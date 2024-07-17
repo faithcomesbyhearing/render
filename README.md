@@ -14,7 +14,7 @@ model now, perhaps bazaar later).
 Render is trademarked, if you wish distribute a revised version of this app, you 
 may not call it Render, nor use the Render Icon.
 
-This release includes the ability to create a demo build which includes a
+This release includes the ability to create a demo build (like [this](https://github.com/faithcomesbyhearing/render.git)) which includes a
 working project.  However, although all sync code is included, access to
 our sync servers is not - so the build will functionally be stand-alone
 (without sync), which you can revise, test, submit pull requests, etc.
@@ -33,9 +33,6 @@ documentation [here](https://renderpartners.freshdesk.com/support/solutions/2200
 
 For technical details see [Developer documentation.](doc/DEVELOPMENT_DOC.md) 
 
-Render uses many other software packages, see OtherLicenses for their terms
-of use.
-
 The Render application is distributed under the MIT license. Refer to the full license text at the following link: [The Render application license.](LICENSE.md)
 
-The Render application utilizes many third-party packages with their own distribution licenses. Refer to the full list of third-party package licenses at the following link: [Packages licenses.](OtherLicenses/.index.md)
+The Render application utilizes many third-party packages with their own distribution licenses. Refer to the full list of third-party package licenses in [OtherLicenses](OtherLicenses/.index.md).
