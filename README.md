@@ -11,7 +11,10 @@ release snapshots
 ([cathedral](https://en.wikipedia.org/wiki/The_Cathedral_and_the_Bazaar)
 model now, perhaps bazaar later).
 
-This release includes the ability to create a build which includes a
+Render is trademarked, if you wish distribute a revised version of this app, you 
+may not call it Render, nor use the Render Icon.
+
+This release includes the ability to create a demo build which includes a
 working project.  However, although all sync code is included, access to
 our sync servers is not - so the build will functionally be stand-alone
 (without sync), which you can revise, test, submit pull requests, etc.

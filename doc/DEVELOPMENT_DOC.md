@@ -134,9 +134,9 @@ To launch application in demo mode the following actions must be done:
 4.  Build and launch the application for the first time. After
     successful launch, close the application. 
 
-5.  Copy and replace demo project local database from the *demo_database* directory to the
+5.  Replace the folders in 
     *C:\\Users\\UserName\\AppData\\Local\\Packages\\BAA1E222-D1B3-4A73-ADB4-3500D19C1B37_k7n2kdbkeecg2\\LocalState\\*
-    directory.
+    with copies of the folders in demo_database.
 
 6.  Launch the Render application again.
 
