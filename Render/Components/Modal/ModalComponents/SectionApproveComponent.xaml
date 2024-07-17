@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="local:SectionApproveComponentViewModel"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:resources="clr-namespace:Render.Resources.Localization"
+                            xmlns:kernel="clr-namespace:Render.Kernel"
+                            xmlns:local="clr-namespace:Render.Components.Modal.ModalComponents"
+                            x:Class="Render.Components.Modal.ModalComponents.SectionApproveComponent">
+
+    <ContentView.Resources>
+        
+        <Style x:Key="BorderStyle" TargetType="Border">
+            <Setter Property="Stroke" Value="{StaticResource DarkGrey}" />
+            <Setter Property="StrokeShape" Value="RoundRectangle 5" />
+            <Setter Property="StrokeThickness" Value="2" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="HeightRequest" Value="81" />
+        </Style>
+
+        <Style x:Key="ErrorText" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource SlateDark}" />
+            <Setter Property="FontFamily" Value="RegularFont" />
+            <Setter Property="Padding" Value="0,0,0,5" />
+            <Setter Property="FontSize" Value="32" />
+            <Setter Property="HeightRequest" Value="40" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+        </Style>
+    </ContentView.Resources>
+
+    <VerticalStackLayout VerticalOptions="Start"
+                         HeightRequest="150"
+                         WidthRequest="806"
+                         HorizontalOptions="FillAndExpand"
+                         Spacing="8" 
+                         Padding="0,10,0,8">
+        
+        <!-- Password entry -->
+        <Border Style="{StaticResource BorderStyle}">
+            <Entry x:Name="PasswordEntry"
+                   IsPassword="true"
+                   Style="{StaticResource Entry}"
+                   FontSize="40"
+                   FontFamily="RegularItalicFont"
+                   Placeholder="{x:Static resources:AppResources.EnterYourPassword}"
+                   AutomationId="PasswordEntry" />
+        </Border>
+        
+        <!-- Validation Message -->
+        <Label x:Name="ValidationLabel" Style="{StaticResource ErrorText}"
+               AutomationId="ValidationLabel" />
+    </VerticalStackLayout>
+    
+</kernel:RenderComponentBase>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderPageBase x:TypeArguments="retellBackTranslate:TabletRetellPassageSelectPageViewModel"
+                       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:titleBar="clr-namespace:Render.Components.TitleBar;assembly=Render"
+                       xmlns:proceedButton="clr-namespace:Render.Components.ProceedButton;assembly=Render"
+                       xmlns:retellBackTranslate="clr-namespace:Render.Pages.BackTranslator.RetellBackTranslate;assembly=Render"
+                       xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                       xmlns:common="clr-namespace:Render.Common"
+                       xmlns:sequencer="clr-namespace:Render.Sequencer;assembly=Render.Sequencer"
+                       x:Class="Render.Pages.BackTranslator.RetellBackTranslate.TabletRetellPassageSelectPage"
+                       NavigationPage.HasNavigationBar="False">
+    
+    <Grid x:Name="TopLevelElement"
+          RowDefinitions="Auto, *"
+          RowSpacing="0"
+          BackgroundColor="{DynamicResource AlternateBackground}">
+
+        <sequencer:Sequencer x:Name="Sequencer" Grid.Row="1" />
+
+        <!--TitleBar is located in the first grid row, but should be rendered
+                after the page content in order to display Passage Number Overlay on top of the page.-->
+        <titleBar:TitleBar x:Name="TitleBar" Grid.Row="0" />
+
+        <proceedButton:ProceedButton x:Name="ProceedButton"
+                                     Grid.Row="2"
+                                     HorizontalOptions="End"
+                                     VerticalOptions="End" />
+
+        <common:LoadingScreen x:Name="LoadingView" Grid.RowSpan="2" />
+    </Grid>
+</kernel:RenderPageBase>

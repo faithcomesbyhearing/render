@@ -1,0 +1,433 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    
+    <!-- Static icons -->
+    <x:String x:Key="Sync">&#xf15f;</x:String>
+    <x:String x:Key="AddFlag">&#xf101;</x:String>
+    <x:String x:Key="AddOrAppend">&#xe901;</x:String>
+    <x:String x:Key="AddUser">&#xf103;</x:String>
+    <x:String x:Key="Add">&#xf104;</x:String>
+    <x:String x:Key="AdvisorCheck">&#xe904;</x:String>
+    <x:String x:Key="ArrowLeftCircle">&#xf106;</x:String>
+    <x:String x:Key="ArrowRightCircle">&#xf107;</x:String>
+    <x:String x:Key="AssignAllSections">&#xf108;</x:String>
+    <x:String x:Key="SegmentBackTranslate">&#xe975;</x:String>
+    <x:String x:Key="CancelOrClose">&#xf10a;</x:String>
+    <x:String x:Key="Checkmark">&#xf10b;</x:String>
+    <x:String x:Key="CirclePlay">&#xf10e;</x:String>
+    <x:String x:Key="CircleStop">&#xf10f;</x:String>
+    <x:String x:Key="Combine">&#xe90d;</x:String>
+    <x:String x:Key="CommunityCheck1">&#xf110;</x:String>
+    <x:String x:Key="CommunityCheck2">&#xf111;</x:String>
+    <x:String x:Key="CommunityCheck3">&#xf112;</x:String>
+    <x:String x:Key="CommunityCheckFlag">&#xe911;</x:String>
+    <x:String x:Key="CommunityCheckQAndR">&#xf113;</x:String>
+    <x:String x:Key="CommunityCheckRetell">&#xf114;</x:String>
+    <x:String x:Key="CommunityCheckSetup">&#xe97f;</x:String>
+    <x:String x:Key="CommunityCheck">&#xe980;</x:String>
+    <x:String x:Key="CommunityRevise">&#xe983;</x:String>
+    <x:String x:Key="ConsultantCheckOriginal">&#xf118;</x:String>
+    <x:String x:Key="ConsultantCheck">&#xe979;</x:String>
+    <x:String x:Key="ConsultantRevise">&#xe981;</x:String>
+    <x:String x:Key="CutConfirm">&#xe91a;</x:String>
+    <x:String x:Key="CutMark">&#xe91b;</x:String>
+    <x:String x:Key="CutUnMark">&#xe91c;</x:String>
+    <x:String x:Key="DecreaseFontSize">&#xe91d;</x:String>
+    <x:String x:Key="DeleteAudio">&#xf11f;</x:String>
+    <x:String x:Key="DeleteUser">&#xf120;</x:String>
+    <x:String x:Key="Delete">&#xf121;</x:String>
+    <x:String x:Key="DivisionOrCut">&#xf123;</x:String>
+    <x:String x:Key="EditFlag">&#xe922;</x:String>
+    <x:String x:Key="EditUser">&#xf125;</x:String>
+    <x:String x:Key="Edit">&#xf126;</x:String>
+    <x:String x:Key="Exit">&#xf127;</x:String>
+    <x:String x:Key="ExportNote">&#xe926;</x:String>
+    <x:String x:Key="ExportProject">&#xe927;</x:String>
+    <x:String x:Key="ExportSection">&#xe928;</x:String>
+    <x:String x:Key="Export">&#xf128;</x:String>
+    <x:String x:Key="Filter">&#xf129;</x:String>
+    <x:String x:Key="FinishedPassOrSubmit">&#xf12a;</x:String>
+    <x:String x:Key="Flag">&#xf12b;</x:String>
+    <x:String x:Key="IncreaseFontSize">&#xe92e;</x:String>
+    <x:String x:Key="LeftArrow">&#xf12f;</x:String>
+    <x:String x:Key="Link">&#xe930;</x:String>
+    <x:String x:Key="Listen">&#xf130;</x:String>
+    <x:String x:Key="LoadSectionsFaster">&#xf131;</x:String>
+    <x:String x:Key="Lock">&#xe933;</x:String>
+    <x:String x:Key="LogOut">&#xf132;</x:String>
+    <x:String x:Key="Logo">&#xe968;</x:String>
+    <x:String x:Key="LoopPhone">&#xe935;</x:String>
+    <x:String x:Key="Loop">&#xf133;</x:String>
+    <x:String x:Key="MorePreferences">&#xf134;</x:String>
+    <x:String x:Key="MenuVertical">&#xe967;</x:String>
+    <x:String x:Key="MoreRoles">&#xe938;</x:String>
+    <x:String x:Key="NoteTranslate">&#xf136;</x:String>
+    <x:String x:Key="Note">&#xf137;</x:String>
+    <x:String x:Key="NoticeToUser">&#xf138;</x:String>
+    <x:String x:Key="ObserveReadOnly">&#xf139;</x:String>
+    <x:String x:Key="Open">&#xf13a;</x:String>
+    <x:String x:Key="PassageReview">&#xf13b;</x:String>
+    <x:String x:Key="Passage">&#xf13c;</x:String>
+    <x:String x:Key="PeerReview">&#xe97b;</x:String>
+    <x:String x:Key="PeerRevise">&#xe97a;</x:String>   
+    <x:String x:Key="Placeholder">&#xf13f;</x:String>
+    <x:String x:Key="PleaseTryAgain">&#xf141;</x:String>
+    <x:String x:Key="PrimaryGeneral">&#xe944;</x:String>
+    <x:String x:Key="PrimaryResource">&#xe945;</x:String>
+    <x:String x:Key="ProcessSetup">&#xf142;</x:String>
+    <x:String x:Key="Processes">&#xf143;</x:String>
+    <x:String x:Key="ProjectConfiguration">&#xf144;</x:String>
+    <x:String x:Key="ProjectInformation">&#xf145;</x:String>
+    <x:String x:Key="ProjectTechnician">&#xf146;</x:String>
+    <x:String x:Key="Project">&#xf14;</x:String>
+    <x:String x:Key="RecordANoteOrSuggestRevision">&#xf149;</x:String>
+    <x:String x:Key="Record">&#xf14a;</x:String>
+    <x:String x:Key="RecorderAppend">&#xe94e;</x:String>
+    <x:String x:Key="RecorderPause">&#xf14b;</x:String>
+    <x:String x:Key="RecorderPlay">&#xf14c;</x:String>
+    <x:String x:Key="RecorderRecord">&#xf14d;</x:String>
+    <x:String x:Key="RecorderStop">&#xf14e;</x:String>
+    <x:String x:Key="RemoveFlag">&#xe953;</x:String>
+    <x:String x:Key="Remove">&#xf150;</x:String>
+    <x:String x:Key="ReRecord">&#xf148;</x:String>
+    <x:String x:Key="Restart">&#xf151;</x:String>
+    <x:String x:Key="RetellBackTranslate">&#xe97d;</x:String>
+    <x:String x:Key="Review">&#xf153;</x:String>
+    <x:String x:Key="RightArrow">&#xf154;</x:String>
+    <x:String x:Key="Roles">&#xf155;</x:String>
+    <x:String x:Key="Sections">&#xf15c;</x:String>
+    <x:String x:Key="SelectOrAssign">&#xf156;</x:String>
+    <x:String x:Key="Separate">&#xe95d;</x:String>
+    <x:String x:Key="SetReview">&#xf157;</x:String>
+    <x:String x:Key="SubmitFlag">&#xf15e;</x:String>
+    <x:String x:Key="SubtractOrMinus">&#xe960;</x:String>
+    <x:String x:Key="TallyI">&#xf160;</x:String>
+    <x:String x:Key="TallyII">&#xf161;</x:String>
+    <x:String x:Key="TallyIII">&#xf162;</x:String>
+    <x:String x:Key="Toolbox">&#xe964;</x:String>
+    <x:String x:Key="Transcribe">&#xe982;</x:String>
+    <x:String x:Key="Translate">&#xe97c;</x:String>
+    <x:String x:Key="Type">&#xf166;</x:String>
+    <x:String x:Key="UnassignAllSections">&#xf167;</x:String>
+    <x:String x:Key="Undo">&#xf168;</x:String>
+    <x:String x:Key="UnselectAll">&#xf169;</x:String>
+    <x:String x:Key="Update">&#xf16a;</x:String>
+    <x:String x:Key="User">&#xf16b;</x:String>
+    <x:String x:Key="ViewUser">&#xf16c;</x:String>
+    <x:String x:Key="View">&#xf16d;</x:String>
+    <x:String x:Key="TypeWarning">&#xe96f;</x:String>
+    <x:String x:Key="Settings">&#xe900;</x:String>
+    <x:String x:Key="Home">&#xf12c;</x:String>
+    <x:String x:Key="ChevronLeft">&#xe902;</x:String>
+    <x:String x:Key="ChevronRight">&#xe903;</x:String>
+    <x:String x:Key="PlaceholderIcon">&#xf13f;</x:String>
+    <x:String x:Key="ViewIcon">&#xf16d;</x:String>
+    <x:String x:Key="TrashCanIcon">&#xf121;</x:String>
+    <x:String x:Key="CheckmarkIcon">&#xf10b;</x:String>
+    <x:String x:Key="TranscriptionIcon">&#xf164;</x:String>
+    <x:String x:Key="SelectATest">&#xe905;</x:String>
+    <x:String x:Key="Sequence">&#xe906;</x:String>
+    <x:String x:Key="StarEdit">&#xe907;</x:String>
+    <x:String x:Key="StarFilled">&#xe908;</x:String>
+    <x:String x:Key="Star">&#xe909;</x:String>
+    <x:String x:Key="TeamSingular">&#xe90a;</x:String>
+    <x:String x:Key="WorkflowAddStep">&#xe90b;</x:String>
+    <x:String x:Key="WorkflowArrangeSteps">&#xe90c;</x:String>
+    <x:String x:Key="ConsultantApproval">&#xe976;</x:String>
+    <x:String x:Key="DraftListen">&#xe910;</x:String>
+    <x:String x:Key="DraftSelect">&#xe912;</x:String>
+    <x:String x:Key="Draft">&#xe913;</x:String>
+    <x:String x:Key="EditNotes">&#xe914;</x:String>
+    <x:String x:Key="Generate">&#xe916;</x:String>
+    <x:String x:Key="GenericCheck">&#xe917;</x:String>
+    <x:String x:Key="LoadSetsFaster">&#xe919;</x:String>
+    <x:String x:Key="QrReview">&#xe923;</x:String>
+    <x:String x:Key="ManageDivisions">&#xe91e;</x:String>
+    <x:String x:Key="PassageListen">&#xe920;</x:String>
+    <x:String x:Key="PassageTranslate">&#xe921;</x:String>
+    <x:String x:Key="Reference">&#xe924;</x:String>
+    <x:String x:Key="SectionAssignUser">&#xe929;</x:String>
+    <x:String x:Key="SectionFeedback">&#xe92a;</x:String>
+    <x:String x:Key="SectionReview">&#xe92b;</x:String>
+    <x:String x:Key="LoadingSpinner">&#xe932;</x:String>
+    <x:String x:Key="ReorderTwo">&#xe934;</x:String>
+    <x:String x:Key="ProjectList">&#xe936;</x:String>
+    <x:String x:Key="AddProject">&#xe937;</x:String>
+    <x:String x:Key="DownloadItem">&#xe939;</x:String>
+    <x:String x:Key="OffloadItem">&#xe950;</x:String>
+    <x:String x:Key="CopyStageQuestions">&#xe92c;</x:String>
+    <x:String x:Key="CopyQuestionsTo">&#xe931;</x:String>
+    <x:String x:Key="CopyQuestionsFrom">&#xe92f;</x:String>
+    <x:String x:Key="ArrowCopyQuestions">&#xe92d;</x:String>
+    <x:String x:Key="DraftEmpty">&#xe93a;</x:String>
+    <x:String x:Key="ExportAudio">&#xe93b;</x:String>
+    <x:String x:Key="BackTranslate">&#xe97e;</x:String>
+    <x:String x:Key="SnapshotRecovery">&#xe940;</x:String>
+    <x:String x:Key="RestoreSnapshot">&#xe942;</x:String>
+    <x:String x:Key="SectionStatus">&#xe91f;</x:String>
+    <x:String x:Key="SelectedQuestionSet">&#xe941;</x:String>
+    <x:String x:Key="RemoveCut">&#xe946;</x:String>
+    <x:String x:Key="ManualAudioEdit">&#xe947;</x:String>
+    <x:String x:Key="CancelCut">&#xe948;</x:String>
+    <x:String x:Key="AddCut">&#xe949;</x:String>
+    <x:String x:Key="MicrophoneNotFound">&#xe943;</x:String>
+    <x:String x:Key="Plus">&#xe93e;</x:String>
+    <x:String x:Key="Minus">&#xe93d;</x:String>
+    <x:String x:Key="ReassignTeam">&#xe946;</x:String>
+    <x:String x:Key="DeleteUndo">&#xe94a;</x:String>
+    <x:String x:Key="MicrophoneWarning">&#xe94b;</x:String>
+    <x:String x:Key="GlobalUser">&#xe94c;</x:String>
+    <x:String x:Key="UserSettings">&#xe951;</x:String>
+    <x:String x:Key="SectionsUnreviewed">&#xe94f;</x:String>
+    <x:String x:Key="InterpretToConsultant">&#xe977;</x:String>
+    <x:String x:Key="InterpretToTranslator">&#xe978;</x:String>
+    <x:String x:Key="EmptyProject">&#xe952;</x:String>
+    <x:String x:Key="NoOffloadProject">&#xe954;</x:String>
+    <x:String x:Key="SelectASnapshot">&#xe959;</x:String>
+    <x:String x:Key="ClearBothSnapshots">&#xe958;</x:String>
+    <x:String x:Key="DeleteWarning">&#xe957;</x:String>
+    <x:String x:Key="DeleteAndComplete">&#xe956;</x:String>
+    <x:String x:Key="DeleteImmediately">&#xe955;</x:String>
+    <x:String x:Key="SectionNew">&#xe95a;</x:String>
+    <x:String x:Key="PassageNew">&#xe95b;</x:String>
+    <x:String x:Key="DraftsNew">&#xe95c;</x:String>
+    <x:String x:Key="Union">&#xe95e;</x:String>
+    <x:String x:Key="InternetError">&#xe962;</x:String>
+    <x:String x:Key="NavBarCheckmark">&#xe965;</x:String>
+    <x:String x:Key="ExportLayerPassword">&#xe966;</x:String>
+    <x:String x:Key="Copy">&#xe963;</x:String>
+    <x:String x:Key="AddProjectViaId">&#xe95f;</x:String>
+    <x:String x:Key="InvalidInput">&#xe961;</x:String>
+    <x:String x:Key="LoadScreenIconGear">&#xe96a;</x:String>
+    <x:String x:Key="BoldArrowUp">&#xe96b;</x:String>
+    <x:String x:Key="BoldChevronRight">&#xe96c;</x:String>
+    <x:String x:Key="BoldChevronLeft">&#xe969;</x:String>
+    <x:String x:Key="TrashCanAudio">&#xe96d;</x:String>
+    <x:String x:Key="TickerArrowLeft">&#xe96e;</x:String>
+    <x:String x:Key="TickerArrowRight">&#xe970;</x:String>
+    <x:String x:Key="AssignRoles">&#xe971;</x:String>
+    <x:String x:Key="AssignSections">&#xe972;</x:String>
+    <x:String x:Key="ConfigureWorkflow">&#xe973;</x:String>
+    <x:String x:Key="ManageUsers">&#xe974;</x:String>
+    <x:String x:Key="TeamsIcon">&#xe90f;</x:String>
+    <x:String x:Key="ReturnXIcon">&#xe918;</x:String>
+    <x:String x:Key="CheckCircle">&#xe925;</x:String>
+    <x:String x:Key="PopUpWarning">&#xe93f;</x:String>
+    <x:String x:Key="DownloadError">&#xe984;</x:String>
+    <x:String x:Key="StageCardArrow">&#xe94d;</x:String>
+    <x:String x:Key="SegmentNew">&#xe985;</x:String>
+    <x:String x:Key="Unlock">&#xe986;</x:String>
+    <x:String x:Key="DraftIconStage">&#xe987;</x:String>
+    <x:String x:Key="ExportFinished">&#xe988;</x:String>
+    <x:String x:Key="LockPlus">&#xe98a;</x:String>
+    <x:String x:Key="UnlockSegment">&#xe98b;</x:String>
+    <x:String x:Key="NoAssigned">&#xe989;</x:String>
+    <x:String x:Key="Retry">&#xe98c;</x:String>
+    <x:String x:Key="AddFromComputer">&#xe98d;</x:String>
+
+    <FontImageSource x:Key="ChevronRightIcon" Glyph="{StaticResource ChevronRight}" FontFamily="Icons"
+                     Color="{DynamicResource TertiaryText}"/>    
+    <FontImageSource x:Key="GlobalUserIcon" Glyph="{StaticResource GlobalUser}" FontFamily="Icons"
+                     Color="{DynamicResource TitleBarBackground}"/>   
+    <FontImageSource x:Key="SegmentFreeCutSource" Glyph="{StaticResource ManualAudioEdit}" FontFamily="Icons"
+                     Color="{DynamicResource SecondaryText}"/>
+    <FontImageSource x:Key="SectionStatusIcon" Glyph="{StaticResource SectionStatus}" FontFamily="Icons"
+                     Color="{DynamicResource SecondaryText}"/>    
+    <FontImageSource x:Key="OffloadItemSource" Glyph="{StaticResource OffloadItem}" FontFamily="Icons"
+                     Color="{DynamicResource SecondaryText}"/>
+    <FontImageSource x:Key="TranscribeSource" Glyph="{StaticResource Transcribe}" FontFamily="Icons"
+                     Color="{DynamicResource Option}"/>
+    <FontImageSource x:Key="SyncIcon" Glyph="&#xf15f;" FontFamily="Icons" Size="40"
+                     Color="{DynamicResource Option}"/>
+    <FontImageSource x:Key="SettingsIconWhite" Glyph="{StaticResource Settings}" FontFamily="Icons"
+                     Color="{DynamicResource SecondaryText}"/>
+    <FontImageSource x:Key="SettingsIcon" Glyph="{StaticResource Settings}" FontFamily="Icons"
+                     Color="{DynamicResource Option}" Size="40"/>
+    <FontImageSource x:Key="LogOutIcon" Glyph="{StaticResource LogOut}" FontFamily="Icons" Size="40" 
+                     Color="{DynamicResource Option}"/>
+    <FontImageSource x:Key="SuccessIcon" Glyph="{StaticResource Checkmark}" FontFamily="Icons" Size="25"
+                     Color="{DynamicResource MainIconColor}"/>
+    <FontImageSource x:Key="RightArrowIcon" Glyph="{StaticResource RightArrow}" FontFamily="Icons" Size="25"
+                     Color="{DynamicResource MainIconColor}"/>
+    <FontImageSource x:Key="LeftArrowIcon" Glyph="{StaticResource LeftArrow}" FontFamily="Icons" Size="25"
+                     Color="{DynamicResource SecondaryText}"/>
+    <FontImageSource x:Key="RecordIcon" Glyph="{StaticResource RecorderRecord}" FontFamily="Icons" Size="40"
+                     Color="{DynamicResource MainIconColor}"/>
+    <FontImageSource x:Key="StopIcon" Glyph="{StaticResource RecorderStop}" FontFamily="Icons" Size="25"
+                     Color="{DynamicResource MainIconColor}"/>
+    <FontImageSource x:Key="PauseIconRequired" Glyph="{StaticResource RecorderPause}" FontFamily="Icons" Size="40"
+                     Color="{DynamicResource Required}"/>
+    <FontImageSource x:Key="PauseIconOption" Glyph="{StaticResource RecorderPause}" FontFamily="Icons" Size="40"
+                     Color="{DynamicResource Option}"/>
+    <FontImageSource x:Key="PauseIconWhite" Glyph="{StaticResource RecorderPause}" FontFamily="Icons" Size="25"
+                     Color="{DynamicResource SecondaryText}"/>
+    <FontImageSource x:Key="PlayIconRequired" Glyph="{StaticResource RecorderPlay}" FontFamily="Icons" Size="40"
+                     Color="{DynamicResource Required}"/>
+    <FontImageSource x:Key="PlayIconOption" Glyph="{StaticResource RecorderPlay}" FontFamily="Icons" Size="40"
+                     Color="{DynamicResource Option}"/>
+    <FontImageSource x:Key="PlayIconWhite" Glyph="{StaticResource RecorderPlay}" FontFamily="Icons" Size="25"
+                     Color="{DynamicResource SecondaryText}"/>
+    <FontImageSource x:Key="PlaceholderSource" Glyph="{StaticResource Placeholder}" FontFamily="Icons" Size="40"
+                     Color="{DynamicResource MainIconColor}"/>
+    <FontImageSource x:Key="PlaceholderWhite" Glyph="{StaticResource Placeholder}" FontFamily="Icons" Size="40"
+                     Color="{DynamicResource SecondaryText}"/>
+    <FontImageSource x:Key="PlaceholderOption" Glyph="{StaticResource Placeholder}" FontFamily="Icons" Size="40"
+                     Color="{DynamicResource Option}"/>
+    <FontImageSource x:Key="Menu" Glyph="{StaticResource MorePreferences}" FontFamily="Icons" Size="40"
+                     Color="{DynamicResource SecondaryText}"/>
+    <FontImageSource x:Key="PlaceholderGray" Glyph="{StaticResource Placeholder}" FontFamily="Icons" Size="30"
+                     Color="{DynamicResource Title}"/>
+    <FontImageSource x:Key="ChevronUp" Glyph="{StaticResource IncreaseFontSize}" FontFamily="Icons"
+                     Color="{DynamicResource SecondaryText}"/>
+    <FontImageSource x:Key="ChevronUpGray" Glyph="{StaticResource IncreaseFontSize}" FontFamily="Icons"
+                     Color="{DynamicResource AlternateButton}"/>
+
+    <FontImageSource x:Key="CombineIcon" Glyph="{StaticResource Combine}" FontFamily="Icons" Size="40"
+                     Color="{DynamicResource Option}"/>
+    <FontImageSource x:Key="ChevronDownGray" Glyph="{StaticResource DecreaseFontSize}" FontFamily="Icons"
+                     Color="{DynamicResource AlternateButton}"/>
+    <FontImageSource x:Key="Cut" Glyph="{StaticResource DivisionOrCut}" FontFamily="Icons"
+                     Color="{DynamicResource Option}"/>
+    <FontImageSource x:Key="CutInactive" Glyph="{StaticResource DivisionOrCut}" FontFamily="Icons"
+                     Color="{DynamicResource InactiveIconColor}"/>
+    <FontImageSource x:Key="TrashCan" Glyph="{StaticResource Delete}" FontFamily="Icons"
+                     Color="{DynamicResource Option}"/>
+    <FontImageSource x:Key="TrashCanWhite" Glyph="{StaticResource Delete}" FontFamily="Icons"
+                     Color="{DynamicResource SecondaryText}"/>
+    <FontImageSource x:Key="TrashCanInactive" Glyph="{StaticResource Delete}" FontFamily="Icons"
+                     Color="{DynamicResource InactiveIconColor}"/>
+    <FontImageSource x:Key="CheckMarkOption" Glyph="{StaticResource Checkmark}" FontFamily="Icons"
+                     Color="{DynamicResource Option}"/>    
+    <FontImageSource x:Key="CheckMarkWhite" Glyph="{StaticResource Checkmark}" FontFamily="Icons"
+                     Color="{DynamicResource SecondaryText}"/>    
+    <FontImageSource x:Key="CheckMarkRequired" Glyph="{StaticResource Checkmark}" FontFamily="Icons"
+                     Color="{DynamicResource Required}"/>
+    <FontImageSource x:Key="CheckMarkInactive" Glyph="{StaticResource Checkmark}" FontFamily="Icons"
+                     Color="{DynamicResource AlternateBackground}"/>
+    <FontImageSource x:Key="Triangle" Glyph="{StaticResource RecorderPlay}" FontFamily="Icons"
+                     Color="{DynamicResource Option}"/>
+    <FontImageSource x:Key="EditIcon" Glyph="{StaticResource Edit}" FontFamily="Icons"
+                     Color="{DynamicResource Option}"/>
+    <FontImageSource x:Key="Append" Glyph="{StaticResource RecorderAppend}" FontFamily="Icons"
+                     Color="{DynamicResource Option}"/>
+    <FontImageSource x:Key="AppendInactive" Glyph="{StaticResource RecorderAppend}" FontFamily="Icons"
+                     Color="{DynamicResource InactiveIconColor}"/>
+
+    <FontImageSource x:Key="TriangleGray" Glyph="{StaticResource RecorderPlay}" FontFamily="Icons"
+                     Color="{DynamicResource StageCardAfterArrowColor}"/>
+    <FontImageSource x:Key="TranslateSource" Glyph="{StaticResource Translate}" FontFamily="Icons"
+                     Color="{DynamicResource MainIconColor}"/>
+   
+    <FontImageSource x:Key="AddSource" Glyph="{StaticResource Add}" FontFamily="Icons"
+                     Color="{DynamicResource Option}"/>    
+    <FontImageSource x:Key="AddOrAppendSource" Glyph="{StaticResource AddOrAppend}" FontFamily="Icons"
+                     Color="{DynamicResource Option}"/>
+    <FontImageSource x:Key="ReRecordSource" Glyph="{StaticResource ReRecord}" FontFamily="Icons"
+                     Color="{DynamicResource Option}"/>    
+    <FontImageSource x:Key="ReRecordWhite" Glyph="{StaticResource ReRecord}" FontFamily="Icons"
+                     Color="{DynamicResource SecondaryText}"/>
+    
+    <!-- Stage Icons -->
+    <FontImageSource x:Key="MicrophoneSource" Glyph="{StaticResource Record}" FontFamily="Icons"
+                     Color="{DynamicResource MainIconColor}"/>
+    <FontImageSource x:Key="PeerCheckSource" Glyph="{StaticResource PeerReview}" FontFamily="Icons"
+                     Color="{DynamicResource MainIconColor}"/>
+    <FontImageSource x:Key="CommunityTestSource" Glyph="{StaticResource CommunityCheck}" FontFamily="Icons"
+                     Color="{DynamicResource MainIconColor}"/>
+    <FontImageSource x:Key="ConsultantCheckSource" Glyph="{StaticResource ConsultantCheck}" FontFamily="Icons"
+                     Color="{DynamicResource MainIconColor}"/>
+    <FontImageSource x:Key="ConsultantCheckOriginalSource" Glyph="{StaticResource ConsultantCheckOriginal}" FontFamily="Icons"
+                     Color="{DynamicResource MainIconColor}"/>
+
+    <FontImageSource x:Key="MicrophoneWhite" Glyph="{StaticResource Record}" FontFamily="Icons"
+                     Color="{DynamicResource SecondaryText}"/>
+    <FontImageSource x:Key="PeerCheckWhite" Glyph="{StaticResource PeerReview}" FontFamily="Icons"
+                     Color="{DynamicResource SecondaryText}"/>
+    <FontImageSource x:Key="CommunityTestWhite" Glyph="{StaticResource CommunityCheck}" FontFamily="Icons"
+                     Color="{DynamicResource SecondaryText}"/>
+    <FontImageSource x:Key="ConsultantCheckWhite" Glyph="{StaticResource ConsultantCheck}" FontFamily="Icons"
+                     Color="{DynamicResource SecondaryText}"/>
+    
+    <!-- Stage Settings -->
+    <FontImageSource x:Key="StageSettingsSource" Glyph="{StaticResource Update}" FontFamily="Icons"
+                     Color="{DynamicResource TertiaryText}"/>
+    <FontImageSource x:Key="PlusIcon" Glyph="{StaticResource Plus}" FontFamily="Icons"
+                     Color="{DynamicResource TertiaryText}"/>
+    <FontImageSource x:Key="MinusIcon" Glyph="{StaticResource Minus}" FontFamily="Icons"
+                     Color="{DynamicResource TertiaryText}"/>
+    
+    <Style x:Key="SubTitleIconLabel" TargetType="Label">
+        <!--<Setter Property="HeightRequest" Value="35"/>
+        <Setter Property="WidthRequest" Value="35"/>-->
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+    </Style>
+    <Style x:Key="SubTitleIcon" TargetType="Image">
+        <Setter Property="HeightRequest" Value="35"/>
+        <Setter Property="WidthRequest" Value="35"/>
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+    </Style>
+    <FontImageSource x:Key="RecordNote" Glyph="{StaticResource RecordANoteOrSuggestRevision}" FontFamily="Icons"
+                     Size="40"
+                     Color="{DynamicResource Option}"/>
+    <FontImageSource x:Key="AddFlagSource" Glyph="{StaticResource AddFlag}" FontFamily="Icons"
+                     Color="{DynamicResource Option}"/>    
+    <FontImageSource x:Key="FlagOption" Glyph="{StaticResource Flag}" FontFamily="Icons"
+                     Color="{DynamicResource Option}"/>
+    <FontImageSource x:Key="FlagInverted" Glyph="{StaticResource Flag}" FontFamily="Icons"
+                     Color="{DynamicResource SecondaryText}"/>    
+    <FontImageSource x:Key="FlagRequired" Glyph="{StaticResource Flag}" FontFamily="Icons" 
+                     Color="{DynamicResource Required}"/>
+    <FontImageSource x:Key="RecordMic" Glyph="{StaticResource Record}" FontFamily="Icons"
+                     Color="{DynamicResource Option}"/>
+    <FontImageSource x:Key="RemoveSource" Glyph="{StaticResource Remove}" FontFamily="Icons"
+                     Color="{DynamicResource Option}"/>
+
+    <FontImageSource x:Key="AddUserIcon" Glyph="{StaticResource AddUser}" FontFamily="Icons" Size="25"
+                     Color="{DynamicResource Option}"/>
+    <FontImageSource x:Key="UserIcon" Glyph="{StaticResource User}" FontFamily="Icons" Size="25"
+                     Color="{DynamicResource MainIconColor}"/>
+    <FontImageSource x:Key="ProjectIcon" Glyph="{StaticResource Project}" FontFamily="Icons" Size="25"
+                     Color="{DynamicResource SecondaryText}"/>
+    <FontImageSource x:Key="HomeIcon" Glyph="{StaticResource Home}" FontFamily="Icons" Size="25"
+                     Color="{DynamicResource SecondaryText}"/>
+    
+    <FontImageSource x:Key="SegmentBackTranslateWhite" Glyph="&#xe975;" FontFamily="Icons"
+                     Color="{DynamicResource SecondaryText}"/>    
+    <FontImageSource x:Key="RetellBackTranslateWhite" Glyph="&#xe97d;" FontFamily="Icons"
+                     Color="{DynamicResource SecondaryText}"/>
+    <FontImageSource x:Key="SetsIcon" Glyph="&#xf15c;" FontFamily="Icons"
+                     Color="{DynamicResource MainIconColor}"/>    
+    <FontImageSource x:Key="PassageIcon" Glyph="&#xf13c;" FontFamily="Icons"
+                     Color="{DynamicResource MainIconColor}"/>    
+    <FontImageSource x:Key="ReviewIcon" Glyph="&#xf153;" FontFamily="Icons"
+                     Color="{DynamicResource MainIconColor}"/>
+    <FontImageSource x:Key="LockIcon" Glyph="&#xe933;" FontFamily="Icons"
+                     Color="{DynamicResource Error}"/>
+    
+    <FontImageSource x:Key="SelectedSegmentWhite" Glyph="{StaticResource PrimaryGeneral}" FontFamily="Icons"
+                     Color="{DynamicResource SecondaryText}"/>  
+    <FontImageSource x:Key="ProjectInformationSource" Glyph="{StaticResource ProjectInformation}" FontFamily="Icons"
+                     Color="{DynamicResource MainIconColor}"/>    
+    <FontImageSource x:Key="SnapshotRecoverySource" Glyph="{StaticResource SnapshotRecovery}" FontFamily="Icons"
+                     Color="{DynamicResource MainIconColor}"/>    
+    <FontImageSource x:Key="RestoreSnapshotSource" Glyph="{StaticResource RestoreSnapshot}" FontFamily="Icons"
+                     Color="{DynamicResource MainIconColor}"/>      
+    <FontImageSource x:Key="SelectedQuestionSetSource" Glyph="{StaticResource SelectedQuestionSet}" FontFamily="Icons"
+                     Color="{DynamicResource MainIconColor}"/>  
+    <FontImageSource x:Key="ClearBothSnapshotsSource" Glyph="{StaticResource ClearBothSnapshots}" FontFamily="Icons"
+                     Color="{DynamicResource MainIconColor}"/>  
+    <FontImageSource x:Key="SelectASnapshotSource" Glyph="{StaticResource SelectASnapshot}" FontFamily="Icons"
+                     Color="{DynamicResource MainIconColor}"/>  
+    <FontImageSource x:Key="DeleteUndoOption" Glyph="{StaticResource DeleteUndo}" FontFamily="Icons"
+                     Color="{DynamicResource Option}"/>
+    <FontImageSource x:Key="DialogCancelButtonImageSource"  Glyph="{StaticResource Remove}" FontFamily="Icons" Size="30"
+                     Color="{DynamicResource SecondaryText}" />
+    <FontImageSource x:Key="DialogConfirmButtonImageSource"  Glyph="{StaticResource Checkmark}" FontFamily="Icons" Size="30"
+                     Color="{DynamicResource SecondaryText}" />
+    
+    <FontImageSource x:Key="TickerArrowLeftIcon"  Glyph="{StaticResource TickerArrowLeft}" FontFamily="Icons" Size="30"
+                     Color="{DynamicResource SecondaryText}" />
+    <FontImageSource x:Key="TickerArrowRightIcon"  Glyph="{StaticResource TickerArrowRight}" FontFamily="Icons" Size="30"
+                     Color="{DynamicResource SecondaryText}" />
+</ResourceDictionary>

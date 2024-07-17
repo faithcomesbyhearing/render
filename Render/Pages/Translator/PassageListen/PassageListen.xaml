@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<kernel:RenderPageBase x:TypeArguments="passageListen:PassageListenViewModel"
+                       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:proceedButton="clr-namespace:Render.Components.ProceedButton;assembly=Render"
+                       xmlns:barPlayer="clr-namespace:Render.Components.BarPlayer;assembly=Render"
+                       xmlns:titleBar="clr-namespace:Render.Components.TitleBar;assembly=Render"
+                       xmlns:resources="clr-namespace:Render.Resources.Localization;assembly=Render"
+                       xmlns:passageListen="clr-namespace:Render.Pages.Translator.PassageListen;assembly=Render"
+                       xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                       xmlns:subTitle="clr-namespace:Render.Components.SubTitle"
+                       xmlns:common="using:Render.Common"
+                       x:Class="Render.Pages.Translator.PassageListen.PassageListen"
+                       NavigationPage.HasNavigationBar="False"
+                       Style="{StaticResource PrimaryPage}">
+    <ContentPage.Resources>
+        <Thickness x:Key="SubTitleMargin">25,15</Thickness>
+    </ContentPage.Resources>
+
+    <AbsoluteLayout Style="{StaticResource MainStack}" x:Name="TopLevelElement">
+        <Grid AbsoluteLayout.LayoutFlags="All"
+              AbsoluteLayout.LayoutBounds="0,0,1,1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            
+            <!--Title bar-->
+            <titleBar:TitleBar Grid.Row="0" x:Name="TitleBar" />
+            
+            <!--References Collection-->
+            <VerticalStackLayout Grid.Row="1">
+                <subTitle:SubTitle AutomationId="ReferenceSubTitle"
+                                   IconType="Reference"
+                                   Margin="{StaticResource SubTitleMargin}"
+                                   Text="{x:Static resources:AppResources.References}"/>
+
+                <CollectionView x:Name="References"
+                                Style="{StaticResource ReferencesCollection}"
+                                AutomationId="ReferencesCollection">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <barPlayer:BarPlayer Style="{StaticResource BarPlayers}"
+                                                 AutomationId="ReferenceBarPlayer" />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+            
+            <!--Supplemental materials collection-->
+            <VerticalStackLayout Grid.Row="2" x:Name="SupplementaryMaterialContainer">
+                <subTitle:SubTitle AutomationId="SupplementaryMaterialSubTitle"
+                                   IconType="Note"
+                                   Margin="{StaticResource SubTitleMargin}"
+                                   Text="{x:Static resources:AppResources.SupplementaryMaterial}" />
+
+                <CollectionView x:Name="SupplementalMaterials"
+                                Style="{StaticResource ReferencesCollection}"
+                                AutomationId="SupplementalMaterialsCollection">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <barPlayer:BarPlayer Style="{StaticResource BarPlayers}"
+                                                 AutomationId="SupplementalMaterialsBarPlayer" />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </Grid>
+
+        <proceedButton:ProceedButton x:Name="ProceedButton"
+                                     AbsoluteLayout.LayoutFlags="PositionProportional"
+                                     AbsoluteLayout.LayoutBounds="1,1" />
+        <common:LoadingScreen x:Name="LoadingView" 
+                                      AbsoluteLayout.LayoutFlags="All"
+                                      AbsoluteLayout.LayoutBounds="0,0,1,1"/>
+    </AbsoluteLayout>
+
+</kernel:RenderPageBase>

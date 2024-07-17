@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<kernel:RenderPageBase x:Class="Render.Pages.Configurator.WorkflowAssignment.WorkflowAssignment"
+                       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:common="clr-namespace:Render.Common"
+                       xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                       xmlns:localization="clr-namespace:Render.Resources.Localization"
+                       xmlns:proceedButton="clr-namespace:Render.Components.ProceedButton;assembly=Render"
+                       xmlns:resources="clr-namespace:Render.Resources;assembly=Render"
+                       xmlns:scroller="using:Render.Components.Scroller"
+                       xmlns:titleBar="clr-namespace:Render.Components.TitleBar;assembly=Render"
+                       xmlns:workflowAssignment="clr-namespace:Render.Pages.Configurator.WorkflowAssignment;assembly=Render"
+                       x:TypeArguments="workflowAssignment:WorkflowAssignmentViewModel"
+                       NavigationPage.HasNavigationBar="False"
+                       Style="{StaticResource PrimaryPage}">
+    <ContentPage.Resources>
+        <workflowAssignment:WorkflowStageColumnTemplateSelector x:Key="WorkflowStageColumnTemplateSelector" />
+    </ContentPage.Resources>
+
+    <Grid x:Name="TopLevelElement"
+          BackgroundColor="{StaticResource AlternateBackground}"
+          RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <!--  Stages  -->
+            <Grid Grid.Column="0"
+                  MinimumHeightRequest="600"
+                  VerticalOptions="Fill">
+                <Grid.RowDefinitions>
+                    <RowDefinition x:Name="TopSpacing" Height="50" />
+                    <RowDefinition x:Name="MainWorkflowRow" Height="8*" />
+                    <RowDefinition x:Name="Spacing" Height="*" />
+                    <RowDefinition x:Name="MiniScrollerRow" Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <!--  Stage Cards  -->
+                <scroller:CustomScrollView x:Name="StagesScrollView"
+                                           Grid.Row="1"
+                                           HorizontalOptions="Fill"
+                                           HorizontalScrollBarVisibility="Never"
+                                           Orientation="Horizontal"
+                                           VerticalOptions="Fill"
+                                           VerticalScrollBarVisibility="Never">
+
+                    <HorizontalStackLayout AutomationId="StageColumnCards">
+                        <Border x:Name="LeftSpacing" WidthRequest="96" />
+
+
+                        <HorizontalStackLayout x:Name="StageColumnCollection"
+                                               Margin="0"
+                                               BindableLayout.ItemTemplateSelector="{StaticResource WorkflowStageColumnTemplateSelector}"
+                                               Spacing="96"/>
+
+
+                        <Border x:Name="RightSpacing" WidthRequest="96" />
+                    </HorizontalStackLayout>
+                </scroller:CustomScrollView>
+
+                <!--  Mini scroller  -->
+                <scroller:CustomMiniScroller x:Name="MiniScrollerContainer"
+                                             Grid.Row="3"
+                                             IsVisible="false"
+                                             HorizontalOptions="Fill"
+                                             VerticalOptions="End" />
+
+            </Grid>
+
+            <!--  Project users  -->
+            <Grid Grid.Column="1"
+                  BackgroundColor="{DynamicResource UserAssignmentPanelBackground}"
+                  RowDefinitions="Auto, *"
+                  RowSpacing="0">
+                <!--  Users Label with icon  -->
+                <HorizontalStackLayout Margin="37,35,58,0"
+                                       HorizontalOptions="Start"
+                                       MinimumWidthRequest="250">
+                    <Label Margin="0,0,10,0"
+                           FontFamily="Icons"
+                           FontSize="40"
+                           Text="{resources:IconExtensions User}"
+                           TextColor="{DynamicResource MainIconColor}" />
+                    <Label FontSize="Medium"
+                           Style="{StaticResource SubTitle}"
+                           Text="{x:Static localization:AppResources.Users}" />
+                </HorizontalStackLayout>
+
+                <!--  User List - Scroll  -->
+                <ScrollView Grid.Row="1"
+                            Margin="0,13,11,162"
+                            HorizontalOptions="End"
+                            HorizontalScrollBarVisibility="Never"
+                            Orientation="Vertical"
+                            VerticalOptions="Fill"
+                            VerticalScrollBarVisibility="Default">
+
+                    <VerticalStackLayout Padding="0,0,59,13"
+                                         AutomationId="ProjectUsersStack"
+                                         BackgroundColor="{DynamicResource UserAssignmentPanelBackground}"
+                                         MinimumWidthRequest="250">
+                        <VerticalStackLayout x:Name="UserAssignmentCollection" AutomationId="UserAssignmentCollection">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <workflowAssignment:UserCard Margin="0,13" />
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </ScrollView>
+            </Grid>
+
+            <BoxView Grid.Column="1"
+                     Margin="0,35,0,162"
+                     BackgroundColor="{StaticResource SlateLight}"
+                     HorizontalOptions="Start"
+                     VerticalOptions="Fill"
+                     WidthRequest="2" />
+
+        </Grid>
+
+        <titleBar:TitleBar x:Name="TitleBar" Grid.Row="0" />
+
+        <common:LoadingScreen x:Name="LoadingView"
+                              Grid.Row="0"
+                              Grid.RowSpan="2" />
+
+        <proceedButton:ProceedButton x:Name="ProceedButton"
+                                     Grid.Row="1"
+                                     HorizontalOptions="End"
+                                     VerticalOptions="End" />
+    </Grid>
+</kernel:RenderPageBase>

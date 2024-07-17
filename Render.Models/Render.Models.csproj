@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Configurations>Debug;Release;AutoTests;Test;Demo</Configurations>
+    <Platforms>AnyCPU</Platforms>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(Configuration.StartsWith('Release')) or $(Configuration.StartsWith('Test')) or $(Configuration.StartsWith('AutoTests'))">
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="FakeModels\JesusHealsManyPeople.opus" />
+    <EmbeddedResource Include="FakeModels\JesusHelpsManyPeople_Name.opus" />
+    <EmbeddedResource Include="FakeModels\TemptationOfJesus_Passage1SupplementaryMaterial.opus" />
+    <EmbeddedResource Include="FakeModels\TemptationOfJesus_Passage2SupplementaryMaterial.opus" />
+    <EmbeddedResource Include="FakeModels\TemptationOfJesus_SectionSupplementaryMaterial.opus" />
+    <EmbeddedResource Include="FakeModels\Temptation_cev.opus" />
+    <EmbeddedResource Include="FakeModels\Temptation_NewInternationalReadersVersion.opus" />
+    <EmbeddedResource Include="FakeModels\Temptation_niv.opus" />
+    <EmbeddedResource Include="FakeModels\Temptation_nlt.opus" />
+    <EmbeddedResource Include="FakeModels\temptation_passage1.opus" />
+    <EmbeddedResource Include="FakeModels\temptation_passage2.opus" />
+    <EmbeddedResource Include="FakeModels\TheTemptationOfJesus_Name.opus" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="ReactiveUI.Fody" Version="19.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Render.TempFromVessel\Render.TempFromVessel.csproj" />
+  </ItemGroup>
+
+</Project>

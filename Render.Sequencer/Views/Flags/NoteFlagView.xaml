@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<base:BaseFlagView x:Class="Render.Sequencer.Views.Flags.NoteFlagView"
+                   xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   xmlns:atomic="clr-namespace:Render.Sequencer.Resources.Atomic"
+                   xmlns:base="clr-namespace:Render.Sequencer.Views.Flags.Base"
+                   xmlns:converters="clr-namespace:Render.Sequencer.Core.Converters"
+                   xmlns:enums="clr-namespace:Render.Sequencer.Contracts.Enums"
+                   xmlns:flags="clr-namespace:Render.Sequencer.Views.Flags"
+                   xmlns:local="clr-namespace:Render.Sequencer.Views.Flags"
+                   xmlns:styles="clr-namespace:Render.Sequencer.Resources.Styles"
+                   x:Name="root"
+                   x:DataType="flags:NoteFlagViewModel"
+                   AnchorX="0.5"
+                   AnchorY="1"
+                   Command="{Binding TapCommand}"
+                   CommandParameter="{Binding}"
+                   HeightRequest="60"
+                   HorizontalOptions="Start"
+                   IsEnabled="True"
+                   PositionX="{Binding PositionDip}"
+                   Rotation="{Binding Direction}"
+                   TranslationY="-30"
+                   WidthRequest="{x:Static local:NoteFlagView.DefaultWidth}">
+    
+    <base:BaseFlagView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <atomic:Colors />
+                <atomic:Sizes />
+
+                <styles:FlagsStyles />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </base:BaseFlagView.Resources>
+    
+    <Grid x:Name="containerGrid"
+          AutomationId="NoteFlagContainer"
+          TranslationY="5.5">
+        <Grid.RowDefinitions>
+            <RowDefinition x:Name="mainEllipseRow" Height="40" />
+            <RowDefinition x:Name="triangleRow" Height="12" />
+            <RowDefinition x:Name="smallEllipseRow" Height="6" />
+        </Grid.RowDefinitions>
+
+        <Polygon x:Name="triangle"
+                 Grid.Row="1"
+                 HeightRequest="20"
+                 HorizontalOptions="Center"
+                 Points="2,0 16,0 9,12"
+                 Style="{StaticResource CircleFlagShapeStyle}"
+                 WidthRequest="23" />
+
+        <Ellipse x:Name="mainEllipse"
+                 Grid.Row="0"
+                 HeightRequest="{StaticResource CircleFlagMainEllipseSize}"
+                 Style="{StaticResource CircleFlagShapeStyle}"
+                 WidthRequest="{StaticResource CircleFlagMainEllipseSize}" />
+
+        <Ellipse x:Name="smallEllipse"
+                 Grid.Row="2"
+                 HeightRequest="{StaticResource CircleFlagSmallEllipseSize}"
+                 Style="{StaticResource CircleFlagShapeStyle}"
+                 WidthRequest="{StaticResource CircleFlagSmallEllipseSize}" />
+
+        <Ellipse x:Name="iconEllipse"
+                 Grid.Row="0"
+                 HeightRequest="{StaticResource CircleFlagIconEllipseSize}"
+                 WidthRequest="{StaticResource CircleFlagIconEllipseSize}" />
+
+        <Label x:Name="icon"
+               Grid.Row="0"
+               AutomationId="NoteFlagIcon"
+               FontFamily="Icons"
+               FontSize="28"
+               HorizontalTextAlignment="Center"
+               Rotation="{Binding Direction, Converter={converters:NegativeFlagDirectionConverter}}"
+               Text="{Binding IconKey, Converter={converters:IconKeyToGlyphConverter}}"
+               TranslationX="0"
+               VerticalTextAlignment="Center" />
+    </Grid>
+
+    <VisualStateManager.VisualStateGroups>
+        <VisualStateGroupList>
+            <VisualStateGroup x:Name="FlagVisualState">
+                <VisualState x:Name="OptionalUnread">
+                    <VisualState.StateTriggers>
+                        <CompareStateTrigger Property="{Binding VisualState}" Value="{x:Static enums:FlagVisualState.OptionalUnread}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Property="IsEnabled" Value="True" />
+                        <Setter TargetName="mainEllipse" Property="Ellipse.Stroke" Value="{StaticResource LightBrush}" />
+                        <Setter TargetName="smallEllipse" Property="Ellipse.Stroke" Value="{StaticResource LightBrush}" />
+                        <Setter TargetName="triangle" Property="Polygon.Stroke" Value="{StaticResource LightBrush}" />
+                        <Setter TargetName="iconEllipse" Property="Ellipse.Fill" Value="{StaticResource AccentLightBrush}" />
+                        <Setter TargetName="icon" Property="Label.TextColor" Value="{StaticResource PrimarySymbols}" />
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="RequiredUnread">
+                    <VisualState.StateTriggers>
+                        <CompareStateTrigger Property="{Binding VisualState}" Value="{x:Static enums:FlagVisualState.RequiredUnread}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Property="IsEnabled" Value="True" />
+                        <Setter TargetName="mainEllipse" Property="Ellipse.Stroke" Value="{StaticResource RequiredBrush}" />
+                        <Setter TargetName="smallEllipse" Property="Ellipse.Stroke" Value="{StaticResource RequiredBrush}" />
+                        <Setter TargetName="triangle" Property="Polygon.Stroke" Value="{StaticResource RequiredBrush}" />
+                        <Setter TargetName="iconEllipse" Property="Ellipse.Fill" Value="{StaticResource AccentLightBrush}" />
+                        <Setter TargetName="icon" Property="Label.TextColor" Value="{StaticResource Required}" />
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="OptionalRead">
+                    <VisualState.StateTriggers>
+                        <CompareStateTrigger Property="{Binding VisualState}" Value="{x:Static enums:FlagVisualState.Read}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Property="IsEnabled" Value="True" />
+                        <Setter TargetName="mainEllipse" Property="Ellipse.Stroke" Value="{StaticResource LightBrush}" />
+                        <Setter TargetName="smallEllipse" Property="Ellipse.Stroke" Value="{StaticResource LightBrush}" />
+                        <Setter TargetName="triangle" Property="Polygon.Stroke" Value="{StaticResource LightBrush}" />
+                        <Setter TargetName="iconEllipse" Property="Ellipse.Fill" Value="{StaticResource LightBrush}" />
+                        <Setter TargetName="icon" Property="Label.TextColor" Value="{StaticResource AccentLight}" />
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="FlagDisabled">
+                    <VisualState.StateTriggers>
+                        <CompareStateTrigger Property="{Binding VisualState}" Value="{x:Static enums:FlagVisualState.Disabled}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Property="IsEnabled" Value="False" />
+                        <Setter TargetName="mainEllipse" Property="Ellipse.Stroke" Value="{StaticResource NeutralBrush}" />
+                        <Setter TargetName="mainEllipse" Property="Ellipse.Fill" Value="{StaticResource LightBrush}" />
+                        <Setter TargetName="smallEllipse" Property="Ellipse.Stroke" Value="{StaticResource NeutralBrush}" />
+                        <Setter TargetName="smallEllipse" Property="Ellipse.Fill" Value="{StaticResource LightBrush}" />
+                        <Setter TargetName="triangle" Property="Polygon.Stroke" Value="{StaticResource NeutralBrush}" />
+                        <Setter TargetName="triangle" Property="Polygon.Fill" Value="{StaticResource LightBrush}" />
+                        <Setter TargetName="iconEllipse" Property="Ellipse.Fill" Value="{StaticResource LightBrush}" />
+                        <Setter TargetName="icon" Property="Label.TextColor" Value="{StaticResource Neutral}" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateGroupList>
+    </VisualStateManager.VisualStateGroups>
+</base:BaseFlagView>

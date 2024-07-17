@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="flagDetail:QuestionAndResponseViewModel"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:barPlayer="clr-namespace:Render.Components.BarPlayer;assembly=Render"
+                            xmlns:flagDetail="clr-namespace:Render.Components.FlagDetail;assembly=Render"
+                            x:Class="Render.Components.FlagDetail.QuestionAndResponse">
+    <ContentView.Resources>
+        <Style x:Key="QuestionResponsePanel" TargetType="Border">
+            <Setter Property="BackgroundColor" Value="{StaticResource Blue}" />
+            <Setter Property="WidthRequest" Value="454" />
+            <Setter Property="HorizontalOptions" Value="End"/>
+            <Setter Property="StrokeThickness" Value="2" />
+            <Setter Property="StrokeShape">
+                <Setter.Value>
+                    <RoundRectangle CornerRadius="8" />
+                </Setter.Value> 
+            </Setter>
+            <Setter Property="Stroke" Value="{DynamicResource DarkBlue}" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Margin" Value="0,10" />
+        </Style>
+
+        <Style x:Key="Question" TargetType="barPlayer:BarPlayer">
+            <Setter Property="WidthRequest" Value="427" />
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="MainStackBorderColor" Value="{StaticResource Blue}" />
+            <Setter Property="SeparatorBorderColor" Value="{StaticResource Blue}" />
+        </Style>
+
+        <Style x:Key="Response" TargetType="barPlayer:BarPlayer">
+            <Setter Property="HorizontalOptions" Value="Fill"/>
+            <Setter Property="PlayerLabelColor" Value="{StaticResource White}" />
+            <Setter Property="PlayerButtonColor" Value="{StaticResource White}" />
+            <Setter Property="TimerLabelColor" Value="{StaticResource White}" />
+            <Setter Property="MainStackBackgroundColor" Value="{StaticResource Blue}" />
+            <Setter Property="MainStackBorderColor" Value="{StaticResource Blue}" />
+            <Setter Property="SeparatorBorderColor" Value="{StaticResource DarkBlue}" />
+            <Setter Property="MinimumTrackColor" Value="{StaticResource AudioPlayerSliderAfterBackground}" />
+            <Setter Property="MaximumTrackColor" Value="{StaticResource AudioPlayerSliderBeforeBackground}" />
+            <Setter Property="ThumbColor" Value="{StaticResource White}" />
+            <Setter Property="EnableSeparatorGradient" Value="True" />
+        </Style>
+    </ContentView.Resources>
+
+    <Border Style="{StaticResource QuestionResponsePanel}">
+        <VerticalStackLayout>
+            <barPlayer:BarPlayer x:Name="QuestionPlayer" Style="{StaticResource Question}" />
+            <VerticalStackLayout x:Name="Responses">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <barPlayer:BarPlayer Style="{StaticResource Response}" />
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </Border>
+</kernel:RenderComponentBase>

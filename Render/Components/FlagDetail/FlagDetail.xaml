@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="flagDetail:FlagDetailViewModel"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:flagDetail="clr-namespace:Render.Components.FlagDetail;assembly=Render"
+                            xmlns:resources="clr-namespace:Render.Resources;assembly=Render"
+                            xmlns:kernel="clr-namespace:Render.Kernel"
+                            xmlns:navigation="clr-namespace:Render.Components.Navigation;assembly=Render"
+                            xmlns:localization="clr-namespace:Render.Resources.Localization"
+                            xmlns:common="clr-namespace:Render.Common"
+                            x:Class="Render.Components.FlagDetail.FlagDetail"
+                            Padding="0">
+
+    <ContentView.Resources>
+        <Style x:Key="Container" TargetType="Border" BasedOn="{StaticResource ModalBorderStyle}">
+            <Setter Property="BackgroundColor" Value="{StaticResource Gray}" />
+            <Setter Property="MaximumHeightRequest" Value="500" />
+            <Setter Property="MaximumWidthRequest" Value="1300" />
+        </Style>
+
+        <Style x:Key="Icon" TargetType="Label">
+            <Setter Property="FontFamily" Value="Icons" />
+            <Setter Property="FontSize" Value="45" />
+            <Setter Property="Margin" Value="15,10, 10,10" />
+            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="TextColor" Value="{StaticResource Blue}" />
+            <Setter Property="VerticalOptions" Value="Center" />
+        </Style>
+
+        <Style x:Key="NoItemLabel" TargetType="Label">
+            <Setter Property="FontSize" Value="{StaticResource MediumFont}" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="Margin" Value="0, 150" />
+        </Style>
+    </ContentView.Resources>
+
+    <AbsoluteLayout x:Name="Layout" HorizontalOptions="Fill" VerticalOptions="Fill">
+        <Grid BackgroundColor="Black" 
+              Opacity="0.2"
+              AbsoluteLayout.LayoutBounds="0,0,1,1"
+              AbsoluteLayout.LayoutFlags="SizeProportional">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer x:Name="BackgroundGesture" />
+            </Grid.GestureRecognizers>
+        </Grid>
+        
+        <Border Style="{StaticResource Container}"
+                BackgroundColor="{StaticResource Gray}"
+                AutomationId="FlagDetailLayout"
+                AbsoluteLayout.LayoutBounds="0.5,0.5,0.9,0.9"
+                AbsoluteLayout.LayoutFlags="XProportional,YProportional,WidthProportional,HeightProportional">
+            <Grid RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <!--Body-->
+                <Grid Grid.Row="1" BackgroundColor="{StaticResource White}" HeightRequest="432">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*" />
+                        <ColumnDefinition Width="0.5*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0" BackgroundColor="{StaticResource GreyFaded}">
+                        <Label IsVisible="False" x:Name="NoRetellLabel"
+                               Text="{x:Static localization:AppResources.RetellIsNotAvailable}"
+                               Style="{StaticResource NoItemLabel}" AutomationId="NoRetell" />
+                        <ScrollView x:Name="RetellScrollView" AutomationId="RetellScrollView"
+                                    Padding="0,10" HorizontalOptions="StartAndExpand">
+                            <VerticalStackLayout x:Name="RetellList"
+                                                 BackgroundColor="Transparent"
+                                                 Padding="10,0">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate>
+                                        <flagDetail:Retell Padding="0,0,0,8" />
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </VerticalStackLayout>
+                        </ScrollView>
+                    </Grid>
+                    <Grid Grid.Column="1" BackgroundColor="{StaticResource Gray}">
+                        <Grid.Shadow>
+                            <Shadow Brush="LightGray"
+                                    Offset="-15,0"
+                                    Radius="15"
+                                    Opacity="0.9" />
+                        </Grid.Shadow>
+
+                        <Label x:Name="NoQuestionLabel" IsVisible="False"
+                               Text="{x:Static localization:AppResources.QuestionAndResponseIsNotAvailable}"
+                               Style="{StaticResource NoItemLabel}" AutomationId="NoQuestions" />
+                        <ScrollView x:Name="QuestionScrollView" AutomationId="QuestionScrollView"
+                                    Padding="0,10" HorizontalOptions="End">
+                            <VerticalStackLayout x:Name="QuestionList" BackgroundColor="Transparent" Padding="10,0">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate>
+                                        <flagDetail:QuestionAndResponse AutomationId="QuestionAndResponse" />
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </VerticalStackLayout>
+                        </ScrollView>
+                    </Grid>
+                </Grid>
+
+                <!--Header-->
+                <Grid Grid.Row="0" BackgroundColor="{StaticResource Gray}">
+                    <Grid.Shadow>
+                        <Shadow Brush="LightGray"
+                                Offset="0,15"
+                                Radius="15"
+                                Opacity="0.9" />
+                    </Grid.Shadow>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" x:Name="Icon"
+                           Style="{StaticResource Icon}"
+                           AutomationId="FlagDetailTitleIcon" />
+
+                    <navigation:ItemDetailNavigationView Grid.Column="0"
+                                                         Grid.ColumnSpan="4"
+                                                         x:Name="NavigationView"
+                                                         AutomationId="NavigationView"
+                                                         HorizontalOptions="Center" />
+                    <Label Grid.Column="3"
+                           Style="{StaticResource Icon}"
+                           FontSize="60"
+                           Text="{resources:IconExtensions Remove}"
+                           HorizontalOptions="End"
+                           AutomationId="CloseFlagDetailButton">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="CloseGesture" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Grid>
+            </Grid>
+        </Border>
+        <common:LoadingBar x:Name="LoadingView" Grid.Column="0" />
+    </AbsoluteLayout>
+
+</kernel:RenderComponentBase>

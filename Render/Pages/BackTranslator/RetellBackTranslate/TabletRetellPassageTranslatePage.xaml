@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderPageBase x:TypeArguments="retellBackTranslate:TabletRetellPassageTranslatePageViewModel"
+                       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:proceedButton="clr-namespace:Render.Components.ProceedButton;assembly=Render"
+                       xmlns:titleBar="clr-namespace:Render.Components.TitleBar;assembly=Render"
+                       xmlns:miniWaveformPlayer="clr-namespace:Render.Components.MiniWaveformPlayer;assembly=Render"
+                       xmlns:retellBackTranslate="clr-namespace:Render.Pages.BackTranslator.RetellBackTranslate;assembly=Render"
+                       xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                       xmlns:common="clr-namespace:Render.Common"
+                       xmlns:sequencer="clr-namespace:Render.Sequencer;assembly=Render.Sequencer"
+                       xmlns:barPlayer="using:Render.Components.BarPlayer"
+                       x:Class="Render.Pages.BackTranslator.RetellBackTranslate.TabletRetellPassageTranslatePage"
+                       NavigationPage.HasNavigationBar="False"
+                       Style="{StaticResource PrimaryPage}">
+
+    <Grid x:Name="TopLevelElement"
+          BackgroundColor="{DynamicResource AlternateBackground}"
+          RowSpacing="0"
+          RowDefinitions="Auto, Auto, *">
+
+        <miniWaveformPlayer:MiniWaveformPlayer Grid.Row="1"
+                                               Margin="25"
+                                               x:Name="MiniWaveformPlayer"
+                                               AutomationId="MiniWaveformPlayerStack"
+                                               Style="{DynamicResource BarPlayers}" />
+
+        <barPlayer:BarPlayer Grid.Row="1"
+                             Margin="25"
+                             x:Name="BarPlayer"
+                             AutomationId="BarPlayerStack"
+                             Style="{StaticResource BarPlayers}" />
+
+        <sequencer:Sequencer x:Name="Sequencer" Grid.Row="2" />
+
+        <titleBar:TitleBar x:Name="TitleBar" Grid.Row="0" />
+
+        <proceedButton:ProceedButton x:Name="ProceedButton"
+                                     Margin="0,25,0,0"
+                                     Grid.Row="2"
+                                     HorizontalOptions="End"
+                                     VerticalOptions="End" />
+
+        <common:LoadingScreen x:Name="LoadingView" Grid.RowSpan="3" />
+    </Grid>
+
+</kernel:RenderPageBase>

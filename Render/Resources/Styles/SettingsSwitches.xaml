@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:stageSettings="clr-namespace:Render.Components.StageSettings;assembly=Render">
+    
+    <Style x:Key="BaseSettingsToggleStyle" TargetType="stageSettings:SettingsSwitch">
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="HorizontalOptions" Value="End"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+    </Style>
+    
+    <Style x:Key="StageSettingsForBlueBackgroundStyle" TargetType="stageSettings:SettingsSwitch"
+           BasedOn="{StaticResource BaseSettingsToggleStyle}">
+        <Setter Property="OnBackgroundColor" Value="{DynamicResource White}"/>
+        <Setter Property="OnThumbColor" Value="{DynamicResource Blue}"/>
+        <Setter Property="OffBackgroundColor" Value="{DynamicResource DarkGrey}"/>
+        <Setter Property="OffThumbColor" Value="{DynamicResource Blue}"/>
+        <Setter Property="Grid.Column" Value="1"/>
+    </Style>
+    
+    <Style x:Key="StageSettingsForWhiteBackgroundStyle" TargetType="stageSettings:SettingsSwitch"
+           BasedOn="{StaticResource BaseSettingsToggleStyle}">
+        <Setter Property="OnBackgroundColor" Value="{DynamicResource Blue}"/>
+        <Setter Property="OnThumbColor" Value="{DynamicResource Gray}"/>
+        <Setter Property="OffBackgroundColor" Value="{DynamicResource DarkGrey}"/>
+        <Setter Property="OffThumbColor" Value="{DynamicResource Blue}"/>
+        <Setter Property="Grid.Column" Value="1"/>
+    </Style>
+
+</ResourceDictionary>

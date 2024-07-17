@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:Class="Render.Components.TitleBar.TitleBarMenu"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:menuActions="clr-namespace:Render.Components.TitleBar.MenuActions;assembly=Render"
+                            xmlns:titleBar="clr-namespace:Render.Components.TitleBar;assembly=Render"
+                            xmlns:versionLabel="clr-namespace:Render.Components.VersionLabel;assembly=Render"
+                            x:TypeArguments="titleBar:TitleBarMenuViewModel">
+    <VerticalStackLayout x:Name="TopLevelElement" Padding="{x:Static titleBar:TitleBarMenu.TopLevelElementPadding}">
+        <!--  Clickable transparent area above the Menu that allows to close the Menu Popup  -->
+        <Grid x:Name="UpperTransparentArea"
+              BackgroundColor="Transparent"
+              HeightRequest="{x:Static titleBar:TitleBarMenu.MenuPaddingTop}">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer x:Name="CloseMenuGestureRecognizer" />
+            </Grid.GestureRecognizers>
+        </Grid>
+
+        <!--  Menu  -->
+        <Border x:Name="MenuBorder"
+                BackgroundColor="{StaticResource White}"
+                Stroke="{StaticResource GreyFaded}"
+                StrokeShape="RoundRectangle 8"
+                StrokeThickness="1">
+            <VerticalStackLayout x:Name="MenuActionsStack"
+                                 Padding="20,25"
+                                 AutomationId="MenuActionsLayout">
+
+                <!--  User info  -->
+                <HorizontalStackLayout x:Name="UserStack"
+                                       Margin="0,0,0,15"
+                                       HorizontalOptions="Start">
+                    <Image Margin="10,0"
+                           AutomationId="UserProfileImage"
+                           HeightRequest="50"
+                           Source="userprofile1.png"
+                           VerticalOptions="Center"
+                           WidthRequest="50" />
+                    <Label x:Name="UserName"
+                           AutomationId="UserNameLabel"
+                           Style="{DynamicResource MediumText}"
+                           Text="{Binding Username}"
+                           VerticalOptions="Center"
+                           WidthRequest="200"
+                           LineBreakMode="TailTruncation" />
+                </HorizontalStackLayout>
+
+                <!--  Actions collection items  -->
+                <CollectionView x:Name="MenuActionsCollection"
+                                AutomationId="MenuActionsCollection"
+                                HeightRequest="80"
+                                HorizontalOptions="Start"
+                                MinimumHeightRequest="80"
+                                VerticalOptions="Start">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <menuActions:MenuAction />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <Line AutomationId="SeparatorLine" Style="{StaticResource MenuItemsSeparator}" />
+
+                <!--  Page items  -->
+                <VerticalStackLayout x:Name="PageRelatedItemsContainer">
+                    <menuActions:MenuAction x:Name="DividePassageButton" AutomationId="DividePassage" />
+
+                    <Line x:Name="PageRelatedItemsSeparator"
+                          AutomationId="SeparatorLine"
+                          Style="{StaticResource MenuItemsSeparator}" />
+                </VerticalStackLayout>
+
+                <!--  Project items  -->
+                <VerticalStackLayout x:Name="ProjectRelatedItemsContainer">
+                    <menuActions:MenuAction x:Name="HomeButton" AutomationId="HomeButton" />
+                    <menuActions:MenuAction x:Name="SectionPageButton" AutomationId="SectionPageButton" />
+                    <menuActions:MenuAction x:Name="AudioExport" AutomationId="AudioExport" />
+
+                    <Line x:Name="ProjectRelatedItemsSeparator"
+                          AutomationId="SeparatorLine"
+                          Style="{StaticResource MenuItemsSeparator}" />
+                </VerticalStackLayout>
+
+
+                <!--  Bottom items  -->
+                <menuActions:MenuAction x:Name="ProjectListButton" AutomationId="ProjectListButton" />
+                <menuActions:SyncMenuAction x:Name="SyncButton" AutomationId="SyncButton" />
+                <menuActions:MenuAction x:Name="LogOutButton" AutomationId="LogOutButton" />
+
+                <Line AutomationId="SeparatorLine" Style="{StaticResource MenuItemsSeparator}" />
+
+                <versionLabel:VersionLabel HorizontalOptions="Start" VerticalOptions="EndAndExpand" />
+            </VerticalStackLayout>
+        </Border>
+    </VerticalStackLayout>
+</kernel:RenderComponentBase>

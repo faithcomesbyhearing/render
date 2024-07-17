@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="audioRecorder:IMiniAudioRecorderViewModel"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:audioRecorder="clr-namespace:Render.Components.AudioRecorder"
+                            xmlns:skia="clr-namespace:SkiaSharp.Views.Maui.Controls;assembly=SkiaSharp.Views.Maui.Controls"
+                            xmlns:kernel="clr-namespace:Render.Kernel"
+                            xmlns:uiResources="clr-namespace:Render.Resources"
+                            x:Class="Render.Components.AudioRecorder.NewMiniAudioRecorder"
+                            x:Name="Root">
+    <ContentView.Resources>
+        <Style x:Key="Container" TargetType="Border">
+            <Setter Property="StrokeShape" Value="RoundRectangle 0,0,0,0" />
+            <Setter Property="Stroke" Value="{Binding ContainerFrameBorderColor, Source={x:Reference Root}}" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="HeightRequest" Value="62" />
+        </Style>
+
+        <Style x:Key="TimerLabel" TargetType="Label">
+            <Setter Property="FontSize" Value="36" />
+            <Setter Property="TextColor" Value="{StaticResource SlateDark}" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="Margin" Value="10,9" />
+        </Style>
+
+        <Style x:Key="ActionButton" TargetType="Button" BasedOn="{StaticResource IconButton}">
+            <Setter Property="FontSize" Value="58" />
+            <Setter Property="TextColor" Value="{StaticResource Blue}" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="BorderWidth" Value="0"/>
+        </Style>
+
+        <Style x:Key="DeleteButton" TargetType="Button" BasedOn="{StaticResource ActionButton}">
+            <Setter Property="Margin" Value="10,0, 40,0" />
+            <Setter Property="FontSize" Value="42" />
+            <Setter Property="HorizontalOptions" Value="End" />
+        </Style>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Border Style="{StaticResource Container}" FlowDirection="LeftToRight">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" x:Name="Timer"
+                       Style="{StaticResource TimerLabel}"
+                       AutomationId="RecorderTimerLabel" />
+                <skia:SKCanvasView Grid.Column="1" x:Name="WaveformCanvas"
+                                   HorizontalOptions="Fill"
+                                   VerticalOptions="Fill"
+                                   Opacity="0.7"
+                                   PaintSurface="OnPaintSurface"/>
+                <Button Grid.Column="1" x:Name="PlayButton"
+                        Style="{StaticResource ActionButton}"
+                        Text="{uiResources:IconExtensions RecorderPlay}"
+                        AutomationId="PlayButton" />
+                <Button Grid.Column="1" x:Name="PauseButton" 
+                        Style="{StaticResource ActionButton}"
+                        Text="{uiResources:IconExtensions RecorderPause}"
+                        AutomationId="PauseButton"/>
+                <Button Grid.Column="2" x:Name="DeleteButton" 
+                        Style="{StaticResource DeleteButton}"
+                        Text="{uiResources:IconExtensions Delete}"
+                        AutomationId="DeleteButton"/>
+            </Grid>
+        </Border>
+    </ContentView.Content>
+</kernel:RenderComponentBase>

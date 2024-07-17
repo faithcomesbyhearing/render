@@ -1,0 +1,399 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:resources="clr-namespace:Render.Resources.Localization">
+
+    <x:Double x:Key="LargeFont">28</x:Double>
+    <x:Double x:Key="LargeFontMinus2Font">26</x:Double>
+    <x:Double x:Key="MediumPlus2Font">22</x:Double>
+    <x:Double x:Key="MediumFont">20</x:Double>
+    <x:Double x:Key="MediumMinus2Font">18</x:Double>
+    <x:Double x:Key="SmallPlus2Font">17</x:Double>
+    <x:Double x:Key="SmallFont">15</x:Double>
+    
+    <Style x:Key="StageSettingsEditStageNameIconStyle" TargetType="Label">
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="FontFamily" Value="Icons" />
+        <Setter Property="FontSize" Value="54" />
+        <Setter Property="TextColor" Value="{DynamicResource Option}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
+
+    <Style x:Key="WorkflowSettingsStageSettingTitle" TargetType="Label">
+        <Setter Property="Text" Value="{x:Static resources:AppResources.StageName}" />
+        <Setter Property="TextColor" Value="{DynamicResource Option}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="TranslationY" Value="7" />
+        <Setter Property="Margin" Value="5,0" />
+        <Setter Property="Padding" Value="8,0" />
+    </Style>
+
+    <Style x:Key="StageSettingsStageNameLabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Option}" />
+        <Setter Property="FontSize" Value="26" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="Margin" Value="13,0" />
+        <Setter Property="FontFamily" Value="BoldFont" />
+    </Style>
+
+    <Style x:Key="StageSettingSettingGroupTitleStyle"
+           BasedOn="{StaticResource StageSettingsStageNameLabelStyle}"
+           TargetType="Label">
+        <Setter Property="Margin" Value="0,0,0,18" />
+
+        <Style.Triggers>
+            <Trigger TargetType="Label" Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.3" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="IconLabelStyle" TargetType="Label">
+        <Setter Property="FontFamily" Value="Icons" />
+        <Setter Property="FontSize" Value="40" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="TextColor" Value="{DynamicResource SecondaryText}" />
+        <Setter Property="Padding" Value="8,0" />
+    </Style>
+
+    <Style x:Key="ModalFooterButtonLabelStyle" TargetType="Label">
+        <Setter Property="FontSize" Value="26" />
+        <Setter Property="FontFamily" Value="BoldFont" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="TextColor" Value="{DynamicResource White}" />
+    </Style>
+
+    <Style x:Key="ModalCloseButtonLabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Blue}" />
+        <Setter Property="FontSize" Value="64" />
+        <Setter Property="FontFamily" Value="Icons" />
+        <Setter Property="HorizontalOptions" Value="End" />
+        <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
+
+    <Style x:Key="ModalTitleLabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource SlateDark}" />
+        <Setter Property="FontFamily" Value="BoldFont" />
+        <Setter Property="FontSize" Value="32" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+    </Style>
+
+    <Style x:Key="ModalMessageLabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Grey}" />
+        <Setter Property="FontFamily" Value="RegularFont" />
+        <Setter Property="FontSize" Value="28" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="StageSettingsSettingLabelStyle" TargetType="Label">
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="TextColor" Value="{DynamicResource Option}" />
+        <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="FontFamily" Value="MediumFont" />
+        <Setter Property="FontSize" Value="{DynamicResource MediumFont}" />
+
+        <Style.Triggers>
+            <Trigger TargetType="Label" Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.3" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="SelectedOptionLabelStyle" TargetType="Label">
+        <Setter Property="HorizontalOptions" Value="End" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="TextColor" Value="{DynamicResource TitleGrey}" />
+        <Setter Property="FontFamily" Value="RegularFont" />
+        <Setter Property="FontSize" Value="{DynamicResource MediumMinus2Font}" />
+        <Setter Property="Margin" Value="0,0,13,0" />
+    </Style>
+
+    <Style x:Key="ProjectNameLabelStyle" TargetType="Label">
+        <Setter Property="HorizontalOptions" Value="StartAndExpand" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="TextColor" Value="{DynamicResource GreyText}" />
+        <Setter Property="FontFamily" Value="MediumFont" />
+        <Setter Property="FontSize" Value="{DynamicResource LargeFontMinus2Font}" />
+        <Setter Property="LineBreakMode" Value="TailTruncation" />
+    </Style>
+
+    <Style x:Key="ProjectCardButtonLabelStyle" TargetType="Label">
+        <Setter Property="HorizontalOptions" Value="StartAndExpand" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="TextColor" Value="{DynamicResource SecondaryText}" />
+        <Setter Property="FontFamily" Value="BoldFont" />
+        <Setter Property="FontSize" Value="{DynamicResource MediumFont}" />
+        <Setter Property="LineBreakMode" Value="WordWrap" />
+    </Style>
+
+    <Style x:Key="NoProjectMessageIconStyle" TargetType="Label">
+        <Setter Property="FontFamily" Value="Icons" />
+        <Setter Property="Margin" Value="0,0,0,35" />
+        <Setter Property="FontSize" Value="108" />
+        <Setter Property="TextColor" Value="{DynamicResource MainIconColor}" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+    </Style>
+
+    <Style x:Key="NoProjectTitleLabelStyle" TargetType="Label">
+        <Setter Property="FontFamily" Value="BoldFont" />
+        <Setter Property="Margin" Value="0,0,0,19" />
+        <Setter Property="FontSize" Value="{DynamicResource LargeFont}" />
+        <Setter Property="TextColor" Value="{DynamicResource MainText}" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="NoProjectMessageLabelStyle" TargetType="Label">
+        <Setter Property="FontFamily" Value="RegularFont" />
+        <Setter Property="Margin" Value="0,0,0,92" />
+        <Setter Property="FontSize" Value="{DynamicResource MediumPlus2Font}" />
+        <Setter Property="TextColor" Value="{DynamicResource GreyText}" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="StageTypeCardLabel" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource SecondaryText}" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <Setter Property="VerticalTextAlignment" Value="Start" />
+        <Setter Property="VerticalOptions" Value="EndAndExpand" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="LineBreakMode" Value="WordWrap" />
+        <Setter Property="FontSize" Value="{StaticResource MediumPlus2Font}" />
+        <Setter Property="Margin" Value="0,10" />
+        <Setter Property="FontFamily" Value="MediumFont" />
+    </Style>
+
+    <Style x:Key="StageNameLabel" TargetType="Label">
+        <Setter Property="FontSize" Value="29" />
+        <Setter Property="FontFamily" Value="BoldFont" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="TextColor" Value="{DynamicResource SecondaryText}" />
+    </Style>
+
+    <Style x:Key="IconStyle" TargetType="Label">
+        <Setter Property="Margin" Value="26, 0" />
+        <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="FontFamily" Value="Icons" />
+        <Setter Property="FontSize" Value="54" />
+        <Setter Property="TextColor" Value="{DynamicResource Option}" />
+        <Setter Property="WidthRequest" Value="60" />
+    </Style>
+
+    <Style x:Key="StageNameStyle" TargetType="Label">
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="FontFamily" Value="MediumFont" />
+        <Setter Property="FontSize" Value="{DynamicResource LargeFontMinus2Font}" />
+        <Setter Property="TextColor" Value="{DynamicResource Grey}" />
+        <Setter Property="LineBreakMode" Value="TailTruncation" />
+        <Setter Property="HorizontalOptions" Value="Fill" />
+    </Style>
+
+    <Style x:Key="StageListIconStyle" TargetType="Label">
+        <Setter Property="Margin" Value="0, 0, 26, 0" />
+        <Setter Property="HorizontalOptions" Value="End" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="FontFamily" Value="Icons" />
+        <Setter Property="FontSize" Value="{DynamicResource LargeFontMinus2Font}" />
+        <Setter Property="TextColor" Value="{DynamicResource Blue}" />
+        <Setter Property="WidthRequest" Value="40" />
+    </Style>
+    
+    <Style x:Key="SubtitleCenter" TargetType="Label">
+        <Setter Property="FontSize" Value="25" />
+        <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+        <Setter Property="LineBreakMode" Value="NoWrap"/>
+        <Setter Property="TextColor" Value="{DynamicResource MainText}"/>
+    </Style>
+
+    <Style x:Key="MediumText" TargetType="Label">
+        <Setter Property="FontSize" Value="{StaticResource MediumFont}" />
+        <Setter Property="TextColor" Value="{DynamicResource MainText}"/>
+    </Style>
+
+    <Style x:Key="SmallText" TargetType="Label">
+        <Setter Property="FontSize" Value="{StaticResource SmallFont}" />
+        <Setter Property="TextColor" Value="{DynamicResource MainText}"/>
+    </Style>
+
+    <Style x:Key="SubTitle" TargetType="Label">
+        <Setter Property="FontSize" Value="26"/>
+        <Setter Property="FontFamily" Value="BoldFont"/>
+        <Setter Property="TextColor" Value="{DynamicResource Title}"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+    </Style>
+    
+    <Style x:Key="WorkflowStageColumnTopLabel" TargetType="Label">
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="HeightRequest" Value="100"/>
+        <Setter Property="VerticalTextAlignment" Value="Center"/>
+        <Setter Property="HorizontalOptions" Value="Start"/>
+        <Setter Property="FontFamily" Value="BoldFont"/>
+        <Setter Property="FontSize" Value="{StaticResource LargeFont}" />
+        <Setter Property="TextColor" Value="{DynamicResource SecondaryText}"/>
+        <Setter Property="LineBreakMode" Value="TailTruncation"/>
+        <Setter Property="MaxLines" Value="2"/>
+        <Setter Property="MaximumWidthRequest" Value="330" />
+    </Style>
+    
+    <Style x:Key="WorkflowStageGroupingTitle" TargetType="Label">
+        <Setter Property="HorizontalTextAlignment" Value="Start"/>
+        <Setter Property="VerticalTextAlignment" Value="Center"/>
+        <Setter Property="TextColor" Value="{DynamicResource SecondaryText}"/>
+        <Setter Property="HorizontalOptions" Value="Start"/>
+        <Setter Property="FontFamily" Value="MediumFont"/>
+        <Setter Property="FontSize" Value="{StaticResource MediumFont}"/>
+    </Style>
+
+    <Style x:Key="WorkflowStageGroupingTitleIcon" TargetType="Label">
+        <Setter Property="FontFamily" Value="Icons"/>
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="TextColor" Value="{StaticResource SecondaryText}"/>
+        <Setter Property="Margin" Value="0,0,5,0"/>
+    </Style>
+
+    <Style x:Key="SettingGroupTitleLabel" TargetType="Label">
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="TextColor" Value="{DynamicResource Option}" />
+        <Setter Property="HorizontalOptions" Value="StartAndExpand" />
+        <Setter Property="FontSize" Value="{DynamicResource MediumFont}"/>
+        <Setter Property="FontFamily" Value="MediumFont"/>
+        <Setter Property="MaxLines" Value="1"/>
+        <Setter Property="LineBreakMode" Value="NoWrap"/>
+    </Style>
+
+    <Style x:Key="SettingGroupSubTitleLabel" TargetType="Label">
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="TextColor" Value="{DynamicResource SecondaryText}" />
+        <Setter Property="HorizontalOptions" Value="StartAndExpand" />
+        <Setter Property="FontFamily" Value="MediumFont"/>
+        <Setter Property="FontSize" Value="{DynamicResource MediumFont}"/>
+    </Style>
+
+    <Style x:Key="RadioButtonSettingLabel" TargetType="Label">
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="FontFamily" Value="MediumFont"/>
+        <Setter Property="FontSize" Value="{StaticResource MediumMinus2Font}"/>
+        <Setter Property="WidthRequest" Value="250" />
+        <Setter Property="TextColor" Value="{DynamicResource White}" />
+        <Setter Property="HorizontalOptions" Value="StartAndExpand" />
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+    </Style>
+
+    <Style x:Key="WelcomeLabelDefault" TargetType="Label">
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="FontFamily" Value="BoldFont"/>
+        <Setter Property="TextColor" Value="{DynamicResource SlateDark}" />
+        <Setter Property="FontSize" Value="46"/>
+    </Style>
+
+    <Style x:Key="LoginLabel" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource GreyText}" />
+        <Setter Property="FontSize" Value="{StaticResource LargeFont}" />
+        <Setter Property="FontFamily" Value="RegularFont"/>
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="HorizontalTextAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="AddNewUserLabelStyle" TargetType="Label">
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="FontFamily" Value="BoldFont"/>
+        <Setter Property="TextColor" Value="{StaticResource SlateDark}" />
+        <Setter Property="FontSize" Value="46"/>
+    </Style>
+
+    <Style x:Key="ButtonLabel" TargetType="Label">
+        <Setter Property="Margin" Value="7, 0, 0, 0" />
+        <Setter Property="TextColor" Value="{DynamicResource SecondaryText}" />
+        <Setter Property="TextTransform" Value="None" />
+        <Setter Property="FontSize" Value="13.3" />
+        <Setter Property="FontFamily" Value="RegularFont" />
+        <Setter Property="VerticalOptions" Value="Center" />
+    </Style>
+
+    <Style x:Key="IconTextLabel" TargetType="Label">
+        <Setter Property="Margin" Value="5, 0, 0, 0" />
+        <Setter Property="TextColor" Value="{DynamicResource TertiaryText}" />
+        <Setter Property="TextTransform" Value="None" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontFamily" Value="MediumFont" />
+        <Setter Property="VerticalOptions" Value="Center" />
+    </Style>
+
+    <Style x:Key="NewStageCardLabel" TargetType="Label">
+        <Setter Property="FontSize" Value="26" />
+        <Setter Property="FontFamily" Value="RegularFont" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="TextColor" Value="{DynamicResource MainText}" />
+    </Style>
+    
+    <Style x:Key="AssignementColumnIconStyle" TargetType="Label" BasedOn="{StaticResource IconLabelStyle}">
+        <Setter Property="FontSize" Value="54" />
+        <Setter Property="Padding" Value="2,0,13,0" />
+    </Style>
+
+    <Style x:Key="ButtonIcon" TargetType="Label">
+        <Setter Property="FontFamily" Value="Icons" />
+        <Setter Property="FontSize" Value="54" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="TextColor" Value="{StaticResource SecondaryText}" />
+    </Style>
+    
+    <Style x:Key="LoadingTextStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource GreyText}" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="FontFamily" Value="RegularFont" />
+        <Setter Property="FontSize" Value="{StaticResource LargeFont}" />
+    </Style>
+    
+    <Style x:Key="ButtonText" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource SecondaryText}" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="FontFamily" Value="BoldFont" />
+        <Setter Property="FontSize" Value="{StaticResource LargeFontMinus2Font}" />
+        <Setter Property="LineBreakMode" Value="WordWrap" />
+    </Style>
+    
+    <Style x:Key="DownloadStatusIcon" TargetType="Label">
+        <Setter Property="FontFamily" Value="Icons" />
+        <Setter Property="FontSize" Value="140" />
+        <Setter Property="TextColor" Value="{StaticResource SlateDark}" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="VerticalOptions" Value="Center" />
+    </Style>
+
+    <Style x:Key="DownloadStatusTitle" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource SlateDark}" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="FontFamily" Value="BoldFont" />
+        <Setter Property="FontSize" Value="46" />
+        <Setter Property="Margin" Value="0,0,0,19" />
+    </Style>
+
+    <Style x:Key="DownloadStatusSubTitle" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource SlateDark}" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="FontFamily" Value="RegularFont" />
+        <Setter Property="FontSize" Value="{StaticResource LargeFontMinus2Font}" />
+    </Style>
+    
+    <Style x:Key="ProjectIdLabelStyle" TargetType="Label" BasedOn="{StaticResource DownloadStatusSubTitle}">
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="Margin" Value="0,5,0,0" />
+    </Style>
+    
+    <Style x:Key="AddProjectButtonsIconStyle" TargetType="Label">
+        <Setter Property="FontFamily" Value="Icons" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="TextColor" Value="{StaticResource Option}" />
+    </Style>
+    
+</ResourceDictionary>

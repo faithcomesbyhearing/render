@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="cards:UserCardViewModel" 
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            x:Class="Render.Pages.Configurator.WorkflowAssignment.UserCard"
+                            xmlns:dragAndDrop="clr-namespace:Render.Kernel.DragAndDrop;assembly=Render"
+                            xmlns:cards="clr-namespace:Render.Pages.Configurator.WorkflowAssignment.Cards">
+    <ContentView.Content>
+        <Border StrokeShape="RoundRectangle 8"
+               Margin="0,0" 
+               Padding="13"
+               BackgroundColor="White"
+               MinimumHeightRequest="52"
+               WidthRequest="250">
+            <Label x:Name="UserFullNameLabel"
+                   Padding="3,0"
+                   HorizontalOptions="Fill"
+                   VerticalOptions="Center"
+                   HorizontalTextAlignment="Start"
+                   VerticalTextAlignment="Center"
+                   FontSize="{StaticResource MediumPlus2Font}"
+                   FontFamily="MediumFont"
+                   TextColor="{StaticResource UserCardFullNameText}"
+                   LineBreakMode="WordWrap"
+                   AutomationId="UserFullNameLabel"/>
+            <Border.Effects>
+                <dragAndDrop:DragRecognizerEffect x:Name="DragStageTypeGestureEffect"
+                                                  DragStarting="DragStageTypeGestureEffect_DragStarting"/>
+            </Border.Effects>
+        </Border>
+    </ContentView.Content>
+</kernel:RenderComponentBase>

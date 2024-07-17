@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="workflowAssignment:TabletTeamAssignmentCardViewModel" 
+                              xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                              xmlns:workflowAssignment="clr-namespace:Render.Pages.Configurator.WorkflowAssignment;assembly=Render"
+                              xmlns:resources="clr-namespace:Render.Resources;assembly=Render"
+                              xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                              x:Class="Render.Pages.Configurator.WorkflowAssignment.TeamAssignmentCard"
+                              xmlns:dragAndDrop="clr-namespace:Render.Kernel.DragAndDrop;assembly=Render"
+                              xmlns:localization="clr-namespace:Render.Resources.Localization">
+    <ContentView.Content>
+        <Grid Padding="0" 
+              BackgroundColor="Transparent"
+              RowDefinitions="Auto,Auto,Auto">
+            
+            <Grid Grid.Row="0"
+                  x:Name="NameStack"
+                  Margin="0,0,0,15"
+                  BackgroundColor="{DynamicResource TeamCardLabelBackground}"
+                  Padding="13"
+                  HeightRequest="52">
+                <Label Grid.Column="0" x:Name="CardName"
+                       Padding="13"
+                       HorizontalOptions="Fill"
+                       VerticalOptions="Fill"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       TextColor="{DynamicResource SecondaryText}"
+                       FontFamily="MediumFont"
+                       FontSize="{StaticResource MediumPlus2Font}"
+                       HeightRequest="52"
+                       AutomationId="CardNameLabel"/>
+                <Frame x:Name="RemoveTeamButton"
+                       BackgroundColor="Transparent"
+                       WidthRequest="20"
+                       Padding="0"
+                       HorizontalOptions="End" 
+                       Margin="0,0,2,0"
+                       VerticalOptions="Center"
+                       AutomationId="RemoveTeamButton">
+                    <Label FontFamily="Icons"
+                           Text="{resources:IconExtensions Remove}"
+                           FontSize="20"
+                           TextColor="{DynamicResource SecondaryText}"
+                           AutomationId="RemoveLabel"/>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="RemoveTeamButtonGestureRecognizer"
+                                              AutomationId="RemoveTeam"
+                                              Tapped="OnButtonClicked" />
+                    </Frame.GestureRecognizers>
+                </Frame>
+            </Grid>
+
+            <Border Grid.Row="1" 
+                    x:Name="AddUserDropZone" Margin="0,13" Padding="0"
+                    StrokeDashArray="6,6" 
+                    StrokeDashOffset="0" 
+                    StrokeThickness="3"
+                    StrokeShape="RoundRectangle 8"
+                    BackgroundColor="Transparent"
+                    MinimumHeightRequest="52"
+                    HorizontalOptions="Fill">
+                <Border.Stroke>
+                    <SolidColorBrush Color="{StaticResource SecondaryText}"/>
+                </Border.Stroke>
+                
+                <Label Margin="21,5"
+                       Padding="5,5"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       Text="{x:Static localization:AppResources.DragUserHere}"
+                       FontFamily="RegularFont"
+                       FontSize="{StaticResource MediumPlus2Font}"
+                       TextColor="{DynamicResource SecondaryText}"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"/>
+                <Border.Effects>
+                    <dragAndDrop:DropRecognizerEffect x:Name="DropRecognizerEffect" Drop="DropRecognizerEffect_Drop" />
+                </Border.Effects>
+            </Border>
+            
+            <Border Grid.Row="2" 
+                   x:Name="UserCardLayout" 
+                   Padding="0" 
+                   Margin="0,13" 
+                   StrokeShape="RoundRectangle 8"
+                   BackgroundColor="White">
+                <workflowAssignment:UserCard
+                                    x:Name="UserCard" 
+                                    HorizontalOptions="Start" 
+                                    VerticalOptions="Center"
+                                    MinimumHeightRequest="40" 
+                                    MinimumWidthRequest="250" />
+            </Border>
+            
+            <Frame Grid.Row="2" 
+                   x:Name="RemoveUserFromAssignmentButton" 
+                   BackgroundColor="Transparent" 
+                   WidthRequest="50"
+                   HeightRequest="40"
+                   VerticalOptions="Center"
+                   HorizontalOptions="End"
+                   Margin="0,13" 
+                   Padding="5,0,5,0">  
+                <Label FontFamily="Icons"
+                       TextColor="{DynamicResource Option}"
+                       Text="{resources:IconExtensions Delete}"
+                       FontSize="36"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"/>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer x:Name="RemoveUserFromAssignmentButtonGestureRecognizer"
+                               AutomationId="RemoveUserAssignment"
+                               Tapped="OnButtonClicked" />
+                </Frame.GestureRecognizers>
+            </Frame>
+        </Grid>
+    </ContentView.Content>
+</kernel:RenderComponentBase>

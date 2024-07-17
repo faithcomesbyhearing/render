@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="navigation:ItemDetailNavigationViewModel"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:navigation="clr-namespace:Render.Components.Navigation;assembly=Render"
+                            xmlns:resources="clr-namespace:Render.Resources"
+                            x:Class="Render.Components.Navigation.ItemDetailNavigationView">
+    <ContentView.Resources>
+        <Style x:Key="Icon" TargetType="Label">
+            <Setter Property="FontFamily" Value="Icons" />
+            <Setter Property="FontSize" Value="44" />
+            <Setter Property="Margin" Value="45,10, 40,10" />
+            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="TextColor" Value="{StaticResource Blue}" />
+            <Setter Property="VerticalOptions" Value="Center" />
+        </Style>
+    </ContentView.Resources>
+
+
+    <HorizontalStackLayout>
+        <Label x:Name="PreviousPicker" Style="{StaticResource Icon}"
+               Text="{resources:IconExtensions BoldChevronLeft}"
+               AutomationId="PreviousConversationPicker">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer x:Name="PreviousGesture" />
+            </Label.GestureRecognizers>
+        </Label>
+        <Label x:Name="NextPicker" Style="{StaticResource Icon}"
+               Text="{resources:IconExtensions BoldChevronRight}"
+               AutomationId="NextConversationPicker">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer x:Name="NextGesture" />
+            </Label.GestureRecognizers>
+        </Label>
+    </HorizontalStackLayout>
+
+</kernel:RenderComponentBase>

@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:Class="Render.Pages.Settings.SectionStatus.Processes.SectionCard"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:localization="clr-namespace:Render.Resources.Localization"
+                            xmlns:processesView="clr-namespace:Render.Pages.Settings.SectionStatus.Processes;assembly=Render"
+                            x:TypeArguments="processesView:SectionCardViewModel">
+
+    <Grid x:Name="SectionCardGrid"  RowDefinitions="*,*,*" HorizontalOptions="Fill">
+        <Border Grid.Row="0" x:Name="Card"
+                Margin="91,10,36,10"
+                HorizontalOptions="Fill"
+                AutomationId="CardFrame"
+                HeightRequest="108">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="16" />
+            </Border.StrokeShape>
+
+            <Grid HorizontalOptions="Fill">
+                <Label x:Name="NoSectionLabel"
+                       Margin="20,0"
+                       FontSize="{DynamicResource MediumFont}"
+                       HorizontalTextAlignment="Center"
+                       Text="{x:Static localization:AppResources.NoSectionsAreInThisStep}"
+                       TextColor="{DynamicResource MainIconColor}"
+                       LineBreakMode="TailTruncation"
+                       VerticalOptions="Center"
+                       AutomationId="NoSectionLabel" />
+                <Label x:Name="SectionNumber"
+                       Margin="13,0,0,0"
+                       FontFamily="BoldFont"
+                       FontSize="32"
+                       HorizontalOptions="Fill"
+                       HorizontalTextAlignment="Start"
+                       LineBreakMode="TailTruncation"
+                       VerticalOptions="Center"
+                       AutomationId="SectionNumberLabel" />
+
+                <Grid VerticalOptions="Center" HorizontalOptions="Fill" Margin="60,0,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" x:Name="SectionScriptureReference"
+                           HorizontalOptions="Fill"
+                           FontFamily="MediumFont"
+                           LineBreakMode="TailTruncation"
+                           Padding="0,0,40,0"
+                           HorizontalTextAlignment="Start"
+                           FontSize="{DynamicResource LargeFontMinus2Font}"
+                           AutomationId="SectionScriptureReferenceLabel" />
+                    <Label Grid.Row="1" x:Name="SectionTitle"
+                           FontFamily="MediumFont"
+                           Padding="0,0,40,0"
+                           LineBreakMode="TailTruncation"
+                           HorizontalTextAlignment="Start"
+                           FontSize="{DynamicResource MediumPlus2Font}"
+                           TextColor="{DynamicResource TertiaryText}"
+                           AutomationId="SectionTitleLabel" />
+                </Grid>
+
+                <Label x:Name="CenterIcon"
+                       Margin="5,0"
+                       Padding="0"
+                       FontFamily="Icons"
+                       FontSize="30"
+                       HorizontalOptions="End"
+                       TextColor="Transparent"
+                       VerticalOptions="Center"
+                       AutomationId="CheckmarkIcon" />
+            </Grid>
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer x:Name="TapGestureRecognizer"
+                                      AutomationId="SectionCard"
+                                      Tapped="OnButtonClicked" />
+            </Border.GestureRecognizers>
+        </Border>
+        <Line Grid.Row="2" x:Name="Line"
+              BackgroundColor="{StaticResource RecorderSeparatorLine}"
+              HorizontalOptions="Fill"
+              HeightRequest="2"
+              Margin="91,0,36,0"
+              Opacity=".5"
+              VerticalOptions="End" />
+    </Grid>
+</kernel:RenderComponentBase>

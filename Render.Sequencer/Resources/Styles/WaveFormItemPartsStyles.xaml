@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary x:Class="Render.Sequencer.Resources.Styles.WaveFormItemPartsStyles"
+                    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:controls="clr-namespace:Render.Sequencer.Core.Controls"
+                    xmlns:atomic="clr-namespace:Render.Sequencer.Resources.Atomic">
+    <ResourceDictionary.MergedDictionaries>
+        <atomic:Colors />
+        <atomic:Sizes />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style x:Key="CombinableWaveFormIconStyle" TargetType="Label">
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="FontFamily" Value="Icons" />
+    </Style>
+
+    <Style x:Key="LockIconStyle"
+           BasedOn="{StaticResource CombinableWaveFormIconStyle}"
+           TargetType="Label">
+        <Setter Property="FontSize" Value="48" />
+        <Setter Property="TextColor" Value="{StaticResource Alert}" />
+    </Style>
+
+    <Style x:Key="CanCombineIconStyle"
+           BasedOn="{StaticResource CombinableWaveFormIconStyle}"
+           TargetType="Label">
+        <Setter Property="FontSize" Value="40" />
+        <Setter Property="TextColor" Value="{StaticResource AccentLight}" />
+    </Style>
+
+    <Style x:Key="AudioInfoContainerStyle" TargetType="Grid">
+        <Setter Property="HorizontalOptions" Value="Fill" />
+        <Setter Property="ColumnSpacing" Value="{StaticResource SmallSpacing}" />
+        <Setter Property="HeightRequest" Value="{StaticResource AudioLabelContainerHeight}" />
+    </Style>
+
+    <Style x:Key="TimerBorderStyle" TargetType="Border">
+        <Setter Property="Padding" Value="7,0" />
+        <Setter Property="FlowDirection" Value="LeftToRight" />
+        <Setter Property="BackgroundColor" Value="{StaticResource Accent}" />
+        <Setter Property="HeightRequest" Value="35" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 5,5,0,0" />
+        <Setter Property="TranslationY" Value="-38" />
+    </Style>
+
+    <Style x:Key="TimerStyle" TargetType="Label">
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontFamily" Value="BoldFont" />
+        <Setter Property="VerticalOptions" Value="Center" />
+    </Style>
+
+    <Style x:Key="CurrentTimeStyle"
+           BasedOn="{StaticResource TimerStyle}"
+           TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource PrimarySymbols}" />
+    </Style>
+
+    <Style x:Key="OvaralTimeStyle"
+           BasedOn="{StaticResource TimerStyle}"
+           TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource SecondarySymbols}" />
+    </Style>
+
+    <Style x:Key="DelimiterStyle" TargetType="BoxView">
+        <Setter Property="BackgroundColor" Value="{StaticResource SecondarySymbols}" />
+        <Setter Property="WidthRequest" Value="{StaticResource DelimiterWidth}" />
+        <Setter Property="HeightRequest" Value="14" />
+    </Style>
+
+    <Style x:Key="AudioIconStyle" TargetType="Label">
+        <Setter Property="FontFamily" Value="Icons" />
+        <Setter Property="FontSize" Value="22" />
+        <Setter Property="TextColor" Value="{StaticResource PrimarySymbols}" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="AudioLabelStyle" TargetType="Label">
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="TextColor" Value="{StaticResource PrimarySymbols}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+    </Style>
+
+    <Style x:Key="RequiredEllipseStyle" TargetType="Ellipse">
+        <Setter Property="Fill" Value="{StaticResource RequiredBrush}" />
+        <Setter Property="HeightRequest" Value="10" />
+        <Setter Property="WidthRequest" Value="10" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="IsVisible" Value="False" />
+    </Style>
+
+    <Style x:Key="CombiningScrubberStyle" TargetType="controls:Scrubber">
+        <Setter Property="Padding" Value="{StaticResource MainScrubberRecorderMargin}" />
+        <Setter Property="ScrubberColor" Value="{StaticResource Accent}" />
+        <Setter Property="ThumbVisualWidth" Value="7" />
+    </Style>
+</ResourceDictionary>

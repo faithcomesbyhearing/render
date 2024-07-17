@@ -1,0 +1,1666 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Add" xml:space="preserve">
+    <value>Tambah</value>
+  </data>
+  <data name="AddAProject" xml:space="preserve">
+    <value>Tambahkan Proyek</value>
+  </data>
+  <data name="AddASection" xml:space="preserve">
+    <value>Tambahkan Bagian</value>
+  </data>
+  <data name="AddATeam" xml:space="preserve">
+    <value>Tambahkan Tim</value>
+  </data>
+  <data name="Added" xml:space="preserve">
+    <value>Ditambahkan</value>
+  </data>
+  <data name="Adding" xml:space="preserve">
+    <value>Menambahkan</value>
+  </data>
+  <data name="AddingProject" xml:space="preserve">
+    <value>Menambahkan Proyek...</value>
+  </data>
+  <data name="AddNew" xml:space="preserve">
+    <value>Tambah baru</value>
+  </data>
+  <data name="AddProject" xml:space="preserve">
+    <value>Tambahkan Proyek</value>
+  </data>
+  <data name="AddProjectViaId" xml:space="preserve">
+    <value>Tambahkan Proyek  dengan ID</value>
+  </data>
+  <data name="AddSection" xml:space="preserve">
+    <value>Tambahkan Bagian</value>
+  </data>
+  <data name="AddStage" xml:space="preserve">
+    <value>Tambahkan Tahap</value>
+  </data>
+  <data name="AddStageHere" xml:space="preserve">
+    <value>Seret panggung ke sini</value>
+  </data>
+  <data name="AddTeam" xml:space="preserve">
+    <value>Tambahkan Tim</value>
+  </data>
+  <data name="AddUser" xml:space="preserve">
+    <value>Tambahkan Pengguna</value>
+  </data>
+  <data name="AddWorkflowStage" xml:space="preserve">
+    <value>Tambahkan Tahap Alur Kerja</value>
+  </data>
+  <data name="AllowEditing" xml:space="preserve">
+    <value>Izinkan Pengeditan</value>
+  </data>
+  <data name="AllSections" xml:space="preserve">
+    <value>Semua Bagian</value>
+  </data>
+  <data name="AllSectionsAssigned" xml:space="preserve">
+    <value>Semua bagian telah ditugaskan.</value>
+  </data>
+  <data name="Approval" xml:space="preserve">
+    <value>Persetujuan</value>
+  </data>
+  <data name="ApprovalSubmitted" xml:space="preserve">
+    <value>persetujuan berhasil diajukan</value>
+  </data>
+  <data name="Approve" xml:space="preserve">
+    <value>Setujui</value>
+  </data>
+  <data name="Approved" xml:space="preserve">
+    <value>Disetujui</value>
+  </data>
+  <data name="ApprovedByLabel" xml:space="preserve">
+    <value>Disetujui oleh:</value>
+  </data>
+  <data name="ApprovedDraft" xml:space="preserve">
+    <value>Anda menyetujui konsep</value>
+  </data>
+  <data name="ApproveSection" xml:space="preserve">
+    <value>Setujui Bagian {0}</value>
+  </data>
+  <data name="ArchivedDrafts" xml:space="preserve">
+    <value>Konsep yang Diarsipkan</value>
+  </data>
+  <data name="ArchivedNotes" xml:space="preserve">
+    <value>Catatan yang Diarsipkan</value>
+  </data>
+  <data name="ArrangeWorkflowStages" xml:space="preserve">
+    <value>Atur Tahapan Alur Kerja</value>
+  </data>
+  <data name="Assigned" xml:space="preserve">
+    <value>{0} Ditugaskan</value>
+  </data>
+  <data name="AssignToTranslator" xml:space="preserve">
+    <value>Tugaskan Ke Penerjemah</value>
+  </data>
+  <data name="AudioClip" xml:space="preserve">
+    <value>Klip Audio</value>
+  </data>
+  <data name="AudioNote" xml:space="preserve">
+    <value>Catatan Audio</value>
+  </data>
+  <data name="BackTranslate" xml:space="preserve">
+    <value>Terjemahan Balik</value>
+  </data>
+  <data name="BackTranslate1" xml:space="preserve">
+    <value>Terjemahan Balik 1</value>
+  </data>
+  <data name="BackTranslate2" xml:space="preserve">
+    <value>Terjemahan Balik 2</value>
+  </data>
+  <data name="BackTranslator" xml:space="preserve">
+    <value>Penerjemah Balik</value>
+  </data>
+  <data name="BackTranslator2" xml:space="preserve">
+    <value>Penerjemah Balik 2</value>
+  </data>
+  <data name="Both" xml:space="preserve">
+    <value>Keduanya</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Batalkan</value>
+  </data>
+  <data name="Canceled" xml:space="preserve">
+    <value>Dibatalkan</value>
+  </data>
+  <data name="Canceling" xml:space="preserve">
+    <value>Membatalkan</value>
+  </data>
+  <data name="Check" xml:space="preserve">
+    <value>Periksa</value>
+  </data>
+  <data name="Check2" xml:space="preserve">
+    <value>Periksa 2</value>
+  </data>
+  <data name="ChooseProjectsForDeviceMessage" xml:space="preserve">
+    <value>Pilih proyek yang ingin Anda tautkan dengan perangkat ini.</value>
+  </data>
+  <data name="ChosenDraft" xml:space="preserve">
+    <value>Konsep Terpilih</value>
+  </data>
+  <data name="Chunk" xml:space="preserve">
+    <value>Potongan {0}</value>
+  </data>
+  <data name="ClearSegmentMessage1" xml:space="preserve">
+    <value>Melanjutkan akan menghapus set segmen terkini yang telah dibagi oleh subbagian ini.</value>
+  </data>
+  <data name="ClearSegmentMessage2" xml:space="preserve">
+    <value>Jika segmentasi sebelumnya dibuat khusus dan bukan setelan default, segmen ini tidak dapat dipulihkan.</value>
+  </data>
+  <data name="ClearSegments" xml:space="preserve">
+    <value>Hapus Segmen</value>
+  </data>
+  <data name="DeleteSnapshots" xml:space="preserve">
+    <value>Hapus Kedua Tangkapan Layar</value>
+  </data>
+  <data name="ClearSnapshotsDescription" xml:space="preserve">
+    <value>Kedua tangkapan layar akan dihapus. Ini akan memajukan bagian ke tangkapan layar sebelumnya.</value>
+  </data>
+  <data name="CombinedBackTranslate" xml:space="preserve">
+    <value>Terjemahan Balik Gabungan</value>
+  </data>
+  <data name="CombineSegmentTitle" xml:space="preserve">
+    <value>Gabungkan - Subbagian {0}</value>
+  </data>
+  <data name="CommunityCheck" xml:space="preserve">
+    <value>Pemeriksaan Komunitas</value>
+  </data>
+  <data name="CommunityRetellPassage" xml:space="preserve">
+    <value>Subbagian {0} - Penyaduran</value>
+  </data>
+  <data name="CommunityRevise" xml:space="preserve">
+    <value>Revisi Komunitas</value>
+  </data>
+  <data name="CommunitySetup" xml:space="preserve">
+    <value>Penyiapan Komunitas</value>
+  </data>
+  <data name="CommunityTest" xml:space="preserve">
+    <value>Tes Komunitas</value>
+  </data>
+  <data name="CommunityTestRevise" xml:space="preserve">
+    <value>Revisi Tes Komunitas</value>
+  </data>
+  <data name="CommunityTestSetup" xml:space="preserve">
+    <value>Penyiapan Komunitas</value>
+  </data>
+  <data name="CompleteWork" xml:space="preserve">
+    <value>Selesaikan Pekerjaan</value>
+  </data>
+  <data name="CompleteWorkMessage" xml:space="preserve">
+    <value>Tahap ini akan dihapus setelah pekerjaan dalam proses diselesaikan terlebih dahulu.</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Konfirmasi</value>
+  </data>
+  <data name="Confirmation" xml:space="preserve">
+    <value>Konfirmasi</value>
+  </data>
+  <data name="Consultant" xml:space="preserve">
+    <value>Konsultan</value>
+  </data>
+  <data name="ConsultantApproval" xml:space="preserve">
+    <value>Persetujuan Konsultan</value>
+  </data>
+  <data name="ConsultantCheck" xml:space="preserve">
+    <value>Pemeriksaan Konsultan</value>
+  </data>
+  <data name="ConsultantLanguage" xml:space="preserve">
+    <value>Bahasa Konsultan</value>
+  </data>
+  <data name="ConsultantRevise" xml:space="preserve">
+    <value>Revisi Konsultan</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>Lanjutkan</value>
+  </data>
+  <data name="CopyPreviousQuestions" xml:space="preserve">
+    <value>Salin Pertanyaan Sebelumnya</value>
+  </data>
+  <data name="CopyQuestions" xml:space="preserve">
+    <value>Salin Pertanyaan</value>
+  </data>
+  <data name="Current" xml:space="preserve">
+    <value>{0} terkini</value>
+  </data>
+  <data name="DeactivateStepWarning" xml:space="preserve">
+    <value>Saat Anda menonaktifkan suatu langkah, semua bagian akan berpindah ke langkah berikutnya dalam alur kerja tersebut</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Hapus</value>
+  </data>
+  <data name="DeleteSnapshotsConfirmation" xml:space="preserve">
+    <value>Apakah Anda yakin ingin menghapus kedua tangkapan layar?</value>
+  </data>
+  <data name="DeleteUser" xml:space="preserve">
+    <value>Hapus pengguna</value>
+  </data>
+  <data name="DeleteUserMessage" xml:space="preserve">
+    <value>Menghapus {0} juga akan menghapus seluruh penugasan bagian mereka. Anda tidak dapat membatalkan tindakan ini.</value>
+  </data>
+  <data name="DeleteUserTitle" xml:space="preserve">
+    <value>Hapus pengguna?</value>
+  </data>
+  <data name="DividePassageTitle" xml:space="preserve">
+    <value>Bagi Subbagian</value>
+  </data>
+  <data name="Do2StepBackTranslate" xml:space="preserve">
+    <value>Terjemahan Balik 2 Langkah</value>
+  </data>
+  <data name="DoNoteInterpret" xml:space="preserve">
+    <value>Sertakan Interpretasi Catatan</value>
+  </data>
+  <data name="DoNoteReview" xml:space="preserve">
+    <value>Tinjauan Catatan</value>
+  </data>
+  <data name="DoPassageBackTranslate1" xml:space="preserve">
+    <value>Lakukan Terjemahan Balik Subbagian 1</value>
+  </data>
+  <data name="DoPassageBackTranslate2" xml:space="preserve">
+    <value>Lakukan Terjemahan Balik Subbagian 2</value>
+  </data>
+  <data name="DoPassageListen" xml:space="preserve">
+    <value>Sertakan Dengarkan Subbagian</value>
+  </data>
+  <data name="DoPassageReview" xml:space="preserve">
+    <value>Tinjauan Subbagian</value>
+  </data>
+  <data name="DoPassageTranscribe" xml:space="preserve">
+    <value>Transkripsi Subbagian</value>
+  </data>
+  <data name="DoQuestionAndResponse" xml:space="preserve">
+    <value>Sertakan Pertanyaan &amp; Tanggapan</value>
+  </data>
+  <data name="DoRetell" xml:space="preserve">
+    <value>Lakukan Penyaduran</value>
+  </data>
+  <data name="DoSectionListen" xml:space="preserve">
+    <value>Sertakan Dengarkan Bagian</value>
+  </data>
+  <data name="DoSectionReview" xml:space="preserve">
+    <value>Sertakan Tinjauan Bagian</value>
+  </data>
+  <data name="DoSegmentBackTranslate1" xml:space="preserve">
+    <value>Lakukan Terjemahan Balik Segmen 1</value>
+  </data>
+  <data name="DoSegmentBackTranslate2" xml:space="preserve">
+    <value>Lakukan Terjemahan Balik Segmen 2</value>
+  </data>
+  <data name="DoSegmentTranscribe" xml:space="preserve">
+    <value>Transkripsi Segmen</value>
+  </data>
+  <data name="DoTranscribe" xml:space="preserve">
+    <value>Lakukan Transkripsi</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Unduh</value>
+  </data>
+  <data name="Downloaded" xml:space="preserve">
+    <value>Diunduh</value>
+  </data>
+  <data name="DownloadingProjects" xml:space="preserve">
+    <value>Mengunduh Proyek</value>
+  </data>
+  <data name="Draft" xml:space="preserve">
+    <value>Konsep</value>
+  </data>
+  <data name="DraftedByLabel" xml:space="preserve">
+    <value>Konsep disusun oleh:</value>
+  </data>
+  <data name="DraftNotes" xml:space="preserve">
+    <value>Catatan Konsep {0}</value>
+  </data>
+  <data name="DraftPassage" xml:space="preserve">
+    <value>Terjemahkan Bagian {0}</value>
+  </data>
+  <data name="DraftRecord" xml:space="preserve">
+    <value>Rekaman Konsep</value>
+  </data>
+  <data name="DraftReplacementModalTitle" xml:space="preserve">
+    <value>Pilih Konsep yang akan Diganti</value>
+  </data>
+  <data name="DraftReview" xml:space="preserve">
+    <value>Tinjauan Konsep {0}</value>
+  </data>
+  <data name="Drafts" xml:space="preserve">
+    <value>Konsep</value>
+  </data>
+  <data name="DraftSelect" xml:space="preserve">
+    <value>Pilihan Konsep</value>
+  </data>
+  <data name="DraftSelection" xml:space="preserve">
+    <value>Pilihan Konsep</value>
+  </data>
+  <data name="DraftTitle" xml:space="preserve">
+    <value>Konsep {0}</value>
+  </data>
+  <data name="EditPassage" xml:space="preserve">
+    <value>Edit Subbagian {0}</value>
+  </data>
+  <data name="EditUser" xml:space="preserve">
+    <value>Edit Pengguna</value>
+  </data>
+  <data name="EmptyCollectionMessage" xml:space="preserve">
+    <value>Klik "Tambah baru" di atas untuk menambahkan proyek.</value>
+  </data>
+  <data name="EmptyCollectionMessageTitle" xml:space="preserve">
+    <value>Daftar proyek kosong.</value>
+  </data>
+  <data name="EmptyOffloadCollectionMessage" xml:space="preserve">
+    <value>Tidak ada proyek untuk dibongkar</value>
+  </data>
+  <data name="EmptyPassword" xml:space="preserve">
+    <value>Kata sandi tidak boleh kosong</value>
+  </data>
+  <data name="End" xml:space="preserve">
+    <value>Berakhir</value>
+  </data>
+  <data name="Enter32digitId" xml:space="preserve">
+    <value>Masukkan ID 32 digit...</value>
+  </data>
+  <data name="EnterAProjectName" xml:space="preserve">
+    <value>Masukkan nama proyek</value>
+  </data>
+  <data name="EnterLanguage" xml:space="preserve">
+    <value>Masukkan Nama Bahasa</value>
+  </data>
+  <data name="EnterPasswordToRestoreSection" xml:space="preserve">
+    <value>Masukkan kata sandi Anda untuk membuka kunci dan memulihkan bagian ini</value>
+  </data>
+  <data name="EnterSectionNumber" xml:space="preserve">
+    <value>Masukkan nomor bagian...</value>
+  </data>
+  <data name="EnterYourPassword" xml:space="preserve">
+    <value>Masukkan Kata Sandi</value>
+  </data>
+  <data name="EnterYourUsername" xml:space="preserve">
+    <value>Masukkan Nama Pengguna Anda</value>
+  </data>
+  <data name="ErrorAddingProject" xml:space="preserve">
+    <value>Terjadi kesalahan saat menambahkan proyek ini.</value>
+  </data>
+  <data name="ErrorConnectLocalMachine" xml:space="preserve">
+    <value>Terjadi kesalahan saat mencoba menyambung ke mesin lokal.</value>
+  </data>
+  <data name="ExportAudio" xml:space="preserve">
+    <value>Ekspor Audio</value>
+  </data>
+  <data name="ExportChecked" xml:space="preserve">
+    <value>Ekspor Diperiksa</value>
+  </data>
+  <data name="Exporting" xml:space="preserve">
+    <value>Mengekspor {0} dari {1}</value>
+  </data>
+  <data name="FontSize" xml:space="preserve">
+    <value>Ukuran Huruf</value>
+  </data>
+  <data name="ForTeam" xml:space="preserve">
+    <value>Untuk {0}</value>
+  </data>
+  <data name="Generate" xml:space="preserve">
+    <value>Hasilkan</value>
+  </data>
+  <data name="Generic" xml:space="preserve">
+    <value>Umum</value>
+  </data>
+  <data name="GlobalUser" xml:space="preserve">
+    <value>Pengguna Global</value>
+  </data>
+  <data name="Grid" xml:space="preserve">
+    <value>Kisi</value>
+  </data>
+  <data name="HaveBeenCleared" xml:space="preserve">
+    <value>telah Dihapus</value>
+  </data>
+  <data name="HigherPriority" xml:space="preserve">
+    <value>Prioritas lebih tinggi</value>
+  </data>
+  <data name="HowToResolve" xml:space="preserve">
+    <value>Bagaimana Anda ingin menyelesaikan masalah ini?</value>
+  </data>
+  <data name="ImproperlyFormattedId" xml:space="preserve">
+    <value>Format ID tidak sesuai. Silakan masukkan kembali.</value>
+  </data>
+  <data name="IncludeBackTranslate" xml:space="preserve">
+    <value>Sertakan Terjemahan Balik</value>
+  </data>
+  <data name="IncludeNoteListenGuidance" xml:space="preserve">
+    <value>Sertakan Panduan Dengarkan Catatan</value>
+  </data>
+  <data name="IncludePassageBackTranslate" xml:space="preserve">
+    <value>Sertakan Terjemahan Balik Subbagian</value>
+  </data>
+  <data name="IncludePassageListen" xml:space="preserve">
+    <value>Sertakan Dengarkan Subbagian</value>
+  </data>
+  <data name="IncludePassageReview" xml:space="preserve">
+    <value>Sertakan Tinjauan Subbagian</value>
+  </data>
+  <data name="IncludePassageReviewAfterReRecording" xml:space="preserve">
+    <value>Sertakan Peninjauan Subbagian Setelah Perekaman Ulang</value>
+  </data>
+  <data name="IncludeSegmentBackTranslate" xml:space="preserve">
+    <value>Sertakan Terjemahan Balik Segmen</value>
+  </data>
+  <data name="IncorrectPassword" xml:space="preserve">
+    <value>Kata sandi ini tidak cocok dengan nama pengguna ini</value>
+  </data>
+  <data name="IncorrectPattern" xml:space="preserve">
+    <value>Pola salah. Silakan coba lagi.</value>
+  </data>
+  <data name="Input" xml:space="preserve">
+    <value>Masukkan</value>
+  </data>
+  <data name="InsertPassword" xml:space="preserve">
+    <value>Masukkan kata sandi di sini</value>
+  </data>
+  <data name="IntermediateLanguage" xml:space="preserve">
+    <value>Bahasa Menengah</value>
+  </data>
+  <data name="Interpret" xml:space="preserve">
+    <value>Interpretasi</value>
+  </data>
+  <data name="Interpreted" xml:space="preserve">
+    <value>Diinterpretasikan</value>
+  </data>
+  <data name="InterpretToConsultant" xml:space="preserve">
+    <value>Interpretasikan Ke Konsultan</value>
+  </data>
+  <data name="InterpretToTranslator" xml:space="preserve">
+    <value>Interpretasikan Ke Penerjemah</value>
+  </data>
+  <data name="Iteration" xml:space="preserve">
+    <value>Perulangan</value>
+  </data>
+  <data name="Jump" xml:space="preserve">
+    <value>Menuju</value>
+  </data>
+  <data name="JumpToSection" xml:space="preserve">
+    <value>Menuju ke Bagian</value>
+  </data>
+  <data name="LastCompletedStage" xml:space="preserve">
+    <value>Tahap yang Terakhir Diselesaikan</value>
+  </data>
+  <data name="LastSubmittedAudioLabel" xml:space="preserve">
+    <value>Audio yang Terakhir Dikirim</value>
+  </data>
+  <data name="LastSync" xml:space="preserve">
+    <value>Sinkronisasi Terakhir</value>
+  </data>
+  <data name="LeaveFreeCut" xml:space="preserve">
+    <value>Biarkan Potongan Bebas Segmen</value>
+  </data>
+  <data name="LeaveFreeCutMessage1" xml:space="preserve">
+    <value>Jika Anda membiarkan Potongan Bebas Segmen, Anda akan kehilangan pekerjaan yang telah dihasilkan hingga saat ini.</value>
+  </data>
+  <data name="LeaveFreeCutMessage2" xml:space="preserve">
+    <value>Selesaikan langkah ini untuk mempertahankan pekerjaan yang telah dibuat.</value>
+  </data>
+  <data name="Localization" xml:space="preserve">
+    <value>Pelokalan</value>
+  </data>
+  <data name="LoggingIn" xml:space="preserve">
+    <value>Masuk...</value>
+  </data>
+  <data name="LogIn" xml:space="preserve">
+    <value>Masuk</value>
+  </data>
+  <data name="LogOut" xml:space="preserve">
+    <value>Keluar</value>
+  </data>
+  <data name="LowerPriority" xml:space="preserve">
+    <value>Prioritas lebih rendah</value>
+  </data>
+  <data name="ManageDivisions" xml:space="preserve">
+    <value>Kelola Subbagian Divisi {0}</value>
+  </data>
+  <data name="ManageUsers" xml:space="preserve">
+    <value>Kelola Pengguna</value>
+  </data>
+  <data name="MarkQuestions" xml:space="preserve">
+    <value>Tandai Subbagian Pertanyaan {0}</value>
+  </data>
+  <data name="MicNotConnectedMessage" xml:space="preserve">
+    <value>Mikrofon tidak terdeteksi.  Hubungkan mikrofon ke sistem Anda untuk merekam audio.</value>
+  </data>
+  <data name="MicNotConnectedTitle" xml:space="preserve">
+    <value>Mikrofon tidak terhubung</value>
+  </data>
+  <data name="MicrophoneAccessMessage" xml:space="preserve">
+    <value>Render tidak memiliki izin untuk menggunakan mikrofon Anda. Untuk memperbaiki ini, buka pengaturan privasi mikrofon dan aktifkan akses mikrofon untuk Render.</value>
+  </data>
+  <data name="MicrophoneAccessTitle" xml:space="preserve">
+    <value>Akses mikrofon diperlukan</value>
+  </data>
+  <data name="MultipleTeamAssignmentLabel" xml:space="preserve">
+    <value>Satu Pengguna Tidak Dapat Ditugaskan ke Beberapa Tim</value>
+  </data>
+  <data name="MultipleTeamAssignmentMessage" xml:space="preserve">
+    <value>Harap tugaskan pengguna unik untuk masing-masing tim.</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Nama</value>
+  </data>
+  <data name="NoAudio" xml:space="preserve">
+    <value>Tidak Ada Audio</value>
+  </data>
+  <data name="NoInternetConnection" xml:space="preserve">
+    <value>Tidak ada koneksi internet</value>
+  </data>
+  <data name="NoReviewedSections" xml:space="preserve">
+    <value>Tidak ada bagian yang telah ditinjau saat ini.</value>
+  </data>
+  <data name="NoSectionAudioForStage" xml:space="preserve">
+    <value>Tidak Ada Bagian Audio untuk Tahap ini</value>
+  </data>
+  <data name="NoSelfCheck" xml:space="preserve">
+    <value>Tidak ada Pemeriksaan Mandiri</value>
+  </data>
+  <data name="NotAbleToLogin" xml:space="preserve">
+    <value>Anda tidak dapat masuk.</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>Catatan</value>
+  </data>
+  <data name="NoteInterpret" xml:space="preserve">
+    <value>Catatan Interpretasi</value>
+  </data>
+  <data name="NoteListen" xml:space="preserve">
+    <value>Dengarkan Catatan</value>
+  </data>
+  <data name="Notes" xml:space="preserve">
+    <value>Catatan</value>
+  </data>
+  <data name="NoteTranslator" xml:space="preserve">
+    <value>Penerjemah Catatan</value>
+  </data>
+  <data name="NotInWorkflow" xml:space="preserve">
+    <value>Bukan bagian dari alur kerja lagi</value>
+  </data>
+  <data name="NoUnreviewedSections" xml:space="preserve">
+    <value>Tidak ada bagian yang belum ditinjau saat ini.</value>
+  </data>
+  <data name="NullUsername" xml:space="preserve">
+    <value>Nama pengguna tidak boleh kosong</value>
+  </data>
+  <data name="Offload" xml:space="preserve">
+    <value>Bongkar</value>
+  </data>
+  <data name="OffloadData" xml:space="preserve">
+    <value>Bongkar Data</value>
+  </data>
+  <data name="Offloading" xml:space="preserve">
+    <value>Membongkar</value>
+  </data>
+  <data name="OffloadWarning" xml:space="preserve">
+    <value>{0} terakhir disinkronkan pada {1}. Apakah Anda yakin ingin membongkar proyek ini?</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>Oke</value>
+  </data>
+  <data name="Original" xml:space="preserve">
+    <value>Asli</value>
+  </data>
+  <data name="OriginalLanguage" xml:space="preserve">
+    <value>Bahasa asli</value>
+  </data>
+  <data name="OriginalNote" xml:space="preserve">
+    <value>Catatan Asli</value>
+  </data>
+  <data name="OriginalPassageTitle" xml:space="preserve">
+    <value>Subbagian {0} (Asli)</value>
+  </data>
+  <data name="Passage" xml:space="preserve">
+    <value>Subbagian {0}</value>
+  </data>
+  <data name="PassageBackTranslate" xml:space="preserve">
+    <value>Terjemahan Balik Subbagian</value>
+  </data>
+  <data name="PassageDivide" xml:space="preserve">
+    <value>Pembagian Subbagian</value>
+  </data>
+  <data name="PassageDraftListen" xml:space="preserve">
+    <value>Dengarkan Konsep Subbagian {0}</value>
+  </data>
+  <data name="PassageListen" xml:space="preserve">
+    <value>Dengarkan Subbagian</value>
+  </data>
+  <data name="PassageListenOnly" xml:space="preserve">
+    <value>Hanya Dengarkan Subbagian</value>
+  </data>
+  <data name="PassageListenTitle" xml:space="preserve">
+    <value>Dengarkan Subbagian {0}</value>
+  </data>
+  <data name="PassageNumber" xml:space="preserve">
+    <value>Subbagian {0}</value>
+  </data>
+  <data name="PassagePeerReview" xml:space="preserve">
+    <value>Subbagian {0} Tinjauan Sejawat</value>
+  </data>
+  <data name="PassageRetell" xml:space="preserve">
+    <value>Penyaduran Subbagian</value>
+  </data>
+  <data name="PassageReview" xml:space="preserve">
+    <value>Tinjauan Subbagian</value>
+  </data>
+  <data name="PassageReviewAfterReRecording" xml:space="preserve">
+    <value>Peninjauan Subbagian Setelah Perekaman Ulang</value>
+  </data>
+  <data name="PassageSelect" xml:space="preserve">
+    <value>Pilihan Subbagian</value>
+  </data>
+  <data name="PassageSelection" xml:space="preserve">
+    <value>Pilihan Subbagian</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Kata Sandi</value>
+  </data>
+  <data name="PasswordGrid" xml:space="preserve">
+    <value>Kisi Kata Sandi</value>
+  </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>Kata sandi diperlukan</value>
+  </data>
+  <data name="PasswordType" xml:space="preserve">
+    <value>Jenis Kata Sandi</value>
+  </data>
+  <data name="PeerCheck" xml:space="preserve">
+    <value>Pemeriksaan Sejawat</value>
+  </data>
+  <data name="PeerReview" xml:space="preserve">
+    <value>Tinjauan Sejawat</value>
+  </data>
+  <data name="PeerRevise" xml:space="preserve">
+    <value>Revisi Sejawat</value>
+  </data>
+  <data name="PleaseConnect" xml:space="preserve">
+    <value>Harap sambungkan ke internet dan mulai Render lagi.</value>
+  </data>
+  <data name="PleaseLogIn" xml:space="preserve">
+    <value>Silakan masuk untuk memulai.</value>
+  </data>
+  <data name="PrecedingAudio" xml:space="preserve">
+    <value>Audio Sebelumnya</value>
+  </data>
+  <data name="PreviousDraft" xml:space="preserve">
+    <value>Konsep Sebelumnya</value>
+  </data>
+  <data name="Proceed" xml:space="preserve">
+    <value>Proses</value>
+  </data>
+  <data name="Processes" xml:space="preserve">
+    <value>Proses</value>
+  </data>
+  <data name="ProjectAddedSuccesfully" xml:space="preserve">
+    <value>Proyek ini berhasil ditambahkan.</value>
+  </data>
+  <data name="ProjectConfiguration" xml:space="preserve">
+    <value>Konfigurasi Proyek</value>
+  </data>
+  <data name="ProjectDeletedTitle" xml:space="preserve">
+    <value>Proyek telah dihapus</value>
+  </data>
+  <data name="ProjectHome" xml:space="preserve">
+    <value>Beranda Proyek</value>
+  </data>
+  <data name="ProjectId" xml:space="preserve">
+    <value>ID Proyek</value>
+  </data>
+  <data name="ProjectList" xml:space="preserve">
+    <value>Daftar Proyek</value>
+  </data>
+  <data name="ProjectsDownloadedSuccessfully" xml:space="preserve">
+    <value>Proyek berhasil diunduh.</value>
+  </data>
+  <data name="ProjectTeams" xml:space="preserve">
+    <value>Tim Proyek</value>
+  </data>
+  <data name="ProjectUsers" xml:space="preserve">
+    <value>Pengguna Proyek</value>
+  </data>
+  <data name="ProjectWorkflow" xml:space="preserve">
+    <value>Alur Kerja Proyek</value>
+  </data>
+  <data name="QuestionFormatted" xml:space="preserve">
+    <value>Pertanyaan {0}</value>
+  </data>
+  <data name="QuestionAndResponse" xml:space="preserve">
+    <value>Pertanyaan &amp; Tanggapan</value>
+  </data>
+  <data name="QuestionPlacement" xml:space="preserve">
+    <value>Penempatan Pertanyaan</value>
+  </data>
+  <data name="QuestionSet" xml:space="preserve">
+    <value>Kumpulan Pertanyaan {0}</value>
+  </data>
+  <data name="Record" xml:space="preserve">
+    <value>Rekam</value>
+  </data>
+  <data name="RecordedSegmentWarningConfirmation" xml:space="preserve">
+    <value>Selesaikan Penggabungan</value>
+  </data>
+  <data name="RecordedSegmentWarningMessage" xml:space="preserve">
+    <value>Segmen sebelumnya sudah berisi audio tanggapan. Jika Anda menggabungkan kedua segmen ini, audio yang direkam sebelumnya akan hilang.</value>
+  </data>
+  <data name="RecordedSegmentWarningTitle" xml:space="preserve">
+    <value>Tanggapan akan Hilang</value>
+  </data>
+  <data name="RecordInterpretation" xml:space="preserve">
+    <value>Rekam Interpretasi</value>
+  </data>
+  <data name="RecordNewDraft" xml:space="preserve">
+    <value>Rekam Konsep Baru</value>
+  </data>
+  <data name="RecordQuestion" xml:space="preserve">
+    <value>Rekam Pertanyaan (Q{0})</value>
+  </data>
+  <data name="RecordQuestionTitle" xml:space="preserve">
+    <value>Rekam Pertanyaan</value>
+  </data>
+  <data name="RecordResponse" xml:space="preserve">
+    <value>Tanggapi Rekaman</value>
+  </data>
+  <data name="RecordRetell" xml:space="preserve">
+    <value>Rekam Penyaduran</value>
+  </data>
+  <data name="RecordStandardQuestion" xml:space="preserve">
+    <value>Rekam Pertanyaan Standar {0}</value>
+  </data>
+  <data name="RecordTranslation" xml:space="preserve">
+    <value>Rekam Terjemahan</value>
+  </data>
+  <data name="Recovery" xml:space="preserve">
+    <value>Pemulihan</value>
+  </data>
+  <data name="References" xml:space="preserve">
+    <value>Referensi</value>
+  </data>
+  <data name="RemoveWork" xml:space="preserve">
+    <value>Hapus Pekerjaan</value>
+  </data>
+  <data name="RemoveWorkMessage" xml:space="preserve">
+    <value>Tahap ini akan segera dihapus dan semua pekerjaan dalam proses akan hilang.</value>
+  </data>
+  <data name="RenderUser" xml:space="preserve">
+    <value>Pengguna Render</value>
+  </data>
+  <data name="Replace" xml:space="preserve">
+    <value>Ganti</value>
+  </data>
+  <data name="RequireNoteListen" xml:space="preserve">
+    <value>Panduan Dengarkan Catatan</value>
+  </data>
+  <data name="RequireNoteReview" xml:space="preserve">
+    <value>Panduan Tinjauan Catatan</value>
+  </data>
+  <data name="RequirePassageListen" xml:space="preserve">
+    <value>Panduan Dengarkan Subbagian</value>
+  </data>
+  <data name="RequirePassageReview" xml:space="preserve">
+    <value>Panduan Tinjauan Subbagian</value>
+  </data>
+  <data name="RequirePassageTranscribeListen" xml:space="preserve">
+    <value>Panduan Transkripsi Subagian</value>
+  </data>
+  <data name="RequireQuestionContextListen" xml:space="preserve">
+    <value>Panduan Dengarkan Konteks Pertanyaan</value>
+  </data>
+  <data name="RequireRecordResponse" xml:space="preserve">
+    <value>Sertakan Panduan Tanggapan</value>
+  </data>
+  <data name="RequireReviewAfterReRecording" xml:space="preserve">
+    <value>Panduan Peninjauan Subbagian Setelah Perekaman Ulang</value>
+  </data>
+  <data name="RequireSectionListen" xml:space="preserve">
+    <value>Panduan Dengarkan Bagian</value>
+  </data>
+  <data name="RequireSectionReview" xml:space="preserve">
+    <value>Panduan Tinjauan Bagian</value>
+  </data>
+  <data name="RequireSegmentTranscribeListen" xml:space="preserve">
+    <value>Panduan Transkripsi Segmen</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Atur Ulang</value>
+  </data>
+  <data name="ResetSection" xml:space="preserve">
+    <value>Atur Ulang Bagian</value>
+  </data>
+  <data name="Response" xml:space="preserve">
+    <value>Tanggapan {0}</value>
+  </data>
+  <data name="Restore" xml:space="preserve">
+    <value>Pulihkan</value>
+  </data>
+  <data name="RestoreSection" xml:space="preserve">
+    <value>Bagian Pulihkan</value>
+  </data>
+  <data name="RestoreSectionConfirmation" xml:space="preserve">
+    <value>Yakin ingin memulihkan bagian ini?</value>
+  </data>
+  <data name="RestoreSnapshotInfo" xml:space="preserve">
+    <value>Pemulihan tangkapan layar ini tidak akan memulihkan tahapan yang dihapus kembali ke alur kerja.</value>
+  </data>
+  <data name="Retell" xml:space="preserve">
+    <value>Sadur</value>
+  </data>
+  <data name="RetellCheck" xml:space="preserve">
+    <value>Pemeriksaan Penyaduran (Subbagian {0})</value>
+  </data>
+  <data name="ReturnToLogIn" xml:space="preserve">
+    <value>Kembali ke Masuk</value>
+  </data>
+  <data name="Review" xml:space="preserve">
+    <value>Tinjauan</value>
+  </data>
+  <data name="Reviewed" xml:space="preserve">
+    <value>Ditinjau</value>
+  </data>
+  <data name="ReviewQuestions" xml:space="preserve">
+    <value>Tinjauan Subbagian Pertanyaan {0}</value>
+  </data>
+  <data name="Revise" xml:space="preserve">
+    <value>Revisi</value>
+  </data>
+  <data name="Revision" xml:space="preserve">
+    <value>Revisi</value>
+  </data>
+  <data name="RoleAssignment" xml:space="preserve">
+    <value>Penugasan Peran</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Cari</value>
+  </data>
+  <data name="Section" xml:space="preserve">
+    <value>Bagian {0}</value>
+  </data>
+  <data name="SectionAndPassageListen" xml:space="preserve">
+    <value>Dengarkan Bagian dan Subbagian</value>
+  </data>
+  <data name="SectionAssignment" xml:space="preserve">
+    <value>Penetapan Bagian</value>
+  </data>
+  <data name="SectionDraft" xml:space="preserve">
+    <value>Konsep Bagian {0}</value>
+  </data>
+  <data name="SectionFeedbackTitle" xml:space="preserve">
+    <value>Bagian {0} Masukan</value>
+  </data>
+  <data name="SectionInformation" xml:space="preserve">
+    <value>Informasi Bagian</value>
+  </data>
+  <data name="SectionList" xml:space="preserve">
+    <value>Daftar Bagian</value>
+  </data>
+  <data name="SectionListen" xml:space="preserve">
+    <value>Dengarkan Bagian</value>
+  </data>
+  <data name="SectionListenOnly" xml:space="preserve">
+    <value>Hanya Dengarkan Bagian</value>
+  </data>
+  <data name="SectionListenTitle" xml:space="preserve">
+    <value>Dengarkan Bagian {0}</value>
+  </data>
+  <data name="SectionNumberLabel" xml:space="preserve">
+    <value>Nomor Bagian</value>
+  </data>
+  <data name="SectionReferenceLabel" xml:space="preserve">
+    <value>Referensi Baris</value>
+  </data>
+  <data name="SectionReset" xml:space="preserve">
+    <value>Bagian telah diatur ulang.</value>
+  </data>
+  <data name="SectionReview" xml:space="preserve">
+    <value>Tinjauan Bagian</value>
+  </data>
+  <data name="SectionSelect" xml:space="preserve">
+    <value>Pilihan Bagian</value>
+  </data>
+  <data name="SectionsMovingWarning" xml:space="preserve">
+    <value>Bagian akan pindah ke langkah berikutnya</value>
+  </data>
+  <data name="SectionStatus" xml:space="preserve">
+    <value>Status Bagian</value>
+  </data>
+  <data name="SectionStepLabel" xml:space="preserve">
+    <value>Langkah Terkini</value>
+  </data>
+  <data name="SectionTitle" xml:space="preserve">
+    <value>Bagian Judul {0}</value>
+  </data>
+  <data name="SectionTitleLabel" xml:space="preserve">
+    <value>Judul Bagian</value>
+  </data>
+  <data name="Segment" xml:space="preserve">
+    <value>Segmen {0}</value>
+  </data>
+  <data name="SegmentBackTranslate" xml:space="preserve">
+    <value>Terjemahan Balik Segmen</value>
+  </data>
+  <data name="SegmentBackTranslateSelect" xml:space="preserve">
+    <value>Segmentasi Pilihan Terjemahan Balik</value>
+  </data>
+  <data name="SegmentBackTranslateTitle" xml:space="preserve">
+    <value>{0} - Segmen {1}</value>
+  </data>
+  <data name="SegmentFreeCut" xml:space="preserve">
+    <value>Potongan Bebas Segmen</value>
+  </data>
+  <data name="SegmentWillBeCleared" xml:space="preserve">
+    <value>Segmen Saat Ini akan Dihapus</value>
+  </data>
+  <data name="SelectADraft" xml:space="preserve">
+    <value>Pilih Konsep</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>Pilih Semua</value>
+  </data>
+  <data name="SelectAProfile" xml:space="preserve">
+    <value>Pilih profil untuk masuk</value>
+  </data>
+  <data name="SelectAProject" xml:space="preserve">
+    <value>Pilih Proyek</value>
+  </data>
+  <data name="SelectDisplay" xml:space="preserve">
+    <value>Pilih Tampilan</value>
+  </data>
+  <data name="SelectDraft" xml:space="preserve">
+    <value>Pilih Konsep</value>
+  </data>
+  <data name="SelectProjectsToImport" xml:space="preserve">
+    <value>Pilih Proyek yang Akan Diimpor</value>
+  </data>
+  <data name="SelectSection" xml:space="preserve">
+    <value>Pilih Bagian</value>
+  </data>
+  <data name="SelectSnapshot" xml:space="preserve">
+    <value>Pilih Tangkapan Layar</value>
+  </data>
+  <data name="SelectSnapshotDescription" xml:space="preserve">
+    <value>Pilih snapshot tertentu untuk melanjutkan. Snapshot yang tidak dipilih akan dihapus.</value>
+  </data>
+  <data name="Sequence" xml:space="preserve">
+    <value>Urutan</value>
+  </data>
+  <data name="Snapshot" xml:space="preserve">
+    <value>Tangkapan Layar</value>
+  </data>
+  <data name="SnapshotChosen" xml:space="preserve">
+    <value>tangkapan layar dipilih untuk</value>
+  </data>
+  <data name="SnapshotConflict" xml:space="preserve">
+    <value>Ada Konflik Tangkapan Layar pada Bagian ini: {0}</value>
+  </data>
+  <data name="Snapshots" xml:space="preserve">
+    <value>Tangkapan Layar</value>
+  </data>
+  <data name="SortBy" xml:space="preserve">
+    <value>Urutkan berdasarkan</value>
+  </data>
+  <data name="Source" xml:space="preserve">
+    <value>Sumber</value>
+  </data>
+  <data name="StageName" xml:space="preserve">
+    <value>Nama Tahap</value>
+  </data>
+  <data name="StandardQuestion" xml:space="preserve">
+    <value>Pertanyaan Standar {0}</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Mulai</value>
+  </data>
+  <data name="Step" xml:space="preserve">
+    <value>Langkah</value>
+  </data>
+  <data name="Step1" xml:space="preserve">
+    <value>Langkah 1</value>
+  </data>
+  <data name="Step2" xml:space="preserve">
+    <value>Langkah 2</value>
+  </data>
+  <data name="SupplementaryMaterial" xml:space="preserve">
+    <value>Materi Tambahan</value>
+  </data>
+  <data name="Sync" xml:space="preserve">
+    <value>Sinkronkan</value>
+  </data>
+  <data name="TeamCheck" xml:space="preserve">
+    <value>Pemeriksaan Tim</value>
+  </data>
+  <data name="TeamOne" xml:space="preserve">
+    <value>Tim 1</value>
+  </data>
+  <data name="TeamTwo" xml:space="preserve">
+    <value>Tim 2</value>
+  </data>
+  <data name="Text" xml:space="preserve">
+    <value>Teks</value>
+  </data>
+  <data name="TextNote" xml:space="preserve">
+    <value>Catatan Teks</value>
+  </data>
+  <data name="TotalPassagesLabel" xml:space="preserve">
+    <value>Total Subbagian</value>
+  </data>
+  <data name="TotalVerses" xml:space="preserve">
+    <value>Jumlah Baris:</value>
+  </data>
+  <data name="Transcribe" xml:space="preserve">
+    <value>Transkripsi</value>
+  </data>
+  <data name="Transcribe2" xml:space="preserve">
+    <value>Transkripsi 2</value>
+  </data>
+  <data name="TranscribePassage" xml:space="preserve">
+    <value>Transkripsi Subbagian</value>
+  </data>
+  <data name="TranscribeSegment" xml:space="preserve">
+    <value>Transkripsi Segmen</value>
+  </data>
+  <data name="Translated" xml:space="preserve">
+    <value>Diterjemahkan</value>
+  </data>
+  <data name="Translation" xml:space="preserve">
+    <value>Terjemahan</value>
+  </data>
+  <data name="Unassigned" xml:space="preserve">
+    <value>Belum ditugaskan</value>
+  </data>
+  <data name="Unreviewed" xml:space="preserve">
+    <value>Belum ditinjau</value>
+  </data>
+  <data name="UnsavedRolesMessage" xml:space="preserve">
+    <value>Jika Anda ingin menyimpan peran yang ditugaskan kepada Anda, pilih panah proses di bagian kanan bawah.</value>
+  </data>
+  <data name="UnsavedRolesTitle" xml:space="preserve">
+    <value>Ada Peran yang Belum Disimpan</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Perbarui</value>
+  </data>
+  <data name="UpdatedPassage" xml:space="preserve">
+    <value>Subbagian Diperbarui</value>
+  </data>
+  <data name="UserLabel" xml:space="preserve">
+    <value>Pengguna Terkini</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Nama Pengguna</value>
+  </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>Nama pengguna ini tidak ada</value>
+  </data>
+  <data name="UserSettings" xml:space="preserve">
+    <value>Pengaturan Pengguna</value>
+  </data>
+  <data name="UserType" xml:space="preserve">
+    <value>Jenis Pengguna</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Versi</value>
+  </data>
+  <data name="VesselUser" xml:space="preserve">
+    <value>Pengguna Wadah</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>Lihat</value>
+  </data>
+  <data name="ViewAllUsers" xml:space="preserve">
+    <value>Lihat Semua Pengguna</value>
+  </data>
+  <data name="ViewSectionAssignments" xml:space="preserve">
+    <value>Lihat penugasan bagian</value>
+  </data>
+  <data name="WelcomeToRender" xml:space="preserve">
+    <value>Selamat Datang di Render</value>
+  </data>
+  <data name="WhichSnapshot" xml:space="preserve">
+    <value>Tangkapan layar mana yang ingin Anda proses?</value>
+  </data>
+  <data name="WorkflowConfiguration" xml:space="preserve">
+    <value>Konfigurasi Alur Kerja</value>
+  </data>
+  <data name="WorkflowDeleteStageMessage" xml:space="preserve">
+    <value>Pilih cara menangani pekerjaan yang sedang berlangsung sebelum menghapus tahapan:</value>
+  </data>
+  <data name="WorkflowDeleteStageTitle" xml:space="preserve">
+    <value>Tahap Ini Berisi Data</value>
+  </data>
+  <data name="WorkWillBeLost" xml:space="preserve">
+    <value>Pekerjaan Anda akan Hilang</value>
+  </data>
+  <data name="DividePassageMessage" xml:space="preserve">
+    <value>Jika Anda meninggalkan pembagian bagian sekarang, pekerjaan Anda akan hilang
+</value>
+  </data>
+  <data name="ErrorOccuredTryAgain" xml:space="preserve">
+    <value>Terjadi kesalahan. Silakan coba lagi.
+</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Kesalahan
+</value>
+  </data>
+  <data name="RetellQuestionResponse" xml:space="preserve">
+    <value>Menceritakan kembali dan Tanya Jawab
+</value>
+  </data>
+  <data name="DiscardWork" xml:space="preserve">
+    <value>Buang Pekerjaan</value>
+  </data>
+  <data name="SectionView" xml:space="preserve">
+    <value>Tampilan bagian</value>
+  </data>
+  <data name="TeamTitle" xml:space="preserve">
+    <value>Tim {0}</value>
+  </data>
+  <data name="TeamView" xml:space="preserve">
+    <value>Tampilan tim</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Menyalin</value>
+  </data>
+  <data name="SegmentSelect" xml:space="preserve">
+    <value>Pilih Segmen</value>
+  </data>
+  <data name="ClearSegmentsQuestion" xml:space="preserve">
+    <value>Hapus Segmen?</value>
+  </data>
+  <data name="ClearSegmentsConfirmation" xml:space="preserve">
+    <value>Yakin ingin menghapus segmen saat ini? Anda tidak dapat membatalkan tindakan ini.</value>
+  </data>
+  <data name="SegmentReview" xml:space="preserve">
+    <value>Tinjauan Segmen</value>
+  </data>
+  <data name="Question" xml:space="preserve">
+    <value>Pertanyaan</value>
+  </data>
+  <data name="SegmentCombine" xml:space="preserve">
+    <value>Penggabungan segmen</value>
+  </data>
+  <data name="CombineWarningMessage" xml:space="preserve">
+    <value>Segmen merah telah diterjemahkan kembali. Memproses akan menghapus terjemahan kembali.</value>
+  </data>
+  <data name="Configuration" xml:space="preserve">
+    <value>Konfigurasi</value>
+  </data>
+  <data name="ConfigureWorkflow" xml:space="preserve">
+    <value>Konfigurasikan Alur Kerja</value>
+  </data>
+  <data name="AssignSections" xml:space="preserve">
+    <value>Tetapkan Bagian</value>
+  </data>
+  <data name="AssignRoles" xml:space="preserve">
+    <value>Tetapkan Peran</value>
+  </data>
+  <data name="Workflow" xml:space="preserve">
+    <value>Alur kerja</value>
+  </data>
+  <data name="SelectUser" xml:space="preserve">
+    <value>Pilih Pengguna</value>
+  </data>
+  <data name="AddUserButtonText" xml:space="preserve">
+    <value>Tambahkan pengguna</value>
+  </data>
+  <data name="Render" xml:space="preserve">
+    <value>Render</value>
+  </data>
+  <data name="Global" xml:space="preserve">
+    <value>global</value>
+  </data>
+  <data name="TextPassword" xml:space="preserve">
+    <value>Kata Sandi Teks</value>
+  </data>
+  <data name="ViewAssignments" xml:space="preserve">
+    <value>Lihat Tugas Bagian</value>
+  </data>
+  <data name="DeleteUserModalMessage" xml:space="preserve">
+    <value>Jika {0} memiliki tugas bagian untuknya, ini juga akan dihapus. Anda tidak dapat membatalkan tindakan ini.</value>
+  </data>
+  <data name="Return" xml:space="preserve">
+    <value>Kembali</value>
+  </data>
+  <data name="SegmentBackTranslate1" xml:space="preserve">
+    <value>Segmen Kembali Terjemahkan 1</value>
+  </data>
+  <data name="SegmentBackTranslate2" xml:space="preserve">
+    <value>Segmen Kembali Terjemahkan 2</value>
+  </data>
+  <data name="PassageBackTranslate1" xml:space="preserve">
+    <value>Passage Kembali Terjemahkan 1</value>
+  </data>
+  <data name="PassageBackTranslate2" xml:space="preserve">
+    <value>Passage Kembali Terjemahkan 2</value>
+  </data>
+  <data name="RetellIsNotAvailable" xml:space="preserve">
+    <value>Menceritakan kembali tidak tersedia</value>
+  </data>
+  <data name="QuestionAndResponseIsNotAvailable" xml:space="preserve">
+    <value>Pertanyaan dan Respons tidak tersedia</value>
+  </data>
+  <data name="CommunityFeedbackGuidance" xml:space="preserve">
+    <value>Panduan Umpan Balik Komunitas</value>
+  </data>
+  <data name="Teams" xml:space="preserve">
+    <value>Tim</value>
+  </data>
+  <data name="DragTeamHere" xml:space="preserve">
+    <value>Seret tim ke sini</value>
+  </data>
+  <data name="Configure" xml:space="preserve">
+    <value>Konfigurasi</value>
+  </data>
+  <data name="QuestionNumberAndTotalNumberFormatted" xml:space="preserve">
+    <value>Pertanyaan {0} dari {1}</value>
+  </data>
+  <data name="GridPassword" xml:space="preserve">
+    <value>Kata sandi kisi</value>
+  </data>
+  <data name="DragSectionHere" xml:space="preserve">
+    <value>Tarik bagian ini</value>
+  </data>
+  <data name="Sections" xml:space="preserve">
+    <value>Bagian</value>
+  </data>
+  <data name="PressCircleToRecord" xml:space="preserve">
+    <value>Tekan lingkaran untuk merekam</value>
+  </data>
+  <data name="PressCircleToRecordOrPressArrowToAddQuestionFromLibrary" xml:space="preserve">
+    <value>Tekan lingkaran untuk merekam, atau {1} tekan {0} untuk menambahkan pertanyaan {1} dari perpustakaan</value>
+  </data>
+  <data name="Library" xml:space="preserve">
+    <value>Perpustakaan</value>
+  </data>
+  <data name="NoQuestionsInTheLibrary" xml:space="preserve">
+    <value>Anda tidak memiliki pertanyaan di perpustakaan</value>
+  </data>
+  <data name="Questions" xml:space="preserve">
+    <value>Pertanyaan</value>
+  </data>
+  <data name="PressArrowToAddQuestion" xml:space="preserve">
+    <value>Tekan {0} untuk menambahkan pertanyaan</value>
+  </data>
+  <data name="Test" xml:space="preserve">
+    <value>Tes</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Bahasa</value>
+  </data>
+  <data name="Translate" xml:space="preserve">
+    <value>Menerjemahkan</value>
+  </data>
+  <data name="RetellOnly" xml:space="preserve">
+    <value>Menceritakan kembali saja</value>
+  </data>
+  <data name="QuestionAndResponseOnly" xml:space="preserve">
+    <value>Tanya &amp; Jawab saja</value>
+  </data>
+  <data name="RenderAvailable" xml:space="preserve">
+    <value>Render {0} tersedia</value>
+  </data>
+  <data name="DownloadRenderButton" xml:space="preserve">
+    <value>Unduh Render baru</value>
+  </data>
+  <data name="DownloadRenderMessage" xml:space="preserve">
+    <value>Unduh Render baru {0} dan dapatkan informasi terbaru.</value>
+  </data>
+  <data name="OneUserOneTeam" xml:space="preserve">
+    <value>Satu pengguna, satu tim</value>
+  </data>
+  <data name="UsersCannotBeAssignedToMultipleTeams" xml:space="preserve">
+    <value>Pengguna tidak dapat ditugaskan ke beberapa tim.</value>
+  </data>
+  <data name="SaveWorkAndProceed" xml:space="preserve">
+    <value>Simpan pekerjaan dan lanjutkan</value>
+  </data>
+  <data name="ExitAnyway" xml:space="preserve">
+    <value>Pokoknya keluar</value>
+  </data>
+  <data name="SaveWorkAndProceedMessage" xml:space="preserve">
+    <value>Tekan panah di kanan bawah untuk menyimpan peran dan melanjutkan.</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Judul:</value>
+  </data>
+  <data name="TotalPassages" xml:space="preserve">
+    <value>Total Subbagian:</value>
+  </data>
+  <data name="Reference" xml:space="preserve">
+    <value>Referensi:</value>
+  </data>
+  <data name="Process" xml:space="preserve">
+    <value>Proses:</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>Pengguna:</value>
+  </data>
+  <data name="NoSectionsAreInThisStep" xml:space="preserve">
+    <value>Tidak ada bagian dalam langkah ini</value>
+  </data>
+  <data name="NoteInterpretToConsultant" xml:space="preserve">
+    <value>Catatan Menafsirkan Kepada Konsultan</value>
+  </data>
+  <data name="NoteInterpretToTranslator" xml:space="preserve">
+    <value>Catatan Menafsirkan adalah penerjemah</value>
+  </data>
+  <data name="AddUserLabel" xml:space="preserve">
+    <value>Tambahkan pengguna baru</value>
+  </data>
+  <data name="ApprovedSection" xml:space="preserve">
+    <value>Bagian yang Disetujui</value>
+  </data>
+  <data name="BothSnapshotsDeleted" xml:space="preserve">
+    <value>Kedua Snapshot telah dihapus</value>
+  </data>
+  <data name="DeleteSnapshotsFor" xml:space="preserve">
+    <value>Hapus Jepretan untuk {0}?</value>
+  </data>
+  <data name="DraftWillBeLost" xml:space="preserve">
+    <value>Draf akan hilang</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>TIDAK</value>
+  </data>
+  <data name="PasswordRequiredToReset" xml:space="preserve">
+    <value>Kata sandi diperlukan untuk mengatur ulang bagian</value>
+  </data>
+  <data name="PasswordRequiredToRestore" xml:space="preserve">
+    <value>Kata sandi diperlukan untuk memulihkan snapshot</value>
+  </data>
+  <data name="TeamWasChosen" xml:space="preserve">
+    <value>Tim {0} dipilih</value>
+  </data>
+  <data name="UserAndTeamWereChosenForSection" xml:space="preserve">
+    <value>{0} dipilih untuk {1}</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Ya</value>
+  </data>
+  <data name="YouCannotUndo" xml:space="preserve">
+    <value>Anda tidak dapat membatalkan tindakan ini</value>
+  </data>
+  <data name="YouHaveChosen" xml:space="preserve">
+    <value>Kamu telah memilih:</value>
+  </data>
+  <data name="ResetSectionWarning" xml:space="preserve">
+    <value>Bagian reset akan menghapus semua data pada tahap Draft. Tindakan ini tidak bisa dibatalkan.</value>
+  </data>
+  <data name="RemovedFromProject" xml:space="preserve">
+    <value>Dihapus dari proyek</value>
+  </data>
+  <data name="DraftEdit" xml:space="preserve">
+    <value>Pengeditan Draf</value>
+  </data>
+  <data name="Stages" xml:space="preserve">
+    <value>Tahapan</value>
+  </data>
+  <data name="SectionListenScreenTitle" xml:space="preserve">
+    <value>Dengarkan Bagian</value>
+  </data>
+  <data name="PassageListenScreenTitle" xml:space="preserve">
+    <value>Dengarkan Subbagian</value>
+  </data>
+  <data name="PassageDivideScreenTitle" xml:space="preserve">
+    <value>Pembagian Subbagian</value>
+  </data>
+  <data name="PassageReviewScreenTitle" xml:space="preserve">
+    <value>Tinjauan Subbagian</value>
+  </data>
+  <data name="SectionReviewScreenTitle" xml:space="preserve">
+    <value>Tinjauan Bagian</value>
+  </data>
+  <data name="TranscribePassageScreenTitle" xml:space="preserve">
+    <value>Transkripsi Subbagian</value>
+  </data>
+  <data name="TranscribeSegmentScreenTitle" xml:space="preserve">
+    <value>Transkripsi Segmen</value>
+  </data>
+  <data name="DoPassageTranscribeScreenTitle" xml:space="preserve">
+    <value>Transkripsi Subbagian</value>
+  </data>
+  <data name="DoSegmentTranscribeScreenTitle" xml:space="preserve">
+    <value>Transkripsi Segmen</value>
+  </data>
+  <data name="UserWasChosen" xml:space="preserve">
+    <value>{0} dipilih</value>
+  </data>
+  <data name="UserWasChosenForSection" xml:space="preserve">
+    <value>{0} dipilih untuk {1}</value>
+  </data>
+  <data name="NoteInterpretScreenTitle" xml:space="preserve">
+    <value>Catatan Interpretasi</value>
+  </data>
+  <data name="RequirePassageListenPeerCheckSetting" xml:space="preserve">
+    <value>Panduan Dengarkan Subbagian</value>
+  </data>
+  <data name="RequireSectionListenPeerCheckSetting" xml:space="preserve">
+    <value>Panduan Dengarkan Bagian</value>
+  </data>
+  <data name="OffloadProject" xml:space="preserve">
+    <value>Bongkar {0}?</value>
+  </data>
+  <data name="ContactSupport" xml:space="preserve">
+    <value>Hubungi dukungan untuk bantuan.</value>
+  </data>
+  <data name="ErrorWithMessage" xml:space="preserve">
+    <value>Kesalahan [{0}]</value>
+  </data>
+  <data name="NoProjectsToDownload" xml:space="preserve">
+    <value>Tidak ada proyek untuk diunduh</value>
+  </data>
+  <data name="WrongPassword" xml:space="preserve">
+    <value>Kata sandi salah. Silakan coba lagi.</value>
+  </data>
+  <data name="SyncFailed" xml:space="preserve">
+    <value>Gagal</value>
+  </data>
+  <data name="DragUserHere" xml:space="preserve">
+    <value>Tarik pengguna ke sini</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Pengguna</value>
+  </data>
+  <data name="DownloadFailed" xml:space="preserve">
+    <value>Pengunduhan gagal.</value>
+  </data>
+  <data name="ExportComplete" xml:space="preserve">
+    <value>Ekspor selesai</value>
+  </data>
+  <data name="NoSectionsAvailable" xml:space="preserve">
+    <value>Tidak Ada Bagian yang Tersedia</value>
+  </data>
+  <data name="TryAgain" xml:space="preserve">
+    <value>Silakan coba lagi</value>
+  </data>
+  <data name="SelectedSnapshotMessageTemplate" xml:space="preserve">
+    <value>{0}, {1} {2} {3}, {4}</value>
+  </data>
+  <data name="TeamWasChosenForSection" xml:space="preserve">
+    <value>{1} {0}, {2}, dipilih untuk {3}</value>
+  </data>
+  <data name="CombineWarningTitle" xml:space="preserve">
+    <value>Terjemahan Kembali akan dihapus</value>
+  </data>
+  <data name="January" xml:space="preserve">
+    <value>Januari</value>
+  </data>
+  <data name="February" xml:space="preserve">
+    <value>Februari</value>
+  </data>
+  <data name="March" xml:space="preserve">
+    <value>Berbaris</value>
+  </data>
+  <data name="April" xml:space="preserve">
+    <value>April</value>
+  </data>
+  <data name="May" xml:space="preserve">
+    <value>Mungkin</value>
+  </data>
+  <data name="June" xml:space="preserve">
+    <value>Juni</value>
+  </data>
+  <data name="July" xml:space="preserve">
+    <value>Juli</value>
+  </data>
+  <data name="August" xml:space="preserve">
+    <value>Agustus</value>
+  </data>
+  <data name="September" xml:space="preserve">
+    <value>September</value>
+  </data>
+  <data name="October" xml:space="preserve">
+    <value>Oktober</value>
+  </data>
+  <data name="November" xml:space="preserve">
+    <value>November</value>
+  </data>
+  <data name="December" xml:space="preserve">
+    <value>Desember</value>
+  </data>
+  <data name="NoSectionAssignedTitle" xml:space="preserve">
+    <value>Anda belum menetapkan Bagian apa pun</value>
+  </data>
+  <data name="NoSectionAssignedMessage" xml:space="preserve">
+    <value>Bagian perlu ditetapkan untuk ditampilkan di sini.</value>
+  </data>
+  <data name="SegmentLabel" xml:space="preserve">
+    <value>Segmen</value>
+  </data>
+  <data name="DeletedUser" xml:space="preserve">
+    <value>Pengguna yang Dihapus</value>
+  </data>
+  <data name="CannotLoadData" xml:space="preserve">
+    <value>Tidak dapat memuat data untuk bagian {0}</value>
+  </data>
+  <data name="SyncAndTryAgain" xml:space="preserve">
+    <value>Jika hal ini terus terjadi, silakan coba sinkronisasi web atau coba bongkar/unduh proyek</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>Mencoba kembali</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Kesuksesan!</value>
+  </data>
+  <data name="AddFromComputer" xml:space="preserve">
+    <value>Tambahkan Proyek Dari Komputer</value>
+  </data>
+  <data name="CannotLoadAudio" xml:space="preserve">
+    <value>Tidak Dapat Memuat Audio</value>
+  </data>
+</root>

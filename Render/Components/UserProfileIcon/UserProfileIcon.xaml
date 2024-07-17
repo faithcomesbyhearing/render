@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Render.Components.UserProfileIcon.UserProfileIcon">
+    <ContentView.Resources>
+        <Style x:Key="UserProfileFrame" TargetType="Frame">
+            <Setter Property="BorderColor" Value="{DynamicResource MainIconColor}"/>
+            <Setter Property="BackgroundColor" Value="{DynamicResource MainIconColor}"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="VerticalOptions" Value="Start"/>
+        </Style>
+        <Style x:Key="UserProfileImageButton" TargetType="ImageButton">
+            <Setter Property="Aspect" Value="AspectFill"/>
+        </Style>
+    </ContentView.Resources>
+    <Frame x:Name="Frame" Style="{DynamicResource UserProfileFrame}" Margin="5">
+        <Frame x:Name="FrameInner" Style="{DynamicResource UserProfileFrame}" >
+            <StackLayout x:Name="Stack">
+                <Label x:Name="Label" TextColor="{DynamicResource SecondaryText}" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"
+                       FontSize="{StaticResource LargeFont}"
+                       FontAttributes="Bold"/>
+                <ImageButton x:Name="ImageButton" Style="{DynamicResource UserProfileImageButton}"/>
+            </StackLayout>            
+        </Frame>
+    </Frame>
+    
+</ContentView>

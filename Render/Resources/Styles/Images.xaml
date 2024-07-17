@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    
+    <Style x:Key="WorkflowSettingsPlusIconStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Option}" />
+        <Setter Property="WidthRequest" Value="26" />
+        <Setter Property="FontFamily" Value="Icons"/>
+        <Setter Property="FontSize" Value="22" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="HorizontalOptions" Value="End" />
+        <Setter Property="Grid.Column" Value="1" />
+    </Style>
+    
+    <Style x:Key="WorkflowSettingsMinusIconStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Option}" />
+        <Setter Property="WidthRequest" Value="26" />
+        <Setter Property="FontFamily" Value="Icons"/>
+        <Setter Property="FontSize" Value="3" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="HorizontalOptions" Value="End" />
+        <Setter Property="Grid.Column" Value="1" />
+    </Style>
+
+    <Style x:Key="RenderLogoStyle" TargetType="Image">
+        <Setter Property="Scale" Value="1" />
+        <Setter Property="Margin" Value="0,0,0,55" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="WidthRequest" Value="480" />
+        <Setter Property="Source" Value="LogoCorrected.png" />
+    </Style>
+    
+</ResourceDictionary>

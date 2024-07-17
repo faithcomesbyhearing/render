@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<kernel:RenderPageBase x:Class="Render.Pages.Consultant.ConsultantApproval.SelectSectionToApprove"
+                       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:consultantApproval="clr-namespace:Render.Pages.Consultant.ConsultantApproval;assembly=Render"
+                       xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                       xmlns:loadingCircles="clr-namespace:Render.Common"
+                       xmlns:proceedButton="clr-namespace:Render.Components.ProceedButton;assembly=Render"
+                       xmlns:resources="clr-namespace:Render.Resources;assembly=Render"
+                       xmlns:titleBar="clr-namespace:Render.Components.TitleBar;assembly=Render"
+                       xmlns:uiResources="clr-namespace:Render.Resources;assembly=Render"
+                       x:TypeArguments="consultantApproval:SelectSectionToApproveViewModel"
+                       NavigationPage.HasNavigationBar="False"
+                       Style="{StaticResource PrimaryPage}">
+    <Grid x:Name="TopLevelElement" BackgroundColor="{StaticResource AlternateBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition x:Name="titleBarRow" Height="{x:Static titleBar:TitleBar.Size}" />
+            <RowDefinition x:Name="contentRow" Height="*" />
+        </Grid.RowDefinitions>
+        
+        <ScrollView Grid.Row="1"
+                    HorizontalOptions="Center"
+                    MaximumWidthRequest="750"
+                    Orientation="Vertical"
+                    VerticalScrollBarVisibility="Never">
+            <VerticalStackLayout x:Name="ApprovalCardCollection" AutomationId="ApprovalCardCollectionStack">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <consultantApproval:SectionToApproveCard Margin="7" AutomationId="SectionToApprove" />
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <titleBar:TitleBar x:Name="TitleBar" Grid.Row="0" />
+        <loadingCircles:LoadingScreen x:Name="loadingView" Grid.RowSpan="2" />
+    </Grid>
+</kernel:RenderPageBase>

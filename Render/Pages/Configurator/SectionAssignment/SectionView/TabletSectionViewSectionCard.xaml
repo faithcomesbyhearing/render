@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<kernel:RenderComponentBase x:Class="Render.Pages.Configurator.SectionAssignment.SectionView.TabletSectionViewSectionCard"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:dragAndDrop="clr-namespace:Render.Kernel.DragAndDrop;assembly=Render"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:localization="clr-namespace:Render.Resources.Localization"
+                            xmlns:resources="clr-namespace:Render.Resources;assembly=Render"
+                            xmlns:sectionView="clr-namespace:Render.Pages.Configurator.SectionAssignment.SectionView;assembly=Render"
+                            x:TypeArguments="sectionView:SectionViewSectionCardViewModel">
+
+    <ContentView.Resources>
+        <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource Option}" />
+    </ContentView.Resources>
+    
+    <Border>
+        <Grid x:Name="SectionGrid"
+              Padding="15,0"
+              ColumnDefinitions="Auto,*,Auto,Auto"
+              HeightRequest="90"
+              HorizontalOptions="Fill"
+              MaximumHeightRequest="90">
+
+            <Label x:Name="SectionNumber"
+                   Grid.Column="0"
+                   FontAttributes="Bold"
+                   FontSize="{StaticResource LargeFont}"
+                   TextColor="{DynamicResource MainText}"
+                   VerticalOptions="Center"
+                   WidthRequest="60" />
+
+            <VerticalStackLayout Grid.Column="1"
+                                 Padding="0"
+                                 HorizontalOptions="Fill"
+                                 VerticalOptions="Center">
+                <Label x:Name="SectionTitleLabel"
+                       FontAttributes="Bold"
+                       FontSize="{StaticResource MediumFont}"
+                       HorizontalOptions="Start"
+                       LineBreakMode="TailTruncation"
+                       TextColor="{DynamicResource MainText}" />
+
+                <Label x:Name="SectionReferenceLabel"
+                       FontSize="{StaticResource MediumFont}"
+                       HorizontalOptions="Start"
+                       LineBreakMode="TailTruncation"
+                       TextColor="{DynamicResource SlateLight}" />
+
+                <Label x:Name="LayoutExtender"
+                       FontSize="{StaticResource MediumFont}"
+                       HeightRequest="1"
+                       HorizontalOptions="Start"
+                       LineBreakMode="TailTruncation"
+                       Text="This hidden label is used to artificially expand parent. 
+                             Have to contains a long text (longer than the longest section title) to fix label sizing issues."
+                       TextColor="Transparent" />
+            </VerticalStackLayout>
+
+            <Border x:Name="UserStack"
+                    Grid.Column="2"
+                    Margin="15,0"
+                    Padding="0"
+                    BackgroundColor="{DynamicResource SecondaryText}"
+                    HeightRequest="50"
+                    HorizontalOptions="End"
+                    StrokeShape="RoundRectangle 8"
+                    WidthRequest="220">
+                <Grid HorizontalOptions="Fill">
+                    <Label x:Name="UserNameLabel"
+                           Padding="10,0"
+                           FontAttributes="Bold"
+                           FontSize="{StaticResource SmallPlus2Font}"
+                           HorizontalOptions="Start"
+                           TextColor="{DynamicResource MainText}"
+                           VerticalOptions="Center" />
+                    <Label Margin="10,0"
+                           FontFamily="Icons"
+                           FontSize="25"
+                           HorizontalOptions="End"
+                           Text="{resources:IconExtensions Delete}"
+                           TextColor="{DynamicResource Option}"
+                           VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="RemoveButtonGestureRecognizer" AutomationId="Remove" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Grid>
+            </Border>
+
+            <Border x:Name="DropRectangle"
+                    Grid.Column="2"
+                    Margin="15,0"
+                    BackgroundColor="{StaticResource AlternateBackground}"
+                    HeightRequest="50"
+                    HorizontalOptions="End"
+                    Stroke="{StaticResource BorderBrush}"
+                    StrokeDashArray="4,4"
+                    StrokeDashOffset="6"
+                    StrokeShape="RoundRectangle 10"
+                    StrokeThickness="2"
+                    VerticalOptions="Center"
+                    WidthRequest="220">
+                <Label FontSize="{StaticResource SmallPlus2Font}"
+                       HorizontalTextAlignment="Center"
+                       InputTransparent="True"
+                       Text="{x:Static localization:AppResources.DragTeamHere}"
+                       TextColor="{StaticResource MainText}"
+                       VerticalTextAlignment="Center" />
+                <Border.Effects>
+                    <dragAndDrop:DropRecognizerEffect DragOver="DropGestureRecognizerEffect_OnDragOver" Drop="TeamDropRecognizerEffect_OnDrop" />
+                </Border.Effects>
+            </Border>
+
+            <Label Grid.Column="3"
+                   Margin="10,0"
+                   FontFamily="Icons"
+                   FontSize="70"
+                   Text="{resources:IconExtensions ReorderTwo}"
+                   TextColor="{DynamicResource Option}"
+                   VerticalOptions="Center"
+                   WidthRequest="80">
+                <Label.Effects>
+                    <dragAndDrop:DragRecognizerEffect DragStarting="SectionDragRecognizerEffect_OnDragStarting" />
+                </Label.Effects>
+            </Label>
+
+            <BoxView Grid.Column="1"
+                     BackgroundColor="{DynamicResource DarkGrey}"
+                     HeightRequest="2"
+                     VerticalOptions="End" />
+
+            <BoxView x:Name="AddSectionAfter"
+                     Grid.ColumnSpan="4"
+                     BackgroundColor="{DynamicResource Option}"
+                     HeightRequest="10"
+                     VerticalOptions="End" />
+        </Grid>
+        <Border.Effects>
+            <dragAndDrop:DropRecognizerEffect x:Name="SectionDragOverRecognizer"
+                                              DragOver="DropGestureRecognizerEffect_OnDragOver"
+                                              Drop="SectionDropRecognizerEffect_OnDrop" />
+        </Border.Effects>
+    </Border>
+</kernel:RenderComponentBase>

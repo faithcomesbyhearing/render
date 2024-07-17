@@ -1,0 +1,1659 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Add" xml:space="preserve">
+    <value>བཙུགས།</value>
+  </data>
+  <data name="AddAProject" xml:space="preserve">
+    <value>ལས་འགུལ་བཙུགས།</value>
+  </data>
+  <data name="AddASection" xml:space="preserve">
+    <value>དབྱེ་ཚན་བཙུགས།</value>
+  </data>
+  <data name="AddATeam" xml:space="preserve">
+    <value>སྡེ་ཚན་བཙུགས།</value>
+  </data>
+  <data name="Added" xml:space="preserve">
+    <value>བཙུགས་ཡི།</value>
+  </data>
+  <data name="Adding" xml:space="preserve">
+    <value>བཙུགས་པའི་བསྒང་།</value>
+  </data>
+  <data name="AddingProject" xml:space="preserve">
+    <value>ལས་འགུལ་བཙུགས་པའི་བསྒང་།...</value>
+  </data>
+  <data name="AddNew" xml:space="preserve">
+    <value>གསར་བཙུགས།</value>
+  </data>
+  <data name="AddProject" xml:space="preserve">
+    <value>ལས་འགུལ་བཙུགས།</value>
+  </data>
+  <data name="AddProjectViaId" xml:space="preserve">
+    <value>ལས་འགུལ་འདི་ཨང་རྟགས་ཐོག་ལས་བཙུགས།</value>
+  </data>
+  <data name="AddSection" xml:space="preserve">
+    <value>དབྱེ་ཚན་བཙུགས།</value>
+  </data>
+  <data name="AddStage" xml:space="preserve">
+    <value>གྲུབ་འབྲས་བཙུགས།</value>
+  </data>
+  <data name="AddStageHere" xml:space="preserve">
+    <value>ཊེམ་པེལེཊི།</value>
+  </data>
+  <data name="AddTeam" xml:space="preserve">
+    <value>སྡེ་ཚན་བཙུགས།</value>
+  </data>
+  <data name="AddUser" xml:space="preserve">
+    <value>སྤྱོད་མི་བཙུགས།</value>
+  </data>
+  <data name="AddWorkflowStage" xml:space="preserve">
+    <value>ལཱ་གི་རིམ་པ་བཙུགས།</value>
+  </data>
+  <data name="AllowEditing" xml:space="preserve">
+    <value>ཞུན་དག་འབད་ནི་གནང་བ་སྤྲོད།</value>
+  </data>
+  <data name="AllSections" xml:space="preserve">
+    <value>དབྱེ་ཚན་ག་ར།</value>
+  </data>
+  <data name="AllSectionsAssigned" xml:space="preserve">
+    <value>དབྱེ་ཚན་ག་ར་ལཱ་སྤྲོད་ཡི།</value>
+  </data>
+  <data name="Approval" xml:space="preserve">
+    <value>གནང་བ།</value>
+  </data>
+  <data name="ApprovalSubmitted" xml:space="preserve">
+    <value>གནང་བ་འདི་མཐར་འཁྱོལ་ཅན་སྦེ་སྤྲོད་ད་ཡི།</value>
+  </data>
+  <data name="Approve" xml:space="preserve">
+    <value>ཆ་འཇོག</value>
+  </data>
+  <data name="Approved" xml:space="preserve">
+    <value>གནང་བ་བྱིན།</value>
+  </data>
+  <data name="ApprovedByLabel" xml:space="preserve">
+    <value>གནང་བ་བྱིན་མི།:</value>
+  </data>
+  <data name="ApprovedDraft" xml:space="preserve">
+    <value>ཁྱོད་ཀྱི་ཟིན་བྲིས་འདི་གནང་བ་སྤྲོད་ཡི།</value>
+  </data>
+  <data name="ApproveSection" xml:space="preserve">
+    <value>དབྱེ་ཚན་ཆ་འཇོག{0}</value>
+  </data>
+  <data name="ArchivedDrafts" xml:space="preserve">
+    <value>གཏན་མཛོད་ཟིན་བྲིས།</value>
+  </data>
+  <data name="ArchivedNotes" xml:space="preserve">
+    <value>གཏན་མཛོད་བརྗེད་ཐོ།</value>
+  </data>
+  <data name="ArrangeWorkflowStages" xml:space="preserve">
+    <value>ལཱ་གི་རིམ་པ་བཟོ།</value>
+  </data>
+  <data name="Assigned" xml:space="preserve">
+    <value>{0}ལཱ་སྤྲོད་ཡི།</value>
+  </data>
+  <data name="AssignToTranslator" xml:space="preserve">
+    <value>སྐད་སྒྱུར་པ་ལུ་ལཱ་སྤྲོད།</value>
+  </data>
+  <data name="AudioClip" xml:space="preserve">
+    <value>ཐོས་སྒྲ།</value>
+  </data>
+  <data name="AudioNote" xml:space="preserve">
+    <value>ཐོས་སྒྲ་བརྗེད་ཐོ།</value>
+  </data>
+  <data name="BackTranslate" xml:space="preserve">
+    <value>ལོག་སྐད་སྒྱུར།</value>
+  </data>
+  <data name="BackTranslate1" xml:space="preserve">
+    <value>ལོག་སྐད་སྒྱུར་ ༡།</value>
+  </data>
+  <data name="BackTranslate2" xml:space="preserve">
+    <value>ལོག་སྐད་སྒྱུར་ ༢།</value>
+  </data>
+  <data name="BackTranslator" xml:space="preserve">
+    <value>སྐད་སྒྱུར་ལོག་རྐྱབ་མི།</value>
+  </data>
+  <data name="BackTranslator2" xml:space="preserve">
+    <value>ལོག་སྐད་སྒྱུར་རྐྱབ་མི་ ༢།</value>
+  </data>
+  <data name="Both" xml:space="preserve">
+    <value>གཉིས་ཆ་ར།</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>ཆ་མེད་གཏང་།</value>
+  </data>
+  <data name="Canceled" xml:space="preserve">
+    <value>ཆ་མེད་གཏང་ཡི།</value>
+  </data>
+  <data name="Canceling" xml:space="preserve">
+    <value>ཆ་མེད་གཏང་བའི་བསྒང་།</value>
+  </data>
+  <data name="Check" xml:space="preserve">
+    <value>ལེགས་བཅོས།</value>
+  </data>
+  <data name="Check2" xml:space="preserve">
+    <value>ཞིབ་དཔྱད ༢།</value>
+  </data>
+  <data name="ChooseProjectsForDeviceMessage" xml:space="preserve">
+    <value>འ་ནཱི་རིམ་ལུགས་དང་མཉམ་ མཐུད་འབྲེལ་འབད་ནི་ཨིན་མི་ལས་འགུལ་འདི་ གདམ་ཁ་རྐྱབ།</value>
+  </data>
+  <data name="ChosenDraft" xml:space="preserve">
+    <value>གདམ་ཁ་རྐྱབ་ཡོད་པའི་ཟིན་བྲིས།</value>
+  </data>
+  <data name="Chunk" xml:space="preserve">
+    <value>དྲ་དུམ{0}</value>
+  </data>
+  <data name="ClearSegmentMessage1" xml:space="preserve">
+    <value>འཕྲོ་མཐུད་བ་ཅིན་ད་ལྟོའི་ཁག་ཚན་བགོ་ཡོད་མི་ཚུ་ཆ་ཚང་མེདཔ་གཏང་འོང་།</value>
+  </data>
+  <data name="ClearSegmentMessage2" xml:space="preserve">
+    <value>ཧེ་མའི་ཁག་ཚན་འདི་ རང་གི་བཟོ་སྟེ་སྔོན་སྒྲིག་མེན་པ་ཅིན་ ཁག་ཚན་འདི་ལོག་ལེན་མི་བཏུབ།</value>
+  </data>
+  <data name="ClearSegments" xml:space="preserve">
+    <value>ཁག་ཚན་མེདཔ་བཟོ་གཏང་།</value>
+  </data>
+  <data name="DeleteSnapshots" xml:space="preserve">
+    <value>བསྡུས་བརྗོད་གཉིས་ཆ་ར་མེདཔ་གཏང་།</value>
+  </data>
+  <data name="ClearSnapshotsDescription" xml:space="preserve">
+    <value>བསྡུས་བརྗོད་གཉིས་ཆ་ར་རྩིས་ཁ་མི་རྐྱབ། འདི་གི་ཧེ་མའི་དབྱེ་ཚན་འདི་གོང་འཕེལ་གཏང་འོང་།</value>
+  </data>
+  <data name="CombinedBackTranslate" xml:space="preserve">
+    <value>ལོག་སྐད་སྒྱུར་རྐྱབ་མི་བསྡོམ།</value>
+  </data>
+  <data name="CombineSegmentTitle" xml:space="preserve">
+    <value>མཐུད་འབྲེལ-ཡིག་རྒྱུགས {0}</value>
+  </data>
+  <data name="CommunityCheck" xml:space="preserve">
+    <value>མི་སྡེ་ཞིབ་དཔྱད།</value>
+  </data>
+  <data name="CommunityRetellPassage" xml:space="preserve">
+    <value>ཡིག་རྒྱུགས{0}-ལོག་སླབ།</value>
+  </data>
+  <data name="CommunityRevise" xml:space="preserve">
+    <value>མི་སྡེ་ཞུན་དག</value>
+  </data>
+  <data name="CommunitySetup" xml:space="preserve">
+    <value>མི་སྡེ་སྲོལ་བཙུགས།</value>
+  </data>
+  <data name="CommunityTest" xml:space="preserve">
+    <value>མི་སྡེ་བརྟག་དཔྱད།</value>
+  </data>
+  <data name="CommunityTestRevise" xml:space="preserve">
+    <value>མི་སྡེ་བརྟག་དཔྱད་བསྐྱར་ཞིབ།</value>
+  </data>
+  <data name="CommunityTestSetup" xml:space="preserve">
+    <value>མི་སྡེ་སྲོལ་བཙུགས།</value>
+  </data>
+  <data name="CompleteWork" xml:space="preserve">
+    <value>ལཱ་མཇུག་བསྡུ།</value>
+  </data>
+  <data name="CompleteWorkMessage" xml:space="preserve">
+    <value>འ་ནཱི་གོ་རིམ་འདི་ ལཱ་འབད་པའི་བསྒང་ཡོད་མི་ཚུ་ ཧེ་མ་ར་མཇུག་བསྡུ་ཞིནམ་ལས་བཏོན་གཏང་འོང་།</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>གཏན་འཁེལ་འབད།</value>
+  </data>
+  <data name="Confirmation" xml:space="preserve">
+    <value>གཏན་འཁེལ།</value>
+  </data>
+  <data name="Consultant" xml:space="preserve">
+    <value>གྲོས་སྟོན།</value>
+  </data>
+  <data name="ConsultantApproval" xml:space="preserve">
+    <value>གྲོས་སྟོན་པའི་གནང་བ།</value>
+  </data>
+  <data name="ConsultantCheck" xml:space="preserve">
+    <value>གྲོས་སྟོན་པ་ཞིབ་དཔྱད།</value>
+  </data>
+  <data name="ConsultantLanguage" xml:space="preserve">
+    <value>གྲོས་སྟོན་པའི་ཁ་སྐད།</value>
+  </data>
+  <data name="ConsultantRevise" xml:space="preserve">
+    <value>གྲོས་སྟོན་པའི་ཞུན་དག</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>འཕྲོ་མཐུད།</value>
+  </data>
+  <data name="CopyPreviousQuestions" xml:space="preserve">
+    <value>ཧེ་མའི་དྲི་བ་ཚུ་འདྲ་བཤུས་རྐྱབ།</value>
+  </data>
+  <data name="CopyQuestions" xml:space="preserve">
+    <value>དྲི་བ་ཚུ་འདྲ་བཤུས་རྐྱབ།</value>
+  </data>
+  <data name="Current" xml:space="preserve">
+    <value>ད་ལྟོའི་{0}</value>
+  </data>
+  <data name="DeactivateStepWarning" xml:space="preserve">
+    <value>ཁྱོད་རིམ་པ་ཚུ་བསད་པའི་སྐབས་ དབྱེ་ཚན་ག་ར་ ཤུལ་མམ་གྱི་ལཱ་རིམ་ནང་འགྱོ་འོང་།</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>བཏོན་གཏང་།</value>
+  </data>
+  <data name="DeleteSnapshotsConfirmation" xml:space="preserve">
+    <value>ཁྱོད་ར་བསྡུས་བརྗོད་གཉིས་མེདཔ་གཏང་ནི་གཏན་འཁེར་ཨིན་ན?</value>
+  </data>
+  <data name="DeleteUser" xml:space="preserve">
+    <value>སྤྱོད་མི་ཆ་མེད་གཏང།</value>
+  </data>
+  <data name="DeleteUserMessage" xml:space="preserve">
+    <value>ཆ་མེད་གཏང་མི་འདི་གིས་ ཁོང་གི་ ལས་འགུལ་དབྱེ་ཚན་ཚུ་ག་ར་ མེདཔ་གཏང་འོང་། ཁྱོད་ཀྱི་འདི་ ལོག་ལེན་མི་ཚུགས།</value>
+  </data>
+  <data name="DeleteUserTitle" xml:space="preserve">
+    <value>སྤྱོད་མི་ཆ་མེད་གཏང།</value>
+  </data>
+  <data name="DividePassageTitle" xml:space="preserve">
+    <value>ཡིག་རྒྱུགས་བགོ</value>
+  </data>
+  <data name="Do2StepBackTranslate" xml:space="preserve">
+    <value>གོམ-༢ ལོག་སྐད་སྒྱུར་རྐྱབ།</value>
+  </data>
+  <data name="DoNoteInterpret" xml:space="preserve">
+    <value>བརྗེད་ཐོ་གི་དོར་ཁ་སྒྱུར་མི་བཙུགས།</value>
+  </data>
+  <data name="DoNoteReview" xml:space="preserve">
+    <value>བརྗེད་ཐོ་བསྐྱར་ཞིབ།</value>
+  </data>
+  <data name="DoPassageBackTranslate1" xml:space="preserve">
+    <value>ཡིག་རྒྱུགས་ལོག་སྐད་སྒྱུར་༡ རྐྱབ།</value>
+  </data>
+  <data name="DoPassageBackTranslate2" xml:space="preserve">
+    <value>ཡིག་རྒྱུགས་ལོག་སྐད་སྒྱུར་༢ རྐྱབ།</value>
+  </data>
+  <data name="DoPassageListen" xml:space="preserve">
+    <value>ཉན་ནིའི་ཡིག་རྒྱུགས་བཙུགས།</value>
+  </data>
+  <data name="DoPassageReview" xml:space="preserve">
+    <value>ཡིག་རྒྱུགས་བསྐྱར་ཞིབ།</value>
+  </data>
+  <data name="DoPassageTranscribe" xml:space="preserve">
+    <value>ཡིག་རྒྱུགས་སྒྲ་སྒྱུར།</value>
+  </data>
+  <data name="DoQuestionAndResponse" xml:space="preserve">
+    <value>དྲི་ལན་བཙུགས།</value>
+  </data>
+  <data name="DoRetell" xml:space="preserve">
+    <value>ལོག་སླབ།</value>
+  </data>
+  <data name="DoSectionListen" xml:space="preserve">
+    <value>ཉན་ནིའི་དབྱེ་ཚན་བཙུགས།</value>
+  </data>
+  <data name="DoSectionReview" xml:space="preserve">
+    <value>དབྱེ་ཚན་བསྐྱར་ཞིབ་བཙུགས།</value>
+  </data>
+  <data name="DoSegmentBackTranslate1" xml:space="preserve">
+    <value>ཁག་ཚན་ལོག་སྐད་སྒྱུར་༡ རྐྱབ།</value>
+  </data>
+  <data name="DoSegmentBackTranslate2" xml:space="preserve">
+    <value>ཁག་ཚན་ལོག་སྐད་སྒྱུར་༢ རྐྱབ།</value>
+  </data>
+  <data name="DoSegmentTranscribe" xml:space="preserve">
+    <value>ཁག་ཚན་སྒྲ་སྒྲུར།</value>
+  </data>
+  <data name="DoTranscribe" xml:space="preserve">
+    <value>སྒྲ་སྒྱུར་འབད།</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>ཕབ་ལེན།</value>
+  </data>
+  <data name="Downloaded" xml:space="preserve">
+    <value>ཕབ་ལེན་འབད་ཡི།</value>
+  </data>
+  <data name="DownloadingProjects" xml:space="preserve">
+    <value>ལས་འགུལ་ཚུ་ཕབ་ལེན་འབད་དོ།</value>
+  </data>
+  <data name="Draft" xml:space="preserve">
+    <value>ཟིན་བྲིས</value>
+  </data>
+  <data name="DraftedByLabel" xml:space="preserve">
+    <value>ཟིན་བྲིས་བཏབ་མི།:</value>
+  </data>
+  <data name="DraftNotes" xml:space="preserve">
+    <value>ཟིན་བྲིས་{0}བརྗེད་ཐོ།</value>
+  </data>
+  <data name="DraftPassage" xml:space="preserve">
+    <value>སྐད་སྒྱུར་ཡིག་རྒྱུགས།{0}</value>
+  </data>
+  <data name="DraftRecord" xml:space="preserve">
+    <value>ཟིན་བྲིས་ཐོ་བཀོད།</value>
+  </data>
+  <data name="DraftReplacementModalTitle" xml:space="preserve">
+    <value>ཚབ་བཙུགས་ནི་དོན་ལུ་ཟིན་བྲིས་འདི་གདམ་ཁ་རྐྱབ།</value>
+  </data>
+  <data name="DraftReview" xml:space="preserve">
+    <value>ཟིན་བྲིས {0} བསྐྱར་ཞིབ།</value>
+  </data>
+  <data name="Drafts" xml:space="preserve">
+    <value>ཟིན་བྲིས་ཚུ།</value>
+  </data>
+  <data name="DraftSelect" xml:space="preserve">
+    <value>ཟིན་བྲིས་གདམ་ཁ།</value>
+  </data>
+  <data name="DraftSelection" xml:space="preserve">
+    <value>ཟིན་བྲིས་གདམ་ཁ།</value>
+  </data>
+  <data name="DraftTitle" xml:space="preserve">
+    <value>ཟིན་བྲིས།{0}</value>
+  </data>
+  <data name="EditPassage" xml:space="preserve">
+    <value>ཡིག་རྒྱུགས་ཞུག་དག{0}</value>
+  </data>
+  <data name="EditUser" xml:space="preserve">
+    <value>སྤྱོད་མི་ཞུན་དག</value>
+  </data>
+  <data name="EmptyCollectionMessage" xml:space="preserve">
+    <value>ལས་འགུལ་ཅིག་བཙུགས་ནིའི་དོན་ལུ་ "གསར་བཙུགས་" ལུ་ཨེབ་གཏང་འབད།</value>
+  </data>
+  <data name="EmptyCollectionMessageTitle" xml:space="preserve">
+    <value>ལས་འགུལ་ཐོ་འདི་སྟོངམ་ཨིན་མས།</value>
+  </data>
+  <data name="EmptyOffloadCollectionMessage" xml:space="preserve">
+    <value>ལས་འཆར་ཚུ་ སེལ་འཐུ་འབད་མ་ཚུགས།</value>
+  </data>
+  <data name="EmptyPassword" xml:space="preserve">
+    <value>གསང་ཨང་ས་སྟོང་བཞག་མི་བཏུབ།</value>
+  </data>
+  <data name="End" xml:space="preserve">
+    <value>མཇུག་བསྡུ།</value>
+  </data>
+  <data name="Enter32digitId" xml:space="preserve">
+    <value>ཨང་རྟགས་-༣༢ འབད་མི་འདི་བཙུགས།</value>
+  </data>
+  <data name="EnterAProjectName" xml:space="preserve">
+    <value>ལས་འགུལ་གྱི་མིང་བཙུགས།</value>
+  </data>
+  <data name="EnterLanguage" xml:space="preserve">
+    <value>ཁ་སྐད་ཀྱི་མིང་བཙུགས།</value>
+  </data>
+  <data name="EnterPasswordToRestoreSection" xml:space="preserve">
+    <value>འ་ནཱི་དབྱེ་ཚན་བསྐྱར་གསོ་དང་ལྡེ་མིག་ཕྱེ་ནི་དོན་ལུ་ ཁྱོད་རའི་གསང་ཨང་བཙུགས།</value>
+  </data>
+  <data name="EnterSectionNumber" xml:space="preserve">
+    <value>དབྱེ་ཚན་ཨང་བཙུགས...</value>
+  </data>
+  <data name="EnterYourPassword" xml:space="preserve">
+    <value>ཁྱོད་རའི་གསང་ཨང་འདི་བཙུགས།</value>
+  </data>
+  <data name="EnterYourUsername" xml:space="preserve">
+    <value>ཁྱོད་རའི་སྤྱོད་མི་འདི་བཙུགས།</value>
+  </data>
+  <data name="ErrorAddingProject" xml:space="preserve">
+    <value>ལས་འགུལ་འདི་བཙུགས་པའི་བསྒང་ བྱ་སྟབས་མ་བདེཝ་འབྱུང་ཡི།</value>
+  </data>
+  <data name="ErrorConnectLocalMachine" xml:space="preserve">
+    <value>ནང་འཁོད་འཕྲུལ་ཆས་ནང་ མཐུད་འབྲེལ་འབད་ནི་དོན་ལུ་ བྱ་སྟབས་མ་བདེཝ་འབྱུང་ཡི།</value>
+  </data>
+  <data name="ExportAudio" xml:space="preserve">
+    <value>ཐོས་སྒྲ་ཕྱིར་འཐོན།</value>
+  </data>
+  <data name="ExportChecked" xml:space="preserve">
+    <value>ཕྱིར་ཐོན་ཞུན་དག</value>
+  </data>
+  <data name="Exporting" xml:space="preserve">
+    <value>ཕྱིར་ཐོན་{0}འབད་བའི་བསྒང་ {1}</value>
+  </data>
+  <data name="FontSize" xml:space="preserve">
+    <value>ཡིག་འབྲུ་ཆེ་ཆུང་།</value>
+  </data>
+  <data name="ForTeam" xml:space="preserve">
+    <value>དོན་ལུ།{0}</value>
+  </data>
+  <data name="Generate" xml:space="preserve">
+    <value>བཟོ།</value>
+  </data>
+  <data name="Generic" xml:space="preserve">
+    <value>སྤྱི་མཚན།</value>
+  </data>
+  <data name="GlobalUser" xml:space="preserve">
+    <value>རྒྱལ་སྤྱིའི་ལག་ལེན་འཐབ་མི།</value>
+  </data>
+  <data name="Grid" xml:space="preserve">
+    <value>རྒྱུག་ཐིག</value>
+  </data>
+  <data name="HaveBeenCleared" xml:space="preserve">
+    <value>མེདཔ་གཏང་ད་ཡི</value>
+  </data>
+  <data name="HigherPriority" xml:space="preserve">
+    <value>གཙོ་རིམ་ཆེ་བ།</value>
+  </data>
+  <data name="HowToResolve" xml:space="preserve">
+    <value>འ་ནཱི་བྱ་སྟབས་མ་བདེཝ་འདི་ ཁྱོད་ཀྱིས་ག་དེ་སྦེ་སེལ་ནི་སྨོ?</value>
+  </data>
+  <data name="ImproperlyFormattedId" xml:space="preserve">
+    <value>སྒྲིག་བཀོད་ལེགས་ཤོམ་མེད་པའི་ཨང་རྟགས་ཨིན་མས། ལོག་བཙུགས་གནང</value>
+  </data>
+  <data name="IncludeBackTranslate" xml:space="preserve">
+    <value>ལོག་སྐད་སྒྱུར་རྐྱབ་མི་འདི་བཙུགས།</value>
+  </data>
+  <data name="IncludeNoteListenGuidance" xml:space="preserve">
+    <value>བརྗེད་ཐོ་ཉན་ནི་ལས་སྟོན་བཙུགས།</value>
+  </data>
+  <data name="IncludePassageBackTranslate" xml:space="preserve">
+    <value>ཡིག་རྒྱུགས་ལོག་སྐད་སྒྱུར་རྐྱབ་མི་འདི་བཙུགས།</value>
+  </data>
+  <data name="IncludePassageListen" xml:space="preserve">
+    <value>ཡིག་རྒྱུགས་ཉན་ནི་བཙུགས།</value>
+  </data>
+  <data name="IncludePassageReview" xml:space="preserve">
+    <value>ཡིག་རྒྱུག་བསྐྱར་ཞིབ་བཙུགས།</value>
+  </data>
+  <data name="IncludePassageReviewAfterReRecording" xml:space="preserve">
+    <value>ལོག་ཐོ་བཀོད་འབད་ཞིནམ་ལས་ ཡིག་རྒྱུགས་བསྐྱར་ཞིབ་འདི་བཙུགས།</value>
+  </data>
+  <data name="IncludeSegmentBackTranslate" xml:space="preserve">
+    <value>ཁག་ཚན་ལོག་སྐད་སྒྱུར་རྐྱབ་མི་འདི་བཙུགས།</value>
+  </data>
+  <data name="IncorrectPassword" xml:space="preserve">
+    <value>འ་ནཱི་གསང་ཨང་འདི་ སྤྱོད་མིང་དང་མི་མཐུན་འབད།</value>
+  </data>
+  <data name="IncorrectPattern" xml:space="preserve">
+    <value>དཔེ་རིས་འཛོལ་བ། ཡང་བསྐྱར་འབད་གནང་།</value>
+  </data>
+  <data name="Input" xml:space="preserve">
+    <value>ནང་བཙུགས།</value>
+  </data>
+  <data name="InsertPassword" xml:space="preserve">
+    <value>འདི་ནང་གསང་ཨང་བཙུགས།</value>
+  </data>
+  <data name="IntermediateLanguage" xml:space="preserve">
+    <value>འབྲེལ་འཐབ་ཀྱི་ཁ་སྐད།</value>
+  </data>
+  <data name="Interpret" xml:space="preserve">
+    <value>དོར་ཁ་བསྒྱུར།</value>
+  </data>
+  <data name="Interpreted" xml:space="preserve">
+    <value>དོར་ཁ་སྒྱུར།</value>
+  </data>
+  <data name="InterpretToConsultant" xml:space="preserve">
+    <value>གྲོས་སྟོན་པ་ལུ་གོ་དོན་བཤད།</value>
+  </data>
+  <data name="InterpretToTranslator" xml:space="preserve">
+    <value>སྐད་སྒྱུར་པ་ལུ་གོ་དོན་བཤད།</value>
+  </data>
+  <data name="Iteration" xml:space="preserve">
+    <value>བསྐྱར་བརྗོད།</value>
+  </data>
+  <data name="Jump" xml:space="preserve">
+    <value>སྤོ།</value>
+  </data>
+  <data name="JumpToSection" xml:space="preserve">
+    <value>དབྱེ་ཚན་ནང་སྤོ།</value>
+  </data>
+  <data name="LastCompletedStage" xml:space="preserve">
+    <value>ལཱ་རིམ་མཇུག་བསྡུ་གནས་ཚད།</value>
+  </data>
+  <data name="LastSubmittedAudioLabel" xml:space="preserve">
+    <value>ཐོས་སྒྲ་མཇུག་སྤྲོད་མི།</value>
+  </data>
+  <data name="LastSync" xml:space="preserve">
+    <value>མཉམ་སྦྱོར་མཇུག</value>
+  </data>
+  <data name="LeaveFreeCut" xml:space="preserve">
+    <value>ཁག་ཚན་མར་ཕབ་ལས་ཕྱིར་འཐོན།</value>
+  </data>
+  <data name="LeaveFreeCutMessage1" xml:space="preserve">
+    <value>ཁྱོད་ཀྱིས་ ཁག་ཚན་མར་ཕབ་ལས་ཕྱིར་འཐོན་འབད་བ་ཅིན་ ད་ལྟོ་ཚུན་ལཱ་འབད་ཡོད་མི་ཚུ་ག་ར་འབྱང་འོང་།</value>
+  </data>
+  <data name="LeaveFreeCutMessage2" xml:space="preserve">
+    <value>ལཱ་ག་ཅི་ར་འབད་ཡོད་རུང་ བཞག་ནི་དོན་ལུ་ འ་ནཱི་རིམ་པ་འདི་ཆ་ཚང་མཇུག་བསྡུ་གནང་།</value>
+  </data>
+  <data name="Localization" xml:space="preserve">
+    <value>ནང་འཁོད།</value>
+  </data>
+  <data name="LoggingIn" xml:space="preserve">
+    <value>ནང་འཛུལ་འབད་བའི་བསྒང...</value>
+  </data>
+  <data name="LogIn" xml:space="preserve">
+    <value>ནང་འཛུལ།</value>
+  </data>
+  <data name="LogOut" xml:space="preserve">
+    <value>ཕྱིར་ཐོན།</value>
+  </data>
+  <data name="LowerPriority" xml:space="preserve">
+    <value>གཙོ་རིམ་ཆུང་བ།</value>
+  </data>
+  <data name="ManageDivisions" xml:space="preserve">
+    <value>ཡིག་རྒྱུགས་ཀྱི་དབྱེ་ཁག་འཛིན་སྐྱོང་།</value>
+  </data>
+  <data name="ManageUsers" xml:space="preserve">
+    <value>སྤྱོད་མི་ཚུ་འཛིན་སྐྱོང་།</value>
+  </data>
+  <data name="MarkQuestions" xml:space="preserve">
+    <value>ཡིག་རྒྱུགས་ཀྱི་དྲི་བ་ཚུ་རྟགས་བཀལ།{0}</value>
+  </data>
+  <data name="MicNotConnectedMessage" xml:space="preserve">
+    <value>སྒྲ་དུང་ངོས་འཛིན་མ་འབད། ཁྱོད་རའི་རིམ་ལུགས་ནང་སྒྲ་དུང་འདི་མཐུད་གནང་།</value>
+  </data>
+  <data name="MicNotConnectedTitle" xml:space="preserve">
+    <value>སྒྲ་དུང་མཐུད་འབྲེལ་མིན་འདུག</value>
+  </data>
+  <data name="MicrophoneAccessMessage" xml:space="preserve">
+    <value>འཕྲུལ་ཆས་འདི་ལུ་ ཁྱོད་རའི་སྒྲ་དུང་ལག་ལེན་འཐབ་ནི་གནང་བ་མིན་འདུག འདི་བཟོ་ནི་དོན་ལུ་ སྒྲ་དུང་སྒེར་གསང་བཟོ་ས་ནང་འགྱོ་ཞིནམ་ལས་ སྒྲ་དུང་ལག་ལེན་འཐབ་ནི་གནང་བ་འདི་ ཨེབ་གནང་།</value>
+  </data>
+  <data name="MicrophoneAccessTitle" xml:space="preserve">
+    <value>སྒྲ་དུང་ལྷོད་ལམ་འདི་དགོ</value>
+  </data>
+  <data name="MultipleTeamAssignmentLabel" xml:space="preserve">
+    <value>སྤྱོད་མི་གཅིག་གི་ སྡེ་ཚན་ལེ་ཤ་ལུ་ལཱ་སྤྲོད་མི་བཏུབ།</value>
+  </data>
+  <data name="MultipleTeamAssignmentMessage" xml:space="preserve">
+    <value>སྡེ་ཚན་རེ་ལུ་ རང་སོའི་སྤྱོད་མི་རྟགས་མ་འདྲཝ་ཅིག་བྱིན།</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>མིང་།</value>
+  </data>
+  <data name="NoAudio" xml:space="preserve">
+    <value>ཐོས་སྒྲ་མེད།</value>
+  </data>
+  <data name="NoInternetConnection" xml:space="preserve">
+    <value>ཡོངས་འབྲེལ་མཐུད་འབྲེལ་མིན་འདུག</value>
+  </data>
+  <data name="NoReviewedSections" xml:space="preserve">
+    <value>ད་ལྟོ་བསྐྱར་ཞིབ་ཀྱི་དབྱེ་ཚན་ཚུ་མིན་འདུག</value>
+  </data>
+  <data name="NoSectionAudioForStage" xml:space="preserve">
+    <value>གོ་རིམ་འདི་ནང་ཐོས་སྒྲའི་དབྱེ་ཚན་མིན་འདུག</value>
+  </data>
+  <data name="NoSelfCheck" xml:space="preserve">
+    <value>རང་རྐྱང་གིས་ཞིབ་དཔྱད་འབད་ནི་མེད།</value>
+  </data>
+  <data name="NotAbleToLogin" xml:space="preserve">
+    <value>ཁྱོད་ར་ནང་འཛུལ་འབད་མི་ཚུགས་པས།</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>བརྗེད་ཐོ</value>
+  </data>
+  <data name="NoteInterpret" xml:space="preserve">
+    <value>བརྗེད་ཐོ་དོར་ཁ་བསྒྱུར།</value>
+  </data>
+  <data name="NoteListen" xml:space="preserve">
+    <value>བརྗེད་ཐོ་ཉན།</value>
+  </data>
+  <data name="Notes" xml:space="preserve">
+    <value>བརྗེད་ཐོ།</value>
+  </data>
+  <data name="NoteTranslator" xml:space="preserve">
+    <value>བརྗེད་ཐོ་འབད་མི་སྐད་སྒྱུར་པ།</value>
+  </data>
+  <data name="NotInWorkflow" xml:space="preserve">
+    <value>ལཱ་གི་རིམ་པ་ནང་མིན་འདུག</value>
+  </data>
+  <data name="NoUnreviewedSections" xml:space="preserve">
+    <value>ད་ལྟོ་བསྐྱར་ཞིབ་མ་འབད་མི་གི་དབྱེ་ཚན་ཚུ་མིན་འདུག</value>
+  </data>
+  <data name="NullUsername" xml:space="preserve">
+    <value>སྤྱོད་མིང་ས་སྟོང་བཞག་མི་བཏུབ།</value>
+  </data>
+  <data name="Offload" xml:space="preserve">
+    <value>བཏོན་བཀོ</value>
+  </data>
+  <data name="OffloadData" xml:space="preserve">
+    <value>གནས་སྡུད་བཏོན་བཀོ།</value>
+  </data>
+  <data name="Offloading" xml:space="preserve">
+    <value>བཏོན་བཀོ་བའི་བསྒང་།</value>
+  </data>
+  <data name="OffloadWarning" xml:space="preserve">
+    <value>གློག་འཕྲིན་ཁ་བྱང་འདི་ '{0}'. ཁྱོད་ཀྱིས་ དངུལ་འབྲེལ་མཐུན་བཟོ་ནི་ཨིན་ན?</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>བཏུབ།</value>
+  </data>
+  <data name="Original" xml:space="preserve">
+    <value>ངོ་མ།</value>
+  </data>
+  <data name="OriginalLanguage" xml:space="preserve">
+    <value>སྐད་ཡིག་ངོ་མ།</value>
+  </data>
+  <data name="OriginalNote" xml:space="preserve">
+    <value>བརྗེད་ཐོ་ངོ་མ།</value>
+  </data>
+  <data name="OriginalPassageTitle" xml:space="preserve">
+    <value>ཡིག་རྒྱུགས{0} (ངོ་མ)</value>
+  </data>
+  <data name="Passage" xml:space="preserve">
+    <value>ཡིག་རྒྱུགས {0}</value>
+  </data>
+  <data name="PassageBackTranslate" xml:space="preserve">
+    <value>ཡིག་རྒྱུགས་ལོག་སྐད་སྒྱུར་རྐྱབ།</value>
+  </data>
+  <data name="PassageDivide" xml:space="preserve">
+    <value>ཡིག་རྒྱུགས་དབྱེ་བགོ།</value>
+  </data>
+  <data name="PassageDraftListen" xml:space="preserve">
+    <value>ཡིག་རྒྱུགས{0}ཟིན་བྲིས་ཉན།</value>
+  </data>
+  <data name="PassageListen" xml:space="preserve">
+    <value>ཡིག་རྒྱུགས་ཉན།</value>
+  </data>
+  <data name="PassageListenOnly" xml:space="preserve">
+    <value>ཡིག་རྒྱུགས་ཉན་ནི་རྐྱངམ་གཅིག</value>
+  </data>
+  <data name="PassageListenTitle" xml:space="preserve">
+    <value>ཡིག་རྒྱུགས {0} ཉན།</value>
+  </data>
+  <data name="PassageNumber" xml:space="preserve">
+    <value>ཡིག་རྒྱུགས {0}</value>
+  </data>
+  <data name="PassagePeerReview" xml:space="preserve">
+    <value>ཡིག་རྒྱུགས་{0}སྡེ་ཚན་བསྐྱར་ཞིབ།</value>
+  </data>
+  <data name="PassageRetell" xml:space="preserve">
+    <value>ཡིག་རྒྱུགས་ལོག་སླབ།</value>
+  </data>
+  <data name="PassageReview" xml:space="preserve">
+    <value>ཡིག་རྒྱུགས་བསྐྱར་ཞིབ།</value>
+  </data>
+  <data name="PassageReviewAfterReRecording" xml:space="preserve">
+    <value>ལོག་ཐོ་བཀོད་འབད་ཞིནམ་ལས་ ཡིག་རྒྱུགས་བསྐྱར་ཞིབ།</value>
+  </data>
+  <data name="PassageSelect" xml:space="preserve">
+    <value>ཡིག་རྒྱུགས་གདམ་ཁ།</value>
+  </data>
+  <data name="PassageSelection" xml:space="preserve">
+    <value>ཡིག་རྒྱུགས་གདམ་ཁ།</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>གསང་ཨང་།</value>
+  </data>
+  <data name="PasswordGrid" xml:space="preserve">
+    <value>གསང་ཨང་རྒྱུག་ཐིག</value>
+  </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>གསང་ཨང་འདི་དགོ</value>
+  </data>
+  <data name="PasswordType" xml:space="preserve">
+    <value>གསང་ཨང་མཛུབ་གནོན་རྐྱབ།</value>
+  </data>
+  <data name="PeerCheck" xml:space="preserve">
+    <value>སྡེ་ཚན་ལེགས་བཅོས།</value>
+  </data>
+  <data name="PeerReview" xml:space="preserve">
+    <value>སྡེ་ཚན་བསྐྱར་ཞིབ།</value>
+  </data>
+  <data name="PeerRevise" xml:space="preserve">
+    <value>སྡེ་ཚན་ཞུན་དག</value>
+  </data>
+  <data name="PleaseConnect" xml:space="preserve">
+    <value>ཡོངས་འབྲེལ་མཐུད་འབྲེལ་འབད་ཞིནམ་ལས་ ལོག་འབད་གནང་།</value>
+  </data>
+  <data name="PleaseLogIn" xml:space="preserve">
+    <value>འགོ་བཙུགས་ནི་དོན་ལུ་ ནང་འཛུལ་འབད།</value>
+  </data>
+  <data name="PrecedingAudio" xml:space="preserve">
+    <value>ཧེ་མའི་ཐོས་སྒྲ</value>
+  </data>
+  <data name="PreviousDraft" xml:space="preserve">
+    <value>སྔོན་གྱི་ཟིན་བྲིས།</value>
+  </data>
+  <data name="Proceed" xml:space="preserve">
+    <value>འཕྲོ་མཐུད།</value>
+  </data>
+  <data name="Processes" xml:space="preserve">
+    <value>བྱ་རིམ།</value>
+  </data>
+  <data name="ProjectAddedSuccesfully" xml:space="preserve">
+    <value>ལས་འགུལ་འདི་མཐར་འཁྱོལ་ཅན་སྦེ་བཙུགས་ད་ཡི།</value>
+  </data>
+  <data name="ProjectConfiguration" xml:space="preserve">
+    <value>ལས་འགུལ་རིམ་སྒྲིག</value>
+  </data>
+  <data name="ProjectDeletedTitle" xml:space="preserve">
+    <value>ལས་འགུལ་འདི་མེདཔ་གཏང་ད་ཡི།</value>
+  </data>
+  <data name="ProjectHome" xml:space="preserve">
+    <value>ལས་འགུལ་གདོང་ཤོག</value>
+  </data>
+  <data name="ProjectId" xml:space="preserve">
+    <value>ལས་འགུལ་ཨང་།</value>
+  </data>
+  <data name="ProjectList" xml:space="preserve">
+    <value>ལས་འགུལ་ཐོ།</value>
+  </data>
+  <data name="ProjectsDownloadedSuccessfully" xml:space="preserve">
+    <value>ལས་འགུལ་ཚུ་ཕབ་ལེན་མཐར་འཁྱོལ་ཅན་སྦེ་ ཕབ་ལེན་འབད་ཡི།</value>
+  </data>
+  <data name="ProjectTeams" xml:space="preserve">
+    <value>ལས་འགུལ་སྡེ་ཚན་ཚུ།</value>
+  </data>
+  <data name="ProjectUsers" xml:space="preserve">
+    <value>ལས་འགུལ་སྤྱོད་མི་ཚུ།</value>
+  </data>
+  <data name="ProjectWorkflow" xml:space="preserve">
+    <value>ལས་འགུལ་ལཱ་རིམ།</value>
+  </data>
+  <data name="QuestionFormatted" xml:space="preserve">
+    <value>དྲི་བ།{0}</value>
+  </data>
+  <data name="QuestionAndResponse" xml:space="preserve">
+    <value>དྲི་ལན།</value>
+  </data>
+  <data name="QuestionPlacement" xml:space="preserve">
+    <value>དྲི་བ་བཞག་ས།</value>
+  </data>
+  <data name="QuestionSet" xml:space="preserve">
+    <value>དྲི་བ་ཁག{0}</value>
+  </data>
+  <data name="Record" xml:space="preserve">
+    <value>ཐོ་བཀོད།</value>
+  </data>
+  <data name="RecordedSegmentWarningConfirmation" xml:space="preserve">
+    <value>བསྡབ་ནི་མཇུག་བསྡུ།</value>
+  </data>
+  <data name="RecordedSegmentWarningMessage" xml:space="preserve">
+    <value>སྔོན་མའི་ཁག་ཚན་ནང་ ཐོས་སྒྲའི་ལན་ཧེ་མ་ལས་འདུག གལ་སྲིད་གཅིག་ཁར་བསྡབ་པ་ཅིན་ ཧེ་མའི་སྒྲ་གཟུང་ཡོད་པའི་ཐོས་སྒྲ་འདི་མེདཔ་འགྱོ་འོང་།</value>
+  </data>
+  <data name="RecordedSegmentWarningTitle" xml:space="preserve">
+    <value>ལན་ཚུ་འབྱང་འོང་།</value>
+  </data>
+  <data name="RecordInterpretation" xml:space="preserve">
+    <value>དོར་ཁ་བསྒྱུར་མི་ཐོ་བཀོད་འབད།</value>
+  </data>
+  <data name="RecordNewDraft" xml:space="preserve">
+    <value>ཟིན་བྲིས་གསརཔ་ཐོ་བཀོད།</value>
+  </data>
+  <data name="RecordQuestion" xml:space="preserve">
+    <value>དྲི་བ་ཐོ་བཀོད།(དྲི་བ{0})</value>
+  </data>
+  <data name="RecordQuestionTitle" xml:space="preserve">
+    <value>དྲི་བ་ཐོ་བཀོད།</value>
+  </data>
+  <data name="RecordResponse" xml:space="preserve">
+    <value>ལན་ཐོ་བཀོད།</value>
+  </data>
+  <data name="RecordRetell" xml:space="preserve">
+    <value>ལོག་སླབ་མི་ཐོ་བཀོད།</value>
+  </data>
+  <data name="RecordStandardQuestion" xml:space="preserve">
+    <value>ཚད་ལྡན་གྱི་དྲི་བ་ཐོ་བཀོད།</value>
+  </data>
+  <data name="RecordTranslation" xml:space="preserve">
+    <value>སྐད་སྒྱུར་ཐོ་བཀོད།</value>
+  </data>
+  <data name="Recovery" xml:space="preserve">
+    <value>སླར་ཐོབ།</value>
+  </data>
+  <data name="References" xml:space="preserve">
+    <value>རྒྱབ་རྟེན།</value>
+  </data>
+  <data name="RemoveWork" xml:space="preserve">
+    <value>ལཱ་བཏོན་གཏང་།</value>
+  </data>
+  <data name="RemoveWorkMessage" xml:space="preserve">
+    <value>འ་ནཱི་གོ་རིམ་འདི་ འདི་འཕྲོ་ལས་བཏོན་གཏང་འོང་། དེ་ལས་ ལཱ་འབད་པའི་བསྒང་ཡོད་མི་ཚུ་ག་ར་འབྱང་འོང་།</value>
+  </data>
+  <data name="RenderUser" xml:space="preserve">
+    <value>ཞབས་ཏོག་སྤྱོད་མི།</value>
+  </data>
+  <data name="Replace" xml:space="preserve">
+    <value>ཚབ་བཙུགས།</value>
+  </data>
+  <data name="RequireNoteListen" xml:space="preserve">
+    <value>བརྗེད་ཐོ་ཉན་ནི་ལས་སྟོན།</value>
+  </data>
+  <data name="RequireNoteReview" xml:space="preserve">
+    <value>བརྗེད་ཐོ་བསྐྱར་ཞིབ་ལམ་སྟོན།</value>
+  </data>
+  <data name="RequirePassageListen" xml:space="preserve">
+    <value>ཉན་ནིའི་ཡིག་རྒྱུགས་ལམ་སྟོན།</value>
+  </data>
+  <data name="RequirePassageReview" xml:space="preserve">
+    <value>ཡིག་རྒྱུགས་བསྐྱར་ཞིབ་ལམ་སྟོན།</value>
+  </data>
+  <data name="RequirePassageTranscribeListen" xml:space="preserve">
+    <value>ཡིག་རྒྱུགས་སྒྲ་སྒྱུར་ལམ་སྟོན།</value>
+  </data>
+  <data name="RequireQuestionContextListen" xml:space="preserve">
+    <value>སྐབས་དོན་དྲི་བ་ཉན་ནའི་ལམ་སྟོན།</value>
+  </data>
+  <data name="RequireRecordResponse" xml:space="preserve">
+    <value>ལན་གྱི་ལམ་སྟོན་བཙུགས།</value>
+  </data>
+  <data name="RequireReviewAfterReRecording" xml:space="preserve">
+    <value>ལོག་ཐོ་བཀོད་འབད་ཞིནམ་ལས་ ཡིག་རྒྱུགས་བསྐྱར་ཞིབ་ཀྱི་ལམ་སྟོན།</value>
+  </data>
+  <data name="RequireSectionListen" xml:space="preserve">
+    <value>ཉན་ནིའི་དབྱེ་ཚན་ཀྱི་ལས་སྟོན།</value>
+  </data>
+  <data name="RequireSectionReview" xml:space="preserve">
+    <value>དབྱེ་ཚན་བསྐྱར་ཞིབ་ལམ་སྟོན།</value>
+  </data>
+  <data name="RequireSegmentTranscribeListen" xml:space="preserve">
+    <value>ཁག་ཚན་སྒྲ་སྒྱུར་ལས་སྟོན།</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>བསྐྱར་བཟོ།</value>
+  </data>
+  <data name="ResetSection" xml:space="preserve">
+    <value>དབྱེ་ཚན་བསྐྱར་བཟོ།</value>
+  </data>
+  <data name="Response" xml:space="preserve">
+    <value>ལན་རྐྱབ{0}།</value>
+  </data>
+  <data name="Restore" xml:space="preserve">
+    <value>བསྐྱར་གསོ་འབད།</value>
+  </data>
+  <data name="RestoreSection" xml:space="preserve">
+    <value>དབྱེ་ཚན་བསྐྱར་གསོ།</value>
+  </data>
+  <data name="RestoreSectionConfirmation" xml:space="preserve">
+    <value>ཁྱོད་ར་ འ་ནཱི་དབྱེ་ཚན་འདི་བསྐྱར་གསོ་འབད་ནི་གཏན་འཁེལ་ཨིན་ན?</value>
+  </data>
+  <data name="RestoreSnapshotInfo" xml:space="preserve">
+    <value>བསྡུས་བརྗོད་འདི་ལོག་ལེནམ་ད་ ལཱ་གི་རིམ་པ་འདི་ནང་གོ་རིམ་ལོག་མི་ལེན།</value>
+  </data>
+  <data name="Retell" xml:space="preserve">
+    <value>ལོག་སླབ།</value>
+  </data>
+  <data name="RetellCheck" xml:space="preserve">
+    <value>ཞིབ་དཔྱད་ལོག་སླབ། (ཡིག་རྒྱུགས{0})</value>
+  </data>
+  <data name="ReturnToLogIn" xml:space="preserve">
+    <value>ནང་འཛུལ་ནང་ལོག་འགྱོ།</value>
+  </data>
+  <data name="Review" xml:space="preserve">
+    <value>བསྐྱར་ཞིབ།</value>
+  </data>
+  <data name="Reviewed" xml:space="preserve">
+    <value>བསྐྱར་ཞིབ་འབད་མི།</value>
+  </data>
+  <data name="ReviewQuestions" xml:space="preserve">
+    <value>ཡིག་རྒྱུགས་དྲི་བ་ཚུ་བསྐྱར་ཞིབ།</value>
+  </data>
+  <data name="Revise" xml:space="preserve">
+    <value>ཞུན་དག</value>
+  </data>
+  <data name="Revision" xml:space="preserve">
+    <value>བསྐྱར་ཞིབ།</value>
+  </data>
+  <data name="RoleAssignment" xml:space="preserve">
+    <value>ལས་འགུལ་འགོ་བཙུགས།</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>འཚོལ།</value>
+  </data>
+  <data name="Section" xml:space="preserve">
+    <value>དབྱེ་ཚན་ {0}</value>
+  </data>
+  <data name="SectionAndPassageListen" xml:space="preserve">
+    <value>དབྱེ་ཚན་དང་ཡིག་རྒྱུགས་ཉན།</value>
+  </data>
+  <data name="SectionAssignment" xml:space="preserve">
+    <value>དབྱེ་ཚན་ལས་འགུལ།</value>
+  </data>
+  <data name="SectionDraft" xml:space="preserve">
+    <value>དབྱེ་ཚན་{0} ཟིན་བྲིས།</value>
+  </data>
+  <data name="SectionFeedbackTitle" xml:space="preserve">
+    <value>དབྱེ་ཚན་ {0} བསམ་ལན།</value>
+  </data>
+  <data name="SectionInformation" xml:space="preserve">
+    <value>དབྱེ་ཚན་གནས་ཚུལ།</value>
+  </data>
+  <data name="SectionList" xml:space="preserve">
+    <value>དབྱེ་ཚན་ཐོ་ཡིག</value>
+  </data>
+  <data name="SectionListen" xml:space="preserve">
+    <value>དབྱེ་ཚན་ཉན།</value>
+  </data>
+  <data name="SectionListenOnly" xml:space="preserve">
+    <value>དབྱེ་ཚན་ཉན་ནི་རྐྱངམ་གཅིག</value>
+  </data>
+  <data name="SectionListenTitle" xml:space="preserve">
+    <value>དབྱེ་ཚན་ {0}  ཉན།</value>
+  </data>
+  <data name="SectionNumberLabel" xml:space="preserve">
+    <value>དབྱེ་ཚན་ཨང་།</value>
+  </data>
+  <data name="SectionReferenceLabel" xml:space="preserve">
+    <value>ཚིགས་བཅད་རྒྱབ་རྟེན།</value>
+  </data>
+  <data name="SectionReset" xml:space="preserve">
+    <value>དབྱེ་ཚན་འདི་བསྐྱར་བཟོ་འབད་ད་ཡི།</value>
+  </data>
+  <data name="SectionReview" xml:space="preserve">
+    <value>དབྱེ་ཚན་བསྐྱར་ཞིབ།</value>
+  </data>
+  <data name="SectionSelect" xml:space="preserve">
+    <value>དབྱེ་ཚན་གདམ་ཁ།</value>
+  </data>
+  <data name="SectionsMovingWarning" xml:space="preserve">
+    <value>དབྱེ་རིམ་ཚུ་ ཤུལ་མམ་གྱི་ལཱ་རིམ་ནང་འགྱོ་འོང་།</value>
+  </data>
+  <data name="SectionStatus" xml:space="preserve">
+    <value>དབྱེ་ཚན་གནས་རིམ།</value>
+  </data>
+  <data name="SectionStepLabel" xml:space="preserve">
+    <value>སྐབས་ཐོག་གི་རིམ་པ།</value>
+  </data>
+  <data name="SectionTitle" xml:space="preserve">
+    <value>དབྱེ་ཚན་ {0}  དོན་ཚན།</value>
+  </data>
+  <data name="SectionTitleLabel" xml:space="preserve">
+    <value>དབྱེ་ཚན་དོན་ཚན།</value>
+  </data>
+  <data name="Segment" xml:space="preserve">
+    <value>ཁག་ཚན{༡}</value>
+  </data>
+  <data name="SegmentBackTranslate" xml:space="preserve">
+    <value>ཁག་ཚན་ལོག་སྐད་སྒྱུར་རྐྱབ།</value>
+  </data>
+  <data name="SegmentBackTranslateSelect" xml:space="preserve">
+    <value>ཁག་ཚན་ལོག་སྐད་སྒྱུར་གདམ་ཁ།</value>
+  </data>
+  <data name="SegmentBackTranslateTitle" xml:space="preserve">
+    <value>{༡} -ཁག་ཚན{༡}</value>
+  </data>
+  <data name="SegmentFreeCut" xml:space="preserve">
+    <value>ཁག་ཚན་མར་ཕབ།</value>
+  </data>
+  <data name="SegmentWillBeCleared" xml:space="preserve">
+    <value>ད་ལྟོའི་ཁག་ཚན་འདི་མེད་བཟོ་གཏང་འོང་།</value>
+  </data>
+  <data name="SelectADraft" xml:space="preserve">
+    <value>ཟིན་བྲིས་གདམ་ཁ་རྐྱབ།</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>ག་ར་གདམ་ཁ་རྐྱབ།</value>
+  </data>
+  <data name="SelectAProfile" xml:space="preserve">
+    <value>ནང་འཛུལ་འབད་ནི་དོན་ལུ་ བཅུད་བསྡུས་ལོ་རྒྱུས་གདམ་ཁ་རྐྱབ་གནང་།</value>
+  </data>
+  <data name="SelectAProject" xml:space="preserve">
+    <value>ལས་འགུལ་གདམ་ཁ།</value>
+  </data>
+  <data name="SelectDisplay" xml:space="preserve">
+    <value>གསལ་སྟོན་གདམ་ཁ་རྐྱབ།</value>
+  </data>
+  <data name="SelectDraft" xml:space="preserve">
+    <value>ཟིན་བྲིས་གདམ་ཁ་རྐྱབ།</value>
+  </data>
+  <data name="SelectProjectsToImport" xml:space="preserve">
+    <value>ནང་ན་བཙུགས་ནི་དོན་ལུ་ ལས་འགུལ་འདི་གདམ་ཁ་རྐྱབ་གནང་།</value>
+  </data>
+  <data name="SelectSection" xml:space="preserve">
+    <value>དབྱེ་ཚན་གདམ་ཁ་རྐྱབ།</value>
+  </data>
+  <data name="SelectSnapshot" xml:space="preserve">
+    <value>བསྡུས་བརྗོད་གདམ་ཁ་རྐྱབ།</value>
+  </data>
+  <data name="SelectSnapshotDescription" xml:space="preserve">
+    <value>དམིགས་བསལ་གྱི་བསྡུས་བརྗོད་འཕྲོ་མཐུད་ནི་ཨིན་མི་འདི་གདམ་ཁ་རྐྱབ། གདམ་ཁ་མ་རྐྱབ་མི་འདི་རྩིས་ཁ་མི་རྐྱབ།</value>
+  </data>
+  <data name="Sequence" xml:space="preserve">
+    <value>རིམ་པ།</value>
+  </data>
+  <data name="Snapshot" xml:space="preserve">
+    <value>བསྡུས་བརྗོད།</value>
+  </data>
+  <data name="SnapshotChosen" xml:space="preserve">
+    <value>བསྡུས་བརྗོད་གདམ་ཁ་རྐྱབ་པའི་དོན་འདི།</value>
+  </data>
+  <data name="SnapshotConflict" xml:space="preserve">
+    <value>འ་ནཱི་དབྱེ་ཚན་འདི་ བསྡུས་བརྗོད་དང་འགལཝ་མས།: {0}</value>
+  </data>
+  <data name="Snapshots" xml:space="preserve">
+    <value>བསྡུས་བརྗོད།</value>
+  </data>
+  <data name="SortBy" xml:space="preserve">
+    <value>རིམ་སྒྲིག་དབྱེ་བ།</value>
+  </data>
+  <data name="Source" xml:space="preserve">
+    <value>འབྱུང་ཁངུས།</value>
+  </data>
+  <data name="StageName" xml:space="preserve">
+    <value>ལཱ་རིམ་མིང་།</value>
+  </data>
+  <data name="StandardQuestion" xml:space="preserve">
+    <value>ཚད་ལྡན་གྱི་དྲི་བ།</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>འགོ་བཙུགས།</value>
+  </data>
+  <data name="Step" xml:space="preserve">
+    <value>རིམ་པ།</value>
+  </data>
+  <data name="Step1" xml:space="preserve">
+    <value>རིམ་པ་ ༡།</value>
+  </data>
+  <data name="Step2" xml:space="preserve">
+    <value>རིམ་པ ༢།</value>
+  </data>
+  <data name="SupplementaryMaterial" xml:space="preserve">
+    <value>ལྷན་ཐབས་མཁོ་ཆས།</value>
+  </data>
+  <data name="Sync" xml:space="preserve">
+    <value>མཉམ་སྦྱོར།</value>
+  </data>
+  <data name="TeamCheck" xml:space="preserve">
+    <value>སྡེ་ཚན་ཞིབ་དཔྱད།</value>
+  </data>
+  <data name="TeamOne" xml:space="preserve">
+    <value>སྡེ་ཚན ༡།</value>
+  </data>
+  <data name="TeamTwo" xml:space="preserve">
+    <value>སྡེ་ཚན ༢།</value>
+  </data>
+  <data name="Text" xml:space="preserve">
+    <value>ཡིག་གུ</value>
+  </data>
+  <data name="TextNote" xml:space="preserve">
+    <value>ཡི་གུ་བརྗེད་ཐོ།</value>
+  </data>
+  <data name="TotalPassagesLabel" xml:space="preserve">
+    <value>ཡིག་རྒྱུགས་ཡོངས་བསྡོམས།</value>
+  </data>
+  <data name="TotalVerses" xml:space="preserve">
+    <value>ཚིགས་བཅད་ཡོངས་བསྡོམས།:</value>
+  </data>
+  <data name="Transcribe" xml:space="preserve">
+    <value>སྒྲ་སྒྱུར་འབད།</value>
+  </data>
+  <data name="Transcribe2" xml:space="preserve">
+    <value>སྒྲ་སྒྱུར་ ༢།</value>
+  </data>
+  <data name="TranscribePassage" xml:space="preserve">
+    <value>ཡིག་རྒྱུགས་སྒྲ་སྒྱུར།</value>
+  </data>
+  <data name="TranscribeSegment" xml:space="preserve">
+    <value>ཁག་ཚན་སྒྲ་སྒྲུར།</value>
+  </data>
+  <data name="Translated" xml:space="preserve">
+    <value>སྐད་སྒྱུར།</value>
+  </data>
+  <data name="Translation" xml:space="preserve">
+    <value>སྐད་སྒྱུར།</value>
+  </data>
+  <data name="Unassigned" xml:space="preserve">
+    <value>ལཱ་འགན་མ་སྤྲོད་མི་</value>
+  </data>
+  <data name="Unreviewed" xml:space="preserve">
+    <value>བསྐྱར་ཞིབ་མ་འབད་མི།</value>
+  </data>
+  <data name="UnsavedRolesMessage" xml:space="preserve">
+    <value>ཁྱོད་ཀྱིས་སྤྲོད་ཡོད་པའི་ལཱ་འགན་ཚུ་ བསག་ཨིན་པ་ཅིན་ གཡས་ཁ་ཐུག་ཡོད་པའི་འཕྲོ་མཐུད་ཨེབ་རྟ་འདི་གདམ་ཁ་རྐྱབ་གནང་།</value>
+  </data>
+  <data name="UnsavedRolesTitle" xml:space="preserve">
+    <value>འདི་ནང་མ་བསག་པའི་འགན་ཚུ་ཡོད།</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>དུས་མཐུན།</value>
+  </data>
+  <data name="UpdatedPassage" xml:space="preserve">
+    <value>ཡིག་རྒྱུགས་དུས་མཐུན་བཟོ་ཡི།</value>
+  </data>
+  <data name="UserLabel" xml:space="preserve">
+    <value>སྐབས་ཐོག་སྤྱོད་མི།</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>སྤྱོད་མིང་།</value>
+  </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>འ་ནཱི་སྤྱོད་མིང་འདི་མིན་འདུག</value>
+  </data>
+  <data name="UserSettings" xml:space="preserve">
+    <value>སྤྱོད་མིའི་བཟོ་བཀོད།</value>
+  </data>
+  <data name="UserType" xml:space="preserve">
+    <value>སྤྱོད་མི་དབྱེ་བ།</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>ཐོན་རིམ།</value>
+  </data>
+  <data name="VesselUser" xml:space="preserve">
+    <value>སྣོད་ཆས་སྤྱོད་མི།</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>བལྟ།</value>
+  </data>
+  <data name="ViewAllUsers" xml:space="preserve">
+    <value>སྤྱོད་མི་ག་ར་བལྟ།</value>
+  </data>
+  <data name="ViewSectionAssignments" xml:space="preserve">
+    <value>ལས་འགུལ་དབྱེ་ཚན་བལྟ།</value>
+  </data>
+  <data name="WelcomeToRender" xml:space="preserve">
+    <value>དྲིན་ལན་འཇལ་གནང་། Render</value>
+  </data>
+  <data name="WhichSnapshot" xml:space="preserve">
+    <value>ཁྱོད་ར་བསྡུས་བརྗོད་ག་འདི་འཕྲོ་མཐུད་ནི་སྨོ?</value>
+  </data>
+  <data name="WorkflowConfiguration" xml:space="preserve">
+    <value>ལཱ་གི་རིམ་སྒྲིག</value>
+  </data>
+  <data name="WorkflowDeleteStageMessage" xml:space="preserve">
+    <value>ཁྱོད་ཀྱིས་ལཱ་འདི་ག་དེ་སྦེ་འབད་ནི་ཨིན་ན་ གདམ་ཁ་རྐྱབས་ ཁྱོད་ཀྱིས་ལཱ་འདི་ག་དེ་སྦེ་འབད་ནི་ཨིན་ན་ གདམ་ཁ་རྐྱབས་:</value>
+  </data>
+  <data name="WorkflowDeleteStageTitle" xml:space="preserve">
+    <value>གོ་རིམ་འདི་ནང་གནས་སྡུད་ཡོད།</value>
+  </data>
+  <data name="WorkWillBeLost" xml:space="preserve">
+    <value>ཁྱོད་རའི་ལཱ་འདི་འབྱང་འོང་།</value>
+  </data>
+  <data name="Question" xml:space="preserve">
+    <value>དྲི་བ།</value>
+  </data>
+  <data name="Render" xml:space="preserve">
+    <value>Render</value>
+  </data>
+  <data name="RetellIsNotAvailable" xml:space="preserve">
+    <value>སི་ཨེམ་ཨེསི་ཨེསི་ཨེབ་གཏང་།</value>
+  </data>
+  <data name="QuestionAndResponseIsNotAvailable" xml:space="preserve">
+    <value>བརྡ་བཀོད་དང་བསྒྱུར་བཅོས་འབད་མ་ཚུགས།</value>
+  </data>
+  <data name="PressCircleToRecord" xml:space="preserve">
+    <value>པ་ ཐོན་ཡོདཔ་ཨིན་པས།</value>
+  </data>
+  <data name="PressCircleToRecordOrPressArrowToAddQuestionFromLibrary" xml:space="preserve">
+    <value>ཨའི་ཨེསི་ཨེསི་ཨེསི་ཨར་ཨེསི་ཨེསི་ཨེསི་ཨེསི་ཨེསི་ཨེསི་ཨེསི་ཨེསི་ལུ་ཨེསི་ཨེསི་ཨེསི་ཨེསི་ཨེབ་གཏང་ནི་ཨིན་</value>
+  </data>
+  <data name="Library" xml:space="preserve">
+    <value>ཡིག་འཕྲིན་ཚུ།</value>
+  </data>
+  <data name="NoQuestionsInTheLibrary" xml:space="preserve">
+    <value>སར་བར་འདི་གིས་ དུས་ཡུན་ཐོབ་མི་ཚུགས་པས།</value>
+  </data>
+  <data name="Questions" xml:space="preserve">
+    <value>དྲི་བཀྲམ་སྤྱོད་ཀྱི་དོན་</value>
+  </data>
+  <data name="PressArrowToAddQuestion" xml:space="preserve">
+    <value>ཨེསི་ཨེསི་ཨེསི་ཨེསི་སླར་ལོག་འབདཝ་ཨིན་</value>
+  </data>
+  <data name="Test" xml:space="preserve">
+    <value>བརྟག་ཞིབ་འཚོལ་</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>སྐད་ཡིག</value>
+  </data>
+  <data name="Translate" xml:space="preserve">
+    <value>ཊེམ་པེལེཊི།</value>
+  </data>
+  <data name="RetellOnly" xml:space="preserve">
+    <value>རྐྱངམ་ཅིག་བཀྲམ།</value>
+  </data>
+  <data name="QuestionAndResponseOnly" xml:space="preserve">
+    <value>དྲི་བཀོད།</value>
+  </data>
+  <data name="RenderAvailable" xml:space="preserve">
+    <value>{0} ཡར་མཐོན་འབད་ནི།</value>
+  </data>
+  <data name="DownloadRenderMessage" xml:space="preserve">
+    <value>དུས་མཐུན་བཟོ་ནིའི་དོན་ལུ་ རིམ་ལག་ལེན་འཐབ་ནིའི་དོན་ལུ་ དུས་མཐུན་བཟོ་ནི།</value>
+  </data>
+  <data name="DownloadRenderButton" xml:space="preserve">
+    <value>བརྡ་བསྐུལ་སྤྱོད་བཏུབ་པའི་གྲངས་ཚུ་ གསར་བསྐྲུན་འབད།</value>
+  </data>
+  <data name="NoteInterpretToConsultant" xml:space="preserve">
+    <value>བསླབ་སྟོན་པ་ལུ་ བསླབ་སྟོན་པ་ལུ་ བསླབ་སྟོན་པ་</value>
+  </data>
+  <data name="NoteInterpretToTranslator" xml:space="preserve">
+    <value>འཕེལ་བཤད་འབད་མི་ལུ་ བཀའ་དྲིན་བསྐྱང་</value>
+  </data>
+  <data name="DeleteUserModalMessage" xml:space="preserve">
+    <value>ཐུམ་སྒྲིལ་ཚུ་རྩ་བསྐྲད་གཏང་ནི་ཨིན་ན? ཁྱོད་ཀྱིས་སེལ་འཐུ་འབད་མི་བརྡ་བཀོད་མི་ཚུགས་པས།</value>
+  </data>
+  <data name="Return" xml:space="preserve">
+    <value>བསྐྱར་བཀྲམ།</value>
+  </data>
+  <data name="SegmentBackTranslate1" xml:space="preserve">
+    <value>1 བསྒྱུར་བཅོས་འབད་ཡོད་པའི་ཐུམ་སྒྲིལ་ཚུ།</value>
+  </data>
+  <data name="SegmentBackTranslate2" xml:space="preserve">
+    <value>2 བསྒྱུར་བཅོས་འབད་ཡོད་པའི་ཐུམ་སྒྲིལ་ཚུ།</value>
+  </data>
+  <data name="PassageBackTranslate1" xml:space="preserve">
+    <value>1 རྒྱབ་སྐྱོར་འབད་དོ།</value>
+  </data>
+  <data name="PassageBackTranslate2" xml:space="preserve">
+    <value>2 རྒྱབ་སྐྱོར་འབད་དོ།</value>
+  </data>
+  <data name="GridPassword" xml:space="preserve">
+    <value>གསང་ཡིག</value>
+  </data>
+  <data name="DragTeamHere" xml:space="preserve">
+    <value>ཊེམ་པེལེཊི།</value>
+  </data>
+  <data name="Teams" xml:space="preserve">
+    <value>ཊེམ་པེལེཊི།</value>
+  </data>
+  <data name="CommunityFeedbackGuidance" xml:space="preserve">
+    <value>པ་ ཐོན་ཡོདཔ་ཨིན་པས།</value>
+  </data>
+  <data name="Configure" xml:space="preserve">
+    <value>ནང་བསྐྱོད་འབད་ནི།</value>
+  </data>
+  <data name="QuestionNumberAndTotalNumberFormatted" xml:space="preserve">
+    <value>དྲི་བ་མིའི་མིང་</value>
+  </data>
+  <data name="ApprovedSection" xml:space="preserve">
+    <value>སེལ་འཐུ་འབད་ཡོད་པའི་ཐུམ་སྒྲིལ་ཚུ།</value>
+  </data>
+  <data name="RemovedFromProject" xml:space="preserve">
+    <value>པ་ ཐོན་ཡོདཔ་ཨིན་པས།</value>
+  </data>
+  <data name="PasswordRequiredToRestore" xml:space="preserve">
+    <value>རྩ་བསྐྲད་གཏང་ནིའི་དོན་ལུ་ རྩ་བསྐྲད་གཏང་།</value>
+  </data>
+  <data name="PasswordRequiredToReset" xml:space="preserve">
+    <value>ནང་འཁོད་ལུ་ཡོད་པའི་ཡིག་སྣོད་ཚུ་རྩ་བསྐྲད་གཏང་།</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>ཟླ་ཐོ།</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>ཅི་མེད།</value>
+  </data>
+  <data name="YouCannotUndo" xml:space="preserve">
+    <value>ཁྱོད་ཀྱིས་སེལ་འཐུ་འབད་མི་ཚུགས་པས།</value>
+  </data>
+  <data name="YouHaveChosen" xml:space="preserve">
+    <value>:ཁྱོད་ཀྱིས་སེལ་འཐུ་འབད་</value>
+  </data>
+  <data name="DraftWillBeLost" xml:space="preserve">
+    <value>ཐུམ་སྒྲིལ་ཚུ་རྩ་བསྐྲད་གཏང་།</value>
+  </data>
+  <data name="ViewAssignments" xml:space="preserve">
+    <value>འོག་གི་ཤོག་ལེབ་ཚུ་</value>
+  </data>
+  <data name="TextPassword" xml:space="preserve">
+    <value>ཚིག་ཡིག</value>
+  </data>
+  <data name="Global" xml:space="preserve">
+    <value>འཛམ་གླིང་</value>
+  </data>
+  <data name="AddUserButtonText" xml:space="preserve">
+    <value>ལག་ལེན་པ་བརྡ་དོན།</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>འཛོལ་བ་</value>
+  </data>
+  <data name="ErrorOccuredTryAgain" xml:space="preserve">
+    <value>ཡང་གསར་བསྐྲུན་འབད་ནི་ལུ་འཛོལ་བ།</value>
+  </data>
+  <data name="RetellQuestionResponse" xml:space="preserve">
+    <value>འཚུབ་/འཚུབས་/འཚུབ་</value>
+  </data>
+  <data name="DividePassageMessage" xml:space="preserve">
+    <value>ཁྱོད་ར་བརྟག་ཞིབ་འཚོལ་ཞིནམ་ལས་ ཁྱོད་ཀྱི་རྒྱབ་སྐྱོར་འབད་དགོཔ་ཨིན་</value>
+  </data>
+  <data name="DiscardWork" xml:space="preserve">
+    <value>ངོ་འཕྲད་འཛོལ་བ།</value>
+  </data>
+  <data name="SectionView" xml:space="preserve">
+    <value>གསལ་གཞི་གངམ།</value>
+  </data>
+  <data name="TeamView" xml:space="preserve">
+    <value>མཐོང་སྣང་གི་ཐོ་ཡིག་ཚུ།</value>
+  </data>
+  <data name="SegmentSelect" xml:space="preserve">
+    <value>སེལ་འཐུ་འབད་ཡོད་པའི་ཚུ།</value>
+  </data>
+  <data name="ClearSegmentsQuestion" xml:space="preserve">
+    <value>རྟེན་འབྲེལ་ཚུ་མོས་མཐུན་འབད་དོ།</value>
+  </data>
+  <data name="ResetSectionWarning" xml:space="preserve">
+    <value>ཐུམ་སྒྲིལ་ཚུ་གཞི་བཙུགས་འབད་ནིའི་དོན་ལུ་ ལས་འགོ་བཙུགསཔ་ཨིན། འདི་བཟུམ་མའི་བསྒྱུར་འབད་ནི་ལུ་འཐུས་ཤོར་བྱུང་ཡོད།</value>
+  </data>
+  <data name="ClearSegmentsConfirmation" xml:space="preserve">
+    <value>ང་བཅས་ཀྱིས་ དཀའ་ངལ་དེ་ཚུ་ ག་དེ་སྦེ་ སེལ་ཐབས་འབད་ནི་ཨིན་ན? ཁྱོད་ཀྱིས་སེལ་འཐུ་འབད་མི་བརྡ་བཀོད་མི་ཚུགས་པས།</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>འདྲ་བཤུས་བཤོ།</value>
+  </data>
+  <data name="AddUserLabel" xml:space="preserve">
+    <value>སྣོད་འཛིན་གསརཔ་ཅིག་ གསར་བསྐྲུན་འབད།</value>
+  </data>
+  <data name="SegmentCombine" xml:space="preserve">
+    <value>པ་ ཐོན་ཡོདཔ་ཨིན་པས།</value>
+  </data>
+  <data name="CombineWarningMessage" xml:space="preserve">
+    <value>དམར་པོ་གི་ཆ་ཤས་འདི་ ལོག་བསྒྱུར་བཅོས་འབད་ཚར་ནུག འདི་གི་དོན་དག་དེ་ སྐད་ཡིག་བསྒྱུར་བཅོས་འབད་ནི་ཨིན་མས།</value>
+  </data>
+  <data name="Configuration" xml:space="preserve">
+    <value>ཆ་མཉམ་སེལ་འཐུ་འབད།</value>
+  </data>
+  <data name="Workflow" xml:space="preserve">
+    <value>པ་ ཐོན་ཡོདཔ་ཨིན་པས།</value>
+  </data>
+  <data name="ConfigureWorkflow" xml:space="preserve">
+    <value>པ་ ཐོན་ཡོདཔ་ཨིན་པས།</value>
+  </data>
+  <data name="TeamTitle" xml:space="preserve">
+    <value>ཊེམ་པེལེཊི།</value>
+  </data>
+  <data name="AssignRoles" xml:space="preserve">
+    <value>བསྒྱུར་བཅོས་ཚུ་རྩ་བསྐྲད་གཏང་།</value>
+  </data>
+  <data name="AssignSections" xml:space="preserve">
+    <value>ཆ་མཉམ་སེལ་འཐུ་འབད།</value>
+  </data>
+  <data name="SelectUser" xml:space="preserve">
+    <value>སེལ་འཐུ་འབད་ཡོད་པའི་ཚུ།</value>
+  </data>
+  <data name="SegmentReview" xml:space="preserve">
+    <value>པ་ ཐོན་ཡོདཔ་ཨིན་པས།</value>
+  </data>
+  <data name="TeamWasChosen" xml:space="preserve">
+    <value>ཆ་མཉམ་སེལ་འཐུ་འབད་</value>
+  </data>
+  <data name="UserAndTeamWereChosenForSection" xml:space="preserve">
+    <value>གདམ་ཁ་ ཁ་སྐོང་ཚུ་སྟོནམ་ཨིན།.</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>མིང་རྟགས་ཀྱི་མིང་:</value>
+  </data>
+  <data name="Process" xml:space="preserve">
+    <value>བྱ་བ་:</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>ལག་ལེན་པ་:</value>
+  </data>
+  <data name="NoSectionsAreInThisStep" xml:space="preserve">
+    <value>འབྱུང་ཁུངས་ཚུ་གི་ཐུམ་སྒྲིལ་ཚུ་མེད།</value>
+  </data>
+  <data name="SaveWorkAndProceedMessage" xml:space="preserve">
+    <value>ཐུམ་སྒྲིལ་ཚུ་གཞི་བཙུགས་འབད་ནིའི་དོན་ལུ་ ཨེབ་གཏང་འབད།</value>
+  </data>
+  <data name="ExitAnyway" xml:space="preserve">
+    <value>ཆ་མཉམ་སེལ་འཐུ་འབད།</value>
+  </data>
+  <data name="TotalPassages" xml:space="preserve">
+    <value>ཆ་མཉམ་སེལ་འཐུ་འབད་:</value>
+  </data>
+  <data name="SaveWorkAndProceed" xml:space="preserve">
+    <value>འཚུབ་/འཚུབས་/འཚུབ་</value>
+  </data>
+  <data name="UsersCannotBeAssignedToMultipleTeams" xml:space="preserve">
+    <value>ཆ་ལག་ལེན་འཐབ་ནིའི་དོན་ལུ་ བརྡ་མཚོན་ཅིག་གིས་ཐོབ་མི་ཚུགས་པས།</value>
+  </data>
+  <data name="OneUserOneTeam" xml:space="preserve">
+    <value>ཤོག་བྱང་རྐྱང་པ་ཚུ་བཀྲམ་སྤྱོད་འབད།</value>
+  </data>
+  <data name="Reference" xml:space="preserve">
+    <value>སེལ་འཐུ་འབད་:</value>
+  </data>
+  <data name="DragSectionHere" xml:space="preserve">
+    <value>ཤོག་བྱང་གི་བརྡ་དོན་ཚུ་རྩ་བསྐྲད་གཏ</value>
+  </data>
+  <data name="BothSnapshotsDeleted" xml:space="preserve">
+    <value>གཞན་ཚུ་ ཁོང་གིས་</value>
+  </data>
+  <data name="Sections" xml:space="preserve">
+    <value>ཚད་རྩིས་ཚུ།</value>
+  </data>
+  <data name="DeleteSnapshotsFor" xml:space="preserve">
+    <value>ཐུམ་སྒྲིལ་ཚུ་རྩ་བསྐྲད་གཏང་།</value>
+  </data>
+  <data name="Stages" xml:space="preserve">
+    <value>ལག་ཆས་ཚུ་</value>
+  </data>
+  <data name="SectionListenScreenTitle" xml:space="preserve">
+    <value>དབྱེ་ཚན་ཉན།</value>
+  </data>
+  <data name="PassageListenScreenTitle" xml:space="preserve">
+    <value>ཡིག་རྒྱུགས་ཉན།</value>
+  </data>
+  <data name="PassageDivideScreenTitle" xml:space="preserve">
+    <value>ཡིག་རྒྱུགས་དབྱེ་བགོ།</value>
+  </data>
+  <data name="PassageReviewScreenTitle" xml:space="preserve">
+    <value>ཡིག་རྒྱུགས་བསྐྱར་ཞིབ།</value>
+  </data>
+  <data name="SectionReviewScreenTitle" xml:space="preserve">
+    <value>དབྱེ་ཚན་བསྐྱར་ཞིབ།</value>
+  </data>
+  <data name="TranscribePassageScreenTitle" xml:space="preserve">
+    <value>ཡིག་རྒྱུགས་སྒྲ་སྒྱུར།</value>
+  </data>
+  <data name="TranscribeSegmentScreenTitle" xml:space="preserve">
+    <value>ཁག་ཚན་སྒྲ་སྒྲུར།</value>
+  </data>
+  <data name="DoPassageTranscribeScreenTitle" xml:space="preserve">
+    <value>ཡིག་རྒྱུགས་སྒྲ་སྒྱུར།</value>
+  </data>
+  <data name="DoSegmentTranscribeScreenTitle" xml:space="preserve">
+    <value>ཁག་ཚན་སྒྲ་སྒྲུར།</value>
+  </data>
+  <data name="UserWasChosen" xml:space="preserve">
+    <value>{0} གདམ་ཁ་ ཁ་སྐོང་ཚུ་སྟོནམ་ཨིན།.</value>
+  </data>
+  <data name="UserWasChosenForSection" xml:space="preserve">
+    <value>{0} གདམ་ཁ་ ཁ་སྐོང་ཚུ་སྟོནམ་ཨིན།. {1}</value>
+  </data>
+  <data name="NoteInterpretScreenTitle" xml:space="preserve">
+    <value>བརྗེད་ཐོ་དོར་ཁ་བསྒྱུར།</value>
+  </data>
+  <data name="RequirePassageListenPeerCheckSetting" xml:space="preserve">
+    <value>ཉན་ནིའི་ཡིག་རྒྱུགས་ལམ་སྟོན།</value>
+  </data>
+  <data name="RequireSectionListenPeerCheckSetting" xml:space="preserve">
+    <value>ཉན་ནིའི་དབྱེ་ཚན་ཀྱི་ལས་སྟོན།</value>
+  </data>
+  <data name="OffloadProject" xml:space="preserve">
+    <value>འབྱུང་ཁུངས།</value>
+  </data>
+  <data name="ContactSupport" xml:space="preserve">
+    <value>གྲོགས་རམ་འབད་དགོ་</value>
+  </data>
+  <data name="ErrorWithMessage" xml:space="preserve">
+    <value>འཛོལ་བ་ [{0}]</value>
+  </data>
+  <data name="NoProjectsToDownload" xml:space="preserve">
+    <value>གློག་ཐག་ར་བ་ཚུ་ གློག་ཐག་ར་བ་ལུ་མ་གཏང་</value>
+  </data>
+  <data name="WrongPassword" xml:space="preserve">
+    <value>ཚིག་བྱང་འཛོལ་ནུག ལོག་སྟེ་ར་ ཚོད་བལྟ་འབད།</value>
+  </data>
+  <data name="SyncFailed" xml:space="preserve">
+    <value>འཐུས་ཤོར་བྱུང་ཡོདཔ།</value>
+  </data>
+  <data name="DragUserHere" xml:space="preserve">
+    <value>ལག་ལེན་པ་ཚུ་ནཱ་ལུ་ཨེབ་གཏང་འབད།</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>ལག་ལེན་པ་ཚུ་</value>
+  </data>
+  <data name="DownloadFailed" xml:space="preserve">
+    <value>ད་རུང་ཡང་ བརྟག་དཔྱད་འབད་</value>
+  </data>
+  <data name="ExportComplete" xml:space="preserve">
+    <value>ཡན་ལག་ཚུ་མེད་</value>
+  </data>
+  <data name="NoSectionsAvailable" xml:space="preserve">
+    <value>ཡན་ལག་ཚུ་མེད་</value>
+  </data>
+  <data name="TryAgain" xml:space="preserve">
+    <value>སྒེར་སྐད་བཅས།</value>
+  </data>
+  <data name="SelectedSnapshotMessageTemplate" xml:space="preserve">
+    <value>{0}, {1} {2} {3}, {4}</value>
+  </data>
+  <data name="TeamWasChosenForSection" xml:space="preserve">
+    <value>{0}གིས་ {1} དང་ {2} འདིའི་ གནས་སྐབས་ {3} དབྱེ་ཚན་བསྐྱར་རེ་བ་བསྡུ་བས།</value>
+  </data>
+  <data name="CombineWarningTitle" xml:space="preserve">
+    <value>འོག་གི་ཤོག་ལེབ་ཚུ་ བསྒྱུར་བཅོས་འབད་ཨིན:</value>
+  </data>
+  <data name="DraftEdit" xml:space="preserve">
+    <value>ཡིག་ཚིགས།</value>
+  </data>
+  <data name="January" xml:space="preserve">
+    <value>སྤྱི་ཟླ་བཅུ་གཅིག་པ།</value>
+  </data>
+  <data name="February" xml:space="preserve">
+    <value>སྤྱི་ཟླ་བཅུ་གཅིག་པ།</value>
+  </data>
+  <data name="March" xml:space="preserve">
+    <value>ཟླ་བ་གསུམ་པ།</value>
+  </data>
+  <data name="April" xml:space="preserve">
+    <value>སྤྱི་ཟླ་༤ པའི་ཚེས་༡</value>
+  </data>
+  <data name="May" xml:space="preserve">
+    <value>ཟླ་བ་༥</value>
+  </data>
+  <data name="June" xml:space="preserve">
+    <value>སྤྱི་ཟླ་༦</value>
+  </data>
+  <data name="July" xml:space="preserve">
+    <value>ཟླ་བ་བདུན་པ།</value>
+  </data>
+  <data name="August" xml:space="preserve">
+    <value>སྤྱི་ཟླ་༨ པའི་ཚེས་༡</value>
+  </data>
+  <data name="September" xml:space="preserve">
+    <value>སྤྱི་ཟླ་༩</value>
+  </data>
+  <data name="October" xml:space="preserve">
+    <value>སྤྱི་ཟླ་༡༠</value>
+  </data>
+  <data name="November" xml:space="preserve">
+    <value>སྤྱི་ཟླ་༡༡</value>
+  </data>
+  <data name="December" xml:space="preserve">
+    <value>ཟླ་བཅུ་གཅིག་པ།</value>
+  </data>
+  <data name="NoSectionAssignedTitle" xml:space="preserve">
+    <value>ཁྱེད་ཀྱིས་གནས་བདེད་མེད་ཤོག་གི་དབྱེ་མེད་བཅོས་པ་མིན་འདུག</value>
+  </data>
+  <data name="NoSectionAssignedMessage" xml:space="preserve">
+    <value>གནད་ཁ་སྤྱི་ཚེས་མེད་པའི་ཡན་ལག་འགན་བའི་དབྱེ་བ་ལས་འབྱུང་བའི་གནས་སྡུད་འབྲེལ་བ་ཡོད་མི་འདུག་པའི་དབང་བ་དེ་ཚོའི་དཀར་འགྱོ་མེད་པ་ཡིན་པས་རེ་ཡིབ་གིས་གནས་སྡུད་བྱེད་པའི་རེ་ཡིབ་འདུག་པའི་རྩོམ་པ་ཇི་སྲུབ་པ་ཡོད།</value>
+  </data>
+  <data name="SegmentLabel" xml:space="preserve">
+    <value>ཁག་ཚན</value>
+  </data>
+  <data name="DeletedUser" xml:space="preserve">
+    <value>ལག་ལེན་པ་རྩ་བསྐྲད་གཏང་།</value>
+  </data>
+  <data name="CannotLoadData" xml:space="preserve">
+    <value>ཨའི་ཌི་ཨའེ་ཨའེ་ཨའེ་ཨའེ་ཨའུཌ་{0}</value>
+  </data>
+  <data name="SyncAndTryAgain" xml:space="preserve">
+    <value>གལ་སྲིད་འདི་མུ་མཐུད་སྦེ་ར་ འབྱུང་པ་ཅིན་ འབྲེལ་མཐུད་འབད་ནིའི་ དཔའ་བཅམ་ ཡང་ན་ ལས་འགུལ་དེ་ བཏོན་གཏང་ནི་དང་ བཏོན་གཏང་ནིའི་ དཔའ་བཅམ་ཚུགས།</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>འབྲི་བའི་འབྲི་མ།</value>
+  </data>
+  <data name="AddFromComputer" xml:space="preserve">
+    <value>གྲངས་འདིར་ལས་གྲངས་གསལ་འབབ།</value>
+  </data>
+  <data name="CannotLoadAudio" xml:space="preserve">
+    <value>སྐད་དུ་ལས་འཕྲུལ་མ་བཟོ་ནི།</value>
+  </data>
+</root>

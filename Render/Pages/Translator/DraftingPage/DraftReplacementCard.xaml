@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="draftingPage:DraftReplacementCardViewModel" 
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:draftingPage="clr-namespace:Render.Pages.Translator.DraftingPage"
+                            xmlns:kernel="clr-namespace:Render.Kernel;"
+                            xmlns:uiResources="clr-namespace:Render.Resources"
+                            x:Class="Render.Pages.Translator.DraftingPage.DraftReplacementCard">
+    <ContentView.Resources>
+        <Style x:Key="DraftCard" TargetType="Border">
+            <Setter Property="StrokeShape" Value="RoundRectangle 10,10,10,10" />
+            <Setter Property="StrokeThickness" Value="3" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="WidthRequest" Value="143" />
+            <Setter Property="HeightRequest" Value="91" />
+        </Style>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Border x:Name="DraftCard" Style="{StaticResource DraftCard}">
+            <Grid>
+                <Label x:Name="WaveformIcon"
+                       FontFamily="Icons"
+                       Text="{uiResources:IconExtensions DraftsNew}"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       FontSize="50"
+                       AutomationId="WaveformIcon" />
+
+                <Grid HorizontalOptions="End" VerticalOptions="Fill" Margin="7">
+                    <Label x:Name="PreviousDraftStar"
+                           FontFamily="Icons"
+                           Text="{uiResources:IconExtensions StarFilled}"
+                           FontSize="15"
+                           VerticalOptions="Start"
+                           AutomationId="PreviousDraftStarImage" />
+                    
+                    <Label x:Name="Label" 
+                           Style="{StaticResource MediumText}" 
+                           VerticalOptions="End"
+                           FontAttributes="Bold" />
+                </Grid>
+            </Grid>
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer x:Name="Tap"/>
+            </Border.GestureRecognizers>
+        </Border>
+    </ContentView.Content>
+</kernel:RenderComponentBase>

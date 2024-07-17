@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="communityTestFlagLibraryModal:CommunityTestFlagLibraryModalViewModel"
+                            xmlns:kernel="clr-namespace:Render.Kernel"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:audioRecorder="clr-namespace:Render.Components.AudioRecorder;assembly=Render"
+                            xmlns:resources="clr-namespace:Render.Resources;assembly=Render"
+                            xmlns:localization="clr-namespace:Render.Resources.Localization"
+                            xmlns:communityTestFlagLibraryModal="using:Render.Components.CommunityTestFlagLibraryModal"
+                            xmlns:common="clr-namespace:Render.Common"
+                            x:Class="Render.Components.CommunityTestFlagLibraryModal.CommunityTestFlagLibraryModal"
+                            Padding="0">
+
+    <ContentView.Resources>
+        <Style x:Key="Container" TargetType="Border">
+            <Setter Property="StrokeShape" Value="RoundRectangle 16,16,16,16" />
+            <Setter Property="MaximumWidthRequest" Value="1300" />
+            <Setter Property="MaximumHeightRequest" Value="710" />
+            <Setter Property="BackgroundColor" Value="{StaticResource Transparent}" />
+        </Style>
+
+        <Style x:Key="Icon" TargetType="Label">
+            <Setter Property="FontFamily" Value="Icons" />
+            <Setter Property="FontSize" Value="40" />
+            <Setter Property="Margin" Value="15,10,10,10" />
+            <Setter Property="Padding" Value="8,0" />
+            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="TextColor" Value="{StaticResource Option}" />
+        </Style>
+
+        <Style x:Key="Title" TargetType="Label">
+            <Setter Property="FontSize" Value="{StaticResource LargeFont}" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="TextColor" Value="{StaticResource Blue}" />
+            <Setter Property="VerticalOptions" Value="Center" />
+        </Style>
+
+        <Style x:Key="RecordButtonBorder" TargetType="Border">
+            <Setter Property="StrokeShape" Value="RoundRectangle 0,0,16,16" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Margin" Value="0" />
+        </Style>
+    </ContentView.Resources>
+
+    <AbsoluteLayout x:Name="TopElementFrame" 
+                    HorizontalOptions="Fill" 
+                    VerticalOptions="Fill">
+        <Grid BackgroundColor="Black" 
+              Opacity="0.2"
+              AbsoluteLayout.LayoutBounds="0,0,1,1"
+              AbsoluteLayout.LayoutFlags="SizeProportional">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer x:Name="BackgroundGesture" />
+            </Grid.GestureRecognizers>
+        </Grid>
+
+        <Border Style="{StaticResource Container}"
+                AutomationId="NoteDetailLayout"
+                AbsoluteLayout.LayoutBounds="0.5,0.5,0.9,0.9"
+                AbsoluteLayout.LayoutFlags="XProportional,YProportional,WidthProportional,HeightProportional">
+            <Grid RowSpacing="0" ColumnSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="110" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Border x:Name="ContentPanel" 
+                        Grid.Row="0" 
+                        Grid.Column="0" Grid.ColumnSpan="2"
+                        BackgroundColor="{StaticResource Gray}" 
+                        Padding="0">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="16,16,16,0" />
+                    </Border.StrokeShape>
+
+                    <Grid RowSpacing="0" ColumnSpacing="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="75" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                         <!-- Library Panel-->
+                        <ScrollView Grid.Row="1" 
+                                    Grid.Column="0" 
+                                    Padding="0"
+                                    x:Name="LibraryScrollView" 
+                                    AutomationId="LibraryScrollView">
+                            <Grid AutomationId="LibraryPanelGrid" 
+                                  BackgroundColor="{StaticResource LightGrey}">
+                                <Label x:Name="YouHaveNoQuestionsInTheLibraryLabel"
+                                       Text="{x:Static localization:AppResources.NoQuestionsInTheLibrary}"
+                                       FontSize="{StaticResource MediumPlus2Font}"
+                                       HorizontalOptions="Center" 
+                                       VerticalOptions="Center"
+                                       AutomationId="NoQuestionsInTheLibraryLabel" />
+                                <Label x:Name="PressArrowToAddQuestionLabel"
+                                       FontSize="{StaticResource MediumPlus2Font}"
+                                       HorizontalOptions="Center" 
+                                       VerticalOptions="Center"
+                                       AutomationId="PressArrowToAddQuestionLabel" />
+
+                                <StackLayout x:Name="LibraryQuestionsPanel"
+                                             BackgroundColor="Transparent"
+                                             Padding="10,0"
+                                             AutomationId="LibraryQuestionStackLayout">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate>
+                                            <communityTestFlagLibraryModal:QuestionCard
+                                                AutomationId="LibraryQuestionCard" />
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </StackLayout>
+                            </Grid>
+                        </ScrollView>
+
+                         <!-- Questions Panel --> 
+                        <Grid Grid.Row="1" Grid.Column="1" AutomationId="QuestionPanelGrid"
+                              BackgroundColor="{StaticResource Gray}">
+                            <Grid.Shadow>
+                                <Shadow Brush="DarkGray"
+                                        Offset="-15,0"
+                                        Radius="15"
+                                        Opacity="0.5" />
+                            </Grid.Shadow>
+                            
+                            <Label Text="{x:Static localization:AppResources.PressCircleToRecord}"
+                                   FontSize="{StaticResource MediumPlus2Font}"
+                                   HorizontalOptions="Center" VerticalOptions="Center"
+                                   x:Name="PressCircleToRecordLabel"
+                                   AutomationId="PressCircleToRecordLabel" />
+
+                            <Label FontSize="{StaticResource MediumPlus2Font}"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"
+                                   HorizontalTextAlignment="Center"
+                                   x:Name="PressCircleToRecordOrPressArrowToAddQuestionLabel"
+                                   AutomationId="PressCircleToRecordOrPressArrowToAddQuestionLabel" />
+
+                            <ScrollView x:Name="QuestionScrollView"
+                                        Padding="0,10"
+                                        VerticalOptions="EndAndExpand"
+                                        BackgroundColor="Transparent" 
+                                        AutomationId="QuestionScrollView">
+                                <Grid AutomationId="QuestionGrid">
+                                    <StackLayout x:Name="QuestionsPanel" BackgroundColor="Transparent" Padding="10,0">
+                                        <BindableLayout.ItemTemplate>
+                                            <DataTemplate>
+                                                <communityTestFlagLibraryModal:QuestionCard
+                                                    AutomationId="QuestionCard" />
+                                            </DataTemplate>
+                                        </BindableLayout.ItemTemplate>
+                                    </StackLayout>
+                                </Grid>
+                            </ScrollView>
+                        </Grid>
+
+                         <!-- Header Left-->
+                        <HorizontalStackLayout Grid.Row="0" 
+                                               Grid.Column="0"
+                                               BackgroundColor="{StaticResource GreyFaded}">
+                            <HorizontalStackLayout.Shadow>
+                                <Shadow Brush="DarkGray"
+                                        Offset="0,15"
+                                        Radius="15"
+                                        Opacity="0.5" />
+                            </HorizontalStackLayout.Shadow>
+                            <Label Style="{StaticResource Icon}"
+                                   Text="{resources:IconExtensions StarFilled}"
+                                   AutomationId="LibraryTitleIcon" />
+                            <Label Text="{x:Static localization:AppResources.Library}"
+                                   Style="{StaticResource Title}"
+                                   AutomationId="LibraryTitleText" />
+                        </HorizontalStackLayout>
+
+                         <!-- Header Right-->
+                        <Grid Grid.Row="0" Grid.Column="1" ColumnSpacing="0"
+                              BackgroundColor="{StaticResource Gray}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.Shadow>
+                                <Shadow Brush="LightGray"
+                                        Offset="-15,15"
+                                        Radius="15"
+                                        Opacity="0.9" />
+                            </Grid.Shadow>
+
+                            <HorizontalStackLayout Grid.Column="0">
+                                <Label Style="{StaticResource Icon}"
+                                       Text="{resources:IconExtensions Flag}"
+                                       AutomationId="QuestionsTitleIcon" />
+                                <Label Text="{x:Static localization:AppResources.Questions}"
+                                    Style="{StaticResource Title}"
+                                    AutomationId="QuestionsTitleText" />
+                            </HorizontalStackLayout>
+
+                            <Label Grid.Column="1" 
+                                   Style="{StaticResource Icon}"
+                                   FontSize="60"
+                                   Text="{resources:IconExtensions Remove}"
+                                   HorizontalOptions="End"
+                                   AutomationId="CloseQuestionLibraryPopupButton">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer x:Name="CloseGesture" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Grid>
+                    </Grid>
+                </Border>
+
+                 <!-- Fake frame for ability close popup via click in empty space under first column --> 
+                <Frame Grid.Row="1" 
+                       Grid.Column="0" 
+                       BackgroundColor="Transparent">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="FrameCloseGesture" />
+                    </Frame.GestureRecognizers>
+                </Frame>
+
+                 <!-- Recording Question Panel --> 
+                <Border x:Name="RecordingQuestionPanel" 
+                        Grid.Row="1" 
+                        Grid.Column="1"
+                        Style="{StaticResource RecordButtonBorder}"
+                        BackgroundColor="{StaticResource LightGrey}"
+                        Padding="0">
+                    <Grid x:Name="RecordingQuestionGrid" 
+                          ColumnSpacing="0" 
+                          BackgroundColor="Transparent">
+                        <Grid.Resources>
+                            <Style x:Key="StartStopRecordingButtonStyle" TargetType="Label">
+                                <Setter Property="HeightRequest" Value="98" />
+                                <Setter Property="WidthRequest" Value="146" />
+
+                                <Setter Property="FontFamily" Value="Icons" />
+                                <Setter Property="FontSize" Value="54" />
+                                <Setter Property="TextColor" Value="{StaticResource SecondaryText}" />
+
+                                <Setter Property="VerticalTextAlignment" Value="Center" />
+                                <Setter Property="HorizontalTextAlignment" Value="Center" />
+
+                                <Setter Property="HorizontalOptions" Value="Center" />
+                                <Setter Property="VerticalOptions" Value="Center" />
+                            </Style>
+                        </Grid.Resources>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="AUto" />
+                        </Grid.ColumnDefinitions>
+                        <Border x:Name="InnerRecordQuestionPanel"
+                                Grid.Column="0" 
+                                Padding="5"
+                                Margin="13"
+                                BackgroundColor="Transparent">
+                            <Grid ColumnSpacing="0" BackgroundColor="Transparent">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Column="0"
+                                       AutomationId="RecordQuestionTimerLabel" />
+
+                                <audioRecorder:NewMiniAudioRecorder Grid.Column="1" x:Name="MiniRecorder"
+                                                                    BackgroundColor="Transparent"
+                                                                    ContainerFrameBorderColor="Transparent"
+                                                                    HideTimerWhenNoAudio="True"
+                                                                    AutomationId="MiniAudioRecorder" />
+                            </Grid>
+                        </Border>
+
+                        <Border Grid.Column="1"
+                                Style="{StaticResource RecordButtonBorder}"
+                                x:Name="StartRecordingButton"
+                                BackgroundColor="{StaticResource Option}"
+                                Padding="0"
+                                Margin="0"
+                                AutomationId="StartRecordingButton">
+                            <Label Style="{DynamicResource StartStopRecordingButtonStyle}"
+                                   Text="{resources:IconExtensions RecorderRecord}" />
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer x:Name="StartRecordGesture" />
+                            </Border.GestureRecognizers>
+                        </Border>
+
+                        <Border Grid.Column="1" 
+                                x:Name="StopRecordingButton"
+                                BackgroundColor="{StaticResource Option}"
+                                AutomationId="StopRecordingButton">
+                            <Label Style="{StaticResource StartStopRecordingButtonStyle}"
+                                   Text="{resources:IconExtensions RecorderStop}" />
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer x:Name="StopRecordGesture" />
+                            </Border.GestureRecognizers>
+                        </Border>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+        
+        <common:LoadingScreen x:Name="loadingView" 
+                              AbsoluteLayout.LayoutFlags="All"
+                              AbsoluteLayout.LayoutBounds="0,0,1,1"/>
+    </AbsoluteLayout>
+</kernel:RenderComponentBase>

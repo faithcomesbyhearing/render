@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView x:Class="Render.Sequencer.Views.Toolbar.ToolbarView"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:atomic="clr-namespace:Render.Sequencer.Resources.Atomic"
+             xmlns:converters="clr-namespace:Render.Sequencer.Core.Converters"
+             xmlns:styles="clr-namespace:Render.Sequencer.Resources.Styles"
+             xmlns:toolbar="clr-namespace:Render.Sequencer.Views.Toolbar"
+             xmlns:toolbarItem="clr-namespace:Render.Sequencer.Views.Toolbar.ToolbarItems"
+             x:DataType="toolbar:ToolbarViewModel">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <atomic:Colors />
+                <atomic:Sizes />
+
+                <styles:ToolbarStyles />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <Grid BackgroundColor="{StaticResource Neutral}"
+          FlowDirection="{Binding Sequencer.IsRightToLeftDirection, Converter={converters:BoolToFlowDirectionConverter}}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="timerColumn" Width="*" />
+            <ColumnDefinition x:Name="buttonsColumn" Width="auto" />
+            <ColumnDefinition x:Name="spacerColumn" Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid x:Name="timerGrid"
+              Grid.Column="0"
+              AutomationId="TimeContainer"
+              FlowDirection="LeftToRight"
+              ColumnSpacing="{StaticResource BaseSpacing}"
+              HorizontalOptions="Center"
+              IsVisible="{Binding HasTimer}"
+              VerticalOptions="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="currentPositionColumn" Width="auto" />
+                <ColumnDefinition x:Name="delimiterColumn" Width="{StaticResource DelimiterWidth}" />
+                <ColumnDefinition x:Name="totalDurationColumn" Width="auto" />
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0"
+                   AutomationId="TotalCurrentPosition"
+                   Style="{StaticResource PositionTimerStyle}"
+                   Text="{Binding Sequencer.TotalCurrentPosition, Converter={converters:DoubleToTimeConverter}}">
+                <Label.Triggers>
+                    <DataTrigger Binding="{Binding Sequencer.AppendRecordMode}"
+                                 TargetType="Label"
+                                 Value="True">
+                        <Setter Property="IsVisible" Value="False" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding HasAudio}"
+                                 TargetType="Label"
+                                 Value="False">
+                        <Setter Property="IsVisible" Value="False" />
+                    </DataTrigger>
+                </Label.Triggers>
+            </Label>
+
+            <BoxView Grid.Column="1"
+                     AutomationId="TimeDelimeter"
+                     Style="{StaticResource MainTimerDelimeterStyle}">
+                <BoxView.Triggers>
+                    <DataTrigger Binding="{Binding Sequencer.AppendRecordMode}"
+                                 TargetType="BoxView"
+                                 Value="True">
+                        <Setter Property="IsVisible" Value="False" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding HasAudio}"
+                                 TargetType="BoxView"
+                                 Value="False">
+                        <Setter Property="IsVisible" Value="False" />
+                    </DataTrigger>
+                </BoxView.Triggers>
+            </BoxView>
+
+            <Label Grid.Column="2"
+                   AutomationId="TotalDuration"
+                   Style="{StaticResource DurationTimerStyle}"
+                   Text="{Binding Sequencer.TotalDuration, Converter={converters:DoubleToTimeConverter}}">
+                <Label.Triggers>
+                    <DataTrigger Binding="{Binding Sequencer.AppendRecordMode}"
+                                 TargetType="Label"
+                                 Value="True">
+                        <Setter Property="TextColor" Value="{StaticResource TertiarySymbols}" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding HasAudio}"
+                                 TargetType="Label"
+                                 Value="False">
+                        <Setter Property="TextColor" Value="{StaticResource TertiarySymbols}" />
+                    </DataTrigger>
+                </Label.Triggers>
+            </Label>
+        </Grid>
+
+        <Border Grid.Column="1" StrokeShape="RoundRectangle 12,12,0,0">
+            <HorizontalStackLayout x:Name="buttonsStack"
+                                   BindableLayout.ItemsSource="{Binding ToolbarItems}"
+                                   Spacing="0" 
+                                   AutomationId="ToolBarHorizontalStack">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <toolbarItem:ToolbarItemView BindingContext="{Binding}" />
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </HorizontalStackLayout>
+        </Border>
+    </Grid>
+</ContentView>

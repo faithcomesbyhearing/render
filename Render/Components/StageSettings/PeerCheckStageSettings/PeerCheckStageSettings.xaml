@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="peerCheck:PeerCheckStageSettingsViewModel"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:peerCheck="clr-namespace:Render.Components.StageSettings.PeerCheckStageSettings;assembly=Render"
+                            xmlns:resources="clr-namespace:Render.Resources;assembly=Render"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:stageSettings="clr-namespace:Render.Components.StageSettings;assembly=Render"
+                            xmlns:localization="clr-namespace:Render.Resources.Localization"
+                            x:Class="Render.Components.StageSettings.PeerCheckStageSettings.PeerCheckStageSettings">
+    
+    <Grid BackgroundColor="{StaticResource Transparent}" RowSpacing="0" x:Name="TopLevelElement">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Stage name with icon and stage name editor -->
+        <HorizontalStackLayout Style="{StaticResource StageNameStackLayoutStyle}">
+            <Label Style="{StaticResource StageSettingsEditStageNameIconStyle}" 
+                   Text="{resources:IconExtensions Update}" />
+            <Label Style="{StaticResource StageSettingsStageNameLabelStyle}"
+                   Text="{x:Static localization:AppResources.StageName}"/>
+            <Border Style="{StaticResource StageSettingStageNameEditBorderStyle}">
+                <Entry x:Name="StageName" Style="{StaticResource StageSettingsStageNameEntryStyle}"/>
+            </Border>
+        </HorizontalStackLayout>
+        
+        <!-- Settings panel -->
+        <ScrollView Style="{StaticResource StageSettingsScrollViewStyle}">
+            <VerticalStackLayout>
+                <!-- No self check-->
+                <Border Style="{StaticResource StageSettingsSectionBorderStyle}">
+                    <Grid Style="{StaticResource StageSettingsWhiteGridStyle}">
+                        <Label Text="{x:Static localization:AppResources.NoSelfCheck}"
+                               Style="{StaticResource StageSettingsSettingLabelStyle}" />
+                                
+                        <stageSettings:SettingsSwitch x:Name="NoSelfCheckToggle"
+                                                      AutomationId="NoSelfCheckToggle"
+                                                      PropertyChanged="OnButtonClicked"
+                                                      Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
+                                
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="NoSelfCheckToggleTapped" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                </Border>
+                
+                <!-- Check -->
+                <Label Style="{StaticResource StageSettingSettingGroupTitleStyle}" 
+                       Text="{x:Static localization:AppResources.Check}" 
+                       Margin="0,26,0,18"/>
+                
+                <!-- Note Listen -->
+                <Border Style="{StaticResource StageSettingsSectionBorderStyle}">
+                    <VerticalStackLayout>
+                        <Grid Style="{StaticResource StageSettingsCollapsedGroupGridStyle}"> 
+                            <Label Text="{x:Static localization:AppResources.NoteListen}"
+                                   Style="{StaticResource SettingGroupTitleLabel}"/>
+                            <Label x:Name="PeerCheckNoteListenExpandStackIcon" Text="{resources:IconExtensions Plus}"
+                                   Style="{StaticResource WorkflowSettingsPlusIconStyle}" />
+                            <Label x:Name="PeerCheckNoteListenCollapseStackIcon" Text="{resources:IconExtensions Minus}"
+                                   Style="{StaticResource WorkflowSettingsMinusIconStyle}"
+                                   IsVisible="False"/>
+                            
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="PeerCheckNoteListenStackTapped" />
+                            </Grid.GestureRecognizers>
+                        </Grid>
+
+                        <VerticalStackLayout x:Name="PeerCheckNoteListenStack" Style="{StaticResource StageSettingsCollapsedStackLayoutStyle}">
+                            <Grid Style="{StaticResource StageSettingsBlueGridStyle}">
+                                <Label Text="{x:Static localization:AppResources.IncludeNoteListenGuidance}"
+                                       Style="{StaticResource SettingGroupSubTitleLabel}" />
+                                
+                                <stageSettings:SettingsSwitch x:Name="RequirePeerCheckNoteListenToggle"
+                                                              AutomationId="RequirePeerCheckNoteListenToggle"
+                                                              PropertyChanged="OnButtonClicked"
+                                                              Style="{StaticResource StageSettingsForBlueBackgroundStyle}" />
+                                
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="RequirePeerCheckNoteListenToggleTapped" />
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+                
+                <!-- Section and Passage Listen -->
+                <Border Style="{StaticResource StageSettingsSectionBorderStyle}">
+                     <VerticalStackLayout>
+                         <!-- Section Header -->
+                         <Grid Style="{StaticResource StageSettingsCollapsedGroupGridStyle}"> 
+                             <Label Text="{x:Static localization:AppResources.SectionAndPassageListen}"
+                                    Style="{StaticResource SettingGroupTitleLabel}"/>
+                             <Label x:Name="SelectedOptionLabel" Style="{StaticResource SelectedOptionLabelStyle}" />
+                             <Label x:Name="SectionReviewAndPassageExpandIcon" Text="{resources:IconExtensions Plus}"
+                                    Style="{StaticResource WorkflowSettingsPlusIconStyle}" />
+                             <Label x:Name="SectionReviewAndPassageCollapseIcon" Text="{resources:IconExtensions Minus}"
+                                    Style="{StaticResource WorkflowSettingsMinusIconStyle}"
+                                    IsVisible="False"/>
+                             
+                             <Grid.GestureRecognizers>
+                                 <TapGestureRecognizer Tapped="SectionAndPassageReviewStackTapped" />
+                             </Grid.GestureRecognizers>
+                         </Grid>
+                         
+                         <VerticalStackLayout x:Name="SectionAndPassageReviewStack" 
+                                      Style="{StaticResource StageSettingsCollapsedStackLayoutStyle}"
+                                      IsVisible="False">
+                             <!-- Radio Buttons -->
+                             <VerticalStackLayout Style="{StaticResource StageSettingsBlueRadioButtonStackLayoutStyle}"
+                                                  x:Name="RadioButtonStack" AutomationId="RadioButtonStack">
+                                 <RadioButton x:Name="Both" AutomationId="BothRadioButton"
+                                              Value="{x:Static peerCheck:SelectedState.Both}"
+                                              Style="{StaticResource StageSettingsRadioButtonStyle}" 
+                                              CheckedChanged="HandleCheck">
+                                    <RadioButton.Content>
+                                        <StackLayout x:Name="BothLabel" BackgroundColor="Transparent">
+                                            <Label Text="{x:Static localization:AppResources.Both}"
+                                                   Style="{StaticResource RadioButtonSettingLabel}"
+                                                   AutomationId="BothLabel"/>
+                                        </StackLayout>
+                                    </RadioButton.Content>
+                                 </RadioButton>
+                                 <RadioButton x:Name="SectionListenOnly" AutomationId="SectionListenRadioButton"
+                                              Value="{x:Static peerCheck:SelectedState.SectionListenOnly}"
+                                              Style="{StaticResource StageSettingsRadioButtonStyle}" 
+                                              CheckedChanged="HandleCheck">
+                                    <RadioButton.Content>
+                                        <StackLayout x:Name="SectionListenOnlyLabel" BackgroundColor="Transparent">
+                                            <Label Text="{x:Static localization:AppResources.SectionListenOnly}"
+                                                   Style="{StaticResource RadioButtonSettingLabel}"
+                                                   AutomationId="SectionListenOnlyLabel" />
+                                        </StackLayout>
+                                    </RadioButton.Content>
+                                 </RadioButton>
+                                 <RadioButton x:Name="PassageListenOnly" AutomationId="PassageListenRadioButton"
+                                                 Value="{x:Static peerCheck:SelectedState.PassageListenOnly}"
+                                                 Style="{StaticResource StageSettingsRadioButtonStyle}" 
+                                                 CheckedChanged="HandleCheck"
+                                                 Margin="0,0,0,0">
+                                    <RadioButton.Content>
+                                        <StackLayout x:Name="PassageListenOnlyLabel" BackgroundColor="Transparent">
+                                            <Label Text="{x:Static localization:AppResources.PassageListenOnly}"
+                                                   Style="{StaticResource RadioButtonSettingLabel}"
+                                                   AutomationId="PassageListenOnlyLabel" />
+                                        </StackLayout>
+                                    </RadioButton.Content>
+                                 </RadioButton>
+                             </VerticalStackLayout>
+                             
+                             <!-- Section Review -->
+                             <VerticalStackLayout>
+                                 <Label Style="{StaticResource StageSettingSettingGroupTitleStyle}" 
+                                        Text="{x:Static localization:AppResources.SectionListen}" 
+                                        Margin="26,35"/>
+                                 
+                                 <BoxView Style="{StaticResource StageSettingsLineWithMargins}" 
+                                          AutomationId="SeparatorBar" />
+                                 
+                                 <Grid Style="{StaticResource StageSettingsWhiteGridStyle}">
+                                     <Label Text="{x:Static localization:AppResources.RequireSectionListenPeerCheckSetting}"
+                                            Style="{StaticResource StageSettingsSettingLabelStyle}"
+                                            x:Name="RequireSectionCheckLabel"/>
+                                        
+                                     <stageSettings:SettingsSwitch x:Name="RequireSectionCheckToggle"
+                                                                   AutomationId="RequireSectionCheckToggle"
+                                                                   PropertyChanged="OnButtonClicked"
+                                                                   Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
+                                        
+                                     <Grid.GestureRecognizers>
+                                         <TapGestureRecognizer Tapped="RequireSectionCheckToggleTapped" />
+                                     </Grid.GestureRecognizers>
+                                 </Grid>
+                                 
+                                 <BoxView Style="{StaticResource StageSettingsLineWithoutMargins}" 
+                                          AutomationId="SeparatorBar" Margin="0,13,0,0"/>
+                             </VerticalStackLayout>
+                             
+                             <!-- Passage Review -->
+                             <VerticalStackLayout Padding="0,0,0,26">
+                                 <Label Style="{StaticResource StageSettingSettingGroupTitleStyle}" 
+                                        Text="{x:Static localization:AppResources.PassageListen}" 
+                                        Margin="26,61,26,35"/>
+                                
+                                 <BoxView Style="{StaticResource StageSettingsLineWithMargins}" 
+                                          AutomationId="SeparatorBar" />
+                                
+                                 <Grid Style="{StaticResource StageSettingsWhiteGridStyle}">
+                                     <Label Text="{x:Static localization:AppResources.RequirePassageListenPeerCheckSetting}"
+                                            Style="{StaticResource StageSettingsSettingLabelStyle}"
+                                            x:Name="RequirePassageCheckLabel"/>
+                                        
+                                     <stageSettings:SettingsSwitch x:Name="RequirePassageCheckToggle"
+                                                                   AutomationId="RequirePassageCheckToggle"
+                                                                   PropertyChanged="OnButtonClicked"
+                                                                   Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
+                                        
+                                     <Grid.GestureRecognizers>
+                                         <TapGestureRecognizer Tapped="RequirePassageCheckToggleTapped" />
+                                     </Grid.GestureRecognizers>
+                                 </Grid>
+                            </VerticalStackLayout>
+                         </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+                
+                <!-- Revise -->
+                <Label Style="{StaticResource StageSettingSettingGroupTitleStyle}" 
+                       Text="{x:Static localization:AppResources.Revise}" 
+                       Margin="0,26,0,18"/>
+                
+                <!-- Allow Editing -->
+                <Border Style="{StaticResource StageSettingsSectionBorderStyle}">
+                    <Grid Style="{StaticResource StageSettingsWhiteGridStyle}">
+                        <Label Text="{x:Static localization:AppResources.AllowEditing}"
+                               Style="{StaticResource StageSettingsSettingLabelStyle}" />
+                                
+                        <stageSettings:SettingsSwitch x:Name="AllowEditingToggle"
+                                                      AutomationId="AllowEditingToggle"
+                                                      PropertyChanged="OnButtonClicked"
+                                                      Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
+                                
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="AllowEditingToggleTapped" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                </Border>
+                
+                <!-- Note Listen -->
+                <Border Style="{StaticResource StageSettingsSectionBorderStyle}">
+                    <VerticalStackLayout>
+                        <!-- Section Header -->
+                        <Grid Style="{StaticResource StageSettingsCollapsedGroupGridStyle}"> 
+                            <Label Text="{x:Static localization:AppResources.NoteListen}"
+                                   Style="{StaticResource SettingGroupTitleLabel}"/>
+                            <Label x:Name="ReviseNoteListenExpandStackIcon" Text="{resources:IconExtensions Plus}"
+                                   Style="{StaticResource WorkflowSettingsPlusIconStyle}" />
+                            <Label x:Name="ReviseNoteListenCollapseStackIcon" Text="{resources:IconExtensions Minus}"
+                                   Style="{StaticResource WorkflowSettingsMinusIconStyle}"
+                                   IsVisible="False"/>
+                            
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="ReviseNoteListenStackTapped" />
+                            </Grid.GestureRecognizers>
+                        </Grid>
+
+                        <VerticalStackLayout x:Name="ReviseNoteListenStack" Style="{StaticResource StageSettingsCollapsedStackLayoutStyle}">
+                            <Grid Style="{StaticResource StageSettingsBlueGridStyle}">
+                                <Label Text="{x:Static localization:AppResources.IncludeNoteListenGuidance}"
+                                       Style="{StaticResource SettingGroupSubTitleLabel}" />
+                                
+                                <stageSettings:SettingsSwitch x:Name="RequireReviseNoteListenToggle"
+                                                              AutomationId="RequireNoteListenToggle"
+                                                              PropertyChanged="OnButtonClicked"
+                                                              Style="{StaticResource StageSettingsForBlueBackgroundStyle}" />
+                                
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="RequireReviseNoteListenToggleTapped" />
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+                
+                <!-- Passage Review After Re-Recording-->
+                <Border Style="{StaticResource StageSettingsSectionBorderStyle}">
+                     <VerticalStackLayout>
+                         <!-- Section Header -->
+                         <Grid Style="{StaticResource StageSettingsCollapsedGroupGridStyle}"> 
+                            <Label Text="{x:Static localization:AppResources.PassageReviewAfterReRecording}"
+                                   Style="{StaticResource SettingGroupTitleLabel}"/>
+                            <Label x:Name="RevisePassageReviewExpandStackIcon" Text="{resources:IconExtensions Plus}"
+                                   Style="{StaticResource WorkflowSettingsPlusIconStyle}" />
+                            <Label x:Name="RevisePassageReviewCollapseStackIcon" Text="{resources:IconExtensions Minus}"
+                                   Style="{StaticResource WorkflowSettingsMinusIconStyle}"
+                                   IsVisible="False"/>
+                            
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="RevisePassageReviewStackTapped" />
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                        
+                        <VerticalStackLayout x:Name="RevisePassageReviewStack" Style="{StaticResource StageSettingsCollapsedStackLayoutStyle}">
+                            <Grid Style="{StaticResource StageSettingsBlueGridStyle}">
+                                <Label Text="{x:Static localization:AppResources.IncludePassageReviewAfterReRecording}"
+                                       Style="{StaticResource SettingGroupSubTitleLabel}" />
+                                
+                                <stageSettings:SettingsSwitch x:Name="DoPassageReviewToggle"
+                                                PropertyChanged="OnButtonClicked"
+                                                AutomationId="DoPassageReviewToggle"
+                                                Style="{StaticResource StageSettingsForBlueBackgroundStyle}" />
+                                
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="DoPassageReviewToggleTapped" />
+                                </Grid.GestureRecognizers>
+                            </Grid>
+
+                            <Grid Style="{StaticResource StageSettingsWhiteGridStyle}">
+                                <Label Text="{x:Static localization:AppResources.RequireReviewAfterReRecording}"
+                                       Style="{StaticResource StageSettingsSettingLabelStyle}" 
+                                       x:Name="RequirePassageReviewLabel"/>
+                                
+                                <stageSettings:SettingsSwitch x:Name="RequirePassageReviewToggle"
+                                                              AutomationId="RequirePassageReviewToggle"
+                                                              PropertyChanged="OnButtonClicked"
+                                                              Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
+                                
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="RequirePassageReviewToggleTapped" />
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</kernel:RenderComponentBase>

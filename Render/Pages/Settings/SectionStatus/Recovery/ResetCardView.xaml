@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<kernel:RenderComponentBase x:Class="Render.Pages.Settings.SectionStatus.Recovery.ResetCard"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:localization="clr-namespace:Render.Resources.Localization"
+                            xmlns:recovery="clr-namespace:Render.Pages.Settings.SectionStatus.Recovery;assembly=Render"
+                            xmlns:resources="clr-namespace:Render.Resources;assembly=Render"
+                            x:TypeArguments="recovery:ResetCardViewModel">
+
+    <HorizontalStackLayout x:Name="Card"
+                           AutomationId="CardStackLayout">
+        <!--  Dot and Line  -->
+        <VerticalStackLayout x:Name="DotStack" 
+                             AutomationId="DotStack"
+                             TranslationY="43"
+                             VerticalOptions="Fill">
+            <Border x:Name="OuterCircle"
+                    AutomationId="OuterCircle"
+                    HorizontalOptions="End"
+                    Style="{StaticResource OuterRing}"
+                    WidthRequest="30"
+                    HeightRequest="30"
+                    Stroke="{StaticResource Black}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="26"/>
+                </Border.StrokeShape>
+                <Frame x:Name="MiddleCircle"
+                       AutomationId="InnerCircle"
+                       BackgroundColor="{StaticResource Azure}"
+                       WidthRequest="28"
+                       HeightRequest="28"
+                       Style="{StaticResource MiddleRing}" />
+            </Border>
+            <Line x:Name="BottomLine"
+                   AutomationId="BottomLine"
+                   BackgroundColor="{StaticResource Black}" 
+                   Fill="{StaticResource Black}"
+                   HeightRequest="15"
+                   HorizontalOptions="Center"
+                   MinimumWidthRequest="2"
+                   TranslationY="1"
+                   WidthRequest="2" 
+                   Margin="0,-1,2,0"/>
+        </VerticalStackLayout>
+        <!--  Stage and Snapshot  -->
+        <VerticalStackLayout Padding="13,26,0,0"
+                             HorizontalOptions="Fill"
+                             VerticalOptions="Fill">
+            <Border x:Name="SnapshotStack"
+                    HeightRequest="56"
+                    HorizontalOptions="Fill"
+                    Stroke="{StaticResource Azure}"
+                    WidthRequest="490">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="8" />
+                </Border.StrokeShape>
+                <Grid Margin="13,0"
+                      ColumnDefinitions="Auto,*,Auto"
+                      HorizontalOptions="Fill">
+                    <Label x:Name="SnapshotLabel"
+                           Grid.Column="0"
+                           AutomationId="SnapshotLabel"
+                           FontFamily="BoldFont"
+                           FontSize="{StaticResource LargeFont}"
+                           HorizontalOptions="Start"
+                           Text="{x:Static localization:AppResources.ResetSection}"
+                           TextColor="{StaticResource Azure}"
+                           VerticalOptions="Center" />
+                    <Label x:Name="ResetButton"
+                           Grid.Column="2"
+                           AutomationId="ResetButton"
+                           FontFamily="Icons"
+                           FontSize="39"
+                           HorizontalOptions="End"
+                           RotationY="180"
+                           Text="{resources:IconExtensions Icon=Restart}"
+                           TextColor="{StaticResource Azure}"
+                           VerticalOptions="Center" />
+                </Grid>
+            </Border>
+        </VerticalStackLayout>
+        <HorizontalStackLayout.GestureRecognizers>
+            <TapGestureRecognizer x:Name="TapGestureRecognizer"
+                                  AutomationId="SectionCard"
+                                  Tapped="OnButtonClicked" />
+        </HorizontalStackLayout.GestureRecognizers>
+    </HorizontalStackLayout>
+
+</kernel:RenderComponentBase>

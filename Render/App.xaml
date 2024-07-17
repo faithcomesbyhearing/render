@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Application x:Class="Render.App"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Render">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/DefaultTheme.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Buttons.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Icons.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Frames.xaml" />
+                <ResourceDictionary Source="Resources/Styles/StackLayouts.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Inputs.xaml" />
+                <ResourceDictionary Source="Resources/Styles/SettingsSwitches.xaml" />
+                <ResourceDictionary Source="Resources/Styles/BoxViews.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Lines.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Labels.xaml" />
+                <ResourceDictionary Source="Resources/Styles/ScrollViews.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Images.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Entries.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Ellipse.xaml" />
+                <ResourceDictionary Source="Resources/Styles/RadioButtons.xaml" />
+                <ResourceDictionary Source="Resources/Styles/AbsoluteLayout.xaml" />
+                <ResourceDictionary Source="Resources/Styles/CollectionView.xaml" />
+                <ResourceDictionary Source="Resources/Styles/BarPlayers.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Borders.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Grids.xaml" />
+
+                <!--  TODO: Uncomment this after implementing Components transfer  -->
+                <!--<ResourceDictionary Source="Components/Toolbar/Timer/TimerStyles.xaml" />-->
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

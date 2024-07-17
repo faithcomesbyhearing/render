@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderPageBase x:TypeArguments="local:DraftingViewModel"
+                       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:kernel="clr-namespace:Render.Kernel"
+                       xmlns:local="clr-namespace:Render.Pages.Translator.DraftingPage"
+                       xmlns:proceedButton="clr-namespace:Render.Components.ProceedButton"
+                       xmlns:loadingCircles="clr-namespace:Render.Common"
+                       xmlns:titleBar="clr-namespace:Render.Components.TitleBar"
+                       xmlns:subTitle="clr-namespace:Render.Components.SubTitle"
+                       xmlns:barPlayer="clr-namespace:Render.Components.BarPlayer"
+                       xmlns:resources="clr-namespace:Render.Resources.Localization"
+                       xmlns:sequencer="clr-namespace:Render.Sequencer;assembly=Render.Sequencer"
+                       x:Class="Render.Pages.Translator.DraftingPage.Drafting">
+    <ContentPage.Resources>
+        <Thickness x:Key="SubTitleMargin">25,15</Thickness>
+
+        <Style x:Key="BottomSections" TargetType="StackLayout">
+            <Setter Property="BackgroundColor" Value="{DynamicResource AlternateBackground}" />
+        </Style>
+        <Style x:Key="ReferenceCollection" TargetType="CollectionView">
+            <Setter Property="Margin" Value="10,0,10,5" />
+            <Setter Property="VerticalScrollBarVisibility" Value="Never" />
+            <Setter Property="WidthRequest" Value="750" />
+            <Setter Property="HeightRequest" Value="216" />
+            <Setter Property="HorizontalOptions" Value="Start" />
+            <Setter Property="VerticalOptions" Value="Start" />
+            <Setter Property="ItemsLayout">
+                <Setter.Value>
+                    <GridItemsLayout Orientation="Vertical"
+                                     Span="2"
+                                     VerticalItemSpacing="10"
+                                     HorizontalItemSpacing="8" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="DraftCollection" TargetType="CollectionView">
+            <Setter Property="Margin" Value="10,0,10,5" />
+            <Setter Property="VerticalScrollBarVisibility" Value="Never" />
+            <Setter Property="WidthRequest" Value="500" />
+            <Setter Property="MinimumWidthRequest" Value="350" />
+            <Setter Property="HeightRequest" Value="216" />
+            <Setter Property="HorizontalOptions" Value="Start" />
+            <Setter Property="VerticalOptions" Value="Start" />
+            <Setter Property="ItemsLayout">
+                <Setter.Value>
+                    <GridItemsLayout Orientation="Vertical"
+                                     Span="3"
+                                     VerticalItemSpacing="7"
+                                     HorizontalItemSpacing="6" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <AbsoluteLayout HorizontalOptions="FillAndExpand" x:Name="TopLevelElement">
+            <Grid RowSpacing="0" AbsoluteLayout.LayoutBounds="1,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="1">
+                    <StackLayout HorizontalOptions="FillAndExpand"
+                                 Style="{DynamicResource BottomSections}">
+                        <Grid ColumnDefinitions="Auto,*,Auto,*" BackgroundColor="Transparent">
+                            <StackLayout Grid.Column="0" BackgroundColor="Transparent">
+                                <subTitle:SubTitle
+                                    AutomationId="ReferenceSubTitle"
+                                    IconType="Reference"
+                                    BackgroundColor="Transparent"
+                                    Margin="{StaticResource SubTitleMargin}"
+                                    Text="{x:Static resources:AppResources.References}" />
+                                
+                                <CollectionView x:Name="References" AutomationId="ReferencesCollection"
+                                                Style="{StaticResource ReferenceCollection}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <barPlayer:BarPlayer AutomationId="ReferenceBarPlayer" />
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </StackLayout>
+
+                            <StackLayout Grid.Column="2">
+                                <subTitle:SubTitle
+                                    IconType="DraftsNew"
+                                    Margin="{StaticResource SubTitleMargin}"
+                                    Text="{x:Static resources:AppResources.Drafts}"
+                                    AutomationId="DraftsLabel" />
+                                <CollectionView x:Name="Drafts" AutomationId="DraftsCollection"
+                                                Style="{StaticResource DraftCollection}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <local:Draft />
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </StackLayout>
+                        </Grid>
+                    </StackLayout>
+                </Grid>
+                
+                <StackLayout Grid.Row="2" x:Name="AudioRecorderStack"
+                             AutomationId="AudioRecorderStack" />
+                <sequencer:Sequencer Grid.Row="2" x:Name="Sequencer"/>
+                <!--TitleBar is located in the first grid row, but should be rendered
+                    after the page content in order to display Passage Number Overlay on top of the page.-->
+                <titleBar:TitleBar Grid.Row="0" x:Name="TitleBar" />
+                
+            </Grid>
+
+            <proceedButton:ProceedButton x:Name="ProceedButton"
+                                         AbsoluteLayout.LayoutFlags="PositionProportional"
+                                         AbsoluteLayout.LayoutBounds="1,1" />
+
+            <loadingCircles:LoadingScreen x:Name="LoadingView"
+                                          AbsoluteLayout.LayoutFlags="All"
+                                          AbsoluteLayout.LayoutBounds="0,0,1,1" />
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</kernel:RenderPageBase>

@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<kernel:RenderPageBase x:Class="Render.Pages.Consultant.ConsultantApproval.ApproveSection"
+                       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:barPlayer="clr-namespace:Render.Components.BarPlayer;assembly=Render"
+                       xmlns:consultantApproval="clr-namespace:Render.Pages.Consultant.ConsultantApproval;assembly=Render"
+                       xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                       xmlns:loadingCircles="clr-namespace:Render.Common;assembly=Render"
+                       xmlns:localization="clr-namespace:Render.Resources.Localization;assembly=Render"
+                       xmlns:miniWaveformPlayer="clr-namespace:Render.Components.MiniWaveformPlayer;assembly=Render"
+                       xmlns:resources="clr-namespace:Render.Resources;assembly=Render"
+                       xmlns:sequencer="clr-namespace:Render.Sequencer;assembly=Render.Sequencer"
+                       xmlns:titleBar="clr-namespace:Render.Components.TitleBar;assembly=Render"
+                       xmlns:toolbar="clr-namespace:Render.Sequencer.Views.Toolbar;assembly=Render.Sequencer"
+                       x:TypeArguments="consultantApproval:ApproveSectionViewModel"
+                       NavigationPage.HasNavigationBar="False"
+                       Style="{StaticResource PrimaryPage}">
+    <ContentPage.Resources>
+        <Style x:Key="BarPlayers" TargetType="barPlayer:BarPlayer">
+            <Setter Property="WidthRequest" Value="428" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="VerticalOptions" Value="Center" />
+        </Style>
+        <Style x:Key="ProceedButtonStyle" TargetType="Border">
+            <Setter Property="BackgroundColor" Value="{StaticResource Option}" />
+            <Setter Property="WidthRequest" Value="175" />
+            <Setter Property="HeightRequest" Value="{x:Static toolbar:ToolbarView.ToolbarHeight}" />
+            <Setter Property="Padding" Value="20,0" />
+        </Style>
+        <Style x:Key="ProceedIconStyle" TargetType="Label">
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="FontFamily" Value="Icons" />
+            <Setter Property="FontSize" Value="35" />
+            <Setter Property="TextColor" Value="{StaticResource SecondaryText}" />
+        </Style>
+        <Style x:Key="ProceedTitleStyle" TargetType="Label">
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="FontSize" Value="{StaticResource MediumFont}" />
+            <Setter Property="TextColor" Value="{StaticResource SecondaryText}" />
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid x:Name="TopLevelElement"
+          BackgroundColor="{StaticResource AlternateBackground}"
+          RowSpacing="15">
+        <Grid.RowDefinitions>
+            <RowDefinition x:Name="titleBarRow" Height="{x:Static titleBar:TitleBar.Size}" />
+            <RowDefinition x:Name="backTranslatePlayersRow" Height="{x:Static barPlayer:BarPlayer.PlayerHeight}" />
+            <RowDefinition x:Name="sequencerRow" Height="*" />
+        </Grid.RowDefinitions>
+        
+        <HorizontalStackLayout x:Name="BackTranslatePlayers"
+                               Grid.Row="1"
+                               Margin="15,0"
+                               BackgroundColor="Transparent"
+                               HorizontalOptions="StartAndExpand"
+                               Spacing="15">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <barPlayer:BarPlayer AutomationId="BackTranslateHolder" Style="{StaticResource BarPlayers}" />
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </HorizontalStackLayout>
+
+        <sequencer:Sequencer x:Name="Sequencer" Grid.Row="2" />
+
+        <titleBar:TitleBar x:Name="TitleBar" Grid.Row="0" />
+
+        <!--  Approve proceed button  -->
+        <Border x:Name="ApproveProceedButton"
+                Grid.Row="0"
+                Grid.RowSpan="3"
+                AutomationId="ApproveProceedButtonFrame"
+                HorizontalOptions="End"
+                StrokeShape="RoundRectangle 8,0,0,0"
+                Style="{StaticResource ProceedButtonStyle}"
+                VerticalOptions="End">
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer x:Name="ApproveProceedButtonGestureRecognizer"
+                                      AutomationId="ApproveSectionProceed"
+                                      Tapped="OnButtonClicked" />
+            </Border.GestureRecognizers>
+
+            <HorizontalStackLayout Spacing="10">
+                <Label x:Name="ApproveProceedButtonIcon"
+                       Margin="1,0,0,0"
+                       AutomationId="ApproveProceedButtonIcon"
+                       Style="{StaticResource ProceedIconStyle}"
+                       Text="{resources:IconExtensions CheckCircle}" />
+
+                <Label Style="{StaticResource ProceedTitleStyle}" Text="{x:Static localization:AppResources.Approve}" />
+            </HorizontalStackLayout>
+        </Border>
+
+        <Border x:Name="ReturnButton"
+                Grid.Row="0"
+                Grid.RowSpan="3"
+                AutomationId="ReturnButtonFrame"
+                HorizontalOptions="Start"
+                StrokeShape="RoundRectangle 0,8,0,0"
+                Style="{StaticResource ProceedButtonStyle}"
+                VerticalOptions="End">
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer x:Name="ReturnButtonGestureRecognizer"
+                                      AutomationId="ReturnSection"
+                                      Tapped="OnButtonClicked" />
+            </Border.GestureRecognizers>
+
+            <HorizontalStackLayout Spacing="10">
+                <Label x:Name="ReturnButtonIcon"
+                       Margin="10,0,0,0"
+                       AutomationId="ReturnButtonIcon"
+                       Style="{StaticResource ProceedIconStyle}"
+                       Text="{resources:IconExtensions ReturnXIcon}" />
+
+                <Label Style="{StaticResource ProceedTitleStyle}" Text="{x:Static localization:AppResources.Return}" />
+            </HorizontalStackLayout>
+        </Border>
+
+        <loadingCircles:LoadingScreen x:Name="loadingView"
+                                      Grid.Row="0"
+                                      Grid.RowSpan="3" />
+    </Grid>
+</kernel:RenderPageBase>

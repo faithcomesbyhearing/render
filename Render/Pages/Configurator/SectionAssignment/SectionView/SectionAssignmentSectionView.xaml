@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="sectionView:SectionAssignmentSectionViewViewModel"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:sectionView="clr-namespace:Render.Pages.Configurator.SectionAssignment.SectionView;assembly=Render"
+                            xmlns:resources="clr-namespace:Render.Resources;assembly=Render"
+                            xmlns:localization="clr-namespace:Render.Resources.Localization"
+                            x:Class="Render.Pages.Configurator.SectionAssignment.SectionView.SectionAssignmentSectionView">
+    
+    <Grid x:Name="MainGrid" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
+                             BackgroundColor="{StaticResource AlternateBackground}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name = "LeftSpace" Width="Auto"/>
+            <ColumnDefinition x:Name = "Sections" Width="*"/>
+            <ColumnDefinition x:Name = "RightSpace" Width="Auto"/>
+            <ColumnDefinition x:Name = "Separator" Width="Auto"/>
+            <ColumnDefinition x:Name = "Teams" Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        
+        <VerticalStackLayout Grid.Column="0" x:Name="LeftSpaceLayout" WidthRequest="330"/>
+
+        <!-- Sections -->
+        <StackLayout Grid.Column="1" 
+                     HorizontalOptions="FillAndExpand" 
+                     BackgroundColor="{DynamicResource AlternateBackground}" >
+            
+            <!-- Higher priority -->
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand"
+                         BackgroundColor="{DynamicResource SlateLight}"
+                         Padding="10">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                    <Label HorizontalOptions="Start"
+                           Text="{resources:IconExtensions ChevronRight}"
+                           TextTransform="Uppercase"
+                           HorizontalTextAlignment="Center"
+                           TextColor="{DynamicResource SecondaryText}"
+                           Rotation="-90"
+                           FontFamily="Icons"
+                           FontSize="20"
+                           Margin="10,5,15,0" />
+                    <Label HorizontalOptions="EndAndExpand"
+                           Text="{x:Static localization:AppResources.HigherPriority}"
+                           FontSize="Medium"
+                           HorizontalTextAlignment="Center"
+                           TextColor="{DynamicResource SecondaryText}" />
+                </StackLayout>
+            </StackLayout>
+
+            <CollectionView x:Name="SectionCollection"
+                            VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <sectionView:TabletSectionViewSectionCard/>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+                <!-- Lower priority -->
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand"
+                         BackgroundColor="{DynamicResource DarkGrey}"
+                         Padding="10">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                    <Label HorizontalOptions="Start"
+                           Text="{resources:IconExtensions ChevronRight}"
+                           TextTransform="Uppercase"
+                           HorizontalTextAlignment="Center"
+                           TextColor="{DynamicResource SecondaryText}"
+                           Rotation="90"
+                           FontFamily="Icons"
+                           FontSize="20"
+                           Margin="10,5,15,0" />
+                    <Label HorizontalOptions="EndAndExpand"
+                           Text="{x:Static localization:AppResources.LowerPriority}"
+                           FontSize="Medium"
+                           HorizontalTextAlignment="Center"
+                           TextColor="{DynamicResource SecondaryText}" />
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>    
+        
+        <VerticalStackLayout x:Name="RightSpaceLayout" Grid.Column="2" WidthRequest="60"/>
+        
+        <!-- Separator -->
+        <VerticalStackLayout Grid.Column="3" WidthRequest="2" VerticalOptions="Fill"
+                     BackgroundColor="{DynamicResource SlateLight}"/>
+        
+        <!-- Teams -->
+        <VerticalStackLayout x:Name="TeamsCollectionLayout" Grid.Column="4" WidthRequest="275"
+                     HorizontalOptions="EndAndExpand"
+                     Margin="0,20,30,0">
+            <HorizontalStackLayout HorizontalOptions="Start" Margin="15,0,0,0">
+                <Label FontFamily="Icons"
+                       Text="{resources:IconExtensions TeamsIcon}"
+                       TextColor="{DynamicResource Option}"
+                       FontSize="{StaticResource LargeFont}" 
+                       VerticalOptions="Center"/>
+                <Label Text="{x:Static localization:AppResources.Teams}" Margin="10,0,0,0"
+                       TextColor="{DynamicResource Option}"
+                       VerticalOptions="Center"
+                       FontSize="{StaticResource LargeFont}"
+                       FontAttributes="Bold" 
+                       VerticalTextAlignment="Center" />
+            </HorizontalStackLayout>
+            <CollectionView x:Name="TeamCollection" VerticalOptions="FillAndExpand" Margin="0,30">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <sectionView:NewSectionViewTeamCard />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <VerticalStackLayout HeightRequest="80"/>
+        </VerticalStackLayout>
+    </Grid>
+</kernel:RenderComponentBase>

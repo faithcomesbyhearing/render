@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="stageView:StageViewStageViewModel"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:audioExport="clr-namespace:Render.Pages.Settings.AudioExport;assembly=Render"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:stageView="clr-namespace:Render.Pages.Settings.AudioExport.StageView;assembly=Render"
+                            x:Class="Render.Pages.Settings.AudioExport.StageView.StageViewStage">
+    
+    <Border StrokeShape="RoundRectangle 10" Padding="0,0"
+            WidthRequest="950"
+            MinimumHeightRequest="100"
+            Margin="0,0,0,20"
+            AutomationId="StageTitleFrame">
+        <Grid BackgroundColor="{DynamicResource UnselectedCard}" RowDefinitions="Auto,2,*" ColumnDefinitions="960" WidthRequest="950">
+            <Grid x:Name="Header" HeightRequest="100" Grid.Row="0" WidthRequest="950"
+                          AutomationId="SectionStatusStack">
+                <HorizontalStackLayout>
+                    <Label x:Name="StageIcon" Style="{StaticResource IconStyle}" AutomationId="StageIcon" />
+                    <Label x:Name="StageName" Style="{StaticResource StageNameStyle}" AutomationId="StageName"  />
+                </HorizontalStackLayout>
+
+                <Label x:Name="StageListIcon" Style="{StaticResource StageListIconStyle}" AutomationId="StageListIcon" />
+            </Grid>
+            
+            <BoxView x:Name="StageTitleBarSeparator"
+                     Grid.Row="1"
+                     HeightRequest="2"
+                     Margin="30,0,40,0"
+                     BackgroundColor="{DynamicResource DarkGrey}"/>
+            <VerticalStackLayout HorizontalOptions="FillAndExpand" x:Name="SectionList" Grid.Row="2"
+                         BackgroundColor="{DynamicResource UnselectedCard}" AutomationId="SectionList">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <audioExport:SectionToExportView Margin="25,0,35,0" AutomationId="SectionCard"/>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </VerticalStackLayout>
+        </Grid>
+        <Border.GestureRecognizers>
+            <TapGestureRecognizer x:Name="TapGestureRecognizer" AutomationId="StageCard"
+                                  Tapped="OnButtonClicked" />
+        </Border.GestureRecognizers>
+    </Border>
+</kernel:RenderComponentBase>

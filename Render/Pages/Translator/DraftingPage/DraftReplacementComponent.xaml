@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="vm:DraftReplacementComponentViewModel"
+                                         xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                                         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                                         xmlns:vm="clr-namespace:Render.Pages.Translator.DraftingPage;assembly=Render"
+                                         xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                                         xmlns:resources="clr-namespace:Render.Resources"
+                                         xmlns:localization="clr-namespace:Render.Resources.Localization"
+                                         xmlns:draftingPage="clr-namespace:Render.Pages.Translator.DraftingPage;assembly=Render"
+                                         xmlns:versionLabel="clr-namespace:Render.Components.VersionLabel;assembly=Render"
+                                         x:Class="Render.Pages.Translator.DraftingPage.DraftReplacementComponent">
+    <FlexLayout x:Name="TopLevelElement" HorizontalOptions="Center" Wrap="Wrap" WidthRequest="500">
+        <BindableLayout.ItemTemplate>
+            <DataTemplate>
+                <draftingPage:DraftReplacementCard />
+            </DataTemplate>
+        </BindableLayout.ItemTemplate>
+    </FlexLayout>
+</kernel:RenderComponentBase>

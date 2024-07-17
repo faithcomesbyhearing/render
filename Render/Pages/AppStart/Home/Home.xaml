@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kernel:RenderPageBase x:Class="Render.Pages.AppStart.Home.Home"
+                       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:kernel="clr-namespace:Render.Kernel"
+                       xmlns:loadingCircles="clr-namespace:Render.Common"
+                       xmlns:home="clr-namespace:Render.Pages.AppStart.Home"
+                       xmlns:titleBar="clr-namespace:Render.Components.TitleBar"
+                       xmlns:versionLabel="clr-namespace:Render.Components.VersionLabel"
+                       x:TypeArguments="home:HomeViewModel"
+                       xmlns:localization="clr-namespace:Render.Resources.Localization"
+                       xmlns:navigationPanels="using:Render.Pages.AppStart.Home.NavigationPanels"
+                       NavigationPage.HasNavigationBar="False"
+                       Style="{DynamicResource PrimaryPage}">
+    <ContentPage.Resources>
+        <Style x:Key="ComponentSelectLabel" TargetType="Label">
+            <Setter Property="LineBreakMode" Value="NoWrap" />
+            <Setter Property="VerticalTextAlignment" Value="Center" />
+            <Setter Property="Padding" Value="10,5" />
+            <Setter Property="FontSize" Value="{StaticResource MediumMinus2Font}" />
+            <Setter Property="FontFamily" Value="MediumFont" />
+        </Style>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <Grid RowDefinitions="75, Auto, 600, *" x:Name="TopLevelElement"
+              RowSpacing="0" BackgroundColor="{DynamicResource AlternateBackground}">
+            <titleBar:TitleBar x:Name="TitleBar" Grid.Row="0"/>
+            
+            <!-- View Select -->
+            <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="FillAndExpand" x:Name="ViewSelectStack"
+                         Padding="0,20,0,0">
+                <Grid x:Name="TopMenuBar" ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10" HorizontalOptions="CenterAndExpand"
+                      VerticalOptions="Fill" HeightRequest="40" IsVisible="False">
+                    <Frame Grid.Column="0" CornerRadius="8" Padding="0" AutomationId="ProjectWorkflowFrame">
+                        <Label x:Name="WorkflowViewButton"
+                               Text="{x:Static localization:AppResources.Workflow}"
+                               Style="{StaticResource ComponentSelectLabel}"
+                               AutomationId="ProjectWorkflowLabel">
+                        </Label>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="SelectWorkflowViewTap"
+                                                  AutomationId="HomePageWorkflowViewButton"
+                                                  Tapped="OnButtonClicked" />
+                        </Frame.GestureRecognizers>
+                    </Frame>
+
+                    <StackLayout Grid.Column="1" Padding="0" 
+                                 VerticalOptions="Center"
+                                 HorizontalOptions="Center"
+                                 AutomationId="BoxViewTabSeparatorLayout">
+                        <BoxView Style="{x:StaticResource WorkflowSettingsBoxViewStyle}" WidthRequest="2" HeightRequest="16" Margin="0,5,0,0" AutomationId="BoxViewTabSeparator" />
+                    </StackLayout>
+
+                    <Frame Grid.Column="2" CornerRadius="8" Padding="0" AutomationId="ProjectConfigurationFrame">
+                        <Label x:Name="AdminViewButton"
+                               Text="{x:Static localization:AppResources.Configuration}"
+                               Style="{StaticResource ComponentSelectLabel}"
+                               AutomationId="ProjectConfigurationLabel">
+                        </Label>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="SelectAdminViewTap"
+                                                  AutomationId="HomePageAdminViewButton"
+                                                  Tapped="OnButtonClicked" />
+
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                </Grid>
+            </StackLayout>
+            
+            <StackLayout Grid.Row="2" VerticalOptions="CenterAndExpand">
+                <navigationPanels:NavigationPane x:Name="WorkflowNavigationPane" AutomationId="WorkflowNavigationPane" />
+                <navigationPanels:NavigationPane x:Name="AdministrationNavigationPane" AutomationId="AdministrationNavigationPane" />
+            </StackLayout>
+            
+            <versionLabel:VersionLabel Grid.Row="3" VerticalOptions="Start" HorizontalOptions="Center" />
+            
+            <loadingCircles:LoadingScreen x:Name="LoadingView"
+                                          Grid.Row="0"
+                                          Grid.RowSpan="4" />
+        </Grid>
+    </ContentPage.Content>
+</kernel:RenderPageBase>

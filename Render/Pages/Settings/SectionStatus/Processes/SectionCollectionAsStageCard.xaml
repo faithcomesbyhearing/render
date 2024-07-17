@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="processesView:SectionCollectionAsStageCardViewModel"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:processesView="clr-namespace:Render.Pages.Settings.SectionStatus.Processes;assembly=Render"
+                            xmlns:localization="clr-namespace:Render.Resources.Localization"
+                            x:Class="Render.Pages.Settings.SectionStatus.Processes.SectionCollectionAsStageCard">
+
+    <Border StrokeShape="RoundRectangle 10" 
+            MaximumWidthRequest="960"
+            Padding="0"
+            Margin="0,0,0,26"
+            HorizontalOptions="Fill">
+        <Grid x:Name="SectionGrid"
+              BackgroundColor="{DynamicResource UnselectedCard}" Padding="0"
+              RowDefinitions="Auto,2,*"
+              HorizontalOptions="Fill">
+            <Grid Grid.Row="0" x:Name="Header"
+                  HorizontalOptions="Fill"
+                  ColumnDefinitions="100,*, *"
+                  HeightRequest="100"
+                  AutomationId="SectionStatusStack">
+                <Label Grid.Column="0" x:Name="IconLabel"
+                       Style="{StaticResource IconStyle}"
+                       AutomationId="StageIcon" />
+                <Label Grid.Column="1" x:Name="Title"
+                       Style="{StaticResource StageNameStyle}"
+                       Text="{x:Static localization:AppResources.Unassigned}"
+                       AutomationId="StageTitleLabel" />
+                <Label Grid.Column="2" x:Name="ListIcon"
+                       Style="{StaticResource StageListIconStyle}"
+                       Text="{StaticResource Plus}"
+                       AutomationId="ListChevronLabel" />
+            </Grid>
+
+            <BoxView Grid.Row="1" x:Name="StageCardBarSeparator"
+                     HeightRequest="2"
+                     Margin="26,0"
+                     Opacity=".8"
+                     BackgroundColor="{DynamicResource DarkGrey}" />
+
+            <VerticalStackLayout Grid.Row="2" x:Name="SectionCollection"
+                                 HorizontalOptions="Fill"
+                                 BackgroundColor="{DynamicResource UnselectedCard}"
+                                 AutomationId="SectionCollection">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <processesView:SectionCard Margin="5,0" AutomationId="SectionCard" HorizontalOptions="Fill" />
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </VerticalStackLayout>
+        </Grid>
+        <Border.GestureRecognizers>
+            <TapGestureRecognizer x:Name="TapGestureRecognizer"
+                                  AutomationId="UnassignedSectionCollectionAsStageCard"
+                                  Tapped="OnButtonClicked" />
+        </Border.GestureRecognizers>
+    </Border>
+</kernel:RenderComponentBase>

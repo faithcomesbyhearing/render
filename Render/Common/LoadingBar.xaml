@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Render.Common.LoadingBar">
+    <ContentView.Resources>
+        <Style x:Key="CircleFrame" TargetType="Frame">
+            <Setter Property="CornerRadius" Value="26"/>
+            <Setter Property="WidthRequest" Value="26"/>
+            <Setter Property="HeightRequest" Value="26"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="BorderColor" Value="{StaticResource SecondaryText}"/>
+            <Setter Property="BackgroundColor" Value="{DynamicResource LoginPageLoadingCircleBackground}"/>
+        </Style>
+    </ContentView.Resources>
+    <HorizontalStackLayout Spacing="26" HorizontalOptions="CenterAndExpand" AutomationId="LoadingBarLayout">
+        <Frame x:Name="Circle1" Style="{DynamicResource CircleFrame}"/>
+        <Frame x:Name="Circle2" Style="{DynamicResource CircleFrame}"/>
+        <Frame x:Name="Circle3" Style="{DynamicResource CircleFrame}"/>
+        <Frame x:Name="Circle4" Style="{DynamicResource CircleFrame}"/>
+    </HorizontalStackLayout>
+</ContentView>

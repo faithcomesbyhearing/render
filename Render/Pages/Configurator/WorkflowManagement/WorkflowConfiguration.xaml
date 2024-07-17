@@ -1,0 +1,128 @@
+<kernel:RenderPageBase x:Class="Render.Pages.Configurator.WorkflowManagement.WorkflowConfiguration"
+                       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:common="using:Render.Common"
+                       xmlns:customScroller="clr-namespace:Render.Components.Scroller"
+                       xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                       xmlns:miniScroller="clr-namespace:Render.Components.Scroller"
+                       xmlns:proceedButton="clr-namespace:Render.Components.ProceedButton;assembly=Render"
+                       xmlns:resources="clr-namespace:Render.Resources.Localization;assembly=Render"
+                       xmlns:titleBar="clr-namespace:Render.Components.TitleBar;assembly=Render"
+                       xmlns:workflowManagement="clr-namespace:Render.Pages.Configurator.WorkflowManagement;assembly=Render"
+                       x:TypeArguments="workflowManagement:WorkflowConfigurationViewModel"
+                       BackgroundColor="{DynamicResource AlternateBackground}"
+                       NavigationPage.HasNavigationBar="False">
+
+    <Grid x:Name="TopLevelElement" RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1" RowSpacing="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="WorkflowStageCards" Width="*" />
+                <ColumnDefinition x:Name="Separator" Width="2" />
+                <ColumnDefinition x:Name="StagesCollection" Width="278" />
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0"
+                  MinimumHeightRequest="600"
+                  VerticalOptions="Fill">
+                <Grid.RowDefinitions>
+                    <RowDefinition x:Name="TopSpacing" Height="100" />
+                    <RowDefinition x:Name="MainWorkflowRow" Height="8*" />
+                    <RowDefinition x:Name="Spacing" Height="*" />
+                    <RowDefinition x:Name="MiniScrollerRow" Height="Auto" />
+                </Grid.RowDefinitions>
+                <!--  Main workflow view  -->
+                <customScroller:CustomScrollView x:Name="StagesScrollView"
+                                                 Grid.Row="1"
+                                                 Margin="0"
+                                                 HorizontalOptions="Fill"
+                                                 HorizontalScrollBarVisibility="Never"
+                                                 Orientation="Horizontal">
+                    <HorizontalStackLayout AutomationId="WorkflowStageCards" HorizontalOptions="Fill">
+
+                        <Border x:Name="LeftSpacing" WidthRequest="96" />
+
+                        <HorizontalStackLayout x:Name="StagesStackLayout">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <workflowManagement:WorkflowStageCard />
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </HorizontalStackLayout>
+
+                        <Border x:Name="RightSpacing" WidthRequest="96" />
+
+                    </HorizontalStackLayout>
+                </customScroller:CustomScrollView>
+
+                <!--  Mini scroller  -->
+                <miniScroller:CustomMiniScroller x:Name="MiniScrollerContainer"
+                                                         Grid.Row="3"
+                                                         HorizontalOptions="Fill"
+                                                         VerticalOptions="End" />
+
+            </Grid>
+
+            <BoxView Grid.Column="1"
+                     Margin="0,35,0,75"
+                     AutomationId="BoxViewTabSeparator"
+                     BackgroundColor="{DynamicResource TertiaryText}"
+                     VerticalOptions="Fill" />
+
+            <!--  Draggable stages to select  -->
+            <Grid Grid.Column="2"
+                  Padding="0,35,0,0"
+                  RowDefinitions="Auto,*,75"
+                  VerticalOptions="Fill">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition x:Name="Content" Width="205" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!--  Stages label  -->
+                <Label Grid.Row="0"
+                       Grid.Column="1"
+                       AutomationId="StagesLabelStackLayout"
+                       FontFamily="BoldFont"
+                       FontSize="{StaticResource LargeFont}"
+                       Text="{x:Static resources:AppResources.Stages}"
+                       TextColor="{StaticResource Option}" />
+
+                <CollectionView x:Name="StagesCollectionView"
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                AutomationId="StagesCollectionView"
+                                HorizontalOptions="Fill">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" VerticalItemSpacing="30" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <workflowManagement:StageTypeCard Padding="0,0,15,0" />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+        </Grid>
+
+        <!--
+            TitleBar is located in the first grid row, but should be rendered
+            after the page content in order to display Passage Number Overlay on top of the page.
+        -->
+        <titleBar:TitleBar x:Name="TitleBar" Grid.Row="0" />
+
+        <proceedButton:ProceedButton x:Name="ProceedButton"
+                                     Grid.Row="1"
+                                     HorizontalOptions="End"
+                                     VerticalOptions="End" />
+
+        <common:LoadingScreen x:Name="LoadingView"
+                              Grid.Row="0"
+                              Grid.RowSpan="2" />
+    </Grid>
+</kernel:RenderPageBase>

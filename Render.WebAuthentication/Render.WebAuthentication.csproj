@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Configurations>Debug;Release;AutoTests;Test;Demo</Configurations>
+    <Platforms>AnyCPU</Platforms>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration.StartsWith('Release')) or $(Configuration.StartsWith('Test')) or $(Configuration.StartsWith('AutoTests'))">
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+    <ItemGroup>
+	    <ProjectReference Include="..\Render.Interfaces\Render.Interfaces.csproj" />
+	    <ProjectReference Include="..\Render.TempFromVessel\Render.TempFromVessel.csproj" />
+    </ItemGroup>
+
+</Project>

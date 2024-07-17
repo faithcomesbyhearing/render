@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Configurations>Debug;Release;AutoTests;Test;Demo</Configurations>
+    <Platforms>AnyCPU</Platforms>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(Configuration.StartsWith('Release')) or $(Configuration.StartsWith('Test')) or $(Configuration.StartsWith('AutoTests'))">
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="5.0.2" />
+    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="5.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Render.Interfaces\Render.Interfaces.csproj" />
+    <ProjectReference Include="..\Render.Models\Render.Models.csproj" />
+    <ProjectReference Include="..\Render.TempFromVessel\Render.TempFromVessel.csproj" />
+  </ItemGroup>
+
+</Project>

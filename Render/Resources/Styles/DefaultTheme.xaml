@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:styles="clr-namespace:Render.Resources.Styles;assembly=Render"
+                    x:Class="Render.UIResources.Styles.DefaultTheme">
+    
+    <Color x:Key="DarkBlue">#001E29</Color>
+    <Color x:Key="Blue">#00394D</Color>
+    <Color x:Key="Turquoise">#33D3FF</Color>
+    <Color x:Key="Azure">#1A799B</Color>
+    <Color x:Key="Yellow">#FFB700</Color>
+    <Color x:Key="Orange">#CA6D00</Color>
+    <Color x:Key="Grey">#4D4D4D</Color>
+    <Color x:Key="LightGrey">#D6DADB</Color>
+    <Color x:Key="DarkGrey">#ACB4B7</Color>
+    <Color x:Key="TitleGrey">#5F696D</Color>
+    <Color x:Key="Red">#C23A00</Color>
+    <Color x:Key="Green">#27A533</Color>
+    <Color x:Key="White">#FFFFFF</Color>
+    <Color x:Key="Black">#000000</Color>
+    <Color x:Key="Slate">#5F696D</Color>
+    <Color x:Key="SlateDark">#474F52</Color>
+    <Color x:Key="SlateLight">#778388</Color>
+    <Color x:Key="GreyFaded">#E9EBEC</Color>
+    <Color x:Key="Peach">#FFE8CC</Color>
+    <Color x:Key="DisabledGrey">#ACB4B7</Color>
+    <Color x:Key="WhiteGray">#D9D9D9</Color>
+    <Color x:Key="Gray">#F2F2F2</Color>
+    <Color x:Key="DarkYellow">#CC9300</Color>
+    <Color x:Key="WaveformBlue">#1A799B</Color>
+    <Color x:Key="GrayishWhite">#D9D9D9</Color>
+
+    <SolidColorBrush x:Key="DarkGreyBrush">#ACB4B7</SolidColorBrush>
+
+    <styles:ColorReference x:Key="Option" Color="{StaticResource Blue}"/>
+    <styles:ColorReference x:Key="SelectedBlue" Color="{StaticResource Azure}"/>
+    <styles:ColorReference x:Key="Required" Color="{StaticResource Yellow}"/>
+    <styles:ColorReference x:Key="AlternateButton" Color="{StaticResource DarkGrey}"/>
+    <styles:ColorReference x:Key="Error" Color="{StaticResource Red}"/>
+    <styles:ColorReference x:Key="MainIconColor" Color="{StaticResource SlateDark}"/>
+    <styles:ColorReference x:Key="InactiveIconColor" Color="{StaticResource DarkGrey}"/>
+    <styles:ColorReference x:Key="MainText" Color="{StaticResource SlateDark}"/>
+    <styles:ColorReference x:Key="SecondaryText" Color="{StaticResource White}"/>
+    <styles:ColorReference x:Key="TertiaryText" Color="{StaticResource SlateLight}"/>
+    <styles:ColorReference x:Key="LightBackgroundText" Color="{StaticResource DarkBlue}"/>
+    <styles:ColorReference x:Key="AlternateBackground" Color="{StaticResource LightGrey}"/>
+    <styles:ColorReference x:Key="Title" Color="{StaticResource Blue}"/>
+    <styles:ColorReference x:Key="SubTitleBar" Color="{StaticResource White}"/>
+    <styles:ColorReference x:Key="SubTitleText" Color="{StaticResource Blue}"/>
+    <styles:ColorReference x:Key="ActivityIndicator" Color="{StaticResource DarkGrey}"/>
+    <styles:ColorReference x:Key="SeparatorBar" Color="{StaticResource DarkGrey}"/>
+    <styles:ColorReference x:Key="TitleBackground" Color="{StaticResource TitleGrey}"/>
+    <styles:ColorReference x:Key="TitleBarBackground" Color="{StaticResource Slate}"/>
+    <styles:ColorReference x:Key="RenderIconBackground" Color="{StaticResource SlateDark}"/>
+    <styles:ColorReference x:Key="GrayWhite" Color="{StaticResource GrayishWhite}"/>
+    <styles:ColorReference x:Key="GreyText" Color="{StaticResource Grey}"/>
+    <styles:ColorReference x:Key="EntryBorder" Color="{StaticResource SlateLight}"/>
+    
+    <!-- Draft Selection -->
+    <styles:ColorReference x:Key="DraftSelectionBackgroundUnselected" Color="{StaticResource Gray}"/>
+    <styles:ColorReference x:Key="DraftSelectionOuterCircleRequired" Color="{StaticResource Slate}"/>
+    <styles:ColorReference x:Key="DraftSelectionSeparatorRequired" Color="{StaticResource GreyFaded}"/>
+    <styles:ColorReference x:Key="DraftSelectionSeparatorSelected" Color="{StaticResource DarkBlue}"/>
+    
+    <!-- NOT used by Draft Selection. Other controls use these colors. -->
+    <styles:ColorReference x:Key="DraftSelectionSelected" Color="{StaticResource SlateDark}"/>
+    <styles:ColorReference x:Key="DraftSelectionSelectedBackground" Color="{StaticResource SlateLight}"/>
+    
+    <styles:ColorReference x:Key="SelectedReference" Color="{StaticResource Peach}"/>
+    <styles:ColorReference x:Key="Transparent" Color="Transparent"/>
+    <styles:ColorReference x:Key="DraftDeselectedOutline" Color="{StaticResource LightGrey}"/>
+    <styles:ColorReference x:Key="DisabledTextColor" Color="{StaticResource DisabledGrey}"/>
+    <styles:ColorReference x:Key="SettingGroupStepTitleBackground" Color="{StaticResource White}"/>
+    <styles:ColorReference x:Key="WaveformBlueColor" Color="{StaticResource Blue}"/>
+
+    <styles:ColorReference x:Key="AudioPlayerThumbBackground" Color="{StaticResource SlateDark}"/>
+    <styles:ColorReference x:Key="AudioPlayerPassageDivideBackground" Color="{StaticResource SlateLight}"/>
+    <styles:ColorReference x:Key="AudioPlayerSliderAfterBackground" Color="{StaticResource LightGrey}"/>
+    <styles:ColorReference x:Key="AudioPlayerSliderBeforeBackground" Color="{StaticResource DarkGrey}"/>
+    <styles:ColorReference x:Key="RequiredAudioPlayerBackground" Color="{StaticResource SlateLight}"/>
+    <styles:ColorReference x:Key="OptionAudioPlayerBackground" Color="{StaticResource White}"/>
+    <styles:ColorReference x:Key="OptionAudioPlayerSliderAfterBackground" Color="{StaticResource LightGrey}"/>
+    <styles:ColorReference x:Key="OptionAudioPlayerSliderBeforeBackground" Color="{StaticResource Slate}"/>
+    <styles:ColorReference x:Key="RequiredAudioPlayerSliderAfterBackground" Color="{StaticResource Slate}"/>
+    <styles:ColorReference x:Key="RequiredAudioPlayerSliderBeforeBackground" Color="{StaticResource SlateDark}"/>
+    <styles:ColorReference x:Key="RequiredMiniWaveform" Color="{StaticResource White}"/>
+    <styles:ColorReference x:Key="RecorderSeparatorBar" Color="{StaticResource DarkGrey}"/>
+    <styles:ColorReference x:Key="RecorderSeparatorLine" Color="{StaticResource Grey}"/>
+
+    <styles:ColorReference x:Key="BarPlayerSecondaryStackBackground" Color="{StaticResource GreyFaded}"/>
+
+    <styles:ColorReference x:Key="SelectedPassageBackground" Color="{StaticResource White}"/>
+    <styles:ColorReference x:Key="UnSelectedPassageBackground" Color="{StaticResource White}"/>
+    
+    <styles:ColorReference x:Key="SelectedPassageHighlight" Color="{StaticResource DarkBlue}"/>
+    
+    <styles:ColorReference x:Key="ToolbarBackground" Color="{StaticResource White}"/>
+    <styles:ColorReference x:Key="ToolbarBorder" Color="{StaticResource SeparatorBar}"/>
+
+    <styles:ColorReference x:Key="TabletUnSelectedPassage" Color="{StaticResource SlateLight}"/>
+    
+    <styles:ColorReference x:Key="PrimaryBackground" Color="{StaticResource White}"/>
+    
+    <styles:ColorReference x:Key="StageCardBackground" Color="{StaticResource DarkBlue}"/>
+    <styles:ColorReference x:Key="StageCardBottomBackground" Color="{StaticResource Blue}"/>
+    <styles:ColorReference x:Key="StageCardAfterArrowColor" Color="{StaticResource Slate}"/>
+    <styles:ColorReference x:Key="StageMiniCardLockedBorder" Color="{StaticResource Black}"/>
+   
+    <!-- Consultant Approval -->
+    <styles:ColorReference x:Key="ConsultantApprovalSectionFrame" Color="{StaticResource White}"/>
+    <styles:ColorReference x:Key="ApproveButtonFrameBackground" Color="{StaticResource Slate}"/>
+    <styles:ColorReference x:Key="ActivePasswordFieldFrame" Color="{StaticResource Slate}"/>
+    <styles:ColorReference x:Key="InactivePasswordFieldFrame" Color="{StaticResource DarkGrey}"/>
+    <styles:ColorReference x:Key="ConsultantApproveButton" Color="{StaticResource Yellow}"/>
+    <styles:ColorReference x:Key="ConsultantApprovedButton" Color="{StaticResource DarkYellow}"/>
+    <styles:ColorReference x:Key="ConsultantCheckRequiredNotes" Color="{StaticResource DarkYellow}"/>
+    <styles:ColorReference x:Key="ApproveProceedButtonInactiveBackground" Color="{StaticResource DarkGrey}"/>
+    <styles:ColorReference x:Key="ApproveButtonLabelTextColor" Color="{StaticResource SlateDark}"/>
+    <styles:ColorReference x:Key="ApproveSectionNameLabelTextColor" Color="{StaticResource White}"/>
+    
+    
+    <!-- User Tile -->
+    <styles:ColorReference x:Key="UserTileFrameBackground" Color="{StaticResource White}"/>
+    <styles:ColorReference x:Key="RenderUserType" Color="{StaticResource Turquoise}"/>
+    <styles:ColorReference x:Key="VesselUserType" Color="{StaticResource Blue}"/>
+    <styles:ColorReference x:Key="RenderUserTypeText" Color="{StaticResource Blue}"/>
+    <styles:ColorReference x:Key="VesselUserTypeText" Color="{StaticResource White}"/>
+    <styles:ColorReference x:Key="PasswordGridBackground" Color="{StaticResource SlateLight}"/>
+    
+    <!--Workflow Assignment-->
+    <styles:ColorReference x:Key="UserAssignmentPanelBackground" Color="{StaticResource LightGrey}"/>
+    <styles:ColorReference x:Key="UserCardBackground" Color="{StaticResource LightGrey}"/>
+    <styles:ColorReference x:Key="UserCardFullNameText" Color="{StaticResource SlateDark}"/>
+    <styles:ColorReference x:Key="StageColumnLabelBackground" Color="{StaticResource SlateLight}"/>
+    <styles:ColorReference x:Key="StageColumnSubHeaderBackground" Color="{StaticResource Slate}"/>
+    <styles:ColorReference x:Key="TeamCardLabelBackground" Color="{StaticResource DarkGrey}"/>
+    <styles:ColorReference x:Key="StageColumnBackground" Color="{StaticResource Blue}"/>
+    <styles:ColorReference x:Key="StageColumnFirstAndLastBackground" Color="{StaticResource DarkBlue}"/>
+
+    <!-- Stage Settings -->
+    <styles:ColorReference x:Key="StageSettingsCardBackground" Color="{StaticResource DarkGrey}"/>
+    <styles:ColorReference x:Key="StepSettingsCardBackground" Color="{StaticResource LightGrey}"/>
+    <styles:ColorReference x:Key="StageSettingsCardCheckbox" Color="{StaticResource Slate}"/>
+    <styles:ColorReference x:Key="StageSettingsCardGroup" Color="{StaticResource SlateLight}"/>
+    <styles:ColorReference x:Key="ModalBackground" Color="{StaticResource GreyFaded}"/>
+    <styles:ColorReference x:Key="StageSettingBackground" Color="{StaticResource LightGrey}"/>
+
+    <!-- DivisionPlayer -->
+    <styles:ColorReference x:Key="LockedDivisionPlayerReference" Color="{StaticResource Red}"/>
+    <styles:ColorReference x:Key="LockedDivisionPlayerReferenceText" Color="{StaticResource White}"/>
+    <styles:ColorReference x:Key="DivisionPlayerReferenceText" Color="{StaticResource SlateDark}"/>
+    <styles:ColorReference x:Key="DivisionPlayerReference" Color="{StaticResource SlateDark}"/>
+    <styles:ColorReference x:Key="DivisionPlayerReferenceLabelBackground" Color="{StaticResource LightGrey}"/>
+    <styles:ColorReference x:Key="SelectedBreathPauseBar" Color="{StaticResource Turquoise}"/>
+    <styles:ColorReference x:Key="UnSelectedBreathPauseBar" Color="{StaticResource Blue}"/>
+    <styles:ColorReference x:Key="InactiveBreathPauseBar" Color="{StaticResource InactiveIconColor}"/>
+    <styles:ColorReference x:Key="SelectedDivisionMarker" Color="{StaticResource Turquoise}"/>
+    <styles:ColorReference x:Key="UnselectedDivisionMarker" Color="{StaticResource Blue}"/>
+    <styles:ColorReference x:Key="InactiveDivisionMarker" Color="{StaticResource InactiveIconColor}"/>
+    <styles:ColorReference x:Key="TabletUnSelectedScroll" Color="{StaticResource SlateLight}"/>
+    <styles:ColorReference x:Key="TabletMiniScrollerBorder" Color="{StaticResource SlateDark}"/>
+    
+    <!-- Mobile Configuration Page -->
+    <styles:ColorReference x:Key="UnselectedStageOptionButtonBackground" Color="{StaticResource DarkBlue}"/>
+
+    <styles:ColorReference x:Key="DownloadButtonBackground" Color="{StaticResource GreyFaded}"/>
+    <styles:ColorReference x:Key="DownloadSuccess" Color="{StaticResource Green}"/>
+
+    <styles:ColorReference x:Key="HomePageIconNumberBackground" Color="{StaticResource SlateLight}"/>
+    
+    <!--Section Status-->
+    <styles:ColorReference x:Key="UnselectedCard" Color="{StaticResource White}"/>
+    <styles:ColorReference x:Key="CardText" Color="{StaticResource SlateDark}"/>
+    <styles:ColorReference x:Key="SelectedCard" Color="{StaticResource GreyFaded}"/>
+    <styles:ColorReference x:Key="SelectedSectionCard" Color="{StaticResource LightGrey}"/>
+    <styles:ColorReference x:Key="TabBar" Color="{StaticResource DarkGrey}"/>
+
+    <!-- Login  -->
+    <styles:ColorReference x:Key="LoginPageBackground" Color="{StaticResource LightGrey}"/>
+    <styles:ColorReference x:Key="LoginPageLoadingCircleBackground" Color="{StaticResource Turquoise}"/>
+    <styles:ColorReference x:Key="LoginPageButtonAreaBackground" Color="{StaticResource DarkGrey}"/>
+    
+    <!-- Export Audio -->
+    <styles:ColorReference x:Key="ExportAudioProgressBarBackground" Color="{StaticResource DarkGrey}"/>    
+    <styles:ColorReference x:Key="ExportAudioProgressBar" Color="{StaticResource SlateLight}"/>
+    
+    <!-- Segment Free Cut -->
+    <styles:ColorReference x:Key="SelectedSegmentFreeCut" Color="{StaticResource DarkYellow}"/>
+    
+    <!-- Password Grid Dot Color-->
+    <styles:ColorReference x:Key="PasswordGridDot" Color="{StaticResource Option}"/>
+    <styles:ColorReference x:Key="UserName" Color="{StaticResource Grey}"/>
+
+    <styles:ColorReference x:Key="ProceedButtonBorder" Color="{StaticResource DarkBlue}"/>
+
+    <Style x:Key="PrimaryPage" TargetType="ContentPage">
+        <Setter Property="BackgroundColor" Value="{StaticResource White}"/>
+    </Style>
+    <Style x:Key="SecondaryPage" TargetType="ContentPage">
+        <Setter Property="BackgroundColor" Value="#1A1A1A"/>
+    </Style>
+    
+    <styles:ColorReference x:Key="RecorderBorderColor" Color="{StaticResource DarkGrey}"/>
+    <styles:ColorReference x:Key="CommunityTestFlagMarkerBackgroundColor" Color="{StaticResource White}"/>
+    <styles:ColorReference x:Key="CommunityTestQuestionLibraryPlayerBackgroundColor" Color="{StaticResource DarkBlue}"/>
+    <styles:ColorReference x:Key="CommunityTestQuestionPlayerBackgroundColor" Color="{StaticResource Blue}"/>
+</ResourceDictionary>

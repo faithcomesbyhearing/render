@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="local:StageDeleteConfirmationComponentViewModel"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:resources="clr-namespace:Render.Resources.Localization"
+                            xmlns:uiResources="clr-namespace:Render.Resources"
+                            xmlns:kernel="clr-namespace:Render.Kernel"
+                            xmlns:local="clr-namespace:Render.Components.Modal.ModalComponents"
+                            xmlns:workflow="clr-namespace:Render.Models.Workflow;assembly=Render.Models"
+                            x:Class="Render.Components.Modal.ModalComponents.StageDeleteConfirmationComponent">
+
+    <ContentView.Resources>
+        <x:Double x:Key="OptionIconSize">50</x:Double>
+
+        <Style x:Key="OptionFrameStyle" TargetType="Frame">
+            <Setter Property="Padding" Value="39,26" />
+            <Setter Property="CornerRadius" Value="16" />
+            <Setter Property="VerticalOptions" Value="Fill" />
+        </Style>
+
+        <Style x:Key="OptionImageStyle" TargetType="Label">
+            <Setter Property="HorizontalOptions" Value="Start" />
+            <Setter Property="VerticalOptions" Value="Center" />
+        </Style>
+
+        <Style x:Key="OptionTitleStyle" TargetType="Label">
+            <Setter Property="Margin" Value="0,0,0,5" />
+            <Setter Property="FontSize" Value="{StaticResource LargeFontMinus2Font}" />
+            <Setter Property="HorizontalOptions" Value="Fill" />
+            <Setter Property="FontFamily" Value="BoldFont" />
+        </Style>
+
+        <Style x:Key="OptionDescriptionStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="26" />
+            <Setter Property="HorizontalOptions" Value="Fill" />
+            <Setter Property="FontFamily" Value="MediumFont" />
+        </Style>
+    </ContentView.Resources>
+
+    <VerticalStackLayout x:Name="TopLevelElement" 
+                         Spacing="30" 
+                         Margin="0,0,0,15">
+
+        <!-- Message -->
+        <Label Text="{x:Static resources:AppResources.WorkflowDeleteStageMessage}"
+               Style="{StaticResource ModalMessageLabelStyle}"/>
+
+        <!-- Stage Removal options -->
+        <VerticalStackLayout HorizontalOptions="Center" 
+                             WidthRequest="800" 
+                             Spacing="39">
+            <Frame x:Name="CompleteWorkFrame" 
+                   Style="{StaticResource OptionFrameStyle}">
+                <Grid ColumnDefinitions="90,*" 
+                      HorizontalOptions="Fill"
+                      VerticalOptions="Center">
+                    <Label Grid.Column="0"
+                           x:Name="CompleteWorkImageSource"
+                           Style="{StaticResource OptionImageStyle}"
+                           FontFamily="Icons"
+                           Text="{uiResources:IconExtensions DeleteAndComplete}"
+                           FontSize="{StaticResource OptionIconSize}"
+                           FontAttributes="Bold">
+                    </Label>
+                    <VerticalStackLayout Grid.Column="1">
+                        <Label x:Name="CompleteWorkOptionTitle"
+                               Text="{x:Static resources:AppResources.CompleteWork}"
+                               Style="{StaticResource OptionTitleStyle}"/>
+                        <Label x:Name="CompleteWorkOptionDescription"
+                               Text="{x:Static resources:AppResources.CompleteWorkMessage}"
+                               Style="{StaticResource OptionDescriptionStyle}" />
+                    </VerticalStackLayout>
+                </Grid>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer AutomationId="CompleteWorkGestureRecognizer"
+                                          Tapped="OptionTapped"
+                                          CommandParameter="{x:Static workflow:StageState.CompleteWork}" />
+                </Frame.GestureRecognizers>
+            </Frame>
+
+            <Frame x:Name="RemoveWorkFrame" 
+                   Style="{StaticResource OptionFrameStyle}">
+                <Grid ColumnDefinitions="90,*" 
+                      HorizontalOptions="Fill"
+                      VerticalOptions="Center" >
+                    <Label Style="{StaticResource OptionImageStyle}" 
+                           Margin="0"
+                           FontFamily="Icons"
+                           x:Name="RemoveWorkImageSource"
+                           Text="{uiResources:IconExtensions DeleteImmediately}"
+                           FontSize="{StaticResource OptionIconSize}"
+                           FontAttributes="Bold"
+                           Grid.Column="0">
+                    </Label>
+                    <VerticalStackLayout Grid.Column="1">
+                        <Label x:Name="RemoveWorkOptionTitle"
+                               Text="{x:Static resources:AppResources.RemoveWork}"
+                               Style="{StaticResource OptionTitleStyle}" />
+                        <Label x:Name="RemoveWorkOptionDescription"
+                               Text="{x:Static resources:AppResources.RemoveWorkMessage}"
+                               Style="{StaticResource OptionDescriptionStyle}" />
+                    </VerticalStackLayout>
+                </Grid>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer AutomationId="RemoveWorkGestureRecognizer"
+                                          Tapped="OptionTapped"
+                                          CommandParameter="{x:Static workflow:StageState.RemoveWork}" />
+                </Frame.GestureRecognizers>
+            </Frame>
+
+        </VerticalStackLayout>
+    </VerticalStackLayout>
+</kernel:RenderComponentBase>

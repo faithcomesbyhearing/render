@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:customRenderer="clr-namespace:Render.Kernel.CustomRenderer;assembly=Render"
+             x:Class="Render.Components.StageSettings.SettingsSwitch"
+             FlowDirection="LeftToRight">
+    
+    <Grid WidthRequest="50" HeightRequest="28" ColumnSpacing="0" FlowDirection="LeftToRight">
+        <Grid.Resources>
+            <Style x:Key="BasePanelStyle" TargetType="customRenderer:Panel">
+                <Setter Property="Margin" Value="0"/>
+                <Setter Property="Padding" Value="0"/>
+            </Style>
+                
+            <Style x:Key="LeftPanelStyle" TargetType="customRenderer:Panel" BasedOn="{StaticResource BasePanelStyle}">
+                <Setter Property="WidthRequest" Value="25"/>
+                <Setter Property="HeightRequest" Value="28"/>
+                <Setter Property="BorderRadius" Value="14,0,14,0"/>
+            </Style>
+                
+            <Style x:Key="CenterPanelStyle" TargetType="customRenderer:Panel" BasedOn="{StaticResource BasePanelStyle}">
+                <Setter Property="CornerRadius" Value="0"/>
+                <Setter Property="HorizontalOptions" Value="Fill"/>
+                <Setter Property="VerticalOptions" Value="Fill"/>
+            </Style>
+                
+            <Style x:Key="RightPanelStyle" TargetType="customRenderer:Panel" BasedOn="{StaticResource BasePanelStyle}">
+                <Setter Property="WidthRequest" Value="25"/>
+                <Setter Property="HeightRequest" Value="28"/>
+                <Setter Property="BorderRadius" Value="0,14,0,14"/>
+            </Style>
+        </Grid.Resources>
+            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <customRenderer:Panel Grid.Column="0" x:Name="LeftPanel" Style="{StaticResource LeftPanelStyle}" />
+            
+        <customRenderer:Panel Grid.Column="1"  x:Name="CenterPanel" Style="{StaticResource CenterPanelStyle}" />
+            
+        <customRenderer:Panel Grid.Column="2" x:Name="RightPanel" Style="{StaticResource RightPanelStyle}" />
+
+        <Frame Grid.Column="0" Grid.ColumnSpan="3" WidthRequest="22" HeightRequest="22" IsClippedToBounds="True" 
+                CornerRadius="11" BackgroundColor="White" x:Name="CustomToggle" AutomationId="SettingsSwitchToggle"
+                Margin="3,3,3,3" Padding="0" HorizontalOptions="Start" VerticalOptions="Center" />
+            
+        <customRenderer:Panel Grid.Column="0" x:Name="LeftPanelOverlay" Style="{StaticResource LeftPanelStyle}"
+                                IsVisible="False" BackgroundColor="White" Opacity="0.7" />
+            
+        <customRenderer:Panel Grid.Column="1"  x:Name="CenterPanelOverlay"  Style="{StaticResource CenterPanelStyle}" 
+                                IsVisible="False" BackgroundColor="White" Opacity="0.7" />
+            
+        <customRenderer:Panel Grid.Column="2" x:Name="RightPanelOverlay" Style="{StaticResource RightPanelStyle}"
+                                IsVisible="False" BackgroundColor="White" Opacity="0.7" />
+            
+        <Grid.GestureRecognizers>
+            <TapGestureRecognizer Tapped="Tapped" />
+        </Grid.GestureRecognizers>
+    </Grid>
+   
+</ContentView>

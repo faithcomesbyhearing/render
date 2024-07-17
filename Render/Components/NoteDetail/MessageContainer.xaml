@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="noteDetail:MessageContainerViewModel"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:noteDetail="clr-namespace:Render.Components.NoteDetail"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:barPlayer="clr-namespace:Render.Components.BarPlayer"
+                            xmlns:uiResources="clr-namespace:Render.Resources"
+                            x:Class="Render.Components.NoteDetail.MessageContainer">
+    <ContentView.Resources>
+        <Style x:Key="Message" TargetType="HorizontalStackLayout">
+            <Setter Property="HorizontalOptions" Value="Start" />
+            <Setter Property="Margin" Value="10,0,0,0" />
+        </Style>
+
+        <!-- This style is used in runtime -->
+        <Style x:Key="OwnerMessage" TargetType="HorizontalStackLayout" BasedOn="{StaticResource Message}">
+            <Setter Property="HorizontalOptions" Value="End" />
+        </Style>
+
+        <Style x:Key="TextMessage" TargetType="Border">
+            <Setter Property="WidthRequest" Value="370" />
+            <Setter Property="HorizontalOptions" Value="Start" />
+            <Setter Property="Padding" Value="5,5,5,10" />
+            <Setter Property="BackgroundColor" Value="{StaticResource White}" />
+            <Setter Property="Stroke" Value="{StaticResource LightGrey}" />
+            <Setter Property="StrokeThickness" Value="2" />
+            <Setter Property="StrokeShape" Value="RoundRectangle 4,4,4,4" />
+        </Style>
+
+        <!-- This style is used in runtime -->
+        <Style x:Key="OwnerTextMessage" TargetType="Border" BasedOn="{StaticResource TextMessage}">
+            <Setter Property="HorizontalOptions" Value="End" />
+            <Setter Property="BackgroundColor" Value="{StaticResource Blue}" />
+            <Setter Property="Stroke" Value="{StaticResource DarkBlue}" />
+        </Style>
+
+        <!-- This style is used in runtime -->
+        <Style x:Key="OwnerOriginalTextMessage" TargetType="Border" BasedOn="{StaticResource TextMessage}">
+            <Setter Property="BackgroundColor" Value="{StaticResource DarkBlue}" />
+        </Style>
+
+        <Style x:Key="TextTitle" TargetType="Label">
+            <Setter Property="FontFamily" Value="MediumFont" />
+            <Setter Property="FontSize" Value="{StaticResource MediumFont}" />
+            <Setter Property="TextColor" Value="{StaticResource SlateDark}" />
+            <Setter Property="LineBreakMode" Value="TailTruncation" />
+        </Style>
+
+        <!-- This style is used in runtime -->
+        <Style x:Key="OwnerTextTitle" TargetType="Label" BasedOn="{StaticResource TextTitle}">
+            <Setter Property="TextColor" Value="{StaticResource White}" />
+        </Style>
+
+        <!-- This style is used in runtime -->
+        <Style x:Key="OwnerTextSlateLightTitle" TargetType="Label" BasedOn="{StaticResource TextTitle}">
+            <Setter Property="TextColor" Value="{StaticResource SlateLight}" />
+        </Style>
+
+        <Style x:Key="TextContent" TargetType="Label">
+            <Setter Property="FontSize" Value="{StaticResource MediumPlus2Font}" />
+            <Setter Property="TextColor" Value="{StaticResource Slate}" />
+            <Setter Property="LineBreakMode" Value="WordWrap" />
+        </Style>
+
+        <!-- This style is used in runtime -->
+        <Style x:Key="OwnerTextContent" TargetType="Label" BasedOn="{StaticResource TextContent}">
+            <Setter Property="TextColor" Value="{StaticResource Gray}" />
+        </Style>
+
+        <!-- This style is used in runtime -->
+        <Style x:Key="OwnerTextSlateLightContent" TargetType="Label" BasedOn="{StaticResource TextContent}">
+            <Setter Property="TextColor" Value="{StaticResource SlateLight}" />
+        </Style>
+
+        <Style x:Key="BaseAudioMessage" TargetType="barPlayer:BarPlayer">
+            <Setter Property="WidthRequest" Value="370" />
+        </Style>
+
+        <Style x:Key="AudioMessage" TargetType="barPlayer:BarPlayer" BasedOn="{StaticResource BaseAudioMessage}">
+            <Setter Property="HorizontalOptions" Value="Start" />
+        </Style>
+
+        <Style x:Key="OwnerAudioMessage" TargetType="barPlayer:BarPlayer" BasedOn="{StaticResource BaseAudioMessage}">
+            <Setter Property="HorizontalOptions" Value="End" />
+            <Setter Property="PlayerLabelColor" Value="{StaticResource White}" />
+            <Setter Property="PlayerButtonColor" Value="{StaticResource White}" />
+            <Setter Property="TimerLabelColor" Value="{StaticResource White}" />
+            <Setter Property="MainStackBackgroundColor" Value="{StaticResource Blue}" />
+            <Setter Property="MainStackBorderColor" Value="{StaticResource DarkBlue}" />
+            <Setter Property="SeparatorBorderColor" Value="{StaticResource DarkBlue}" />
+            <Setter Property="MinimumTrackColor" Value="{StaticResource AudioPlayerSliderAfterBackground}" />
+            <Setter Property="MaximumTrackColor" Value="{StaticResource AudioPlayerSliderBeforeBackground}" />
+            <Setter Property="ThumbColor" Value="{StaticResource White}" />
+        </Style>
+
+        <!-- This style is used in runtime -->
+        <Style x:Key="OwnerOriginalAudioMessage" TargetType="barPlayer:BarPlayer" BasedOn="{StaticResource OwnerAudioMessage}">
+            <Setter Property="MainStackBackgroundColor" Value="{StaticResource DarkBlue}" />
+            <Setter Property="MainStackBorderColor" Value="{StaticResource Blue}" />
+            <Setter Property="SeparatorBorderColor" Value="{StaticResource Blue}" />
+        </Style>
+
+        <!-- This style is used in runtime -->
+        <Style x:Key="OriginalAudioMessage" TargetType="barPlayer:BarPlayer" BasedOn="{StaticResource OwnerAudioMessage}">
+            <Setter Property="PlayerLabelColor" Value="{StaticResource SlateLight}" />
+            <Setter Property="PlayerButtonColor" Value="{StaticResource Blue}" />
+            <Setter Property="TimerLabelColor" Value="{StaticResource SlateLight}" />
+            <Setter Property="MainStackBackgroundColor" Value="{StaticResource LightGrey}" />
+            <Setter Property="MainStackBorderColor" Value="{StaticResource Gray}" />
+            <Setter Property="SeparatorBorderColor" Value="{StaticResource Gray}" />
+            <Setter Property="ThumbColor" Value="{StaticResource SlateDark}" />
+            <Setter Property="MinimumTrackColor" Value="{StaticResource AudioPlayerSliderBeforeBackground}" />
+            <Setter Property="MaximumTrackColor" Value="{StaticResource Gray}" />
+        </Style>
+
+        <Style x:Key="MessageTrashButton" TargetType="Button" BasedOn="{StaticResource IconButton}">
+            <Setter Property="BorderWidth" Value="0"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="TextColor" Value="{StaticResource Option}"/>
+            <Setter Property="FontSize" Value="50"/>
+            <Setter Property="Margin" Value="5,0"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="HorizontalOptions" Value="End"/>
+        </Style>
+    </ContentView.Resources>
+
+    <ContentView.Content>
+        <Grid>
+            <HorizontalStackLayout x:Name="Message" 
+                                   Style="{StaticResource Message}" 
+                                   Opacity="0" AutomationId="NoteDetailItem">
+                <Button x:Name="MessageTrashButton"
+                    Text="{uiResources:IconExtensions Delete}" 
+                    Style="{StaticResource MessageTrashButton}" 
+                    AutomationId="MessageTrashButton"/>
+                <Border x:Name="TextMessage" Style="{StaticResource TextMessage}" AutomationId="TextMessageContainer">
+                    <VerticalStackLayout>
+                        <Label x:Name="TextMessageAuthor" Style="{StaticResource TextTitle}" AutomationId="TextMessageAuthorLabel" />
+                        <Label x:Name="TextMessageContent" Style="{StaticResource TextContent}" AutomationId="TextMessageContentLabel" />
+                    </VerticalStackLayout>
+                </Border>
+                <Border>
+                    <VerticalStackLayout>
+                        <barPlayer:BarPlayer x:Name="AudioMessage" Style="{StaticResource AudioMessage}" AutomationId="AudioMessageContainer" />
+                        <barPlayer:BarPlayer x:Name="InterpretedAudioMessage" Style="{StaticResource AudioMessage}" AutomationId="InterpretedAudioMessageContainer" />
+                    </VerticalStackLayout>
+                </Border>
+            </HorizontalStackLayout>
+        </Grid>
+    </ContentView.Content>
+</kernel:RenderComponentBase>

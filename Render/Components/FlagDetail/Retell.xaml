@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="flagDetail:RetellViewModel"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:barPlayer="clr-namespace:Render.Components.BarPlayer;assembly=Render"
+                            xmlns:flagDetail="clr-namespace:Render.Components.FlagDetail;assembly=Render"
+                            x:Class="Render.Components.FlagDetail.Retell">
+
+    <barPlayer:BarPlayer x:Name="RetellPlayer" 
+                         WidthRequest="454"
+                         Margin="0,10" 
+                         HorizontalOptions="Start" />
+</kernel:RenderComponentBase>

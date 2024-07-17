@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="userManagement:UserTileViewModel"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:userManagement="clr-namespace:Render.Pages.Configurator.UserManagement;assembly=Render"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:resources="clr-namespace:Render.Resources"
+                            x:Class="Render.Pages.Configurator.UserManagement.UserTile">
+    <ContentView.Resources>
+        <Style x:Key="UserTileFrame" TargetType="Frame">
+            <Setter Property="BackgroundColor" Value="{DynamicResource UserTileFrameBackground}" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="HeightRequest" Value="90" />
+            <Setter Property="HorizontalOptions" Value="Fill" />
+            <Setter Property="Padding" Value="0" />
+        </Style>
+        <Style x:Key="BorderStyle" TargetType="Border">
+            <Setter Property="StrokeThickness" Value="4" />
+            <Setter Property="StrokeShape" Value="RoundRectangle 50" />
+        </Style>
+        <Style x:Key="UserAvatarBorderStyle" TargetType="Border">
+            <Setter Property="StrokeThickness" Value="4" />
+            <Setter Property="StrokeShape" Value="RoundRectangle 8,0,8,0" />
+            <Setter Property="Margin" Value="1"/>
+        </Style>
+    </ContentView.Resources>
+    
+    <Frame Style="{DynamicResource UserTileFrame}" WidthRequest="455"> 
+        <Grid HorizontalOptions="Fill"> 
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <!-- User avatar -->
+            <Border Grid.Column="0" 
+                    Style="{StaticResource UserAvatarBorderStyle}" 
+                    BackgroundColor="{DynamicResource SeparatorBar}">
+                <Border Padding="1"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   Style="{StaticResource BorderStyle}"
+                   BackgroundColor="{DynamicResource MainIconColor}">
+                    <Frame Style="{StaticResource UserIconFrame}" BackgroundColor="{DynamicResource SeparatorBar}"
+                           HeightRequest="50"
+                           WidthRequest="50"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           Padding="0"
+                           Margin="0">
+                        <Label HorizontalOptions="Center" VerticalOptions="End" FontFamily="Icons"
+                               Text="{resources:IconExtensions TeamSingular}"
+                               TextColor="{DynamicResource MainIconColor}"
+                               FontSize="50" />
+                    </Frame>
+                </Border>
+            </Border>
+            
+            <!-- User full name -->
+            <VerticalStackLayout Grid.Column="1"
+                             Margin="13,0,0,0"
+                             Spacing="8"
+                             VerticalOptions="Center" 
+                             HorizontalOptions="Center">
+                    <Label x:Name="UserFullName" 
+                           FontAttributes="Bold"
+                           FontSize="22"
+                           FontFamily="MediumFont"
+                           TextColor="{StaticResource MainText}"
+                           LineBreakMode="TailTruncation" />
+                    <Label x:Name="UserRoles" 
+                           Margin="0"
+                           FontSize="20"
+                           FontFamily="MediumFont"
+                           TextColor="{StaticResource TertiaryText}"
+                           LineBreakMode="TailTruncation" />
+                </VerticalStackLayout>
+            
+            <!-- User type -->
+            <HorizontalStackLayout Grid.Column="3" 
+                                   HorizontalOptions="Fill" 
+                                   Spacing="20"  >
+                <Frame x:Name="UserTypeFrame"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Fill"
+                       CornerRadius="5"
+                       Padding="0">
+                    <Label x:Name="UserTypeLabel"
+                           FontSize="18"
+                           TextTransform="Uppercase"
+                           FontFamily="MediumFont"
+                           TextColor="{StaticResource MainText}"
+                           HorizontalTextAlignment="Center"
+                           Padding="10" />
+                </Frame>
+                <Label x:Name="Chevron" Text="{DynamicResource ChevronRight}"
+                       TextColor="{DynamicResource MainIconColor}"
+                       Padding="10"
+                       VerticalOptions="Center" 
+                       FontFamily="Icons" 
+                       FontSize="30" 
+                       HorizontalOptions="End" />
+            </HorizontalStackLayout>
+              
+        </Grid>
+        
+        <!-- Effect for when we have a create/edit user page -->
+        <Frame.GestureRecognizers>
+            <TapGestureRecognizer x:Name="TapGestureRecognizer" Tapped="OnButtonClicked" />
+        </Frame.GestureRecognizers>
+    </Frame>
+</kernel:RenderComponentBase>

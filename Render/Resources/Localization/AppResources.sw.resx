@@ -1,0 +1,1664 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Add" xml:space="preserve">
+    <value>Ongeza</value>
+  </data>
+  <data name="AddAProject" xml:space="preserve">
+    <value>Ongeza Mradi</value>
+  </data>
+  <data name="AddASection" xml:space="preserve">
+    <value>Ongeza Sehemu</value>
+  </data>
+  <data name="AddATeam" xml:space="preserve">
+    <value>Ongeza Timu</value>
+  </data>
+  <data name="Added" xml:space="preserve">
+    <value>Imeongezwa</value>
+  </data>
+  <data name="Adding" xml:space="preserve">
+    <value>Kuongeza</value>
+  </data>
+  <data name="AddingProject" xml:space="preserve">
+    <value>Inaongeza Mradi...</value>
+  </data>
+  <data name="AddNew" xml:space="preserve">
+    <value>Ongeza Mpya</value>
+  </data>
+  <data name="AddProject" xml:space="preserve">
+    <value>Ongeza Mradi</value>
+  </data>
+  <data name="AddProjectViaId" xml:space="preserve">
+    <value>Ongeza Mradi kupitia Kitambulisho</value>
+  </data>
+  <data name="AddSection" xml:space="preserve">
+    <value>Ongeza Sehemu</value>
+  </data>
+  <data name="AddStage" xml:space="preserve">
+    <value>Ongeza Hatua</value>
+  </data>
+  <data name="AddStageHere" xml:space="preserve">
+    <value>Buruta jukwaa hapa</value>
+  </data>
+  <data name="AddTeam" xml:space="preserve">
+    <value>Ongeza Timu</value>
+  </data>
+  <data name="AddUser" xml:space="preserve">
+    <value>Ongeza Mtumiaji</value>
+  </data>
+  <data name="AddWorkflowStage" xml:space="preserve">
+    <value>Ongeza Hatua ya Mtiririko wa Kazi</value>
+  </data>
+  <data name="AllowEditing" xml:space="preserve">
+    <value>Ruhusu Kuhariri</value>
+  </data>
+  <data name="AllSections" xml:space="preserve">
+    <value>Sehemu Zote</value>
+  </data>
+  <data name="AllSectionsAssigned" xml:space="preserve">
+    <value>Sehemu zote zimepewa.</value>
+  </data>
+  <data name="Approval" xml:space="preserve">
+    <value>Ruhusa</value>
+  </data>
+  <data name="ApprovalSubmitted" xml:space="preserve">
+    <value>idhini imewasilishwa</value>
+  </data>
+  <data name="Approve" xml:space="preserve">
+    <value>Idhinisha</value>
+  </data>
+  <data name="Approved" xml:space="preserve">
+    <value>Imeidhinishwa</value>
+  </data>
+  <data name="ApprovedByLabel" xml:space="preserve">
+    <value>Imeidhinishwa na:</value>
+  </data>
+  <data name="ApprovedDraft" xml:space="preserve">
+    <value>Umeidhinisha rasimu</value>
+  </data>
+  <data name="ApproveSection" xml:space="preserve">
+    <value>Idhinisha Sehemu ya {0}</value>
+  </data>
+  <data name="ArchivedDrafts" xml:space="preserve">
+    <value>Rasimu Zilizohifadhiwa</value>
+  </data>
+  <data name="ArchivedNotes" xml:space="preserve">
+    <value>Vidokezo Vilivyohifadhiwa</value>
+  </data>
+  <data name="ArrangeWorkflowStages" xml:space="preserve">
+    <value>Panga Hatua za Mtiririko wa Kazi</value>
+  </data>
+  <data name="Assigned" xml:space="preserve">
+    <value>{0} Imekabidhiwa</value>
+  </data>
+  <data name="AssignToTranslator" xml:space="preserve">
+    <value>Mkabidhi Mtafsiri</value>
+  </data>
+  <data name="AudioClip" xml:space="preserve">
+    <value>Kipande cha Sauti</value>
+  </data>
+  <data name="AudioNote" xml:space="preserve">
+    <value>Ujumbe wa Sauti</value>
+  </data>
+  <data name="BackTranslate" xml:space="preserve">
+    <value>Tafsiri Asili</value>
+  </data>
+  <data name="BackTranslate1" xml:space="preserve">
+    <value>Tafsiri Asili ya 1</value>
+  </data>
+  <data name="BackTranslate2" xml:space="preserve">
+    <value>Tafsiri Asili ya 2</value>
+  </data>
+  <data name="BackTranslator" xml:space="preserve">
+    <value>Mtafsiri Asilia</value>
+  </data>
+  <data name="BackTranslator2" xml:space="preserve">
+    <value>Mtafsiri wa Nyuma 2</value>
+  </data>
+  <data name="Both" xml:space="preserve">
+    <value>Zote mbili</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Ghairi</value>
+  </data>
+  <data name="Canceled" xml:space="preserve">
+    <value>Imeghairiwa</value>
+  </data>
+  <data name="Canceling" xml:space="preserve">
+    <value>Inaghairi</value>
+  </data>
+  <data name="Check" xml:space="preserve">
+    <value>Angalia</value>
+  </data>
+  <data name="Check2" xml:space="preserve">
+    <value>Angalia 2</value>
+  </data>
+  <data name="ChooseProjectsForDeviceMessage" xml:space="preserve">
+    <value>Chagua miradi ambayo ungependa kuhusisha na kifaa hiki.</value>
+  </data>
+  <data name="ChosenDraft" xml:space="preserve">
+    <value>Rasimu iliyochaguliwa</value>
+  </data>
+  <data name="Chunk" xml:space="preserve">
+    <value>Kipande {0}</value>
+  </data>
+  <data name="ClearSegmentMessage1" xml:space="preserve">
+    <value>Kusonga mbele kutaondoa seti ya sasa ya sehemu ambazo kifungu hiki kimegawanywa.</value>
+  </data>
+  <data name="ClearSegmentMessage2" xml:space="preserve">
+    <value>Ikiwa sehemu iliyotangulia iliundwa maalum na sio seti chaguomsingi sehemu hizi haziwezi kurejeshwa.</value>
+  </data>
+  <data name="ClearSegments" xml:space="preserve">
+    <value>Futa Sehemu</value>
+  </data>
+  <data name="DeleteSnapshots" xml:space="preserve">
+    <value>Futa Picha Zote Mbili</value>
+  </data>
+  <data name="ClearSnapshotsDescription" xml:space="preserve">
+    <value>Picha zote mbili zitatupwa. Hii itasogeza mbele sehemu kwa muhtasari wake wa awali.</value>
+  </data>
+  <data name="CombinedBackTranslate" xml:space="preserve">
+    <value>Tafsiri Asili iliyowekwa Pamoja</value>
+  </data>
+  <data name="CombineSegmentTitle" xml:space="preserve">
+    <value>Unganisha - Kifungu {0}</value>
+  </data>
+  <data name="CommunityCheck" xml:space="preserve">
+    <value>Ukaguzi wa Jamii</value>
+  </data>
+  <data name="CommunityRetellPassage" xml:space="preserve">
+    <value>Kifungu {0} - Eleza upya</value>
+  </data>
+  <data name="CommunityRevise" xml:space="preserve">
+    <value>Marekebisho ya Jamii</value>
+  </data>
+  <data name="CommunitySetup" xml:space="preserve">
+    <value>Mipangilio ya Jamii</value>
+  </data>
+  <data name="CommunityTest" xml:space="preserve">
+    <value>Jaribio la Jamii</value>
+  </data>
+  <data name="CommunityTestRevise" xml:space="preserve">
+    <value>Marekebisho ya Jaribio la Jamii</value>
+  </data>
+  <data name="CommunityTestSetup" xml:space="preserve">
+    <value>Mipangilio ya Jamii</value>
+  </data>
+  <data name="CompleteWork" xml:space="preserve">
+    <value>Kamilisha Kazi</value>
+  </data>
+  <data name="CompleteWorkMessage" xml:space="preserve">
+    <value>Hatua hii itaondolewa mara tu kazi yoyote iliyo katika mchakato itakua imekamilika kwanza.</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Thibitisha</value>
+  </data>
+  <data name="Confirmation" xml:space="preserve">
+    <value>Uthibitisho</value>
+  </data>
+  <data name="Consultant" xml:space="preserve">
+    <value>Mshauri</value>
+  </data>
+  <data name="ConsultantApproval" xml:space="preserve">
+    <value>Idhini ya Mshauri</value>
+  </data>
+  <data name="ConsultantCheck" xml:space="preserve">
+    <value>Ukaguzi wa Mshauri</value>
+  </data>
+  <data name="ConsultantLanguage" xml:space="preserve">
+    <value>Lugha ya Mshauri</value>
+  </data>
+  <data name="ConsultantRevise" xml:space="preserve">
+    <value>Marekebisho ya Mshauri</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>Endelea</value>
+  </data>
+  <data name="CopyPreviousQuestions" xml:space="preserve">
+    <value>Nakili Maswali Yaliyotangulia</value>
+  </data>
+  <data name="CopyQuestions" xml:space="preserve">
+    <value>Nakili Maswali</value>
+  </data>
+  <data name="Current" xml:space="preserve">
+    <value>Ya sasa {0}</value>
+  </data>
+  <data name="DeactivateStepWarning" xml:space="preserve">
+    <value>Unapozima hatua sehemu zote zitahamia hatua inayofuata katika utendakazi</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Futa</value>
+  </data>
+  <data name="DeleteSnapshotsConfirmation" xml:space="preserve">
+    <value>Je, una uhakika kuwa ungependa kufuta vijipicha vyote viwili?</value>
+  </data>
+  <data name="DeleteUser" xml:space="preserve">
+    <value>Futa mtumiaji</value>
+  </data>
+  <data name="DeleteUserMessage" xml:space="preserve">
+    <value>Kufuta {0} pia kutaondoa kazi zote zilizochaguliwa nao. Huwezi kutendua kitendo hiki.</value>
+  </data>
+  <data name="DeleteUserTitle" xml:space="preserve">
+    <value>Ungependa kufuta mtumiaji?</value>
+  </data>
+  <data name="DividePassageTitle" xml:space="preserve">
+    <value>Gawanya Kifungu</value>
+  </data>
+  <data name="Do2StepBackTranslate" xml:space="preserve">
+    <value>Hatua 2 ya Tafsiri Asili</value>
+  </data>
+  <data name="DoNoteInterpret" xml:space="preserve">
+    <value>Jumuisha Ufafanuzi wa Maandishi</value>
+  </data>
+  <data name="DoNoteReview" xml:space="preserve">
+    <value>Kumbuka Mwongozo</value>
+  </data>
+  <data name="DoPassageBackTranslate1" xml:space="preserve">
+    <value>Fanya Tafsiri Asili kwa Tafsiri ya 1</value>
+  </data>
+  <data name="DoPassageBackTranslate2" xml:space="preserve">
+    <value>Fanya Tafsiri Asili kwa Tafsiri ya 2</value>
+  </data>
+  <data name="DoPassageListen" xml:space="preserve">
+    <value>Jumuisha Usikivu wa Kifungu</value>
+  </data>
+  <data name="DoPassageReview" xml:space="preserve">
+    <value>Uhakiki wa Kifungu</value>
+  </data>
+  <data name="DoPassageTranscribe" xml:space="preserve">
+    <value>Nakili Kifungu</value>
+  </data>
+  <data name="DoQuestionAndResponse" xml:space="preserve">
+    <value>Jumuisha Swali na Jibu</value>
+  </data>
+  <data name="DoRetell" xml:space="preserve">
+    <value>Andika Tena</value>
+  </data>
+  <data name="DoSectionListen" xml:space="preserve">
+    <value>Jumuisha Sehemu ya Kusikiliza</value>
+  </data>
+  <data name="DoSectionReview" xml:space="preserve">
+    <value>Jumuisha Uhakiki wa Sehemu</value>
+  </data>
+  <data name="DoSegmentBackTranslate1" xml:space="preserve">
+    <value>Fanya Tafsiri Asili kwa Sehemu ya Tafsiri ya 1</value>
+  </data>
+  <data name="DoSegmentBackTranslate2" xml:space="preserve">
+    <value>Fanya Tafsiri Asili kwa Sehemu ya Tafsiri ya 2</value>
+  </data>
+  <data name="DoSegmentTranscribe" xml:space="preserve">
+    <value>Nakili Sehemu</value>
+  </data>
+  <data name="DoTranscribe" xml:space="preserve">
+    <value>Nakili</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Pakua</value>
+  </data>
+  <data name="Downloaded" xml:space="preserve">
+    <value>Imepakuliwa</value>
+  </data>
+  <data name="DownloadingProjects" xml:space="preserve">
+    <value>Inapakua Miradi</value>
+  </data>
+  <data name="Draft" xml:space="preserve">
+    <value>Rasimu</value>
+  </data>
+  <data name="DraftedByLabel" xml:space="preserve">
+    <value>Imeandaliwa na:</value>
+  </data>
+  <data name="DraftNotes" xml:space="preserve">
+    <value>Rasimu ya {0} Vidokezo</value>
+  </data>
+  <data name="DraftPassage" xml:space="preserve">
+    <value>Tafsiri Kifungu {0}</value>
+  </data>
+  <data name="DraftRecord" xml:space="preserve">
+    <value>Rasimu ya Rekodi</value>
+  </data>
+  <data name="DraftReplacementModalTitle" xml:space="preserve">
+    <value>Chagua Rasimu ya Kubadilisha</value>
+  </data>
+  <data name="DraftReview" xml:space="preserve">
+    <value>Rasimu ya {0} Mapitio</value>
+  </data>
+  <data name="Drafts" xml:space="preserve">
+    <value>Rasimu</value>
+  </data>
+  <data name="DraftSelect" xml:space="preserve">
+    <value>Rasimu ya Chaguzi</value>
+  </data>
+  <data name="DraftSelection" xml:space="preserve">
+    <value>Uteuzi wa Rasimu</value>
+  </data>
+  <data name="DraftTitle" xml:space="preserve">
+    <value>Rasimu {0}</value>
+  </data>
+  <data name="EditPassage" xml:space="preserve">
+    <value>Badilisha Kifungu {0}</value>
+  </data>
+  <data name="EditUser" xml:space="preserve">
+    <value>Badilisha Mtumiaji</value>
+  </data>
+  <data name="EmptyCollectionMessage" xml:space="preserve">
+    <value>Bofya "Ongeza mpya" hapo juu ili kuongeza mradi.</value>
+  </data>
+  <data name="EmptyCollectionMessageTitle" xml:space="preserve">
+    <value>Orodha ya mradi ni tupu.</value>
+  </data>
+  <data name="EmptyOffloadCollectionMessage" xml:space="preserve">
+    <value>Hakuna miradi ya kupakua</value>
+  </data>
+  <data name="EmptyPassword" xml:space="preserve">
+    <value>Nenosiri haliwezi kuwa tupu</value>
+  </data>
+  <data name="End" xml:space="preserve">
+    <value>Malizia</value>
+  </data>
+  <data name="Enter32digitId" xml:space="preserve">
+    <value>Weka kitambulisho chenye tarakimu 32...</value>
+  </data>
+  <data name="EnterAProjectName" xml:space="preserve">
+    <value>Weka jina la mradi</value>
+  </data>
+  <data name="EnterLanguage" xml:space="preserve">
+    <value>Weka Jina la Lugha</value>
+  </data>
+  <data name="EnterPasswordToRestoreSection" xml:space="preserve">
+    <value>Weka nenosiri lako ili kufungua na kurejesha sehemu hii</value>
+  </data>
+  <data name="EnterSectionNumber" xml:space="preserve">
+    <value>Weka nambari ya sehemu...</value>
+  </data>
+  <data name="EnterYourPassword" xml:space="preserve">
+    <value>Weka Nenosiri Lako</value>
+  </data>
+  <data name="EnterYourUsername" xml:space="preserve">
+    <value>Weka Jina Lako la Mtumiaji</value>
+  </data>
+  <data name="ErrorAddingProject" xml:space="preserve">
+    <value>Kulikuwa na hitilafu wakati wa kuongeza mradi huu.</value>
+  </data>
+  <data name="ErrorConnectLocalMachine" xml:space="preserve">
+    <value>Kulikuwa na hitilafu wakati wa kujaribu kuunganisha kwa mashine ya ndani.</value>
+  </data>
+  <data name="ExportAudio" xml:space="preserve">
+    <value>Hamisha Sauti</value>
+  </data>
+  <data name="ExportChecked" xml:space="preserve">
+    <value>Hamisho Imechunguzwa</value>
+  </data>
+  <data name="Exporting" xml:space="preserve">
+    <value>Inasafirisha {0} ya {1}</value>
+  </data>
+  <data name="FontSize" xml:space="preserve">
+    <value>Ukubwa wa Herufi</value>
+  </data>
+  <data name="ForTeam" xml:space="preserve">
+    <value>Kwa {0}</value>
+  </data>
+  <data name="Generate" xml:space="preserve">
+    <value>Tengeneza</value>
+  </data>
+  <data name="Generic" xml:space="preserve">
+    <value>Kawaida</value>
+  </data>
+  <data name="GlobalUser" xml:space="preserve">
+    <value>Mtumiaji wa Ulimwenguni</value>
+  </data>
+  <data name="Grid" xml:space="preserve">
+    <value>Gridi</value>
+  </data>
+  <data name="HaveBeenCleared" xml:space="preserve">
+    <value>yamesafishwa</value>
+  </data>
+  <data name="HigherPriority" xml:space="preserve">
+    <value>Kipaumbele cha Juu</value>
+  </data>
+  <data name="HowToResolve" xml:space="preserve">
+    <value>Je, ungependa kutatua suala hili vipi?</value>
+  </data>
+  <data name="ImproperlyFormattedId" xml:space="preserve">
+    <value>Kitambulisho ambacho hakijaumbizwa ipasavyo. Tafadhali weka tena.</value>
+  </data>
+  <data name="IncludeBackTranslate" xml:space="preserve">
+    <value>Jumuisha Tafsiri Asilia</value>
+  </data>
+  <data name="IncludeNoteListenGuidance" xml:space="preserve">
+    <value>Jumuisha Mwongozo wa Maandishi ya Usikivu</value>
+  </data>
+  <data name="IncludePassageBackTranslate" xml:space="preserve">
+    <value>Jumuisha Kifungu cha Tafsiri Asilia</value>
+  </data>
+  <data name="IncludePassageListen" xml:space="preserve">
+    <value>Jumuisha Usikivu wa Kifungu</value>
+  </data>
+  <data name="IncludePassageReview" xml:space="preserve">
+    <value>Jumuisha Uhakiki wa Kifungu</value>
+  </data>
+  <data name="IncludePassageReviewAfterReRecording" xml:space="preserve">
+    <value>Jumuisha Uhakiki wa Kifungu Baada ya Kurekodi Upya</value>
+  </data>
+  <data name="IncludeSegmentBackTranslate" xml:space="preserve">
+    <value>Jumuisha Sehemu ya Tafsiri Asilia</value>
+  </data>
+  <data name="IncorrectPassword" xml:space="preserve">
+    <value>Nenosiri hili halilingani na jina hili la mtumiaji</value>
+  </data>
+  <data name="IncorrectPattern" xml:space="preserve">
+    <value>Mchoro usio sahihi. Tafadhali jaribu tena.</value>
+  </data>
+  <data name="Input" xml:space="preserve">
+    <value>Ingizo</value>
+  </data>
+  <data name="InsertPassword" xml:space="preserve">
+    <value>Weka nenosiri hapa</value>
+  </data>
+  <data name="IntermediateLanguage" xml:space="preserve">
+    <value>Lugha ya Kati</value>
+  </data>
+  <data name="Interpret" xml:space="preserve">
+    <value>Tafsiri</value>
+  </data>
+  <data name="Interpreted" xml:space="preserve">
+    <value>Imefasiriwa</value>
+  </data>
+  <data name="InterpretToConsultant" xml:space="preserve">
+    <value>Tafsiri Kwa Mshauri</value>
+  </data>
+  <data name="InterpretToTranslator" xml:space="preserve">
+    <value>Tafsiri Kwa Mfasiri</value>
+  </data>
+  <data name="Iteration" xml:space="preserve">
+    <value>Kurudia</value>
+  </data>
+  <data name="Jump" xml:space="preserve">
+    <value>Ruka</value>
+  </data>
+  <data name="JumpToSection" xml:space="preserve">
+    <value>Ruka kwenye Sehemu</value>
+  </data>
+  <data name="LastCompletedStage" xml:space="preserve">
+    <value>Hatua Iliyokamilika Mwisho</value>
+  </data>
+  <data name="LastSubmittedAudioLabel" xml:space="preserve">
+    <value>Sauti Iliyowasilishwa Mwisho</value>
+  </data>
+  <data name="LastSync" xml:space="preserve">
+    <value>Usawazishaji wa Mwisho</value>
+  </data>
+  <data name="LeaveFreeCut" xml:space="preserve">
+    <value>Wacha Sehemu ya Kukatwa</value>
+  </data>
+  <data name="LeaveFreeCutMessage1" xml:space="preserve">
+    <value>Ukiacha Sehemu ya Kakatwa utapoteza kazi yoyote ambayo imetolewa hadi sasa.</value>
+  </data>
+  <data name="LeaveFreeCutMessage2" xml:space="preserve">
+    <value>Kamilisha hatua hii ili kuhifadhi kazi yoyote ambayo imeundwa.</value>
+  </data>
+  <data name="Localization" xml:space="preserve">
+    <value>Ujanibishaji</value>
+  </data>
+  <data name="LoggingIn" xml:space="preserve">
+    <value>Inaingia...</value>
+  </data>
+  <data name="LogIn" xml:space="preserve">
+    <value>Ingia</value>
+  </data>
+  <data name="LogOut" xml:space="preserve">
+    <value>Toka</value>
+  </data>
+  <data name="LowerPriority" xml:space="preserve">
+    <value>Kipaumbele cha chini</value>
+  </data>
+  <data name="ManageDivisions" xml:space="preserve">
+    <value>Dhibiti Sehemu za Sehemu {0}</value>
+  </data>
+  <data name="ManageUsers" xml:space="preserve">
+    <value>Dhibiti Watumiaji</value>
+  </data>
+  <data name="MarkQuestions" xml:space="preserve">
+    <value>Weka alama kwenye Kifungu cha Maswali {0}</value>
+  </data>
+  <data name="MicNotConnectedMessage" xml:space="preserve">
+    <value>Kinasasauti hakikutambuliwa.  Tafadhali unganisha kinasasauti kwenye mfumo wako ili kurekodi sauti.</value>
+  </data>
+  <data name="MicNotConnectedTitle" xml:space="preserve">
+    <value>Kinasasauti hakijaunganishwa</value>
+  </data>
+  <data name="MicrophoneAccessMessage" xml:space="preserve">
+    <value>Mtoaji hana ruhusa ya kutumia kinasasauti chako. Ili kurekebisha hili, nenda kwenye mipangilio ya faragha ya kinasasauti na uwashe ufikiaji wa kinasasauti kwa Mtoaji.</value>
+  </data>
+  <data name="MicrophoneAccessTitle" xml:space="preserve">
+    <value>Ufikiaji wa kinasasauti unahitajika</value>
+  </data>
+  <data name="MultipleTeamAssignmentLabel" xml:space="preserve">
+    <value>Mtumiaji Mmoja Hawezi Kukabidhiwa kwa Timu Nyingi</value>
+  </data>
+  <data name="MultipleTeamAssignmentMessage" xml:space="preserve">
+    <value>Tafadhali kabidhi mtumiaji wa kipekee kwa kila timu binafsi.</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Jina</value>
+  </data>
+  <data name="NoAudio" xml:space="preserve">
+    <value>Hakuna Sauti</value>
+  </data>
+  <data name="NoInternetConnection" xml:space="preserve">
+    <value>Hakuna Muunganisho wa Mtandao</value>
+  </data>
+  <data name="NoReviewedSections" xml:space="preserve">
+    <value>Hakuna sehemu zilizokaguliwa kwa wakati huu.</value>
+  </data>
+  <data name="NoSectionAudioForStage" xml:space="preserve">
+    <value>Hakuna Sehemu ya Sauti kwa Hatua hii</value>
+  </data>
+  <data name="NoSelfCheck" xml:space="preserve">
+    <value>Hakuna Kujiangalia</value>
+  </data>
+  <data name="NotAbleToLogin" xml:space="preserve">
+    <value>Huwezi kuingia.</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>Kumbuka</value>
+  </data>
+  <data name="NoteInterpret" xml:space="preserve">
+    <value>Tafsiri Andiko</value>
+  </data>
+  <data name="NoteListen" xml:space="preserve">
+    <value>Sikiliza Maandishi</value>
+  </data>
+  <data name="Notes" xml:space="preserve">
+    <value>Vidokezo</value>
+  </data>
+  <data name="NoteTranslator" xml:space="preserve">
+    <value>Mtafsiri wa Kuandika</value>
+  </data>
+  <data name="NotInWorkflow" xml:space="preserve">
+    <value>Sio sehemu ya mtiririko wa kazi tena</value>
+  </data>
+  <data name="NoUnreviewedSections" xml:space="preserve">
+    <value>Hakuna sehemu ambazo hazijakaguliwa kwa wakati huu.</value>
+  </data>
+  <data name="NullUsername" xml:space="preserve">
+    <value>Jina la mtumiaji haliwezi kuwa tupu</value>
+  </data>
+  <data name="Offload" xml:space="preserve">
+    <value>Pakua</value>
+  </data>
+  <data name="OffloadData" xml:space="preserve">
+    <value>Data ya Kupakia</value>
+  </data>
+  <data name="Offloading" xml:space="preserve">
+    <value>Inapakia</value>
+  </data>
+  <data name="OffloadWarning" xml:space="preserve">
+    <value>{0} ilisawazishwa mara ya mwisho mnamo {1}. Je, una uhakika kuwa ungependa kupakua mradi huu?</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>SAWA</value>
+  </data>
+  <data name="Original" xml:space="preserve">
+    <value>Asili</value>
+  </data>
+  <data name="OriginalLanguage" xml:space="preserve">
+    <value>Lugha Asilia</value>
+  </data>
+  <data name="OriginalNote" xml:space="preserve">
+    <value>Nakala Asili</value>
+  </data>
+  <data name="OriginalPassageTitle" xml:space="preserve">
+    <value>Kifungu cha {0} (Asili)</value>
+  </data>
+  <data name="Passage" xml:space="preserve">
+    <value>Kifungu {0}</value>
+  </data>
+  <data name="PassageBackTranslate" xml:space="preserve">
+    <value>Tafsiri Asilia</value>
+  </data>
+  <data name="PassageDivide" xml:space="preserve">
+    <value>Mgawanyiko wa Kifungu</value>
+  </data>
+  <data name="PassageDraftListen" xml:space="preserve">
+    <value>Kifungu cha {0} Sikiliza Rasimu</value>
+  </data>
+  <data name="PassageListen" xml:space="preserve">
+    <value>Sikiliza Kifungu</value>
+  </data>
+  <data name="PassageListenOnly" xml:space="preserve">
+    <value>Sikiliza Kifungu pekee</value>
+  </data>
+  <data name="PassageListenTitle" xml:space="preserve">
+    <value>Kifungu {0} Sikiliza</value>
+  </data>
+  <data name="PassageNumber" xml:space="preserve">
+    <value>Kifungu {0}</value>
+  </data>
+  <data name="PassagePeerReview" xml:space="preserve">
+    <value>Kifungu cha {0} Maoni ya Rika</value>
+  </data>
+  <data name="PassageRetell" xml:space="preserve">
+    <value>Eleza Kifungu Tena</value>
+  </data>
+  <data name="PassageReview" xml:space="preserve">
+    <value>Uhakiki wa Kifungu</value>
+  </data>
+  <data name="PassageReviewAfterReRecording" xml:space="preserve">
+    <value>Uhakiki wa Kifungu Baada ya Kurekodi Upya</value>
+  </data>
+  <data name="PassageSelect" xml:space="preserve">
+    <value>Chagua Kifungu</value>
+  </data>
+  <data name="PassageSelection" xml:space="preserve">
+    <value>Uchaguzi wa Kifungu</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Nenosiri</value>
+  </data>
+  <data name="PasswordGrid" xml:space="preserve">
+    <value>Gridi ya Nenosiri</value>
+  </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>Nenosiri linahitajika</value>
+  </data>
+  <data name="PasswordType" xml:space="preserve">
+    <value>Aina ya Nenosiri</value>
+  </data>
+  <data name="PeerCheck" xml:space="preserve">
+    <value>Ukaguzi wa Rika</value>
+  </data>
+  <data name="PeerReview" xml:space="preserve">
+    <value>Uhakiki wa Rika</value>
+  </data>
+  <data name="PeerRevise" xml:space="preserve">
+    <value>Marekebisho ya Rika</value>
+  </data>
+  <data name="PleaseConnect" xml:space="preserve">
+    <value>Tafadhali unganisha kwenye intaneti na uanze Kutoa tena.</value>
+  </data>
+  <data name="PleaseLogIn" xml:space="preserve">
+    <value>Tafadhali ingia ili kuanza.</value>
+  </data>
+  <data name="PrecedingAudio" xml:space="preserve">
+    <value>Sauti Iliyotangulia</value>
+  </data>
+  <data name="PreviousDraft" xml:space="preserve">
+    <value>Rasimu ya awali</value>
+  </data>
+  <data name="Proceed" xml:space="preserve">
+    <value>Endelea</value>
+  </data>
+  <data name="Processes" xml:space="preserve">
+    <value>Michakato</value>
+  </data>
+  <data name="ProjectAddedSuccesfully" xml:space="preserve">
+    <value>Mradi huu uliongezwa kwa mafanikio.</value>
+  </data>
+  <data name="ProjectConfiguration" xml:space="preserve">
+    <value>Usanidi wa Mradi</value>
+  </data>
+  <data name="ProjectDeletedTitle" xml:space="preserve">
+    <value>Mradi ulifutwa</value>
+  </data>
+  <data name="ProjectHome" xml:space="preserve">
+    <value>Mradi wa Nyumbani</value>
+  </data>
+  <data name="ProjectId" xml:space="preserve">
+    <value>Kitambulisho cha mradi</value>
+  </data>
+  <data name="ProjectList" xml:space="preserve">
+    <value>Orodha ya Mradi</value>
+  </data>
+  <data name="ProjectsDownloadedSuccessfully" xml:space="preserve">
+    <value>Imepakua Miradi kwa Mafanikio</value>
+  </data>
+  <data name="ProjectTeams" xml:space="preserve">
+    <value>Timu za Mradi</value>
+  </data>
+  <data name="ProjectUsers" xml:space="preserve">
+    <value>Watumiaji wa Mradi</value>
+  </data>
+  <data name="ProjectWorkflow" xml:space="preserve">
+    <value>Mtiririko wa kazi wa mradi</value>
+  </data>
+  <data name="QuestionFormatted" xml:space="preserve">
+    <value>Swali {0}</value>
+  </data>
+  <data name="QuestionAndResponse" xml:space="preserve">
+    <value>Swali na Jibu</value>
+  </data>
+  <data name="QuestionPlacement" xml:space="preserve">
+    <value>Uwekaji wa Maswali</value>
+  </data>
+  <data name="QuestionSet" xml:space="preserve">
+    <value>Seti ya Swali {0}</value>
+  </data>
+  <data name="Record" xml:space="preserve">
+    <value>Rekodi</value>
+  </data>
+  <data name="RecordedSegmentWarningConfirmation" xml:space="preserve">
+    <value>Kamilisha Kuunganisha</value>
+  </data>
+  <data name="RecordedSegmentWarningMessage" xml:space="preserve">
+    <value>Sehemu iliyotangulia tayari ina sauti ya majibu. Ukiunganisha sehemu hizi mbili pamoja sauti iliyorekodiwa hapo awali itapotea.</value>
+  </data>
+  <data name="RecordedSegmentWarningTitle" xml:space="preserve">
+    <value>Majibu yatapotea</value>
+  </data>
+  <data name="RecordInterpretation" xml:space="preserve">
+    <value>Rekodi Ufafanuzi</value>
+  </data>
+  <data name="RecordNewDraft" xml:space="preserve">
+    <value>Rekodi Rasimu Mpya</value>
+  </data>
+  <data name="RecordQuestion" xml:space="preserve">
+    <value>Rekodi Swali (Q{0})</value>
+  </data>
+  <data name="RecordQuestionTitle" xml:space="preserve">
+    <value>Nakili Swali</value>
+  </data>
+  <data name="RecordResponse" xml:space="preserve">
+    <value>Rekodi ya Majibu</value>
+  </data>
+  <data name="RecordRetell" xml:space="preserve">
+    <value>Rekodi Simulizi</value>
+  </data>
+  <data name="RecordStandardQuestion" xml:space="preserve">
+    <value>Nakili Swali la Kawaida {0}</value>
+  </data>
+  <data name="RecordTranslation" xml:space="preserve">
+    <value>Rekodi Tafsiri</value>
+  </data>
+  <data name="Recovery" xml:space="preserve">
+    <value>Kupata Tena</value>
+  </data>
+  <data name="References" xml:space="preserve">
+    <value>Marejeleo</value>
+  </data>
+  <data name="RemoveWork" xml:space="preserve">
+    <value>Ondoa Kazi</value>
+  </data>
+  <data name="RemoveWorkMessage" xml:space="preserve">
+    <value>Hatua hii itaondolewa mara moja na kazi zote zilizo katika mchakato zitapotea.</value>
+  </data>
+  <data name="RenderUser" xml:space="preserve">
+    <value>Mtumiaji</value>
+  </data>
+  <data name="Replace" xml:space="preserve">
+    <value>Badilisha</value>
+  </data>
+  <data name="RequireNoteListen" xml:space="preserve">
+    <value>Kumbuka Mwongozo wa Kusikiliza</value>
+  </data>
+  <data name="RequireNoteReview" xml:space="preserve">
+    <value>Kumbuka Mwongozo wa Mapitio</value>
+  </data>
+  <data name="RequirePassageListen" xml:space="preserve">
+    <value>Mwongozo wa Usikilizaji wa kifungu</value>
+  </data>
+  <data name="RequirePassageReview" xml:space="preserve">
+    <value>Mwongozo wa Mapitio ya Kifungu</value>
+  </data>
+  <data name="RequirePassageTranscribeListen" xml:space="preserve">
+    <value>Mwongozo wa Kunukuu Kifungu</value>
+  </data>
+  <data name="RequireQuestionContextListen" xml:space="preserve">
+    <value>Muktadha wa Swali Mwongozo wa Kusikiliza</value>
+  </data>
+  <data name="RequireRecordResponse" xml:space="preserve">
+    <value>Jumuisha Mwongozo wa Majibu</value>
+  </data>
+  <data name="RequireReviewAfterReRecording" xml:space="preserve">
+    <value>Uhakiki wa Kifungu Baada ya Mwongozo wa Kurekodi Upya</value>
+  </data>
+  <data name="RequireSectionListen" xml:space="preserve">
+    <value>Sehemu ya Mwongozo wa Kusikiliza</value>
+  </data>
+  <data name="RequireSectionReview" xml:space="preserve">
+    <value>Mwongozo wa Mapitio ya Sehemu</value>
+  </data>
+  <data name="RequireSegmentTranscribeListen" xml:space="preserve">
+    <value>Mwongozo wa Kunukuu Sehemu</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Weka upya</value>
+  </data>
+  <data name="ResetSection" xml:space="preserve">
+    <value>Weka upya Sehemu</value>
+  </data>
+  <data name="Response" xml:space="preserve">
+    <value>Jibu {0}</value>
+  </data>
+  <data name="Restore" xml:space="preserve">
+    <value>Rejesha</value>
+  </data>
+  <data name="RestoreSection" xml:space="preserve">
+    <value>Rejesha Sehemu</value>
+  </data>
+  <data name="RestoreSectionConfirmation" xml:space="preserve">
+    <value>Je, una uhakika unataka kurejesha sehemu hii?</value>
+  </data>
+  <data name="RestoreSnapshotInfo" xml:space="preserve">
+    <value>Kurejesha muhtasari huu hakutarejesha hatua iliyoondolewa kwenye mtiririko wa kazi.</value>
+  </data>
+  <data name="Retell" xml:space="preserve">
+    <value>Simulia tena</value>
+  </data>
+  <data name="RetellCheck" xml:space="preserve">
+    <value>Angalia Upya (Kifungu cha {0})</value>
+  </data>
+  <data name="ReturnToLogIn" xml:space="preserve">
+    <value>Rudi kwa Ingia</value>
+  </data>
+  <data name="Review" xml:space="preserve">
+    <value>Kagua</value>
+  </data>
+  <data name="Reviewed" xml:space="preserve">
+    <value>Imekaguliwa</value>
+  </data>
+  <data name="ReviewQuestions" xml:space="preserve">
+    <value>Kagua Kifungu cha Maswali {0}</value>
+  </data>
+  <data name="Revise" xml:space="preserve">
+    <value>Rekebisha</value>
+  </data>
+  <data name="Revision" xml:space="preserve">
+    <value>Marudio</value>
+  </data>
+  <data name="RoleAssignment" xml:space="preserve">
+    <value>Mgawo wa Wajibu</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Tafuta</value>
+  </data>
+  <data name="Section" xml:space="preserve">
+    <value>Sehemu {0}</value>
+  </data>
+  <data name="SectionAndPassageListen" xml:space="preserve">
+    <value>Sikiliza Sehemu na kifungu</value>
+  </data>
+  <data name="SectionAssignment" xml:space="preserve">
+    <value>Mgawo wa Sehemu</value>
+  </data>
+  <data name="SectionDraft" xml:space="preserve">
+    <value>Sehemu ya {0} Rasimu</value>
+  </data>
+  <data name="SectionFeedbackTitle" xml:space="preserve">
+    <value>Sehemu {0} Maoni</value>
+  </data>
+  <data name="SectionInformation" xml:space="preserve">
+    <value>Maelezo ya Sehemu</value>
+  </data>
+  <data name="SectionList" xml:space="preserve">
+    <value>Orodha ya Sehemu</value>
+  </data>
+  <data name="SectionListen" xml:space="preserve">
+    <value>Sikiliza Sehemu</value>
+  </data>
+  <data name="SectionListenOnly" xml:space="preserve">
+    <value>Sikiliza Sehemu pekee</value>
+  </data>
+  <data name="SectionListenTitle" xml:space="preserve">
+    <value>Sehemu {0} Sikiliza</value>
+  </data>
+  <data name="SectionNumberLabel" xml:space="preserve">
+    <value>Nambari ya Sehemu</value>
+  </data>
+  <data name="SectionReferenceLabel" xml:space="preserve">
+    <value>Rejeleo la Aya</value>
+  </data>
+  <data name="SectionReset" xml:space="preserve">
+    <value>Sehemu imewekwa upya.</value>
+  </data>
+  <data name="SectionReview" xml:space="preserve">
+    <value>Uhakiki wa Sehemu</value>
+  </data>
+  <data name="SectionSelect" xml:space="preserve">
+    <value>Chagua Sehemu</value>
+  </data>
+  <data name="SectionsMovingWarning" xml:space="preserve">
+    <value>Sehemu zitahamia hatua inayofuata</value>
+  </data>
+  <data name="SectionStatus" xml:space="preserve">
+    <value>Hali ya Sehemu</value>
+  </data>
+  <data name="SectionStepLabel" xml:space="preserve">
+    <value>Hatua ya Sasa</value>
+  </data>
+  <data name="SectionTitle" xml:space="preserve">
+    <value>Kichwa cha Sehemu ya {0}</value>
+  </data>
+  <data name="SectionTitleLabel" xml:space="preserve">
+    <value>Kichwa cha Sehemu</value>
+  </data>
+  <data name="Segment" xml:space="preserve">
+    <value>Sehemu ya {0}</value>
+  </data>
+  <data name="SegmentBackTranslate" xml:space="preserve">
+    <value>Tafsiri Sehemu kwa Lugha Asili</value>
+  </data>
+  <data name="SegmentBackTranslateSelect" xml:space="preserve">
+    <value>Chagua Tafsiri Asili kwa Sehemu</value>
+  </data>
+  <data name="SegmentBackTranslateTitle" xml:space="preserve">
+    <value>{0} - Sehemu ya {1}</value>
+  </data>
+  <data name="SegmentFreeCut" xml:space="preserve">
+    <value>Kata Sehemu</value>
+  </data>
+  <data name="SegmentWillBeCleared" xml:space="preserve">
+    <value>Sehemu za Sasa zitafutwa</value>
+  </data>
+  <data name="SelectADraft" xml:space="preserve">
+    <value>Chagua Rasimu</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>Chagua Yote</value>
+  </data>
+  <data name="SelectAProfile" xml:space="preserve">
+    <value>Chagua wasifu ili kuingia</value>
+  </data>
+  <data name="SelectAProject" xml:space="preserve">
+    <value>Chagua Mradi</value>
+  </data>
+  <data name="SelectDisplay" xml:space="preserve">
+    <value>Chagua Onyesho</value>
+  </data>
+  <data name="SelectDraft" xml:space="preserve">
+    <value>Chagua Rasimu</value>
+  </data>
+  <data name="SelectProjectsToImport" xml:space="preserve">
+    <value>Chagua Miradi ya Kuingiza</value>
+  </data>
+  <data name="SelectSection" xml:space="preserve">
+    <value>Chagua Sehemu</value>
+  </data>
+  <data name="SelectSnapshot" xml:space="preserve">
+    <value>Chagua Picha</value>
+  </data>
+  <data name="SelectSnapshotDescription" xml:space="preserve">
+    <value>Chagua picha mahususi ya kuendelea nayo. Picha ambayo haijachaguliwa itafutwa.</value>
+  </data>
+  <data name="Sequence" xml:space="preserve">
+    <value>Mfuatano</value>
+  </data>
+  <data name="Snapshot" xml:space="preserve">
+    <value>Picha</value>
+  </data>
+  <data name="SnapshotChosen" xml:space="preserve">
+    <value>picha iliyochaguliwa kwa</value>
+  </data>
+  <data name="SnapshotConflict" xml:space="preserve">
+    <value>Sehemu hii ina Migogoro ya Picha: {0}</value>
+  </data>
+  <data name="Snapshots" xml:space="preserve">
+    <value>Vijipicha</value>
+  </data>
+  <data name="SortBy" xml:space="preserve">
+    <value>Panga kwa</value>
+  </data>
+  <data name="Source" xml:space="preserve">
+    <value>Chanzo</value>
+  </data>
+  <data name="StageName" xml:space="preserve">
+    <value>Jina la jukwaa</value>
+  </data>
+  <data name="StandardQuestion" xml:space="preserve">
+    <value>Swali la Kawaida {0}</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Anza</value>
+  </data>
+  <data name="Step" xml:space="preserve">
+    <value>Hatua</value>
+  </data>
+  <data name="Step1" xml:space="preserve">
+    <value>Hatua ya 1</value>
+  </data>
+  <data name="Step2" xml:space="preserve">
+    <value>Hatua ya 2</value>
+  </data>
+  <data name="SupplementaryMaterial" xml:space="preserve">
+    <value>Nyenzo za Kuongezea</value>
+  </data>
+  <data name="Sync" xml:space="preserve">
+    <value>Sawazisha</value>
+  </data>
+  <data name="TeamCheck" xml:space="preserve">
+    <value>Ukaguzi wa Timu</value>
+  </data>
+  <data name="TeamOne" xml:space="preserve">
+    <value>Timu ya 1</value>
+  </data>
+  <data name="TeamTwo" xml:space="preserve">
+    <value>Timu ya 2</value>
+  </data>
+  <data name="Text" xml:space="preserve">
+    <value>Maandishi</value>
+  </data>
+  <data name="TextNote" xml:space="preserve">
+    <value>Ujumbe wa Maandishi</value>
+  </data>
+  <data name="TotalPassagesLabel" xml:space="preserve">
+    <value>Jumla ya Vifungu</value>
+  </data>
+  <data name="TotalVerses" xml:space="preserve">
+    <value>Jumla ya Aya:</value>
+  </data>
+  <data name="Transcribe" xml:space="preserve">
+    <value>Nakili</value>
+  </data>
+  <data name="Transcribe2" xml:space="preserve">
+    <value>Nakili 2</value>
+  </data>
+  <data name="TranscribePassage" xml:space="preserve">
+    <value>Nakili Kifungu</value>
+  </data>
+  <data name="TranscribeSegment" xml:space="preserve">
+    <value>Nakili Sehemu</value>
+  </data>
+  <data name="Translated" xml:space="preserve">
+    <value>Imetafsiriwa</value>
+  </data>
+  <data name="Translation" xml:space="preserve">
+    <value>Tafsiri</value>
+  </data>
+  <data name="Unassigned" xml:space="preserve">
+    <value>Haijaagizwa</value>
+  </data>
+  <data name="Unreviewed" xml:space="preserve">
+    <value>Haijakaguliwa</value>
+  </data>
+  <data name="UnsavedRolesMessage" xml:space="preserve">
+    <value>Ikiwa ungependa kuhifadhi majukumu ambayo umekabidhi basi chagua kishale cha kuendelea upande wa chini kulia.</value>
+  </data>
+  <data name="UnsavedRolesTitle" xml:space="preserve">
+    <value>Kuna Majukumu Ambayo Hayajahifadhiwa</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Sasisha</value>
+  </data>
+  <data name="UpdatedPassage" xml:space="preserve">
+    <value>Kifungu Kilisasishwa</value>
+  </data>
+  <data name="UserLabel" xml:space="preserve">
+    <value>Mtumiaji wa Sasa</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Jina la mtumiaji</value>
+  </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>Jina hili la mtumiaji halipo</value>
+  </data>
+  <data name="UserSettings" xml:space="preserve">
+    <value>Mipangilio ya Mtumiaji</value>
+  </data>
+  <data name="UserType" xml:space="preserve">
+    <value>Aina ya Mtumiaji</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Toleo</value>
+  </data>
+  <data name="VesselUser" xml:space="preserve">
+    <value>Mtumiaji wa Chombo</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>Tazama</value>
+  </data>
+  <data name="ViewAllUsers" xml:space="preserve">
+    <value>Tazama Watumiaji Wote</value>
+  </data>
+  <data name="ViewSectionAssignments" xml:space="preserve">
+    <value>Tazama kazi za sehemu</value>
+  </data>
+  <data name="WelcomeToRender" xml:space="preserve">
+    <value>Karibu kwenye Render</value>
+  </data>
+  <data name="WhichSnapshot" xml:space="preserve">
+    <value>Je, ungependa kuendelea na picha gani ya {0}?</value>
+  </data>
+  <data name="WorkflowConfiguration" xml:space="preserve">
+    <value>Usanidi wa mtiririko wa kazi</value>
+  </data>
+  <data name="WorkflowDeleteStageMessage" xml:space="preserve">
+    <value>Chagua jinsi ya kushughulikia kazi inayoendelea kabla ya kuondoa hatua:</value>
+  </data>
+  <data name="WorkflowDeleteStageTitle" xml:space="preserve">
+    <value>Hatua Hii Ina Data</value>
+  </data>
+  <data name="WorkWillBeLost" xml:space="preserve">
+    <value>Kazi yako itapotea</value>
+  </data>
+  <data name="DividePassageMessage" xml:space="preserve">
+    <value>Ukiacha mgawanyiko wa kifungu sasa, kazi yako itapotea</value>
+  </data>
+  <data name="ErrorOccuredTryAgain" xml:space="preserve">
+    <value>Hitilafu imetokea. Tafadhali jaribu tena.
+</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Hitilafu</value>
+  </data>
+  <data name="RetellQuestionResponse" xml:space="preserve">
+    <value>Sema tena na Maswali na Majibu</value>
+  </data>
+  <data name="DiscardWork" xml:space="preserve">
+    <value>Acha Kazi</value>
+  </data>
+  <data name="SectionView" xml:space="preserve">
+    <value>Mwonekano wa sehemu</value>
+  </data>
+  <data name="TeamTitle" xml:space="preserve">
+    <value>Timu {0}</value>
+  </data>
+  <data name="TeamView" xml:space="preserve">
+    <value>Mtazamo wa timu</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Nakili</value>
+  </data>
+  <data name="SegmentSelect" xml:space="preserve">
+    <value>chagua sehemu</value>
+  </data>
+  <data name="ClearSegmentsQuestion" xml:space="preserve">
+    <value>Futa Sehemu?</value>
+  </data>
+  <data name="ClearSegmentsConfirmation" xml:space="preserve">
+    <value>Je, una uhakika unataka kufuta sehemu za sasa? Huwezi kutendua kitendo hiki.</value>
+  </data>
+  <data name="SegmentReview" xml:space="preserve">
+    <value>Ukaguzi wa Sehemu</value>
+  </data>
+  <data name="Question" xml:space="preserve">
+    <value>Swali</value>
+  </data>
+  <data name="SegmentCombine" xml:space="preserve">
+    <value>Mchanganyiko wa sehemu</value>
+  </data>
+  <data name="CombineWarningMessage" xml:space="preserve">
+    <value>Sehemu nyekundu tayari imetafsiriwa tena. Kuendelea kutafuta tafsiri ya nyuma.</value>
+  </data>
+  <data name="Configuration" xml:space="preserve">
+    <value>Usanidi</value>
+  </data>
+  <data name="ConfigureWorkflow" xml:space="preserve">
+    <value>Sanidi Mtiririko wa Kazi</value>
+  </data>
+  <data name="AssignSections" xml:space="preserve">
+    <value>Weka Sehemu</value>
+  </data>
+  <data name="AssignRoles" xml:space="preserve">
+    <value>Weka Majukumu</value>
+  </data>
+  <data name="Workflow" xml:space="preserve">
+    <value>Mtiririko wa kazi</value>
+  </data>
+  <data name="SelectUser" xml:space="preserve">
+    <value>Chagua Mtumiaji</value>
+  </data>
+  <data name="AddUserButtonText" xml:space="preserve">
+    <value>Ongeza Mtumiaji</value>
+  </data>
+  <data name="Render" xml:space="preserve">
+    <value>Render</value>
+  </data>
+  <data name="Global" xml:space="preserve">
+    <value>kimataifa</value>
+  </data>
+  <data name="TextPassword" xml:space="preserve">
+    <value>Nenosiri la maandishi</value>
+  </data>
+  <data name="ViewAssignments" xml:space="preserve">
+    <value>Tazama Kazi za Sehemu</value>
+  </data>
+  <data name="DeleteUserModalMessage" xml:space="preserve">
+    <value>Ikiwa {0} ana kazi za sehemu zake, hizi pia zitaondolewa. Huwezi kutendua kitendo hiki.</value>
+  </data>
+  <data name="Return" xml:space="preserve">
+    <value>Rudi</value>
+  </data>
+  <data name="SegmentBackTranslate1" xml:space="preserve">
+    <value>Sehemu ya Nyuma ya Tafsiri 1</value>
+  </data>
+  <data name="SegmentBackTranslate2" xml:space="preserve">
+    <value>Sehemu ya Nyuma ya Tafsiri 2</value>
+  </data>
+  <data name="PassageBackTranslate1" xml:space="preserve">
+    <value>Tafsiri ya Kifungu cha Nyuma 1</value>
+  </data>
+  <data name="PassageBackTranslate2" xml:space="preserve">
+    <value>Tafsiri ya Kifungu cha Nyuma 2</value>
+  </data>
+  <data name="RetellIsNotAvailable" xml:space="preserve">
+    <value>Kurejelea tena hakupatikani</value>
+  </data>
+  <data name="QuestionAndResponseIsNotAvailable" xml:space="preserve">
+    <value>Swali na Majibu haipatikani</value>
+  </data>
+  <data name="CommunityFeedbackGuidance" xml:space="preserve">
+    <value>Mwongozo wa Maoni ya Jamii</value>
+  </data>
+  <data name="Teams" xml:space="preserve">
+    <value>Timu</value>
+  </data>
+  <data name="DragTeamHere" xml:space="preserve">
+    <value>Buruta timu hapa</value>
+  </data>
+  <data name="Configure" xml:space="preserve">
+    <value>Sanidi</value>
+  </data>
+  <data name="QuestionNumberAndTotalNumberFormatted" xml:space="preserve">
+    <value>Swali la {0} kati ya {1}</value>
+  </data>
+  <data name="GridPassword" xml:space="preserve">
+    <value>Nenosiri la gridi</value>
+  </data>
+  <data name="DragSectionHere" xml:space="preserve">
+    <value>Buruta sehemu hapa</value>
+  </data>
+  <data name="Sections" xml:space="preserve">
+    <value>Sehemu</value>
+  </data>
+  <data name="PressCircleToRecord" xml:space="preserve">
+    <value>Bonyeza mduara ili kurekodi</value>
+  </data>
+  <data name="PressCircleToRecordOrPressArrowToAddQuestionFromLibrary" xml:space="preserve">
+    <value>Bonyeza mduara kurekodi, au {1} bonyeza {0} ili kuongeza swali {1} kutoka kwenye maktaba</value>
+  </data>
+  <data name="Library" xml:space="preserve">
+    <value>Maktaba</value>
+  </data>
+  <data name="NoQuestionsInTheLibrary" xml:space="preserve">
+    <value>Huna maswali kwenye maktaba</value>
+  </data>
+  <data name="Questions" xml:space="preserve">
+    <value>Maswali</value>
+  </data>
+  <data name="PressArrowToAddQuestion" xml:space="preserve">
+    <value>Bonyeza {0} ili kuongeza swali</value>
+  </data>
+  <data name="Test" xml:space="preserve">
+    <value>Mtihani</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Lugha</value>
+  </data>
+  <data name="Translate" xml:space="preserve">
+    <value>Tafsiri</value>
+  </data>
+  <data name="RetellOnly" xml:space="preserve">
+    <value>Sema tena tu</value>
+  </data>
+  <data name="QuestionAndResponseOnly" xml:space="preserve">
+    <value>Swali na Majibu pekee</value>
+  </data>
+  <data name="RenderAvailable" xml:space="preserve">
+    <value>Render {0} inapatikana</value>
+  </data>
+  <data name="DownloadRenderButton" xml:space="preserve">
+    <value>Pakua Kipengele kipya</value>
+  </data>
+  <data name="DownloadRenderMessage" xml:space="preserve">
+    <value>Pakua Render {0} mpya na usasishe.</value>
+  </data>
+  <data name="OneUserOneTeam" xml:space="preserve">
+    <value>Mtumiaji mmoja, timu moja</value>
+  </data>
+  <data name="UsersCannotBeAssignedToMultipleTeams" xml:space="preserve">
+    <value>Watumiaji hawawezi kupewa timu nyingi.</value>
+  </data>
+  <data name="SaveWorkAndProceed" xml:space="preserve">
+    <value>Hifadhi kazi na uendelee</value>
+  </data>
+  <data name="ExitAnyway" xml:space="preserve">
+    <value>Ondoka hata hivyo</value>
+  </data>
+  <data name="SaveWorkAndProceedMessage" xml:space="preserve">
+    <value>Bonyeza kishale kwenye sehemu ya chini kulia ili kuhifadhi majukumu na uendelee.</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Kichwa:</value>
+  </data>
+  <data name="TotalPassages" xml:space="preserve">
+    <value>Jumla ya Vifungu:</value>
+  </data>
+  <data name="Reference" xml:space="preserve">
+    <value>Rejeleo:</value>
+  </data>
+  <data name="Process" xml:space="preserve">
+    <value>Mchakato:</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>Mtumiaji:</value>
+  </data>
+  <data name="NoSectionsAreInThisStep" xml:space="preserve">
+    <value>Hakuna sehemu katika hatua hii</value>
+  </data>
+  <data name="NoteInterpretToConsultant" xml:space="preserve">
+    <value>Kumbuka Tafsiri kwa Mshauri</value>
+  </data>
+  <data name="NoteInterpretToTranslator" xml:space="preserve">
+    <value>Kumbuka Mkalimani ni mfasiri</value>
+  </data>
+  <data name="AddUserLabel" xml:space="preserve">
+    <value>Ongeza mtumiaji mpya</value>
+  </data>
+  <data name="ApprovedSection" xml:space="preserve">
+    <value>Sehemu Iliyoidhinishwa</value>
+  </data>
+  <data name="BothSnapshotsDeleted" xml:space="preserve">
+    <value>Picha zote mbili zimefutwa</value>
+  </data>
+  <data name="DeleteSnapshotsFor" xml:space="preserve">
+    <value>Ungependa kufuta Vijipicha vya {0}?</value>
+  </data>
+  <data name="DraftWillBeLost" xml:space="preserve">
+    <value>Rasimu itapotea</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Hapana</value>
+  </data>
+  <data name="PasswordRequiredToReset" xml:space="preserve">
+    <value>Nenosiri linahitajika ili kuweka upya sehemu</value>
+  </data>
+  <data name="PasswordRequiredToRestore" xml:space="preserve">
+    <value>Nenosiri linahitajika ili kurejesha muhtasari</value>
+  </data>
+  <data name="TeamWasChosen" xml:space="preserve">
+    <value>Timu {0} ilichaguliwa</value>
+  </data>
+  <data name="UserAndTeamWereChosenForSection" xml:space="preserve">
+    <value>{0} ilichaguliwa kwa {1}</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Ndiyo</value>
+  </data>
+  <data name="YouCannotUndo" xml:space="preserve">
+    <value>Huwezi kutendua kitendo hiki</value>
+  </data>
+  <data name="YouHaveChosen" xml:space="preserve">
+    <value>Umechagua:</value>
+  </data>
+  <data name="ResetSectionWarning" xml:space="preserve">
+    <value>Sehemu ya kuweka upya itafuta data yote katika hatua ya Rasimu. Kitendo hiki hakiwezi kutenduliwa.</value>
+  </data>
+  <data name="RemovedFromProject" xml:space="preserve">
+    <value>Imeondolewa kwenye mradi</value>
+  </data>
+  <data name="DraftEdit" xml:space="preserve">
+    <value>Rasimu ya Hariri</value>
+  </data>
+  <data name="Stages" xml:space="preserve">
+    <value>Hatua</value>
+  </data>
+  <data name="SectionListenScreenTitle" xml:space="preserve">
+    <value>Sikiliza Sehemu</value>
+  </data>
+  <data name="PassageListenScreenTitle" xml:space="preserve">
+    <value>Sikiliza Kifungu</value>
+  </data>
+  <data name="PassageDivideScreenTitle" xml:space="preserve">
+    <value>Mgawanyiko wa Kifungu</value>
+  </data>
+  <data name="PassageReviewScreenTitle" xml:space="preserve">
+    <value>Uhakiki wa Kifungu</value>
+  </data>
+  <data name="SectionReviewScreenTitle" xml:space="preserve">
+    <value>Uhakiki wa Sehemu</value>
+  </data>
+  <data name="TranscribePassageScreenTitle" xml:space="preserve">
+    <value>Nakili Kifungu</value>
+  </data>
+  <data name="TranscribeSegmentScreenTitle" xml:space="preserve">
+    <value>Nakili Sehemu</value>
+  </data>
+  <data name="DoPassageTranscribeScreenTitle" xml:space="preserve">
+    <value>Nakili Kifungu</value>
+  </data>
+  <data name="DoSegmentTranscribeScreenTitle" xml:space="preserve">
+    <value>Nakili Sehemu</value>
+  </data>
+  <data name="UserWasChosen" xml:space="preserve">
+    <value>{0} ilichaguliwa</value>
+  </data>
+  <data name="UserWasChosenForSection" xml:space="preserve">
+    <value>{0} ilichaguliwa kwa {1}</value>
+  </data>
+  <data name="NoteInterpretScreenTitle" xml:space="preserve">
+    <value>Tafsiri Andiko</value>
+  </data>
+  <data name="RequirePassageListenPeerCheckSetting" xml:space="preserve">
+    <value>Mwongozo wa Usikilizaji wa kifungu</value>
+  </data>
+  <data name="RequireSectionListenPeerCheckSetting" xml:space="preserve">
+    <value>Sehemu ya Mwongozo wa Kusikiliza</value>
+  </data>
+  <data name="OffloadProject" xml:space="preserve">
+    <value>Ungependa kupakua {0}?</value>
+  </data>
+  <data name="ContactSupport" xml:space="preserve">
+    <value>Wasiliana na usaidizi kwa usaidizi.</value>
+  </data>
+  <data name="ErrorWithMessage" xml:space="preserve">
+    <value>Hitilafu [{0}]</value>
+  </data>
+  <data name="NoProjectsToDownload" xml:space="preserve">
+    <value>Hakuna miradi ya kupakua</value>
+  </data>
+  <data name="WrongPassword" xml:space="preserve">
+    <value>Nenosiri si sahihi. Tafadhali jaribu tena.</value>
+  </data>
+  <data name="SyncFailed" xml:space="preserve">
+    <value>Imeshindwa</value>
+  </data>
+  <data name="DragUserHere" xml:space="preserve">
+    <value>Buruta mtumiaji hapa</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Watumiaji</value>
+  </data>
+  <data name="DownloadFailed" xml:space="preserve">
+    <value>Imeshindwa kupakua.</value>
+  </data>
+  <data name="ExportComplete" xml:space="preserve">
+    <value>Uhamishaji umekamilika</value>
+  </data>
+  <data name="NoSectionsAvailable" xml:space="preserve">
+    <value>Hakuna Sehemu Zinazopatikana</value>
+  </data>
+  <data name="TryAgain" xml:space="preserve">
+    <value>Tafadhali jaribu tena</value>
+  </data>
+  <data name="SelectedSnapshotMessageTemplate" xml:space="preserve">
+    <value>{0}, {1} {2} {3}, {4}</value>
+  </data>
+  <data name="TeamWasChosenForSection" xml:space="preserve">
+    <value>{0} ya {1}, {2}, ilichaguliwa kwa {3}</value>
+  </data>
+  <data name="CombineWarningTitle" xml:space="preserve">
+    <value>Tafsiri ya Nyuma itafutwa</value>
+  </data>
+  <data name="January" xml:space="preserve">
+    <value>Januari</value>
+  </data>
+  <data name="February" xml:space="preserve">
+    <value>Februari</value>
+  </data>
+  <data name="March" xml:space="preserve">
+    <value>Machi</value>
+  </data>
+  <data name="April" xml:space="preserve">
+    <value>Aprili</value>
+  </data>
+  <data name="May" xml:space="preserve">
+    <value>Mei</value>
+  </data>
+  <data name="June" xml:space="preserve">
+    <value>Juni</value>
+  </data>
+  <data name="July" xml:space="preserve">
+    <value>Julai</value>
+  </data>
+  <data name="August" xml:space="preserve">
+    <value>Agosti</value>
+  </data>
+  <data name="September" xml:space="preserve">
+    <value>Septemba</value>
+  </data>
+  <data name="October" xml:space="preserve">
+    <value>Oktoba</value>
+  </data>
+  <data name="November" xml:space="preserve">
+    <value>Novemba</value>
+  </data>
+  <data name="December" xml:space="preserve">
+    <value>Desemba</value>
+  </data>
+  <data name="NoSectionAssignedTitle" xml:space="preserve">
+    <value>Bado hujakabidhi Sehemu zozote</value>
+  </data>
+  <data name="NoSectionAssignedMessage" xml:space="preserve">
+    <value>Sehemu zinahitaji kukabidhiwa ili zionyeshwe hapa.</value>
+  </data>
+  <data name="SegmentLabel" xml:space="preserve">
+    <value>Sehemu</value>
+  </data>
+  <data name="DeletedUser" xml:space="preserve">
+    <value>Mtumiaji Aliyefutwa</value>
+  </data>
+  <data name="CannotLoadData" xml:space="preserve">
+    <value>Haiwezi kupakia data ya sehemu ya {0}</value>
+  </data>
+  <data name="SyncAndTryAgain" xml:space="preserve">
+    <value>Hili likiendelea kutokea, tafadhali jaribu kusawazisha wavuti au jaribu upakuaji/upakuaji wa mradi</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>Jaribu tena</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>
+Mafanikio!</value>
+  </data>
+  <data name="AddFromComputer" xml:space="preserve">
+    <value>Ongeza Mradi Kutoka kwa Kompyuta</value>
+  </data>
+  <data name="CannotLoadAudio" xml:space="preserve">
+    <value>Haiwezi Kupakia Sauti</value>
+  </data>
+</root>

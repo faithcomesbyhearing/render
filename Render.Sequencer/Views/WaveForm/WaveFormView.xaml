@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentView x:Class="Render.Sequencer.Views.WaveForm.WaveFormView"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:atomic="clr-namespace:Render.Sequencer.Resources.Atomic"
+             xmlns:behaviours="clr-namespace:Render.Sequencer.Core.Behaviors"
+             xmlns:controls="clr-namespace:Render.Sequencer.Core.Controls"
+             xmlns:enums="clr-namespace:Render.Sequencer.Contracts.Enums"
+             xmlns:flags="clr-namespace:Render.Sequencer.Views.Flags"
+             xmlns:items="clr-namespace:Render.Sequencer.Views.WaveForm.Items"
+             xmlns:local="clr-namespace:Render.Sequencer.Views.WaveForm"
+             xmlns:styles="clr-namespace:Render.Sequencer.Resources.Styles"
+             x:DataType="local:BaseWaveFormViewModel"
+             BackgroundColor="{StaticResource Light}">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <atomic:Colors />
+                <atomic:Sizes />
+
+                <styles:WaveFormStyles />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <ScrollView x:Name="scrollView"
+                Width="{Binding Sequencer.Width}"
+                behaviours:ScrollViewBehavior.AttachBehavior="True"
+                behaviours:ScrollViewBehavior.InputScrollX="{Binding Sequencer.InputScrollX, Mode=OneWay}"
+                behaviours:ScrollViewBehavior.TotalWidth="{Binding Sequencer.TotalWidth, Mode=OneWayToSource}"
+                behaviours:ScrollViewBehavior.WidthRatio="{Binding Sequencer.WidthRatio, Mode=OneWayToSource}"
+                AutomationId="Scroller"
+                ScrollX="{Binding Sequencer.OutputScrollX}"
+                Style="{StaticResource MainScrollViewStyle}">
+        <ScrollView.Triggers>
+            <DataTrigger Binding="{Binding Sequencer.State}"
+                         TargetType="ScrollView"
+                         Value="{x:Static enums:SequencerState.Recording}">
+                <Setter Property="IsEnabled" Value="False" />
+            </DataTrigger>
+        </ScrollView.Triggers>
+
+        <Grid x:Name="waveformsCollectionWrapper" AutomationId="WaveformContainer">
+            <HorizontalStackLayout x:Name="waveformsCollection"
+                                   BindableLayout.ItemTemplateSelector="{items:WaveFormItemTemplateSelector}"
+                                   BindableLayout.ItemsSource="{Binding WaveFormItems}"
+                                   HeightRequest="{Binding Source={x:Reference scrollView}, Path=Height}"
+                                   ChildAdded="OnWaveformsCollectionChildAdded" 
+                                   ChildRemoved="OnWaveformsCollectionChildRemoved"
+                                   VerticalOptions="Start"
+                                   HorizontalOptions="Start" />
+            <!--
+                When this scrubber is disabled, it ignores touch gestures.
+                But SliderBehavior still receives updates through the bindings.
+                Therefore, scrolling works for all cases wherever we use
+                local scrubbers (for example in CombiningWaveFormItemView)
+            -->
+            <controls:Scrubber x:Name="scrubber"
+                               behaviours:SliderBehavior.AttachBehavior="True"
+                               behaviours:SliderBehavior.AttachedScrollView="{x:Reference scrollView}"
+                               behaviours:SliderBehavior.Dragging="{Binding Sequencer.IsScrubberDragging}"
+                               behaviours:SliderBehavior.ScrollMargin="{StaticResource ScrubberScrollOffset}"
+                               AutomationId="Scrubber"
+                               DragCompletedCommand="{Binding Sequencer.InternalPlayer.ScrubberDragEndedCommand}"
+                               HorizontalOptions="Start"
+                               IsEnabled="{Binding HasScrubber}"
+                               IsVisible="{Binding HasScrubber}"
+                               Maximum="{Binding Sequencer.TotalDuration}"
+                               Minimum="0"
+                               Style="{StaticResource MainScrubberStyle}"
+                               TargetViewTag="{x:Static flags:FlagTags.CommonFlag}"
+                               ViewSearchContainer="{x:Reference waveformsCollection}"
+                               WidthRequest="{Binding Source={x:Reference waveformsCollection}, Path=Width}"
+                               Value="{Binding Sequencer.TotalCurrentPosition}">
+                <controls:Scrubber.Triggers>
+                    <DataTrigger Binding="{Binding Sequencer.InitialMode}"
+                                 TargetType="controls:Scrubber"
+                                 Value="{x:Static enums:SequencerMode.Recorder}">
+                        <Setter Property="Padding" Value="{StaticResource MainScrubberRecorderMargin}" />
+                    </DataTrigger>
+                </controls:Scrubber.Triggers>
+            </controls:Scrubber>
+        </Grid>
+    </ScrollView>
+</ContentView>

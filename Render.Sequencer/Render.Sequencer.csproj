@@ -1,0 +1,124 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net8.0</TargetFrameworks>
+    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <SingleProject>true</SingleProject>
+    <UseMaui>true</UseMaui>
+	  <UseMauiEssentials>false</UseMauiEssentials>	  
+    <Nullable>enable</Nullable>
+    
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.19041.0</SupportedOSPlatformVersion>
+    <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.19041.0</TargetPlatformMinVersion>
+    <DefaultLanguage>En-us</DefaultLanguage>
+    <Configurations>Debug;Release;AutoTests;Test;Demo</Configurations>
+    <Platforms>AnyCPU</Platforms>
+  </PropertyGroup>
+  <ItemGroup>
+	  <PackageReference Include="ReactiveUI.Maui" Version="19.2.1" />
+	  <PackageReference Include="ReactiveUI.Fody" Version="19.2.1" />
+    <PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.7" />
+    <PackageReference Include="SkiaSharp.Views.Maui.Controls.Compatibility" Version="2.88.7" />
+    <PackageReference Include="SkiaSharp.Views.Maui.Core" Version="2.88.7" />
+	  <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.7" />
+	  <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Render.Services\Render.Services.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="$(Configuration.StartsWith('Release')) or $(Configuration.StartsWith('Test')) or $(Configuration.StartsWith('AutoTests'))">
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+
+  <!--Explicit reference for latest WindowsSDK version to support ReactiveUI dependencies-->
+  <!--Remove this after future .NET MAUI updates with latest WindwosSDK support-->
+  <ItemGroup Condition="'$(TargetFramework)' == 'net8.0-windows10.0.19041.0'">
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.5.240311000" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.3233" />
+  </ItemGroup>
+  
+  <ItemGroup Condition="$(TargetFramework.StartsWith('net8.0-android')) != true">
+    <Compile Remove="**\**\*.droid.cs" />
+    <None Include="**\**\*.droid.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+    <Compile Remove="**\Android\**\*.cs" />
+    <None Include="**\Android\**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.Contains('-windows')) != true">
+    <Compile Remove="**\*.win.cs" />
+    <None Include="**\*.win.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+    <Compile Remove="**\Windows\**\*.cs" />
+    <None Include="**\Windows\**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' != 'net8.0'">
+    <Content Remove="**\Standard\**" />
+    <Compile Remove="**\Standard\**" />
+    <EmbeddedResource Remove="**\Standard\**" />
+    <None Remove="**\Standard\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+	  <MauiXaml Update="Resources\Resources.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Resources\Atomic\Sizes.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Resources\Styles\FlagsStyles.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Resources\Styles\ScrollerStyles.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Resources\Styles\WaveFormItemPartsStyles.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Resources\Styles\WaveFormItemStyles.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Resources\Styles\ToolbarStyles.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Resources\Styles\WaveFormStyles.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Flags\MarkerFlagView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Flags\SimpleFlagView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Flags\NoteFlagView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Sequencer.xaml">
+	   <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+    <MauiXaml Update="Views\Scroller\ScrollerView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\Toolbar\ToolbarItems\ToolbarItemView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\Toolbar\ToolbarView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\WaveForm\Items\Combining\CombiningWaveFormItemView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\WaveForm\Items\Combining\CombinableWaveFormItemView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\WaveForm\Items\Editable\EditableWaveFormItemView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\WaveForm\Items\WaveFormItemView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\WaveForm\WaveFormView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+  </ItemGroup>
+</Project>

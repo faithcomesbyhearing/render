@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:Class="Render.Pages.Configurator.WorkflowAssignment.Stages.WorkflowDraftStageColumn"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:localization="clr-namespace:Render.Resources.Localization"
+                            xmlns:resources="clr-namespace:Render.Resources;assembly=Render"
+                            xmlns:stages="clr-namespace:Render.Pages.Configurator.WorkflowAssignment.Stages"
+                            xmlns:workflowAssignment="clr-namespace:Render.Pages.Configurator.WorkflowAssignment;assembly=Render"
+                            x:TypeArguments="stages:WorkflowDraftStageColumnViewModel">
+
+    <Border Padding="26"
+            BackgroundColor="{StaticResource StageColumnFirstAndLastBackground}"
+            Style="{StaticResource StageColumnBorderStyle}"
+            VerticalOptions="Fill">
+
+        <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition x:Name="StgName" Height="Auto" />
+                <RowDefinition x:Name="Content" Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!--  Stage name with icon  -->
+            <VerticalStackLayout Grid.Row="0">
+
+                <HorizontalStackLayout Spacing="0">
+                    <Label x:Name="IconLabel"
+                           AutomationId="StageIcon"
+                           Style="{StaticResource AssignementColumnIconStyle}" />
+
+                    <Label x:Name="StageName" Style="{DynamicResource WorkflowStageColumnTopLabel}" />
+                </HorizontalStackLayout>
+
+                <BoxView Margin="0"
+                         BackgroundColor="{StaticResource DarkGrey}"
+                         HeightRequest="1"
+                         HorizontalOptions="Fill"
+                         VerticalOptions="Start" />
+
+            </VerticalStackLayout>
+
+            <!--  Content  -->
+            <Grid Grid.Row="1" VerticalOptions="Fill">
+                <Grid.RowDefinitions>
+                    <RowDefinition x:Name="Button" Height="Auto" />
+                    <RowDefinition x:Name="ScrollViewRow" Height="*" />
+                </Grid.RowDefinitions>
+                <!--  Add Team Button  -->
+                <Frame Padding="0"
+                       Grid.Row="0"
+                       BackgroundColor="Transparent"
+                       HeightRequest="78">
+                    <Frame Margin="0"
+                           Padding="10,0"
+                           BackgroundColor="{StaticResource Gray}"
+                           CornerRadius="8"
+                           HeightRequest="40"
+                           HorizontalOptions="Start"
+                           MinimumWidthRequest="140"
+                           VerticalOptions="Center">
+                        <HorizontalStackLayout VerticalOptions="Center">
+                            <Label Margin="0,0,10,0"
+                                   FontFamily="Icons"
+                                   FontSize="{StaticResource LargeFont}"
+                                   Text="{resources:IconExtensions Add}"
+                                   TextColor="{StaticResource Blue}"
+                                   VerticalTextAlignment="Center" />
+                            <Label FontFamily="BoldFont"
+                                   FontSize="{StaticResource MediumFont}"
+                                   Text="{x:Static localization:AppResources.AddTeam}"
+                                   TextColor="{StaticResource Blue}"
+                                   VerticalTextAlignment="Center" />
+                        </HorizontalStackLayout>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="AddTeamButtonGestureRecognizer" AutomationId="AddTeamButton" />
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                </Frame>
+
+                <!--  Team Assignment Cards  -->
+                <ScrollView Grid.Row="1"
+                            Padding="0,0,5,0"
+                            WidthRequest="300"
+                            VerticalScrollBarVisibility="Default">
+                    <Grid ColumnDefinitions="*, 10">
+                        <StackLayout Grid.Column="0" x:Name="TeamCollection">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <workflowAssignment:TeamAssignmentCard />
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+                    </Grid>
+                </ScrollView>
+
+            </Grid>
+
+            <!--  Bottom half  -->
+            <VerticalStackLayout Grid.Row="2">
+                <BoxView Margin="0,26,0,13"
+                         BackgroundColor="{StaticResource DarkGrey}"
+                         HeightRequest="2"
+                         HorizontalOptions="Fill"
+                         VerticalOptions="Start" />
+
+                <!--  Settings Button  -->
+                <Frame x:Name="SettingsButton"
+                       Padding="0"
+                       VerticalOptions="End"
+                       BackgroundColor="Transparent"
+                       HorizontalOptions="End">
+                    <Label FontFamily="Icons"
+                           FontSize="54"
+                           Text="{StaticResource Settings}"
+                           TextColor="{DynamicResource SecondaryText}" />
+
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="SettingsButtonGestureRecognizer"
+                                              AutomationId="DraftStageSettings" />
+                    </Frame.GestureRecognizers>
+                </Frame>
+            </VerticalStackLayout>
+        </Grid>
+    </Border>
+
+</kernel:RenderComponentBase>

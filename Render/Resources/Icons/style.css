@@ -1,0 +1,682 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?xg0jzb');
+  src:  url('fonts/icomoon.eot?xg0jzb#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?xg0jzb') format('truetype'),
+    url('fonts/icomoon.woff?xg0jzb') format('woff'),
+    url('fonts/icomoon.svg?xg0jzb#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-Retry:before {
+  content: "\e98c";
+}
+.icon-LockPlus:before {
+  content: "\e98a";
+}
+.icon-UnlockSegment:before {
+  content: "\e98b";
+}
+.icon-NoAssignedSections:before {
+  content: "\e989";
+}
+.icon-DraftIconStage:before {
+  content: "\e987";
+}
+.icon-ExportFinished:before {
+  content: "\e988";
+}
+.icon-Unlock:before {
+  content: "\e986";
+}
+.icon-SegmentNew:before {
+  content: "\e985";
+}
+.icon-DownloadError:before {
+  content: "\e984";
+}
+.icon-OffloadItem:before {
+  content: "\e950";
+}
+.icon-StageCardArrow:before {
+  content: "\e94d";
+}
+.icon-PopUpWarning:before {
+  content: "\e93f";
+}
+.icon-CheckCircle:before {
+  content: "\e925";
+}
+.icon-ReturnXIcon:before {
+  content: "\e918";
+}
+.icon-Teams-Icon:before {
+  content: "\e90f";
+}
+.icon-Community-Revise:before {
+  content: "\e983";
+}
+.icon-Back-Translate:before {
+  content: "\e97e";
+}
+.icon-Community-Check-Setup:before {
+  content: "\e97f";
+}
+.icon-Community-Test:before {
+  content: "\e980";
+}
+.icon-Consultant-Revise:before {
+  content: "\e981";
+}
+.icon-Transcribe:before {
+  content: "\e982";
+}
+.icon-Segment-Back-Translate:before {
+  content: "\e975";
+}
+.icon-Consultant-Approval:before {
+  content: "\e976";
+}
+.icon-Interpret-to-Consultant:before {
+  content: "\e977";
+}
+.icon-Interpret-to-Translator:before {
+  content: "\e978";
+}
+.icon-Consultant-Check:before {
+  content: "\e979";
+}
+.icon-Retell-Back-Translate:before {
+  content: "\e97d";
+}
+.icon-Peer-Revise1:before {
+  content: "\e97a";
+}
+.icon-Peer-Check:before {
+  content: "\e97b";
+}
+.icon-Drafting:before {
+  content: "\e97c";
+}
+.icon-Assign-Roles:before {
+  content: "\e971";
+}
+.icon-Assign-Sections:before {
+  content: "\e972";
+}
+.icon-Configure-Workflow:before {
+  content: "\e973";
+}
+.icon-Manage-Users:before {
+  content: "\e974";
+}
+.icon-TickerArrowLeft:before {
+  content: "\e96e";
+}
+.icon-TickerArrowRight:before {
+  content: "\e970";
+}
+.icon-TrashCanAudio:before {
+  content: "\e96d";
+  color: #474f52;
+}
+.icon-BoldChevronLeft:before {
+  content: "\e969";
+}
+.icon-BoldChevronRight:before {
+  content: "\e96c";
+}
+.icon-BoldArrowUp:before {
+  content: "\e96b";
+}
+.icon-LoadScreenIconGear:before {
+  content: "\e96a";
+}
+.icon-Menu:before {
+  content: "\e967";
+}
+.icon-Logo:before {
+  content: "\e968";
+}
+.icon-ExportLayerPassword:before {
+  content: "\e966";
+}
+.icon-NavBarCheckmark:before {
+  content: "\e965";
+}
+.icon-Copy:before {
+  content: "\e963";
+}
+.icon-InternetError:before {
+  content: "\e962";
+}
+.icon-InvalidInput:before {
+  content: "\e961";
+}
+.icon-AddProjectGUID:before {
+  content: "\e95f";
+}
+.icon-Union:before {
+  content: "\e95e";
+}
+.icon-SectionNew:before {
+  content: "\e95a";
+}
+.icon-PassageNew:before {
+  content: "\e95b";
+}
+.icon-DraftsNew:before {
+  content: "\e95c";
+}
+.icon-ClearBothSnapshots:before {
+  content: "\e958";
+}
+.icon-SelectaSnapshot:before {
+  content: "\e959";
+}
+.icon-DeleteImmediately:before {
+  content: "\e955";
+}
+.icon-DeleteAndComplete:before {
+  content: "\e956";
+}
+.icon-DeleteWarning:before {
+  content: "\e957";
+}
+.icon-Empty-Project:before {
+  content: "\e952";
+}
+.icon-No-Offload-Project:before {
+  content: "\e954";
+}
+.icon-UserSettings:before {
+  content: "\e951";
+}
+.icon-Sections-Unreviewed:before {
+  content: "\e94f";
+}
+.icon-GlobalUser:before {
+  content: "\e94c";
+}
+.icon-MicrophoneWarning:before {
+  content: "\e94b";
+}
+.icon-DeleteUndo:before {
+  content: "\e94a";
+}
+.icon-RemoveCut:before {
+  content: "\e946";
+}
+.icon-ManualAudioEdit:before {
+  content: "\e947";
+}
+.icon-CancelCut:before {
+  content: "\e948";
+}
+.icon-AddCut:before {
+  content: "\e949";
+}
+.icon-MicrophoneNotFound:before {
+  content: "\e943";
+}
+.icon-RestoreSnapshot:before {
+  content: "\e940";
+}
+.icon-SelectedQuestionSet:before {
+  content: "\e941";
+}
+.icon-SnapshotRecovery:before {
+  content: "\e942";
+}
+.icon-Minus:before {
+  content: "\e93d";
+}
+.icon-Plus:before {
+  content: "\e93e";
+}
+.icon-SectionStatus:before {
+  content: "\e91f";
+}
+.icon-ExportAudio:before {
+  content: "\e93b";
+}
+.icon-DraftEmpty:before {
+  content: "\e93a";
+}
+.icon-AddProject:before {
+  content: "\e937";
+}
+.icon-DownloadItem:before {
+  content: "\e939";
+}
+.icon-ProjectList:before {
+  content: "\e936";
+}
+.icon-ReorderTwo:before {
+  content: "\e934";
+}
+.icon-LoadingSpinner:before {
+  content: "\e932";
+}
+.icon-ArrowCopyQuestions:before {
+  content: "\e92d";
+}
+.icon-CopyQuestionsFrom:before {
+  content: "\e92f";
+}
+.icon-CopyQuestionsTo:before {
+  content: "\e931";
+}
+.icon-CopyStageQuestions:before {
+  content: "\e92c";
+}
+.icon-Select-a-Test:before {
+  content: "\e905";
+}
+.icon-Sequence:before {
+  content: "\e906";
+}
+.icon-Star-Edit:before {
+  content: "\e907";
+}
+.icon-Star-Filled:before {
+  content: "\e908";
+}
+.icon-Star:before {
+  content: "\e909";
+}
+.icon-Team-Singular:before {
+  content: "\e90a";
+}
+.icon-Workflow-Add-Step:before {
+  content: "\e90b";
+}
+.icon-Workflow-Arrange-Steps:before {
+  content: "\e90c";
+}
+.icon-Workflow-Configure:before {
+  content: "\e90e";
+}
+.icon-Draft-Listen:before {
+  content: "\e910";
+}
+.icon-Draft-Select:before {
+  content: "\e912";
+}
+.icon-Draft:before {
+  content: "\e913";
+}
+.icon-Edit-Notes:before {
+  content: "\e914";
+}
+.icon-Export-Section:before {
+  content: "\e915";
+}
+.icon-Generate:before {
+  content: "\e916";
+}
+.icon-Generic-Check:before {
+  content: "\e917";
+}
+.icon-Load-Sets-Faster:before {
+  content: "\e919";
+}
+.icon-Manage-Divisions:before {
+  content: "\e91e";
+}
+.icon-Passage-Draft-Review:before {
+  content: "\e93c";
+}
+.icon-Passage-Listen:before {
+  content: "\e920";
+}
+.icon-Passage-Translate:before {
+  content: "\e921";
+}
+.icon-QR-Review:before {
+  content: "\e923";
+}
+.icon-Reference:before {
+  content: "\e924";
+}
+.icon-Section-Assign-User:before {
+  content: "\e929";
+}
+.icon-Section-Feedback:before {
+  content: "\e92a";
+}
+.icon-Section-Review:before {
+  content: "\e92b";
+}
+.icon-ChevronLeft:before {
+  content: "\e902";
+}
+.icon-ChevronRight:before {
+  content: "\e903";
+}
+.icon-Settings:before {
+  content: "\e900";
+}
+.icon-Sync:before {
+  content: "\f15f";
+}
+.icon-AddFlag:before {
+  content: "\f101";
+}
+.icon-AddOrAppend:before {
+  content: "\e901";
+}
+.icon-AddUser:before {
+  content: "\f103";
+}
+.icon-Add:before {
+  content: "\f104";
+}
+.icon-AdvisorCheck:before {
+  content: "\e904";
+}
+.icon-ArrowLeftCircle:before {
+  content: "\f106";
+}
+.icon-ArrowRightCircle:before {
+  content: "\f107";
+}
+.icon-AssignAllSections:before {
+  content: "\f108";
+}
+.icon-CancelorClose:before {
+  content: "\f10a";
+}
+.icon-Checkmark:before {
+  content: "\f10b";
+}
+.icon-Circle-Play:before {
+  content: "\f10e";
+}
+.icon-CircleStop:before {
+  content: "\f10f";
+}
+.icon-Combine:before {
+  content: "\e90d";
+}
+.icon-CommunityCheck1:before {
+  content: "\f110";
+}
+.icon-CommunityCheck2:before {
+  content: "\f111";
+}
+.icon-CommunityCheck3:before {
+  content: "\f112";
+}
+.icon-CommunityCheckFlag:before {
+  content: "\e911";
+}
+.icon-CommunityCheckQandR:before {
+  content: "\f113";
+}
+.icon-CommunityCheckRetell:before {
+  content: "\f114";
+}
+.icon-Consultant-Check-Original:before {
+  content: "\f118";
+}
+.icon-Cut-Confirm:before {
+  content: "\e91a";
+}
+.icon-Cut-Mark:before {
+  content: "\e91b";
+}
+.icon-Cut-Unmark:before {
+  content: "\e91c";
+}
+.icon-Decrease-Font-Size:before {
+  content: "\e91d";
+}
+.icon-Delete-Audio:before {
+  content: "\f11f";
+}
+.icon-Delete-User:before {
+  content: "\f120";
+}
+.icon-Delete:before {
+  content: "\f121";
+}
+.icon-Division-or-Cut:before {
+  content: "\f123";
+}
+.icon-Edit-Flag:before {
+  content: "\e922";
+}
+.icon-Edit-User:before {
+  content: "\f125";
+}
+.icon-Edit:before {
+  content: "\f126";
+}
+.icon-Exit:before {
+  content: "\f127";
+}
+.icon-Export-Note:before {
+  content: "\e926";
+}
+.icon-Export-Project:before {
+  content: "\e927";
+}
+.icon-Export-Section1:before {
+  content: "\e928";
+}
+.icon-Export:before {
+  content: "\f128";
+}
+.icon-Filter:before {
+  content: "\f129";
+}
+.icon-Finished-Pass-or-Submit:before {
+  content: "\f12a";
+}
+.icon-Flag:before {
+  content: "\f12b";
+}
+.icon-Home:before {
+  content: "\f12c";
+}
+.icon-Increase-Font-Size:before {
+  content: "\e92e";
+}
+.icon-Left-Arrow:before {
+  content: "\f12f";
+}
+.icon-Link:before {
+  content: "\e930";
+}
+.icon-Listen:before {
+  content: "\f130";
+}
+.icon-Load-Sections-Faster:before {
+  content: "\f131";
+}
+.icon-Lock:before {
+  content: "\e933";
+}
+.icon-Log-out:before {
+  content: "\f132";
+}
+.icon-Loop-Phone:before {
+  content: "\e935";
+}
+.icon-Loop:before {
+  content: "\f133";
+}
+.icon-More-Preferences:before {
+  content: "\f134";
+}
+.icon-More-Roles:before {
+  content: "\e938";
+}
+.icon-Note-Translate:before {
+  content: "\f136";
+}
+.icon-Note:before {
+  content: "\f137";
+}
+.icon-Notice-To-User:before {
+  content: "\f138";
+}
+.icon-Observe-Read-Only:before {
+  content: "\f139";
+}
+.icon-Open:before {
+  content: "\f13a";
+}
+.icon-Passage-Review:before {
+  content: "\f13b";
+}
+.icon-Passage:before {
+  content: "\f13c";
+}
+.icon-Placeholder:before {
+  content: "\f13f";
+}
+.icon-Please-Try-Again:before {
+  content: "\f141";
+}
+.icon-Primary-General:before {
+  content: "\e944";
+}
+.icon-Primary-Resource:before {
+  content: "\e945";
+}
+.icon-Processes-Setup:before {
+  content: "\f142";
+}
+.icon-Processes:before {
+  content: "\f143";
+}
+.icon-Project-Configuration:before {
+  content: "\f144";
+}
+.icon-Project-Information:before {
+  content: "\f145";
+}
+.icon-Project-Technician:before {
+  content: "\f146";
+}
+.icon-Project:before {
+  content: "\f14";
+}
+.icon-Record-a-Note-or-Suggest-Revision:before {
+  content: "\f149";
+}
+.icon-Record:before {
+  content: "\f14a";
+}
+.icon-Recorder-Append:before {
+  content: "\e94e";
+}
+.icon-Recorder-Pause:before {
+  content: "\f14b";
+}
+.icon-Recorder-Play:before {
+  content: "\f14c";
+}
+.icon-Recorder-Record:before {
+  content: "\f14d";
+}
+.icon-Recorder-Stop:before {
+  content: "\f14e";
+}
+.icon-Remove-Flag:before {
+  content: "\e953";
+}
+.icon-Remove:before {
+  content: "\f150";
+}
+.icon-Re-record:before {
+  content: "\f148";
+}
+.icon-Restart:before {
+  content: "\f151";
+}
+.icon-Review:before {
+  content: "\f153";
+}
+.icon-Right-Arrow:before {
+  content: "\f154";
+}
+.icon-Roles:before {
+  content: "\f155";
+}
+.icon-Sections:before {
+  content: "\f15c";
+}
+.icon-Select-or-Assign:before {
+  content: "\f156";
+}
+.icon-Separate:before {
+  content: "\e95d";
+}
+.icon-Set-Review:before {
+  content: "\f157";
+}
+.icon-Submit-Flag:before {
+  content: "\f15e";
+}
+.icon-Subtract-or-Minus:before {
+  content: "\e960";
+}
+.icon-Tally-I:before {
+  content: "\f160";
+}
+.icon-Tally-II:before {
+  content: "\f161";
+}
+.icon-Tally-III:before {
+  content: "\f162";
+}
+.icon-Toolbox:before {
+  content: "\e964";
+}
+.icon-Type:before {
+  content: "\f166";
+}
+.icon-Unassign-All-Sections:before {
+  content: "\f167";
+}
+.icon-Undo:before {
+  content: "\f168";
+}
+.icon-Unselect-All:before {
+  content: "\f169";
+}
+.icon-Update:before {
+  content: "\f16a";
+}
+.icon-User:before {
+  content: "\f16b";
+}
+.icon-View-User:before {
+  content: "\f16c";
+}
+.icon-View:before {
+  content: "\f16d";
+}
+.icon-TypeWarning:before {
+  content: "\e96f";
+}

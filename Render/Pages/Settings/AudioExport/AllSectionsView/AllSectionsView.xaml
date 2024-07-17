@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="allSectionsView:AllSectionsViewViewModel"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:allSectionsView="clr-namespace:Render.Pages.Settings.AudioExport.AllSectionsView;assembly=Render"
+                            xmlns:audioExport="clr-namespace:Render.Pages.Settings.AudioExport;assembly=Render"
+                            x:Class="Render.Pages.Settings.AudioExport.AllSectionsView.AllSectionsView">
+    <!-- all sections -->
+    <ScrollView WidthRequest="960"
+                HorizontalOptions="Center">
+        <Grid ColumnDefinitions="*, 13">
+            <Frame Grid.Column="0" 
+                   CornerRadius="8"
+                   Padding="26,0"
+                   BorderColor="{StaticResource AlternateButton}" 
+                   BackgroundColor="{StaticResource UnselectedCard}">
+                <StackLayout x:Name="SectionList"
+                             BackgroundColor="{DynamicResource UnselectedCard}"
+                             AutomationId="SectionToExportList">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <audioExport:SectionToExportView />
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+            </Frame>
+        </Grid>
+    </ScrollView>
+</kernel:RenderComponentBase>

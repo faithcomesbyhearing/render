@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderPageBase x:TypeArguments="draftSelectPage:DraftSelectViewModel"
+                       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:draftSelectPage="clr-namespace:Render.Pages.Translator.DraftSelectPage;assembly=Render"
+                       xmlns:draftSelection="clr-namespace:Render.Components.DraftSelection;assembly=Render"
+                       xmlns:titleBar="clr-namespace:Render.Components.TitleBar;assembly=Render"
+                       xmlns:proceedButton="clr-namespace:Render.Components.ProceedButton;assembly=Render"
+                       xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                       xmlns:loadingCircles="clr-namespace:Render.Common;assembly=Render"
+                       NavigationPage.HasNavigationBar="False"
+                       x:Class="Render.Pages.Translator.DraftSelectPage.DraftSelect"
+                       Style="{DynamicResource PrimaryPage}">
+    <ContentPage.Resources>
+        <Style x:Key="DraftGrid" TargetType="CollectionView">
+            <Setter Property="HorizontalOptions" Value="Start" />
+            <Setter Property="VerticalOptions" Value="Start" />
+            <Setter Property="WidthRequest" Value="1350" />
+            <Setter Property="VerticalScrollBarVisibility" Value="Never" />
+            <Setter Property="ItemsLayout">
+                <Setter.Value>
+                    <GridItemsLayout Orientation="Vertical"
+                                     Span="3"
+                                     VerticalItemSpacing="10"
+                                     HorizontalItemSpacing="10" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="DraftSelections" TargetType="draftSelection:DraftSelection">
+            <Setter Property="HorizontalOptions" Value="Start" />
+            <Setter Property="VerticalOptions" Value="Start" />
+            <Setter Property="MinimumWidthRequest" Value="100" />
+        </Style>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid x:Name="TopLevelElement"
+              BackgroundColor="{DynamicResource AlternateBackground}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="75" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="75" />
+            </Grid.ColumnDefinitions>
+            <titleBar:TitleBar Grid.Row="0"
+                               Grid.Column="0"
+                               Grid.ColumnSpan="2"
+                               x:Name="TitleBar" />
+            
+            <CollectionView x:Name="DraftList"
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Margin="10,70"
+                            AutomationId="DraftSelectCollection"
+                            Style="{StaticResource DraftGrid}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid AutomationId="DraftSelectionPanel">
+                            <draftSelection:DraftSelection Style="{StaticResource DraftSelections}" />
+                        </Grid>
+                    </DataTemplate>
+                    </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <proceedButton:ProceedButton Grid.Row="2"
+                                         Grid.Column="1"
+                                         x:Name="ProceedButton" />
+            <loadingCircles:LoadingScreen Grid.Row="0"
+                                          Grid.Column="0"
+                                          Grid.RowSpan="3"
+                                          Grid.ColumnSpan="2"
+                                          x:Name="LoadingView" />
+        </Grid>
+    </ContentPage.Content>
+</kernel:RenderPageBase>

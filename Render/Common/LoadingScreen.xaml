@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Render.Common.LoadingScreen"
+             xmlns:uiResources="clr-namespace:Render.Resources"
+             BackgroundColor="{DynamicResource Option}" 
+             Opacity="0.8"
+             IsVisible="False">
+    <StackLayout WidthRequest="400" 
+                 HeightRequest="400" 
+                 Margin="0" 
+                 Padding="0"
+                 VerticalOptions="Center" 
+                 HorizontalOptions="Center"
+                 Orientation="Horizontal"
+                 AutomationId="LoadScreenLayout">
+        <Label x:Name="LargeGear" 
+               Text="{uiResources:IconExtensions LoadScreenIconGear}"  
+               VerticalOptions="Center" 
+               HorizontalOptions="Center" 
+               FontSize="200"
+               TextColor="{DynamicResource SecondaryText}" 
+               FontFamily="Icons"
+               AutomationId="LargeGear"/>
+
+        <Label x:Name="SmallGear" 
+               Text="{uiResources:IconExtensions LoadScreenIconGear}"  
+               FontSize="120"
+               Margin="0"
+               VerticalOptions="Center" 
+               HorizontalOptions="Center"
+               TextColor="{DynamicResource SecondaryText}" 
+               FontFamily="Icons"
+               AutomationId="SmallGear"/>
+    </StackLayout>
+</ContentView>

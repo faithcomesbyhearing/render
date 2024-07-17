@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderPageBase x:TypeArguments="retellBackTranslate:RetellPassageReviewPageViewModel"
+                       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:barPlayer="clr-namespace:Render.Components.BarPlayer;assembly=Render"
+                       xmlns:titleBar="clr-namespace:Render.Components.TitleBar;assembly=Render"
+                       xmlns:retellBackTranslate="clr-namespace:Render.Pages.BackTranslator.RetellBackTranslate;assembly=Render"
+                       xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                       xmlns:proceedButton="clr-namespace:Render.Components.ProceedButton;assembly=Render"
+                       xmlns:resources="clr-namespace:Render.Resources"
+                       xmlns:common="clr-namespace:Render.Common"
+                       xmlns:miniWaveformPlayer="clr-namespace:Render.Components.MiniWaveformPlayer"
+                       x:Class="Render.Pages.BackTranslator.RetellBackTranslate.RetellPassageReviewPage"
+                       NavigationPage.HasNavigationBar="False"
+                       Style="{StaticResource PrimaryPage}">
+
+    <Grid x:Name="TopLevelElement"
+          BackgroundColor="{DynamicResource AlternateBackground}"
+          RowSpacing="0"
+          ColumnSpacing="0"
+          RowDefinitions="Auto, Auto, *, Auto"
+          ColumnDefinitions="*, Auto">
+
+        <HorizontalStackLayout Grid.Row="1"
+                               HorizontalOptions="Start"
+                               VerticalOptions="Start"
+                               Margin="25,38"
+                               Spacing="25"
+                               AutomationId="BarPlayersCollection">
+
+            <miniWaveformPlayer:MiniWaveformPlayer x:Name="PassagePlayer" Style="{StaticResource BarPlayers}" />
+
+            <barPlayer:BarPlayer x:Name="TwoStepPassagePlayer"
+                                 Style="{StaticResource BarPlayers}" />
+
+            <barPlayer:BarPlayer x:Name="BackTranslatePlayer" Style="{StaticResource BarPlayers}" />
+        </HorizontalStackLayout>
+
+        <Border Grid.Row="3" Grid.ColumnSpan="2"
+                Style="{DynamicResource BorderStyle}"
+                AutomationId="ToolBarHorizontalStack">
+            <Label Text="{resources:IconExtensions ReRecord}"
+                   AutomationId="ReRecord"
+                   FontFamily="Icons"
+                   TextColor="{DynamicResource Option}"
+                   FontSize="54"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer x:Name="ReRecordButtonGestureRecognizer"
+                                      AutomationId="ReRecordButtonTap" />
+            </Border.GestureRecognizers>
+        </Border>
+
+        <titleBar:TitleBar x:Name="TitleBar"
+                           Grid.Row="0"
+                           Grid.ColumnSpan="2"/>
+
+        <proceedButton:ProceedButton x:Name="ProceedButton"
+                                     Grid.Row="3"
+                                     Grid.Column="1"
+                                     HorizontalOptions="End"/>
+
+        <common:LoadingScreen x:Name="LoadingView"
+                              Grid.Row="0"
+                              Grid.Column="0"
+                              Grid.ColumnSpan="2"
+                              Grid.RowSpan="4" />
+    </Grid>
+</kernel:RenderPageBase>

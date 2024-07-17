@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<base:BaseFlagView x:Class="Render.Sequencer.Views.Flags.SimpleFlagView"
+                   xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   xmlns:atomic="clr-namespace:Render.Sequencer.Resources.Atomic"
+                   xmlns:base="clr-namespace:Render.Sequencer.Views.Flags.Base"
+                   xmlns:converters="clr-namespace:Render.Sequencer.Core.Converters"
+                   xmlns:enums="clr-namespace:Render.Sequencer.Contracts.Enums"
+                   xmlns:flags="clr-namespace:Render.Sequencer.Views.Flags"
+                   xmlns:local="clr-namespace:Render.Sequencer.Views.Flags"
+                   xmlns:styles="clr-namespace:Render.Sequencer.Resources.Styles"
+                   x:Name="root"
+                   x:DataType="base:BaseFlagViewModel"
+                   HeightRequest="{StaticResource SimpleFlagSize}"
+                   HorizontalOptions="Start"
+                   IsEnabled="True"
+                   PositionX="{Binding MiniPositionDip}"
+                   WidthRequest="{StaticResource SimpleFlagSize}">
+
+    <base:BaseFlagView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <atomic:Colors />
+                <atomic:Sizes />
+
+                <styles:FlagsStyles />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </base:BaseFlagView.Resources>
+
+    <Grid x:Name="containerGrid" WidthRequest="{StaticResource SimpleFlagSize}">
+        <Ellipse x:Name="mainEllipse" Style="{StaticResource SimpleFlagMainEllipseStyle}" />
+        <Ellipse x:Name="innerEllipse" Style="{StaticResource SimpleFlagInnerEllipseStyle}" />
+    </Grid>
+
+    <VisualStateManager.VisualStateGroups>
+        <VisualStateGroupList>
+            <VisualStateGroup x:Name="FlagVisualState">
+                <VisualState x:Name="OptionalUnread">
+                    <VisualState.StateTriggers>
+                        <CompareStateTrigger Property="{Binding VisualState}" Value="{x:Static enums:FlagVisualState.OptionalUnread}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Property="IsEnabled" Value="True" />
+                        <Setter TargetName="mainEllipse" Property="Ellipse.Stroke" Value="{StaticResource LightBrush}" />
+                        <Setter TargetName="mainEllipse" Property="Ellipse.Fill" Value="{StaticResource AccentLightBrush}" />
+                        <Setter TargetName="innerEllipse" Property="Ellipse.Fill" Value="{StaticResource AccentLightBrush}" />
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="RequiredUnread">
+                    <VisualState.StateTriggers>
+                        <CompareStateTrigger Property="{Binding VisualState}" Value="{x:Static enums:FlagVisualState.RequiredUnread}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Property="IsEnabled" Value="True" />
+                        <Setter TargetName="mainEllipse" Property="Ellipse.Stroke" Value="{StaticResource RequiredBrush}" />
+                        <Setter TargetName="mainEllipse" Property="Ellipse.Fill" Value="{StaticResource AccentLightBrush}" />
+                        <Setter TargetName="innerEllipse" Property="Ellipse.Fill" Value="{StaticResource AccentLightBrush}" />
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="OptionalRead">
+                    <VisualState.StateTriggers>
+                        <CompareStateTrigger Property="{Binding VisualState}" Value="{x:Static enums:FlagVisualState.Read}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Property="IsEnabled" Value="True" />
+                        <Setter TargetName="mainEllipse" Property="Ellipse.Stroke" Value="{StaticResource LightBrush}" />
+                        <Setter TargetName="mainEllipse" Property="Ellipse.Fill" Value="{StaticResource AccentLightBrush}" />
+                        <Setter TargetName="innerEllipse" Property="Ellipse.Fill" Value="{StaticResource LightBrush}" />
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="FlagDisabled">
+                    <VisualState.StateTriggers>
+                        <CompareStateTrigger Property="{Binding VisualState}" Value="{x:Static enums:FlagVisualState.Disabled}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Property="IsEnabled" Value="False" />
+                        <Setter TargetName="mainEllipse" Property="Ellipse.Stroke" Value="{StaticResource NeutralBrush}" />
+                        <Setter TargetName="mainEllipse" Property="Ellipse.Fill" Value="{StaticResource LightBrush}" />
+                        <Setter TargetName="innerEllipse" Property="Ellipse.Fill" Value="{StaticResource NeutralBrush}" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateGroupList>
+    </VisualStateManager.VisualStateGroups>
+</base:BaseFlagView>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<base:BaseFlagView x:Class="Render.Sequencer.Views.Flags.MarkerFlagView"
+                   xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   xmlns:base="clr-namespace:Render.Sequencer.Views.Flags.Base"
+                   xmlns:converters="clr-namespace:Render.Sequencer.Core.Converters"
+                   xmlns:enums="clr-namespace:Render.Sequencer.Contracts.Enums"
+                   xmlns:flags="clr-namespace:Render.Sequencer.Views.Flags"
+                   xmlns:atomic="clr-namespace:Render.Sequencer.Resources.Atomic"
+                   xmlns:styles="clr-namespace:Render.Sequencer.Resources.Styles"
+                   x:Name="root"
+                   x:DataType="flags:MarkerFlagViewModel"
+                   Command="{Binding TapCommand}"
+                   CommandParameter="{Binding}"
+                   HeightRequest="80"
+                   HorizontalOptions="Start"
+                   IsEnabled="True"
+                   PositionX="{Binding PositionDip}"
+                   WidthRequest="42">
+    <base:BaseFlagView.Resources>
+        <x:Double x:Key="SeapratorSize">3</x:Double>
+        
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <atomic:Colors />
+                <atomic:Sizes />
+
+                <styles:FlagsStyles />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </base:BaseFlagView.Resources>
+
+    <Grid x:Name="wrapperGrid" AutomationId="MarkerFlagContainer">
+        <BoxView x:Name="outerBorder"
+                 Grid.RowSpan="3"
+                 CornerRadius="4" />
+
+        <BoxView x:Name="innerBorder"
+                 Grid.RowSpan="3"
+                 Margin="2" />
+
+        <Grid x:Name="containerGrid"
+              Margin="5"
+              RowSpacing="5">
+            <Grid.RowDefinitions>
+                <RowDefinition x:Name="iconRow" Height="*" />
+                <RowDefinition x:Name="separatorRow" Height="{StaticResource SeapratorSize}" />
+                <RowDefinition x:Name="symbolRow" Height="*" />
+            </Grid.RowDefinitions>
+
+            <Label x:Name="icon"
+                   Grid.Row="0"
+                   AutomationId="MarkerFlagIcon"
+                   FontFamily="Icons"
+                   FontSize="22"
+                   HorizontalTextAlignment="Center"
+                   Text="{Binding IconKey, Converter={converters:IconKeyToGlyphConverter}}"
+                   VerticalTextAlignment="Center" />
+
+            <BoxView x:Name="separator"
+                     Grid.Row="1"
+                     HeightRequest="{StaticResource SeapratorSize}"
+                     WidthRequest="25" />
+
+            <Label x:Name="symbol"
+                   Grid.Row="2"
+                   AutomationId="MarkerFlagSymbol"
+                   FontFamily="BoldFont"
+                   FontSize="22"
+                   HorizontalTextAlignment="Center"
+                   Text="{Binding Symbol}"
+                   VerticalTextAlignment="Center" />
+        </Grid>
+    </Grid>
+
+    <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="FlagVisualState">
+            <VisualState x:Name="OptionalUnread">
+                <VisualState.StateTriggers>
+                    <CompareStateTrigger Property="{Binding VisualState}" Value="{x:Static enums:FlagVisualState.OptionalUnread}" />
+                </VisualState.StateTriggers>
+                <VisualState.Setters>
+                    <Setter Property="IsEnabled" Value="True" />
+                    <Setter TargetName="outerBorder" Property="BoxView.Color" Value="{StaticResource Light}" />
+                    <Setter TargetName="innerBorder" Property="BoxView.Color" Value="{StaticResource AccentLight}" />
+                    <Setter TargetName="containerGrid" Property="Grid.BackgroundColor" Value="{StaticResource AccentLight}" />
+                    <Setter TargetName="icon" Property="Label.TextColor" Value="{StaticResource PrimarySymbols}" />
+                    <Setter TargetName="separator" Property="BoxView.Color" Value="{StaticResource Light}" />
+                    <Setter TargetName="symbol" Property="Label.TextColor" Value="{StaticResource PrimarySymbols}" />
+                </VisualState.Setters>
+            </VisualState>
+
+            <VisualState x:Name="RequiredUnread">
+                <VisualState.StateTriggers>
+                    <CompareStateTrigger Property="{Binding VisualState}" Value="{x:Static enums:FlagVisualState.RequiredUnread}" />
+                </VisualState.StateTriggers>
+                <VisualState.Setters>
+                    <Setter Property="IsEnabled" Value="True" />
+                    <Setter TargetName="outerBorder" Property="BoxView.Color" Value="{StaticResource Required}" />
+                    <Setter TargetName="innerBorder" Property="BoxView.Color" Value="{StaticResource AccentLight}" />
+                    <Setter TargetName="containerGrid" Property="Grid.BackgroundColor" Value="{StaticResource AccentLight}" />
+                    <Setter TargetName="icon" Property="Label.TextColor" Value="{StaticResource Required}" />
+                    <Setter TargetName="separator" Property="BoxView.Color" Value="{StaticResource Required}" />
+                    <Setter TargetName="symbol" Property="Label.TextColor" Value="{StaticResource Required}" />
+                </VisualState.Setters>
+            </VisualState>
+
+            <VisualState x:Name="OptionalRead">
+                <VisualState.StateTriggers>
+                    <CompareStateTrigger Property="{Binding VisualState}" Value="{x:Static enums:FlagVisualState.Read}" />
+                </VisualState.StateTriggers>
+                <VisualState.Setters>
+                    <Setter Property="IsEnabled" Value="True" />
+                    <Setter TargetName="outerBorder" Property="BoxView.Color" Value="{StaticResource Light}" />
+                    <Setter TargetName="innerBorder" Property="BoxView.Color" Value="{StaticResource AccentLight}" />
+                    <Setter TargetName="containerGrid" Property="Grid.BackgroundColor" Value="{StaticResource Light}" />
+                    <Setter TargetName="icon" Property="Label.TextColor" Value="{StaticResource AccentLight}" />
+                    <Setter TargetName="separator" Property="BoxView.Color" Value="{StaticResource AccentLight}" />
+                    <Setter TargetName="symbol" Property="Label.TextColor" Value="{StaticResource AccentLight}" />
+                </VisualState.Setters>
+            </VisualState>
+
+            <VisualState x:Name="FlagDisabled">
+                <VisualState.StateTriggers>
+                    <CompareStateTrigger Property="{Binding VisualState}" Value="{x:Static enums:FlagVisualState.Disabled}" />
+                </VisualState.StateTriggers>
+                <VisualState.Setters>
+                    <Setter Property="IsEnabled" Value="False" />
+                    <Setter TargetName="outerBorder" Property="BoxView.Color" Value="{StaticResource Neutral}" />
+                    <Setter TargetName="innerBorder" Property="BoxView.Color" Value="{StaticResource Light}" />
+                    <Setter TargetName="containerGrid" Property="Grid.BackgroundColor" Value="{StaticResource Light}" />
+                    <Setter TargetName="icon" Property="Label.TextColor" Value="{StaticResource Neutral}" />
+                    <Setter TargetName="separator" Property="BoxView.Color" Value="{StaticResource Neutral}" />
+                    <Setter TargetName="symbol" Property="Label.TextColor" Value="{StaticResource Neutral}" />
+                </VisualState.Setters>
+            </VisualState>
+        </VisualStateGroup>
+    </VisualStateManager.VisualStateGroups>
+</base:BaseFlagView>

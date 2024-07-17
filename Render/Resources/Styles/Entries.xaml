@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    
+    <Style x:Key="WorkflowSettingsEntryStyle" TargetType="Entry">
+        <Setter Property="BackgroundColor" Value="{DynamicResource SecondaryText}" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="TextColor" Value="{DynamicResource GreyText}" />
+        <Setter Property="FontSize" Value="{DynamicResource MediumFont}" />
+        <Setter Property="FontFamily" Value="RegularItalicFont"/>
+        <Setter Property="Margin" Value="0,0" />
+        <Setter Property="VerticalOptions" Value="Center"/>
+    </Style>
+    
+    <Style x:Key="StageSettingsStageNameEntryStyle" TargetType="Entry">
+        <Setter Property="BackgroundColor" Value="{DynamicResource SecondaryText}" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="TextColor" Value="{DynamicResource GreyText}" />
+        <Setter Property="FontSize" Value="{DynamicResource MediumFont}" />
+        <Setter Property="WidthRequest" Value="400" />
+        <Setter Property="FontFamily" Value="RegularFont"/>
+        <Setter Property="MaxLength" Value="32"/>
+    </Style>
+    
+    <Style x:Key="Entry" TargetType="Entry">
+        <Setter Property="TextColor" Value="{DynamicResource MainText}" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource SecondaryText}"/>
+        <Setter Property="Margin" Value="0"/>
+    </Style>
+
+</ResourceDictionary>

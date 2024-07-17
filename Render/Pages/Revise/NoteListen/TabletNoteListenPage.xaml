@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderPageBase x:TypeArguments="noteListen:TabletNoteListenPageViewModel"
+                       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:titleBar="clr-namespace:Render.Components.TitleBar;assembly=Render"
+                       xmlns:proceedButton="clr-namespace:Render.Components.ProceedButton;assembly=Render"
+                       xmlns:noteListen="clr-namespace:Render.Pages.Revise.NoteListen;assembly=Render"
+                       xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                       xmlns:common="clr-namespace:Render.Common"
+                       xmlns:sequencer="clr-namespace:Render.Sequencer;assembly=Render.Sequencer"
+                       xmlns:localization="using:Render.Resources.Localization"
+                       x:Class="Render.Pages.Revise.NoteListen.TabletNoteListenPage"
+                       NavigationPage.HasNavigationBar="False">
+
+    <AbsoluteLayout x:Name="TopLevelElement" Style="{StaticResource MainStack}">
+        <Grid AbsoluteLayout.LayoutFlags="All"
+              AbsoluteLayout.LayoutBounds="0,0,1,1"
+              RowSpacing="13">
+            <Grid.RowDefinitions>
+                <RowDefinition x:Name="TitleBarRow" Height="Auto" />
+                <RowDefinition x:Name="RevisionsRow" Height="Auto" />
+                <RowDefinition x:Name="SequencerRow" Height="*" />
+            </Grid.RowDefinitions>
+            
+            <HorizontalStackLayout Grid.Row="1"
+                                   x:Name="RevisionLayout"
+                                   IsVisible="false"
+                                   Spacing="20"
+                                   Padding="25,0"
+                                   HeightRequest="60">
+                <Label Text="{x:Static localization:AppResources.Revision}"
+                       FontFamily="MediumFont"
+                       HorizontalTextAlignment="Start"
+                       TextColor="{StaticResource MainText}"
+                       FontSize="{StaticResource LargeFontMinus2Font}"
+                       VerticalTextAlignment="Center"
+                       AutomationId="RevisionLabel" />
+
+                <Picker x:Name="RevisionPicker"
+                        Style="{StaticResource DraftPicker}"
+                        FontSize="{StaticResource MediumPlus2Font}"
+                        FontFamily="MediumFont"
+                        FontAttributes="None"
+                        VerticalOptions="Center"
+                        SelectedIndex="0"
+                        WidthRequest="400"
+                        AutomationId="RevisionPicker"
+                        ItemDisplayBinding="{Binding Value}" />
+
+            </HorizontalStackLayout>
+
+            <sequencer:Sequencer Grid.Row="2" x:Name="Sequencer" />
+
+            <!--TitleBar is located in the first grid row, but should be rendered
+                after the page content in order to display Passage Number Overlay on top of the page.-->
+            <titleBar:TitleBar Grid.Row="0" x:Name="TitleBar" />
+        </Grid>
+
+        <proceedButton:ProceedButton x:Name="ProceedButton"
+                                     AbsoluteLayout.LayoutFlags="PositionProportional"
+                                     AbsoluteLayout.LayoutBounds="1,1" />
+
+        <common:LoadingScreen x:Name="LoadingView"
+                              AbsoluteLayout.LayoutFlags="All"
+                              AbsoluteLayout.LayoutBounds="0,0,1,1" />
+    </AbsoluteLayout>
+
+</kernel:RenderPageBase>

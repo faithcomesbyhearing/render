@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView x:Class="Render.Sequencer.Views.WaveForm.Items.Combining.CombinableWaveFormItemView"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:atomic="clr-namespace:Render.Sequencer.Resources.Atomic"
+             xmlns:behaviours="clr-namespace:Render.Sequencer.Core.Behaviors"
+             xmlns:controls="clr-namespace:Render.Sequencer.Core.Controls"
+             xmlns:converters="clr-namespace:Render.Sequencer.Core.Converters"
+             xmlns:enums="clr-namespace:Render.Sequencer.Contracts.Enums"
+             xmlns:flags="clr-namespace:Render.Sequencer.Views.Flags"
+             xmlns:local="clr-namespace:Render.Sequencer.Views.WaveForm.Items.Combining"
+             xmlns:skia="clr-namespace:SkiaSharp.Views.Maui.Controls;assembly=SkiaSharp.Views.Maui.Controls"
+             xmlns:styles="clr-namespace:Render.Sequencer.Resources.Styles"
+             xmlns:waveForm="clr-namespace:Render.Sequencer.Views.WaveForm"
+             x:DataType="local:CombinableWaveFormItemViewModel">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <atomic:Colors />
+                <atomic:Sizes />
+
+                <styles:WaveFormItemStyles />
+                <styles:WaveFormItemPartsStyles />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <Grid IsEnabled="{Binding IsAvailable}">
+        <Grid.RowDefinitions>
+            <RowDefinition x:Name="canvasRow" Height="*" />
+            <RowDefinition x:Name="labelRow" Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <skia:SKCanvasView x:Name="Canvas"
+                           Grid.Row="0"
+                           behaviours:SkiaCanvasBehavior.AttachBehavior="True"
+                           behaviours:SkiaCanvasBehavior.Painter="{Binding Painter}"
+                           behaviours:SkiaCanvasBehavior.Parent="{Binding Source={RelativeSource AncestorType={x:Type waveForm:WaveFormView}, Mode=FindAncestor}}"
+                           behaviours:SkiaCanvasBehavior.Samples="{Binding Samples}"
+                           behaviours:SkiaCanvasBehavior.WaveFormColor="{StaticResource AccentLight}"
+                           AutomationId="WaveformCanvas"
+                           WidthRequest="{Binding Width}" />
+
+        <BoxView x:Name="unselectedItemBorder"
+                AutomationId="UnselectedWaveFormBorder"
+                Style="{StaticResource UnselectedWaveFormItemStyle}">
+            <BoxView.Triggers>
+                <DataTrigger Binding="{Binding IsLocked}"
+                             TargetType="BoxView"
+                             Value="True">
+                    <Setter Property="IsVisible" Value="False" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding SequencerAudio.IsCombined}"
+                             TargetType="BoxView"
+                             Value="true">
+                    <Setter Property="IsVisible" Value="False" />
+                </DataTrigger>
+            </BoxView.Triggers>
+        </BoxView>
+
+        <Border x:Name="lockedItemBorder"
+                AutomationId="LockedWaveFormBorder"
+                IsVisible="{Binding IsLocked}"
+                Style="{StaticResource LockedWaveFormItemStyle}">
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding UnlockItemCommand}" CommandParameter="{Binding}" />
+            </Border.GestureRecognizers>
+            <Border.Triggers>
+                <DataTrigger Binding="{Binding IsAvailable}"
+                             TargetType="Border"
+                             Value="False">
+                    <Setter Property="Stroke" Value="{StaticResource Primary}" />
+                </DataTrigger>
+            </Border.Triggers>
+
+            <Grid>
+                <BoxView x:Name="lockItemBackground" Style="{StaticResource CombinableWaveFormItemBackgroundStyle}" />
+                <Label x:Name="lockIcon"
+                       Style="{StaticResource LockIconStyle}"
+                       IsVisible="{Binding CanUnlock, Converter={converters:NegativeBoolConverter}}"
+                       Text="{Binding Converter={converters:IconKeyToGlyphConverter}, Source=Lock}">
+                    <Label.Triggers>
+                        <DataTrigger Binding="{Binding IsAvailable}"
+                                     TargetType="Label"
+                                     Value="False">
+                            <Setter Property="TextColor" Value="{StaticResource Primary}" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+                <Label x:Name="canUnlockIcon"
+                       FontSize="30"
+                       IsVisible="{Binding CanUnlock}"
+                       Style="{StaticResource LockIconStyle}"
+                       Text="{Binding Converter={converters:IconKeyToGlyphConverter}, Source=LockPlus}">
+                    <Label.Triggers>
+                        <DataTrigger Binding="{Binding IsAvailable}"
+                                     TargetType="Label"
+                                     Value="False">
+                            <Setter Property="TextColor" Value="{StaticResource Primary}" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+            </Grid>
+        </Border>
+
+        <Border x:Name="canCombineItemBorder"
+                AutomationId="CanCombineWaveFormBorder"
+                IsVisible="{Binding CanCombine}"
+                Style="{StaticResource CanCombineWaveFormItemStyle}">
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding CombineItemCommand}" CommandParameter="{Binding}" />
+            </Border.GestureRecognizers>
+            <Border.Triggers>
+                <DataTrigger Binding="{Binding IsAvailable}"
+                             TargetType="Border"
+                             Value="False">
+                    <Setter Property="Stroke" Value="{StaticResource Primary}" />
+                </DataTrigger>
+            </Border.Triggers>
+
+            <Grid>
+                <BoxView x:Name="canCombineItemBackground" Style="{StaticResource CombinableWaveFormItemBackgroundStyle}" />
+                <Label x:Name="canCombineIcon"
+                       Style="{StaticResource CanCombineIconStyle}"
+                       Text="{Binding Converter={converters:IconKeyToGlyphConverter}, Source=AddOrAppend}">
+                    <Label.Triggers>
+                        <DataTrigger Binding="{Binding IsAvailable}"
+                                     TargetType="Label"
+                                     Value="False">
+                            <Setter Property="TextColor" Value="{StaticResource Primary}" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+            </Grid>
+        </Border>
+
+        <Grid x:Name="labelContainer"
+              Grid.Row="1"
+              BackgroundColor="{StaticResource AccentLight}"
+              FlowDirection="{Binding Sequencer.IsRightToLeftDirection, Converter={converters:BoolToFlowDirectionConverter}}"
+              IsVisible="{Binding SequencerAudio.IsCombined, Converter={converters:NegativeBoolConverter}}"
+              Style="{StaticResource AudioInfoContainerStyle}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="leftSpacer" Width="*" />
+                <ColumnDefinition x:Name="iconColumn" Width="Auto" />
+                <ColumnDefinition x:Name="labelColumn" Width="Auto" />
+                <ColumnDefinition x:Name="rightSpacer" Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label x:Name="startIcon"
+                   Grid.Column="1"
+                   Rotation="{Binding Sequencer.IsRightToLeftDirection, Converter={converters:RigthToLeftToDegreeConverter}}"
+                   Style="{StaticResource AudioIconStyle}"
+                   Text="{Binding SequencerAudio.Audio.StartIcon, Converter={converters:IconKeyToGlyphConverter}}" />
+
+            <Label x:Name="audioLabel"
+                   Grid.Column="2"
+                   AutomationId="WaveFormLabel"
+                   FontSize="16"
+                   Style="{StaticResource AudioLabelStyle}"
+                   Text="{Binding Name}" />
+        </Grid>
+    </Grid>
+
+    <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="AudioIconMediaQueriesGroup">
+
+            <VisualState x:Name="LessThan70Icon">
+                <VisualState.StateTriggers>
+                    <CompareStateTrigger Property="{Binding Width, Converter={converters:WidthToBoolConverter TargetValue=70, Operator=LessThan}}" Value="True" />
+                </VisualState.StateTriggers>
+                <VisualState.Setters>
+                    <Setter TargetName="startIcon" Property="Label.WidthRequest" Value="0" />
+                </VisualState.Setters>
+            </VisualState>
+
+            <VisualState x:Name="MoreThan70Icon">
+                <VisualState.StateTriggers>
+                    <CompareStateTrigger Property="{Binding Width, Converter={converters:WidthToBoolConverter TargetValue=70, Operator=GreaterThan}}" Value="True" />
+                </VisualState.StateTriggers>
+                <VisualState.Setters>
+                    <Setter TargetName="startIcon" Property="Label.WidthRequest" Value="NaN" />
+                </VisualState.Setters>
+            </VisualState>
+
+        </VisualStateGroup>
+
+        <VisualStateGroup x:Name="AudioLabelMediaQueriesGroup">
+
+            <VisualState x:Name="LessThan45">
+                <VisualState.StateTriggers>
+                    <CompareStateTrigger Property="{Binding Width, Converter={converters:WidthToBoolConverter TargetValue=45, Operator=LessThan}}" Value="True" />
+                </VisualState.StateTriggers>
+                <VisualState.Setters>
+                    <Setter TargetName="audioLabel" Property="Label.WidthRequest" Value="0" />
+                </VisualState.Setters>
+            </VisualState>
+
+            <VisualState x:Name="LessThan145">
+                <VisualState.StateTriggers>
+                    <CompareStateTrigger Property="{Binding Width, Converter={converters:WidthToBoolConverter TargetValue=145, Operator=LessThan}}" Value="True" />
+                </VisualState.StateTriggers>
+                <VisualState.Setters>
+                    <Setter TargetName="audioLabel" Property="Label.WidthRequest" Value="NaN" />
+                    <Setter TargetName="audioLabel" Property="Label.Text" Value="{Binding Number}" />
+                </VisualState.Setters>
+            </VisualState>
+
+            <VisualState x:Name="MoreThan145">
+                <VisualState.StateTriggers>
+                    <CompareStateTrigger Property="{Binding Width, Converter={converters:WidthToBoolConverter TargetValue=145, Operator=GreaterThan}}" Value="True" />
+                </VisualState.StateTriggers>
+                <VisualState.Setters>
+                    <Setter TargetName="audioLabel" Property="Label.WidthRequest" Value="NaN" />
+                    <Setter TargetName="audioLabel" Property="Label.Text" Value="{Binding Name}" />
+                </VisualState.Setters>
+            </VisualState>
+
+        </VisualStateGroup>
+
+        <VisualStateGroup x:Name="CentralItemIconsMediaQueriesGroup">
+
+            <VisualState x:Name="LessThan60CentralIcons">
+                <VisualState.StateTriggers>
+                    <CompareStateTrigger Property="{Binding Width, Converter={converters:WidthToBoolConverter TargetValue=60, Operator=LessThan}}" Value="True" />
+                </VisualState.StateTriggers>
+                <VisualState.Setters>
+                    <Setter TargetName="canCombineIcon" Property="Label.WidthRequest" Value="0" />
+                    <Setter TargetName="lockIcon" Property="Label.WidthRequest" Value="0" />
+                    <Setter TargetName="canUnlockIcon" Property="Label.WidthRequest" Value="0" />
+                </VisualState.Setters>
+            </VisualState>
+
+            <VisualState x:Name="MoreThan60CentralIcons">
+                <VisualState.StateTriggers>
+                    <CompareStateTrigger Property="{Binding Width, Converter={converters:WidthToBoolConverter TargetValue=60, Operator=GreaterThan}}" Value="True" />
+                </VisualState.StateTriggers>
+                <VisualState.Setters>
+                    <Setter TargetName="canCombineIcon" Property="Label.WidthRequest" Value="NaN" />
+                    <Setter TargetName="lockIcon" Property="Label.WidthRequest" Value="NaN" />
+                    <Setter TargetName="canUnlockIcon" Property="Label.WidthRequest" Value="NaN" />
+                </VisualState.Setters>
+            </VisualState>
+
+        </VisualStateGroup>
+    </VisualStateManager.VisualStateGroups>
+</ContentView>

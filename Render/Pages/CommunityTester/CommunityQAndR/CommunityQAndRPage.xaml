@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<kernel:RenderPageBase x:TypeArguments="communityQAndR:CommunityQAndRPageViewModel"
+                       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                       xmlns:communityQAndR="clr-namespace:Render.Pages.CommunityTester.CommunityQAndR;assembly=Render"
+                       xmlns:titleBar="clr-namespace:Render.Components.TitleBar;assembly=Render"
+                       xmlns:proceedButton="clr-namespace:Render.Components.ProceedButton;assembly=Render"
+                       xmlns:miniWaveformPlayer="clr-namespace:Render.Components.MiniWaveformPlayer;assembly=Render"
+                       xmlns:barPlayer="clr-namespace:Render.Components.BarPlayer;assembly=Render"
+                       xmlns:loadingCircles="clr-namespace:Render.Common"
+                       xmlns:sequencer="clr-namespace:Render.Sequencer;assembly=Render.Sequencer"
+                       x:Class="Render.Pages.CommunityTester.CommunityQAndR.CommunityQAndRPage">
+    <AbsoluteLayout x:Name="TopLevelElement">
+        <Grid AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="1" BackgroundColor="{DynamicResource AlternateBackground}" RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <!--Audio Players-->
+                <Grid Grid.Row="0"
+                    RowSpacing="{x:Static titleBar:TitleBar.Spacing}"
+                    BackgroundColor="{DynamicResource AlternateBackground}"
+                    Padding="{x:Static titleBar:TitleBar.Spacing}"
+                    ColumnSpacing="{x:Static titleBar:TitleBar.Spacing}">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <miniWaveformPlayer:MiniWaveformPlayer Grid.Row="0" Grid.Column="0" x:Name="SectionPlayer" 
+                                                           HeightRequest="80" WidthRequest="400" AutomationId="SectionPlayerContainer"/>
+
+                    <miniWaveformPlayer:MiniWaveformPlayer Grid.Row="0" Grid.Column="1" x:Name="PassagePlayer" 
+                                                           HeightRequest="80" WidthRequest="400" AutomationId="PassagePlayerContainer"/>
+
+                    <miniWaveformPlayer:MiniWaveformPlayer Grid.Row="1" Grid.Column="0" 
+                                                           x:Name="AudioClipPlayer" HeightRequest="80" WidthRequest="400" 
+                                                           AutomationId="AudioClipPlayerContainer"/>
+
+                    <barPlayer:BarPlayer Grid.Row="1" Grid.Column="1" x:Name="QuestionPlayer" HeightRequest="80" WidthRequest="400" 
+                                         AutomationId="QuestionPlayerContainer"/>
+                </Grid>
+
+                <!-- Waveform with mini waveform and toolbar-->
+                <Grid Grid.Row="1" VerticalOptions="Fill" HorizontalOptions="Fill" BackgroundColor="{StaticResource White}">
+                    <sequencer:Sequencer Grid.Row="2" x:Name="Sequencer"/>
+                </Grid>
+            </Grid>
+
+            <!--TitleBar is located in the first grid row, but should be rendered
+                    after the page content in order to display Passage Number Overlay on top of the page.-->
+            <titleBar:TitleBar Grid.Row="0" x:Name="TitleBar" />
+        </Grid>
+        <proceedButton:ProceedButton x:Name="ProceedButton"
+                                     AbsoluteLayout.LayoutBounds="1,1"
+                                     AbsoluteLayout.LayoutFlags="PositionProportional" />
+        <loadingCircles:LoadingScreen x:Name="LoadingView" 
+                                      AbsoluteLayout.LayoutFlags="All"
+                                      AbsoluteLayout.LayoutBounds="0,0,1,1"/>
+
+    </AbsoluteLayout>
+</kernel:RenderPageBase>

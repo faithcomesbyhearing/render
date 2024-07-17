@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView x:Class="Render.Sequencer.Sequencer"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:atomic="clr-namespace:Render.Sequencer.Resources.Atomic"
+             xmlns:resources="clr-namespace:Render.Sequencer.Resources"
+             xmlns:scroller="clr-namespace:Render.Sequencer.Views.Scroller"
+             xmlns:behaviours="clr-namespace:Render.Sequencer.Core.Behaviors"
+             xmlns:toolbar="clr-namespace:Render.Sequencer.Views.Toolbar"
+             xmlns:viewModels="clr-namespace:Render.Sequencer.ViewModels"
+             xmlns:waveform="clr-namespace:Render.Sequencer.Views.WaveForm">
+    <ContentView.Behaviors>
+        <behaviours:EventToCommandBehavior EventName="Loaded"
+                                           Command="{Binding LoadedCommand}"/>
+    </ContentView.Behaviors>
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <atomic:Colors />
+                <atomic:Sizes />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <ContentView.Content>
+        <Grid BackgroundColor="{StaticResource Neutral}"
+              FlowDirection="LeftToRight">
+            <Grid.RowDefinitions>
+                <RowDefinition x:Name="waveFormRow" Height="*" />
+                <RowDefinition x:Name="scrollerRow" Height="{x:Static scroller:ScrollerView.ScrollerHeight}" />
+                <RowDefinition x:Name="spacerRow" Height="{StaticResource LargeSpacing}" />
+                <RowDefinition x:Name="toolbarRow" Height="{x:Static toolbar:ToolbarView.ToolbarHeight}" />
+            </Grid.RowDefinitions>
+
+            <waveform:WaveFormView x:Name="waveFormView"
+                                   Grid.Row="0"
+                                   AutomationId="WaveFormView"
+                                   BindingContext="{Binding WaveFormViewModel}" />
+
+            <scroller:ScrollerView x:Name="scrollerView"
+                                   Grid.Row="1"
+                                   AutomationId="ScrollerView"
+                                   BindingContext="{Binding ScrollerViewModel}" />
+
+            <toolbar:ToolbarView x:Name="toolbarView"
+                                 Grid.Row="3"
+                                 AutomationId="ToolbarView"
+                                 BindingContext="{Binding ToolbarViewModel}" />
+        </Grid>
+    </ContentView.Content>
+</ContentView>

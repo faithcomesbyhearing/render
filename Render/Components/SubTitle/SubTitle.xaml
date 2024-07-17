@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Render.Components.SubTitle.SubTitle">
+    <Frame CornerRadius="0" Padding="0" BackgroundColor="Transparent">
+        <StackLayout Orientation="Horizontal" BackgroundColor="Transparent">
+            <Label x:Name="IconLabel"
+                   AutomationId="SubTitleIcon"
+                   Margin="15,0,15,0"
+                   HeightRequest="45"
+                   FontSize="45"
+                   BackgroundColor="Transparent"
+                   FontFamily="Icons"
+                   TextColor="{StaticResource Option}"
+                   VerticalOptions="Center" />
+
+            <Label x:Name="TextLabel"
+                   AutomationId="SubTitleText"
+                   Margin="0"
+                   FontSize="{StaticResource LargeFont}"
+                   FontFamily="BoldFont"
+                   TextColor="{StaticResource Option}"
+                   VerticalOptions="Center"
+                   VerticalTextAlignment="Center" />
+        </StackLayout>
+    </Frame>
+</ContentView>

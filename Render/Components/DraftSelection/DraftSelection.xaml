@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="draftSelection:DraftSelectionViewModel"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:miniWaveformPlayer="clr-namespace:Render.Components.MiniWaveformPlayer;assembly=Render"
+                            xmlns:draftSelection="clr-namespace:Render.Components.DraftSelection;assembly=Render"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:barPlayer="clr-namespace:Render.Components.BarPlayer;assembly=Render"
+                            x:Class="Render.Components.DraftSelection.DraftSelection">
+    <ContentView.Resources>
+        <Style x:Key="BarPlayers" TargetType="barPlayer:BarPlayer">
+            <Setter Property="WidthRequest" Value="428" />
+            <Setter Property="HorizontalOptions" Value="Start" />
+            <Setter Property="VerticalOptions" Value="Center" />
+        </Style>
+
+        <Style x:Key="BackgroundContainer" TargetType="Grid">
+            <Setter Property="Padding" Value="10,0" />
+        </Style>
+
+        <Style x:Key="Circle" TargetType="Frame">
+            <Setter Property="CornerRadius" Value="20" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="Padding" Value="0" />
+        </Style>
+        <Style x:Key="OuterCircle" TargetType="Frame" BasedOn="{StaticResource Circle}">
+            <Setter Property="MinimumHeightRequest" Value="{x:Static draftSelection:DraftSelection.OuterCircleSize}" />
+            <Setter Property="HeightRequest" Value="{x:Static draftSelection:DraftSelection.OuterCircleSize}" />
+            <Setter Property="MinimumWidthRequest" Value="{x:Static draftSelection:DraftSelection.OuterCircleSize}" />
+            <Setter Property="WidthRequest" Value="{x:Static draftSelection:DraftSelection.OuterCircleSize}" />
+        </Style>
+        <Style x:Key="MiddleCircle" TargetType="Frame" BasedOn="{StaticResource Circle}">
+            <Setter Property="MinimumHeightRequest" Value="{x:Static draftSelection:DraftSelection.MiddleCircleSize}" />
+            <Setter Property="HeightRequest" Value="{x:Static draftSelection:DraftSelection.MiddleCircleSize}" />
+            <Setter Property="MinimumWidthRequest" Value="{x:Static draftSelection:DraftSelection.MiddleCircleSize}" />
+            <Setter Property="WidthRequest" Value="{x:Static draftSelection:DraftSelection.MiddleCircleSize}" />
+        </Style>
+        <Style x:Key="InnerCircle" TargetType="Frame" BasedOn="{StaticResource Circle}">
+            <Setter Property="MinimumHeightRequest" Value="{x:Static draftSelection:DraftSelection.InnerCircleSize}" />
+            <Setter Property="HeightRequest" Value="{x:Static draftSelection:DraftSelection.InnerCircleSize}" />
+            <Setter Property="MinimumWidthRequest" Value="{x:Static draftSelection:DraftSelection.InnerCircleSize}" />
+            <Setter Property="WidthRequest" Value="{x:Static draftSelection:DraftSelection.InnerCircleSize}" />
+        </Style>
+    </ContentView.Resources>
+
+    <ContentView.Content>
+        <StackLayout>
+            <Grid>
+                <miniWaveformPlayer:MiniWaveformPlayer x:Name="MiniWaveformPlayer" Style="{StaticResource BarPlayers}">
+                    <miniWaveformPlayer:MiniWaveformPlayer.ContentBeforePlayer>
+                        <StackLayout Orientation="Horizontal">
+                            <!-- Radio button -->
+                            <Grid x:Name="BackgroundContainer" Style="{StaticResource BackgroundContainer}">
+                                <Frame x:Name="OuterCircle" Style="{StaticResource OuterCircle}">
+                                    <Frame x:Name="MiddleCircle" Style="{StaticResource MiddleCircle}">
+                                        <Frame x:Name="InnerCircle" Style="{StaticResource InnerCircle}" />
+                                    </Frame>
+                                </Frame>
+                            </Grid>
+                        </StackLayout>
+                    </miniWaveformPlayer:MiniWaveformPlayer.ContentBeforePlayer>
+                </miniWaveformPlayer:MiniWaveformPlayer>
+
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer x:Name="FrameTapped" />
+                </Grid.GestureRecognizers>
+            </Grid>
+        </StackLayout>
+    </ContentView.Content>
+</kernel:RenderComponentBase>

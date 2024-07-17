@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderPageBase x:TypeArguments="tablet:TabletPeerReviewPassageListenPageViewModel"
+                       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:titleBar="clr-namespace:Render.Components.TitleBar;assembly=Render"
+                       xmlns:proceedButton="clr-namespace:Render.Components.ProceedButton;assembly=Render"
+                       xmlns:barPlayer="clr-namespace:Render.Components.BarPlayer;assembly=Render"
+                       xmlns:tablet="clr-namespace:Render.Pages.PeerReview.PassageListen.Tablet;assembly=Render"
+                       xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                       xmlns:subTitle="clr-namespace:Render.Components.SubTitle"
+                       xmlns:localization="clr-namespace:Render.Resources.Localization"
+                       xmlns:common="clr-namespace:Render.Common"
+                       xmlns:sequencer="clr-namespace:Render.Sequencer;assembly=Render.Sequencer"
+                       x:Class="Render.Pages.PeerReview.PassageListen.Tablet.TabletPeerReviewPassageListenPage"
+                       NavigationPage.HasNavigationBar="False"
+                       BackgroundColor="{DynamicResource AlternateBackground}">
+    <ContentPage.Resources>
+        <Thickness x:Key="SubTitleMargin">25,15</Thickness>
+    </ContentPage.Resources>
+
+    <AbsoluteLayout Style="{StaticResource MainStack}" x:Name="TopLevelElement">
+        <Grid AbsoluteLayout.LayoutFlags="All"
+              AbsoluteLayout.LayoutBounds="0,0,1,1"
+              RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition x:Name="TitleBarRow" Height="Auto" />
+                <RowDefinition x:Name="ReferencesRow" Height="Auto" />
+                <RowDefinition x:Name="SequencerRow" Height="*" />
+            </Grid.RowDefinitions>
+            <VerticalStackLayout Grid.Row="1">
+                <subTitle:SubTitle AutomationId="ReferenceSubTitle"
+                                   IconType="Reference"
+                                   Margin="{StaticResource SubTitleMargin}"
+                                   Text="{x:Static localization:AppResources.References}" />
+
+                <CollectionView x:Name="References"
+                                Style="{StaticResource ReferencesCollection}"
+                                AutomationId="ReferencesCollection">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <barPlayer:BarPlayer Style="{StaticResource BarPlayers}"
+                                                 AutomationId="ReferenceBarPlayer" />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                
+            </VerticalStackLayout>
+
+            <!--Sequencer-->
+            <sequencer:Sequencer Grid.Row="2" x:Name="Sequencer"/>
+            
+            <!--TitleBar is located in the first grid row, but should be rendered
+                after the page content in order to display Passage Number Overlay on top of the page.-->
+            <titleBar:TitleBar Grid.Row="0" x:Name="TitleBar" />
+        </Grid>
+
+        <proceedButton:ProceedButton x:Name="ProceedButton"
+                                     AbsoluteLayout.LayoutFlags="PositionProportional"
+                                     AbsoluteLayout.LayoutBounds="1,1" />
+        <common:LoadingScreen x:Name="LoadingView"
+                                      AbsoluteLayout.LayoutFlags="All"
+                                      AbsoluteLayout.LayoutBounds="0,0,1,1" />
+    </AbsoluteLayout>
+</kernel:RenderPageBase>

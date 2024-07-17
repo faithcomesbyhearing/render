@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="teamView:TeamViewSectionCardViewModel"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:teamView="clr-namespace:Render.Pages.Configurator.SectionAssignment.TeamView;assembly=Render"
+                            x:Class="Render.Pages.Configurator.SectionAssignment.TeamView.TeamViewSectionCard"
+                            x:Name="TeamViewSectionCardComponent"
+                            xmlns:dragAndDrop="clr-namespace:Render.Kernel.DragAndDrop;assembly=Render">
+    <Frame x:Name="TeamViewSectionCardFrame" 
+           Padding="0,5" 
+           CornerRadius="8" 
+           BackgroundColor="{StaticResource SecondaryText}"
+           Margin="5,10"
+           HeightRequest="85">
+        <Frame.GestureRecognizers>
+            <TapGestureRecognizer Command="{Binding ToggleSelectCommand}"/>
+        </Frame.GestureRecognizers>
+        <Frame.Effects>
+            <dragAndDrop:DragRecognizerEffect DragStarting="DragGestureRecognizerEffect_OnDragStarting"/>
+        </Frame.Effects>
+        <Grid ColumnDefinitions="Auto,Auto" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+            <Label Grid.Column="0" x:Name="SectionNumber" TextColor="{DynamicResource MainText}"
+                   FontSize="{StaticResource MediumPlus2Font}"
+                   FontAttributes="Bold" 
+                   Margin="15,0"
+                   VerticalOptions="Center"
+                   WidthRequest="35"
+                   HorizontalTextAlignment="Center"/>
+            <Grid Grid.Column="1" RowDefinitions="*, 20" RowSpacing="0" HorizontalOptions="StartAndExpand" 
+                          VerticalOptions="Center" MinimumWidthRequest="100">
+                <Label Grid.Row="0" x:Name="SectionTitleLabel" TextColor="{DynamicResource MainText}"
+                       FontSize="{StaticResource MediumMinus2Font}" WidthRequest="395"
+                       FontAttributes="Bold" LineBreakMode="CharacterWrap"/>
+                <Label Grid.Row="1" x:Name="SectionReferenceLabel" 
+                       TextColor="{DynamicResource MainText}" FontSize="{StaticResource MediumMinus2Font}" 
+                       LineBreakMode="TailTruncation"/>
+            </Grid>
+        </Grid>
+    </Frame>
+</kernel:RenderComponentBase>

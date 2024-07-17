@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="menuActions:SyncMenuActionViewModel"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:menuActions="clr-namespace:Render.Components.TitleBar.MenuActions;assembly=Render"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            x:Class="Render.Components.TitleBar.MenuActions.SyncMenuAction">
+    <HorizontalStackLayout Margin="15">
+        <HorizontalStackLayout.GestureRecognizers>
+            <TapGestureRecognizer Tapped="OnButtonClicked" x:Name="GestureRecognizer" />
+        </HorizontalStackLayout.GestureRecognizers>
+        <Label x:Name="Image" Margin="0" HorizontalOptions="Center" FontSize="40" FontFamily="Icons"
+               VerticalOptions="Center" TextColor="{DynamicResource Option}" />
+        <Label x:Name="Label" Margin="25,0,0, 0" Style="{DynamicResource MediumText}"
+               VerticalOptions="Center" />
+        <Label x:Name="SecondaryImage" Margin="5,5, 5, 0" HorizontalOptions="Center" FontSize="25" FontFamily="Icons"
+               VerticalOptions="Center" TextColor="{DynamicResource Option}" />
+        <Label x:Name="SecondaryLabel" Margin="5, 0" FontSize="{DynamicResource MediumFont}"
+               VerticalOptions="Center" TextColor="{DynamicResource TertiaryText}" />
+    </HorizontalStackLayout>
+</kernel:RenderComponentBase>

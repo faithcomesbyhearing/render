@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:Class="Render.Components.Modal.ModalComponents.SnapshotSelectComponentView"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:component="clr-namespace:Render.Components.Modal.ModalComponents"
+                            xmlns:kernel="clr-namespace:Render.Kernel"
+                            x:TypeArguments="component:SnapshotSelectComponentViewModel">
+
+    <ContentView.Resources>
+        <Style x:Key="TeamNameStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource AlternateBackground}" />
+            <Setter Property="FontFamily" Value="RegularFont" />
+            <Setter Property="LineBreakMode" Value="TailTruncation" />
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+        </Style>
+
+        <Style x:Key="TeamLabelStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource SecondaryText}" />
+            <Setter Property="FontFamily" Value="BoldFont" />
+            <Setter Property="FontSize" Value="{StaticResource LargeFontMinus2Font}" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+        </Style>
+
+        <Style x:Key="SnapshotDateStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource SecondaryText}" />
+            <Setter Property="FontFamily" Value="MediumFont" />
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+        </Style>
+
+        <Style x:Key="ButtonStackLayoutStyle" TargetType="VerticalStackLayout">
+            <Setter Property="Padding" Value="0,10,39,10" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="MaximumWidthRequest" Value="350"></Setter>
+        </Style>
+    </ContentView.Resources>
+
+    <!--  choose team stack  -->
+    <VerticalStackLayout x:Name="SelectStack"
+                         Margin="19,0"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center">
+        <Label x:Name="StageName"
+               Margin="0,0,0,35"
+               AutomationId="SectionTitleLabel"
+               FontFamily="BoldFont"
+               FontSize="{StaticResource LargeFont}"
+               HorizontalOptions="Center"
+               TextColor="{StaticResource Error}" />
+        <Label x:Name="BodyText"
+               AutomationId="BodyTextLabel"
+               FontFamily="RegularFont"
+               FontSize="{StaticResource LargeFont}"
+               HorizontalOptions="Center"
+               TextColor="{StaticResource MainText}" />
+
+        <HorizontalStackLayout Margin="0,50"
+                               HorizontalOptions="Center"
+                               Spacing="39">
+
+            <Border AutomationId="TeamOneFrame" BackgroundColor="{StaticResource Option}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="16" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Style="{StaticResource ButtonStackLayoutStyle}">
+                    <Label x:Name="TeamLabel"
+                           AutomationId="TeamLabel"
+                           Style="{StaticResource TeamLabelStyle}" />
+                    <Label x:Name="TeamName"
+                           AutomationId="TeamOneNameLabel"
+                           Style="{StaticResource TeamNameStyle}" />
+                    <Label x:Name="SnapshotDate"
+                           AutomationId="SnapshotDateLabel"
+                           Style="{StaticResource SnapshotDateStyle}" />
+                </VerticalStackLayout>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer AutomationId="TeamOneCard" Tapped="OnTeamOneClicked" />
+                </Border.GestureRecognizers>
+            </Border>
+
+            <Border AutomationId="TeamTwoFrame" BackgroundColor="{StaticResource Option}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="16" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Style="{StaticResource ButtonStackLayoutStyle}">
+                    <Label x:Name="OtherTeamLabel"
+                           AutomationId="OtherTeamLabel"
+                           Style="{StaticResource TeamLabelStyle}" />
+                    <Label x:Name="OtherTeamName"
+                           AutomationId="TeamTwoNameLabel"
+                           Style="{StaticResource TeamNameStyle}" />
+                    <Label x:Name="OtherTeamSnapshotDate"
+                           AutomationId="OtherTeamSnapshotDateLabel"
+                           Style="{StaticResource SnapshotDateStyle}" />
+                </VerticalStackLayout>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer AutomationId="TeamTwoCard" Tapped="OnTeamTwoClicked" />
+                </Border.GestureRecognizers>
+            </Border>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</kernel:RenderComponentBase>

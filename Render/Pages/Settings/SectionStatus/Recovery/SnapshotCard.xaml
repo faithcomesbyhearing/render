@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="recovery:SnapshotCardViewModel"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:recovery="clr-namespace:Render.Pages.Settings.SectionStatus.Recovery;assembly=Render"
+                            xmlns:resources="clr-namespace:Render.Resources.Localization"
+                            xmlns:icons="clr-namespace:Render.Resources"
+                            xmlns:customRenderer="clr-namespace:Render.Kernel.CustomRenderer;assembly=Render"
+                            x:Class="Render.Pages.Settings.SectionStatus.Recovery.SnapshotCard">
+    
+    <HorizontalStackLayout x:Name="Card"
+                           AutomationId="SnapshotCard"
+                           Padding="0">
+        <!-- Dot and Line -->
+        <VerticalStackLayout VerticalOptions="Fill">
+            <Line x:Name="Line"
+                   HorizontalOptions="Center"
+                   BackgroundColor="{StaticResource DarkGrey}"
+                   WidthRequest="2"
+                   HeightRequest="96"
+                   Fill="{StaticResource DarkGrey}"
+                   AutomationId="Line" />
+            <Border x:Name="OuterCircle"
+                   Style="{StaticResource OuterRing}"
+                   HorizontalOptions="End"
+                   WidthRequest="28"
+                   HeightRequest="28"
+                   Opacity=".8"
+                   AutomationId="OuterCircle"
+                   Stroke="{DynamicResource Black}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="26"/>
+                </Border.StrokeShape>
+                <Frame x:Name="MiddleCircle"
+                       Style="{StaticResource MiddleRing}"
+                       WidthRequest="26"
+                       HeightRequest="26"
+                       AutomationId="InnerCircle" />
+            </Border>
+            <Line x:Name="BottomLine"
+                    HorizontalOptions="Center"
+                    BackgroundColor="{DynamicResource DarkGrey}"
+                    Fill="{StaticResource DarkGrey}"
+                    WidthRequest="2"
+                    MinimumWidthRequest="2"
+                    HeightRequest="15"
+                    AutomationId="BottomLine" />
+        </VerticalStackLayout>
+
+        <!-- Stage and Snapshot -->
+        <VerticalStackLayout VerticalOptions="Fill"
+                             Margin="13,0,0,0"
+                             HorizontalOptions="Fill"
+                             Padding="0" >
+            <Grid x:Name="StageInfoGrid" 
+                  Margin="13,10,13,0"
+                  ColumnSpacing="13" AutomationId="StageInfoGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition x:Name="contentRow" Height="Auto" />
+                    <RowDefinition x:Name="spacerRow" Height="5" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition x:Name="stageNameColumn" Width="2*" />
+                    <ColumnDefinition x:Name="descritpionColumn" Width="200" />
+                    <ColumnDefinition x:Name="infoIconColumn" Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Label x:Name="StageLabel" Opacity="0.7" 
+                       TextColor="{DynamicResource CardText}"
+                       FontSize="{DynamicResource LargeFontMinus2Font}"
+                       AutomationId="StageLabel"
+                       LineBreakMode="TailTruncation" />
+
+                <Label Grid.Row="0" Grid.Column="1" 
+                       x:Name="StageDescriptionLabel" 
+                       Margin="0,2,0,0"
+                       Opacity="0.7" 
+                       VerticalOptions="Center"
+                       Text="{x:Static resources:AppResources.RemovedFromProject}"
+                       TextColor="{StaticResource CardText}"
+                       FontSize="{StaticResource MediumFont}"
+                       FontFamily="RegularItalicFont"
+                       AutomationId="StageDescriptionLabel"
+                       LineBreakMode="TailTruncation"/>
+                
+                <customRenderer:ToolTipButton Grid.Row="0"
+                                              Grid.Column="2"
+                                              x:Name="ToolTipButton"
+                                              FontFamily="Icons"
+                                              Text="i"
+                                              TextColor="{StaticResource SlateDark}"
+                                              FontSize="15"
+                                              BorderColor="{StaticResource SlateLight}"
+                                              BackgroundColor="{StaticResource Transparent}"
+                                              BorderWidth="1.5"
+                                              CornerRadius="28"
+                                              WidthRequest="28"
+                                              HeightRequest="28"
+                                              VerticalOptions="Center">
+                    <customRenderer:ToolTipButton.ToolTipText >
+                        <Label Text="{x:Static resources:AppResources.RestoreSnapshotInfo}"
+                               FontSize="16" 
+                               FontFamily="RegularFont" />
+                    </customRenderer:ToolTipButton.ToolTipText>
+                </customRenderer:ToolTipButton>
+
+            </Grid>
+
+            <Border x:Name="SnapshotStack"
+                    Margin="0,26,0,0"
+                    HorizontalOptions="Fill"
+                    HeightRequest="56"
+                    WidthRequest="490"
+                    AutomationId="SnapshotStack">
+                
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="8" />
+                </Border.StrokeShape>
+
+                <Grid ColumnDefinitions="2*, 3*, 2*"
+                      Margin="13,0,0,0">
+                    
+                    <Label Grid.Column="0" 
+                           TextColor="{StaticResource CardText}"
+                           VerticalOptions="Center"
+                           FontSize="{StaticResource LargeFont}"
+                           HorizontalOptions="Start"
+                           AutomationId="SnapshotLabel"
+                           FontFamily="BoldFont"
+                           Text="{x:Static resources:AppResources.Snapshot}"
+                           LineBreakMode="TailTruncation"/>
+                    
+                    <Label x:Name="SnapshotDateLabel"
+                           Grid.Column="1"
+                           TextColor="{StaticResource CardText}"
+                           VerticalOptions="Center"
+                           FontSize="{StaticResource LargeFont}"
+                           HorizontalOptions="Center"
+                           AutomationId="SnapshotDateLabel"
+                           FontFamily="BoldFont"
+                           Opacity=".8"
+                           Margin="10, 0"
+                           LineBreakMode="TailTruncation" />
+                    
+                    <Border x:Name="RestoreButton" 
+                            Grid.Column="2"
+                            AutomationId="RestoreButton"
+                            HorizontalOptions="Fill"
+                            BackgroundColor="{DynamicResource Option}">
+                        
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="0,8,0,8"/>
+                        </Border.StrokeShape>
+
+                        <Grid Padding="8,0"  ColumnDefinitions="Auto, *">
+                            <Label AutomationId="RestoreButtonIcon"
+                                   Grid.Column="0"
+                                   FontFamily="Icons"
+                                   FontSize="36" Rotation="70"
+                                   VerticalOptions="Center"
+                                   Text="{icons:IconExtensions Icon=Sync}"
+                                   TextColor="{DynamicResource White}">
+                            </Label>
+                            <Label AutomationId="RestoreButtonLabel"
+                                   Margin="8, 0"
+                                   Grid.Column="1"
+                                   FontSize="{DynamicResource MediumFont}"
+                                   FontFamily="BoldFont"
+                                   VerticalOptions="Center"
+                                   Text="{x:Static resources:AppResources.Restore}"
+                                   TextColor="{DynamicResource White}"
+                                   LineBreakMode="TailTruncation"
+                                   >
+                            </Label>
+                        </Grid>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="RestoreButtonTap" />
+                        </Border.GestureRecognizers>
+                    </Border>
+                </Grid>
+            </Border>
+        </VerticalStackLayout>
+        <HorizontalStackLayout.GestureRecognizers>
+            <TapGestureRecognizer x:Name="TapGestureRecognizer" AutomationId="SectionCard" Tapped="OnButtonClicked" />
+        </HorizontalStackLayout.GestureRecognizers>
+    </HorizontalStackLayout>
+</kernel:RenderComponentBase>

@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderPageBase x:TypeArguments="userManagement:UserManagementPageViewModel"
+                       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:userManagement="clr-namespace:Render.Pages.Configurator.UserManagement;assembly=Render"
+                       xmlns:proceedButton="clr-namespace:Render.Components.ProceedButton;assembly=Render"
+                       xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                       xmlns:localization="clr-namespace:Render.Resources.Localization"
+                       xmlns:titleBar="clr-namespace:Render.Components.TitleBar"
+                       xmlns:common="clr-namespace:Render.Common"
+                       xmlns:resources="clr-namespace:Render.Resources"
+                       x:Class="Render.Pages.Configurator.UserManagement.UserManagementPage"
+                       NavigationPage.HasNavigationBar="False"
+                       BackgroundColor="{DynamicResource PrimaryBackground}">
+
+    <ContentPage.Resources>
+        <Style x:Key="BorderStyle" TargetType="Border">
+            <Setter Property="StrokeShape" Value="RoundRectangle 15,15,0,0" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="BackgroundColor" Value="{StaticResource ToolbarBackground}" />
+            <Setter Property="HeightRequest" Value="80" />
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid x:Name="TopLevelElement"
+          BackgroundColor="{DynamicResource AlternateBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition x:Name="TitleRow" Height="Auto" />
+            <RowDefinition x:Name="Name" Height="Auto" />
+            <RowDefinition x:Name="CollectionRow" Height="*" />
+            <RowDefinition x:Name="BottomRow" Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="960" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <titleBar:TitleBar Grid.Row="0" Grid.ColumnSpan="3" x:Name="TitleBar" />
+
+        <!-- Select user label -->
+        <Label Grid.Row="1"
+               Grid.Column="1"
+               HeightRequest="108"
+               FontSize="32"
+               TextColor="{StaticResource Option}"
+               FontFamily="BoldFont"
+               Padding="15,30,0,0"
+               Text="{x:Static localization:AppResources.SelectUser}" />
+        
+        <!-- Users collection -->
+        <Grid Grid.Row="2" 
+              Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <CollectionView Grid.Column="0"
+                            x:Name="VesselUsersList" 
+                            AutomationId="VesselUsersList"
+                            HorizontalOptions="Fill"
+                            SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <userManagement:UserTile Padding="0,0,5,26" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <CollectionView Grid.Column="1" 
+                            x:Name="RenderUsersList"
+                            AutomationId="RenderUsersList"
+                            HorizontalOptions="Fill"
+                            SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <userManagement:UserTile Padding="0,0,5,26" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+
+        <!-- Add User button -->
+        <Border Grid.Row="3"
+                Grid.Column="1"
+                HorizontalOptions="Center"
+                AutomationId="AddUserButton"
+                Style="{StaticResource BorderStyle}">
+            <HorizontalStackLayout Padding="39,0"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center">
+                <Label Margin="0,0,13,0"
+                       AutomationId="AddUserButtonImage"
+                       FontFamily="Icons"
+                       FontSize="54"
+                       Text="{resources:IconExtensions AddUser}"
+                       TextColor="{StaticResource Option}" />
+                <Label AutomationId="AddUserButtonLabel"
+                       Style="{StaticResource ProjectCardButtonLabelStyle}"
+                       TextColor="{StaticResource Option}"
+                       Text="{x:Static localization:AppResources.AddUserButtonText}" />
+            </HorizontalStackLayout>
+
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer x:Name="AddUserGestureRecognizer"
+                                      Tapped="OnButtonClicked"
+                                      AutomationId="AddUser" />
+            </Border.GestureRecognizers>
+        </Border>
+
+        <proceedButton:ProceedButton Grid.Row="3"
+                                     Grid.Column="2"
+                                     x:Name="ProceedButton"
+                                     HorizontalOptions="End"
+                                     VerticalOptions="End" />
+
+        <common:LoadingScreen Grid.Row="0" 
+                              Grid.Column="0"
+                              Grid.ColumnSpan="3"
+                              Grid.RowSpan="4"
+                              x:Name="LoadingView" />
+    </Grid>
+</kernel:RenderPageBase>

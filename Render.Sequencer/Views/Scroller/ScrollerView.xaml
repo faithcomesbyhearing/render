@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView x:Class="Render.Sequencer.Views.Scroller.ScrollerView"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:atomic="clr-namespace:Render.Sequencer.Resources.Atomic"
+             xmlns:behaviours="clr-namespace:Render.Sequencer.Core.Behaviors"
+             xmlns:controls="clr-namespace:Render.Sequencer.Core.Controls"
+             xmlns:converters="clr-namespace:Render.Sequencer.Core.Converters"
+             xmlns:enums="clr-namespace:Render.Sequencer.Contracts.Enums"
+             xmlns:flags="clr-namespace:Render.Sequencer.Views.Flags"
+             xmlns:local="clr-namespace:Render.Sequencer.Views.Scroller"
+             xmlns:miniWaveform="clr-namespace:Render.Sequencer.Views.WaveForm.MiniItems"
+             xmlns:editableMiniWaveform="clr-namespace:Render.Sequencer.Views.WaveForm.Items.Editable"
+             xmlns:skia="clr-namespace:SkiaSharp.Views.Maui.Controls;assembly=SkiaSharp.Views.Maui.Controls"
+             xmlns:styles="clr-namespace:Render.Sequencer.Resources.Styles"
+             x:Name="Scroller"
+             Width="{Binding Width}"
+             x:DataType="local:BaseScrollerViewModel"
+             BackgroundColor="{StaticResource Light}">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <atomic:Colors />
+                <atomic:Sizes />
+
+                <styles:ScrollerStyles />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <Grid>
+
+        <HorizontalStackLayout x:Name="miniWaveFormsStack" BindableLayout.ItemsSource="{Binding MiniWaveFormItems}">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate x:DataType="miniWaveform:BaseMiniWaveFormItemViewModel">
+                    <Grid x:Name="miniWaveFormItemView" WidthRequest="{Binding Width}">
+                        <skia:SKCanvasView x:Name="canvas"
+                                           behaviours:SkiaCanvasBehavior.AttachBehavior="True"
+                                           behaviours:SkiaCanvasBehavior.Painter="{Binding Painter}"
+                                           behaviours:SkiaCanvasBehavior.Samples="{Binding Samples}"
+                                           behaviours:SkiaCanvasBehavior.WaveFormColor="{StaticResource AccentLight}"
+                                           AutomationId="MiniWaveformCanvas" />
+                        
+                        <Grid x:Name="flagsGrid"
+                              x:DataType="miniWaveform:MiniWaveFormItemViewModel"
+                              AutomationId="FlagsContainer"
+                              IsVisible="{Binding HasFlags}"
+                              BindableLayout.ItemsSource="{Binding Flags}"
+                              VerticalOptions="Center">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <flags:SimpleFlagView />
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </Grid>
+
+                        <Grid Style="{StaticResource MiniWaveFormsItemStyle}">
+                            <Grid.Triggers>
+                                <DataTrigger x:DataType="miniWaveform:MiniWaveFormItemViewModel"
+                                             Binding="{Binding IsSelected}"
+                                             TargetType="Grid"
+                                             Value="True">
+                                    <Setter Property="Opacity" Value="0" />
+                                </DataTrigger>
+                                <DataTrigger x:DataType="editableMiniWaveform:EditableMiniWaveFormItemViewModel"
+                                             Binding="{Binding IsEditableSelected}"
+                                             TargetType="Grid"
+                                             Value="True">
+                                    <Setter Property="Opacity" Value="0.2" />
+                                    <Setter Property="BackgroundColor" Value="{StaticResource AccentLight}" />
+                                </DataTrigger>
+                            </Grid.Triggers>
+                        </Grid>
+                    </Grid>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </HorizontalStackLayout>
+
+        <Border x:Name="scroller"
+                AnchorX="0"
+                IsVisible="{Binding HasScroller}"
+                Style="{StaticResource VisibleAreaStyle}"
+                TranslationX="{Binding ScrollerTranslationX}"
+                WidthRequest="{Binding ScrollerWidth}" />
+
+        <controls:Scrubber x:Name="miniScrubber"
+                           behaviours:SliderBehavior.AttachBehavior="True"
+                           AutomationId="MiniScrubber"
+                           Maximum="{Binding Sequencer.TotalDuration}"
+                           Minimum="0"
+                           Style="{StaticResource MiniScrubberStyle}"
+                           Value="{Binding Sequencer.TotalCurrentPosition}">
+            <controls:Scrubber.Triggers>
+                <DataTrigger Binding="{Binding Sequencer.State}"
+                             TargetType="controls:Scrubber"
+                             Value="{x:Static enums:SequencerState.Recording}">
+                    <Setter Property="IsVisible" Value="False" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding HasScrubber}"
+                             TargetType="controls:Scrubber"
+                             Value="True">
+                    <Setter Property="Opacity" Value="1" />
+                </DataTrigger>
+            </controls:Scrubber.Triggers>
+        </controls:Scrubber>
+
+        <Slider x:Name="hiddenScroller"
+                behaviours:SliderBehavior.AttachBehavior="True"
+                behaviours:SliderBehavior.Dragging="{Binding Sequencer.IsScrollerDragging}"
+                AutomationId="MiniScroller"
+                Maximum="{Binding Sequencer.TotalWidth}"
+                Minimum="0"
+                Opacity="0"
+                Value="{Binding Sequencer.InputScrollX, Mode=TwoWay}">
+            <Slider.Triggers>
+                <DataTrigger Binding="{Binding Sequencer.State}"
+                             TargetType="Slider"
+                             Value="{x:Static enums:SequencerState.Playing}">
+                    <Setter Property="IsEnabled" Value="False" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Sequencer.State}"
+                             TargetType="Slider"
+                             Value="{x:Static enums:SequencerState.Recording}">
+                    <Setter Property="IsEnabled" Value="False" />
+                </DataTrigger>
+            </Slider.Triggers>
+        </Slider>
+    </Grid>
+</ContentView>

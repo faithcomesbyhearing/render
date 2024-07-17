@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderPageBase x:TypeArguments="sectionAssignment:SectionAssignmentPageViewModel"
+                       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                       xmlns:sectionAssignment="clr-namespace:Render.Pages.Configurator.SectionAssignment;assembly=Render"
+                       xmlns:proceedButton="clr-namespace:Render.Components.ProceedButton;assembly=Render"
+                       xmlns:titleBar="clr-namespace:Render.Components.TitleBar;assembly=Render"
+                       xmlns:sectionView="clr-namespace:Render.Pages.Configurator.SectionAssignment.SectionView;assembly=Render"
+                       xmlns:teamView="clr-namespace:Render.Pages.Configurator.SectionAssignment.TeamView;assembly=Render"
+                       xmlns:localization="clr-namespace:Render.Resources.Localization"
+                       xmlns:common="clr-namespace:Render.Common"
+                       x:Class="Render.Pages.Configurator.SectionAssignment.SectionAssignmentPage"
+                       NavigationPage.HasNavigationBar="False"
+                       BackgroundColor="{StaticResource AlternateBackground}">
+    <ContentPage.Resources>
+        <Style x:Key="MainStack" TargetType="AbsoluteLayout">
+            <Setter Property="BackgroundColor" Value="{DynamicResource AlternateBackground}" />
+            <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+            <Setter Property="VerticalOptions" Value="FillAndExpand" />
+        </Style>
+        <Style x:Key="ComponentSelectLabel" TargetType="Label">
+            <Setter Property="LineBreakMode" Value="NoWrap" />
+            <Setter Property="VerticalTextAlignment" Value="Center" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="Padding" Value="10,5" />
+            <Setter Property="FontSize" Value="{StaticResource MediumMinus2Font}" />
+            <Setter Property="FontFamily" Value="MediumFont" />
+        </Style>
+    </ContentPage.Resources>
+    
+    <Grid Style="{StaticResource MainStack}" x:Name="TopLevelElement">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <titleBar:TitleBar Grid.Row="0" x:Name="TitleBar" />
+
+            <!--tabs-->
+            <Grid Grid.Row="1" ColumnSpacing="10" 
+                  HorizontalOptions="CenterAndExpand"
+                  VerticalOptions="Fill"
+                  IsVisible="True"
+                  HeightRequest="40"
+                  Margin="0,10"
+                  ColumnDefinitions="*,Auto,Auto">
+
+                <!-- left tab -->
+                <Frame Grid.Column="0" CornerRadius="8" Padding="0" AutomationId="ProjectConfigurationFrame">
+                    <Label x:Name="SectionViewButton" Text="{x:Static localization:AppResources.SectionView}"
+                           BackgroundColor="{DynamicResource Option}"
+                           Style="{DynamicResource ComponentSelectLabel}" />
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="SelectSectionViewTap"
+                                              AutomationId="SelectSectionViewButton"
+                                              Tapped="OnButtonClicked" />
+                    </Frame.GestureRecognizers>
+                </Frame>
+
+                <!-- separator -->
+                <VerticalStackLayout Grid.Column="1" Padding="0"
+                             VerticalOptions="Center"
+                             HorizontalOptions="Center"
+                             AutomationId="BoxViewTabSeparatorLayout">
+                    <BoxView Style="{x:StaticResource WorkflowSettingsBoxViewStyle}" WidthRequest="2" HeightRequest="16" Margin="0,5,0,0"
+                             AutomationId="BoxViewTabSeparator" />
+                </VerticalStackLayout>
+
+                <!-- right tab -->
+                <Frame Grid.Column="2" CornerRadius="8" Padding="0" AutomationId="ProjectConfigurationFrame">
+                    <Label x:Name="TeamViewButton"
+                           Text="{x:Static localization:AppResources.TeamView}"
+                           TextColor="{DynamicResource MainText}"
+                           Style="{DynamicResource ComponentSelectLabel}" />
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="SelectTeamViewTap"
+                                              AutomationId="SelectTeamViewTapButton"
+                                              Tapped="OnButtonClicked" />
+                    </Frame.GestureRecognizers>
+                </Frame>
+            </Grid>
+            
+            <!--items-->
+            <sectionView:SectionAssignmentSectionView Grid.Row="2" x:Name="SectionView"/>
+            
+            <teamView:SectionAssignmentTeamView Grid.Row="2" x:Name="TeamView"/>
+            
+            <proceedButton:ProceedButton Grid.Row="2" x:Name="ProceedButton"
+                                         HorizontalOptions="End"
+                                         VerticalOptions="End"
+                                         TranslationX="-5"
+                                         TranslationY="-5"/>
+            <common:LoadingScreen Grid.Row="2" x:Name="LoadingView"
+                                  AbsoluteLayout.LayoutFlags="All"
+                                  AbsoluteLayout.LayoutBounds="0,0,1,1" />
+        </Grid>
+    </Grid>
+
+</kernel:RenderPageBase>

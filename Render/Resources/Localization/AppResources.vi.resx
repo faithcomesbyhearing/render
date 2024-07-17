@@ -1,0 +1,1662 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Add" xml:space="preserve">
+    <value>Thêm</value>
+  </data>
+  <data name="AddAProject" xml:space="preserve">
+    <value>Thêm Dự Án</value>
+  </data>
+  <data name="AddASection" xml:space="preserve">
+    <value>Thêm Phần</value>
+  </data>
+  <data name="AddATeam" xml:space="preserve">
+    <value>Thêm Nhóm</value>
+  </data>
+  <data name="Added" xml:space="preserve">
+    <value>Đã thêm</value>
+  </data>
+  <data name="Adding" xml:space="preserve">
+    <value>Đang thêm</value>
+  </data>
+  <data name="AddingProject" xml:space="preserve">
+    <value>Đang Thêm Dự Án...</value>
+  </data>
+  <data name="AddNew" xml:space="preserve">
+    <value>Thêm Mới</value>
+  </data>
+  <data name="AddProject" xml:space="preserve">
+    <value>Thêm Dự Án</value>
+  </data>
+  <data name="AddProjectViaId" xml:space="preserve">
+    <value>Thêm Dự Án thông qua ID</value>
+  </data>
+  <data name="AddSection" xml:space="preserve">
+    <value>Thêm Phần</value>
+  </data>
+  <data name="AddStage" xml:space="preserve">
+    <value>Thêm Giai Đoạn</value>
+  </data>
+  <data name="AddStageHere" xml:space="preserve">
+    <value>Kéo giai đoạn ở đây</value>
+  </data>
+  <data name="AddTeam" xml:space="preserve">
+    <value>Thêm Nhóm</value>
+  </data>
+  <data name="AddUser" xml:space="preserve">
+    <value>Thêm Người Dùng</value>
+  </data>
+  <data name="AddWorkflowStage" xml:space="preserve">
+    <value>Thêm Giai Đoạn Quy Trình Làm Việc</value>
+  </data>
+  <data name="AllowEditing" xml:space="preserve">
+    <value>Cho Phép Chỉnh Sửa</value>
+  </data>
+  <data name="AllSections" xml:space="preserve">
+    <value>Tất Cả Các Phần</value>
+  </data>
+  <data name="AllSectionsAssigned" xml:space="preserve">
+    <value>Tất cả các phần đã được chỉ định.</value>
+  </data>
+  <data name="Approval" xml:space="preserve">
+    <value>Phê duyệt</value>
+  </data>
+  <data name="ApprovalSubmitted" xml:space="preserve">
+    <value>phê duyệt đã được gửi thành công</value>
+  </data>
+  <data name="Approve" xml:space="preserve">
+    <value>Phê duyệt</value>
+  </data>
+  <data name="Approved" xml:space="preserve">
+    <value>Đã phê duyệt</value>
+  </data>
+  <data name="ApprovedByLabel" xml:space="preserve">
+    <value>Đã phê duyệt bởi:</value>
+  </data>
+  <data name="ApprovedDraft" xml:space="preserve">
+    <value>Quý vị đã phê duyệt bản nháp</value>
+  </data>
+  <data name="ApproveSection" xml:space="preserve">
+    <value>Phê Duyệt Phần {0}</value>
+  </data>
+  <data name="ArchivedDrafts" xml:space="preserve">
+    <value>Bản Nháp Đã Lưu Trữ</value>
+  </data>
+  <data name="ArchivedNotes" xml:space="preserve">
+    <value>Ghi Chú Đã Lưu Trữ</value>
+  </data>
+  <data name="ArrangeWorkflowStages" xml:space="preserve">
+    <value>Sắp Xếp Các Giai Đoạn Quy Trình Làm Việc</value>
+  </data>
+  <data name="Assigned" xml:space="preserve">
+    <value>{0} Đã chỉ định</value>
+  </data>
+  <data name="AssignToTranslator" xml:space="preserve">
+    <value>Giao Cho Người Dịch</value>
+  </data>
+  <data name="AudioClip" xml:space="preserve">
+    <value>Đoạn Âm Thanh</value>
+  </data>
+  <data name="AudioNote" xml:space="preserve">
+    <value>Ghi Chú Âm Thanh</value>
+  </data>
+  <data name="BackTranslate" xml:space="preserve">
+    <value>Dịch Ngược Lại</value>
+  </data>
+  <data name="BackTranslate1" xml:space="preserve">
+    <value>Dịch Ngược Lại 1</value>
+  </data>
+  <data name="BackTranslate2" xml:space="preserve">
+    <value>Dịch Ngược Lại 2</value>
+  </data>
+  <data name="BackTranslator" xml:space="preserve">
+    <value>Người Dịch Ngược Lại</value>
+  </data>
+  <data name="BackTranslator2" xml:space="preserve">
+    <value>Người Dịch Ngược Lại 2</value>
+  </data>
+  <data name="Both" xml:space="preserve">
+    <value>Cả hai</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Hủy</value>
+  </data>
+  <data name="Canceled" xml:space="preserve">
+    <value>Đã hủy</value>
+  </data>
+  <data name="Canceling" xml:space="preserve">
+    <value>Đang hủy</value>
+  </data>
+  <data name="Check" xml:space="preserve">
+    <value>Kiểm tra</value>
+  </data>
+  <data name="Check2" xml:space="preserve">
+    <value>Kiểm tra 2</value>
+  </data>
+  <data name="ChooseProjectsForDeviceMessage" xml:space="preserve">
+    <value>Chọn dự án mà quý vị muốn liên kết với thiết bị này.</value>
+  </data>
+  <data name="ChosenDraft" xml:space="preserve">
+    <value>Bản Nháp Đã Chọn</value>
+  </data>
+  <data name="Chunk" xml:space="preserve">
+    <value>Đoạn nhỏ {0}</value>
+  </data>
+  <data name="ClearSegmentMessage1" xml:space="preserve">
+    <value>Tiếp tục sẽ xóa tập hợp các phân đoạn hiện tại đã chia trong đoạn văn bản.</value>
+  </data>
+  <data name="ClearSegmentMessage2" xml:space="preserve">
+    <value>Nếu phân đoạn trước đó được tạo theo tùy chỉnh và không phải là nhóm mặc định thì không thể khôi phục các phân đoạn này.</value>
+  </data>
+  <data name="ClearSegments" xml:space="preserve">
+    <value>Xóa Phân Đoạn</value>
+  </data>
+  <data name="DeleteSnapshots" xml:space="preserve">
+    <value>Xóa Cả Hai Ảnh Chụp Nhanh</value>
+  </data>
+  <data name="ClearSnapshotsDescription" xml:space="preserve">
+    <value>Cả hai ảnh chụp nhanh sẽ bị loại bỏ. Thao tác này sẽ chuyển phần này sang ảnh chụp nhanh trước đó.</value>
+  </data>
+  <data name="CombinedBackTranslate" xml:space="preserve">
+    <value>Dịch Ngược Lại Kết Hợp</value>
+  </data>
+  <data name="CombineSegmentTitle" xml:space="preserve">
+    <value>Kết hợp - Đoạn Văn Bản {0}</value>
+  </data>
+  <data name="CommunityCheck" xml:space="preserve">
+    <value>Kiểm Tra Cộng Đồng</value>
+  </data>
+  <data name="CommunityRetellPassage" xml:space="preserve">
+    <value>Đoạn Văn Bản {0} - Kể lại</value>
+  </data>
+  <data name="CommunityRevise" xml:space="preserve">
+    <value>Sửa Đổi Cộng Đồng</value>
+  </data>
+  <data name="CommunitySetup" xml:space="preserve">
+    <value>Thiết Lập Cộng Đồng</value>
+  </data>
+  <data name="CommunityTest" xml:space="preserve">
+    <value>Thử Nghiệm Cộng Đồng</value>
+  </data>
+  <data name="CommunityTestRevise" xml:space="preserve">
+    <value>Sửa Đổi Thử Nghiệm Cộng Đồng</value>
+  </data>
+  <data name="CommunityTestSetup" xml:space="preserve">
+    <value>Thiết Lập Cộng Đồng</value>
+  </data>
+  <data name="CompleteWork" xml:space="preserve">
+    <value>Hoàn Thành Bài Làm</value>
+  </data>
+  <data name="CompleteWorkMessage" xml:space="preserve">
+    <value>Giai đoạn này sẽ bị loại bỏ sau khi các bài làm đang xử lý được hoàn thành trước.</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Xác nhận</value>
+  </data>
+  <data name="Confirmation" xml:space="preserve">
+    <value>Xác nhận</value>
+  </data>
+  <data name="Consultant" xml:space="preserve">
+    <value>Cố Vấn</value>
+  </data>
+  <data name="ConsultantApproval" xml:space="preserve">
+    <value>Phế Duyệt Cố Vấn</value>
+  </data>
+  <data name="ConsultantCheck" xml:space="preserve">
+    <value>Kiểm Tra Cố Vấn</value>
+  </data>
+  <data name="ConsultantLanguage" xml:space="preserve">
+    <value>Ngôn Ngữ Cố Vấn</value>
+  </data>
+  <data name="ConsultantRevise" xml:space="preserve">
+    <value>Sửa Đổi Cố Vấn</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>Tiếp tục</value>
+  </data>
+  <data name="CopyPreviousQuestions" xml:space="preserve">
+    <value>Sao Chép Câu Hỏi Trước</value>
+  </data>
+  <data name="CopyQuestions" xml:space="preserve">
+    <value>Sao Chép Câu Hỏi</value>
+  </data>
+  <data name="Current" xml:space="preserve">
+    <value>Hiện tại {0}</value>
+  </data>
+  <data name="DeactivateStepWarning" xml:space="preserve">
+    <value>Khi quý vị tắt một bước, tất cả các phần sẽ chuyển sang bước tiếp theo trong quy trình làm việc</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Xóa</value>
+  </data>
+  <data name="DeleteSnapshotsConfirmation" xml:space="preserve">
+    <value>Quý vị có chắc chắn muốn xóa cả hai ảnh chụp nhanh này không?</value>
+  </data>
+  <data name="DeleteUser" xml:space="preserve">
+    <value>Xóa người dùng</value>
+  </data>
+  <data name="DeleteUserMessage" xml:space="preserve">
+    <value>Xóa {0} cũng sẽ xóa tất cả các phần được gán. Quý vị không thể hoàn tác hành động này.</value>
+  </data>
+  <data name="DeleteUserTitle" xml:space="preserve">
+    <value>Xóa người dùng?</value>
+  </data>
+  <data name="DividePassageTitle" xml:space="preserve">
+    <value>Chia Đoạn Văn Bản</value>
+  </data>
+  <data name="Do2StepBackTranslate" xml:space="preserve">
+    <value>Dịch Ngược Lại Gồm 2 Bước</value>
+  </data>
+  <data name="DoNoteInterpret" xml:space="preserve">
+    <value>Bao Gồm Ghi Chú của Thông Dịch Viên</value>
+  </data>
+  <data name="DoNoteReview" xml:space="preserve">
+    <value>Xem Lại Ghi Chú</value>
+  </data>
+  <data name="DoPassageBackTranslate1" xml:space="preserve">
+    <value>Thực Hiện Đoạn Văn Bản Dịch Ngược Lại 1</value>
+  </data>
+  <data name="DoPassageBackTranslate2" xml:space="preserve">
+    <value>Thực Hiện Đoạn Văn Bản Dịch Ngược Lại 2</value>
+  </data>
+  <data name="DoPassageListen" xml:space="preserve">
+    <value>Bao Gồm Đoạn Nghe</value>
+  </data>
+  <data name="DoPassageReview" xml:space="preserve">
+    <value>Xem Lại Đoạn Văn Bản</value>
+  </data>
+  <data name="DoPassageTranscribe" xml:space="preserve">
+    <value>Phiên Âm Đoạn Văn Bản</value>
+  </data>
+  <data name="DoQuestionAndResponse" xml:space="preserve">
+    <value>Bao Gồm Câu Hỏi &amp; Câu Trả Lời</value>
+  </data>
+  <data name="DoRetell" xml:space="preserve">
+    <value>Thực Hiện Kể lại</value>
+  </data>
+  <data name="DoSectionListen" xml:space="preserve">
+    <value>Bao Gồm Phần Nghe</value>
+  </data>
+  <data name="DoSectionReview" xml:space="preserve">
+    <value>Bao Gồm Phần Xem Lại</value>
+  </data>
+  <data name="DoSegmentBackTranslate1" xml:space="preserve">
+    <value>Thực Hiện Phân Đoạn Dịch Ngược Lại 1</value>
+  </data>
+  <data name="DoSegmentBackTranslate2" xml:space="preserve">
+    <value>Thực Hiện Phân Đoạn Dịch Ngược Lại 2</value>
+  </data>
+  <data name="DoSegmentTranscribe" xml:space="preserve">
+    <value>Phiên Âm Phân Đoạn</value>
+  </data>
+  <data name="DoTranscribe" xml:space="preserve">
+    <value>Thực Hiện Phiên Âm</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Tải xuống</value>
+  </data>
+  <data name="Downloaded" xml:space="preserve">
+    <value>Đã tải xuống</value>
+  </data>
+  <data name="DownloadingProjects" xml:space="preserve">
+    <value>Tải Dự Án</value>
+  </data>
+  <data name="Draft" xml:space="preserve">
+    <value>Bản nháp</value>
+  </data>
+  <data name="DraftedByLabel" xml:space="preserve">
+    <value>Soạn thảo bởi:</value>
+  </data>
+  <data name="DraftNotes" xml:space="preserve">
+    <value>Bản nháp {0} Ghi chú</value>
+  </data>
+  <data name="DraftPassage" xml:space="preserve">
+    <value>Dịch Đoạn Văn Bản {0}</value>
+  </data>
+  <data name="DraftRecord" xml:space="preserve">
+    <value>Bản Ghi Bản Nháp</value>
+  </data>
+  <data name="DraftReplacementModalTitle" xml:space="preserve">
+    <value>Chọn Bản Nháp để Thay Thế</value>
+  </data>
+  <data name="DraftReview" xml:space="preserve">
+    <value>Bản nháp {0} Xem lại</value>
+  </data>
+  <data name="Drafts" xml:space="preserve">
+    <value>Bản nháp</value>
+  </data>
+  <data name="DraftSelect" xml:space="preserve">
+    <value>Chọn Bản Nháp</value>
+  </data>
+  <data name="DraftSelection" xml:space="preserve">
+    <value>Chọn Bản Nháp</value>
+  </data>
+  <data name="DraftTitle" xml:space="preserve">
+    <value>Bản nháp {0}</value>
+  </data>
+  <data name="EditPassage" xml:space="preserve">
+    <value>Chỉnh Sửa Đoạn Văn Bản {0}</value>
+  </data>
+  <data name="EditUser" xml:space="preserve">
+    <value>Chỉnh Sửa Người Dùng</value>
+  </data>
+  <data name="EmptyCollectionMessage" xml:space="preserve">
+    <value>Nhấp vào "Thêm mới" ở trên để thêm dự án.</value>
+  </data>
+  <data name="EmptyCollectionMessageTitle" xml:space="preserve">
+    <value>Danh sách dự án trống.</value>
+  </data>
+  <data name="EmptyOffloadCollectionMessage" xml:space="preserve">
+    <value>Không có dự án giảm tải</value>
+  </data>
+  <data name="EmptyPassword" xml:space="preserve">
+    <value>Mật khẩu không được để trống</value>
+  </data>
+  <data name="End" xml:space="preserve">
+    <value>Kết thúc</value>
+  </data>
+  <data name="Enter32digitId" xml:space="preserve">
+    <value>Nhập ID gồm 32 chữ số...</value>
+  </data>
+  <data name="EnterAProjectName" xml:space="preserve">
+    <value>Nhập tên dự án</value>
+  </data>
+  <data name="EnterLanguage" xml:space="preserve">
+    <value>Nhập Tên Ngôn Ngữ</value>
+  </data>
+  <data name="EnterPasswordToRestoreSection" xml:space="preserve">
+    <value>Nhập mật khẩu của quý vị để mở khóa và khôi phục phần này</value>
+  </data>
+  <data name="EnterSectionNumber" xml:space="preserve">
+    <value>Nhập số phần...</value>
+  </data>
+  <data name="EnterYourPassword" xml:space="preserve">
+    <value>Nhập Mật Khẩu của Quý Vị</value>
+  </data>
+  <data name="EnterYourUsername" xml:space="preserve">
+    <value>Nhập Tài Khoản của Quý Vị</value>
+  </data>
+  <data name="ErrorAddingProject" xml:space="preserve">
+    <value>Đã xảy ra lỗi khi thêm dự án này.</value>
+  </data>
+  <data name="ErrorConnectLocalMachine" xml:space="preserve">
+    <value>Đã xảy ra lỗi khi cố kết nối với máy cục bộ.</value>
+  </data>
+  <data name="ExportAudio" xml:space="preserve">
+    <value>Xuất Bản Âm Thanh</value>
+  </data>
+  <data name="ExportChecked" xml:space="preserve">
+    <value>Đã Kiểm Tra Xuất Bản</value>
+  </data>
+  <data name="Exporting" xml:space="preserve">
+    <value>Đang xuất {0} / {1}</value>
+  </data>
+  <data name="FontSize" xml:space="preserve">
+    <value>Cỡ Chữ</value>
+  </data>
+  <data name="ForTeam" xml:space="preserve">
+    <value>Dành cho {0}</value>
+  </data>
+  <data name="Generate" xml:space="preserve">
+    <value>Tạo</value>
+  </data>
+  <data name="Generic" xml:space="preserve">
+    <value>Chung</value>
+  </data>
+  <data name="GlobalUser" xml:space="preserve">
+    <value>Người Dùng Toàn Cầu</value>
+  </data>
+  <data name="Grid" xml:space="preserve">
+    <value>Mạng lưới</value>
+  </data>
+  <data name="HaveBeenCleared" xml:space="preserve">
+    <value>đã Xóa</value>
+  </data>
+  <data name="HigherPriority" xml:space="preserve">
+    <value>Mức độ ưu tiên cao hơn</value>
+  </data>
+  <data name="HowToResolve" xml:space="preserve">
+    <value>Quý vị muốn giải quyết vấn đề này như thế nào?</value>
+  </data>
+  <data name="ImproperlyFormattedId" xml:space="preserve">
+    <value>Định dạng ID không đúng. Vui lòng nhập lại.</value>
+  </data>
+  <data name="IncludeBackTranslate" xml:space="preserve">
+    <value>Bao Gồm Dịch Ngược Lại</value>
+  </data>
+  <data name="IncludeNoteListenGuidance" xml:space="preserve">
+    <value>Bao Gồm Ghi Chú Hướng Dẫn Nghe</value>
+  </data>
+  <data name="IncludePassageBackTranslate" xml:space="preserve">
+    <value>Bao Gồm Đoạn Văn Bản Dịch Ngược Lại</value>
+  </data>
+  <data name="IncludePassageListen" xml:space="preserve">
+    <value>Bao Gồm Đoạn Nghe</value>
+  </data>
+  <data name="IncludePassageReview" xml:space="preserve">
+    <value>Bao Gồm Xem Lại Đoạn Văn Bản</value>
+  </data>
+  <data name="IncludePassageReviewAfterReRecording" xml:space="preserve">
+    <value>Bao Gồm Xem Lại Đoạn Văn Bản Sau Khi Ghi Âm Lại</value>
+  </data>
+  <data name="IncludeSegmentBackTranslate" xml:space="preserve">
+    <value>Bao Gồm Phân Đoạn Dịch Ngược Lại</value>
+  </data>
+  <data name="IncorrectPassword" xml:space="preserve">
+    <value>Mật khẩu không đúng với tài khoản này</value>
+  </data>
+  <data name="IncorrectPattern" xml:space="preserve">
+    <value>Mẫu không chính xác. Vui lòng thử lại.</value>
+  </data>
+  <data name="Input" xml:space="preserve">
+    <value>Đầu vào</value>
+  </data>
+  <data name="InsertPassword" xml:space="preserve">
+    <value>Nhập mật khẩu tại đây</value>
+  </data>
+  <data name="IntermediateLanguage" xml:space="preserve">
+    <value>Ngôn Ngữ Trung Gian</value>
+  </data>
+  <data name="Interpret" xml:space="preserve">
+    <value>Thông dịch</value>
+  </data>
+  <data name="Interpreted" xml:space="preserve">
+    <value>Đã thông dịch</value>
+  </data>
+  <data name="InterpretToConsultant" xml:space="preserve">
+    <value>Phiên Dịch Cho Cố Vấn</value>
+  </data>
+  <data name="InterpretToTranslator" xml:space="preserve">
+    <value>Phiên Dịch Cho Người Dịch</value>
+  </data>
+  <data name="Iteration" xml:space="preserve">
+    <value>Lặp lại</value>
+  </data>
+  <data name="Jump" xml:space="preserve">
+    <value>Chuyển</value>
+  </data>
+  <data name="JumpToSection" xml:space="preserve">
+    <value>Chuyển sang Phần</value>
+  </data>
+  <data name="LastCompletedStage" xml:space="preserve">
+    <value>Giai Đoạn Hoàn Thành Cuối Cùng</value>
+  </data>
+  <data name="LastSubmittedAudioLabel" xml:space="preserve">
+    <value>Bản Âm Thanh Đã Gửi Cuối Cùng</value>
+  </data>
+  <data name="LastSync" xml:space="preserve">
+    <value>Đồng Bộ Lần Cuối</value>
+  </data>
+  <data name="LeaveFreeCut" xml:space="preserve">
+    <value>Rời Khỏi Cắt Phân Đoạn Tự Do</value>
+  </data>
+  <data name="LeaveFreeCutMessage1" xml:space="preserve">
+    <value>Nếu quý vị rời khỏi Cắt Phân Đoạn Tự Do, quý vị sẽ mất các bài làm đã được tạo cho đến nay.</value>
+  </data>
+  <data name="LeaveFreeCutMessage2" xml:space="preserve">
+    <value>Hoàn thành bước này để giữ lại các bài làm đã được tạo.</value>
+  </data>
+  <data name="Localization" xml:space="preserve">
+    <value>Bản địa hóa</value>
+  </data>
+  <data name="LoggingIn" xml:space="preserve">
+    <value>Đang đăng nhập...</value>
+  </data>
+  <data name="LogIn" xml:space="preserve">
+    <value>Đăng Nhập</value>
+  </data>
+  <data name="LogOut" xml:space="preserve">
+    <value>Đăng Xuất</value>
+  </data>
+  <data name="LowerPriority" xml:space="preserve">
+    <value>Mức độ ưu tiên thấp hơn</value>
+  </data>
+  <data name="ManageDivisions" xml:space="preserve">
+    <value>Quản Lý Chia Đoạn Văn Bản {0}</value>
+  </data>
+  <data name="ManageUsers" xml:space="preserve">
+    <value>Quản Lý Người Dùng</value>
+  </data>
+  <data name="MarkQuestions" xml:space="preserve">
+    <value>Đánh Dấu Đoạn Văn Câu Hỏi {0}</value>
+  </data>
+  <data name="MicNotConnectedMessage" xml:space="preserve">
+    <value>Không tìm thấy micrô.  Vui lòng kết nối micrô với hệ thống để ghi lại âm thanh.</value>
+  </data>
+  <data name="MicNotConnectedTitle" xml:space="preserve">
+    <value>Micrô không được kết nối</value>
+  </data>
+  <data name="MicrophoneAccessMessage" xml:space="preserve">
+    <value>Render không có quyền sử dụng micrô của quý vị. Để khắc phục điều này, hãy đi tới cài đặt quyền riêng tư micrô và bật quyền truy cập micrô cho Render.</value>
+  </data>
+  <data name="MicrophoneAccessTitle" xml:space="preserve">
+    <value>Cần có quyền truy cập micrô</value>
+  </data>
+  <data name="MultipleTeamAssignmentLabel" xml:space="preserve">
+    <value>Không Thể Chỉ Định Một Người Dùng Cho Nhiều Nhóm</value>
+  </data>
+  <data name="MultipleTeamAssignmentMessage" xml:space="preserve">
+    <value>Vui lòng chỉ định một người dùng duy nhất cho riêng mỗi nhóm.</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Tên</value>
+  </data>
+  <data name="NoAudio" xml:space="preserve">
+    <value>Không Có Âm Thanh</value>
+  </data>
+  <data name="NoInternetConnection" xml:space="preserve">
+    <value>Không Có Kết Nối Internet</value>
+  </data>
+  <data name="NoReviewedSections" xml:space="preserve">
+    <value>Không có phần được xem lại tại thời điểm này.</value>
+  </data>
+  <data name="NoSectionAudioForStage" xml:space="preserve">
+    <value>Không Có Phần Âm Thanh Cho Giai Đoạn Này</value>
+  </data>
+  <data name="NoSelfCheck" xml:space="preserve">
+    <value>Không Tự Kiểm Tra</value>
+  </data>
+  <data name="NotAbleToLogin" xml:space="preserve">
+    <value>Quý vị không thể đăng nhập.</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>Ghi chú</value>
+  </data>
+  <data name="NoteInterpret" xml:space="preserve">
+    <value>Ghi Chú Thông Dịch</value>
+  </data>
+  <data name="NoteListen" xml:space="preserve">
+    <value>Ghi Chú Nghe</value>
+  </data>
+  <data name="Notes" xml:space="preserve">
+    <value>Ghi chú</value>
+  </data>
+  <data name="NoteTranslator" xml:space="preserve">
+    <value>Ghi Chú cho Người Dịch</value>
+  </data>
+  <data name="NotInWorkflow" xml:space="preserve">
+    <value>Không còn là một phần của quy trình làm việc</value>
+  </data>
+  <data name="NoUnreviewedSections" xml:space="preserve">
+    <value>Không có phần chưa được xem lại tại thời điểm này.</value>
+  </data>
+  <data name="NullUsername" xml:space="preserve">
+    <value>Tài khoản không được để trống</value>
+  </data>
+  <data name="Offload" xml:space="preserve">
+    <value>Giảm tải</value>
+  </data>
+  <data name="OffloadData" xml:space="preserve">
+    <value>Giảm Tải Dữ Liệu</value>
+  </data>
+  <data name="Offloading" xml:space="preserve">
+    <value>Đang giảm tải</value>
+  </data>
+  <data name="OffloadWarning" xml:space="preserve">
+    <value>{0} được đồng bộ hóa lần cuối vào {1}. Bạn có chắc chắn muốn giảm tải dự án này không?</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>Được rồi</value>
+  </data>
+  <data name="Original" xml:space="preserve">
+    <value>Ban đầu</value>
+  </data>
+  <data name="OriginalLanguage" xml:space="preserve">
+    <value>Ngôn Ngữ Ban Đầu</value>
+  </data>
+  <data name="OriginalNote" xml:space="preserve">
+    <value>Ghi Chú Ban Đầu</value>
+  </data>
+  <data name="OriginalPassageTitle" xml:space="preserve">
+    <value>Đoạn Văn Bản {0} (Bản gốc)</value>
+  </data>
+  <data name="Passage" xml:space="preserve">
+    <value>Đoạn Văn Bản {0}</value>
+  </data>
+  <data name="PassageBackTranslate" xml:space="preserve">
+    <value>Đoạn Văn Bản Dịch Ngược Lại</value>
+  </data>
+  <data name="PassageDivide" xml:space="preserve">
+    <value>Chia Đoạn Văn Bản</value>
+  </data>
+  <data name="PassageDraftListen" xml:space="preserve">
+    <value>Đoạn Văn Bản {0} Bản Nháp Nghe</value>
+  </data>
+  <data name="PassageListen" xml:space="preserve">
+    <value>Đoạn Văn Bản Nghe</value>
+  </data>
+  <data name="PassageListenOnly" xml:space="preserve">
+    <value>Chỉ Đoạn Văn Bản Nghe</value>
+  </data>
+  <data name="PassageListenTitle" xml:space="preserve">
+    <value>Đoạn Văn Bản {0} Nghe</value>
+  </data>
+  <data name="PassageNumber" xml:space="preserve">
+    <value>Đoạn Văn Bản {0}</value>
+  </data>
+  <data name="PassagePeerReview" xml:space="preserve">
+    <value>Đoạn Văn Bản {0} Bình Duyệt</value>
+  </data>
+  <data name="PassageRetell" xml:space="preserve">
+    <value>Kể Lại Đoạn Văn Bản</value>
+  </data>
+  <data name="PassageReview" xml:space="preserve">
+    <value>Xem Lại Đoạn Văn Bản</value>
+  </data>
+  <data name="PassageReviewAfterReRecording" xml:space="preserve">
+    <value>Xem Lại Đoạn Văn Bản Sau Khi Ghi Âm Lại</value>
+  </data>
+  <data name="PassageSelect" xml:space="preserve">
+    <value>Chọn Đoạn Văn Bản</value>
+  </data>
+  <data name="PassageSelection" xml:space="preserve">
+    <value>Chọn Đoạn Văn Bản</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Mật khẩu</value>
+  </data>
+  <data name="PasswordGrid" xml:space="preserve">
+    <value>Mạng Lưới Mật Khẩu</value>
+  </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>Yêu cầu có mật khẩu</value>
+  </data>
+  <data name="PasswordType" xml:space="preserve">
+    <value>Loại Mật Khẩu</value>
+  </data>
+  <data name="PeerCheck" xml:space="preserve">
+    <value>Kiểm Tra Chéo</value>
+  </data>
+  <data name="PeerReview" xml:space="preserve">
+    <value>Bình Duyệt</value>
+  </data>
+  <data name="PeerRevise" xml:space="preserve">
+    <value>Sửa Đổi Chéo</value>
+  </data>
+  <data name="PleaseConnect" xml:space="preserve">
+    <value>Vui lòng kết nối với internet và khởi động lại Render.</value>
+  </data>
+  <data name="PleaseLogIn" xml:space="preserve">
+    <value>Vui lòng đăng nhập để bắt đầu.</value>
+  </data>
+  <data name="PrecedingAudio" xml:space="preserve">
+    <value>Âm Thanh Đến Trước</value>
+  </data>
+  <data name="PreviousDraft" xml:space="preserve">
+    <value>Bản Nháp Trước</value>
+  </data>
+  <data name="Proceed" xml:space="preserve">
+    <value>Đã tiến hành</value>
+  </data>
+  <data name="Processes" xml:space="preserve">
+    <value>Các quy trình</value>
+  </data>
+  <data name="ProjectAddedSuccesfully" xml:space="preserve">
+    <value>Dự án này đã được thêm thành công.</value>
+  </data>
+  <data name="ProjectConfiguration" xml:space="preserve">
+    <value>Cấu Hình Dự Án</value>
+  </data>
+  <data name="ProjectDeletedTitle" xml:space="preserve">
+    <value>Đã xóa dự án</value>
+  </data>
+  <data name="ProjectHome" xml:space="preserve">
+    <value>Trang Chủ Dự Án</value>
+  </data>
+  <data name="ProjectId" xml:space="preserve">
+    <value>ID Dự Án</value>
+  </data>
+  <data name="ProjectList" xml:space="preserve">
+    <value>Danh Sách Dự Án</value>
+  </data>
+  <data name="ProjectsDownloadedSuccessfully" xml:space="preserve">
+    <value>Dự án đã tải xuống thành công.</value>
+  </data>
+  <data name="ProjectTeams" xml:space="preserve">
+    <value>Nhóm Dự Án</value>
+  </data>
+  <data name="ProjectUsers" xml:space="preserve">
+    <value>Người Dùng Dự Án</value>
+  </data>
+  <data name="ProjectWorkflow" xml:space="preserve">
+    <value>Quy Trình Làm Việc Của Dự Án</value>
+  </data>
+  <data name="QuestionFormatted" xml:space="preserve">
+    <value>Câu Hỏi {0}</value>
+  </data>
+  <data name="QuestionAndResponse" xml:space="preserve">
+    <value>Câu Hỏi &amp; Câu Trả Lời</value>
+  </data>
+  <data name="QuestionPlacement" xml:space="preserve">
+    <value>Vị Trí Câu Hỏi</value>
+  </data>
+  <data name="QuestionSet" xml:space="preserve">
+    <value>Bộ Câu Hỏi {0}</value>
+  </data>
+  <data name="Record" xml:space="preserve">
+    <value>Bản ghi</value>
+  </data>
+  <data name="RecordedSegmentWarningConfirmation" xml:space="preserve">
+    <value>Hoàn Thành Hợp Nhất</value>
+  </data>
+  <data name="RecordedSegmentWarningMessage" xml:space="preserve">
+    <value>Phân đoạn trước đó đã chứa bản âm thanh câu trả lời. Nếu quý vị hợp nhất 2 đoạn này lại với nhau, bản âm thanh đã ghi trước đó sẽ bị mất.</value>
+  </data>
+  <data name="RecordedSegmentWarningTitle" xml:space="preserve">
+    <value>Các Câu Trả Lời sẽ bị Mất</value>
+  </data>
+  <data name="RecordInterpretation" xml:space="preserve">
+    <value>Thông Dịch Bản Ghi</value>
+  </data>
+  <data name="RecordNewDraft" xml:space="preserve">
+    <value>Bản Ghi Bản Nháp Mới</value>
+  </data>
+  <data name="RecordQuestion" xml:space="preserve">
+    <value>Bản Ghi Câu Hỏi (Q{0})</value>
+  </data>
+  <data name="RecordQuestionTitle" xml:space="preserve">
+    <value>Bản Ghi Câu Hỏi</value>
+  </data>
+  <data name="RecordResponse" xml:space="preserve">
+    <value>Bản Ghi Câu Trả Lời</value>
+  </data>
+  <data name="RecordRetell" xml:space="preserve">
+    <value>Bản Ghi Kể Lại</value>
+  </data>
+  <data name="RecordStandardQuestion" xml:space="preserve">
+    <value>Bản Ghi Câu Hỏi Tiêu Chuẩn {0}</value>
+  </data>
+  <data name="RecordTranslation" xml:space="preserve">
+    <value>Ghi Lại Bản Dịch</value>
+  </data>
+  <data name="Recovery" xml:space="preserve">
+    <value>Khôi phục</value>
+  </data>
+  <data name="References" xml:space="preserve">
+    <value>Tài liệu tham khảo</value>
+  </data>
+  <data name="RemoveWork" xml:space="preserve">
+    <value>Loại Bỏ Bài Làm</value>
+  </data>
+  <data name="RemoveWorkMessage" xml:space="preserve">
+    <value>Giai đoạn này sẽ bị loại bỏ ngay lập tức và tất cả các bài làm đang xử lý sẽ bị mất.</value>
+  </data>
+  <data name="RenderUser" xml:space="preserve">
+    <value>Người Dùng Render</value>
+  </data>
+  <data name="Replace" xml:space="preserve">
+    <value>Thay thế</value>
+  </data>
+  <data name="RequireNoteListen" xml:space="preserve">
+    <value>Ghi Chú Hướng Dẫn Nghe</value>
+  </data>
+  <data name="RequireNoteReview" xml:space="preserve">
+    <value>Ghi Chú Hướng Dẫn Xem Lại</value>
+  </data>
+  <data name="RequirePassageListen" xml:space="preserve">
+    <value>Đoạn Hướng Dẫn Nghe</value>
+  </data>
+  <data name="RequirePassageReview" xml:space="preserve">
+    <value>Đoạn Hướng Dẫn Xem Lại</value>
+  </data>
+  <data name="RequirePassageTranscribeListen" xml:space="preserve">
+    <value>Hướng Dẫn Phiên Âm Đoạn Văn Bản</value>
+  </data>
+  <data name="RequireQuestionContextListen" xml:space="preserve">
+    <value>Câu Hỏi về Bối Cảnh Hướng Dẫn Nghe</value>
+  </data>
+  <data name="RequireRecordResponse" xml:space="preserve">
+    <value>Bao Gồm Hướng Dẫn Câu Trả Lời</value>
+  </data>
+  <data name="RequireReviewAfterReRecording" xml:space="preserve">
+    <value>Xem Lại Đoạn Văn Bản Sau Khi Ghi Âm Lại Hướng Dẫn</value>
+  </data>
+  <data name="RequireSectionListen" xml:space="preserve">
+    <value>Phần Hướng Dẫn Nghe</value>
+  </data>
+  <data name="RequireSectionReview" xml:space="preserve">
+    <value>Phần Hướng Dẫn Xem Lại</value>
+  </data>
+  <data name="RequireSegmentTranscribeListen" xml:space="preserve">
+    <value>Hướng Dẫn Phiên Âm Phân Đoạn</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Cài lại</value>
+  </data>
+  <data name="ResetSection" xml:space="preserve">
+    <value>Cài Lại Phần</value>
+  </data>
+  <data name="Response" xml:space="preserve">
+    <value>Câu trả lời {0}</value>
+  </data>
+  <data name="Restore" xml:space="preserve">
+    <value>Khôi phục</value>
+  </data>
+  <data name="RestoreSection" xml:space="preserve">
+    <value>Khôi Phục Phần</value>
+  </data>
+  <data name="RestoreSectionConfirmation" xml:space="preserve">
+    <value>Quý vị có chắc muốn khôi phục phần này?</value>
+  </data>
+  <data name="RestoreSnapshotInfo" xml:space="preserve">
+    <value>Việc khôi phục ảnh chụp nhanh này sẽ không khôi phục giai đoạn đã xóa trở lại quy trình làm việc.</value>
+  </data>
+  <data name="Retell" xml:space="preserve">
+    <value>Kể lại</value>
+  </data>
+  <data name="RetellCheck" xml:space="preserve">
+    <value>Kiểm Tra Kể Lại (Đoạn Văn Bản {0})</value>
+  </data>
+  <data name="ReturnToLogIn" xml:space="preserve">
+    <value>Quay Lại Đăng Nhập</value>
+  </data>
+  <data name="Review" xml:space="preserve">
+    <value>Xem lại</value>
+  </data>
+  <data name="Reviewed" xml:space="preserve">
+    <value>Đã xem lại</value>
+  </data>
+  <data name="ReviewQuestions" xml:space="preserve">
+    <value>Xem Lại Đoạn Văn Câu Hỏi {0}</value>
+  </data>
+  <data name="Revise" xml:space="preserve">
+    <value>Sửa đổi</value>
+  </data>
+  <data name="Revision" xml:space="preserve">
+    <value>Bản sửa đổi</value>
+  </data>
+  <data name="RoleAssignment" xml:space="preserve">
+    <value>Chỉ Định Vai Trò</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Tìm kiếm</value>
+  </data>
+  <data name="Section" xml:space="preserve">
+    <value>Phần {0}</value>
+  </data>
+  <data name="SectionAndPassageListen" xml:space="preserve">
+    <value>Phần và Đoạn Nghe</value>
+  </data>
+  <data name="SectionAssignment" xml:space="preserve">
+    <value>Phần Chỉ Định</value>
+  </data>
+  <data name="SectionDraft" xml:space="preserve">
+    <value>Phần {0} Bản Nháp</value>
+  </data>
+  <data name="SectionFeedbackTitle" xml:space="preserve">
+    <value>Phần {0} Phản Hồi</value>
+  </data>
+  <data name="SectionInformation" xml:space="preserve">
+    <value>Thông Tin Phần</value>
+  </data>
+  <data name="SectionList" xml:space="preserve">
+    <value>Danh Sách Phần</value>
+  </data>
+  <data name="SectionListen" xml:space="preserve">
+    <value>Phần Nghe</value>
+  </data>
+  <data name="SectionListenOnly" xml:space="preserve">
+    <value>Chỉ Phần Nghe</value>
+  </data>
+  <data name="SectionListenTitle" xml:space="preserve">
+    <value>Phần {0} Tiêu Đề</value>
+  </data>
+  <data name="SectionNumberLabel" xml:space="preserve">
+    <value>Số Phần</value>
+  </data>
+  <data name="SectionReferenceLabel" xml:space="preserve">
+    <value>Câu Tham Khảo</value>
+  </data>
+  <data name="SectionReset" xml:space="preserve">
+    <value>Phần đã được thiết lập lại.</value>
+  </data>
+  <data name="SectionReview" xml:space="preserve">
+    <value>Phần Xem Lại</value>
+  </data>
+  <data name="SectionSelect" xml:space="preserve">
+    <value>Chọn Phần</value>
+  </data>
+  <data name="SectionsMovingWarning" xml:space="preserve">
+    <value>Các phần sẽ chuyển sang bước tiếp theo</value>
+  </data>
+  <data name="SectionStatus" xml:space="preserve">
+    <value>Trạng Thái Phần</value>
+  </data>
+  <data name="SectionStepLabel" xml:space="preserve">
+    <value>Bước Hiện Tại</value>
+  </data>
+  <data name="SectionTitle" xml:space="preserve">
+    <value>Phần {0} Tiêu Đề</value>
+  </data>
+  <data name="SectionTitleLabel" xml:space="preserve">
+    <value>Tiêu Đề Phần</value>
+  </data>
+  <data name="Segment" xml:space="preserve">
+    <value>Phân đoạn {0}</value>
+  </data>
+  <data name="SegmentBackTranslate" xml:space="preserve">
+    <value>Phân Đoạn Dịch Ngược Lại</value>
+  </data>
+  <data name="SegmentBackTranslateSelect" xml:space="preserve">
+    <value>Chọn Phân Đoạn Dịch Ngược Lại</value>
+  </data>
+  <data name="SegmentBackTranslateTitle" xml:space="preserve">
+    <value>{0} - Phân đoạn {1}</value>
+  </data>
+  <data name="SegmentFreeCut" xml:space="preserve">
+    <value>Cắt Phân Đoạn Tự Do</value>
+  </data>
+  <data name="SegmentWillBeCleared" xml:space="preserve">
+    <value>Các Phân Đoạn Hiện Tại sẽ bị Xóa</value>
+  </data>
+  <data name="SelectADraft" xml:space="preserve">
+    <value>Chọn Bản Nháp</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>Chọn Tất Cả</value>
+  </data>
+  <data name="SelectAProfile" xml:space="preserve">
+    <value>Chọn một tài khoản để đăng nhập</value>
+  </data>
+  <data name="SelectAProject" xml:space="preserve">
+    <value>Chọn Dự Án</value>
+  </data>
+  <data name="SelectDisplay" xml:space="preserve">
+    <value>Chọn Hiển Thị</value>
+  </data>
+  <data name="SelectDraft" xml:space="preserve">
+    <value>Chọn Bản Nháp</value>
+  </data>
+  <data name="SelectProjectsToImport" xml:space="preserve">
+    <value>Chọn Dự Án Để Nhập</value>
+  </data>
+  <data name="SelectSection" xml:space="preserve">
+    <value>Chọn Phần</value>
+  </data>
+  <data name="SelectSnapshot" xml:space="preserve">
+    <value>Chọn Ảnh Chụp Nhanh</value>
+  </data>
+  <data name="SelectSnapshotDescription" xml:space="preserve">
+    <value>Chọn một ảnh chụp nhanh cụ thể để tiếp tục. Ảnh chụp nhanh không được chọn sẽ bị xóa.</value>
+  </data>
+  <data name="Sequence" xml:space="preserve">
+    <value>Trình tự</value>
+  </data>
+  <data name="Snapshot" xml:space="preserve">
+    <value>Ảnh chụp nhanh</value>
+  </data>
+  <data name="SnapshotChosen" xml:space="preserve">
+    <value>ảnh chụp nhanh đã chọn cho</value>
+  </data>
+  <data name="SnapshotConflict" xml:space="preserve">
+    <value>Phần này có Xung đột về Ảnh chụp nhanh: {0}</value>
+  </data>
+  <data name="Snapshots" xml:space="preserve">
+    <value>Các ảnh chụp nhanh</value>
+  </data>
+  <data name="SortBy" xml:space="preserve">
+    <value>Lọc theo</value>
+  </data>
+  <data name="Source" xml:space="preserve">
+    <value>Nguồn</value>
+  </data>
+  <data name="StageName" xml:space="preserve">
+    <value>Tên Giai Đoạn</value>
+  </data>
+  <data name="StandardQuestion" xml:space="preserve">
+    <value>Câu Hỏi Tiêu Chuẩn {0}</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Bắt đầu</value>
+  </data>
+  <data name="Step" xml:space="preserve">
+    <value>Bước</value>
+  </data>
+  <data name="Step1" xml:space="preserve">
+    <value>Bước 1</value>
+  </data>
+  <data name="Step2" xml:space="preserve">
+    <value>Bước 2</value>
+  </data>
+  <data name="SupplementaryMaterial" xml:space="preserve">
+    <value>Tài Liệu Bổ Sung</value>
+  </data>
+  <data name="Sync" xml:space="preserve">
+    <value>Đồng bộ</value>
+  </data>
+  <data name="TeamCheck" xml:space="preserve">
+    <value>Kiểm Tra Nhóm</value>
+  </data>
+  <data name="TeamOne" xml:space="preserve">
+    <value>Nhóm 1</value>
+  </data>
+  <data name="TeamTwo" xml:space="preserve">
+    <value>Nhóm 2</value>
+  </data>
+  <data name="Text" xml:space="preserve">
+    <value>Văn bản</value>
+  </data>
+  <data name="TextNote" xml:space="preserve">
+    <value>Ghi Chú Văn Bản</value>
+  </data>
+  <data name="TotalPassagesLabel" xml:space="preserve">
+    <value>Tổng Đoạn</value>
+  </data>
+  <data name="TotalVerses" xml:space="preserve">
+    <value>Tổng Số Câu:</value>
+  </data>
+  <data name="Transcribe" xml:space="preserve">
+    <value>Phiên Âm</value>
+  </data>
+  <data name="Transcribe2" xml:space="preserve">
+    <value>Phiên âm 2</value>
+  </data>
+  <data name="TranscribePassage" xml:space="preserve">
+    <value>Đoạn Phiên Âm</value>
+  </data>
+  <data name="TranscribeSegment" xml:space="preserve">
+    <value>Phân Đoạn Phiên Âm</value>
+  </data>
+  <data name="Translated" xml:space="preserve">
+    <value>Đã dịch</value>
+  </data>
+  <data name="Translation" xml:space="preserve">
+    <value>Bản dịch</value>
+  </data>
+  <data name="Unassigned" xml:space="preserve">
+    <value>Chưa chỉ định</value>
+  </data>
+  <data name="Unreviewed" xml:space="preserve">
+    <value>Chưa xem lại</value>
+  </data>
+  <data name="UnsavedRolesMessage" xml:space="preserve">
+    <value>Nếu quý vị muốn lưu các vai trò đã chỉ định, hãy chọn mũi tên tiếp tục ở dưới cùng bên phải.</value>
+  </data>
+  <data name="UnsavedRolesTitle" xml:space="preserve">
+    <value>Có Các Vai Trò Chưa Được Lưu</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Cập nhật</value>
+  </data>
+  <data name="UpdatedPassage" xml:space="preserve">
+    <value>Đoạn Văn Bản Đã Cập Nhật</value>
+  </data>
+  <data name="UserLabel" xml:space="preserve">
+    <value>Người Dùng Hiện Tại</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Tài khoản</value>
+  </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>Tài khoản này không tồn tại</value>
+  </data>
+  <data name="UserSettings" xml:space="preserve">
+    <value>Cài Đặt Người Dùng</value>
+  </data>
+  <data name="UserType" xml:space="preserve">
+    <value>Loại Người Dùng</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Phiên bản</value>
+  </data>
+  <data name="VesselUser" xml:space="preserve">
+    <value>Người Dùng Hộp Chứa</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>Xem</value>
+  </data>
+  <data name="ViewAllUsers" xml:space="preserve">
+    <value>Xem Toàn Bộ Người Dùng</value>
+  </data>
+  <data name="ViewSectionAssignments" xml:space="preserve">
+    <value>Xem phần chỉ định</value>
+  </data>
+  <data name="WelcomeToRender" xml:space="preserve">
+    <value>Chào mừng đến với Render</value>
+  </data>
+  <data name="WhichSnapshot" xml:space="preserve">
+    <value>Quý vị muốn tiếp tục với ảnh chụp nhanh nào?</value>
+  </data>
+  <data name="WorkflowConfiguration" xml:space="preserve">
+    <value>Cấu Hình Quy Trình Làm Việc</value>
+  </data>
+  <data name="WorkflowDeleteStageMessage" xml:space="preserve">
+    <value>Chọn cách xử lý công việc đang thực hiện trước khi xóa giai đoạn:</value>
+  </data>
+  <data name="WorkflowDeleteStageTitle" xml:space="preserve">
+    <value>Giai Đoạn Này Chứa Dữ Liệu</value>
+  </data>
+  <data name="WorkWillBeLost" xml:space="preserve">
+    <value>Bài Làm Của Quý Vị sẽ bị Mất</value>
+  </data>
+  <data name="DividePassageMessage" xml:space="preserve">
+    <value>Nếu bạn để lối đi phân chia bây giờ, công việc của bạn sẽ bị mất</value>
+  </data>
+  <data name="ErrorOccuredTryAgain" xml:space="preserve">
+    <value>Đã xảy ra lỗi. Vui lòng thử lại.</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Lỗi</value>
+  </data>
+  <data name="RetellQuestionResponse" xml:space="preserve">
+    <value>Kể lại và Hỏi &amp; Đáp</value>
+  </data>
+  <data name="DiscardWork" xml:space="preserve">
+    <value>Loại bỏ công việc</value>
+  </data>
+  <data name="SectionView" xml:space="preserve">
+    <value>Phần xem</value>
+  </data>
+  <data name="TeamTitle" xml:space="preserve">
+    <value>Đội {0}</value>
+  </data>
+  <data name="TeamView" xml:space="preserve">
+    <value>Chế độ xem nhóm</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Sao chép</value>
+  </data>
+  <data name="SegmentSelect" xml:space="preserve">
+    <value>chọn phân khúc</value>
+  </data>
+  <data name="ClearSegmentsQuestion" xml:space="preserve">
+    <value>Xóa phân đoạn?</value>
+  </data>
+  <data name="ClearSegmentsConfirmation" xml:space="preserve">
+    <value>Bạn có chắc chắn muốn xóa các phân đoạn hiện tại không? Bạn không thể hoàn tác hành động này.</value>
+  </data>
+  <data name="SegmentReview" xml:space="preserve">
+    <value>Đánh giá phân đoạn</value>
+  </data>
+  <data name="Question" xml:space="preserve">
+    <value>Câu Hỏi</value>
+  </data>
+  <data name="SegmentCombine" xml:space="preserve">
+    <value>kết hợp phân đoạn</value>
+  </data>
+  <data name="CombineWarningMessage" xml:space="preserve">
+    <value>Đoạn màu đỏ đã được dịch lại. Tiếp tục sẽ xóa bản dịch phía sau.</value>
+  </data>
+  <data name="Configuration" xml:space="preserve">
+    <value>Cấu hình</value>
+  </data>
+  <data name="ConfigureWorkflow" xml:space="preserve">
+    <value>Định cấu hình quy trình làm việc</value>
+  </data>
+  <data name="AssignSections" xml:space="preserve">
+    <value>Chỉ định phần</value>
+  </data>
+  <data name="AssignRoles" xml:space="preserve">
+    <value>Chỉ định vai trò</value>
+  </data>
+  <data name="Workflow" xml:space="preserve">
+    <value>quy trình làm việc</value>
+  </data>
+  <data name="SelectUser" xml:space="preserve">
+    <value>Chọn người dùng</value>
+  </data>
+  <data name="AddUserButtonText" xml:space="preserve">
+    <value>Thêm người dùng</value>
+  </data>
+  <data name="Render" xml:space="preserve">
+    <value>Render</value>
+  </data>
+  <data name="Global" xml:space="preserve">
+    <value>toàn cầu</value>
+  </data>
+  <data name="TextPassword" xml:space="preserve">
+    <value>Mật khẩu văn bản</value>
+  </data>
+  <data name="ViewAssignments" xml:space="preserve">
+    <value>Xem phần bài tập</value>
+  </data>
+  <data name="DeleteUserModalMessage" xml:space="preserve">
+    <value>Nếu {0} có phần gán cho chúng, chúng cũng sẽ bị xóa. Bạn không thể hoàn tác hành động này.</value>
+  </data>
+  <data name="Return" xml:space="preserve">
+    <value>Trở lại</value>
+  </data>
+  <data name="SegmentBackTranslate1" xml:space="preserve">
+    <value>Đoạn Quay lại Dịch 1</value>
+  </data>
+  <data name="SegmentBackTranslate2" xml:space="preserve">
+    <value>Đoạn Quay lại Dịch 2</value>
+  </data>
+  <data name="RetellIsNotAvailable" xml:space="preserve">
+    <value>Kể lại không khả dụng</value>
+  </data>
+  <data name="QuestionAndResponseIsNotAvailable" xml:space="preserve">
+    <value>Câu hỏi và trả lời không có sẵn</value>
+  </data>
+  <data name="CommunityFeedbackGuidance" xml:space="preserve">
+    <value>Hướng dẫn Phản hồi của Cộng đồng</value>
+  </data>
+  <data name="Teams" xml:space="preserve">
+    <value>Đội</value>
+  </data>
+  <data name="DragTeamHere" xml:space="preserve">
+    <value>Kéo đội vào đây</value>
+  </data>
+  <data name="Configure" xml:space="preserve">
+    <value>định cấu hình</value>
+  </data>
+  <data name="QuestionNumberAndTotalNumberFormatted" xml:space="preserve">
+    <value>Câu hỏi {0} của {1}</value>
+  </data>
+  <data name="GridPassword" xml:space="preserve">
+    <value>mật khẩu lưới</value>
+  </data>
+  <data name="DragSectionHere" xml:space="preserve">
+    <value>Kéo phần vào đây</value>
+  </data>
+  <data name="Sections" xml:space="preserve">
+    <value>Phần</value>
+  </data>
+  <data name="PressCircleToRecord" xml:space="preserve">
+    <value>Nhấn vào vòng tròn để ghi lại</value>
+  </data>
+  <data name="PressCircleToRecordOrPressArrowToAddQuestionFromLibrary" xml:space="preserve">
+    <value>Nhấn vào vòng tròn để ghi hoặc {1} nhấn {0} để thêm câu hỏi {1} từ thư viện</value>
+  </data>
+  <data name="Library" xml:space="preserve">
+    <value>Thư viện</value>
+  </data>
+  <data name="NoQuestionsInTheLibrary" xml:space="preserve">
+    <value>Bạn không có câu hỏi trong thư viện</value>
+  </data>
+  <data name="Questions" xml:space="preserve">
+    <value>câu hỏi</value>
+  </data>
+  <data name="PressArrowToAddQuestion" xml:space="preserve">
+    <value>Nhấn {0} để thêm câu hỏi</value>
+  </data>
+  <data name="Test" xml:space="preserve">
+    <value>Bài kiểm tra</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Ngôn ngữ</value>
+  </data>
+  <data name="Translate" xml:space="preserve">
+    <value>Dịch</value>
+  </data>
+  <data name="RetellOnly" xml:space="preserve">
+    <value>chỉ kể lại</value>
+  </data>
+  <data name="QuestionAndResponseOnly" xml:space="preserve">
+    <value>Chỉ câu hỏi &amp; trả lời</value>
+  </data>
+  <data name="RenderAvailable" xml:space="preserve">
+    <value>Kết xuất {0} khả dụng</value>
+  </data>
+  <data name="DownloadRenderButton" xml:space="preserve">
+    <value>Tải xuống kết xuất mới</value>
+  </data>
+  <data name="DownloadRenderMessage" xml:space="preserve">
+    <value>Tải xuống Kết xuất {0} mới và luôn cập nhật.</value>
+  </data>
+  <data name="OneUserOneTeam" xml:space="preserve">
+    <value>Một người dùng, một nhóm</value>
+  </data>
+  <data name="UsersCannotBeAssignedToMultipleTeams" xml:space="preserve">
+    <value>Người dùng không thể được chỉ định cho nhiều nhóm.</value>
+  </data>
+  <data name="SaveWorkAndProceed" xml:space="preserve">
+    <value>Lưu công việc và tiếp tục</value>
+  </data>
+  <data name="ExitAnyway" xml:space="preserve">
+    <value>Vẫn thoát</value>
+  </data>
+  <data name="SaveWorkAndProceedMessage" xml:space="preserve">
+    <value>Nhấn vào mũi tên ở dưới cùng bên phải để lưu vai trò và tiếp tục.</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Tiêu đề:</value>
+  </data>
+  <data name="TotalPassages" xml:space="preserve">
+    <value>Tổng Đoạn:</value>
+  </data>
+  <data name="Reference" xml:space="preserve">
+    <value>Tài liệu tham khảo:</value>
+  </data>
+  <data name="Process" xml:space="preserve">
+    <value>Các quy trình:</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>Người dùng:</value>
+  </data>
+  <data name="NoSectionsAreInThisStep" xml:space="preserve">
+    <value>Không có phần nào trong bước này</value>
+  </data>
+  <data name="NoteInterpretToConsultant" xml:space="preserve">
+    <value>Lưu ý Giải thích cho Tư vấn</value>
+  </data>
+  <data name="NoteInterpretToTranslator" xml:space="preserve">
+    <value>Lưu ý Phiên dịch là người phiên dịch</value>
+  </data>
+  <data name="AddUserLabel" xml:space="preserve">
+    <value>Thêm người dùng mới</value>
+  </data>
+  <data name="ApprovedSection" xml:space="preserve">
+    <value>Phần được phê duyệt</value>
+  </data>
+  <data name="BothSnapshotsDeleted" xml:space="preserve">
+    <value>Cả hai Ảnh chụp nhanh đã bị xóa</value>
+  </data>
+  <data name="DeleteSnapshotsFor" xml:space="preserve">
+    <value>Xóa Ảnh chụp nhanh cho {0}?</value>
+  </data>
+  <data name="DraftWillBeLost" xml:space="preserve">
+    <value>Bản nháp sẽ bị mất</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>KHÔNG</value>
+  </data>
+  <data name="PassageBackTranslate1" xml:space="preserve">
+    <value>Passage Back Dịch 1</value>
+  </data>
+  <data name="PassageBackTranslate2" xml:space="preserve">
+    <value>Passage Back Dịch 2</value>
+  </data>
+  <data name="PasswordRequiredToReset" xml:space="preserve">
+    <value>Mật khẩu được yêu cầu để thiết lập lại một phần</value>
+  </data>
+  <data name="PasswordRequiredToRestore" xml:space="preserve">
+    <value>Cần có mật khẩu để khôi phục ảnh chụp nhanh</value>
+  </data>
+  <data name="TeamWasChosen" xml:space="preserve">
+    <value>Đội {0} đã được chọn</value>
+  </data>
+  <data name="UserAndTeamWereChosenForSection" xml:space="preserve">
+    <value>{0} đã được chọn cho {1}</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Đúng</value>
+  </data>
+  <data name="YouCannotUndo" xml:space="preserve">
+    <value>Bạn không thể hoàn tác hành động này</value>
+  </data>
+  <data name="YouHaveChosen" xml:space="preserve">
+    <value>Bạn đã lựa chọn:</value>
+  </data>
+  <data name="ResetSectionWarning" xml:space="preserve">
+    <value>Phần đặt lại sẽ xóa tất cả dữ liệu trong giai đoạn Dự thảo. Hành động này không thể được hoàn tác.</value>
+  </data>
+  <data name="RemovedFromProject" xml:space="preserve">
+    <value>Đã xóa khỏi dự án</value>
+  </data>
+  <data name="DraftEdit" xml:space="preserve">
+    <value>Dự thảo Sửa đổi</value>
+  </data>
+  <data name="Stages" xml:space="preserve">
+    <value>giai đoạn</value>
+  </data>
+  <data name="SectionListenScreenTitle" xml:space="preserve">
+    <value>Phần Nghe</value>
+  </data>
+  <data name="PassageListenScreenTitle" xml:space="preserve">
+    <value>Đoạn Văn Bản Nghe</value>
+  </data>
+  <data name="PassageDivideScreenTitle" xml:space="preserve">
+    <value>Chia Đoạn Văn Bản</value>
+  </data>
+  <data name="PassageReviewScreenTitle" xml:space="preserve">
+    <value>Xem Lại Đoạn Văn Bản</value>
+  </data>
+  <data name="SectionReviewScreenTitle" xml:space="preserve">
+    <value>Phần Xem Lại</value>
+  </data>
+  <data name="TranscribePassageScreenTitle" xml:space="preserve">
+    <value>Đoạn Phiên Âm</value>
+  </data>
+  <data name="TranscribeSegmentScreenTitle" xml:space="preserve">
+    <value>Phân Đoạn Phiên Âm</value>
+  </data>
+  <data name="DoPassageTranscribeScreenTitle" xml:space="preserve">
+    <value>Phiên Âm Đoạn Văn Bản</value>
+  </data>
+  <data name="DoSegmentTranscribeScreenTitle" xml:space="preserve">
+    <value>Phiên Âm Phân Đoạn</value>
+  </data>
+  <data name="UserWasChosen" xml:space="preserve">
+    <value>{0} đã được chọn</value>
+  </data>
+  <data name="UserWasChosenForSection" xml:space="preserve">
+    <value>{0} đã được chọn cho {1}</value>
+  </data>
+  <data name="NoteInterpretScreenTitle" xml:space="preserve">
+    <value>Ghi Chú Thông Dịch</value>
+  </data>
+  <data name="RequirePassageListenPeerCheckSetting" xml:space="preserve">
+    <value>Đoạn Hướng Dẫn Nghe</value>
+  </data>
+  <data name="RequireSectionListenPeerCheckSetting" xml:space="preserve">
+    <value>Phần Hướng Dẫn Nghe</value>
+  </data>
+  <data name="OffloadProject" xml:space="preserve">
+    <value>Giảm tải {0}?</value>
+  </data>
+  <data name="ContactSupport" xml:space="preserve">
+    <value>Liên hệ hỗ trợ để được hỗ trợ.</value>
+  </data>
+  <data name="ErrorWithMessage" xml:space="preserve">
+    <value>Lỗi [{0}]</value>
+  </data>
+  <data name="NoProjectsToDownload" xml:space="preserve">
+    <value>Không có dự án nào để tải xuống</value>
+  </data>
+  <data name="WrongPassword" xml:space="preserve">
+    <value>Mật khẩu sai. Vui lòng thử lại.</value>
+  </data>
+  <data name="DragUserHere" xml:space="preserve">
+    <value>Kéo người dùng vào đây</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Người dùng</value>
+  </data>
+  <data name="SyncFailed" xml:space="preserve">
+    <value>Thất bại</value>
+  </data>
+  <data name="DownloadFailed" xml:space="preserve">
+    <value>Tải xuống không thành công.</value>
+  </data>
+  <data name="ExportComplete" xml:space="preserve">
+    <value>Xuất hoàn tất</value>
+  </data>
+  <data name="NoSectionsAvailable" xml:space="preserve">
+    <value>Không có phần nào</value>
+  </data>
+  <data name="TryAgain" xml:space="preserve">
+    <value>Vui lòng thử lại</value>
+  </data>
+  <data name="SelectedSnapshotMessageTemplate" xml:space="preserve">
+    <value>{0}, {1} {2} {3}, {4}</value>
+  </data>
+  <data name="TeamWasChosenForSection" xml:space="preserve">
+    <value>{1}, {2} của {0} đã được chọn cho {3}</value>
+  </data>
+  <data name="CombineWarningTitle" xml:space="preserve">
+    <value>Quay lại Bản dịch sẽ bị xóa</value>
+  </data>
+  <data name="January" xml:space="preserve">
+    <value>Tháng 1</value>
+  </data>
+  <data name="February" xml:space="preserve">
+    <value>Tháng 2</value>
+  </data>
+  <data name="March" xml:space="preserve">
+    <value>Tháng 3</value>
+  </data>
+  <data name="April" xml:space="preserve">
+    <value>Tháng 4</value>
+  </data>
+  <data name="May" xml:space="preserve">
+    <value>Tháng 5</value>
+  </data>
+  <data name="June" xml:space="preserve">
+    <value>Tháng 6</value>
+  </data>
+  <data name="July" xml:space="preserve">
+    <value>Tháng 7</value>
+  </data>
+  <data name="August" xml:space="preserve">
+    <value>Tháng 8</value>
+  </data>
+  <data name="September" xml:space="preserve">
+    <value>Tháng 9</value>
+  </data>
+  <data name="October" xml:space="preserve">
+    <value>Tháng 10</value>
+  </data>
+  <data name="November" xml:space="preserve">
+    <value>Tháng 11</value>
+  </data>
+  <data name="December" xml:space="preserve">
+    <value>Tháng 12</value>
+  </data>
+  <data name="NoSectionAssignedTitle" xml:space="preserve">
+    <value>Bạn chưa chỉ định Phần nào</value>
+  </data>
+  <data name="NoSectionAssignedMessage" xml:space="preserve">
+    <value>Các phần cần phải được chỉ định để hiển thị ở đây.</value>
+  </data>
+  <data name="SegmentLabel" xml:space="preserve">
+    <value>Phân đoạn</value>
+  </data>
+  <data name="DeletedUser" xml:space="preserve">
+    <value>Người dùng đã bị xóa</value>
+  </data>
+  <data name="CannotLoadData" xml:space="preserve">
+    <value>Không thể tải dữ liệu cho phần {0}</value>
+  </data>
+  <data name="SyncAndTryAgain" xml:space="preserve">
+    <value>Nếu điều này tiếp tục xảy ra, vui lòng thử đồng bộ hóa web hoặc thử giảm tải/tải xuống dự án</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>Thử lại</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Thành công!</value>
+  </data>
+  <data name="AddFromComputer" xml:space="preserve">
+    <value>Thêm dự án từ máy tính</value>
+  </data>
+  <data name="CannotLoadAudio" xml:space="preserve">
+    <value>Không thể tải âm thanh</value>
+  </data>
+</root>

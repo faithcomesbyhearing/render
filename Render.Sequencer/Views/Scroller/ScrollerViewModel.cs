@@ -1,0 +1,28 @@
+﻿using ReactiveUI;
+using Render.Sequencer.Core;
+using Render.Sequencer.Core.Audio;
+using Render.Sequencer.Core.Utils.Extensions;
+using Render.Sequencer.Views.WaveForm.MiniItems;
+
+namespace Render.Sequencer.Views.Scroller;
+
+public class ScrollerViewModel : BaseScrollerViewModel
+{
+    public ScrollerViewModel(InternalSequencer sequencer)
+        : base(sequencer) { }
+
+    protected override BaseMiniWaveFormItemViewModel CreateMiniWaveFormViewModel(SequencerAudio audio)
+    {
+        return new MiniWaveFormItemViewModel(audio, Sequencer);
+    }
+
+    protected override void SetupListeners()
+    {
+        base.SetupListeners();
+
+        Sequencer
+            .WhenAnyValue(sequencer => sequencer.HasScrubber)
+            .BindTo(this, scroller => scroller.HasScrubber)
+            .ToDisposables(Disposables);
+    }
+}

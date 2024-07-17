@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Frame xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       x:Class="Render.Components.StageSettings.RadioButtons.RadioButtonsView"
+       HasShadow="False"
+       BackgroundColor="Transparent"
+       HorizontalOptions="Start"
+       VerticalOptions="Center"
+       WidthRequest="250"
+       Padding="0"
+       AutomationId="RadioButtonTemplateFrame">
+    
+    <VisualStateManager.VisualStateGroups>
+        <VisualStateGroupList>
+            <VisualStateGroup x:Name="CheckedStates">
+                <VisualState x:Name="Checked">
+                    <VisualState.Setters>
+                        <Setter TargetName="Check"
+                                Property="Opacity"
+                                Value="1" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Unchecked">
+                    <VisualState.Setters>
+                        <Setter TargetName="Check"
+                                Property="Opacity"
+                                Value="0" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateGroupList>
+    </VisualStateManager.VisualStateGroups>
+    
+    <Grid ColumnDefinitions="Auto,Auto" ColumnSpacing="0" Margin="0" Padding="0">
+        <Grid WidthRequest="26" 
+              HeightRequest="26"
+              HorizontalOptions="Start"
+              VerticalOptions="Center" 
+              Margin="0,0,8,0" Padding="0"
+              Column="0"
+              AutomationId="EllipseGrid"
+              IsClippedToBounds="True">
+            <Ellipse Style="{DynamicResource UnChecked}"
+                     AutomationId="Uncheck" Margin="0" StrokeThickness="2">
+                <Ellipse.Stroke>
+                    <SolidColorBrush Color="{DynamicResource DarkGrey}" />
+                </Ellipse.Stroke>
+                <Ellipse.Fill>
+                    <SolidColorBrush Color="{DynamicResource White}" />
+                </Ellipse.Fill>
+            </Ellipse>
+            <Ellipse x:Name="Check"
+                     Style="{DynamicResource Checked}" 
+                     AutomationId="Check" Margin="0">
+                <Ellipse.Fill>
+                    <SolidColorBrush Color="{DynamicResource Option}" />
+                </Ellipse.Fill>
+            </Ellipse>
+        </Grid>
+        
+        <Grid Column="1" AutomationId="ContentPresenterGrid">
+            <ContentPresenter VerticalOptions="Center"/>
+        </Grid>
+    </Grid>
+</Frame>

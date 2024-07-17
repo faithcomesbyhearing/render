@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary x:Class="Render.Sequencer.Resources.Styles.ToolbarStyles"
+                    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:atomic="clr-namespace:Render.Sequencer.Resources.Atomic"
+                    xmlns:controls="clr-namespace:Render.Sequencer.Core.Controls">
+    <ResourceDictionary.MergedDictionaries>
+        <atomic:Colors />
+        <atomic:Sizes />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style x:Key="MainTimerStyle" TargetType="Label">
+        <Setter Property="FontSize" Value="26" />
+        <Setter Property="FontFamily" Value="BoldFont" />
+    </Style>
+
+    <Style x:Key="PositionTimerStyle"
+           BasedOn="{StaticResource MainTimerStyle}"
+           TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource TertiarySymbols}" />
+    </Style>
+
+    <Style x:Key="DurationTimerStyle"
+           BasedOn="{StaticResource MainTimerStyle}"
+           TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource SecondarySymbols}" />
+    </Style>
+
+    <Style x:Key="MainTimerDelimeterStyle" TargetType="BoxView">
+        <Setter Property="BackgroundColor" Value="{StaticResource SecondarySymbols}" />
+        <Setter Property="HeightRequest" Value="20" />
+        <Setter Property="WidthRequest" Value="{StaticResource DelimiterWidth}" />
+    </Style>
+
+    <Style x:Key="ToolbarButtonStyle" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{StaticResource Light}" />
+        <Setter Property="CornerRadius" Value="0" />
+        <Setter Property="FontFamily" Value="Icons" />
+        <Setter Property="FontSize" Value="36" />
+        <Setter Property="WidthRequest" Value="{StaticResource ToolbarItemsWidth}" />
+        <Setter Property="IsEnabled" Value="False" />
+        <Setter Property="TextColor" Value="{StaticResource AccentLight}" />
+    </Style>
+</ResourceDictionary>

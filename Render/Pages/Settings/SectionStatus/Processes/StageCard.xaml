@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="processesView:StageCardViewModel"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:processesView="clr-namespace:Render.Pages.Settings.SectionStatus.Processes;assembly=Render"
+                            x:Class="Render.Pages.Settings.SectionStatus.Processes.StageCard">
+
+    <Border x:Name="StageGrid"
+            StrokeShape="RoundRectangle 10"  
+            Padding="0"
+            Margin="0,0,0,26">
+        <Grid BackgroundColor="{DynamicResource UnselectedCard}" 
+              HorizontalOptions="Fill" 
+              Padding="0" 
+              Margin="0"
+              RowDefinitions="Auto,2,*">
+            <Grid Grid.Row="0"
+                  ColumnDefinitions="100,*,*"
+                  Padding="5,0,0,0"
+                  HeightRequest="100"
+                  AutomationId="StageTitleStack">
+                <Label Grid.Column="0" x:Name="StageIcon" Style="{StaticResource IconStyle}" AutomationId="StageIconLabel" />
+                <Label Grid.Column="1" x:Name="StageName" Style="{StaticResource StageNameStyle}" AutomationId="StageNameLabel"/>
+                <Label Grid.Column="3" x:Name="StageListIcon" Style="{StaticResource StageListIconStyle}" AutomationId="StageListChevronLabel" />
+            </Grid>
+
+            <BoxView Grid.Row="1" x:Name="StageTitleBarSeparator"
+                     HeightRequest="2" Margin="26,0"
+                     Opacity=".8"
+                     BackgroundColor="{DynamicResource DarkGrey}" />
+
+            <VerticalStackLayout Grid.Row="2" x:Name="StepCollection"
+                                 HorizontalOptions="Fill"
+                                 BackgroundColor="{DynamicResource UnselectedCard}"
+                                 AutomationId="StepCollection">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <processesView:StepCard AutomationId="StepCard" />
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </VerticalStackLayout>
+        </Grid>
+        <Border.GestureRecognizers>
+            <TapGestureRecognizer x:Name="TapGestureRecognizer" AutomationId="StageCard"
+                                  Tapped="OnButtonClicked" />
+        </Border.GestureRecognizers>
+    </Border>
+</kernel:RenderComponentBase>

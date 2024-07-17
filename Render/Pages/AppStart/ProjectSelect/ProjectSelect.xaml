@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderPageBase x:Class="Render.Pages.AppStart.ProjectSelect.ProjectSelect"
+                       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:kernel="clr-namespace:Render.Kernel"
+                       xmlns:loadingCircles="clr-namespace:Render.Common"
+                       xmlns:local="clr-namespace:Render.Pages.AppStart.ProjectSelect"
+                       xmlns:projectDownload="clr-namespace:Render.Pages.AppStart.ProjectDownload;assembly=Render"
+                       xmlns:projectList="clr-namespace:Render.Pages.AppStart.ProjectList;assembly=Render"
+                       xmlns:resources="clr-namespace:Render.Resources.Localization"
+                       xmlns:stageSettings="clr-namespace:Render.Components.StageSettings;assembly=Render"
+                       xmlns:titleBar="clr-namespace:Render.Components.TitleBar"
+                       xmlns:resources1="clr-namespace:Render.Resources"
+                       xmlns:addViaFolder="clr-namespace:Render.Components.AddViaFolder"
+                       x:TypeArguments="local:ProjectSelectViewModel">
+    <ContentPage.Resources>
+        <Style x:Key="ComponentLabel" TargetType="Label">
+            <Setter Property="LineBreakMode" Value="NoWrap" />
+            <Setter Property="VerticalTextAlignment" Value="Center" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="Padding" Value="10,5" />
+            <Setter Property="FontSize" Value="{StaticResource MediumMinus2Font}" />
+            <Setter Property="FontFamily" Value="MediumFont" />
+        </Style>
+    </ContentPage.Resources>
+
+    <AbsoluteLayout x:Name="TopLevelElement"
+                    BackgroundColor="{StaticResource AlternateBackground}"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Fill">
+        <Grid x:Name="ProjectSelectView" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+            <Grid.RowDefinitions>
+                <RowDefinition x:Name="TitleBarRow" Height="Auto" />
+                <RowDefinition x:Name="TabsRow" Height="108" />
+                <RowDefinition x:Name="ItemsRow" Height="*" />
+            </Grid.RowDefinitions>
+
+            <titleBar:TitleBar x:Name="TitleBar" Grid.Row="0" />
+
+            <!--  Project List & Add New tabs buttons  -->
+            <HorizontalStackLayout
+                Grid.Row="1"
+                HorizontalOptions="Center">
+
+                <Grid ColumnDefinitions="*,Auto,*" WidthRequest="960">
+
+                    <!--  add from computer button  -->
+                    <Border x:Name="AddProjectFromComputer"
+                            Grid.Column="0"
+                            HorizontalOptions="Start"
+                            HeightRequest="45"
+                            StrokeShape="RoundRectangle 8"
+                            Style="{StaticResource ButtonBorder}"
+                            AutomationId="AddAProjectViaGuidButton">
+
+                        <Grid ColumnDefinitions="Auto,Auto"
+                              ColumnSpacing="10"
+                              Style="{StaticResource ButtonBackground}"
+                              Padding="5">
+
+                            <Label Grid.Column="0"
+                                   Style="{StaticResource ButtonIcon}"
+                                   FontSize="24"
+                                   Text="{resources1:IconExtensions AddFromComputer}"
+                                   AutomationId="AddFromComputer" />
+
+                            <Label Grid.Column="1"
+                                   Text="{x:Static resources:AppResources.AddFromComputer}"
+                                   Style="{StaticResource ButtonText}"
+                                   FontSize="{StaticResource MediumMinus2Font}"
+                                   AutomationId="AddProjectFromComputerButtonText" />
+
+                        </Grid>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="AddAProjectFromComputerGesture" />
+                        </Border.GestureRecognizers>
+                    </Border>
+
+                    <!--  tabs  -->
+                    <Grid x:Name="PageSelectorContainer"
+                          Grid.Column="1"
+                          ColumnDefinitions="Auto,*,Auto"
+                          ColumnSpacing="14"
+                          HorizontalOptions="Center"
+                          IsVisible="True"
+                          VerticalOptions="Center">
+
+                        <!--  project list tab  -->
+                        <Border Grid.Column="0"
+                                Padding="0"
+                                AutomationId="ProjectConfigurationFrame"
+                                StrokeShape="RoundRectangle 8">
+                            <Label x:Name="ProjectListViewButton"
+                                   Padding="13,10"
+                                   BackgroundColor="{DynamicResource Option}"
+                                   Style="{DynamicResource ComponentLabel}"
+                                   Text="{x:Static resources:AppResources.ProjectList}" />
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer x:Name="SelectProjectListViewTap"
+                                                      AutomationId="SelectSectionViewButton"
+                                                      Tapped="OnButtonClicked" />
+                            </Border.GestureRecognizers>
+                        </Border>
+
+                        <!--  separator  -->
+                        <VerticalStackLayout Grid.Column="1"
+                                             Padding="0"
+                                             AutomationId="BoxViewTabSeparatorLayout"
+                                             HorizontalOptions="Center"
+                                             VerticalOptions="Center">
+                            <BoxView Margin="0,5,0,0"
+                                     AutomationId="BoxViewTabSeparator"
+                                     HeightRequest="16"
+                                     Style="{x:StaticResource WorkflowSettingsBoxViewStyle}"
+                                     WidthRequest="2" />
+                        </VerticalStackLayout>
+
+                        <!--  add new project tab  -->
+                        <Border Grid.Column="2"
+                                Padding="0"
+                                AutomationId="ProjectConfigurationFrame"
+                                StrokeShape="RoundRectangle 8">
+                            <Label x:Name="AddProjectViewButton"
+                                   Padding="13,10"
+                                   Style="{DynamicResource ComponentLabel}"
+                                   Text="{x:Static resources:AppResources.AddNew}"
+                                   TextColor="{DynamicResource MainText}" />
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer x:Name="SelectAddNewProjectViewTap"
+                                                      AutomationId="SelectTeamViewTapButton"
+                                                      Tapped="OnButtonClicked" />
+                            </Border.GestureRecognizers>
+                        </Border>
+                    </Grid>
+
+
+                    <!--  offload toggle  -->
+                    <Grid x:Name="ShowOffloadSwitch"
+                          Grid.Column="2"
+                          WidthRequest="250"
+                          ColumnDefinitions="200, 50"
+                          HorizontalOptions="End">
+                        
+                        <Label AutomationId="OffloadDataLabel"
+                               Style="{StaticResource ComponentLabel}"
+                               Text="{x:Static resources:AppResources.OffloadData}"
+                               LineBreakMode="TailTruncation"
+                               HorizontalTextAlignment="End"
+                               TextColor="{DynamicResource Option}" />
+                        
+                        <stageSettings:SettingsSwitch x:Name="OffloadSwitch"
+                                                      Grid.Column="1"
+                                                      AutomationId="OffloadSwitchToggle"
+                                                      PropertyChanged="OnButtonClicked"
+                                                      Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
+                    </Grid>
+                </Grid>
+            </HorizontalStackLayout>
+            <!--  Project List & Add New tabs content  -->
+            <projectList:ProjectList x:Name="ProjectListTab"
+                                     Grid.Row="2"
+                                     AutomationId="ProjectListTab" />
+            <projectDownload:ProjectDownload x:Name="AddProjectTab"
+                                             Grid.Row="2"
+                                             AutomationId="AddNewProjectTab" />
+
+        </Grid>
+
+        <loadingCircles:LoadingScreen x:Name="LoadingView"
+                                      AbsoluteLayout.LayoutBounds="0,0,1,1"
+                                      AbsoluteLayout.LayoutFlags="All" />
+        
+        <addViaFolder:AddViaFolderView x:Name="AddViaFolderView" 
+                                       AbsoluteLayout.LayoutBounds="0,0,1,1"
+                                       AbsoluteLayout.LayoutFlags="All"
+                                       VerticalOptions="Center" HorizontalOptions="Center" />
+    </AbsoluteLayout>
+</kernel:RenderPageBase>

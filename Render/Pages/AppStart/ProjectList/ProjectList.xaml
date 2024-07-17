@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<kernel:RenderComponentBase x:Class="Render.Pages.AppStart.ProjectList.ProjectList"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:projectList="clr-namespace:Render.Pages.AppStart.ProjectList;assembly=Render"
+                            xmlns:projectSelect="clr-namespace:Render.Pages.AppStart.ProjectSelect;assembly=Render"
+                            xmlns:versionLabel="clr-namespace:Render.Components.VersionLabel;assembly=Render"
+                            x:TypeArguments="projectList:ProjectListViewModel"
+                            NavigationPage.HasNavigationBar="False">
+
+    <Grid x:Name="TopLevelElement">
+
+        <!--  Project list  -->
+        <ScrollView x:Name="ProjectsCollectionScrollView"
+                    AutomationId="ProjectsCollectionScrollView"
+                    VerticalScrollBarVisibility="Default">
+            <Grid Padding="0" ColumnDefinitions="*,Auto,*">
+                <VerticalStackLayout x:Name="ProjectsCollection"
+                                     Grid.Column="1"
+                                     AutomationId="SelectProjectsCollection"
+                                     HorizontalOptions="CenterAndExpand">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <projectSelect:ProjectSelectCard Padding="0,0,0,26" />
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+            </Grid>
+        </ScrollView>
+
+        <!--  'No Projects' message  -->
+        <Grid x:Name="NoProjectMessageContainer"
+              Margin="0,200,0,0"
+              AutomationId="NoProjectMessageContainer"
+              RowDefinitions="Auto,Auto,Auto,Auto">
+
+            <Label x:Name="Icon"
+                   Grid.Row="0"
+                   AutomationId="MessageIcon"
+                   Style="{StaticResource NoProjectMessageIconStyle}" />
+            <Label x:Name="MessageTitle"
+                   Grid.Row="1"
+                   AutomationId="MessageTitleLabel"
+                   Style="{StaticResource NoProjectTitleLabelStyle}" />
+            <Label x:Name="MessageText"
+                   Grid.Row="2"
+                   AutomationId="MessageTextLabel"
+                   Style="{StaticResource NoProjectMessageLabelStyle}" />
+
+            <versionLabel:VersionLabel Grid.Row="3"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Start" />
+        </Grid>
+    </Grid>
+
+</kernel:RenderComponentBase>

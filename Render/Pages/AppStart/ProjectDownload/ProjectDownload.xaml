@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<kernel:RenderComponentBase x:Class="Render.Pages.AppStart.ProjectDownload.ProjectDownload"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:customRenderer="clr-namespace:Render.Kernel.CustomRenderer;assembly=Render"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:localization="clr-namespace:Render.Resources.Localization"
+                            xmlns:projectDownload="clr-namespace:Render.Pages.AppStart.ProjectDownload;assembly=Render"
+                            xmlns:resources="clr-namespace:Render.Resources;assembly=Render"
+                            xmlns:versionLabel="clr-namespace:Render.Components.VersionLabel;assembly=Render"
+                            x:TypeArguments="projectDownload:ProjectDownloadViewModel">
+    <ContentView.Resources>
+        <Style x:Key="ProjectDownloadEntryBorder" TargetType="Border">
+            <Setter Property="Stroke" Value="{DynamicResource DarkGrey}" />
+            <Setter Property="StrokeThickness" Value="1" />
+            <Setter Property="StrokeShape" Value="RoundRectangle 8" />
+            <Setter Property="BackgroundColor" Value="{DynamicResource SecondaryText}" />
+            <Setter Property="Padding" Value="0,5" />
+            <Setter Property="Margin" Value="0,30,0,10" />
+            <Setter Property="WidthRequest" Value="960" />
+            <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+            <Setter Property="VerticalOptions" Value="Center" />
+        </Style>
+    </ContentView.Resources>
+
+    <Grid x:Name="TopLevelElement" RowDefinitions="Auto, *">
+
+        <!--  Search entry  -->
+        <Border x:Name="SearchEntryBorder"
+                Grid.Row="0"
+                Style="{StaticResource ProjectDownloadEntryBorder}">
+            <customRenderer:CustomEntry x:Name="SearchEntry"
+                                        AutomationId="SearchEntry"
+                                        FontFamily="RegularItalicFont"
+                                        FontSize="{StaticResource LargeFontMinus2Font}"
+                                        Placeholder="{x:Static localization:AppResources.EnterAProjectName}"
+                                        Style="{StaticResource WorkflowSettingsEntryStyle}" />
+        </Border>
+
+        <!--  Project list  -->
+        <ScrollView x:Name="ProjectsToDownloadScrollView"
+                    Grid.Row="1"
+                    Margin="0,39,0,0"
+                    VerticalScrollBarVisibility="Default">
+            <Grid Padding="0" ColumnDefinitions="*,Auto,*">
+                <VerticalStackLayout x:Name="ProjectsToDownloadCollection"
+                                     Grid.Column="1"
+                                     AutomationId="SelectProjectsCollection"
+                                     HorizontalOptions="CenterAndExpand">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <projectDownload:ProjectDownloadCard Padding="0,0,0,26" />
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+            </Grid>
+        </ScrollView>
+
+        <!--  'No Projects' message  -->
+        <Grid x:Name="NoProjectMessageContainer"
+              Grid.Row="1"
+              Margin="0,200,0,0"
+              AutomationId="NoProjectMessageContainer"
+              RowDefinitions="Auto,Auto,Auto">
+
+            <Label Grid.Row="0"
+                   AutomationId="MessageIcon"
+                   Style="{StaticResource NoProjectMessageIconStyle}"
+                   Text="{resources:IconExtensions EmptyProject}" />
+            <Label Grid.Row="1"
+                   Margin="0,0,0,92"
+                   AutomationId="MessageTitleLabel"
+                   Style="{StaticResource NoProjectTitleLabelStyle}"
+                   Text="{x:Static localization:AppResources.NoProjectsToDownload}" />
+
+            <versionLabel:VersionLabel Grid.Row="2"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Start" />
+        </Grid>
+
+    </Grid>
+
+</kernel:RenderComponentBase>

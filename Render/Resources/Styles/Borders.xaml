@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <Style x:Key="StageSettingBorder" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="{DynamicResource SlateDark}"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Stroke" Value="{DynamicResource MainIconColor}"/>
+        <Setter Property="StrokeThickness" Value="1"/>
+        <Setter Property="VerticalOptions" Value="Fill"/>
+        <Setter Property="Margin" Value="10,0,0,0"/>
+        <Setter Property="Grid.Column" Value="1"/>
+        
+        <Setter Property="StrokeShape">
+            <Setter.Value>
+                <RoundRectangle CornerRadius="8" />
+            </Setter.Value> 
+        </Setter>
+        
+        <Style.Triggers>
+            <Trigger TargetType="Border" Property="IsEnabled" Value="False" >
+                <Setter Property="Opacity" Value="0.3"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <Style x:Key="DraftPickerBorder" TargetType="Border">
+        <Setter Property="StrokeShape">
+            <Setter.Value>
+                <RoundRectangle CornerRadius="4" />
+            </Setter.Value> 
+        </Setter>
+        <Setter Property="BackgroundColor" Value="{DynamicResource ToolbarBackground}" />
+    </Style>
+
+    
+    <Style x:Key="ModalBorderStyle" TargetType="Border">
+        <Setter Property="StrokeShape">
+            <Setter.Value>
+                <RoundRectangle CornerRadius="16" />
+            </Setter.Value> 
+        </Setter>
+        <Setter Property="BackgroundColor" Value="White"/>
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+    </Style>
+    
+    <Style x:Key="ModalButtonBorderStyle" TargetType="Border">
+        <Setter Property="StrokeShape">
+            <Setter.Value>
+                <RoundRectangle CornerRadius="16" />
+            </Setter.Value> 
+        </Setter>
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+        <Setter Property="BackgroundColor" Value="{DynamicResource Blue}"/>
+    </Style>
+    
+    <Style x:Key="StageSettingStageNameEditBorderStyle" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="{DynamicResource White}"/>
+        <Setter Property="Stroke" Value="{DynamicResource DarkGrey}"/>
+        <Setter Property="StrokeThickness" Value="1"/>
+        
+        <Setter Property="StrokeShape">
+            <Setter.Value>
+                <RoundRectangle CornerRadius="8" />
+            </Setter.Value> 
+        </Setter>
+    </Style>
+    
+    <Style x:Key="StageSettingsSectionBorderStyle" TargetType="Border">
+        <Setter Property="Margin" Value="0,0,0,26"/>
+        <Setter Property="Padding" Value="0,0,0,0"/>
+        <Setter Property="BackgroundColor" Value="{DynamicResource White}"/>
+        
+        <Setter Property="StrokeShape">
+            <Setter.Value>
+                <RoundRectangle CornerRadius="8" />
+            </Setter.Value> 
+        </Setter>
+    </Style>
+    
+    <Style x:Key="ProjectCardMainBorderStyle" TargetType="Border">
+        <Setter Property="WidthRequest" Value="960" />
+        <Setter Property="HeightRequest" Value="104" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 8" />
+        <Setter Property="StrokeThickness" Value="0" />
+        <Setter Property="Padding" Value="26,0" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource White}" />
+    </Style>
+    
+    <Style x:Key="ProjectCardButtonBorderStyle" TargetType="Border">
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="HeightRequest" Value="56" />
+        <Setter Property="MinimumWidthRequest" Value="160" />
+        <Setter Property="Padding" Value="15,0" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 8" />
+        <Setter Property="StrokeThickness" Value="0" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource Option}" />
+    </Style>
+    
+    <Style x:Key="BorderStyle" TargetType="Border">
+        <Setter Property="StrokeShape" Value="RoundRectangle 15,15,0,0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="BackgroundColor" Value="{StaticResource ToolbarBackground}" />
+        <Setter Property="HeightRequest" Value="80" />
+        <Setter Property="WidthRequest" Value="191" />
+        <Setter Property="VerticalOptions" Value="End" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+    </Style>
+    
+    <Style x:Key="StageColumnBorderStyle" TargetType="Border">
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 8" />
+    </Style>
+    
+    <Style x:Key="ButtonBorder" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="{StaticResource DarkBlue}" />
+        <Setter Property="StrokeThickness" Value="2" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 16" />
+    </Style>
+   
+</ResourceDictionary>

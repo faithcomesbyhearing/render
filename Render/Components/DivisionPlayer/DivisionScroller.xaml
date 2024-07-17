@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="scroller:ScrollerViewModel"
+                            xmlns:kernel="clr-namespace:Render.Kernel"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                             xmlns:scroller="clr-namespace:Render.Components.Scroller"
+                             x:Class="Render.Components.DivisionPlayer.DivisionScroller">
+    <ContentView.Resources>
+        <Style x:Key="ScrollerStyle" TargetType="Border">
+            <Setter Property="StrokeShape" Value="RoundRectangle 12" />
+            <Setter Property="BackgroundColor" Value="{StaticResource LightGrey}" />
+        </Style>
+
+        <Style x:Key="VisibleAreaStyle" TargetType="Border">
+            <Setter Property="BackgroundColor" Value="{StaticResource DarkGrey}" />
+            <Setter Property="StrokeShape" Value="RoundRectangle 12" />
+        </Style>
+
+        <Style x:Key="HiddenScrollerStyle" TargetType="Slider">
+            <Setter Property="Opacity" Value="0" />
+            <Setter Property="VerticalOptions" Value="Fill" />
+            <Setter Property="HorizontalOptions" Value="Fill" />
+            <Setter Property="IsEnabled" Value="True" />
+        </Style>
+    </ContentView.Resources>
+
+    <Grid AutomationId="MainScrollerGrid">
+        <Border Style="{StaticResource ScrollerStyle}">
+            <Grid AutomationId="ScrollerFrameGrid">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                
+                <Border Grid.Column="0"
+                        x:Name="HiddenAreaBefore"
+                        AutomationId="HiddenAreaBefore" />
+
+                <Border Grid.Column="1"
+                        x:Name="VisibleArea"
+                        Style="{StaticResource VisibleAreaStyle}"
+                        AutomationId="VisibleArea" />
+                
+                <Border Grid.Column="2"
+                        HorizontalOptions="Fill"
+                        AutomationId="HiddenAreaAfter" />
+            </Grid>
+        </Border>
+        <Slider x:Name="HiddenScroller"
+                Minimum="0"
+                Style="{StaticResource HiddenScrollerStyle}"
+                AutomationId="HiddenScroller" />
+    </Grid>
+</kernel:RenderComponentBase>

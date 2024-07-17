@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="teamView:TeamViewSectionAssignmentCardViewModel"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:teamView="clr-namespace:Render.Pages.Configurator.SectionAssignment.TeamView;assembly=Render"
+                            xmlns:resources="clr-namespace:Render.Resources;assembly=Render"
+                            x:Class="Render.Pages.Configurator.SectionAssignment.TeamView.TeamViewSectionAssignmentCard"
+                            x:Name="TeamViewSectionAssignmentComponent"
+                            xmlns:dragAndDrop="clr-namespace:Render.Kernel.DragAndDrop;assembly=Render"
+                            xmlns:localization="clr-namespace:Render.Resources.Localization">
+    <Border x:Name="TopElement"
+            HorizontalOptions="Fill"
+            BackgroundColor="Transparent"
+            HeightRequest="105">
+        <Grid ColumnDefinitions="*,50"
+              RowDefinitions="Auto,Auto,*"
+              VerticalOptions="Fill"
+              HorizontalOptions="Fill"
+              AutomationId="TeamViewSectionAssignmentRegion">
+            <Label x:Name="AddSectionLabel"
+                   Grid.Row="0"
+                   Grid.Column="0"
+                   FontFamily="Icons"
+                   Text="{resources:IconExtensions Add}"
+                   TextColor="{DynamicResource MainIconColor}"
+                   FontSize="45" />
+            <Line x:Name="AddSectionLine"
+                  Grid.Row="1"
+                  Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  X1="0"
+                  X2="2000"
+                  Y1="1"
+                  Y2="1"
+                  StrokeDashArray="6, 6"
+                  StrokeThickness="1.5"
+                  StrokeDashOffset="2"
+                  HorizontalOptions="Fill">
+                <Line.Stroke>
+                    <SolidColorBrush Color="{DynamicResource RecorderSeparatorLine}" />
+                </Line.Stroke>
+            </Line>
+            <Border x:Name="SectionStack"
+                   Grid.Column="0"
+                   Grid.Row="2"
+                   Padding="13,8"
+                   Margin="10"
+                   BackgroundColor="{DynamicResource Gray}"
+                   HorizontalOptions="Fill"
+                   VerticalOptions="Fill">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10" />
+                </Border.StrokeShape>
+                <Grid ColumnDefinitions="50,*,50"
+                      RowDefinitions="*,*"
+                      HorizontalOptions="Fill"
+                      VerticalOptions="Fill">
+                    <Label x:Name="SectionNumber"
+                           TextColor="{DynamicResource MainText}"
+                           FontSize="{StaticResource LargeFont}"
+                           Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"
+                           FontAttributes="Bold"
+                           VerticalOptions="Fill"
+                           HorizontalOptions="Fill"
+                           VerticalTextAlignment="Center"
+                           HorizontalTextAlignment="Center"/>
+                    <Label x:Name="SectionTitleLabel"
+                           TextColor="{DynamicResource MainText}"
+                           Grid.Column="1" Grid.Row="0"
+                           FontSize="{StaticResource MediumMinus2Font}"
+                           FontAttributes="Bold" VerticalOptions="Fill"
+                           HorizontalOptions="Fill"
+                           VerticalTextAlignment="Center"
+                           HorizontalTextAlignment="Start"
+                           Margin="20,0"
+                           LineBreakMode="TailTruncation" />
+                    <Label x:Name="SectionReferenceLabel"
+                           TextColor="{DynamicResource SlateLight}"
+                           Grid.Column="1" Grid.Row="1"
+                           FontSize="{StaticResource MediumMinus2Font}" VerticalOptions="Fill"
+                           HorizontalOptions="Fill"
+                           VerticalTextAlignment="Center"
+                           HorizontalTextAlignment="Start"
+                           Margin="20,0"
+                           LineBreakMode="TailTruncation" />
+                    <Frame x:Name="RemoveButton"
+                           Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"
+                           BackgroundColor="{DynamicResource Option}"
+                           VerticalOptions="Center"
+                           WidthRequest="35"
+                           HeightRequest="35"
+                           CornerRadius="15"
+                           Padding="6"
+                           AutomationId="RemoveButton">
+                        <Label FontFamily="Icons"
+                               Text="{resources:IconExtensions Delete}"
+                               TextColor="{DynamicResource SecondaryText}"
+                               FontSize="{StaticResource MediumFont}"
+                               VerticalOptions="Fill"
+                               HorizontalOptions="Fill"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center">
+                        </Label>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="RemoveButtonGestureRecognizer"
+                                                    AutomationId="Remove" />
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                </Grid>
+            </Border>
+            <Border x:Name="DropRectangle"
+                    BackgroundColor="{DynamicResource AlternateBackground}"
+                    Margin="10"
+                    Grid.Column="0"
+                    Grid.Row="2"
+                    StrokeThickness="2"
+                    StrokeDashArray="4,4"
+                    StrokeDashOffset="6"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Fill">
+                <Border.Stroke>
+                    <SolidColorBrush Color="{DynamicResource Option}" />
+                </Border.Stroke>
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10" />
+                </Border.StrokeShape>
+                <Label InputTransparent="True"
+                       VerticalOptions="Fill"
+                       HorizontalOptions="Fill"
+                       VerticalTextAlignment="Center"
+                       HorizontalTextAlignment="Center"
+                       Text="{x:Static localization:AppResources.DragSectionHere}"
+                       TextColor="{DynamicResource MainText}"
+                       FontSize="{StaticResource SmallPlus2Font}"/>
+                <Border.Effects>
+                    <dragAndDrop:DropRecognizerEffect Drop="TeamDropRecognizerEffect_OnDrop" />
+                </Border.Effects>
+            </Border>
+            <Label x:Name="DragImageIcon"
+                   Grid.Column="1"
+                   Grid.Row="2"
+                   Margin="10,0"
+                   FontFamily="Icons"
+                   Text="{resources:IconExtensions ReorderTwo}"
+                   TextColor="{DynamicResource Option}"
+                   FontSize="50"
+                   VerticalOptions="Fill"
+                   HorizontalOptions="Fill"
+                   VerticalTextAlignment="Center"
+                   HorizontalTextAlignment="Center">
+                <Label.Effects>
+                    <dragAndDrop:DragRecognizerEffect DragStarting="SectionDragRecognizerEffect_OnDragStarting" />
+                </Label.Effects>
+            </Label>
+        </Grid>
+        <Border.Effects>
+            <dragAndDrop:DropRecognizerEffect Drop="SectionDropRecognizerEffect_OnDrop"
+                                              DragOver="DropGestureRecognizerEffect_OnDragOver"
+                                              x:Name="SectionDragOverRecognizer" />
+        </Border.Effects>
+    </Border>
+</kernel:RenderComponentBase>

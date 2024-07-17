@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderPageBase x:TypeArguments="login:LoginViewModel"
+                       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:login="clr-namespace:Render.Pages.AppStart.Login;assembly=Render"
+                       xmlns:resources="clr-namespace:Render.Resources;assembly=Render"
+                       xmlns:validationEntry="clr-namespace:Render.Components.ValidationEntry;assembly=Render"
+                       xmlns:versionLabel="clr-namespace:Render.Components.VersionLabel;assembly=Render"
+                       xmlns:passwordGrid="clr-namespace:Render.Components.PasswordGrid;assembly=Render"
+                       xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                       xmlns:loadingCircles="clr-namespace:Render.Common"
+                       xmlns:controls="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:localization="clr-namespace:Render.Resources.Localization"
+                       xmlns:profileAvatar="clr-namespace:Render.Components.ProfileAvatar"
+                       x:Class="Render.Pages.AppStart.Login.Login"
+                       BackgroundColor="{DynamicResource LoginPageBackground}">
+    <controls:ContentPage.Resources>
+        <Style x:Key="UserProfileCollection" TargetType="CollectionView">
+            <Setter Property="Margin" Value="15">
+            </Setter>
+            <Setter Property="WidthRequest" Value="600">
+            </Setter>
+            <Setter Property="VerticalOptions" Value="Start" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="VerticalScrollBarVisibility" Value="Never" />
+        </Style>
+        <Style x:Key="ErrorText" TargetType="Label">
+            <Setter Property="TextColor" Value="{DynamicResource Error}" />
+            <Setter Property="FontSize" Value="{StaticResource SmallFont}"/>
+            <Setter Property="FontAttributes" Value="Italic, Bold"/>
+        </Style>
+    </controls:ContentPage.Resources>
+    <Grid x:Name="TopLevelElement">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <!-- Header -->
+        <Grid Grid.Row="1">
+            <VerticalStackLayout>
+                <Label x:Name="BackButton" FontFamily="Icons"
+                       Text="{resources:IconExtensions ChevronLeft}" FontSize="35"
+                       BackgroundColor="Transparent" TextColor="{DynamicResource SecondaryText}"
+                       Margin="50">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="BackButtonTap" Tapped="OnButtonClicked" />
+                    </Label.GestureRecognizers>
+                </Label>
+                <Image x:Name="RenderTitle"
+                       Source="LogoCorrected.png"
+                       HorizontalOptions="CenterAndExpand"
+                       Margin="50"
+                       WidthRequest="200" Scale="1"
+                       AutomationId="RenderFullLogo"/>
+            </VerticalStackLayout>
+        </Grid>
+        <!-- Content -->
+        <Grid Grid.Row="2">
+            <VerticalStackLayout PropertyChanged="IconLoginStack_OnPropertyChanged" x:Name="IconLoginStack"
+                                 HorizontalOptions="Center"
+                                 WidthRequest="750">
+                <Label FontSize="20" FontFamily="LightFont" Text="{x:Static localization:AppResources.SelectAProfile}"
+                       TextColor="{DynamicResource LightBackgroundText}"
+                       HorizontalOptions="Center"
+                       AutomationId="SelectAProfileLabel">
+                </Label>
+                <ScrollView VerticalScrollBarVisibility="Always">
+                    <VerticalStackLayout>
+                        <CollectionView x:Name="TopUserIconCollection"
+                                        Style="{StaticResource UserProfileCollection}" AutomationId="LastLoggedIntoUsersCollection">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <profileAvatar:UserLoginIconVertical Orientation="Vertical" />
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Orientation="Vertical" Span="4"
+                                                 VerticalItemSpacing="20"
+                                                 HorizontalItemSpacing="5">
+                                </GridItemsLayout>
+                            </CollectionView.ItemsLayout>
+                        </CollectionView>
+                        <BoxView HeightRequest="5" x:Name="UsersSeparator"
+                                 BackgroundColor="{DynamicResource TertiaryText}"
+                                 HorizontalOptions="Fill"
+                                 AutomationId="UsersSeparator">
+                        </BoxView>
+                        <CollectionView x:Name="UserIconCollection"
+                                        Style="{StaticResource UserProfileCollection}"
+                                        AutomationId="LastUsedProjectsUsersCollection">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <profileAvatar:UserLoginIconVertical
+                                        Orientation="Vertical" />
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Orientation="Vertical" Span="4"
+                                                 VerticalItemSpacing="20"
+                                                 HorizontalItemSpacing="5">
+                                </GridItemsLayout>
+                            </CollectionView.ItemsLayout>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </ScrollView>
+            </VerticalStackLayout>
+            <Grid x:Name="IconPasswordLoginStack" HorizontalOptions="Center" VerticalOptions="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                
+                <profileAvatar:UserLoginIconHorizontal Grid.Row="0" x:Name="UserLoginIcon" Orientation="Horizontal" AutomationId="UserLoginPanel"/>
+                
+                <BoxView Grid.Row="1" BackgroundColor="Transparent" HeightRequest="20" />
+                
+                <validationEntry:ValidationEntry Grid.Row="2" x:Name="IconPassword" AutomationId="PasswordValidationEntry"/>
+                <passwordGrid:PasswordGrid Grid.Row="2" x:Name="PasswordGrid" WidthRequest="200" HeightRequest="250" Padding="5" AutomationId="PasswordGrid"/>
+                
+                <Label Grid.Row="3" x:Name="ValidationLabel" Style="{StaticResource ErrorText}" HorizontalOptions="Center" Padding="0,0,0,20" />
+                
+                <Frame Grid.Row="4" x:Name="LoginButtonFrame" Style="{StaticResource ButtonFrame}" HorizontalOptions="Center" WidthRequest="250">
+                    <HorizontalStackLayout HorizontalOptions="Center" Padding="10,3">
+                        <Label FontFamily="Icons" Text="{resources:IconExtensions Open}" FontSize="25" 
+                               Margin="0, 10, 5, 0" AutomationId="OpenImage"
+                               BackgroundColor="Transparent" TextColor="{DynamicResource SecondaryText}"/>
+                        <Label x:Name="LoginText" Text="{x:Static localization:AppResources.LogIn}" 
+                               Style="{StaticResource ButtonLabel}" AutomationId="LoginText"/>
+                    </HorizontalStackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="LoginFrameGesture" />
+                    </Frame.GestureRecognizers>
+                </Frame>
+            </Grid>
+        </Grid>
+        <!-- Footer -->
+        <Grid Grid.Row="3">
+            <Frame x:Name="ButtonStack" BackgroundColor="{DynamicResource LoginPageButtonAreaBackground}" Padding="0">
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="20"
+                         Margin="0" Padding="0,15">
+                <Frame Style="{StaticResource ButtonFrame}">
+                    <HorizontalStackLayout HorizontalOptions="Center" Padding="10,3" AutomationId="AddUserPanel">
+                        <Label FontFamily="Icons" Text="{resources:IconExtensions AddUser}" FontSize="35" VerticalOptions="Center"
+                               BackgroundColor="Transparent" TextColor="{DynamicResource SecondaryText}"
+                               AutomationId="AddUserImage"/>
+                        <Label Text="{x:Static localization:AppResources.AddUser}"
+                               Style="{StaticResource ButtonLabel}" AutomationId="AddUserLabel" />
+                    </HorizontalStackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="AddUserFrameGesture" />
+                    </Frame.GestureRecognizers>
+                </Frame>
+                <Frame Style="{StaticResource ButtonFrame}" >
+                    <HorizontalStackLayout HorizontalOptions="Center" Padding="10,3" AutomationId="ViewAllUsersPanel">
+                        <Label FontFamily="Icons" Text="{resources:IconExtensions User}" FontSize="35" VerticalOptions="Center"
+                               BackgroundColor="Transparent" TextColor="{DynamicResource SecondaryText}"
+                               AutomationId="ViewAllUsersImage"/>
+                        <Label Text="{x:Static localization:AppResources.ViewAllUsers}"
+                               Style="{StaticResource ButtonLabel}" AutomationId="ViewAllUsersLabel" />
+                     </HorizontalStackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="ViewAllUsersGesture" />
+                    </Frame.GestureRecognizers>
+                </Frame>
+            </HorizontalStackLayout>
+            </Frame>
+        </Grid>
+        
+        <!-- Version -->
+        <Grid Grid.Row="4">
+            <versionLabel:VersionLabel VerticalOptions="EndAndExpand" HorizontalOptions="End"/>
+        </Grid>
+        <loadingCircles:LoadingScreen x:Name="loadingView" 
+                                      Grid.Row="0" 
+                                      Grid.RowSpan="5" />
+    </Grid>
+</kernel:RenderPageBase>

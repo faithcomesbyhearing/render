@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<kernel:RenderComponentBase x:Class="Render.Pages.AppStart.ProjectSelect.ProjectSelectCard"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:home="clr-namespace:Render.Pages.AppStart.ProjectSelect;assembly=Render"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:uiResources="clr-namespace:Render.Resources;assembly=Render"
+                            xmlns:resources="clr-namespace:Render.Resources.Localization"
+                            x:TypeArguments="home:ProjectSelectCardViewModel">
+
+    <Border AutomationId="ProjectCardFrame" Style="{StaticResource ProjectCardMainBorderStyle}">
+
+        <Grid Margin="5,15"
+              ColumnSpacing="0"
+              HorizontalOptions="FillAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="IconColumn" Width="Auto" />
+                <ColumnDefinition x:Name="NameColumn" Width="Auto" />
+                <ColumnDefinition x:Name="EmptySpace" Width="*" />
+                <ColumnDefinition x:Name="StatusColumn" Width="Auto" />
+                <ColumnDefinition x:Name="ButtonColumn" Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <!--  project icon  -->
+            <Label Grid.Column="0"
+                   Margin="0,0,26,0"
+                   AutomationId="ProjectImage"
+                   FontFamily="Icons"
+                   FontSize="70"
+                   Text="{uiResources:IconExtensions Project}"
+                   TextColor="{DynamicResource Option}"
+                   VerticalOptions="Center" />
+
+            <!--  project name  -->
+            <Label x:Name="ProjectName"
+                   Grid.Column="1"
+                   AutomationId="ProjectNameLabel"
+                   Style="{StaticResource ProjectNameLabelStyle}"
+                   WidthRequest="580" />
+
+            <!--  project status  -->
+            <HorizontalStackLayout x:Name="ProjectStatus"
+                                   Grid.Column="3"
+                                   Padding="39,0"
+                                   AutomationId="ProjectStatusStack"
+                                   HeightRequest="56">
+                <Label x:Name="StatusIcon"
+                       Margin="5,0,13,0"
+                       AutomationId="SpinnerImage"
+                       FontFamily="Icons"
+                       FontSize="45"
+                       HorizontalOptions="Center"
+                       TextColor="{DynamicResource Option}"
+                       VerticalOptions="Center" />
+                <Label x:Name="StatusText"
+                       AutomationId="StatusLabel"
+                       Style="{StaticResource ProjectCardButtonLabelStyle}"
+                       TextColor="{StaticResource Option}" />
+            </HorizontalStackLayout>
+
+            <!--  offload button  -->
+            <Border x:Name="OffloadButton"
+                    Grid.Column="4"
+                    AutomationId="OffloadButton"
+                    Style="{StaticResource ProjectCardButtonBorderStyle}">
+                <HorizontalStackLayout Style="{StaticResource ProjectListButtonsStackLayout}">
+                    <Label AutomationId="OffloadImage"
+                           FontFamily="Icons"
+                           FontSize="39"
+                           Margin="0,0,0,3"
+                           VerticalOptions="Center"
+                           Text="{uiResources:IconExtensions OffloadItem}"
+                           TextColor="{DynamicResource SecondaryText}" />
+                    <Label AutomationId="OffloadLabel"
+                           Style="{StaticResource ProjectCardButtonLabelStyle}"
+                           Text="{x:Static resources:AppResources.Offload}" />
+                 </HorizontalStackLayout>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer x:Name="OffloadButtonTap"
+                                              AutomationId="DownloadButtonTap"
+                                              Tapped="OnButtonClicked" />
+                </Border.GestureRecognizers>
+            </Border>
+
+            <!--  chevron  -->
+            <Label x:Name="Chevron"
+                   Grid.Column="4"
+                   Margin="0"
+                   AutomationId="ChevronImage"
+                   FontFamily="Icons"
+                   FontSize="26"
+                   Text="{uiResources:IconExtensions ChevronRight}"
+                   TextColor="{StaticResource Option}"
+                   VerticalOptions="Center" />
+        </Grid>
+        <Border.GestureRecognizers>
+            <TapGestureRecognizer x:Name="SelectProjectButton"
+                                  AutomationId="SelectProjectButton"
+                                  Tapped="OnButtonClicked" />
+        </Border.GestureRecognizers>
+    </Border>
+</kernel:RenderComponentBase>

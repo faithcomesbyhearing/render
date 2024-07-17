@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<rxui:ReactiveContentView x:Class="Render.Components.TranscribeTextBox.TranscribeTextBoxController"
+                          xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                          xmlns:localization="clr-namespace:Render.Resources.Localization"
+                          xmlns:resources="clr-namespace:Render.Resources;assembly=Render"
+                          xmlns:rxui="clr-namespace:ReactiveUI.Maui;assembly=ReactiveUI.Maui"
+                          xmlns:transcribeTextBox="clr-namespace:Render.Components.TranscribeTextBox;assembly=Render"
+                          x:TypeArguments="transcribeTextBox:TranscribeTextBoxViewModel">
+    <ContentView.Resources>
+        <Style x:Key="FontSizeChangeIcon" TargetType="Label">
+            <Setter Property="FontFamily" Value="Icons" />
+            <Setter Property="FontSize" Value="48" />
+        </Style>
+        <Style x:Key="CopyButtonIcon" TargetType="Label">
+            <Setter Property="FontFamily" Value="Icons" />
+            <Setter Property="FontSize" Value="20" />
+        </Style>
+    </ContentView.Resources> 
+
+    <Grid BackgroundColor="{DynamicResource SecondaryText}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="91" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="grid" Grid.Row="0"
+              Padding="26"
+              ColumnSpacing="10"
+              HeightRequest="91">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="40" />
+                <ColumnDefinition Width="40" />
+            </Grid.ColumnDefinitions>
+
+            <Border x:Name="CopyButtonBorder"
+                    Grid.Column="0"
+                    BackgroundColor="{DynamicResource Option}"
+                    HorizontalOptions="Start">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="8" />
+                </Border.StrokeShape>
+                
+                <HorizontalStackLayout Padding="8" Spacing="8">
+                    <Label Style="{DynamicResource CopyButtonIcon}"
+                           Text="{resources:IconExtensions Copy}"
+                           TextColor="{DynamicResource SecondaryText}"
+                           VerticalOptions="Fill" />
+                    <Label FontAttributes="Bold"
+                           FontFamily="RegularFont"
+                           FontSize="20"
+                           Text="{x:Static localization:AppResources.Copy}"
+                           TextColor="{DynamicResource SecondaryText}"
+                           VerticalOptions="Fill"
+                           VerticalTextAlignment="Center" />
+                </HorizontalStackLayout>
+                
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer x:Name="CopyTextTap" />
+                </Border.GestureRecognizers>
+            </Border>
+            
+            <Label Grid.Column="1"
+                   AutomationId="FontSizeLabel"
+                   FontAttributes="Bold"
+                   FontFamily="MediumFont"
+                   FontSize="22"
+                   HorizontalOptions="End"
+                   Text="{x:Static localization:AppResources.FontSize}"
+                   TextColor="{DynamicResource Title}"
+                   VerticalOptions="Fill"
+                   VerticalTextAlignment="Center" />
+            
+            <Label x:Name="IncreaseFont"
+                   Grid.Column="2"
+                   Margin="0,-5,0,0"
+                   AutomationId="AddOrAppendIcon"
+                   Style="{DynamicResource FontSizeChangeIcon}"
+                   Text="{resources:IconExtensions AddOrAppend}"
+                   TextColor="{DynamicResource Option}"
+                   VerticalOptions="Fill">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer x:Name="IncreaseFontTap" />
+                </Label.GestureRecognizers>
+            </Label>
+            
+            <Label x:Name="DecreaseFont"
+                   Grid.Column="3"
+                   Margin="0,-5,0,0"
+                   AutomationId="DecreaseFontButtonTap"
+                   Style="{DynamicResource FontSizeChangeIcon}"
+                   Text="{resources:IconExtensions SubtractOrMinus}"
+                   TextColor="{DynamicResource Option}"
+                   VerticalOptions="Fill">
+                
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer x:Name="DecreaseFontTap" />
+                </Label.GestureRecognizers>
+            </Label>
+        </Grid>
+
+        <Editor x:Name="TextField"
+                AutomationId="TextField"
+                Grid.Row="1"
+                BackgroundColor="{DynamicResource SecondaryText}"
+                FontFamily="{DynamicResource RegularFont}"
+                FontSize="60"
+                AutoSize="TextChanges"
+                PlaceholderColor="{DynamicResource SecondaryText}"
+                TextColor="{DynamicResource MainText}" />
+    </Grid>
+</rxui:ReactiveContentView>

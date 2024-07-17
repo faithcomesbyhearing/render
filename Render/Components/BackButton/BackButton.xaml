@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="kernel:ViewModelBase"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            x:Class="Render.Components.BackButton.BackButton"
+                            xmlns:kernel="clr-namespace:Render.Kernel"
+                            xmlns:resources="clr-namespace:Render.Resources">
+    <ContentView.Resources>
+        <Style x:Key="BackButtonStyle" TargetType="Border">
+            <Setter Property="WidthRequest" Value="108" />
+            <Setter Property="HeightRequest" Value="108" />
+            <Setter Property="StrokeThickness" Value="2" />
+            <Setter Property="HorizontalOptions" Value="Start" />
+            <Setter Property="VerticalOptions" Value="Start" />
+            <Setter Property="StrokeShape" Value="RoundRectangle 0,0,0,16" />
+            <Setter Property="BackgroundColor" Value="{StaticResource DarkBlue}" />
+        </Style>
+    </ContentView.Resources>
+
+    <Border x:Name="BackButtonBorder"
+            AutomationId="BackButton"
+            Style="{StaticResource BackButtonStyle}"
+            Margin="-1,0,0,0">
+        <Grid BackgroundColor="{StaticResource Option}">
+            <Label x:Name="BackButtonIcon"
+                   Style="{StaticResource ButtonIcon}"
+                   HorizontalTextAlignment="Center"
+                   FontAttributes="Bold"
+                   Text="{resources:IconExtensions ChevronLeft}" />
+        </Grid>
+        <Border.GestureRecognizers>
+            <TapGestureRecognizer x:Name="BackButtonTap" Tapped="OnButtonClicked" />
+        </Border.GestureRecognizers>
+    </Border>
+
+</kernel:RenderComponentBase>

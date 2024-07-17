@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="navigationIcons:NavigationIconViewModel"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:navigationIcons="clr-namespace:Render.Pages.AppStart.Home.NavigationIcons;assembly=Render"
+                            x:Class="Render.Pages.AppStart.Home.NavigationIcons.NavigationIcon">
+    <AbsoluteLayout x:Name="NavIcon"  Margin="0,0,0,25" Padding="0">
+        <AbsoluteLayout.GestureRecognizers>
+            <TapGestureRecognizer x:Name="Tap" AutomationId="NavigationIcon" Tapped="OnButtonClicked" />
+        </AbsoluteLayout.GestureRecognizers>
+        <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
+            AbsoluteLayout.LayoutFlags="All" AutomationId="NavigationIconPanel">
+            <Grid RowDefinitions="Auto,Auto" RowSpacing="40" HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand">
+                <Label Grid.Row="0" x:Name="IconSource" HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand"
+                   FontFamily="Icons" FontSize="140"/>
+                <Label Grid.Row="1" x:Name="Title" TextColor="{StaticResource Option}"
+                   HorizontalTextAlignment="Center"
+                   LineBreakMode="WordWrap"
+                   FontAttributes="Bold"
+                   FontSize="{StaticResource MediumPlus2Font}"
+                   FontFamily="BoldFont"/>
+            </Grid>
+        </StackLayout>
+
+        <Frame x:Name="StageNumberFrame"
+               BorderColor="{DynamicResource AlternateBackground}"
+               BackgroundColor="{DynamicResource AlternateBackground}"
+               AbsoluteLayout.LayoutBounds="0.8,0,0.2,0.2"
+               AbsoluteLayout.LayoutFlags="All"
+               Padding="0"
+               AutomationId="StageNumberFrame">
+            <Frame BorderColor="{DynamicResource AlternateBackground}"
+                   BackgroundColor="{DynamicResource HomePageIconNumberBackground}"
+                   Margin="2"
+                   Padding="0">
+                <Label x:Name="Number"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       FontSize="{StaticResource LargeFont}"
+                       FontAttributes="Bold"
+                       TextColor="{DynamicResource LightGrey}"
+                       AutomationId="StageNumberLabel"/>
+            </Frame>
+        </Frame>
+    </AbsoluteLayout>
+</kernel:RenderComponentBase>

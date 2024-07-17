@@ -1,0 +1,45 @@
+<kernel:RenderComponentBase x:TypeArguments="local:IUserLoginIconViewModel"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:kernel="clr-namespace:Render.Kernel"
+             xmlns:local="clr-namespace:Render.Components.ProfileAvatar"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:uiResources="clr-namespace:Render.Resources"
+             xmlns:resources="clr-namespace:Render.Resources.Localization"
+             x:Class="Render.Components.ProfileAvatar.UserLoginIconVertical">
+
+    <StackLayout x:Name="Layout" HorizontalOptions="Fill"
+                 VerticalOptions="Start" Margin="0"
+                 AutomationId="UserProfilePanel">
+        <StackLayout.GestureRecognizers>
+            <TapGestureRecognizer x:Name="FrameTap" />
+        </StackLayout.GestureRecognizers>
+        <Frame Style="{StaticResource UserIconFrame}" BackgroundColor="LightBlue"
+               HorizontalOptions="Center" VerticalOptions="Start"
+               Padding="0" Scale="1"
+               Margin="5">
+            <Label FontFamily="Icons" Text="{uiResources:IconExtensions TeamSingular}" AutomationId="UserProfileImage"
+                   FontSize="65" HorizontalOptions="Center"
+                   TextColor="{DynamicResource MainIconColor}" VerticalOptions="End" />
+        </Frame>
+        <Label x:Name="Label" TextColor="{DynamicResource LightBackgroundText}" HorizontalOptions="Fill"
+               HorizontalTextAlignment="Center"
+               VerticalOptions="Start" FontFamily="MediumFont"
+               FontSize="{StaticResource SmallFont}" Margin="0,10,0,0"
+               VerticalTextAlignment="Center" LineBreakMode="TailTruncation"
+               AutomationId="UserNameLabel">
+        </Label>
+        <HorizontalStackLayout x:Name="GlobalUserBadge"
+                         Margin="0,10,0,0"
+                         VerticalOptions="Start"
+                         HorizontalOptions="Center" AutomationId="GlobalUserBadge">
+            <Label Text="{StaticResource GlobalUser}" FontFamily="Icons" FontSize="20" VerticalOptions="Center"
+                   TextColor="{DynamicResource TitleBarBackground}" HorizontalOptions="Center"
+                   AutomationId="GlobalUserImage" />
+            <Label Text="{x:Static resources:AppResources.GlobalUser}"
+                   Style="{StaticResource IconTextLabel}"
+                   WidthRequest="120"
+                   LineBreakMode="TailTruncation"
+                   AutomationId="GlobalUserLabel" />
+        </HorizontalStackLayout>
+    </StackLayout>
+</kernel:RenderComponentBase>

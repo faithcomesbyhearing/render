@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase
+    x:Class="Render.Pages.Configurator.WorkflowAssignment.Stages.WorkflowConsultantApprovalStageColumn"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+    xmlns:stages="clr-namespace:Render.Pages.Configurator.WorkflowAssignment.Stages"
+    xmlns:workflowAssignment="clr-namespace:Render.Pages.Configurator.WorkflowAssignment;assembly=Render"
+    x:TypeArguments="stages:WorkflowConsultantApprovalStageColumnViewModel">
+
+    <Border Padding="26"
+            BackgroundColor="{StaticResource StageColumnFirstAndLastBackground}"
+            Style="{StaticResource StageColumnBorderStyle}">
+
+        <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition x:Name="StgName" Height="Auto" />
+                <RowDefinition x:Name="Content" Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!--  Stage name with icon  -->
+            <VerticalStackLayout Grid.Row="0">
+                <HorizontalStackLayout Spacing="0">
+                    <Label x:Name="IconLabel"
+                           AutomationId="StageIcon"
+                           Style="{StaticResource AssignementColumnIconStyle}" />
+
+                    <Label x:Name="StageName" Style="{DynamicResource WorkflowStageColumnTopLabel}" />
+                </HorizontalStackLayout>
+
+                <BoxView Margin="0"
+                         BackgroundColor="{StaticResource DarkGrey}"
+                         HeightRequest="1"
+                         HorizontalOptions="Fill"
+                         VerticalOptions="Start" />
+            </VerticalStackLayout>
+
+            <!--  Team Assignment Cards  -->
+            <VerticalStackLayout Grid.Row="1"
+                                 BackgroundColor="Transparent"
+                                 Style="{StaticResource WorkflowStageColumnMainStack}">
+                <ScrollView Padding="0,0,5,0">
+                    <StackLayout x:Name="TeamCollection">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <workflowAssignment:TeamAssignmentCard />
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+                </ScrollView>
+            </VerticalStackLayout>
+            
+            <!--  Bottom half  -->
+            <VerticalStackLayout Grid.Row="2" HeightRequest="95">
+                <BoxView Margin="0,26,0,13"
+                         BackgroundColor="{StaticResource DarkGrey}"
+                         HeightRequest="2"
+                         HorizontalOptions="Fill"
+                         VerticalOptions="Start" />
+            </VerticalStackLayout>
+        </Grid>
+    </Border>
+</kernel:RenderComponentBase>

@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="modalComponents:DeleteUserComponentViewModel"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:kernel="clr-namespace:Render.Kernel"
+                            xmlns:modalComponents="clr-namespace:Render.Components.Modal.ModalComponents"
+                            xmlns:resources="clr-namespace:Render.Resources.Localization"
+                            x:Class="Render.Components.Modal.ModalComponents.DeleteUserComponent">
+
+
+    <VerticalStackLayout x:Name="TopLevelElement"
+                         HeightRequest="132"
+                         HorizontalOptions="Center"
+                         WidthRequest="708"
+                         Spacing="20" Margin="0">
+        <Label Style="{StaticResource ModalMessageLabelStyle}"
+               x:Name="DeleteUserMessage"
+               VerticalOptions="Start"
+               AutomationId="MessageLabel"
+               Margin="0" />
+
+        <Label x:Name="ViewSectionAssignmentsButton"
+               Text="{x:Static resources:AppResources.ViewAssignments}"
+               VerticalOptions="End"
+               HorizontalOptions="Center"
+               TextColor="{StaticResource Option}"
+               FontSize="28"
+               TextDecorations="Underline"
+               FontFamily="RegularFont">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer x:Name="ViewSectionAssignmentsGesture"
+                                      AutomationId="ViewSectionAssignmentsButton" />
+            </Label.GestureRecognizers>
+        </Label>
+
+    </VerticalStackLayout>
+
+</kernel:RenderComponentBase>

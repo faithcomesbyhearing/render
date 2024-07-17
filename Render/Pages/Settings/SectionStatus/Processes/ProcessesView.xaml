@@ -1,0 +1,286 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="processesView:SectionStatusProcessesViewModel"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:kernel="clr-namespace:Render.Kernel"
+                            xmlns:processesView="clr-namespace:Render.Pages.Settings.SectionStatus.Processes;assembly=Render"
+                            xmlns:resources="clr-namespace:Render.Resources;assembly=Render"
+                            xmlns:barPlayer="clr-namespace:Render.Components.BarPlayer;assembly=Render"
+                            xmlns:localization="clr-namespace:Render.Resources.Localization"
+                            xmlns:versionLabel="clr-namespace:Render.Components.VersionLabel"
+                            x:Class="Render.Pages.Settings.SectionStatus.Processes.ProcessesView">
+
+    <ContentView.Resources>
+        <Style x:Key="BarPlayerCollection" TargetType="CollectionView">
+            <Setter Property="Margin" Value="10,15,10,0" />
+            <Setter Property="VerticalOptions" Value="Start" />
+            <Setter Property="HorizontalOptions" Value="Start" />
+            <Setter Property="FlowDirection" Value="LeftToRight" />
+        </Style>
+
+        <Style x:Key="InfoCardTitleStyle" TargetType="Label">
+            <Setter Property="Margin" Value="10,0" />
+            <Setter Property="FontSize" Value="{StaticResource LargeFontMinus2Font}" />
+            <Setter Property="FontFamily" Value="BoldFont" />
+            <Setter Property="LineBreakMode" Value="TailTruncation" />
+            <Setter Property="TextColor" Value="{DynamicResource CardText}" />
+        </Style>
+
+        <Style x:Key="InfoCardMessageStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="{StaticResource LargeFontMinus2Font}" />
+            <Setter Property="FontFamily" Value="RegularFont" />
+            <Setter Property="TextColor" Value="{DynamicResource CardText}" />
+            <Setter Property="LineBreakMode" Value="WordWrap" />
+        </Style>
+
+        <Style x:Key="InfoCardGridStyle" TargetType="Grid">
+            <Setter Property="WidthRequest" Value="360" />
+        </Style>
+    </ContentView.Resources>
+
+    <Grid x:Name="ProcessViewGrid"
+          Margin="0,26,0,0"
+          Padding="0"
+          HorizontalOptions="Fill"
+          RowDefinitions="*">
+        <ScrollView x:Name="OuterScrollView"
+                    MaximumWidthRequest="960"
+                    Padding="5,0,5,0"
+                    Margin="0"
+                    VerticalOptions="Start">
+            <Grid x:Name="SectionCollectionCards" RowDefinitions="*,*,*" HorizontalOptions="Fill">
+                <processesView:SectionCollectionAsStageCard Grid.Row="0" x:Name="UnassignedSectionCollectionAsStageCardView"
+                                                            HorizontalOptions="Fill"
+                                                            AutomationId="UnassignedSectionCollection" />
+                <VerticalStackLayout Grid.Row="1" x:Name="StageCollection"
+                                     HorizontalOptions="Fill"
+                                     AutomationId="StagesSectionCollection">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <processesView:StageCard />
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+                <processesView:SectionCollectionAsStageCard Grid.Row="2" x:Name="ApprovedSectionCollectionAsStageCardView"
+                                                            HorizontalOptions="Fill"
+                                                            AutomationId="ApprovedSectionCollection" />
+            </Grid>
+        </ScrollView>
+
+        <Grid x:Name="NoSectionAssigned"
+              IsVisible="False"
+              HeightRequest="350"
+              HorizontalOptions="Fill"
+              VerticalOptions="Center"
+              MaximumWidthRequest="960"
+              RowDefinitions="Auto,Auto,Auto,*,Auto">
+            <Label Grid.Row="0" x:Name="NoSectionAssignedIcon"
+                   HorizontalTextAlignment="Center"
+                   FontFamily="Icons"
+                   FontSize="108"
+                   HorizontalOptions="Fill"
+                   Text="{resources:IconExtensions NoAssigned}"
+                   TextColor="{StaticResource Option}"
+                   AutomationId="NoSectionAssignedIcon" />
+            <Label Grid.Row="1" x:Name="Title"
+                   HorizontalTextAlignment="Center"
+                   FontFamily="BoldFont"
+                   Margin="0,35,0,19"
+                   LineBreakMode="WordWrap"
+                   FontSize="32"
+                   HorizontalOptions="Fill"
+                   Text="{x:Static localization:AppResources.NoSectionAssignedTitle}"
+                   TextColor="{StaticResource SlateDark}"
+                   AutomationId="NoSectionAssignedTitle" />
+            <Label Grid.Row="2" x:Name="Message"
+                   HorizontalTextAlignment="Center"
+                   FontFamily="RegularFont"
+                   LineBreakMode="WordWrap"
+                   FontSize="32"
+                   HorizontalOptions="Fill"
+                   Text="{x:Static localization:AppResources.NoSectionAssignedMessage}"
+                   TextColor="{StaticResource Grey}"
+                   AutomationId="NoSectionAssignedMessage" />
+            <versionLabel:VersionLabel Grid.Row="4" HorizontalOptions="Center" VerticalOptions="End" />
+        </Grid>
+
+        <Grid x:Name="InfoModal"
+              HorizontalOptions="End"
+              VerticalOptions="Fill"
+              WidthRequest="384"
+              Padding="0"
+              BackgroundColor="{StaticResource Gray}"
+              IsVisible="False"
+              AutomationId="InfoModal"
+              Margin="0,-85,0,0"
+              RowDefinitions="80,*">
+
+            <!--Scroll view and content-->
+            <ScrollView Grid.Row="1" x:Name="InfoModalScrollView"
+                        BackgroundColor="{StaticResource Gray}"
+                        Orientation="Vertical">
+                <Grid x:Name="InfoCardContent"
+                      RowSpacing="26"
+                      RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+                    <Grid Grid.Row="0" RowDefinitions="Auto,*">
+                        <HorizontalStackLayout Grid.Row="0"
+                                               Margin="20,10,0,0"
+                                               Spacing="13"
+                                               VerticalOptions="Center">
+
+                            <!--Section title and close button-->
+                            <Label x:Name="SectionIcon"
+                                   HorizontalOptions="Start"
+                                   HeightRequest="40"
+                                   WidthRequest="40"
+                                   FontFamily="Icons"
+                                   FontSize="28"
+                                   TextColor="{DynamicResource MainIconColor}"
+                                   Text="{resources:IconExtensions SectionNew}"
+                                   HorizontalTextAlignment="Center"
+                                   VerticalTextAlignment="Center"
+                                   AutomationId="SectionIconLabel" />
+                            <Label x:Name="SectionNumber"
+                                   FontSize="32"
+                                   TextColor="{DynamicResource CardText}"
+                                   FontFamily="BoldFont" />
+                        </HorizontalStackLayout>
+
+                        <Line Grid.Row="1" x:Name="StepTitleBarSeparator"
+                              Opacity=".8"
+                              HeightRequest="2"
+                              BackgroundColor="{DynamicResource DarkGrey}"
+                              WidthRequest="270"
+                              HorizontalOptions="Center" />
+                    </Grid>
+
+                    <Grid Grid.Row="1" Margin="0,13,0,0" ColumnDefinitions="Auto,*"
+                          Style="{StaticResource InfoCardGridStyle}">
+                        <Label Grid.Column="0"
+                               Style="{StaticResource InfoCardTitleStyle}"
+                               Text="{x:Static localization:AppResources.Title}"
+                               AutomationId="SectionTitleLabel" />
+                        <Label Grid.Column="1" x:Name="SectionTitle" Style="{StaticResource InfoCardMessageStyle}" />
+                    </Grid>
+
+                    <Grid Grid.Row="2" ColumnDefinitions="Auto,*" Style="{StaticResource InfoCardGridStyle}">
+                        <Label Grid.Column="0"
+                               Text="{x:Static localization:AppResources.TotalPassages}"
+                               Style="{StaticResource InfoCardTitleStyle}"
+                               AutomationId="TotalPassagesLabel" />
+                        <Label Grid.Column="1" x:Name="TotalPassages" Style="{StaticResource InfoCardMessageStyle}" />
+                    </Grid>
+
+                    <Grid Grid.Row="3" ColumnDefinitions="Auto,*" Style="{StaticResource InfoCardGridStyle}">
+                        <Label Grid.Column="0"
+                               Text="{x:Static localization:AppResources.Reference}"
+                               Style="{StaticResource InfoCardTitleStyle}"
+                               AutomationId="SectionReferenceLabel" />
+                        <Label Grid.Column="1" x:Name="Reference" Style="{StaticResource InfoCardMessageStyle}" />
+                    </Grid>
+
+                    <Grid Grid.Row="4" ColumnDefinitions="Auto,*" Style="{StaticResource InfoCardGridStyle}">
+                        <Label Grid.Column="0"
+                               Text="{x:Static localization:AppResources.TotalVerses}"
+                               Style="{StaticResource InfoCardTitleStyle}"
+                               AutomationId="TotalVerses" />
+                        <Label Grid.Column="1" x:Name="TotalVerses" Style="{StaticResource InfoCardMessageStyle}" />
+                    </Grid>
+
+                    <Grid Grid.Row="5" ColumnDefinitions="Auto,*" Style="{StaticResource InfoCardGridStyle}">
+                        <Label Grid.Column="0"
+                               Text="{x:Static localization:AppResources.Process}"
+                               Style="{StaticResource InfoCardTitleStyle}"
+                               AutomationId="SectionStepLabel" />
+                        <Label Grid.Column="1" x:Name="Process" Style="{StaticResource InfoCardMessageStyle}" />
+                    </Grid>
+
+                    <Grid Grid.Row="6" ColumnDefinitions="Auto,*" Style="{StaticResource InfoCardGridStyle}">
+                        <Label Grid.Column="0"
+                               Text="{x:Static localization:AppResources.User}"
+                               Style="{StaticResource InfoCardTitleStyle}"
+                               AutomationId="UserLabel" />
+                        <Label Grid.Column="1" x:Name="User" Style="{StaticResource InfoCardMessageStyle}" />
+                    </Grid>
+
+                    <FlexLayout Grid.Row="7" 
+                                WidthRequest="360" 
+                                JustifyContent="Start"
+                                Direction="Row" 
+                                Wrap="Wrap">
+                        <Label Text="{x:Static localization:AppResources.DraftedByLabel}"
+                               Style="{StaticResource InfoCardTitleStyle}"
+                               Margin="5,0,0,0"
+                               AutomationId="DraftedByLabel" />
+                        <Label x:Name="DraftedBy" Margin="5,0" Style="{StaticResource InfoCardMessageStyle}" />
+                    </FlexLayout>
+
+                    <Grid Grid.Row="8" ColumnDefinitions="Auto,*" Style="{StaticResource InfoCardGridStyle}">
+                        <Label Grid.Column="0"
+                               Text="{x:Static localization:AppResources.ApprovedByLabel}"
+                               Style="{StaticResource InfoCardTitleStyle}"
+                               AutomationId="ApprovedByLabel" />
+                        <Label Grid.Column="1" x:Name="ApprovedBy" Style="{StaticResource InfoCardMessageStyle}" />
+                    </Grid>
+
+                    <CollectionView Grid.Row="9" x:Name="SectionAudioBarPlayerCollection"
+                                    Style="{StaticResource BarPlayerCollection}"
+                                    WidthRequest="364"
+                                    AutomationId="SectionAudioBarPlayerCollection">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <barPlayer:BarPlayer AutomationId="SectionAudioBarPlayer" WidthRequest="364" />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical" VerticalItemSpacing="10" />
+                        </CollectionView.ItemsLayout>
+                    </CollectionView>
+                </Grid>
+            </ScrollView>
+
+            <!--Header-->
+            <Grid Grid.Row="0"
+                  Grid.Column="0"
+                  Padding="21,26,21,26"
+                  HorizontalOptions="Fill"
+                  VerticalOptions="Center"
+                  BackgroundColor="{StaticResource Gray}"
+                  ColumnDefinitions="Auto,*,Auto">
+                <Grid.Shadow>
+                    <Shadow Radius="10"
+                            Offset="0,20"
+                            Opacity=".8"
+                            Brush="#E3E3E3" />
+                </Grid.Shadow>
+
+                <Label Grid.Column="0" x:Name="InfoModalTitle"
+                       Margin="21,0,0,0"
+                       Text="{x:Static localization:AppResources.SectionInformation}"
+                       FontFamily="BoldFont"
+                       VerticalOptions="Center"
+                       LineBreakMode="NoWrap"
+                       HorizontalOptions="Fill"
+                       TextColor="{StaticResource Blue}"
+                       FontSize="24"
+                       AutomationId="SectionInformation" />
+                <Label Grid.Column="2" x:Name="RemoveIcon"
+                       FontFamily="Icons"
+                       FontSize="44"
+                       HeightRequest="44"
+                       WidthRequest="44"
+                       Text="{resources:IconExtensions Remove}"
+                       TextColor="{StaticResource Blue}"
+                       HorizontalOptions="End"
+                       AutomationId="RemoveIcon">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="CloseGestureRecognizer"
+                                              Tapped="OnButtonClicked"
+                                              AutomationId="ProcessesViewCloseSectionInformationButton" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+        </Grid>
+    </Grid>
+</kernel:RenderComponentBase>

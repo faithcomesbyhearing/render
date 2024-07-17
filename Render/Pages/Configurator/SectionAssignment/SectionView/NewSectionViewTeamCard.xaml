@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="sectionView:NewSectionViewTeamCardViewModel"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:sectionView="clr-namespace:Render.Pages.Configurator.SectionAssignment.SectionView;assembly=Render"
+                            x:Class="Render.Pages.Configurator.SectionAssignment.SectionView.NewSectionViewTeamCard"
+                            xmlns:dragAndDrop="clr-namespace:Render.Kernel.DragAndDrop;assembly=Render">
+    <Grid HorizontalOptions="Fill" Margin="0" WidthRequest="250" MinimumWidthRequest="100" Padding="0,18">
+        <Grid.Effects>
+            <dragAndDrop:DragRecognizerEffect DragStarting="DragGestureRecognizerEffects_OnDragStarting" />
+        </Grid.Effects>
+
+        <Frame CornerRadius="10"
+               BackgroundColor="{DynamicResource SecondaryText}"
+               Padding="15,0"
+               Margin="0,2"
+               HorizontalOptions="StartAndExpand"
+               VerticalOptions="FillAndExpand"
+               WidthRequest="220"
+               HeightRequest="50">
+            <Label x:Name="TeamNameLabel" TextColor="{DynamicResource MainText}"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Start"
+                   HorizontalTextAlignment="Start"
+                   FontSize="{DynamicResource SmallPlus2Font}"
+                   FontAttributes="Bold" />
+        </Frame>
+        <Frame x:Name="TeamCountFrame"
+               CornerRadius="23"
+               BackgroundColor="{DynamicResource SecondaryText}"
+               WidthRequest="50"
+               HorizontalOptions="End"
+               HeightRequest="50"
+               BorderColor="{DynamicResource DarkBlue}"
+               TranslationY="-20"
+               Padding="0">
+            <Label x:Name="CountLabel"
+                   TextColor="{DynamicResource Option}"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"
+                   FontAttributes="Bold"
+                   FontSize="{DynamicResource SmallPlus2Font}"
+                   BackgroundColor="{DynamicResource SecondaryText}" />
+        </Frame>
+    </Grid>
+</kernel:RenderComponentBase>

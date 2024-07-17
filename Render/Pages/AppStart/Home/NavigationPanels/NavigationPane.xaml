@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="navigationPanels:INavigationPane"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:navigationIcons="clr-namespace:Render.Pages.AppStart.Home.NavigationIcons;assembly=Render"
+                            xmlns:touchActions="clr-namespace:Render.Kernel.TouchActions;assembly=Render"
+                            xmlns:navigationPanels="using:Render.Pages.AppStart.Home.NavigationPanels"
+                            x:Class="Render.Pages.AppStart.Home.NavigationPanels.NavigationPane">
+    <VerticalStackLayout x:Name="NavPaneStack">
+        <ScrollView x:Name="NavigationScrollView"
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="FillAndExpand"
+                    Orientation="Horizontal"
+                    HorizontalScrollBarVisibility="Never"
+                    VerticalScrollBarVisibility="Never">
+            <StackLayout x:Name="IconCollection"
+                         Orientation="Horizontal"
+                         VerticalOptions="FillAndExpand" HorizontalOptions="CenterAndExpand" HeightRequest="280"
+                         AutomationId="IconCollection">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <navigationIcons:NavigationIcon VerticalOptions="FillAndExpand"
+                                                        WidthRequest="{DynamicResource NavIconWidth}"
+                                                        MinimumWidthRequest="{DynamicResource NavIconWidth}" />
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+        </ScrollView>
+
+        <!-- Mini scroller -->
+        <Grid x:Name="MiniScroller">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Frame x:Name="VisibleFrame" Grid.Column="1" HorizontalOptions="Start"
+                   InputTransparent="True"
+                   BorderColor="{DynamicResource GreyFaded}"
+                   Padding="0"
+                   CornerRadius="20"
+                   AutomationId="NavigationVisibleFrame" />
+            <Frame Grid.Column="1" Padding="0" BackgroundColor="Transparent" HasShadow="False">
+                <StackLayout x:Name="MiniIconCollection" HorizontalOptions="Center" VerticalOptions="Center"
+                             BackgroundColor="Transparent"
+                             Orientation="Horizontal"
+                             InputTransparent="False" AutomationId="MiniIconCollection">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <navigationIcons:MiniNavigationIcon />
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+                <Frame.Effects>
+                    <touchActions:TouchEffect x:Name="MiniScrollerAction" Capture="True"
+                                              TouchAction="MiniScroller_OnTouchAction" />
+                </Frame.Effects>
+            </Frame>
+        </Grid>
+    </VerticalStackLayout>
+
+</kernel:RenderComponentBase>

@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView x:Class="Render.Sequencer.Views.WaveForm.Items.WaveFormItemView"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:atomic="clr-namespace:Render.Sequencer.Resources.Atomic"
+             xmlns:behaviours="clr-namespace:Render.Sequencer.Core.Behaviors"
+             xmlns:controls="clr-namespace:Render.Sequencer.Core.Controls"
+             xmlns:converters="clr-namespace:Render.Sequencer.Core.Converters"
+             xmlns:enums="clr-namespace:Render.Sequencer.Contracts.Enums"
+             xmlns:flags="clr-namespace:Render.Sequencer.Views.Flags"
+             xmlns:local="clr-namespace:Render.Sequencer.Views.WaveForm.Items"
+             xmlns:skia="clr-namespace:SkiaSharp.Views.Maui.Controls;assembly=SkiaSharp.Views.Maui.Controls"
+             xmlns:styles="clr-namespace:Render.Sequencer.Resources.Styles"
+             xmlns:waveForm="clr-namespace:Render.Sequencer.Views.WaveForm"
+             x:DataType="local:WaveFormItemViewModel">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <atomic:Colors />
+                <atomic:Sizes />
+
+                <styles:WaveFormItemStyles />
+                <styles:WaveFormItemPartsStyles />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <Grid AutomationId="PassageLayout">
+        <Grid.RowDefinitions>
+            <RowDefinition x:Name="canvasRow" Height="*" />
+            <RowDefinition x:Name="labelRow" Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <skia:SKCanvasView x:Name="Canvas"
+                           Grid.Row="0"
+                           behaviours:SkiaCanvasBehavior.AttachBehavior="True"
+                           behaviours:SkiaCanvasBehavior.Painter="{Binding Painter}"
+                           behaviours:SkiaCanvasBehavior.Samples="{Binding Samples}"
+                           behaviours:SkiaCanvasBehavior.WaveFormColor="{StaticResource AccentLight}"
+                           AutomationId="WaveformCanvas"
+                           WidthRequest="{Binding Width}" />
+
+        <Grid x:Name="flagsGrid"
+              AutomationId="FlagsContainer"
+              BindableLayout.ItemTemplateSelector="{flags:FlagTemplateSelector}"
+              BindableLayout.ItemsSource="{Binding Flags}"
+              IsVisible="{Binding HasFlags}"
+              VerticalOptions="Center" />
+
+        <BoxView x:Name="unselectedItemBorder"
+                AutomationId="UnselectedWaveFormBorder"
+                IsVisible="{Binding IsSelected, Converter={converters:NegativeBoolConverter}}"
+                Style="{StaticResource UnselectedWaveFormItemStyle}">
+            <BoxView.Triggers>
+                <DataTrigger Binding="{Binding Sequencer.InitialMode}"
+                             TargetType="BoxView"
+                             Value="{x:Static enums:SequencerMode.Recorder}">
+                    <Setter Property="Opacity" Value="0" />
+                </DataTrigger>
+            </BoxView.Triggers>
+        </BoxView>
+
+        <Grid x:Name="labelContainer"
+              Grid.Row="1"
+              FlowDirection="{Binding Sequencer.IsRightToLeftDirection, Converter={converters:BoolToFlowDirectionConverter}}"
+              Style="{StaticResource AudioInfoContainerStyle}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="leftSpacer" Width="*" />
+                <ColumnDefinition x:Name="iconColumn" Width="Auto" />
+                <ColumnDefinition x:Name="labelColumn" Width="Auto" />
+                <ColumnDefinition x:Name="requiredColumn" Width="Auto" />
+                <ColumnDefinition x:Name="rightSpacer" Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.Triggers>
+                <DataTrigger Binding="{Binding Sequencer.InitialMode}"
+                             TargetType="Grid"
+                             Value="{x:Static enums:SequencerMode.Recorder}">
+                    <Setter Property="HeightRequest" Value="0" />
+                </DataTrigger>
+            </Grid.Triggers>
+
+            <Border x:Name="timerBorder"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="5"
+                    IsVisible="{Binding IsSelected }"
+                    Style="{StaticResource TimerBorderStyle}">
+                <Grid ColumnSpacing="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition x:Name="currentPositionColumn" Width="auto" />
+                        <ColumnDefinition x:Name="delimiterColumn" Width="{StaticResource DelimiterWidth}" />
+                        <ColumnDefinition x:Name="totalDurationColumn" Width="auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label x:Name="currentPositionLabel"
+                           Grid.Column="0"
+                           AutomationId="CurrentPosition"
+                           Style="{StaticResource CurrentTimeStyle}"
+                           Text="{Binding Sequencer.CurrentPosition, Converter={converters:DoubleToTimeConverter}}" />
+
+                    <BoxView Grid.Column="1" Style="{StaticResource DelimiterStyle}" />
+
+                    <Label x:Name="audioDuraionLabel"
+                           Grid.Column="2"
+                           AutomationId="TotalDurationLabel"
+                           Style="{StaticResource OvaralTimeStyle}"
+                           Text="{Binding Duration, Converter={converters:DoubleToTimeConverter}}" />
+                </Grid>
+            </Border>
+
+            <Label x:Name="startIcon"
+                   Grid.Column="1"
+                   Rotation="{Binding Sequencer.IsRightToLeftDirection, Converter={converters:RigthToLeftToDegreeConverter}}"
+                   Style="{StaticResource AudioIconStyle}"
+                   Text="{Binding SequencerAudio.Audio.StartIcon, Converter={converters:IconKeyToGlyphConverter}}" />
+
+            <Label x:Name="audioLabel"
+                   Grid.Column="2"
+                   AutomationId="WaveFormLabel"
+                   Style="{StaticResource AudioLabelStyle}" />
+
+            <Ellipse x:Name="requiredEllipse"
+                     Grid.Column="3"
+                     Margin="0,2,0,0"
+                     Style="{StaticResource RequiredEllipseStyle}">
+                <Ellipse.Triggers>
+                    <DataTrigger Binding="{Binding SequencerAudio.Audio.Option}"
+                                 TargetType="Ellipse"
+                                 Value="{x:Static enums:AudioOption.Required}">
+                        <Setter Property="IsVisible" Value="True" />
+                    </DataTrigger>
+                </Ellipse.Triggers>
+            </Ellipse>
+
+            <Label x:Name="endIcon"
+                   Grid.Column="3"
+                   IsVisible="False"
+                   Style="{StaticResource AudioIconStyle}"
+                   Text="{Binding SequencerAudio.Audio.EndIcon, Converter={converters:IconKeyToGlyphConverter}}">
+                <Label.Triggers>
+                    <DataTrigger Binding="{Binding SequencerAudio.Audio.Option}"
+                                 TargetType="Label"
+                                 Value="{x:Static enums:AudioOption.Completed}">
+                        <Setter Property="IsVisible" Value="True" />
+                    </DataTrigger>
+                </Label.Triggers>
+            </Label>
+
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CommonGroup">
+                    <VisualState x:Name="Selected">
+                        <VisualState.StateTriggers>
+                            <CompareStateTrigger Property="{Binding IsSelected}" Value="True" />
+                        </VisualState.StateTriggers>
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="{StaticResource Accent}" />
+                        </VisualState.Setters>
+                    </VisualState>
+
+                    <VisualState x:Name="Unselected">
+                        <VisualState.StateTriggers>
+                            <CompareStateTrigger Property="{Binding IsSelected}" Value="False" />
+                        </VisualState.StateTriggers>
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="{StaticResource AccentLight}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+
+                <VisualStateGroup x:Name="AudioNameTimerMediaQueriesGroup">
+                    <VisualState x:Name="LessThan40">
+                        <VisualState.StateTriggers>
+                            <CompareStateTrigger Property="{Binding Width, Converter={converters:WidthToBoolConverter TargetValue=40, Operator=LessThan}}" Value="True" />
+                        </VisualState.StateTriggers>
+                        <VisualState.Setters>
+                            <Setter TargetName="audioLabel" Property="Label.WidthRequest" Value="0" />
+                            <Setter TargetName="timerBorder" Property="Border.WidthRequest" Value="0" />
+                        </VisualState.Setters>
+                    </VisualState>
+
+                    <VisualState x:Name="LessThan150">
+                        <VisualState.StateTriggers>
+                            <CompareStateTrigger Property="{Binding Width, Converter={converters:WidthToBoolConverter TargetValue=150, Operator=LessThan}}" Value="True" />
+                        </VisualState.StateTriggers>
+                        <VisualState.Setters>
+                            <Setter TargetName="audioLabel" Property="Label.Text" Value="{Binding SequencerAudio.Audio.AudioNumber}" />
+                            <Setter TargetName="audioLabel" Property="Label.WidthRequest" Value="NaN" />
+                            <Setter TargetName="timerBorder" Property="Border.WidthRequest" Value="0" />
+                        </VisualState.Setters>
+                    </VisualState>
+
+                    <VisualState x:Name="MoreThan150">
+                        <VisualState.StateTriggers>
+                            <CompareStateTrigger Property="{Binding Width, Converter={converters:WidthToBoolConverter TargetValue=150, Operator=GreaterThan}}" Value="True" />
+                        </VisualState.StateTriggers>
+                        <VisualState.Setters>
+                            <Setter TargetName="audioLabel" Property="Label.Text" Value="{Binding SequencerAudio.Audio.Name}" />
+                            <Setter TargetName="audioLabel" Property="Label.WidthRequest" Value="NaN" />
+                            <Setter TargetName="timerBorder" Property="Border.WidthRequest" Value="NaN" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+
+                <VisualStateGroup x:Name="AudioIconsMediaQueriesGroup">
+                    <VisualState x:Name="MoreThan70">
+                        <VisualState.StateTriggers>
+                            <CompareStateTrigger Property="{Binding Width, Converter={converters:WidthToBoolConverter TargetValue=70, Operator=GreaterThan}}" Value="True" />
+                        </VisualState.StateTriggers>
+                        <VisualState.Setters>
+                            <Setter TargetName="startIcon" Property="Label.WidthRequest" Value="30" />
+                        </VisualState.Setters>
+                    </VisualState>
+
+                    <VisualState x:Name="LessThan70">
+                        <VisualState.StateTriggers>
+                            <CompareStateTrigger Property="{Binding Width, Converter={converters:WidthToBoolConverter TargetValue=70, Operator=LessThan}}" Value="True" />
+                        </VisualState.StateTriggers>
+                        <VisualState.Setters>
+                            <Setter TargetName="startIcon" Property="Label.WidthRequest" Value="0" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+
+                <VisualStateGroup x:Name="ContainerColumnSpacingMediaQueriesGroup">
+                    <VisualState x:Name="HideColumnSpacing">
+                        <VisualState.StateTriggers>
+                            <CompareStateTrigger Property="{Binding Width, Converter={converters:WidthToBoolConverter TargetValue=100, Operator=GreaterThan}}" Value="True" />
+                        </VisualState.StateTriggers>
+                        <VisualState.Setters>
+                            <Setter TargetName="labelContainer" Property="Grid.ColumnSpacing" Value="5" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    
+                    <VisualState x:Name="ShowColumnSpacing">
+                        <VisualState.StateTriggers>
+                            <CompareStateTrigger Property="{Binding Width, Converter={converters:WidthToBoolConverter TargetValue=100, Operator=LessThan}}" Value="True" />
+                        </VisualState.StateTriggers>
+                        <VisualState.Setters>
+                            <Setter TargetName="labelContainer" Property="Grid.ColumnSpacing" Value="0" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+        </Grid>
+    </Grid>
+</ContentView>

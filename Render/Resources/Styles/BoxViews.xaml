@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    
+    <Style x:Key="WorkflowSettingsBoxViewStyle" TargetType="BoxView">
+        <Setter Property="TranslationY" Value="-2" />
+        <Setter Property="Margin" Value="15,0,0,0" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="HeightRequest" Value="2" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource TertiaryText}" />
+    </Style>
+
+    <Style x:Key="BaseStageSettingsLine" TargetType="BoxView">
+        <Setter Property="BackgroundColor" Value="{DynamicResource LightGrey}"/>
+        <Setter Property="HeightRequest" Value="1" />
+        <Setter Property="HorizontalOptions" Value="Fill" />
+    </Style>
+
+    <Style x:Key="StageSettingsLineWithMargins" TargetType="BoxView" BasedOn="{StaticResource BaseStageSettingsLine}">
+        <Setter Property="Margin" Value="26,0" />
+    </Style>
+
+    <Style x:Key="StageSettingsLineWithoutMargins" TargetType="BoxView" BasedOn="{StaticResource BaseStageSettingsLine}">
+        <Setter Property="Margin" Value="0" />
+    </Style>
+
+    <Style x:Key="StageSettingsVerticalLineWithMargins" TargetType="BoxView">
+        <Setter Property="BackgroundColor" Value="{DynamicResource LightGrey}"/>
+        <Setter Property="WidthRequest" Value="1" />
+        <Setter Property="VerticalOptions" Value="Fill" />
+        <Setter Property="Margin" Value="0,26" />
+    </Style>
+    
+    <Style x:Key="BaseStageCardLine" TargetType="BoxView">
+        <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+        <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource DarkGrey}"/>
+        <Setter Property="HeightRequest" Value="2"/>
+    </Style>
+    
+</ResourceDictionary>

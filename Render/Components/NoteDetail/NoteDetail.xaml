@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="noteDetail:NoteDetailViewModel"
+                         xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                         xmlns:noteDetail="clr-namespace:Render.Components.NoteDetail"
+                         xmlns:audioRecorder="clr-namespace:Render.Components.AudioRecorder"
+                         xmlns:uiResources="clr-namespace:Render.Resources"
+                         xmlns:navigation="clr-namespace:Render.Components.Navigation"
+                         xmlns:kernel="clr-namespace:Render.Kernel"
+                         xmlns:loadingCircles="clr-namespace:Render.Common"
+                         x:Class="Render.Components.NoteDetail.NoteDetail">
+    <ContentView.Resources>
+        <SolidColorBrush x:Key="EditorBackgroundBrush" Color="{StaticResource White}" />
+
+        <Style x:Key="Container" TargetType="Frame">
+            <Setter Property="CornerRadius" Value="16" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Margin" Value="40" />
+            <Setter Property="WidthRequest" Value="1000" />
+            <Setter Property="BackgroundColor" Value="{StaticResource Gray}" />
+        </Style>
+
+        <Style x:Key="Icon" TargetType="Label">
+            <Setter Property="FontFamily" Value="Icons" />
+            <Setter Property="FontSize" Value="64" />
+            <Setter Property="Margin" Value="15,10, 10,10" />
+            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="TextColor" Value="{StaticResource Blue}" />
+        </Style>
+
+        <Style x:Key="Title" TargetType="Label">
+            <Setter Property="FontSize" Value="{DynamicResource MediumFont}" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="TextColor" Value="{StaticResource Blue}" />
+            <Setter Property="VerticalOptions" Value="Center" />
+        </Style>
+
+        <Style x:Key="FooterSeparator" TargetType="BoxView">
+            <Setter Property="HeightRequest" Value="2" />
+            <Setter Property="Color" Value="{StaticResource DarkGrey}" />
+            <Setter Property="Margin" Value="0,0,0,-1" />
+            <Setter Property="VerticalOptions" Value="Start" />
+        </Style>
+
+        <Style x:Key="Editor" TargetType="Editor">
+            <Setter Property="AutoSize" Value="TextChanges" />
+            <Setter Property="Background" Value="{StaticResource EditorBackgroundBrush}" />
+            <Setter Property="BackgroundColor" Value="{StaticResource White}" />
+            <Setter Property="FontSize" Value="36" />
+            <Setter Property="TextColor" Value="{StaticResource SlateDark}" />
+        </Style>
+
+        <Style x:Key="Recorder" TargetType="audioRecorder:NewMiniAudioRecorder">
+            <Setter Property="BackgroundColor" Value="{StaticResource White}" />
+        </Style>
+
+        <Style x:Key="ActionButton" TargetType="Label">
+            <Setter Property="FontFamily" Value="Icons" />
+            <Setter Property="FontSize" Value="54" />
+            <Setter Property="VerticalTextAlignment" Value="Center" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="VerticalOptions" Value="End" />
+            <Setter Property="HeightRequest" Value="88" />
+            <Setter Property="WidthRequest" Value="146" />
+            <Setter Property="BackgroundColor" Value="{StaticResource Blue}" />
+            <Setter Property="TextColor" Value="{StaticResource White}" />
+        </Style>
+    </ContentView.Resources>
+
+    <Grid x:Name="Layout" HorizontalOptions="Fill" VerticalOptions="Fill">
+        <Grid BackgroundColor="Black" Opacity="0.1">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer x:Name="BackgroundGesture" />
+            </Grid.GestureRecognizers>
+        </Grid>
+        <Frame x:Name="Container" Style="{StaticResource Container}"
+               AutomationId="NoteDetailLayout">
+            <Grid RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <!--Header-->
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Style="{StaticResource Icon}"
+                           Text="{uiResources:IconExtensions RecordANoteOrSuggestRevision}"
+                           AutomationId="NoteDetailTitleIcon" />
+                    <Label Grid.Column="1" x:Name="Title"
+                           Style="{StaticResource Title}"
+                           AutomationId="NoteDetailTitleText" />
+                    <navigation:ItemDetailNavigationView Grid.Column="0" Grid.ColumnSpan="4" x:Name="NavigationView" 
+                                                         FlowDirection="LeftToRight" AutomationId="NavigationView" 
+                                                         HorizontalOptions="Center" />
+                    <Label Grid.Column="3" Style="{StaticResource Icon}" Text="{uiResources:IconExtensions Remove}"
+                           HorizontalOptions="End" AutomationId="CloseNoteDetailButton">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="CloseGesture" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Grid>
+                <!--Body-->
+                <ScrollView Grid.Row="1" x:Name="MessageScrollView" AutomationId="MessageList" Padding="10">
+                    <ScrollView.Background>
+                        <LinearGradientBrush EndPoint="0,1">
+                            <GradientStop Color="{StaticResource LightGrey}" Offset="0.01" />
+                            <GradientStop Color="{StaticResource Gray}" Offset="0.1" />
+                            <GradientStop Color="{StaticResource Gray}" Offset="0.15" />
+                            <GradientStop Color="{StaticResource Gray}" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </ScrollView.Background>
+                    <VerticalStackLayout x:Name="MessageList" BackgroundColor="Transparent" MinimumHeightRequest="400">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <noteDetail:MessageContainer Margin="0,0,0,10" AutomationId="NoteDetailItem" />
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </VerticalStackLayout>
+                </ScrollView>
+                <!--Footer-->
+                <Grid Grid.Row="2" x:Name="PopupNotesFooter" ColumnSpacing="0" BackgroundColor="{StaticResource LightGrey}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <BoxView Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource FooterSeparator}" />
+
+                    <Grid Grid.Column="0" Margin="13">
+                        <Editor x:Name="TextMessageEditor"
+                                Style="{StaticResource Editor}"
+                                SizeChanged="TextMessageEditor_OnSizeChanged"
+                                TextChanged="TextMessageEditor_OnTextChanged"
+                                AutomationId="TextMessageEditor" />
+                        <audioRecorder:NewMiniAudioRecorder x:Name="MiniRecorder" FlowDirection="LeftToRight" Style="{StaticResource Recorder}" AutomationId="MiniAudioRecorder" />
+                    </Grid>
+                    <Label Grid.Column="1" x:Name="RecordButton"
+                           Style="{StaticResource ActionButton}"
+                           Text="{uiResources:IconExtensions RecorderRecord}"
+                           AutomationId="RecordButton">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="RecordGesture" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label Grid.Column="1" x:Name="StopRecordButton"
+                           Style="{StaticResource ActionButton}"
+                           Text="{uiResources:IconExtensions RecorderStop}"
+                           AutomationId="StopRecordingButton">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="StopRecordGesture" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label Grid.Column="1" x:Name="SubmitMessage"
+                           Style="{StaticResource ActionButton}"
+                           Text="{uiResources:IconExtensions BoldArrowUp}"
+                           FontSize="44"
+                           AutomationId="SubmitMessageButton">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="SubmitMessageGesture" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Grid>
+            </Grid>
+        </Frame>
+
+        <loadingCircles:LoadingScreen x:Name="loadingView" />
+    </Grid>
+
+</kernel:RenderComponentBase>

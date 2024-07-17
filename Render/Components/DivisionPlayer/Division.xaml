@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="divisionPlayer:DivisionViewModel"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:kernel="using:Render.Kernel"
+                            xmlns:divisionPlayer="using:Render.Components.DivisionPlayer"
+                            x:Class="Render.Components.DivisionPlayer.Division">
+    <ContentView.Resources>
+        <Style x:Key="Border" TargetType="Border">
+            <Setter Property="StrokeThickness" Value="1" />
+            <Setter Property="StrokeShape" Value="RoundRectangle 0,0,0,16" />
+            <Setter Property="HorizontalOptions" Value="Fill" />
+        </Style>
+        <Style x:Key="PassageNumber" TargetType="Label">
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="TextColor" Value="{StaticResource SlateLight}" />
+        </Style>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid Margin="13,0,0,0">
+            <Border Style="{StaticResource Border}"
+                    Margin="2,2,0,0"
+                    Stroke="{StaticResource Turquoise}">
+            </Border>
+            <Border Style="{StaticResource Border}"
+                    Margin="0,0,2,2"
+                    Stroke="White"
+                    BackgroundColor="White">
+                <Label x:Name="PassageNumberLabel"
+                       Style="{StaticResource PassageNumber}"
+                       AutomationId="DivisionNumberLabel" 
+                       HorizontalOptions="Center"/>
+            </Border>
+        </Grid>
+    </ContentView.Content>
+</kernel:RenderComponentBase>

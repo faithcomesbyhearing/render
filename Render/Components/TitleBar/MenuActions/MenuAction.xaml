@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:Class="Render.Components.TitleBar.MenuActions.MenuAction"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:menuActions="clr-namespace:Render.Components.TitleBar.MenuActions"
+                            x:TypeArguments="menuActions:IMenuActionViewModel">
+    <HorizontalStackLayout Margin="15">
+        <HorizontalStackLayout.GestureRecognizers>
+            <TapGestureRecognizer x:Name="GestureRecognizer" Tapped="OnButtonClicked" />
+        </HorizontalStackLayout.GestureRecognizers>
+
+        <Label x:Name="Image"
+               Margin="0"
+               FontFamily="Icons"
+               FontSize="40"
+               TextColor="{DynamicResource Option}"
+               WidthRequest="50" />
+
+        <Label x:Name="Label"
+               Margin="5,-10"
+               Style="{DynamicResource MediumText}"
+               VerticalOptions="Center"
+               WidthRequest="200"
+               LineBreakMode="TailTruncation" />
+    </HorizontalStackLayout>
+</kernel:RenderComponentBase>

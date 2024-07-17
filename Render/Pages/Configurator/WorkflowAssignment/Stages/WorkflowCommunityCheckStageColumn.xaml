@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<kernel:RenderComponentBase x:Class="Render.Pages.Configurator.WorkflowAssignment.Stages.WorkflowCommunityCheckStageColumn"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:stages="clr-namespace:Render.Pages.Configurator.WorkflowAssignment.Stages"
+                            xmlns:workflowAssignment="clr-namespace:Render.Pages.Configurator.WorkflowAssignment;assembly=Render"
+                            x:TypeArguments="stages:WorkflowCommunityCheckStageColumnViewModel">
+    
+    <Border Padding="26"
+            BackgroundColor="{StaticResource StageColumnBackground}"
+            Style="{StaticResource StageColumnBorderStyle}"
+            VerticalOptions="Fill">
+
+        <Grid RowSpacing="10">
+            <Grid.RowDefinitions>
+                <RowDefinition x:Name="StgName" Height="Auto" />
+                <RowDefinition x:Name="TeamAssignment" Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!--  Stage name with icon  -->
+            <VerticalStackLayout Grid.Row="0">
+
+                <HorizontalStackLayout Spacing="0">
+                    <Label x:Name="IconLabel"
+                           AutomationId="StageIcon"
+                           Style="{StaticResource AssignementColumnIconStyle}" />
+
+                    <Label x:Name="StageName" Style="{DynamicResource WorkflowStageColumnTopLabel}" />
+                </HorizontalStackLayout>
+
+                <BoxView Margin="0"
+                         BackgroundColor="{StaticResource DarkGrey}"
+                         HeightRequest="1"
+                         HorizontalOptions="Fill"
+                         VerticalOptions="Start" />
+            </VerticalStackLayout>
+
+            <!--  Team Assignment Cards  -->
+            <ScrollView Grid.Row="1"
+                        Padding="0,0,5,0"
+                        VerticalScrollBarVisibility="Default"
+                        WidthRequest="300">
+                <Grid ColumnDefinitions="*,10">
+                    <StackLayout x:Name="TeamCollection" Grid.Column="0">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <workflowAssignment:TeamAssignmentCard />
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+                </Grid>
+            </ScrollView>
+            
+            <!--  Bottom half  -->
+            <VerticalStackLayout Grid.Row="2">
+                <BoxView Margin="0,26,0,13"
+                         BackgroundColor="{StaticResource DarkGrey}"
+                         HeightRequest="2"
+                         HorizontalOptions="Fill"
+                         VerticalOptions="Start" />
+
+                <!--  Settings Button  -->
+                <Frame x:Name="SettingsButton"
+                       Padding="0"
+                       BackgroundColor="Transparent"
+                       HorizontalOptions="End"
+                       VerticalOptions="End">
+                    <Label FontFamily="Icons"
+                           FontSize="54"
+                           Text="{StaticResource Settings}"
+                           TextColor="{DynamicResource SecondaryText}" />
+
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="SettingsButtonGestureRecognizer" AutomationId="DraftStageSettings" />
+                    </Frame.GestureRecognizers>
+                </Frame>
+            </VerticalStackLayout>
+        </Grid>
+    </Border>
+</kernel:RenderComponentBase>

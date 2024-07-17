@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<kernel:RenderComponentBase x:Class="Render.Components.SectionTitlePlayer.SectionTitlePlayer"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:local="clr-namespace:Render.Components.TitleBar;assembly=Render"
+                            xmlns:resources="clr-namespace:Render.Resources;assembly=Render"
+                            xmlns:sectionTitlePlayer="clr-namespace:Render.Components.SectionTitlePlayer;assembly=Render"
+                            x:TypeArguments="sectionTitlePlayer:SectionTitlePlayerViewModel">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <Border x:Name="passageNumberOverlayContainer"
+                HeightRequest="{x:Static sectionTitlePlayer:SectionTitlePlayer.OverlayHeight}"
+                HorizontalOptions="End"
+                Stroke="{StaticResource DarkGrey}"
+                StrokeShape="RoundRectangle 0,0,8,8"
+                StrokeThickness="1.8"
+                TranslationX="1.8">
+            <HorizontalStackLayout x:Name="overlayLayout"
+                                   Grid.Column="0"
+                                   BackgroundColor="{StaticResource Blue}"
+                                   Spacing="5">
+                <Label x:Name="passageIconLabel"
+                       BackgroundColor="Transparent"
+                       FontFamily="Icons"
+                       FontSize="19"
+                       Text="{resources:IconExtensions PassageNew}"
+                       TextColor="{StaticResource SecondaryText}"
+                       VerticalTextAlignment="Center" />
+
+                <Label x:Name="passageNumberLabel"
+                       AutomationId="PassageNumberLabel"
+                       FontFamily="MediumFont"
+                       FontSize="16"
+                       TextColor="{DynamicResource SecondaryText}"
+                       VerticalOptions="Center" />
+            </HorizontalStackLayout>
+        </Border>
+
+        <Grid x:Name="sectionNumberPlayer"
+              Grid.Column="0"
+              BackgroundColor="{StaticResource Blue}"
+              ColumnSpacing="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0"
+                   Margin="0,0,3,0"
+                   BackgroundColor="Transparent"
+                   FontFamily="Icons"
+                   FontSize="23"
+                   Text="{resources:IconExtensions SectionNew}"
+                   TextColor="{StaticResource SecondaryText}"
+                   VerticalTextAlignment="Center" />
+
+            <Label x:Name="sectionNumberLabel"
+                   Grid.Column="1"
+                   Padding="0"
+                   AutomationId="SectionTitleLabel"
+                   FontFamily="BoldFont"
+                   FontSize="20"
+                   TextColor="{DynamicResource SecondaryText}"
+                   VerticalOptions="Center" />
+
+            <Grid Grid.Column="2">
+                <Grid.Resources>
+                    <Style BasedOn="{StaticResource IconButton}" TargetType="Button">
+                        <Setter Property="WidthRequest" Value="30" />
+                        <Setter Property="Padding" Value="0" />
+                        <Setter Property="Margin" Value="0" />
+                    </Style>
+                </Grid.Resources>
+
+                <Button x:Name="sectionNumberAudioPlay"
+                        AutomationId="SectionTitleAudioButton"
+                        BorderWidth="0"
+                        Text="{resources:IconExtensions CirclePlay}" />
+                <Button x:Name="sectionNumberAudioStop"
+                        AutomationId="SectionTitleAudioButton"
+                        BorderWidth="0"
+                        Text="{resources:IconExtensions CircleStop}" />
+            </Grid>
+        </Grid>
+    </Grid>
+</kernel:RenderComponentBase>

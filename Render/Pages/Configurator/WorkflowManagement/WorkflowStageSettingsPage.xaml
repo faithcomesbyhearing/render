@@ -1,0 +1,48 @@
+<kernel:RenderPageBase x:TypeArguments="workflowManagement:WorkflowStageSettingsPageViewModel"
+                       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                       xmlns:proceedButton="clr-namespace:Render.Components.ProceedButton;assembly=Render"
+                       xmlns:titleBar="clr-namespace:Render.Components.TitleBar;assembly=Render"
+                       xmlns:workflowManagement="using:Render.Pages.Configurator.WorkflowManagement"
+                       xmlns:common="using:Render.Common"
+                       x:Class="Render.Pages.Configurator.WorkflowManagement.WorkflowStageSettingsPage"
+                       NavigationPage.HasNavigationBar="False"
+                       Style="{StaticResource PrimaryPage}">
+    <ContentPage.Resources>
+        <!-- <stageSettings:StageSettingsTemplateSelector x:Key="Selector" /> -->
+    </ContentPage.Resources>
+    <AbsoluteLayout x:Name="TopLevelElement">
+        <Grid AbsoluteLayout.LayoutFlags="All"
+              AbsoluteLayout.LayoutBounds="0,0,1,1"
+              RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="1" BackgroundColor="{StaticResource LightGrey}" ColumnSpacing="80">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="1" x:Name="MainStack" MaximumWidthRequest="960" HorizontalOptions="Center">
+                    <!-- <draftingStageSettings:DraftingStageSettings/> -->
+                </Grid>
+            </Grid>
+
+            <!--TitleBar is located in the first grid row, but should be rendered
+                after the page content in order to display Passage Number Overlay on top of the page.-->
+            <titleBar:TitleBar Grid.Row="0" x:Name="TitleBar" />
+        </Grid>
+
+        <proceedButton:ProceedButton x:Name="ProceedButton"
+                                     AbsoluteLayout.LayoutFlags="PositionProportional"
+                                     AbsoluteLayout.LayoutBounds="1,1" />
+        <common:LoadingScreen x:Name="loadingView"
+                              AbsoluteLayout.LayoutFlags="All"
+                              AbsoluteLayout.LayoutBounds="0,0,1,1" />
+    </AbsoluteLayout>
+</kernel:RenderPageBase>

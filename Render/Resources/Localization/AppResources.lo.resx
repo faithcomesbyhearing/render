@@ -1,0 +1,1666 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Add" xml:space="preserve">
+    <value>ເພີ່ມ</value>
+  </data>
+  <data name="AddAProject" xml:space="preserve">
+    <value>ເພີ່ມໂຄງການ</value>
+  </data>
+  <data name="AddASection" xml:space="preserve">
+    <value>ເພີ່ມພາກສ່ວນ</value>
+  </data>
+  <data name="AddATeam" xml:space="preserve">
+    <value>ເພີ່ມທີມ</value>
+  </data>
+  <data name="Added" xml:space="preserve">
+    <value>ເພີ່ມແລ້ວ</value>
+  </data>
+  <data name="Adding" xml:space="preserve">
+    <value>ກຳລັງເພີ່ມ</value>
+  </data>
+  <data name="AddingProject" xml:space="preserve">
+    <value>ກຳລັງເພີ່ມໂຄງການ...</value>
+  </data>
+  <data name="AddNew" xml:space="preserve">
+    <value>ເພີ່ມໃໝ່</value>
+  </data>
+  <data name="AddProject" xml:space="preserve">
+    <value>ເພີ່ມໂຄງການ</value>
+  </data>
+  <data name="AddProjectViaId" xml:space="preserve">
+    <value>ເພີ່ມໂຄງການຜ່ານ ID</value>
+  </data>
+  <data name="AddSection" xml:space="preserve">
+    <value>ເພີ່ມພາກສ່ວນ</value>
+  </data>
+  <data name="AddStage" xml:space="preserve">
+    <value>ເພີ່ມຂັ້ນຕອນ</value>
+  </data>
+  <data name="AddStageHere" xml:space="preserve">
+    <value>ລາກຂັ້ນຕອນມາທີ່ນີ້</value>
+  </data>
+  <data name="AddTeam" xml:space="preserve">
+    <value>ເພີ່ມທີມງານ</value>
+  </data>
+  <data name="AddUser" xml:space="preserve">
+    <value>ເພີ່ມຜູ່ໃຊ້</value>
+  </data>
+  <data name="AddWorkflowStage" xml:space="preserve">
+    <value>ເພີ່ມຂັ້ນຕອນການເຮັດວຽກ</value>
+  </data>
+  <data name="AllowEditing" xml:space="preserve">
+    <value>ອະນຸຍາດໃຫ້ແກ້ໄຂ</value>
+  </data>
+  <data name="AllSections" xml:space="preserve">
+    <value>ພາກສ່ວນທັງໝົດ</value>
+  </data>
+  <data name="AllSectionsAssigned" xml:space="preserve">
+    <value>ພາກສ່ວນທັງໝົດໄດ້ຖືກມອບໝາຍ.</value>
+  </data>
+  <data name="Approval" xml:space="preserve">
+    <value>ການອະນຸມັດ</value>
+  </data>
+  <data name="ApprovalSubmitted" xml:space="preserve">
+    <value>ສົ່ງການອະນຸມັດສຳເລັດແລ້ວ</value>
+  </data>
+  <data name="Approve" xml:space="preserve">
+    <value>ອະນຸມັດ</value>
+  </data>
+  <data name="Approved" xml:space="preserve">
+    <value>ອະນຸມັດແລ້ວ</value>
+  </data>
+  <data name="ApprovedByLabel" xml:space="preserve">
+    <value>ອະນຸມັດໂດຍ:</value>
+  </data>
+  <data name="ApprovedDraft" xml:space="preserve">
+    <value>ທ່ານອະນຸມັດຮ່າງ</value>
+  </data>
+  <data name="ApproveSection" xml:space="preserve">
+    <value>ອະນຸມັດພາກສ່ວນ ​{0}</value>
+  </data>
+  <data name="ArchivedDrafts" xml:space="preserve">
+    <value>ສະບັບຮ່າງທີ່ເກັບໄວ້</value>
+  </data>
+  <data name="ArchivedNotes" xml:space="preserve">
+    <value>ບັນທຶກທີ່ເກັບໄວ້</value>
+  </data>
+  <data name="ArrangeWorkflowStages" xml:space="preserve">
+    <value>ຈັດຮຽງຂັ້ນຕອນການເຮັດວຽກ</value>
+  </data>
+  <data name="Assigned" xml:space="preserve">
+    <value>{0} ມອບໝາຍແລ້ວ</value>
+  </data>
+  <data name="AssignToTranslator" xml:space="preserve">
+    <value>ມອບໝາຍໃຫ້ນັກແປ</value>
+  </data>
+  <data name="AudioClip" xml:space="preserve">
+    <value>ຄລິບສຽງ</value>
+  </data>
+  <data name="AudioNote" xml:space="preserve">
+    <value>ບັນທຶກສຽງ</value>
+  </data>
+  <data name="BackTranslate" xml:space="preserve">
+    <value>ແປກັບຫຼັງ</value>
+  </data>
+  <data name="BackTranslate1" xml:space="preserve">
+    <value>ແປກັບຫຼັງ 1</value>
+  </data>
+  <data name="BackTranslate2" xml:space="preserve">
+    <value>ແປກັບຫຼັງ 2</value>
+  </data>
+  <data name="BackTranslator" xml:space="preserve">
+    <value>ນັກແປກັບຫຼັງ</value>
+  </data>
+  <data name="BackTranslator2" xml:space="preserve">
+    <value>ນັກແປກັບຫຼັງ 2</value>
+  </data>
+  <data name="Both" xml:space="preserve">
+    <value>ທັງສອງ</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>ຍົກເລີກ</value>
+  </data>
+  <data name="Canceled" xml:space="preserve">
+    <value>ໄດ້ຍົກເລີກ</value>
+  </data>
+  <data name="Canceling" xml:space="preserve">
+    <value>ກຳລັງຍົກເລີກ</value>
+  </data>
+  <data name="Check" xml:space="preserve">
+    <value>ການກວດສອບ</value>
+  </data>
+  <data name="Check2" xml:space="preserve">
+    <value>ກວດສອບ 2</value>
+  </data>
+  <data name="ChooseProjectsForDeviceMessage" xml:space="preserve">
+    <value>ເລືອກໂຄງການທີ່ທ່ານຢາກຈະເຊື່ອມໂຍງກັບອຸປະກອນນີ້.</value>
+  </data>
+  <data name="ChosenDraft" xml:space="preserve">
+    <value>ຮ່າງທີ່ຖືກເລືອກ</value>
+  </data>
+  <data name="Chunk" xml:space="preserve">
+    <value>ກ້ອນ {0}</value>
+  </data>
+  <data name="ClearSegmentMessage1" xml:space="preserve">
+    <value>ການສືບຕໍ່ໄປຂ້າງໜ້າຈະລຶບລ້າງຊຸດປັດຈຸບັນຂອງພາກສ່ວນທາງຜ່ານນີ້ໄດ້ຖືກແບ່ງອອກເປັນ.</value>
+  </data>
+  <data name="ClearSegmentMessage2" xml:space="preserve">
+    <value>ຖ້າການແບ່ງສ່ວນທີ່ຜ່ານມາຖືກສ້າງຂື້ນເອງ ແລະ ບໍ່ແມ່ນການຕັ້ງຄ່າເລີ່ມຕົ້ນຕັ້ງຄ່າພາກສ່ວນເຫຼົ່ານີ້ບໍ່ສາມາດກູ້ຄືນໄດ້.</value>
+  </data>
+  <data name="ClearSegments" xml:space="preserve">
+    <value>ລຶບພາກສ່ວນ</value>
+  </data>
+  <data name="DeleteSnapshots" xml:space="preserve">
+    <value>ລຶບລ້າງພາບຖ່າຍທັງສອງ</value>
+  </data>
+  <data name="ClearSnapshotsDescription" xml:space="preserve">
+    <value>ພາບຖ່າຍທັງສອງຈະຖືກຍົກເລີກ. ນີ້ຈະເປັນການເລື່ອນພາກສ່ວນໄປຫາພາບຖ່າຍກ່ອນໜ້າຂອງມັນ.</value>
+  </data>
+  <data name="CombinedBackTranslate" xml:space="preserve">
+    <value>ລວມແປກັບຫຼັງ</value>
+  </data>
+  <data name="CombineSegmentTitle" xml:space="preserve">
+    <value>ລວມ - ທາງຜ່ານ {0}</value>
+  </data>
+  <data name="CommunityCheck" xml:space="preserve">
+    <value>ການກວດສອບຊຸມຊົນ</value>
+  </data>
+  <data name="CommunityRetellPassage" xml:space="preserve">
+    <value>ທາງຜ່ານ {0} - ບອກຄືນ</value>
+  </data>
+  <data name="CommunityRevise" xml:space="preserve">
+    <value>ກວດແກ້ຊຸມຊົນ</value>
+  </data>
+  <data name="CommunitySetup" xml:space="preserve">
+    <value>ຕັ້ງຄ່າຊຸມຊົນ</value>
+  </data>
+  <data name="CommunityTest" xml:space="preserve">
+    <value>ການທົດສອບຊຸມຊົນ</value>
+  </data>
+  <data name="CommunityTestRevise" xml:space="preserve">
+    <value>ກວດແກ້ການທົດສອບຊຸມຊົນ</value>
+  </data>
+  <data name="CommunityTestSetup" xml:space="preserve">
+    <value>ຕັ້ງຄ່າຊຸມຊົນ</value>
+  </data>
+  <data name="CompleteWork" xml:space="preserve">
+    <value>ສໍາເລັດການເຮັດວຽກ</value>
+  </data>
+  <data name="CompleteWorkMessage" xml:space="preserve">
+    <value>ຂັ້ນ​ຕອນ​ນີ້​ຈະ​ຖືກ​ລົບ​ອອກ​ເມື່ອ​​ຂະ​ບວນ​ການໃດ​ໜຶ່ງ​​ໄດ້​ຮັບ​ການເຮັດ​ສໍາ​ເລັດ​ທໍາ​ອິດ​.</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>ຢືນຢັນ</value>
+  </data>
+  <data name="Confirmation" xml:space="preserve">
+    <value>ການຢືນຢັນ</value>
+  </data>
+  <data name="Consultant" xml:space="preserve">
+    <value>ທີ່ປຶກສາ</value>
+  </data>
+  <data name="ConsultantApproval" xml:space="preserve">
+    <value>ການອະນຸມັດທີ່ປຶກສາ</value>
+  </data>
+  <data name="ConsultantCheck" xml:space="preserve">
+    <value>ກວດສອບທີ່ປຶກສາ</value>
+  </data>
+  <data name="ConsultantLanguage" xml:space="preserve">
+    <value>ພາສາທີ່ປຶກສາ</value>
+  </data>
+  <data name="ConsultantRevise" xml:space="preserve">
+    <value>ທີ່ປຶກສາກວດແກ້</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>ດຳ​ເນີນ​ການຕໍ່</value>
+  </data>
+  <data name="CopyPreviousQuestions" xml:space="preserve">
+    <value>ສຳເນົາຄຳຖາມກ່ອນໜ້າ</value>
+  </data>
+  <data name="CopyQuestions" xml:space="preserve">
+    <value>ສຳເນົາຄຳຖາມ</value>
+  </data>
+  <data name="Current" xml:space="preserve">
+    <value>ປັດຈຸບັນ {0}</value>
+  </data>
+  <data name="DeactivateStepWarning" xml:space="preserve">
+    <value>ເມື່ອທ່ານປິດຂັ້ນຕອນໜຶ່ງ, ທຸກພາກສ່ວນຈະຍ້າຍໄປຂັ້ນຕອນຕໍ່ໄປໃນຂັ້ນຕອນວຽກ</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>ລຶບ</value>
+  </data>
+  <data name="DeleteSnapshotsConfirmation" xml:space="preserve">
+    <value>ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການລຶບຮູບຖ່າຍທັງສອງອອກ?</value>
+  </data>
+  <data name="DeleteUser" xml:space="preserve">
+    <value>ລຶບຜູ່ໃຊ້</value>
+  </data>
+  <data name="DeleteUserMessage" xml:space="preserve">
+    <value>ການລຶບ {0} ຈະເປັນການລຶບການມອບໝາຍພາກສ່ວນທັງໝົດອອກນຳ. ທ່ານບໍ່ສາມາດຍົກເລີກການດຳເນີນການນີ້.</value>
+  </data>
+  <data name="DeleteUserTitle" xml:space="preserve">
+    <value>ລຶບຜູ່ໃຊ້ບໍ?</value>
+  </data>
+  <data name="DividePassageTitle" xml:space="preserve">
+    <value>ແບ່ງທາງຜ່ານ</value>
+  </data>
+  <data name="Do2StepBackTranslate" xml:space="preserve">
+    <value>ການແປກັບຫຼັງ 2 ຂັ້ນຕອນ</value>
+  </data>
+  <data name="DoNoteInterpret" xml:space="preserve">
+    <value>ລວມເອົາການແປບັນທຶກ</value>
+  </data>
+  <data name="DoNoteReview" xml:space="preserve">
+    <value>ບັນທຶກການທົບທວນຄືນ</value>
+  </data>
+  <data name="DoPassageBackTranslate1" xml:space="preserve">
+    <value>ເຮັດການແປກັບຫຼັງທາງຜ່ານ 1</value>
+  </data>
+  <data name="DoPassageBackTranslate2" xml:space="preserve">
+    <value>ເຮັດການແປກັບຫຼັງທາງຜ່ານ 2</value>
+  </data>
+  <data name="DoPassageListen" xml:space="preserve">
+    <value>ລວມເອົາທາງຜ່ານການຟັງ</value>
+  </data>
+  <data name="DoPassageReview" xml:space="preserve">
+    <value>ການທົບທວນຄືນທາງຜ່ານ</value>
+  </data>
+  <data name="DoPassageTranscribe" xml:space="preserve">
+    <value>ການຖອດຂໍ້ຄວາມທາງຜ່ານ</value>
+  </data>
+  <data name="DoQuestionAndResponse" xml:space="preserve">
+    <value>ລວມມີຄໍາຖາມ ແລະ ຄໍາຕອບ</value>
+  </data>
+  <data name="DoRetell" xml:space="preserve">
+    <value>ເຮັດການບອກຄືນ</value>
+  </data>
+  <data name="DoSectionListen" xml:space="preserve">
+    <value>ລວມເອົາພາກສ່ວນຟັງ</value>
+  </data>
+  <data name="DoSectionReview" xml:space="preserve">
+    <value>ລວມມີການທົບທວນຄືນພາກສ່ວນ</value>
+  </data>
+  <data name="DoSegmentBackTranslate1" xml:space="preserve">
+    <value>ເຮັດການແປກັບຫຼັງພາກສ່ວນ 1</value>
+  </data>
+  <data name="DoSegmentBackTranslate2" xml:space="preserve">
+    <value>ເຮັດການແປກັບຫຼັງພາກສ່ວນ 2</value>
+  </data>
+  <data name="DoSegmentTranscribe" xml:space="preserve">
+    <value>ການຖອດຂໍ້ຄວາມຈາກພາກສ່ວນ</value>
+  </data>
+  <data name="DoTranscribe" xml:space="preserve">
+    <value>ເຮັດການຖອດຂໍ້ຄວາມ</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>ດາວໂຫຼດ</value>
+  </data>
+  <data name="Downloaded" xml:space="preserve">
+    <value>ດາວໂຫຼດແລ້ວ</value>
+  </data>
+  <data name="DownloadingProjects" xml:space="preserve">
+    <value>ກຳລັງດາວໂຫຼດໂຄງການ</value>
+  </data>
+  <data name="Draft" xml:space="preserve">
+    <value>ຮ່າງ</value>
+  </data>
+  <data name="DraftedByLabel" xml:space="preserve">
+    <value>ຮ່າງໂດຍ:</value>
+  </data>
+  <data name="DraftNotes" xml:space="preserve">
+    <value>ຮ່າງ {0} ໝາຍເຫດ</value>
+  </data>
+  <data name="DraftPassage" xml:space="preserve">
+    <value>ແປທາງຜ່ານ {0}</value>
+  </data>
+  <data name="DraftRecord" xml:space="preserve">
+    <value>ບັນທຶກຮ່າງ</value>
+  </data>
+  <data name="DraftReplacementModalTitle" xml:space="preserve">
+    <value>ເລືອກຮ່ງເພື່ອປ່ຽນແທນ</value>
+  </data>
+  <data name="DraftReview" xml:space="preserve">
+    <value>ຮ່າງ {0} ທົບທວນຄືນ</value>
+  </data>
+  <data name="Drafts" xml:space="preserve">
+    <value>ຮ່າງ</value>
+  </data>
+  <data name="DraftSelect" xml:space="preserve">
+    <value>ເລືອກຮ່າງ</value>
+  </data>
+  <data name="DraftSelection" xml:space="preserve">
+    <value>ການຄັດເລືອກຮ່າງ</value>
+  </data>
+  <data name="DraftTitle" xml:space="preserve">
+    <value>ຮ່າງ {0}</value>
+  </data>
+  <data name="EditPassage" xml:space="preserve">
+    <value>ທາງຜ່ານ {0}</value>
+  </data>
+  <data name="EditUser" xml:space="preserve">
+    <value>ແກ້ໄຂຜູ້ໃຊ້</value>
+  </data>
+  <data name="EmptyCollectionMessage" xml:space="preserve">
+    <value>ຄລິກ "ເພີ່ມໃຫມ່" ຂ້າງເທິງເພື່ອເພີ່ມໂຄງການ.</value>
+  </data>
+  <data name="EmptyCollectionMessageTitle" xml:space="preserve">
+    <value>ລາຍຊື່ໂຄງການຫວ່າງເປົ່າ.</value>
+  </data>
+  <data name="EmptyOffloadCollectionMessage" xml:space="preserve">
+    <value>ບໍ່ມີໂຄງການທີ່ຈະ offload</value>
+  </data>
+  <data name="EmptyPassword" xml:space="preserve">
+    <value>ລະຫັດຜ່ານບໍ່ສາມາດໃຫ້ປະຫວ່າງ</value>
+  </data>
+  <data name="End" xml:space="preserve">
+    <value>ສິ້ນສຸດ</value>
+  </data>
+  <data name="Enter32digitId" xml:space="preserve">
+    <value>ປ້ອນລະຫັດ ID 32 ຕົວ...</value>
+  </data>
+  <data name="EnterAProjectName" xml:space="preserve">
+    <value>ເພີ່ມຊື່ໂຄງການ</value>
+  </data>
+  <data name="EnterLanguage" xml:space="preserve">
+    <value>ປ້ອນຊື່ພາສາ</value>
+  </data>
+  <data name="EnterPasswordToRestoreSection" xml:space="preserve">
+    <value>ໃສ່ລະຫັດຜ່ານຂອງທ່ານເພື່ອປົດລັອກ ແລະ ກູ້ຄືນພາກສ່ວນນີ້</value>
+  </data>
+  <data name="EnterSectionNumber" xml:space="preserve">
+    <value>ໃສ່ໝາຍເລກພາກສ່ວນ...</value>
+  </data>
+  <data name="EnterYourPassword" xml:space="preserve">
+    <value>ປ້ອນລະຫັດຜ່ານຂອງທ່ານ</value>
+  </data>
+  <data name="EnterYourUsername" xml:space="preserve">
+    <value>ປ້ອນຊື່ຜູ້ໃຊ້ຂອງທ່ານ</value>
+  </data>
+  <data name="ErrorAddingProject" xml:space="preserve">
+    <value>ມີຂໍ້ຜິດພາດໃນຂະນະທີ່ເພີ່ມໂຄງການນີ້.</value>
+  </data>
+  <data name="ErrorConnectLocalMachine" xml:space="preserve">
+    <value>ເກີດຄວາມຜິດພາດໃນການພະຍາຍາມເຊື່ອມຕໍ່ກັບເຄື່ອງທ້ອງຖິ່ນ.</value>
+  </data>
+  <data name="ExportAudio" xml:space="preserve">
+    <value>ສົ່ງອອກສຽງ</value>
+  </data>
+  <data name="ExportChecked" xml:space="preserve">
+    <value>ກວດສອບການສົ່ງອອກ</value>
+  </data>
+  <data name="Exporting" xml:space="preserve">
+    <value>ກຳລັງສົ່ງອອກ {0} ຂອງ {1}</value>
+  </data>
+  <data name="FontSize" xml:space="preserve">
+    <value>ຂະໜາດຕົວອັກສອນ</value>
+  </data>
+  <data name="ForTeam" xml:space="preserve">
+    <value>ສຳລັບ {0}</value>
+  </data>
+  <data name="Generate" xml:space="preserve">
+    <value>ຜະລິດ</value>
+  </data>
+  <data name="Generic" xml:space="preserve">
+    <value>ທົ່ວໄປ</value>
+  </data>
+  <data name="GlobalUser" xml:space="preserve">
+    <value>ຜູ້ໃຊ້ທົ່ວໂລກ</value>
+  </data>
+  <data name="Grid" xml:space="preserve">
+    <value>ຕາຂ່າຍ</value>
+  </data>
+  <data name="HaveBeenCleared" xml:space="preserve">
+    <value>ໄດ້ຖືກລຶບລ້າງແລ້ວ</value>
+  </data>
+  <data name="HigherPriority" xml:space="preserve">
+    <value>ບູລິມະສິດສູງກວ່າ</value>
+  </data>
+  <data name="HowToResolve" xml:space="preserve">
+    <value>ທ່ານຕ້ອງການແກ້ໄຂບັນຫານີ້ແນວໃດ?</value>
+  </data>
+  <data name="ImproperlyFormattedId" xml:space="preserve">
+    <value>ຮູບແບບ ID ບໍ່ຖືກຕ້ອງ. ກະລຸນາປ້ອນໃສ່ໃໝ່.</value>
+  </data>
+  <data name="IncludeBackTranslate" xml:space="preserve">
+    <value>ລວມແປກັບຫຼັງ</value>
+  </data>
+  <data name="IncludeNoteListenGuidance" xml:space="preserve">
+    <value>ລວມໝາຍເຫດຄຳແນະນຳຟັງ</value>
+  </data>
+  <data name="IncludePassageBackTranslate" xml:space="preserve">
+    <value>ລວມເອົາທາງຜ່ານແປກັບຫຼັງ</value>
+  </data>
+  <data name="IncludePassageListen" xml:space="preserve">
+    <value>ລວມເອົາທາງຜ່ານການຟັງ</value>
+  </data>
+  <data name="IncludePassageReview" xml:space="preserve">
+    <value>ລວມເອົາການທົບທວນທາງຜ່ານ</value>
+  </data>
+  <data name="IncludePassageReviewAfterReRecording" xml:space="preserve">
+    <value>ລວມເອົາການທົບທວນທາງຜ່ານຫຼັງຈາກການບັນທຶກຄືນໃໝ່</value>
+  </data>
+  <data name="IncludeSegmentBackTranslate" xml:space="preserve">
+    <value>ລວມເອົາພາກສ່ວນແປກັບຫຼັງ</value>
+  </data>
+  <data name="IncorrectPassword" xml:space="preserve">
+    <value>ລະຫັດຜ່ານນີ້ບໍ່ກົງກັບຊື່ຜູ້ໃຊ້ນີ້</value>
+  </data>
+  <data name="IncorrectPattern" xml:space="preserve">
+    <value>ຮູບແບບບໍ່ຖືກຕ້ອງ. ກະລຸນາລອງໃໝ່ອີກເທື່ອຄັ້ງ.</value>
+  </data>
+  <data name="Input" xml:space="preserve">
+    <value>ປ້ອນເຂົ້າ</value>
+  </data>
+  <data name="InsertPassword" xml:space="preserve">
+    <value>ໃສ່ລະຫັດຜ່ານທີ່ນີ້</value>
+  </data>
+  <data name="IntermediateLanguage" xml:space="preserve">
+    <value>ພາສາລະດັບກາງ</value>
+  </data>
+  <data name="Interpret" xml:space="preserve">
+    <value>ນາຍແປພາສາ</value>
+  </data>
+  <data name="Interpreted" xml:space="preserve">
+    <value>ຕີຄວາມໝາຍແລ້ວ</value>
+  </data>
+  <data name="InterpretToConsultant" xml:space="preserve">
+    <value>ແປໃຫ້ທີ່ປຶກສາ</value>
+  </data>
+  <data name="InterpretToTranslator" xml:space="preserve">
+    <value>ແປໃຫ້ນັກແປ</value>
+  </data>
+  <data name="Iteration" xml:space="preserve">
+    <value>ຊ້ຳ</value>
+  </data>
+  <data name="Jump" xml:space="preserve">
+    <value>ຂ້າມໄປ</value>
+  </data>
+  <data name="JumpToSection" xml:space="preserve">
+    <value>ຂ້າມໄປຫາພາກສ່ວນ</value>
+  </data>
+  <data name="LastCompletedStage" xml:space="preserve">
+    <value>ຂັ້ນຕອນສຸດທ້າຍທີ່ສໍາເລັດ</value>
+  </data>
+  <data name="LastSubmittedAudioLabel" xml:space="preserve">
+    <value>ສຽງທີ່ສົ່ງມາຫຼ້າສຸດ</value>
+  </data>
+  <data name="LastSync" xml:space="preserve">
+    <value>ຊິງຄ໌ຄັ້ງສຸດທ້າຍ</value>
+  </data>
+  <data name="LeaveFreeCut" xml:space="preserve">
+    <value>ອອກຈາກພາກສ່ວນຕັດຟຣີ</value>
+  </data>
+  <data name="LeaveFreeCutMessage1" xml:space="preserve">
+    <value>ຖ້າທ່ານອອກຈາກອອກຈາກພາກສ່ວນຕັດຟຣີ ທ່ານຈະສູນເສຍວຽກງານໃດໆທີ່ຜະລິດມາຈົນເຖິງປະຈຸບັນ.</value>
+  </data>
+  <data name="LeaveFreeCutMessage2" xml:space="preserve">
+    <value>ຈົ່ງເຮັດສໍາເລັດຂັ້ນຕອນນີ້ເພື່ອຮັກສາວຽກງານໃດໆທີ່ຖືກສ້າງຂຶ້ນ.</value>
+  </data>
+  <data name="Localization" xml:space="preserve">
+    <value>ການປັບໃຫ້ເຂົ້າກັບທ້ອງຖິ່ນ</value>
+  </data>
+  <data name="LoggingIn" xml:space="preserve">
+    <value>ກຳ​ລັງ​ເຂົ້າ​ສູ່ລະ​ບົບ...</value>
+  </data>
+  <data name="LogIn" xml:space="preserve">
+    <value>ລົງຊື່ເຂົ້າລະບົບ</value>
+  </data>
+  <data name="LogOut" xml:space="preserve">
+    <value>ອອກຈາກລະບົບ</value>
+  </data>
+  <data name="LowerPriority" xml:space="preserve">
+    <value>ບູລິມະສິດຕໍ່າກວ່າ</value>
+  </data>
+  <data name="ManageDivisions" xml:space="preserve">
+    <value>ຈັດການການແບ່ງທາງຜ່ານ {0}</value>
+  </data>
+  <data name="ManageUsers" xml:space="preserve">
+    <value>ຈັດການຜູ້ໃຊ້</value>
+  </data>
+  <data name="MarkQuestions" xml:space="preserve">
+    <value>ໝາຍທາງຜ່ານຄຳຖາມ {0}</value>
+  </data>
+  <data name="MicNotConnectedMessage" xml:space="preserve">
+    <value>ບໍ່ພົບໄມໂຄຣໂຟນ.  ກະລຸນາເຊື່ອມຕໍ່ໄມໂຄຣໂຟນກັບລະບົບຂອງທ່ານເພື່ອບັນທຶກສຽງ.</value>
+  </data>
+  <data name="MicNotConnectedTitle" xml:space="preserve">
+    <value>ໄມໂຄຣໂຟນບໍ່ໄດ້ເຊື່ອມຕໍ່</value>
+  </data>
+  <data name="MicrophoneAccessMessage" xml:space="preserve">
+    <value>ການສະແດງຜົນບໍ່ມີການອະນຸຍາດໃຫ້ໃຊ້ໄມໂຄຣໂຟນຂອງທ່ານ. ເພື່ອແກ້ໄຂນີ້, ໃຫ້ໄປທີ່ການຕັ້ງຄ່າຄວາມເປັນສ່ວນຕົວຂອງໄມໂຄຣໂຟນ ແລະ ເປີດການເຂົ້າເຖິງໄມໂຄຣໂຟນສຳລັບການ Render.</value>
+  </data>
+  <data name="MicrophoneAccessTitle" xml:space="preserve">
+    <value>ການເຂົ້າເຖິງໄມໂຄຣໂຟນແມ່ນຈຳເປັນ</value>
+  </data>
+  <data name="MultipleTeamAssignmentLabel" xml:space="preserve">
+    <value>ຜູ້ໃຊ້ໜຶ່ງຄົນບໍ່ສາມາດຖືກມອບໝາຍໃຫ້ຫຼາຍທີມໄດ້</value>
+  </data>
+  <data name="MultipleTeamAssignmentMessage" xml:space="preserve">
+    <value>ກະລຸນາມອບໝາຍຜູ້ໃຊ້ທີ່ເປັນເອກະລັກໃຫ້ກັບແຕ່ລະທີມຂອງແຕ່ລະຄົນ.</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>ຊື່</value>
+  </data>
+  <data name="NoAudio" xml:space="preserve">
+    <value>ບໍ່ມີສຽງ</value>
+  </data>
+  <data name="NoInternetConnection" xml:space="preserve">
+    <value>ບໍ່ມີການເຊື່ອມຕໍ່ອິນເຕີເນັດ</value>
+  </data>
+  <data name="NoReviewedSections" xml:space="preserve">
+    <value>ບໍ່ມີພາກສ່ວນທີ່ທົບທວນຄືນໃນເວລານີ້.</value>
+  </data>
+  <data name="NoSectionAudioForStage" xml:space="preserve">
+    <value>ບໍ່ມີພາກສ່ວນສຽງສຳລັບຂັ້ນຕອນນີ້</value>
+  </data>
+  <data name="NoSelfCheck" xml:space="preserve">
+    <value>ບໍ່ມີການກວດສອບຕົນເອງ</value>
+  </data>
+  <data name="NotAbleToLogin" xml:space="preserve">
+    <value>ທ່ານບໍ່ສາມາດລົງຊື່ເຂົ້າສູ່ລະບົບໄດ້.</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>ບັນທຶກ</value>
+  </data>
+  <data name="NoteInterpret" xml:space="preserve">
+    <value>ໝາຍເຫດ ແປ</value>
+  </data>
+  <data name="NoteListen" xml:space="preserve">
+    <value>ໝາຍເຫດຟັງ</value>
+  </data>
+  <data name="Notes" xml:space="preserve">
+    <value>ໝາຍ​ເຫດ</value>
+  </data>
+  <data name="NoteTranslator" xml:space="preserve">
+    <value>ບັນທຶກບັກແປ</value>
+  </data>
+  <data name="NotInWorkflow" xml:space="preserve">
+    <value>ບໍ່ແມ່ນສ່ວນໜຶ່ງຂອງຂັ້ນຕອນວຽກອີກຕໍ່ໄປ</value>
+  </data>
+  <data name="NoUnreviewedSections" xml:space="preserve">
+    <value>ບໍ່ມີພາກສ່ວນທີ່ຍັງບໍ່ໄດ້ກວດສອບໃນເວລານີ້.</value>
+  </data>
+  <data name="NullUsername" xml:space="preserve">
+    <value>ບໍ່ສາມາດປະຊື່ຜູ້ໃຊ້ໃຫ້ຫວ່າງເປົ່າໄດ້</value>
+  </data>
+  <data name="Offload" xml:space="preserve">
+    <value>ຖອດ</value>
+  </data>
+  <data name="OffloadData" xml:space="preserve">
+    <value>ຖ່າຍຂໍ້ມູນ</value>
+  </data>
+  <data name="Offloading" xml:space="preserve">
+    <value>ກຳລັງຖອດອອກ</value>
+  </data>
+  <data name="OffloadWarning" xml:space="preserve">
+    <value>{0} ຖືກຊິງຄ໌ຄັ້ງສຸດທ້າຍເມື່ອ {1}. ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການຍົກເລີກໂຄງການນີ້?</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>ຕົກລົງ</value>
+  </data>
+  <data name="Original" xml:space="preserve">
+    <value>ຂອງແທ້</value>
+  </data>
+  <data name="OriginalLanguage" xml:space="preserve">
+    <value>ພາສາຕົ້ນສະບັບ</value>
+  </data>
+  <data name="OriginalNote" xml:space="preserve">
+    <value>ໝາຍເຫດເດີມ</value>
+  </data>
+  <data name="OriginalPassageTitle" xml:space="preserve">
+    <value>ທາງຜ່ານ {0} (ຕົ້ນສະບັບ)</value>
+  </data>
+  <data name="Passage" xml:space="preserve">
+    <value>ທາງຜ່ານ {0}</value>
+  </data>
+  <data name="PassageBackTranslate" xml:space="preserve">
+    <value>ທາງຜ່ານການແປກັບຫຼັງ</value>
+  </data>
+  <data name="PassageDivide" xml:space="preserve">
+    <value>ແບ່ງທາງຜ່ານ</value>
+  </data>
+  <data name="PassageDraftListen" xml:space="preserve">
+    <value>ທາງຜ່ານ {0} ຟັງຮ່າງ</value>
+  </data>
+  <data name="PassageListen" xml:space="preserve">
+    <value>ທາງຜ່ານຟັງ</value>
+  </data>
+  <data name="PassageListenOnly" xml:space="preserve">
+    <value>ທາງຜ່ານຟັງເທົ່ານັ້ນ</value>
+  </data>
+  <data name="PassageListenTitle" xml:space="preserve">
+    <value>ທາງຜ່ານ {0} ຟັງ</value>
+  </data>
+  <data name="PassageNumber" xml:space="preserve">
+    <value>ທາງຜ່ານ {0}</value>
+  </data>
+  <data name="PassagePeerReview" xml:space="preserve">
+    <value>ທາງຜ່ານ {0} ການທົບທວນເພື່ອນມິດ</value>
+  </data>
+  <data name="PassageRetell" xml:space="preserve">
+    <value>ບອກຄືນທາງຜ່ານ</value>
+  </data>
+  <data name="PassageReview" xml:space="preserve">
+    <value>ການທົບທວນຄືນທາງຜ່ານ</value>
+  </data>
+  <data name="PassageReviewAfterReRecording" xml:space="preserve">
+    <value>ການທົບທວນຄືນທາງຜ່ານຫຼັງຈາກການບັນທຶກຄືນໃໝ່</value>
+  </data>
+  <data name="PassageSelect" xml:space="preserve">
+    <value>ເລືອກທາງຜ່ານ</value>
+  </data>
+  <data name="PassageSelection" xml:space="preserve">
+    <value>ການເລືອກທາງຜ່ານ</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>ລະຫັດຜ່ານ</value>
+  </data>
+  <data name="PasswordGrid" xml:space="preserve">
+    <value>ຕາຂ່າຍລະຫັດຜ່ານ</value>
+  </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>ຕ້ອງໃສ່ລະຫັດຜ່ານ</value>
+  </data>
+  <data name="PasswordType" xml:space="preserve">
+    <value>ປະເພດລະຫັດຜ່ານ</value>
+  </data>
+  <data name="PeerCheck" xml:space="preserve">
+    <value>ການກວດສອບເພື່ອນມິດ</value>
+  </data>
+  <data name="PeerReview" xml:space="preserve">
+    <value>ການທົບທວນເພື່ອນມິດ</value>
+  </data>
+  <data name="PeerRevise" xml:space="preserve">
+    <value>ກວດແກ້ເພື່ອນມິດ</value>
+  </data>
+  <data name="PleaseConnect" xml:space="preserve">
+    <value>ກະລຸນາເຊື່ອມຕໍ່ອິນເຕີເນັດ ແລະ ເລີ່ມ Render ອີກຄັ້ງ.</value>
+  </data>
+  <data name="PleaseLogIn" xml:space="preserve">
+    <value>ກະລຸນາລົງຊື່ເຂົ້າສູ່ລະບົບເພື່ອເລີ່ມຕົ້ນ.</value>
+  </data>
+  <data name="PrecedingAudio" xml:space="preserve">
+    <value>ສຽງກ່ອນໜ້າ</value>
+  </data>
+  <data name="PreviousDraft" xml:space="preserve">
+    <value>ຮ່າງກ່ອນໜ້າ</value>
+  </data>
+  <data name="Proceed" xml:space="preserve">
+    <value>ດຳ​ເນີນ​ການ</value>
+  </data>
+  <data name="Processes" xml:space="preserve">
+    <value>ປະມວນຜົນ</value>
+  </data>
+  <data name="ProjectAddedSuccesfully" xml:space="preserve">
+    <value>ໂຄງ​ການ​ນີ້​ໄດ້​ຖືກ​ເພີ່ມຢ່າງ​ສໍາ​ເລັດ​.</value>
+  </data>
+  <data name="ProjectConfiguration" xml:space="preserve">
+    <value>ການຕັ້ງຄ່າໂຄງການ</value>
+  </data>
+  <data name="ProjectDeletedTitle" xml:space="preserve">
+    <value>ໂຄງການດັ່ງກ່າວໄດ້ຖືກລຶບແລ້ວ</value>
+  </data>
+  <data name="ProjectHome" xml:space="preserve">
+    <value>ໜ້າຫຼັກໂຄງການ</value>
+  </data>
+  <data name="ProjectId" xml:space="preserve">
+    <value>ID ໂຄງການ</value>
+  </data>
+  <data name="ProjectList" xml:space="preserve">
+    <value>ລາຍຊື່ໂຄງການ</value>
+  </data>
+  <data name="ProjectsDownloadedSuccessfully" xml:space="preserve">
+    <value>ດາວໂຫຼດໂຄງການສຳເລັດແລ້ວ.</value>
+  </data>
+  <data name="ProjectTeams" xml:space="preserve">
+    <value>ທີມງານໂຄງການ</value>
+  </data>
+  <data name="ProjectUsers" xml:space="preserve">
+    <value>ຜູ້ໃຊ້ໂຄງການ</value>
+  </data>
+  <data name="ProjectWorkflow" xml:space="preserve">
+    <value>ຂັ້ນຕອນວຽກຂອງໂຄງການ</value>
+  </data>
+  <data name="QuestionFormatted" xml:space="preserve">
+    <value>ຄໍາຖາມ {0}</value>
+  </data>
+  <data name="QuestionAndResponse" xml:space="preserve">
+    <value>ຄໍາຖາມ ແລະ ຄໍາຕອບ</value>
+  </data>
+  <data name="QuestionPlacement" xml:space="preserve">
+    <value>ການຈັດວາງຄຳຖາມ</value>
+  </data>
+  <data name="QuestionSet" xml:space="preserve">
+    <value>ຊຸດຄຳຖາມ {0}</value>
+  </data>
+  <data name="Record" xml:space="preserve">
+    <value>ບັນທຶກ</value>
+  </data>
+  <data name="RecordedSegmentWarningConfirmation" xml:space="preserve">
+    <value>ລວມເຂົ້າກັນສົມບູນ</value>
+  </data>
+  <data name="RecordedSegmentWarningMessage" xml:space="preserve">
+    <value>ພາກສ່ວນກ່ອນໜ້ານີ້ມີຄຳຕອບສຽງຕອບຢູ່ແລ້ວ. ຖ້າ​ຫາກ​ທ່ານ​ລວມ​ທັງ​ສອງ​ພາກ​ສ່ວນ​ນີ້​ເຂົ້າ​ກັນ​ສຽງ​ທີ່​ບັນ​ທຶກ​ໄວ້​ກ່ອນໜ້າ​ນີ້​ຈະ​ສູນ​ເສຍ​ໄປ​.</value>
+  </data>
+  <data name="RecordedSegmentWarningTitle" xml:space="preserve">
+    <value>ຄໍາຕອບຈະຫາຍໄປ</value>
+  </data>
+  <data name="RecordInterpretation" xml:space="preserve">
+    <value>ບັນທຶກການຕີຄວາມໝາຍ</value>
+  </data>
+  <data name="RecordNewDraft" xml:space="preserve">
+    <value>ບັນທຶກຮ່າງໃໝ່</value>
+  </data>
+  <data name="RecordQuestion" xml:space="preserve">
+    <value>ບັນທຶກຄຳຖາມ (Q{0})</value>
+  </data>
+  <data name="RecordQuestionTitle" xml:space="preserve">
+    <value>ຄຳຖາມບັນທຶກ</value>
+  </data>
+  <data name="RecordResponse" xml:space="preserve">
+    <value>ບັນທຶກການຕອບ</value>
+  </data>
+  <data name="RecordRetell" xml:space="preserve">
+    <value>ບັນທຶກບອກຄືນ</value>
+  </data>
+  <data name="RecordStandardQuestion" xml:space="preserve">
+    <value>ບັນທຶກຄຳຖາມມາດຕະຖານ {0}</value>
+  </data>
+  <data name="RecordTranslation" xml:space="preserve">
+    <value>ບັນທຶກການແປ</value>
+  </data>
+  <data name="Recovery" xml:space="preserve">
+    <value>ກູ້ຄືນ</value>
+  </data>
+  <data name="References" xml:space="preserve">
+    <value>ເອກະສານອ້າງອີງ</value>
+  </data>
+  <data name="RemoveWork" xml:space="preserve">
+    <value>ເອົາວຽກອອກ</value>
+  </data>
+  <data name="RemoveWorkMessage" xml:space="preserve">
+    <value>ຂັ້ນ​ຕອນ​ນີ້​ຈະ​ຖືກ​ລົບ​ອອກ​ໃນ​ທັນ​ທີ ​ແລະ​ ການ​ເຮັດ​ວຽກ​ທັງໝົດ​ໃນ​ຂະ​ບວນ​ການ​ຈະ​ສູນ​ເສຍ​ໄປ​.</value>
+  </data>
+  <data name="RenderUser" xml:space="preserve">
+    <value>ຜູ້ໃຊ້ Render</value>
+  </data>
+  <data name="Replace" xml:space="preserve">
+    <value>ປ່ຽນແທນ</value>
+  </data>
+  <data name="RequireNoteListen" xml:space="preserve">
+    <value>ໝາຍເຫດຄຳແນະນຳຟັງ</value>
+  </data>
+  <data name="RequireNoteReview" xml:space="preserve">
+    <value>ໝາຍເຫດຄໍາແນະນໍາການທົບທວນຄືນ</value>
+  </data>
+  <data name="RequirePassageListen" xml:space="preserve">
+    <value>ທາງຜ່ານຟັງຄໍາແນະນໍາ</value>
+  </data>
+  <data name="RequirePassageReview" xml:space="preserve">
+    <value>ຄໍາແນະນໍາການທົບທວນຄືນທາງຜ່ານ</value>
+  </data>
+  <data name="RequirePassageTranscribeListen" xml:space="preserve">
+    <value>ຄຳແນະນຳການຖອດຂໍ້ຄວາມ</value>
+  </data>
+  <data name="RequireQuestionContextListen" xml:space="preserve">
+    <value>ບໍລິບົດຄຳຖາມຄຳແນະນຳຟັງ</value>
+  </data>
+  <data name="RequireRecordResponse" xml:space="preserve">
+    <value>ລວມຄຳແນະນຳຄຳຕອບ</value>
+  </data>
+  <data name="RequireReviewAfterReRecording" xml:space="preserve">
+    <value>ການທົບທວນຄືນທາງຜ່ານຫຼັງຈາກບັນທຶກຄໍາແນະນໍາຄືນໃໝ່</value>
+  </data>
+  <data name="RequireSectionListen" xml:space="preserve">
+    <value>ພາກສ່ວນຟັງຄໍາແນະນໍາ</value>
+  </data>
+  <data name="RequireSectionReview" xml:space="preserve">
+    <value>ຄຳແນະນຳການທົບທວນຄືນພາກສ່ວນ</value>
+  </data>
+  <data name="RequireSegmentTranscribeListen" xml:space="preserve">
+    <value>ຄຳແນະນຳການຖອດພາກສ່ວນ</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>ຕັ້ງຄ່າໃໝ່</value>
+  </data>
+  <data name="ResetSection" xml:space="preserve">
+    <value>ຕັ້ງຄ່າພາກສ່ວນໃໝ່</value>
+  </data>
+  <data name="Response" xml:space="preserve">
+    <value>ຄຳຕອບ {0}</value>
+  </data>
+  <data name="Restore" xml:space="preserve">
+    <value>ກູ້ຄືນ</value>
+  </data>
+  <data name="RestoreSection" xml:space="preserve">
+    <value>ກູ້ຄືນພາກສ່ວນ</value>
+  </data>
+  <data name="RestoreSectionConfirmation" xml:space="preserve">
+    <value>ທ່ານແນ່ໃຈທີ່ຈະກູ້ຄືນພາກສ່ວນ?</value>
+  </data>
+  <data name="RestoreSnapshotInfo" xml:space="preserve">
+    <value>ການກູ້ຄືນຮູບຖ່າຍນີ້ຈະບໍ່ກູ້ຄືນຂັ້ນຕອນທີ່ຖືກລົບເຂົ້າໄປໃນຂັ້ນຕອນວຽກ.</value>
+  </data>
+  <data name="Retell" xml:space="preserve">
+    <value>ເລົ່າຄືນ</value>
+  </data>
+  <data name="RetellCheck" xml:space="preserve">
+    <value>ກວດເບິ່ງຄືນ (ທາງຜ່ານ {0})</value>
+  </data>
+  <data name="ReturnToLogIn" xml:space="preserve">
+    <value>ກັບຄືນສູ່ລົງຊື່ເຂົ້າສູ່ລະບົບ</value>
+  </data>
+  <data name="Review" xml:space="preserve">
+    <value>ທົບທວນຄືນ</value>
+  </data>
+  <data name="Reviewed" xml:space="preserve">
+    <value>ທົບທວນຄືນ</value>
+  </data>
+  <data name="ReviewQuestions" xml:space="preserve">
+    <value>ທົບທວນທາງຜ່ານຄໍາຖາມ {0}</value>
+  </data>
+  <data name="Revise" xml:space="preserve">
+    <value>ກວດແກ້</value>
+  </data>
+  <data name="Revision" xml:space="preserve">
+    <value>ການກວດແກ້</value>
+  </data>
+  <data name="RoleAssignment" xml:space="preserve">
+    <value>ການມອບໝາຍບົດບາດ</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>ຄົ້ນຫາ</value>
+  </data>
+  <data name="Section" xml:space="preserve">
+    <value>ພາກທີ {0}</value>
+  </data>
+  <data name="SectionAndPassageListen" xml:space="preserve">
+    <value>ພາກສ່ວນ ​ແລະ ທາງຜ່ານຟັງ​</value>
+  </data>
+  <data name="SectionAssignment" xml:space="preserve">
+    <value>ການມອບໝາຍພາກສ່ວນ</value>
+  </data>
+  <data name="SectionDraft" xml:space="preserve">
+    <value>ພາກສ່ວນ {0} ຮ່າງ</value>
+  </data>
+  <data name="SectionFeedbackTitle" xml:space="preserve">
+    <value>ພາກສ່ວນ {0} ຄຳຕິຊົມ</value>
+  </data>
+  <data name="SectionInformation" xml:space="preserve">
+    <value>ຂໍ້ມູນພາກສ່ວນ</value>
+  </data>
+  <data name="SectionList" xml:space="preserve">
+    <value>ລາຍການພາກສ່ວນ</value>
+  </data>
+  <data name="SectionListen" xml:space="preserve">
+    <value>ພາກສ່ວນຟັງ</value>
+  </data>
+  <data name="SectionListenOnly" xml:space="preserve">
+    <value>ພາກສ່ວນຟັງເທົ່ານັ້ນ</value>
+  </data>
+  <data name="SectionListenTitle" xml:space="preserve">
+    <value>ພາກສ່ວນ {0} ຟັງ</value>
+  </data>
+  <data name="SectionNumberLabel" xml:space="preserve">
+    <value>ໝາຍເລກພາກສ່ວນ</value>
+  </data>
+  <data name="SectionReferenceLabel" xml:space="preserve">
+    <value>ຂໍ້ອ້າງອີງ</value>
+  </data>
+  <data name="SectionReset" xml:space="preserve">
+    <value>ພາກສ່ວນໄດ້ຖືກຕັ້ງຄ່າໃໝ່.</value>
+  </data>
+  <data name="SectionReview" xml:space="preserve">
+    <value>ທົບທວນຄືນພາກສ່ວນ</value>
+  </data>
+  <data name="SectionSelect" xml:space="preserve">
+    <value>ເລືອກພາກສ່ວນ</value>
+  </data>
+  <data name="SectionsMovingWarning" xml:space="preserve">
+    <value>ພາກສ່ວນຕ່າງໆຈະຍ້າຍໄປຂັ້ນຕອນຕໍ່ໄປ</value>
+  </data>
+  <data name="SectionStatus" xml:space="preserve">
+    <value>ສະຖານະພາກສ່ວນ</value>
+  </data>
+  <data name="SectionStepLabel" xml:space="preserve">
+    <value>ຂັ້ນຕອນປະຈຸບັນ</value>
+  </data>
+  <data name="SectionTitle" xml:space="preserve">
+    <value>ພາກທີ {0} ຫົວຂໍ້</value>
+  </data>
+  <data name="SectionTitleLabel" xml:space="preserve">
+    <value>ຫົວຂໍ້ພາກສ່ວນ</value>
+  </data>
+  <data name="Segment" xml:space="preserve">
+    <value> ພາກສ່ວນ {0}</value>
+  </data>
+  <data name="SegmentBackTranslate" xml:space="preserve">
+    <value>ສ່ວນທີແປກັບຫຼັງ</value>
+  </data>
+  <data name="SegmentBackTranslateSelect" xml:space="preserve">
+    <value>ເລືອກແປກັບຫຼັງພາກສ່ວນ</value>
+  </data>
+  <data name="SegmentBackTranslateTitle" xml:space="preserve">
+    <value>{0} - ພາກສ່ວນ {1}</value>
+  </data>
+  <data name="SegmentFreeCut" xml:space="preserve">
+    <value>ຕັດພາກສ່ວນຟຣີ</value>
+  </data>
+  <data name="SegmentWillBeCleared" xml:space="preserve">
+    <value>ພາກສ່ວນປັດຈຸບັນຈະຖືກລຶບລ້າງ</value>
+  </data>
+  <data name="SelectADraft" xml:space="preserve">
+    <value>ເລືອກຮ່າງ</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>ເລືອກເອົາທັງໝົດ</value>
+  </data>
+  <data name="SelectAProfile" xml:space="preserve">
+    <value>ເລືອກໂປຣໄຟລ໌ເພື່ອເຂົ້າສູ່ລະບົບ</value>
+  </data>
+  <data name="SelectAProject" xml:space="preserve">
+    <value>ເລືອກໂຄງການ</value>
+  </data>
+  <data name="SelectDisplay" xml:space="preserve">
+    <value>ເລືອກຈໍສະແດງ</value>
+  </data>
+  <data name="SelectDraft" xml:space="preserve">
+    <value>ເລືອກຮ່າງ</value>
+  </data>
+  <data name="SelectProjectsToImport" xml:space="preserve">
+    <value>ເລືອກໂຄງການທີ່ຈະນໍາເຂົ້າ</value>
+  </data>
+  <data name="SelectSection" xml:space="preserve">
+    <value>ເລືອກພາກສ່ວນ</value>
+  </data>
+  <data name="SelectSnapshot" xml:space="preserve">
+    <value>ເລືອກພາບຖ່າຍ</value>
+  </data>
+  <data name="SelectSnapshotDescription" xml:space="preserve">
+    <value>ເລືອກພາບຖ່າຍສະເພາະເພື່ອດຳເນີນການຕໍ່. ພາບຖ່າຍທີ່ບໍ່ໄດ້ເລືອກຈະຖືກລຶບອອກ.</value>
+  </data>
+  <data name="Sequence" xml:space="preserve">
+    <value>ລຳດັບ</value>
+  </data>
+  <data name="Snapshot" xml:space="preserve">
+    <value>ພາບຖ່າຍ</value>
+  </data>
+  <data name="SnapshotChosen" xml:space="preserve">
+    <value>ພາບຖ່າຍທີ່ເລືອກສຳລັບ</value>
+  </data>
+  <data name="SnapshotConflict" xml:space="preserve">
+    <value>ພາກສ່ວນນີ້ມີການຂັດກັນໂດຍຫຍໍ້: {0}</value>
+  </data>
+  <data name="Snapshots" xml:space="preserve">
+    <value>ພາບຖ່າຍ</value>
+  </data>
+  <data name="SortBy" xml:space="preserve">
+    <value>ຈັດລຽງໂດຍ</value>
+  </data>
+  <data name="Source" xml:space="preserve">
+    <value>ແຫຼ່ງທີ່ມາ</value>
+  </data>
+  <data name="StageName" xml:space="preserve">
+    <value>ຊື່ຂັ້ນຕອນ</value>
+  </data>
+  <data name="StandardQuestion" xml:space="preserve">
+    <value>ຄຳຖາມມາດຕະຖານ {0}</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>ເລີ່ມຕົ້ນ</value>
+  </data>
+  <data name="Step" xml:space="preserve">
+    <value>ຂັ້ນຕອນ</value>
+  </data>
+  <data name="Step1" xml:space="preserve">
+    <value>ຂັ້ນຕອນທີ 1</value>
+  </data>
+  <data name="Step2" xml:space="preserve">
+    <value>ຂັ້ນຕອນທີ 2</value>
+  </data>
+  <data name="SupplementaryMaterial" xml:space="preserve">
+    <value>ວັດສະດຸເສີມ</value>
+  </data>
+  <data name="Sync" xml:space="preserve">
+    <value>ຊິ້ງຂໍ້ມູນ</value>
+  </data>
+  <data name="TeamCheck" xml:space="preserve">
+    <value>ການກວດສອບທີມງານ</value>
+  </data>
+  <data name="TeamOne" xml:space="preserve">
+    <value>ທີມງານ 1</value>
+  </data>
+  <data name="TeamTwo" xml:space="preserve">
+    <value>ທີມງານ 2</value>
+  </data>
+  <data name="Text" xml:space="preserve">
+    <value>ເນື້ອໃນ</value>
+  </data>
+  <data name="TextNote" xml:space="preserve">
+    <value>ບັນທຶກຂໍ້ຄວາມ</value>
+  </data>
+  <data name="TotalPassagesLabel" xml:space="preserve">
+    <value>ທາງຜ່ານທັງໝົດ</value>
+  </data>
+  <data name="TotalVerses" xml:space="preserve">
+    <value>ຂໍ້ທັງໝົດ:</value>
+  </data>
+  <data name="Transcribe" xml:space="preserve">
+    <value>ການຖອດຂໍ້ຄວາມ</value>
+  </data>
+  <data name="Transcribe2" xml:space="preserve">
+    <value>ການຖອດຂໍ້ຄວາມ 2</value>
+  </data>
+  <data name="TranscribePassage" xml:space="preserve">
+    <value>ການຖອດຂໍ້ຄວາມທາງຜ່ານ</value>
+  </data>
+  <data name="TranscribeSegment" xml:space="preserve">
+    <value>ພາກສ່ວນການຖອດຂໍ້ຄວາມ</value>
+  </data>
+  <data name="Translated" xml:space="preserve">
+    <value>ແປແລ້ວ</value>
+  </data>
+  <data name="Translation" xml:space="preserve">
+    <value>ການແປ</value>
+  </data>
+  <data name="Unassigned" xml:space="preserve">
+    <value>ບໍ່ໄດ້ມອບໝາຍ</value>
+  </data>
+  <data name="Unreviewed" xml:space="preserve">
+    <value>ບໍ່ໄດ້ທົບທວນຄືນ</value>
+  </data>
+  <data name="UnsavedRolesMessage" xml:space="preserve">
+    <value>ຖ້າທ່ານຕ້ອງການບັນທຶກບົດບາດທີ່ທ່ານໄດ້ມອບໝາຍໃຫ້, ຫຼັງຈາກນັ້ນເລືອກລູກສອນດໍາເນີນການຢູ່ລຸ່ມຂວາ.</value>
+  </data>
+  <data name="UnsavedRolesTitle" xml:space="preserve">
+    <value>ມີບົດບາດທີ່ບໍ່ໄດ້ບັນທຶກໄວ້</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>ອັບເດດ</value>
+  </data>
+  <data name="UpdatedPassage" xml:space="preserve">
+    <value>ທາງຜ່ານອັບເດດແລ້ວ</value>
+  </data>
+  <data name="UserLabel" xml:space="preserve">
+    <value>ຜູ້ໃຊ້ປະຈຸບັນ</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>ຊື່ຜູ້ໃຊ້</value>
+  </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>ຊື່ຜູ້ໃຊ້ນີ້ບໍ່ມີຢູ່</value>
+  </data>
+  <data name="UserSettings" xml:space="preserve">
+    <value>ການຕັ້ງຄ່າຜູ້ໃຊ້,</value>
+  </data>
+  <data name="UserType" xml:space="preserve">
+    <value>ປະເພດຜູ້ໃຊ້</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>ສະບັບ</value>
+  </data>
+  <data name="VesselUser" xml:space="preserve">
+    <value>ຜູ້ໃຊ້ເຮືອ</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>ເບິ່ງ</value>
+  </data>
+  <data name="ViewAllUsers" xml:space="preserve">
+    <value>ເບິ່ງຜູ້ໃຊ້ທັງໝົດ</value>
+  </data>
+  <data name="ViewSectionAssignments" xml:space="preserve">
+    <value>ເບິ່ງການມອບໝາຍພາກສ່ວນ</value>
+  </data>
+  <data name="WelcomeToRender" xml:space="preserve">
+    <value>ຍິນດີຕ້ອນຮັບສູ່ Render</value>
+  </data>
+  <data name="WhichSnapshot" xml:space="preserve">
+    <value>ຮູບຖ່າຍ {0} ອັນໃດທີ່ທ່ານຕ້ອງການດຳເນີນຕໍ່ໄປ?</value>
+  </data>
+  <data name="WorkflowConfiguration" xml:space="preserve">
+    <value>ການຕັ້ງຄ່າຂະບວນການເຮັດວຽກ</value>
+  </data>
+  <data name="WorkflowDeleteStageMessage" xml:space="preserve">
+    <value>ເລືອກວິທີຈັດການວຽກທີ່ພວມດຳເນີນກ່ອນທີ່ຈະເອົາຂັ້ນຕອນອອກ:</value>
+  </data>
+  <data name="WorkflowDeleteStageTitle" xml:space="preserve">
+    <value>ຂັ້ນຕອນນີ້ປະກອບດ້ວຍຂໍ້ມູນ</value>
+  </data>
+  <data name="WorkWillBeLost" xml:space="preserve">
+    <value>ວຽກຂອງທ່ານຈະສູນເສຍໄປ</value>
+  </data>
+  <data name="DividePassageMessage" xml:space="preserve">
+    <value>ຖ້າ​ເຈົ້າ​ອອກ​ຈາກ​ການ​ແບ່ງ​ແຍກ​ໃນ​ຕອນ​ນີ້, ວຽກ​ງານ​ຂອງ​ເຈົ້າ​ຈະ​ສູນ​ເສຍ
+</value>
+  </data>
+  <data name="ErrorOccuredTryAgain" xml:space="preserve">
+    <value>ເກີດຄວາມຜິດພາດຂຶ້ນ. ກະລຸນາລອງອີກຄັ້ງ.
+</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>ຜິດພາດ
+</value>
+  </data>
+  <data name="RetellQuestionResponse" xml:space="preserve">
+    <value>Retell ແລະຄໍາຖາມ &amp; ຄໍາຕອບ
+</value>
+  </data>
+  <data name="DiscardWork" xml:space="preserve">
+    <value>ຍົກເລີກວຽກ</value>
+  </data>
+  <data name="SectionView" xml:space="preserve">
+    <value>ພາກສ່ວນເບິ່ງ</value>
+  </data>
+  <data name="TeamTitle" xml:space="preserve">
+    <value>ທີມ {0}</value>
+  </data>
+  <data name="TeamView" xml:space="preserve">
+    <value>ທັດສະນະຂອງທີມງານ</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>ສຳເນົາ</value>
+  </data>
+  <data name="SegmentSelect" xml:space="preserve">
+    <value>ເລືອກພາກສ່ວນ</value>
+  </data>
+  <data name="ClearSegmentsQuestion" xml:space="preserve">
+    <value>ລຶບພາກສ່ວນບໍ?</value>
+  </data>
+  <data name="ClearSegmentsConfirmation" xml:space="preserve">
+    <value>ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການລຶບສ່ວນປັດຈຸບັນ? ທ່ານບໍ່ສາມາດຍົກເລີກຄຳສັ່ງນີ້ໄດ້.</value>
+  </data>
+  <data name="SegmentReview" xml:space="preserve">
+    <value>ການທົບທວນສ່ວນ</value>
+  </data>
+  <data name="Question" xml:space="preserve">
+    <value>ຄໍາຖາມ</value>
+  </data>
+  <data name="SegmentCombine" xml:space="preserve">
+    <value>ສ່ວນປະສົມ</value>
+  </data>
+  <data name="CombineWarningMessage" xml:space="preserve">
+    <value>ສ່ວນສີແດງໄດ້ຖືກແປແລ້ວ. ການດຳເນີນການຈະລຶບການແປຄືນ.</value>
+  </data>
+  <data name="Configuration" xml:space="preserve">
+    <value>ການຕັ້ງຄ່າ</value>
+  </data>
+  <data name="ConfigureWorkflow" xml:space="preserve">
+    <value>ຕັ້ງຄ່າຂັ້ນຕອນການເຮັດວຽກ</value>
+  </data>
+  <data name="AssignSections" xml:space="preserve">
+    <value>ມອບໝາຍພາກສ່ວນ</value>
+  </data>
+  <data name="AssignRoles" xml:space="preserve">
+    <value>ມອບໝາຍໜ້າທີ່</value>
+  </data>
+  <data name="Workflow" xml:space="preserve">
+    <value>ຂະບວນການເຮັດວຽກ</value>
+  </data>
+  <data name="SelectUser" xml:space="preserve">
+    <value>ເລືອກຜູ້ໃຊ້</value>
+  </data>
+  <data name="AddUserButtonText" xml:space="preserve">
+    <value>ເພີ່ມຜູ້ໃຊ້</value>
+  </data>
+  <data name="Render" xml:space="preserve">
+    <value>Render</value>
+  </data>
+  <data name="Global" xml:space="preserve">
+    <value>ທົ່ວໂລກ</value>
+  </data>
+  <data name="TextPassword" xml:space="preserve">
+    <value>ຂໍ້ຄວາມລະຫັດຜ່ານ</value>
+  </data>
+  <data name="ViewAssignments" xml:space="preserve">
+    <value>ເບິ່ງການມອບໝາຍພາກ</value>
+  </data>
+  <data name="DeleteUserModalMessage" xml:space="preserve">
+    <value>ຖ້າ {0} ມີການມອບໝາຍພາກໃຫ້ເຂົາເຈົ້າ, ສິ່ງເຫຼົ່ານີ້ຈະຖືກລຶບອອກນຳ. ທ່ານບໍ່ສາມາດຍົກເລີກຄຳສັ່ງນີ້ໄດ້.</value>
+  </data>
+  <data name="Return" xml:space="preserve">
+    <value>ກັບຄືນ</value>
+  </data>
+  <data name="RetellIsNotAvailable" xml:space="preserve">
+    <value>ບໍ່ສາມາດບອກເລົ່າຄືນໄດ້</value>
+  </data>
+  <data name="QuestionAndResponseIsNotAvailable" xml:space="preserve">
+    <value>ບໍ່ມີຄຳຖາມ ແລະຄຳຕອບ</value>
+  </data>
+  <data name="CommunityFeedbackGuidance" xml:space="preserve">
+    <value>ຄຳແນະນຳການຕິຊົມຊຸມຊົນ</value>
+  </data>
+  <data name="Teams" xml:space="preserve">
+    <value>ທີມງານ</value>
+  </data>
+  <data name="DragTeamHere" xml:space="preserve">
+    <value>ລາກທີມມາທີ່ນີ້</value>
+  </data>
+  <data name="Configure" xml:space="preserve">
+    <value>ຕັ້ງຄ່າ</value>
+  </data>
+  <data name="QuestionNumberAndTotalNumberFormatted" xml:space="preserve">
+    <value>ຄຳຖາມທີ {0} ຈາກທັງໝົດ {1}</value>
+  </data>
+  <data name="GridPassword" xml:space="preserve">
+    <value>ລະຫັດຜ່ານຕາຂ່າຍ</value>
+  </data>
+  <data name="DragSectionHere" xml:space="preserve">
+    <value>ລາກພາກສ່ວນມາບ່ອນນີ້</value>
+  </data>
+  <data name="Sections" xml:space="preserve">
+    <value>ພາກສ່ວນ</value>
+  </data>
+  <data name="PressCircleToRecord" xml:space="preserve">
+    <value>ກົດວົງມົນເພື່ອບັນທຶກ</value>
+  </data>
+  <data name="PressCircleToRecordOrPressArrowToAddQuestionFromLibrary" xml:space="preserve">
+    <value>ກົດວົງມົນເພື່ອບັນທຶກ, ຫຼື {1} ກົດ {0} ເພື່ອເພີ່ມຄໍາຖາມ {1} ຈາກຫ້ອງສະຫມຸດ</value>
+  </data>
+  <data name="Library" xml:space="preserve">
+    <value>ຫໍສະໝຸດ</value>
+  </data>
+  <data name="NoQuestionsInTheLibrary" xml:space="preserve">
+    <value>ທ່ານບໍ່ມີຄໍາຖາມຢູ່ໃນຫ້ອງສະຫມຸດ</value>
+  </data>
+  <data name="Questions" xml:space="preserve">
+    <value>ຄຳຖາມ</value>
+  </data>
+  <data name="PressArrowToAddQuestion" xml:space="preserve">
+    <value>ກົດ {0} ເພື່ອເພີ່ມຄຳຖາມ</value>
+  </data>
+  <data name="Test" xml:space="preserve">
+    <value>ການທົດສອບ</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>ພາສາ</value>
+  </data>
+  <data name="Translate" xml:space="preserve">
+    <value>ແປ</value>
+  </data>
+  <data name="RetellOnly" xml:space="preserve">
+    <value>ເລົ່າຄືນເທົ່ານັ້ນ</value>
+  </data>
+  <data name="QuestionAndResponseOnly" xml:space="preserve">
+    <value>ຄໍາຖາມ &amp; ຄໍາຕອບເທົ່ານັ້ນ</value>
+  </data>
+  <data name="RenderAvailable" xml:space="preserve">
+    <value>ການສະແດງຜົນ {0} ມີໃຫ້</value>
+  </data>
+  <data name="DownloadRenderButton" xml:space="preserve">
+    <value>ດາວໂຫລດ Render ໃໝ່</value>
+  </data>
+  <data name="DownloadRenderMessage" xml:space="preserve">
+    <value>ດາວໂຫລດ Render {0} ໃໝ່ ແລະອັບເດດໃໝ່.</value>
+  </data>
+  <data name="OneUserOneTeam" xml:space="preserve">
+    <value>ຫນຶ່ງຜູ້ໃຊ້, ຫນຶ່ງທີມງານ</value>
+  </data>
+  <data name="UsersCannotBeAssignedToMultipleTeams" xml:space="preserve">
+    <value>ບໍ່ສາມາດມອບໝາຍຜູ້ໃຊ້ໃຫ້ກັບຫຼາຍທີມໄດ້.</value>
+  </data>
+  <data name="SaveWorkAndProceed" xml:space="preserve">
+    <value>ບັນທຶກວຽກແລະດໍາເນີນການ</value>
+  </data>
+  <data name="ExitAnyway" xml:space="preserve">
+    <value>ອອກຈາກແນວໃດ</value>
+  </data>
+  <data name="SaveWorkAndProceedMessage" xml:space="preserve">
+    <value>ກົດປຸ່ມລູກສອນຢູ່ເບື້ອງຂວາລຸ່ມເພື່ອບັນທຶກບົດບາດ ແລະດຳເນີນການຕໍ່.</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>ຫົວຂໍ້:</value>
+  </data>
+  <data name="TotalPassages" xml:space="preserve">
+    <value>ທາງຜ່ານທັງໝົດ:</value>
+  </data>
+  <data name="Reference" xml:space="preserve">
+    <value>ອ້າງອີງ:</value>
+  </data>
+  <data name="Process" xml:space="preserve">
+    <value>ຂະບວນການ:</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>ຜູ້ໃຊ້:</value>
+  </data>
+  <data name="NoSectionsAreInThisStep" xml:space="preserve">
+    <value>ບໍ່ມີພາກສ່ວນໃດຢູ່ໃນຂັ້ນຕອນນີ້</value>
+  </data>
+  <data name="NoteInterpretToConsultant" xml:space="preserve">
+    <value>ແປບັນທຶກສໍາລັບທີ່ປຶກສາ</value>
+  </data>
+  <data name="NoteInterpretToTranslator" xml:space="preserve">
+    <value>ແປບັນທຶກສໍາລັບນັກແປ</value>
+  </data>
+  <data name="AddUserLabel" xml:space="preserve">
+    <value>ເພີ່ມຜູ້ໃຊ້ໃໝ່</value>
+  </data>
+  <data name="ApprovedSection" xml:space="preserve">
+    <value>ພາກສ່ວນທີ່ໄດ້ຮັບການອະນຸມັດ</value>
+  </data>
+  <data name="BothSnapshotsDeleted" xml:space="preserve">
+    <value>ຮູບຖ່າຍທັງສອງໄດ້ຖືກລຶບແລ້ວ</value>
+  </data>
+  <data name="DeleteSnapshotsFor" xml:space="preserve">
+    <value>ລຶບ Snapshots ສໍາລັບ {0} ບໍ?</value>
+  </data>
+  <data name="DraftWillBeLost" xml:space="preserve">
+    <value>ຮ່າງຈະສູນເສຍ</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>ບໍ່</value>
+  </data>
+  <data name="PassageBackTranslate1" xml:space="preserve">
+    <value>ທາງຜ່ານການແປກັບຫຼັງ 1</value>
+  </data>
+  <data name="PassageBackTranslate2" xml:space="preserve">
+    <value>ທາງຜ່ານການແປກັບຫຼັງ 2</value>
+  </data>
+  <data name="PasswordRequiredToReset" xml:space="preserve">
+    <value>ຕ້ອງໃຊ້ລະຫັດຜ່ານເພື່ອຣີເຊັດພາກສ່ວນໃດໜຶ່ງ</value>
+  </data>
+  <data name="PasswordRequiredToRestore" xml:space="preserve">
+    <value>ຕ້ອງໃຊ້ລະຫັດຜ່ານເພື່ອກູ້ພາບຖ່າຍຄືນມາ</value>
+  </data>
+  <data name="TeamWasChosen" xml:space="preserve">
+    <value>ທີມ {0} ຖືກເລືອກ</value>
+  </data>
+  <data name="UserAndTeamWereChosenForSection" xml:space="preserve">
+    <value>{0} ຖືກເລືອກສໍາລັບ {1}</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>ແມ່ນແລ້ວ</value>
+  </data>
+  <data name="YouCannotUndo" xml:space="preserve">
+    <value>ທ່ານບໍ່ສາມາດຍົກເລີກການກະທຳນີ້ໄດ້</value>
+  </data>
+  <data name="YouHaveChosen" xml:space="preserve">
+    <value>ທ່ານ​ໄດ້​ເລືອກ​ເອົາ​:</value>
+  </data>
+  <data name="ResetSectionWarning" xml:space="preserve">
+    <value>ພາກສ່ວນການຣີເຊັດຈະລຶບຂໍ້ມູນທັງໝົດໃນຂັ້ນຕອນສະບັບຮ່າງ. ຄຳສັ່ງນີ້ບໍ່ສາມາດຍົກເລີກໄດ້.</value>
+  </data>
+  <data name="RemovedFromProject" xml:space="preserve">
+    <value>ລຶບອອກຈາກໂຄງການ</value>
+  </data>
+  <data name="DraftEdit" xml:space="preserve">
+    <value>ດັດແກ້ຮ່າງ</value>
+  </data>
+  <data name="Stages" xml:space="preserve">
+    <value>ຂັ້ນຕອນ</value>
+  </data>
+  <data name="SectionListenScreenTitle" xml:space="preserve">
+    <value>ພາກສ່ວນຟັງ</value>
+  </data>
+  <data name="PassageListenScreenTitle" xml:space="preserve">
+    <value>ທາງຜ່ານຟັງ</value>
+  </data>
+  <data name="PassageDivideScreenTitle" xml:space="preserve">
+    <value>ແບ່ງທາງຜ່ານ</value>
+  </data>
+  <data name="PassageReviewScreenTitle" xml:space="preserve">
+    <value>ການທົບທວນຄືນທາງຜ່ານ</value>
+  </data>
+  <data name="SectionReviewScreenTitle" xml:space="preserve">
+    <value>ທົບທວນຄືນພາກສ່ວນ</value>
+  </data>
+  <data name="TranscribePassageScreenTitle" xml:space="preserve">
+    <value>ການຖອດຂໍ້ຄວາມທາງຜ່ານ</value>
+  </data>
+  <data name="TranscribeSegmentScreenTitle" xml:space="preserve">
+    <value>ພາກສ່ວນການຖອດຂໍ້ຄວາມ</value>
+  </data>
+  <data name="DoPassageTranscribeScreenTitle" xml:space="preserve">
+    <value>ການຖອດຂໍ້ຄວາມທາງຜ່ານ</value>
+  </data>
+  <data name="DoSegmentTranscribeScreenTitle" xml:space="preserve">
+    <value>ການຖອດຂໍ້ຄວາມຈາກພາກສ່ວນ</value>
+  </data>
+  <data name="UserWasChosen" xml:space="preserve">
+    <value>{0} ຖືກເລືອກ</value>
+  </data>
+  <data name="UserWasChosenForSection" xml:space="preserve">
+    <value>{0} ຖືກເລືອກສໍາລັບ {1}</value>
+  </data>
+  <data name="NoteInterpretScreenTitle" xml:space="preserve">
+    <value>ໝາຍເຫດ ແປ</value>
+  </data>
+  <data name="RequirePassageListenPeerCheckSetting" xml:space="preserve">
+    <value>ທາງຜ່ານຟັງຄໍາແນະນໍາ</value>
+  </data>
+  <data name="RequireSectionListenPeerCheckSetting" xml:space="preserve">
+    <value>ພາກສ່ວນຟັງຄໍາແນະນໍາ</value>
+  </data>
+  <data name="OffloadProject" xml:space="preserve">
+    <value>ໂຫຼດ {0} ບໍ?</value>
+  </data>
+  <data name="ContactSupport" xml:space="preserve">
+    <value>ຕິດ​ຕໍ່​ສະ​ຫນັບ​ສະ​ຫນູນ​ສໍາ​ລັບ​ການ​ຊ່ວຍ​ເຫຼືອ​.</value>
+  </data>
+  <data name="ErrorWithMessage" xml:space="preserve">
+    <value>ຜິດພາດ [{0}]</value>
+  </data>
+  <data name="NoProjectsToDownload" xml:space="preserve">
+    <value>ບໍ່ມີໂຄງການໃຫ້ດາວໂຫຼດ</value>
+  </data>
+  <data name="WrongPassword" xml:space="preserve">
+    <value>ລະຫັດຜ່ານຜິດ. ກະລຸນາລອງໃໝ່ອີກຄັ້ງ.</value>
+  </data>
+  <data name="SyncFailed" xml:space="preserve">
+    <value>ລົ້ມເຫລວ</value>
+  </data>
+  <data name="DragUserHere" xml:space="preserve">
+    <value>ລາກຜູ້ໃຊ້ມາທີ່ນີ້</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>ຜູ້ໃຊ້</value>
+  </data>
+  <data name="DownloadFailed" xml:space="preserve">
+    <value>ການດາວໂຫຼດລົ້ມເຫລວ.</value>
+  </data>
+  <data name="ExportComplete" xml:space="preserve">
+    <value>ສົ່ງອອກສຳເລັດ</value>
+  </data>
+  <data name="NoSectionsAvailable" xml:space="preserve">
+    <value>ບໍ່ມີພາກສ່ວນທີ່ມີຢູ່</value>
+  </data>
+  <data name="TryAgain" xml:space="preserve">
+    <value>ກະລຸນາລອງອີກຄັ້ງ</value>
+  </data>
+  <data name="SelectedSnapshotMessageTemplate" xml:space="preserve">
+    <value>{0}, {1} {2} {3}, {4}</value>
+  </data>
+  <data name="TeamWasChosenForSection" xml:space="preserve">
+    <value>{0} ຂອງ {1}, {2}, ຖືກເລືອກສໍາລັບ {3}</value>
+  </data>
+  <data name="CombineWarningTitle" xml:space="preserve">
+    <value>ການແປຄືນຈະຖືກລຶບ</value>
+  </data>
+  <data name="January" xml:space="preserve">
+    <value>ມັງກອນ</value>
+  </data>
+  <data name="February" xml:space="preserve">
+    <value>ເດືອນກຸມພາ</value>
+  </data>
+  <data name="March" xml:space="preserve">
+    <value>ມີນາ</value>
+  </data>
+  <data name="April" xml:space="preserve">
+    <value>ເດືອນເມສາ</value>
+  </data>
+  <data name="May" xml:space="preserve">
+    <value>ພຶດສະພາ</value>
+  </data>
+  <data name="June" xml:space="preserve">
+    <value>ເດືອນມິຖຸນາ</value>
+  </data>
+  <data name="July" xml:space="preserve">
+    <value>ກໍລະກົດ</value>
+  </data>
+  <data name="August" xml:space="preserve">
+    <value>ສິງຫາ</value>
+  </data>
+  <data name="September" xml:space="preserve">
+    <value>ກັນຍາ</value>
+  </data>
+  <data name="October" xml:space="preserve">
+    <value>ຕຸລາ</value>
+  </data>
+  <data name="November" xml:space="preserve">
+    <value>ເດືອນພະຈິກ</value>
+  </data>
+  <data name="December" xml:space="preserve">
+    <value>ເດືອນທັນວາ</value>
+  </data>
+  <data name="SegmentBackTranslate1" xml:space="preserve">
+    <value>ສ່ວນທີແປກັບຫຼັງ 1</value>
+  </data>
+  <data name="SegmentBackTranslate2" xml:space="preserve">
+    <value>ສ່ວນທີແປກັບຫຼັງ 2</value>
+  </data>
+  <data name="NoSectionAssignedTitle" xml:space="preserve">
+    <value>ທ່ານຍັງບໍ່ໄດ້ມອບໝາຍພາກສ່ວນໃດເທື່ອ</value>
+  </data>
+  <data name="NoSectionAssignedMessage" xml:space="preserve">
+    <value>ຕ້ອງໄດ້ມອບໝາຍພາກສ່ວນຕ່າງໆເພື່ອສະແດງຢູ່ບ່ອນນີ້.</value>
+  </data>
+  <data name="SegmentLabel" xml:space="preserve">
+    <value> ພາກສ່ວນ</value>
+  </data>
+  <data name="DeletedUser" xml:space="preserve">
+    <value>ລຶບຜູ້ໃຊ້ແລ້ວ</value>
+  </data>
+  <data name="CannotLoadData" xml:space="preserve">
+    <value>ບໍ່ສາມາດໂຫຼດຂໍ້ມູນສຳລັບພາກທີ {0} ໄດ້</value>
+  </data>
+  <data name="SyncAndTryAgain" xml:space="preserve">
+    <value>ຖ້າອັນນີ້ຍັງສືບຕໍ່ເກີດຂຶ້ນ, ກະລຸນາພະຍາຍາມ sync ເວັບ ຫຼືລອງ offload/download ໂຄງການ</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>ລອງໃໝ່</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>ຄວາມ​ສໍາ​ເລັດ!</value>
+  </data>
+  <data name="AddFromComputer" xml:space="preserve">
+    <value>ເພີ່ມໂຄງການຈາກຄອມພິວເຕີ</value>
+  </data>
+  <data name="CannotLoadAudio" xml:space="preserve">
+    <value>ບໍ່ສາມາດໂຫຼດສຽງໄດ້</value>
+  </data>
+</root>

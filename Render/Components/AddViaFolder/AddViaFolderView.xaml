@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="addProject:IAddProjectViewModel"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:kernel="using:Render.Kernel"
+                            xmlns:local="using:Render.Components.AddViaFolder"
+                            xmlns:resources="clr-namespace:Render.Resources"
+                            xmlns:localization="clr-namespace:Render.Resources.Localization"
+                            xmlns:common="clr-namespace:Render.Common"
+                            xmlns:addProject="using:Render.Components.AddProject"
+                            x:Class="Render.Components.AddViaFolder.AddViaFolderView">
+    
+    <Grid ColumnDefinitions="Auto,*,Auto"
+          x:Name="TopLevelElement" 
+          VerticalOptions="Center"
+          HorizontalOptions="Center">
+
+        <Grid Grid.Column="1" RowDefinitions="Auto,Auto">
+
+            <Image Grid.Row="0"
+                   Style="{StaticResource RenderLogoStyle}"
+                   AutomationId="LogoImage" />
+
+            <!-- Adding Project Loading Stack -->
+            <Grid Grid.Row="1"
+                  RowDefinitions="Auto,Auto"
+                  Style="{StaticResource DownloadStatusGrid}"
+                  x:Name="LoadingStack"
+                  AutomationId="LoadingStack">
+
+                <VerticalStackLayout Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Label Style="{StaticResource LoadingTextStyle}"
+                           Text="{x:Static localization:AppResources.AddingProject}"
+                           TextColor="{StaticResource Option}"
+                           AutomationId="AddingProjectLabel" />
+                    <Label x:Name="AddingProjectIdLabel"
+                           Style="{StaticResource ProjectIdLabelStyle}" />
+                    <common:LoadingBar Margin="0,19,0,0" />
+                </VerticalStackLayout>
+
+                <Border Grid.Row="1"
+                        Style="{StaticResource ButtonBorder}"
+                        AutomationId="CancelButtonFrame">
+
+                    <Grid Style="{StaticResource ButtonBackground}">
+
+                        <Grid ColumnDefinitions="Auto,*"
+                              ColumnSpacing="13"
+                              HorizontalOptions="Center"
+                              AutomationId="LoginPanel">
+                            <Label Grid.Column="0"
+                                   Style="{StaticResource ButtonIcon}"
+                                   AutomationId="RemoveIcon"
+                                   Text="{resources:IconExtensions Remove}" />
+                            <Label Grid.Column="1"
+                                   Style="{StaticResource ButtonText}"
+                                   AutomationId="CancelLabel"
+                                   Text="{x:Static localization:AppResources.Cancel}" />
+                        </Grid>
+                    </Grid>
+
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="CancelOnDownloadingGesture" />
+                    </Border.GestureRecognizers>
+                </Border>
+            </Grid>
+
+            <!-- Error Adding Project Stack -->
+            <Grid Grid.Row="1"
+                  x:Name="ErrorAddingProjectStack"
+                  Style="{StaticResource DownloadStatusGrid}"
+                  RowDefinitions="Auto,Auto"
+                  AutomationId="ErrorAddingProjectStack">
+
+                <Grid RowDefinitions="120,Auto,Auto,Auto" Grid.Row="0"
+                      AutomationId="ErrorAddingProjectInnerStack"
+                      HorizontalOptions="Fill">
+                    <Label Grid.Row="0"
+                           Style="{StaticResource DownloadStatusIcon}"
+                           Text="{resources:IconExtensions TypeWarning}"
+                           AutomationId="ErrorAddingProjectIcon" />
+                    <Label Grid.Row="1" Style="{StaticResource DownloadStatusTitle}"
+                           Text="{x:Static localization:AppResources.TryAgain}" />
+                    <Label Grid.Row="2"
+                           Style="{StaticResource DownloadStatusSubTitle}"
+                           x:Name="ErrorAddingProjectLabel"
+                           AutomationId="ErrorAddingProjectLabel"
+                           Text="{x:Static localization:AppResources.ErrorAddingProject}" />
+                    <Label Grid.Row="3"
+                           x:Name="ErrorProjectIdLabel"
+                           Style="{StaticResource ProjectIdLabelStyle}" />
+                </Grid>
+
+                <!-- Retry & Cancel buttons -->
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="48" Grid.Row="2">
+
+                    <Border x:Name="RetryDownloadFrame"
+                            Style="{StaticResource ButtonBorder}"
+                            StrokeShape="RoundRectangle 8"
+                            AutomationId="RetryDownloadFrame">
+
+                        <Grid Style="{StaticResource ButtonBackground}">
+
+                            <Grid ColumnDefinitions="Auto,*"
+                                  ColumnSpacing="13"
+                                  HorizontalOptions="Center"
+                                  AutomationId="RetryDownloadStack">
+                                <Label Grid.Column="0"
+                                       Style="{StaticResource ButtonIcon}"
+                                       AutomationId="RetryDownloadIcon"
+                                       Text="{resources:IconExtensions Retry}" />
+                                <Label Grid.Column="1"
+                                       Style="{StaticResource ButtonText}"
+                                       AutomationId="RetryDownloadButtonLabel"
+                                       Text="{x:Static localization:AppResources.Retry}" />
+                            </Grid>
+                        </Grid>
+
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="RetryOnErrorGesture" />
+                        </Border.GestureRecognizers>
+                    </Border>
+
+                    <Border Style="{StaticResource ButtonBorder}"
+                            StrokeShape="RoundRectangle 8"
+                            AutomationId="CancelDownloadFrame">
+
+                        <Grid Style="{StaticResource ButtonBackground}">
+
+                            <Grid ColumnDefinitions="Auto,*"
+                                  ColumnSpacing="13"
+                                  HorizontalOptions="Center"
+                                  AutomationId="CancelDownloadStack">
+                                <Label Grid.Column="0"
+                                       Style="{StaticResource ButtonIcon}"
+                                       AutomationId="CancelDownloadIcon"
+                                       Text="{resources:IconExtensions Remove}" />
+                                <Label Grid.Column="1"
+                                       Style="{StaticResource ButtonText}"
+                                       AutomationId="CancelDownloadButtonLabel"
+                                       Text="{x:Static localization:AppResources.Cancel}" />
+                            </Grid>
+                        </Grid>
+
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="CancelOnErrorGesture" />
+                        </Border.GestureRecognizers>
+                    </Border>
+                </HorizontalStackLayout>
+            </Grid>
+
+            <!-- Project Added Success Stack -->
+            <Grid Grid.Row="1"
+                  x:Name="ProjectAddedSuccessStack"
+                  RowDefinitions="Auto,Auto"
+                  Style="{StaticResource DownloadStatusGrid}"
+                  AutomationId="ProjectAddedSuccessStack">
+
+                <Grid Grid.Row="0" 
+                      RowDefinitions="Auto,Auto,Auto,Auto"
+                      AutomationId="ProjectAddedSuccessStackInnerStack">
+
+                    <Label Grid.Row="0" Style="{StaticResource DownloadStatusIcon}"
+                           Text="{resources:IconExtensions FinishedPassOrSubmit}"
+                           AutomationId="ProjectAddedSuccessIcon" />
+                    <Label Grid.Row="1" Style="{StaticResource DownloadStatusTitle}"
+                           Text="{x:Static localization:AppResources.Success}"
+                           AutomationId="ProjectAddedSuccessLabel" />
+                    <Label Grid.Row="2" 
+                           Style="{StaticResource DownloadStatusSubTitle}"
+                           Text="{x:Static localization:AppResources.ProjectAddedSuccesfully}"
+                           AutomationId="ProjectAddedSuccessIdLabel" />
+                    <Label Grid.Row="3"
+                           x:Name="SuccessProjectIdLabel"
+                           Style="{StaticResource ProjectIdLabelStyle}" />
+                </Grid>
+
+                <Border Grid.Row="1" 
+                        Style="{StaticResource ButtonBorder}"
+                        AutomationId="ReturnToScreenBorder">
+
+                    <Grid Style="{StaticResource ButtonBackground}">
+
+                        <Grid ColumnDefinitions="Auto,*"
+                              ColumnSpacing="13"
+                              HorizontalOptions="Center"
+                              AutomationId="ReturnToScreenGrid">
+                            <Label Grid.Column="0"
+                                   Style="{StaticResource ButtonIcon}"
+                                   Text="{resources:IconExtensions LogOut}"
+                                   AutomationId="ReturnToScreenIcon" />
+
+                            <Label Grid.Column="1" x:Name="ReturnToScreenLabel"
+                                   Style="{StaticResource ButtonText}"
+                                   AutomationId="ReturnLogInButtonLabel" />
+                        </Grid>
+                    </Grid>
+
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="NavigateOnCompletedGesture" />
+                    </Border.GestureRecognizers>
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</kernel:RenderComponentBase>

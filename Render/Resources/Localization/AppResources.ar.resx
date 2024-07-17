@@ -1,0 +1,1665 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Add" xml:space="preserve">
+    <value>إضافة</value>
+  </data>
+  <data name="AddAProject" xml:space="preserve">
+    <value>إضافة مشروع</value>
+  </data>
+  <data name="AddASection" xml:space="preserve">
+    <value>إضافة قسم</value>
+  </data>
+  <data name="AddATeam" xml:space="preserve">
+    <value>إضافة فريق</value>
+  </data>
+  <data name="Added" xml:space="preserve">
+    <value>تمت الإضافة</value>
+  </data>
+  <data name="Adding" xml:space="preserve">
+    <value>إضافة</value>
+  </data>
+  <data name="AddingProject" xml:space="preserve">
+    <value>إضافة مشروع...</value>
+  </data>
+  <data name="AddNew" xml:space="preserve">
+    <value>إضافة جديد</value>
+  </data>
+  <data name="AddProject" xml:space="preserve">
+    <value>إضافة مشروع</value>
+  </data>
+  <data name="AddProjectViaId" xml:space="preserve">
+    <value>إضافة مشروع عبر المعرِّف</value>
+  </data>
+  <data name="AddSection" xml:space="preserve">
+    <value>إضافة قسم</value>
+  </data>
+  <data name="AddStage" xml:space="preserve">
+    <value>إضافة مرحلة</value>
+  </data>
+  <data name="AddStageHere" xml:space="preserve">
+    <value>اسحب المرحلة هنا</value>
+  </data>
+  <data name="AddTeam" xml:space="preserve">
+    <value>إضافة فريق</value>
+  </data>
+  <data name="AddUser" xml:space="preserve">
+    <value>إضافة مستخدم</value>
+  </data>
+  <data name="AddWorkflowStage" xml:space="preserve">
+    <value>إضافة مرحلة سير عمل</value>
+  </data>
+  <data name="AllowEditing" xml:space="preserve">
+    <value>السماح بالتعديل</value>
+  </data>
+  <data name="AllSections" xml:space="preserve">
+    <value>جميع الأقسام</value>
+  </data>
+  <data name="AllSectionsAssigned" xml:space="preserve">
+    <value>تم تعيين جميع الأقسام.</value>
+  </data>
+  <data name="Approval" xml:space="preserve">
+    <value>الموافقة</value>
+  </data>
+  <data name="ApprovalSubmitted" xml:space="preserve">
+    <value>تم إرسال الموافقة بنجاح</value>
+  </data>
+  <data name="Approve" xml:space="preserve">
+    <value>الموافقة</value>
+  </data>
+  <data name="Approved" xml:space="preserve">
+    <value>تمت الموافقة</value>
+  </data>
+  <data name="ApprovedByLabel" xml:space="preserve">
+    <value>تمت الموافقة من قبل:</value>
+  </data>
+  <data name="ApprovedDraft" xml:space="preserve">
+    <value>لقد وافقت على المسودة</value>
+  </data>
+  <data name="ApproveSection" xml:space="preserve">
+    <value>تأكيد القسم {0}</value>
+  </data>
+  <data name="ArchivedDrafts" xml:space="preserve">
+    <value>المسودات المؤرشفة</value>
+  </data>
+  <data name="ArchivedNotes" xml:space="preserve">
+    <value>ملاحظات مؤرشفة</value>
+  </data>
+  <data name="ArrangeWorkflowStages" xml:space="preserve">
+    <value>ترتيب مراحل سير العمل</value>
+  </data>
+  <data name="Assigned" xml:space="preserve">
+    <value>{0} تم التعيين</value>
+  </data>
+  <data name="AssignToTranslator" xml:space="preserve">
+    <value>قم بالتعيين للمترجم</value>
+  </data>
+  <data name="AudioClip" xml:space="preserve">
+    <value>مقطع صوتي</value>
+  </data>
+  <data name="AudioNote" xml:space="preserve">
+    <value>ملاحظة صوتية</value>
+  </data>
+  <data name="BackTranslate" xml:space="preserve">
+    <value>الترجمة الارتدادية</value>
+  </data>
+  <data name="BackTranslate1" xml:space="preserve">
+    <value>الترجمة الارتدادية 1</value>
+  </data>
+  <data name="BackTranslate2" xml:space="preserve">
+    <value>الترجمة الارتدادية 2</value>
+  </data>
+  <data name="BackTranslator" xml:space="preserve">
+    <value>مترجم ترجمة ارتدادية</value>
+  </data>
+  <data name="BackTranslator2" xml:space="preserve">
+    <value>المترجم الذي يقوم بالترجمة الارتدادية 2</value>
+  </data>
+  <data name="Both" xml:space="preserve">
+    <value>كلاهما</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>إلغاء</value>
+  </data>
+  <data name="Canceled" xml:space="preserve">
+    <value>تم الإلغاء</value>
+  </data>
+  <data name="Canceling" xml:space="preserve">
+    <value>الإلغاء</value>
+  </data>
+  <data name="Check" xml:space="preserve">
+    <value>تحقق</value>
+  </data>
+  <data name="Check2" xml:space="preserve">
+    <value>تحقق 2</value>
+  </data>
+  <data name="ChooseProjectsForDeviceMessage" xml:space="preserve">
+    <value>اختر المشاريع التي ترغب في ربطها بهذا الجهاز.</value>
+  </data>
+  <data name="ChosenDraft" xml:space="preserve">
+    <value>المسودة المختارة</value>
+  </data>
+  <data name="Chunk" xml:space="preserve">
+    <value>قطعة {0}</value>
+  </data>
+  <data name="ClearSegmentMessage1" xml:space="preserve">
+    <value>سيؤدي المضي قدمًا إلى مسح المجموعة الحالية من الأجزاء التي تم تقسيم هذا المقطع إليها.</value>
+  </data>
+  <data name="ClearSegmentMessage2" xml:space="preserve">
+    <value>إذا تم إنشاء التقسيم السابق بشكل مخصص وليس المجموعة الافتراضية، فلا يمكن استرداد هذه الأجزاء.</value>
+  </data>
+  <data name="ClearSegments" xml:space="preserve">
+    <value>مسح الأجزاء</value>
+  </data>
+  <data name="DeleteSnapshots" xml:space="preserve">
+    <value>مسح كلتا اللقطتين</value>
+  </data>
+  <data name="ClearSnapshotsDescription" xml:space="preserve">
+    <value>سيتم تجاهل كلتا اللقطتين. سيؤدي ذلك إلى تقدم القسم إلى اللقطة السابقة.</value>
+  </data>
+  <data name="CombinedBackTranslate" xml:space="preserve">
+    <value>ترجمة ارتدادية مجمعة</value>
+  </data>
+  <data name="CombineSegmentTitle" xml:space="preserve">
+    <value>دمج - الفقرة {0}</value>
+  </data>
+  <data name="CommunityCheck" xml:space="preserve">
+    <value>الفحص المجتمعي</value>
+  </data>
+  <data name="CommunityRetellPassage" xml:space="preserve">
+    <value>الفقرة {0} - إعادة سرد</value>
+  </data>
+  <data name="CommunityRevise" xml:space="preserve">
+    <value>مراجعة المجتمع</value>
+  </data>
+  <data name="CommunitySetup" xml:space="preserve">
+    <value>إعداد المجتمع</value>
+  </data>
+  <data name="CommunityTest" xml:space="preserve">
+    <value>اختبار مجتمعي</value>
+  </data>
+  <data name="CommunityTestRevise" xml:space="preserve">
+    <value>مراجعة اختبار المجتمع</value>
+  </data>
+  <data name="CommunityTestSetup" xml:space="preserve">
+    <value>إعداد المجتمع</value>
+  </data>
+  <data name="CompleteWork" xml:space="preserve">
+    <value>إكمال العمل</value>
+  </data>
+  <data name="CompleteWorkMessage" xml:space="preserve">
+    <value>ستتم إزالة هذه المرحلة بمجرد اكتمال أي عمل قيد المعالجة أولاً.</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>تأكيد</value>
+  </data>
+  <data name="Confirmation" xml:space="preserve">
+    <value>التأكيد</value>
+  </data>
+  <data name="Consultant" xml:space="preserve">
+    <value>الاستشاري</value>
+  </data>
+  <data name="ConsultantApproval" xml:space="preserve">
+    <value>موافقة الاستشاري</value>
+  </data>
+  <data name="ConsultantCheck" xml:space="preserve">
+    <value>فحص الاستشاري</value>
+  </data>
+  <data name="ConsultantLanguage" xml:space="preserve">
+    <value>لغة الاستشاري</value>
+  </data>
+  <data name="ConsultantRevise" xml:space="preserve">
+    <value>مراجعة الاستشاري</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>متابعة</value>
+  </data>
+  <data name="CopyPreviousQuestions" xml:space="preserve">
+    <value>نسخ الأسئلة السابقة</value>
+  </data>
+  <data name="CopyQuestions" xml:space="preserve">
+    <value>نسخ الأسئلة</value>
+  </data>
+  <data name="Current" xml:space="preserve">
+    <value>الحالي {0}</value>
+  </data>
+  <data name="DeactivateStepWarning" xml:space="preserve">
+    <value>عند إيقاف تشغيل أي خطوة، ستنتقل جميع الأقسام إلى الخطوة التالية في سير العمل.</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="DeleteSnapshotsConfirmation" xml:space="preserve">
+    <value>هل ترغب بالتأكيد في مسح كلتا اللقطتين؟</value>
+  </data>
+  <data name="DeleteUser" xml:space="preserve">
+    <value>حذف مستخدم</value>
+  </data>
+  <data name="DeleteUserMessage" xml:space="preserve">
+    <value>سيؤدي حذف {0} أيضًا إلى إزالة جميع مهام القسم الخاصة بهم. لا يمكنك التراجع عن هذا الإجراء.</value>
+  </data>
+  <data name="DeleteUserTitle" xml:space="preserve">
+    <value>حذف المستخدم؟</value>
+  </data>
+  <data name="DividePassageTitle" xml:space="preserve">
+    <value>تقسيم الفقرة</value>
+  </data>
+  <data name="Do2StepBackTranslate" xml:space="preserve">
+    <value>ترجمة ارتدادية في خطوتين</value>
+  </data>
+  <data name="DoNoteInterpret" xml:space="preserve">
+    <value>قم بتضمين شرح الملاحظات</value>
+  </data>
+  <data name="DoNoteReview" xml:space="preserve">
+    <value>مراجعة الملاحظة</value>
+  </data>
+  <data name="DoPassageBackTranslate1" xml:space="preserve">
+    <value>قم بترجمة الفقرة ترجمة ارتدادية 1</value>
+  </data>
+  <data name="DoPassageBackTranslate2" xml:space="preserve">
+    <value>قم بترجمة الفقرة ترجمة ارتدادية 2</value>
+  </data>
+  <data name="DoPassageListen" xml:space="preserve">
+    <value>قم بتضمين الاستماع إلى الفقرة</value>
+  </data>
+  <data name="DoPassageReview" xml:space="preserve">
+    <value>مراجعة الفقرة</value>
+  </data>
+  <data name="DoPassageTranscribe" xml:space="preserve">
+    <value>نسخ الفقرة</value>
+  </data>
+  <data name="DoQuestionAndResponse" xml:space="preserve">
+    <value>تضمين السؤال والإجابة</value>
+  </data>
+  <data name="DoRetell" xml:space="preserve">
+    <value>كرر القول</value>
+  </data>
+  <data name="DoSectionListen" xml:space="preserve">
+    <value>قم بتضمين قسم الاستماع</value>
+  </data>
+  <data name="DoSectionReview" xml:space="preserve">
+    <value>قم بتضمين مراجعة القسم</value>
+  </data>
+  <data name="DoSegmentBackTranslate1" xml:space="preserve">
+    <value>قم بترجمة الجزء ترجمة ارتدادية 1</value>
+  </data>
+  <data name="DoSegmentBackTranslate2" xml:space="preserve">
+    <value>قم بترجمة الجزء ترجمة ارتدادية 2</value>
+  </data>
+  <data name="DoSegmentTranscribe" xml:space="preserve">
+    <value>نسخ الجزء</value>
+  </data>
+  <data name="DoTranscribe" xml:space="preserve">
+    <value>قم بالنسخ</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>تنزيل</value>
+  </data>
+  <data name="Downloaded" xml:space="preserve">
+    <value>تم التنزيل</value>
+  </data>
+  <data name="DownloadingProjects" xml:space="preserve">
+    <value>تنزيل المشاريع</value>
+  </data>
+  <data name="Draft" xml:space="preserve">
+    <value>مسودة</value>
+  </data>
+  <data name="DraftedByLabel" xml:space="preserve">
+    <value>تمت صياغته بواسطة:</value>
+  </data>
+  <data name="DraftNotes" xml:space="preserve">
+    <value>مسودة {0} ملاحظات</value>
+  </data>
+  <data name="DraftPassage" xml:space="preserve">
+    <value>ترجمة الفقرة {0}</value>
+  </data>
+  <data name="DraftRecord" xml:space="preserve">
+    <value>مسودة السجل</value>
+  </data>
+  <data name="DraftReplacementModalTitle" xml:space="preserve">
+    <value>حدد مسودة لاستبدالها</value>
+  </data>
+  <data name="DraftReview" xml:space="preserve">
+    <value>مسودة {0} المراجعة</value>
+  </data>
+  <data name="Drafts" xml:space="preserve">
+    <value>المسودات</value>
+  </data>
+  <data name="DraftSelect" xml:space="preserve">
+    <value>اختيار المسودة</value>
+  </data>
+  <data name="DraftSelection" xml:space="preserve">
+    <value>اختيار المسودة</value>
+  </data>
+  <data name="DraftTitle" xml:space="preserve">
+    <value>مسودة {0}</value>
+  </data>
+  <data name="EditPassage" xml:space="preserve">
+    <value>تعديل المقطع {0}</value>
+  </data>
+  <data name="EditUser" xml:space="preserve">
+    <value>تعديل المستخدم</value>
+  </data>
+  <data name="EmptyCollectionMessage" xml:space="preserve">
+    <value>قائمة المشروع فارغة.</value>
+  </data>
+  <data name="EmptyCollectionMessageTitle" xml:space="preserve">
+    <value>قائمة المشروع فارغة.</value>
+  </data>
+  <data name="EmptyOffloadCollectionMessage" xml:space="preserve">
+    <value>لا توجد مشاريع لتفريغها</value>
+  </data>
+  <data name="EmptyPassword" xml:space="preserve">
+    <value>لا يمكن أن تكون كلمة المرور فارغة</value>
+  </data>
+  <data name="End" xml:space="preserve">
+    <value>النهاية</value>
+  </data>
+  <data name="Enter32digitId" xml:space="preserve">
+    <value>أدخل المعرِّف المكون من 32 رقمًا...</value>
+  </data>
+  <data name="EnterAProjectName" xml:space="preserve">
+    <value>أدخل اسم مشروع</value>
+  </data>
+  <data name="EnterLanguage" xml:space="preserve">
+    <value>أدخل اسم اللغة</value>
+  </data>
+  <data name="EnterPasswordToRestoreSection" xml:space="preserve">
+    <value>أدخل كلمة المرور الخاصة بك لفتح هذا القسم واستعادته</value>
+  </data>
+  <data name="EnterSectionNumber" xml:space="preserve">
+    <value>أدخل رقم القسم...</value>
+  </data>
+  <data name="EnterYourPassword" xml:space="preserve">
+    <value>أدخل كلمة المرور</value>
+  </data>
+  <data name="EnterYourUsername" xml:space="preserve">
+    <value>أدخل اسم المستخدم الخاص بك</value>
+  </data>
+  <data name="ErrorAddingProject" xml:space="preserve">
+    <value>لقد حدث خطأ أثناء إضافة هذا المشروع.</value>
+  </data>
+  <data name="ErrorConnectLocalMachine" xml:space="preserve">
+    <value>لقد حدث خطأ أثناء محاولة الاتصال بجهاز محلي.</value>
+  </data>
+  <data name="ExportAudio" xml:space="preserve">
+    <value>تصدير الصوت</value>
+  </data>
+  <data name="ExportChecked" xml:space="preserve">
+    <value>تم فحص التصدير</value>
+  </data>
+  <data name="Exporting" xml:space="preserve">
+    <value>تصدير {0} من {1}</value>
+  </data>
+  <data name="FontSize" xml:space="preserve">
+    <value>حجم الخط</value>
+  </data>
+  <data name="ForTeam" xml:space="preserve">
+    <value>بالنسبة لـ {0}</value>
+  </data>
+  <data name="Generate" xml:space="preserve">
+    <value>إنشاء</value>
+  </data>
+  <data name="Generic" xml:space="preserve">
+    <value>عامل</value>
+  </data>
+  <data name="GlobalUser" xml:space="preserve">
+    <value>مستخدم عالمي</value>
+  </data>
+  <data name="Grid" xml:space="preserve">
+    <value>شبكة</value>
+  </data>
+  <data name="HaveBeenCleared" xml:space="preserve">
+    <value>تم المسح</value>
+  </data>
+  <data name="HigherPriority" xml:space="preserve">
+    <value>أولوية أعلى</value>
+  </data>
+  <data name="HowToResolve" xml:space="preserve">
+    <value>كيف تريد حل هذه المشكلة؟</value>
+  </data>
+  <data name="ImproperlyFormattedId" xml:space="preserve">
+    <value>معرِّف تم تنسيقه بشكل غير صحيح. يرجى إعادة إدخاله.</value>
+  </data>
+  <data name="IncludeBackTranslate" xml:space="preserve">
+    <value>قم بتضمين الترجمة الارتدادية</value>
+  </data>
+  <data name="IncludeNoteListenGuidance" xml:space="preserve">
+    <value>قم بتضمين إرشادات الاستماع والملاحظات</value>
+  </data>
+  <data name="IncludePassageBackTranslate" xml:space="preserve">
+    <value>قم بتضمين ترجمة الفقرة ترجمة ارتدادية</value>
+  </data>
+  <data name="IncludePassageListen" xml:space="preserve">
+    <value>قم بتضمين الاستماع إلى الفقرة</value>
+  </data>
+  <data name="IncludePassageReview" xml:space="preserve">
+    <value>قم بتضمين مراجعة الفقرة</value>
+  </data>
+  <data name="IncludePassageReviewAfterReRecording" xml:space="preserve">
+    <value>قم بتضمين مراجعة المقطع بعد إعادة التسجيل</value>
+  </data>
+  <data name="IncludeSegmentBackTranslate" xml:space="preserve">
+    <value>قم بتضمين الترجمة الارتدادية للجزء</value>
+  </data>
+  <data name="IncorrectPassword" xml:space="preserve">
+    <value>كلمة المرور لا تتطابق مع اسم المستخدم</value>
+  </data>
+  <data name="IncorrectPattern" xml:space="preserve">
+    <value>نمط غير صحيح. يرجى المحاولة مرة أخرى.</value>
+  </data>
+  <data name="Input" xml:space="preserve">
+    <value>إدخال</value>
+  </data>
+  <data name="InsertPassword" xml:space="preserve">
+    <value>أدخل كلمة المرور هنا</value>
+  </data>
+  <data name="IntermediateLanguage" xml:space="preserve">
+    <value>اللغة الوسيط</value>
+  </data>
+  <data name="Interpret" xml:space="preserve">
+    <value>ترجمة فورية</value>
+  </data>
+  <data name="Interpreted" xml:space="preserve">
+    <value>مُترجَم ترجمة فورية</value>
+  </data>
+  <data name="InterpretToConsultant" xml:space="preserve">
+    <value>الترجمة إلى الاستشاري</value>
+  </data>
+  <data name="InterpretToTranslator" xml:space="preserve">
+    <value>الترجمة الفورية للمترجم</value>
+  </data>
+  <data name="Iteration" xml:space="preserve">
+    <value>التكرار</value>
+  </data>
+  <data name="Jump" xml:space="preserve">
+    <value>انتقل</value>
+  </data>
+  <data name="JumpToSection" xml:space="preserve">
+    <value>انتقل إلى القسم</value>
+  </data>
+  <data name="LastCompletedStage" xml:space="preserve">
+    <value>آخر مرحلة مكتملة</value>
+  </data>
+  <data name="LastSubmittedAudioLabel" xml:space="preserve">
+    <value>آخر ملف صوت تم إرساله</value>
+  </data>
+  <data name="LastSync" xml:space="preserve">
+    <value>المزامنة الأخيرة</value>
+  </data>
+  <data name="LeaveFreeCut" xml:space="preserve">
+    <value>اترك الجزء سهل التشكيل</value>
+  </data>
+  <data name="LeaveFreeCutMessage1" xml:space="preserve">
+    <value>إذا تركت الجزء سهل التشكيل، فستفقد أي عمل تم إنتاجه حتى الآن.</value>
+  </data>
+  <data name="LeaveFreeCutMessage2" xml:space="preserve">
+    <value>أكمل هذه الخطوة للاحتفاظ بأي عمل تم إنشاؤه.</value>
+  </data>
+  <data name="Localization" xml:space="preserve">
+    <value>التعريب</value>
+  </data>
+  <data name="LoggingIn" xml:space="preserve">
+    <value>جارِ تسجيل الدخول...</value>
+  </data>
+  <data name="LogIn" xml:space="preserve">
+    <value>تسجيل الدخول</value>
+  </data>
+  <data name="LogOut" xml:space="preserve">
+    <value>تسجيل الخروج</value>
+  </data>
+  <data name="LowerPriority" xml:space="preserve">
+    <value>أولوية أقل</value>
+  </data>
+  <data name="ManageDivisions" xml:space="preserve">
+    <value>إدارة أقسام الفقرة{0}</value>
+  </data>
+  <data name="ManageUsers" xml:space="preserve">
+    <value>إدارة المستخدمين</value>
+  </data>
+  <data name="MarkQuestions" xml:space="preserve">
+    <value>ضع علامة على فقرة الأسئلة {0}</value>
+  </data>
+  <data name="MicNotConnectedMessage" xml:space="preserve">
+    <value>لم يتم اكتشاف ميكروفون.  يرجى توصيل ميكروفون بنظامك لتسجيل الصوت.</value>
+  </data>
+  <data name="MicNotConnectedTitle" xml:space="preserve">
+    <value>الميكروفون غير متصل</value>
+  </data>
+  <data name="MicrophoneAccessMessage" xml:space="preserve">
+    <value>لا يمتلك Render الإذن لاستخدام الميكروفون الخاص بك. لإصلاح ذلك، انتقل إلى إعدادات خصوصية الميكروفون وقم بتشغيل الوصول إلى الميكروفون لـ Render.</value>
+  </data>
+  <data name="MicrophoneAccessTitle" xml:space="preserve">
+    <value>الوصول إلى الميكروفون مطلوب</value>
+  </data>
+  <data name="MultipleTeamAssignmentLabel" xml:space="preserve">
+    <value>لا يمكن تعيين مستخدم واحد لفرق متعددة</value>
+  </data>
+  <data name="MultipleTeamAssignmentMessage" xml:space="preserve">
+    <value>يرجى تعيين مستخدم فريد لكل فريق على حدة.</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>الاسم</value>
+  </data>
+  <data name="NoAudio" xml:space="preserve">
+    <value>لا يوجد صوت</value>
+  </data>
+  <data name="NoInternetConnection" xml:space="preserve">
+    <value>لا يوجد اتصال بالإنترنت</value>
+  </data>
+  <data name="NoReviewedSections" xml:space="preserve">
+    <value>لا توجد أقسام تمت مراجعتها في هذا الوقت.</value>
+  </data>
+  <data name="NoSectionAudioForStage" xml:space="preserve">
+    <value>لا يوجد قسم صوتي لهذه المرحلة</value>
+  </data>
+  <data name="NoSelfCheck" xml:space="preserve">
+    <value>لا يوجد فحص ذاتي</value>
+  </data>
+  <data name="NotAbleToLogin" xml:space="preserve">
+    <value>أنت غير قادر على تسجيل الدخول.</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>ملاحظة</value>
+  </data>
+  <data name="NoteInterpret" xml:space="preserve">
+    <value>تفسير الملاحظات</value>
+  </data>
+  <data name="NoteListen" xml:space="preserve">
+    <value>ملاحظة: استمع</value>
+  </data>
+  <data name="Notes" xml:space="preserve">
+    <value>الملاحظات</value>
+  </data>
+  <data name="NoteTranslator" xml:space="preserve">
+    <value>مترجم الملاحظات</value>
+  </data>
+  <data name="NotInWorkflow" xml:space="preserve">
+    <value>لم تعد جزءًا من سير العمل</value>
+  </data>
+  <data name="NoUnreviewedSections" xml:space="preserve">
+    <value>لا توجد أقسام لم تتم مراجعتها في هذا الوقت.</value>
+  </data>
+  <data name="NullUsername" xml:space="preserve">
+    <value>لا يمكن ترك اسم المستخدم فارغًا</value>
+  </data>
+  <data name="Offload" xml:space="preserve">
+    <value>إلغاء تحميل</value>
+  </data>
+  <data name="OffloadData" xml:space="preserve">
+    <value>تفريغ البيانات</value>
+  </data>
+  <data name="Offloading" xml:space="preserve">
+    <value>التفريغ</value>
+  </data>
+  <data name="OffloadWarning" xml:space="preserve">
+    <value>تمت مزامنة {0} آخر مرة في {1}. هل أنت متأكد أنك تريد تفريغ هذا المشروع؟</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>موافق</value>
+  </data>
+  <data name="Original" xml:space="preserve">
+    <value>أصلي</value>
+  </data>
+  <data name="OriginalLanguage" xml:space="preserve">
+    <value>اللغة الأصلية</value>
+  </data>
+  <data name="OriginalNote" xml:space="preserve">
+    <value>ملاحظة أصلية</value>
+  </data>
+  <data name="OriginalPassageTitle" xml:space="preserve">
+    <value>المقطع {0} (الأصل)</value>
+  </data>
+  <data name="Passage" xml:space="preserve">
+    <value>الفقرة {0}</value>
+  </data>
+  <data name="PassageBackTranslate" xml:space="preserve">
+    <value>ترجمة الفقرة ترجمة ارتدادية</value>
+  </data>
+  <data name="PassageDivide" xml:space="preserve">
+    <value>تقسيم المقطع</value>
+  </data>
+  <data name="PassageDraftListen" xml:space="preserve">
+    <value>الفقرة {0} مسودة الاستماع</value>
+  </data>
+  <data name="PassageListen" xml:space="preserve">
+    <value>فقرة الاستماع</value>
+  </data>
+  <data name="PassageListenOnly" xml:space="preserve">
+    <value>مقطع الاستماع فقط</value>
+  </data>
+  <data name="PassageListenTitle" xml:space="preserve">
+    <value>الفقرة {0} استمع</value>
+  </data>
+  <data name="PassageNumber" xml:space="preserve">
+    <value>الفقرة {0}</value>
+  </data>
+  <data name="PassagePeerReview" xml:space="preserve">
+    <value>الفقرة {0} مراجعة الأقران</value>
+  </data>
+  <data name="PassageRetell" xml:space="preserve">
+    <value>تكرار الكلام في المقطع</value>
+  </data>
+  <data name="PassageReview" xml:space="preserve">
+    <value>مراجعة الفقرة</value>
+  </data>
+  <data name="PassageReviewAfterReRecording" xml:space="preserve">
+    <value>مراجعة المقطع بعد إعادة التسجيل</value>
+  </data>
+  <data name="PassageSelect" xml:space="preserve">
+    <value>اختيار المقطع</value>
+  </data>
+  <data name="PassageSelection" xml:space="preserve">
+    <value>اختيار الفقرة</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>كلمة المرور</value>
+  </data>
+  <data name="PasswordGrid" xml:space="preserve">
+    <value>شبكة كلمات المرور</value>
+  </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>كلمة المرور مطلوبة</value>
+  </data>
+  <data name="PasswordType" xml:space="preserve">
+    <value>نوع كلمة المرور</value>
+  </data>
+  <data name="PeerCheck" xml:space="preserve">
+    <value>فحص الأقران</value>
+  </data>
+  <data name="PeerReview" xml:space="preserve">
+    <value>مراجعة الأقران</value>
+  </data>
+  <data name="PeerRevise" xml:space="preserve">
+    <value>مراجعة الأقران</value>
+  </data>
+  <data name="PleaseConnect" xml:space="preserve">
+    <value>يرجى الاتصال بالإنترنت وتشغيل Render مرة أخرى.</value>
+  </data>
+  <data name="PleaseLogIn" xml:space="preserve">
+    <value>يرجى تسجيل الدخول للبدء.</value>
+  </data>
+  <data name="PrecedingAudio" xml:space="preserve">
+    <value>الصوت السابق</value>
+  </data>
+  <data name="PreviousDraft" xml:space="preserve">
+    <value>المسودة السابقة</value>
+  </data>
+  <data name="Proceed" xml:space="preserve">
+    <value>تقدم</value>
+  </data>
+  <data name="Processes" xml:space="preserve">
+    <value>العمليات</value>
+  </data>
+  <data name="ProjectAddedSuccesfully" xml:space="preserve">
+    <value>تمت إضافة هذا المشروع بنجاح.</value>
+  </data>
+  <data name="ProjectConfiguration" xml:space="preserve">
+    <value>إعدادات المشروع</value>
+  </data>
+  <data name="ProjectDeletedTitle" xml:space="preserve">
+    <value>تم حذف المشروع</value>
+  </data>
+  <data name="ProjectHome" xml:space="preserve">
+    <value>الصفحة الرئيسية للمشروع</value>
+  </data>
+  <data name="ProjectId" xml:space="preserve">
+    <value>معرِّف المشروع</value>
+  </data>
+  <data name="ProjectsDownloadedSuccessfully" xml:space="preserve">
+    <value>تم تنزيل المشاريع بنجاح.</value>
+  </data>
+  <data name="ProjectTeams" xml:space="preserve">
+    <value>فرق المشروع</value>
+  </data>
+  <data name="ProjectUsers" xml:space="preserve">
+    <value>مستخدمو المشروع</value>
+  </data>
+  <data name="ProjectWorkflow" xml:space="preserve">
+    <value>سير عمل المشروع</value>
+  </data>
+  <data name="QuestionFormatted" xml:space="preserve">
+    <value>السؤال {0}</value>
+  </data>
+  <data name="QuestionAndResponse" xml:space="preserve">
+    <value>سؤال وجواب</value>
+  </data>
+  <data name="QuestionPlacement" xml:space="preserve">
+    <value>موضع السؤال</value>
+  </data>
+  <data name="QuestionSet" xml:space="preserve">
+    <value>مجموعة الأسئلة {0}</value>
+  </data>
+  <data name="Record" xml:space="preserve">
+    <value>السجل</value>
+  </data>
+  <data name="RecordedSegmentWarningConfirmation" xml:space="preserve">
+    <value>الدمج الكامل</value>
+  </data>
+  <data name="RecordedSegmentWarningMessage" xml:space="preserve">
+    <value>يحتوي المقطع السابق بالفعل على صوت الرد. إذا قمت بدمج هذين المقطعين معًا، فسيتم فقد الصوت المسجل مسبقًا.</value>
+  </data>
+  <data name="RecordedSegmentWarningTitle" xml:space="preserve">
+    <value>سيتم فقدان الردود</value>
+  </data>
+  <data name="RecordInterpretation" xml:space="preserve">
+    <value>تسجيل الترجمة الفورية</value>
+  </data>
+  <data name="RecordNewDraft" xml:space="preserve">
+    <value>سجل مسودة جديدة</value>
+  </data>
+  <data name="RecordQuestion" xml:space="preserve">
+    <value>تسجيل الأسئلة (Q {0})</value>
+  </data>
+  <data name="RecordQuestionTitle" xml:space="preserve">
+    <value>تسجيل السؤال</value>
+  </data>
+  <data name="RecordResponse" xml:space="preserve">
+    <value>سجل الاستجابة</value>
+  </data>
+  <data name="RecordRetell" xml:space="preserve">
+    <value>تسجيل تكرار الكلام</value>
+  </data>
+  <data name="RecordStandardQuestion" xml:space="preserve">
+    <value>سجل السؤال القياسي {0}</value>
+  </data>
+  <data name="RecordTranslation" xml:space="preserve">
+    <value>ترجمة السجلات</value>
+  </data>
+  <data name="Recovery" xml:space="preserve">
+    <value>التعافي</value>
+  </data>
+  <data name="References" xml:space="preserve">
+    <value>المراجع</value>
+  </data>
+  <data name="RemoveWork" xml:space="preserve">
+    <value>إزالة العمل</value>
+  </data>
+  <data name="RemoveWorkMessage" xml:space="preserve">
+    <value>ستتم إزالة هذه المرحلة على الفور وستفقد جميع الأعمال قيد المعالجة.</value>
+  </data>
+  <data name="RenderUser" xml:space="preserve">
+    <value>مستخدم Render</value>
+  </data>
+  <data name="Replace" xml:space="preserve">
+    <value>استبدل</value>
+  </data>
+  <data name="RequireNoteListen" xml:space="preserve">
+    <value>ملاحظة: إرشادات الاستماع</value>
+  </data>
+  <data name="RequireNoteReview" xml:space="preserve">
+    <value>إرشادات مراجعة الملاحظات</value>
+  </data>
+  <data name="RequirePassageListen" xml:space="preserve">
+    <value>إرشادات الاستماع الخاصة بالفقرة</value>
+  </data>
+  <data name="RequirePassageReview" xml:space="preserve">
+    <value>إرشادات مراجعة الفقرة</value>
+  </data>
+  <data name="RequirePassageTranscribeListen" xml:space="preserve">
+    <value>إرشادات نسخ المقطع</value>
+  </data>
+  <data name="RequireQuestionContextListen" xml:space="preserve">
+    <value>سياق السؤال: إرشادات الاستماع</value>
+  </data>
+  <data name="RequireRecordResponse" xml:space="preserve">
+    <value>قم بتضمين إرشادات الاستجابة</value>
+  </data>
+  <data name="RequireReviewAfterReRecording" xml:space="preserve">
+    <value>مراجعة المقطع بعد إرشادات إعادة التسجيل</value>
+  </data>
+  <data name="RequireSectionListen" xml:space="preserve">
+    <value>قسم الاستماع والإرشاد</value>
+  </data>
+  <data name="RequireSectionReview" xml:space="preserve">
+    <value>إرشادات مراجعة القسم</value>
+  </data>
+  <data name="RequireSegmentTranscribeListen" xml:space="preserve">
+    <value>إرشادات نسخ الجزء</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>إعادة الضبط</value>
+  </data>
+  <data name="ResetSection" xml:space="preserve">
+    <value>قسم إعادة الضبط</value>
+  </data>
+  <data name="Response" xml:space="preserve">
+    <value>الاستجابة {0}</value>
+  </data>
+  <data name="Restore" xml:space="preserve">
+    <value>الاستعادة</value>
+  </data>
+  <data name="RestoreSection" xml:space="preserve">
+    <value>قسم الاستعادة</value>
+  </data>
+  <data name="RestoreSectionConfirmation" xml:space="preserve">
+    <value>هل أنت متأكد من أنك تريد استعادة هذا القسم؟</value>
+  </data>
+  <data name="RestoreSnapshotInfo" xml:space="preserve">
+    <value>لن تؤدي استعادة هذه اللقطة إلى استعادة المرحلة التي تمت إزالتها إلى سير العمل.</value>
+  </data>
+  <data name="Retell" xml:space="preserve">
+    <value>تكرار القول</value>
+  </data>
+  <data name="RetellCheck" xml:space="preserve">
+    <value>فحص تكرار الكلام (الفقرة {0})</value>
+  </data>
+  <data name="ReturnToLogIn" xml:space="preserve">
+    <value>العودة إلى تسجيل الدخول</value>
+  </data>
+  <data name="Review" xml:space="preserve">
+    <value>مراجعة</value>
+  </data>
+  <data name="Reviewed" xml:space="preserve">
+    <value>تمت مراجعتها</value>
+  </data>
+  <data name="ReviewQuestions" xml:space="preserve">
+    <value>فقرة مراجعة الأسئلة {0}</value>
+  </data>
+  <data name="Revise" xml:space="preserve">
+    <value>راجع</value>
+  </data>
+  <data name="Revision" xml:space="preserve">
+    <value>مراجعة</value>
+  </data>
+  <data name="RoleAssignment" xml:space="preserve">
+    <value>تعيين الدور</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>ابحث</value>
+  </data>
+  <data name="Section" xml:space="preserve">
+    <value>القسم {0}</value>
+  </data>
+  <data name="SectionAndPassageListen" xml:space="preserve">
+    <value>القسم والمقطع- الاستماع</value>
+  </data>
+  <data name="SectionAssignment" xml:space="preserve">
+    <value>تعيين القسم</value>
+  </data>
+  <data name="SectionDraft" xml:space="preserve">
+    <value>القسم {0} المسودة</value>
+  </data>
+  <data name="SectionFeedbackTitle" xml:space="preserve">
+    <value>القسم {0} التعليقات</value>
+  </data>
+  <data name="SectionInformation" xml:space="preserve">
+    <value>معلومات القسم</value>
+  </data>
+  <data name="SectionList" xml:space="preserve">
+    <value>قائمة الأقسام</value>
+  </data>
+  <data name="SectionListen" xml:space="preserve">
+    <value>قسم الاستماع</value>
+  </data>
+  <data name="SectionListenOnly" xml:space="preserve">
+    <value>قسم الاستماع فقط</value>
+  </data>
+  <data name="SectionListenTitle" xml:space="preserve">
+    <value>القسم {0} استمع</value>
+  </data>
+  <data name="SectionNumberLabel" xml:space="preserve">
+    <value>رقم القسم</value>
+  </data>
+  <data name="SectionReferenceLabel" xml:space="preserve">
+    <value>مرجع المقطع</value>
+  </data>
+  <data name="SectionReset" xml:space="preserve">
+    <value>تمت إعادة تعيين القسم.</value>
+  </data>
+  <data name="SectionReview" xml:space="preserve">
+    <value>مراجعة القسم</value>
+  </data>
+  <data name="SectionSelect" xml:space="preserve">
+    <value>حدد القسم</value>
+  </data>
+  <data name="SectionsMovingWarning" xml:space="preserve">
+    <value>ستنتقل الأقسام إلى الخطوة التالية</value>
+  </data>
+  <data name="SectionStatus" xml:space="preserve">
+    <value>حالة القسم</value>
+  </data>
+  <data name="SectionStepLabel" xml:space="preserve">
+    <value>الخطوة الحالية</value>
+  </data>
+  <data name="SectionTitle" xml:space="preserve">
+    <value>عنوان القسم {0}</value>
+  </data>
+  <data name="SectionTitleLabel" xml:space="preserve">
+    <value>عنوان القسم</value>
+  </data>
+  <data name="Segment" xml:space="preserve">
+    <value>الجزء {0}</value>
+  </data>
+  <data name="SegmentBackTranslate" xml:space="preserve">
+    <value>ترجمة الجزء ترجمة ارتدادية</value>
+  </data>
+  <data name="SegmentBackTranslateSelect" xml:space="preserve">
+    <value>حدد الترجمة الارتدادية للجزء</value>
+  </data>
+  <data name="SegmentBackTranslateTitle" xml:space="preserve">
+    <value>{0} - الجزء {1}</value>
+  </data>
+  <data name="SegmentFreeCut" xml:space="preserve">
+    <value>فصل سهل للجزء</value>
+  </data>
+  <data name="SegmentWillBeCleared" xml:space="preserve">
+    <value>سيتم مسح الأجزاء الحالية</value>
+  </data>
+  <data name="SelectADraft" xml:space="preserve">
+    <value>حدد مسودة</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>حدد الكل</value>
+  </data>
+  <data name="SelectAProfile" xml:space="preserve">
+    <value>حدد ملف تعريف لتسجيل الدخول</value>
+  </data>
+  <data name="SelectAProject" xml:space="preserve">
+    <value>حدد المشروع</value>
+  </data>
+  <data name="SelectDisplay" xml:space="preserve">
+    <value>حدد العرض</value>
+  </data>
+  <data name="SelectDraft" xml:space="preserve">
+    <value>حدد مسودة</value>
+  </data>
+  <data name="SelectProjectsToImport" xml:space="preserve">
+    <value>حدد المشاريع للاستيراد</value>
+  </data>
+  <data name="SelectSection" xml:space="preserve">
+    <value>حدد القسم</value>
+  </data>
+  <data name="SelectSnapshot" xml:space="preserve">
+    <value>حدد لقطة</value>
+  </data>
+  <data name="SelectSnapshotDescription" xml:space="preserve">
+    <value>حدد لقطة معينة للمتابعة. سيتم حذف اللقطة غير المختارة.</value>
+  </data>
+  <data name="Sequence" xml:space="preserve">
+    <value>التسلسل</value>
+  </data>
+  <data name="Snapshot" xml:space="preserve">
+    <value>لقطة</value>
+  </data>
+  <data name="SnapshotChosen" xml:space="preserve">
+    <value>لقطة تم اختيارها لـ</value>
+  </data>
+  <data name="SnapshotConflict" xml:space="preserve">
+    <value>يحتوي هذا القسم على تعارض في اللقطة: {0}</value>
+  </data>
+  <data name="Snapshots" xml:space="preserve">
+    <value>لقطات</value>
+  </data>
+  <data name="SortBy" xml:space="preserve">
+    <value>فرز حسب</value>
+  </data>
+  <data name="Source" xml:space="preserve">
+    <value>المصدر</value>
+  </data>
+  <data name="StageName" xml:space="preserve">
+    <value>اسم المرحلة</value>
+  </data>
+  <data name="StandardQuestion" xml:space="preserve">
+    <value>السؤال القياسي {0}</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>البداية</value>
+  </data>
+  <data name="Step" xml:space="preserve">
+    <value>الخطوة</value>
+  </data>
+  <data name="Step1" xml:space="preserve">
+    <value>الخطوة 1</value>
+  </data>
+  <data name="Step2" xml:space="preserve">
+    <value>الخطوة 2</value>
+  </data>
+  <data name="SupplementaryMaterial" xml:space="preserve">
+    <value>مواد تكميلية</value>
+  </data>
+  <data name="Sync" xml:space="preserve">
+    <value>المزامنة</value>
+  </data>
+  <data name="TeamCheck" xml:space="preserve">
+    <value>فحص الفريق</value>
+  </data>
+  <data name="TeamOne" xml:space="preserve">
+    <value>الفريق 1</value>
+  </data>
+  <data name="TeamTwo" xml:space="preserve">
+    <value>الفريق 2</value>
+  </data>
+  <data name="Text" xml:space="preserve">
+    <value>نص</value>
+  </data>
+  <data name="TextNote" xml:space="preserve">
+    <value>ملاحظة نصية</value>
+  </data>
+  <data name="TotalPassagesLabel" xml:space="preserve">
+    <value>إجمالي الفقرات</value>
+  </data>
+  <data name="TotalVerses" xml:space="preserve">
+    <value>مجموع المقاطع:</value>
+  </data>
+  <data name="Transcribe" xml:space="preserve">
+    <value>نسخ</value>
+  </data>
+  <data name="Transcribe2" xml:space="preserve">
+    <value>نسخ 2</value>
+  </data>
+  <data name="TranscribePassage" xml:space="preserve">
+    <value>نسخ الفقرة</value>
+  </data>
+  <data name="TranscribeSegment" xml:space="preserve">
+    <value>نسخ الجزء</value>
+  </data>
+  <data name="Translated" xml:space="preserve">
+    <value>تمت ترجمته</value>
+  </data>
+  <data name="Translation" xml:space="preserve">
+    <value>الترجمة</value>
+  </data>
+  <data name="Unassigned" xml:space="preserve">
+    <value>غير مخصص</value>
+  </data>
+  <data name="Unreviewed" xml:space="preserve">
+    <value>لم تتم مراجعتها</value>
+  </data>
+  <data name="UnsavedRolesMessage" xml:space="preserve">
+    <value>إذا كنت ترغب في حفظ الأدوار التي قمت بتعيينها، فحدد سهم المتابعة في أسفل الناحية اليمنى.</value>
+  </data>
+  <data name="UnsavedRolesTitle" xml:space="preserve">
+    <value>هناك أدوار غير محفوظة</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>تحديث</value>
+  </data>
+  <data name="UpdatedPassage" xml:space="preserve">
+    <value>المقطع المحدث</value>
+  </data>
+  <data name="UserLabel" xml:space="preserve">
+    <value>المستخدم الحالي</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>اسم المستخدم</value>
+  </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>اسم المستخدم هذا غير موجود</value>
+  </data>
+  <data name="UserSettings" xml:space="preserve">
+    <value>إعدادات المستخدم</value>
+  </data>
+  <data name="UserType" xml:space="preserve">
+    <value>نوع المستخدم</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>الإصدار</value>
+  </data>
+  <data name="VesselUser" xml:space="preserve">
+    <value>مستخدم Vessel</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>عرض</value>
+  </data>
+  <data name="ViewAllUsers" xml:space="preserve">
+    <value>عرض جميع المستخدمين</value>
+  </data>
+  <data name="ViewSectionAssignments" xml:space="preserve">
+    <value>عرض مهام القسم</value>
+  </data>
+  <data name="WelcomeToRender" xml:space="preserve">
+    <value>مرحبًا بك في Render</value>
+  </data>
+  <data name="WhichSnapshot" xml:space="preserve">
+    <value>ما اللقطة التي ترغب في المتابعة بها؟</value>
+  </data>
+  <data name="WorkflowConfiguration" xml:space="preserve">
+    <value>إعداد سير العمل</value>
+  </data>
+  <data name="WorkflowDeleteStageMessage" xml:space="preserve">
+    <value>اختر كيفية التعامل مع العمل قيد التقدم قبل إزالة المرحلة:</value>
+  </data>
+  <data name="WorkflowDeleteStageTitle" xml:space="preserve">
+    <value>تحتوي هذه المرحلة على بيانات</value>
+  </data>
+  <data name="WorkWillBeLost" xml:space="preserve">
+    <value>سيتم فقدان عملك</value>
+  </data>
+  <data name="DividePassageMessage" xml:space="preserve">
+    <value>إذا تركت تقسيم الممر الآن ، فسيتم فقد عملك
+</value>
+  </data>
+  <data name="ErrorOccuredTryAgain" xml:space="preserve">
+    <value>حدث خطأ. حاول مرة اخرى.
+</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>خطأ</value>
+  </data>
+  <data name="RetellQuestionResponse" xml:space="preserve">
+    <value>إعادة طرح والسؤال والرد
+</value>
+  </data>
+  <data name="DiscardWork" xml:space="preserve">
+    <value>تجاهل العمل</value>
+  </data>
+  <data name="SectionView" xml:space="preserve">
+    <value>عرض المقطع</value>
+  </data>
+  <data name="TeamTitle" xml:space="preserve">
+    <value>فريق {0}</value>
+  </data>
+  <data name="TeamView" xml:space="preserve">
+    <value>عرض الفريق</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>ينسخ</value>
+  </data>
+  <data name="SegmentSelect" xml:space="preserve">
+    <value>تحديد الجزء</value>
+  </data>
+  <data name="ClearSegmentsQuestion" xml:space="preserve">
+    <value>مسح الشرائح؟</value>
+  </data>
+  <data name="ClearSegmentsConfirmation" xml:space="preserve">
+    <value>هل أنت متأكد أنك تريد مسح الأجزاء الحالية؟ لا يمكنك التراجع عن هذا الإجراء.</value>
+  </data>
+  <data name="SegmentReview" xml:space="preserve">
+    <value>مراجعة الجزء</value>
+  </data>
+  <data name="Question" xml:space="preserve">
+    <value>السؤال</value>
+  </data>
+  <data name="SegmentCombine" xml:space="preserve">
+    <value>دمج الجزء</value>
+  </data>
+  <data name="CombineWarningMessage" xml:space="preserve">
+    <value>لقد تمت بالفعل إعادة ترجمة الجزء الأحمر. ستؤدي المتابعة إلى حذف الترجمة الخلفية.</value>
+  </data>
+  <data name="Configuration" xml:space="preserve">
+    <value>إعدادات</value>
+  </data>
+  <data name="ConfigureWorkflow" xml:space="preserve">
+    <value>تكوين سير العمل</value>
+  </data>
+  <data name="AssignSections" xml:space="preserve">
+    <value>تعيين الأقسام</value>
+  </data>
+  <data name="AssignRoles" xml:space="preserve">
+    <value>تعيين الأدوار</value>
+  </data>
+  <data name="Workflow" xml:space="preserve">
+    <value>سير العمل</value>
+  </data>
+  <data name="SelectUser" xml:space="preserve">
+    <value>اختر المستخدم</value>
+  </data>
+  <data name="AddUserButtonText" xml:space="preserve">
+    <value>إضافة مستخدم</value>
+  </data>
+  <data name="Render" xml:space="preserve">
+    <value>Render</value>
+  </data>
+  <data name="Global" xml:space="preserve">
+    <value>عالمي</value>
+  </data>
+  <data name="TextPassword" xml:space="preserve">
+    <value>كلمة المرور النصية</value>
+  </data>
+  <data name="ViewAssignments" xml:space="preserve">
+    <value>عرض مهام القسم</value>
+  </data>
+  <data name="DeleteUserModalMessage" xml:space="preserve">
+    <value>إذا كان لدى {0} تعيينات أقسام خاصة بهم ، فستتم إزالتها أيضًا. لا يمكنك التراجع عن هذا الإجراء.</value>
+  </data>
+  <data name="Return" xml:space="preserve">
+    <value>يعود</value>
+  </data>
+  <data name="SegmentBackTranslate1" xml:space="preserve">
+    <value>ترجمة المقطع الخلفي 1</value>
+  </data>
+  <data name="SegmentBackTranslate2" xml:space="preserve">
+    <value>ترجمة المقطع الخلفي 2</value>
+  </data>
+  <data name="RetellIsNotAvailable" xml:space="preserve">
+    <value>إعادة الرواية غير متوفرة</value>
+  </data>
+  <data name="QuestionAndResponseIsNotAvailable" xml:space="preserve">
+    <value>السؤال والرد غير متوفر</value>
+  </data>
+  <data name="Teams" xml:space="preserve">
+    <value>فرق</value>
+  </data>
+  <data name="CommunityFeedbackGuidance" xml:space="preserve">
+    <value>دليل ملاحظات المجتمع</value>
+  </data>
+  <data name="DragTeamHere" xml:space="preserve">
+    <value>اسحب الفريق هنا</value>
+  </data>
+  <data name="Configure" xml:space="preserve">
+    <value>تهيئة</value>
+  </data>
+  <data name="QuestionNumberAndTotalNumberFormatted" xml:space="preserve">
+    <value>سؤال {0} من {1}</value>
+  </data>
+  <data name="GridPassword" xml:space="preserve">
+    <value>كلمة مرور الشبكة</value>
+  </data>
+  <data name="DragSectionHere" xml:space="preserve">
+    <value>قسم السحب هنا</value>
+  </data>
+  <data name="Sections" xml:space="preserve">
+    <value>الأقسام</value>
+  </data>
+  <data name="PressCircleToRecord" xml:space="preserve">
+    <value>اضغط على الدائرة للتسجيل</value>
+  </data>
+  <data name="PressCircleToRecordOrPressArrowToAddQuestionFromLibrary" xml:space="preserve">
+    <value>اضغط على الدائرة للتسجيل ، أو {1} اضغط على {0} لإضافة سؤال {1} من المكتبة</value>
+  </data>
+  <data name="Library" xml:space="preserve">
+    <value>مكتبة</value>
+  </data>
+  <data name="NoQuestionsInTheLibrary" xml:space="preserve">
+    <value>ليس لديك أسئلة في المكتبة</value>
+  </data>
+  <data name="Questions" xml:space="preserve">
+    <value>أسئلة</value>
+  </data>
+  <data name="PressArrowToAddQuestion" xml:space="preserve">
+    <value>اضغط على {0} لإضافة سؤال</value>
+  </data>
+  <data name="Test" xml:space="preserve">
+    <value>امتحان</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>لغة</value>
+  </data>
+  <data name="Translate" xml:space="preserve">
+    <value>يترجم</value>
+  </data>
+  <data name="RetellOnly" xml:space="preserve">
+    <value>إعادة بيع فقط</value>
+  </data>
+  <data name="QuestionAndResponseOnly" xml:space="preserve">
+    <value>سؤال وجواب فقط</value>
+  </data>
+  <data name="RenderAvailable" xml:space="preserve">
+    <value>عرض {0} متاح</value>
+  </data>
+  <data name="DownloadRenderButton" xml:space="preserve">
+    <value>تنزيل برنامج Render الجديد</value>
+  </data>
+  <data name="DownloadRenderMessage" xml:space="preserve">
+    <value>قم بتنزيل Render الجديد {0} وابقَ على اطلاع.</value>
+  </data>
+  <data name="OneUserOneTeam" xml:space="preserve">
+    <value>مستخدم واحد وفريق واحد</value>
+  </data>
+  <data name="UsersCannotBeAssignedToMultipleTeams" xml:space="preserve">
+    <value>لا يمكن تعيين المستخدمين لفرق متعددة.</value>
+  </data>
+  <data name="SaveWorkAndProceed" xml:space="preserve">
+    <value>حفظ العمل والمضي قدما</value>
+  </data>
+  <data name="ExitAnyway" xml:space="preserve">
+    <value>الخروج على أي حال</value>
+  </data>
+  <data name="SaveWorkAndProceedMessage" xml:space="preserve">
+    <value>اضغط على السهم الموجود أسفل اليمين لحفظ الأدوار والمتابعة.</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>عنوان:</value>
+  </data>
+  <data name="TotalPassages" xml:space="preserve">
+    <value>إجمالي الممرات:</value>
+  </data>
+  <data name="Reference" xml:space="preserve">
+    <value>مرجع:</value>
+  </data>
+  <data name="Process" xml:space="preserve">
+    <value>عملية:</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>مستخدم:</value>
+  </data>
+  <data name="NoSectionsAreInThisStep" xml:space="preserve">
+    <value>لا توجد أقسام في هذه الخطوة</value>
+  </data>
+  <data name="NoteInterpretToConsultant" xml:space="preserve">
+    <value>ملاحظة ترجم إلى استشاري</value>
+  </data>
+  <data name="NoteInterpretToTranslator" xml:space="preserve">
+    <value>ملاحظة ترجم إلى مترجم</value>
+  </data>
+  <data name="AddUserLabel" xml:space="preserve">
+    <value>إضافة مستخدم جديد</value>
+  </data>
+  <data name="ApprovedSection" xml:space="preserve">
+    <value>قسم معتمد</value>
+  </data>
+  <data name="BothSnapshotsDeleted" xml:space="preserve">
+    <value>تم حذف كلتا اللقطتين</value>
+  </data>
+  <data name="DeleteSnapshotsFor" xml:space="preserve">
+    <value>هل تريد حذف لقطات لـ {0}؟</value>
+  </data>
+  <data name="DraftWillBeLost" xml:space="preserve">
+    <value>ستفقد المسودة</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>لا</value>
+  </data>
+  <data name="PassageBackTranslate1" xml:space="preserve">
+    <value>ترجمة مرور العودة 1</value>
+  </data>
+  <data name="PassageBackTranslate2" xml:space="preserve">
+    <value>ترجمة مرور العودة 2</value>
+  </data>
+  <data name="PasswordRequiredToReset" xml:space="preserve">
+    <value>كلمة المرور مطلوبة لإعادة تعيين قسم</value>
+  </data>
+  <data name="PasswordRequiredToRestore" xml:space="preserve">
+    <value>كلمة المرور مطلوبة لاستعادة لقطة</value>
+  </data>
+  <data name="TeamWasChosen" xml:space="preserve">
+    <value>تم اختيار الفريق {0}</value>
+  </data>
+  <data name="UserAndTeamWereChosenForSection" xml:space="preserve">
+    <value>تم اختيار {0} لـ {1}</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>نعم</value>
+  </data>
+  <data name="YouCannotUndo" xml:space="preserve">
+    <value>لا يمكنك التراجع عن هذا الإجراء</value>
+  </data>
+  <data name="YouHaveChosen" xml:space="preserve">
+    <value>لقد اخترت:</value>
+  </data>
+  <data name="ResetSectionWarning" xml:space="preserve">
+    <value>سيؤدي قسم إعادة التعيين إلى حذف جميع البيانات الموجودة في مرحلة المسودة. لا يمكن التراجع عن هذا الإجراء.</value>
+  </data>
+  <data name="RemovedFromProject" xml:space="preserve">
+    <value>تمت إزالته من المشروع</value>
+  </data>
+  <data name="DraftEdit" xml:space="preserve">
+    <value>تحرير المسودة</value>
+  </data>
+  <data name="Stages" xml:space="preserve">
+    <value>مراحل</value>
+  </data>
+  <data name="SectionListenScreenTitle" xml:space="preserve">
+    <value>قسم الاستماع</value>
+  </data>
+  <data name="PassageListenScreenTitle" xml:space="preserve">
+    <value>فقرة الاستماع</value>
+  </data>
+  <data name="PassageDivideScreenTitle" xml:space="preserve">
+    <value>تقسيم المقطع</value>
+  </data>
+  <data name="PassageReviewScreenTitle" xml:space="preserve">
+    <value>مراجعة الفقرة</value>
+  </data>
+  <data name="SectionReviewScreenTitle" xml:space="preserve">
+    <value>مراجعة القسم</value>
+  </data>
+  <data name="TranscribePassageScreenTitle" xml:space="preserve">
+    <value>نسخ الفقرة</value>
+  </data>
+  <data name="TranscribeSegmentScreenTitle" xml:space="preserve">
+    <value>نسخ الجزء</value>
+  </data>
+  <data name="DoPassageTranscribeScreenTitle" xml:space="preserve">
+    <value>نسخ الفقرة</value>
+  </data>
+  <data name="DoSegmentTranscribeScreenTitle" xml:space="preserve">
+    <value>نسخ الجزء</value>
+  </data>
+  <data name="UserWasChosen" xml:space="preserve">
+    <value>تم اختيار {0}</value>
+  </data>
+  <data name="UserWasChosenForSection" xml:space="preserve">
+    <value>تم اختيار {0} لـ {1}</value>
+  </data>
+  <data name="NoteInterpretScreenTitle" xml:space="preserve">
+    <value>تفسير الملاحظات</value>
+  </data>
+  <data name="RequirePassageListenPeerCheckSetting" xml:space="preserve">
+    <value>إرشادات الاستماع الخاصة بالفقرة</value>
+  </data>
+  <data name="RequireSectionListenPeerCheckSetting" xml:space="preserve">
+    <value>قسم الاستماع والإرشاد</value>
+  </data>
+  <data name="OffloadProject" xml:space="preserve">
+    <value>تفريغ {0}؟</value>
+  </data>
+  <data name="ContactSupport" xml:space="preserve">
+    <value>اتصل بالدعم للحصول على المساعدة</value>
+  </data>
+  <data name="ErrorWithMessage" xml:space="preserve">
+    <value>خطأ [{0}]</value>
+  </data>
+  <data name="ProjectList" xml:space="preserve">
+    <value>قائمة المشروع</value>
+  </data>
+  <data name="NoProjectsToDownload" xml:space="preserve">
+    <value>لا توجد مشاريع للتحميل</value>
+  </data>
+  <data name="WrongPassword" xml:space="preserve">
+    <value>كلمة مرور خاطئة. حاول مرة اخرى.</value>
+  </data>
+  <data name="DragUserHere" xml:space="preserve">
+    <value>اسحب المستخدم هنا</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>المستخدمين</value>
+  </data>
+  <data name="SyncFailed" xml:space="preserve">
+    <value>فشل</value>
+  </data>
+  <data name="DownloadFailed" xml:space="preserve">
+    <value>التحميل فشل.</value>
+  </data>
+  <data name="ExportComplete" xml:space="preserve">
+    <value>اكتمل التصدير</value>
+  </data>
+  <data name="NoSectionsAvailable" xml:space="preserve">
+    <value>لا توجد أقسام متاحة</value>
+  </data>
+  <data name="TryAgain" xml:space="preserve">
+    <value>حاول مرة اخرى</value>
+  </data>
+  <data name="SelectedSnapshotMessageTemplate" xml:space="preserve">
+    <value>{0}، {1} {2} {3}، {4}</value>
+  </data>
+  <data name="TeamWasChosenForSection" xml:space="preserve">
+    <value>تم اختيار {1} لـ {0}، {2}، لـ {3}</value>
+  </data>
+  <data name="CombineWarningTitle" xml:space="preserve">
+    <value>سيتم حذف الترجمة الخلفية</value>
+  </data>
+  <data name="January" xml:space="preserve">
+    <value>يناير</value>
+  </data>
+  <data name="February" xml:space="preserve">
+    <value>شهر فبراير</value>
+  </data>
+  <data name="March" xml:space="preserve">
+    <value>يمشي</value>
+  </data>
+  <data name="April" xml:space="preserve">
+    <value>أبريل</value>
+  </data>
+  <data name="May" xml:space="preserve">
+    <value>يمكن</value>
+  </data>
+  <data name="June" xml:space="preserve">
+    <value>يونيو</value>
+  </data>
+  <data name="July" xml:space="preserve">
+    <value>يوليو</value>
+  </data>
+  <data name="August" xml:space="preserve">
+    <value>أغسطس</value>
+  </data>
+  <data name="September" xml:space="preserve">
+    <value>سبتمبر</value>
+  </data>
+  <data name="October" xml:space="preserve">
+    <value>اكتوبر</value>
+  </data>
+  <data name="November" xml:space="preserve">
+    <value>شهر نوفمبر</value>
+  </data>
+  <data name="December" xml:space="preserve">
+    <value>ديسمبر</value>
+  </data>
+  <data name="NoSectionAssignedTitle" xml:space="preserve">
+    <value>لم تقم بتعيين أي أقسام بعد</value>
+  </data>
+  <data name="NoSectionAssignedMessage" xml:space="preserve">
+    <value>يجب تعيين الأقسام ليتم عرضها هنا.</value>
+  </data>
+  <data name="SegmentLabel" xml:space="preserve">
+    <value>الجزء</value>
+  </data>
+  <data name="DeletedUser" xml:space="preserve">
+    <value>مستخدم محذوف</value>
+  </data>
+  <data name="CannotLoadData" xml:space="preserve">
+    <value>لا يمكن تحميل البيانات للقسم {0}</value>
+  </data>
+  <data name="SyncAndTryAgain" xml:space="preserve">
+    <value>إذا استمر حدوث ذلك، فيرجى محاولة مزامنة الويب أو محاولة إلغاء تحميل/تنزيل المشروع</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>أعد المحاولة</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>نجاح!</value>
+  </data>
+  <data name="AddFromComputer" xml:space="preserve">
+    <value>إضافة مشروع من جهاز الكمبيوتر</value>
+  </data>
+  <data name="CannotLoadAudio" xml:space="preserve">
+    <value>ا يمكن تحميل الصوت</value>
+  </data>
+</root>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<kernel:RenderComponentBase x:TypeArguments="local:ProceedButtonViewModel"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Render.Components.ProceedButton.ProceedButton"
+             xmlns:local="clr-namespace:Render.Components.ProceedButton"
+             xmlns:kernel="clr-namespace:Render.Kernel">
+    <ContentView.Resources>
+        <Style x:Key="ButtonFrameStyle" TargetType="Frame">
+            <Setter Property="CornerRadius" Value="{x:Static local:ProceedButton.BorderCornerRadius}" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        </Style>
+
+        <Style x:Key="ButtonBorderStyle" TargetType="Frame" BasedOn="{StaticResource ButtonFrameStyle}">
+            <Setter Property="WidthRequest" Value="{x:Static local:ProceedButton.BorderSize}" />
+            <Setter Property="HeightRequest" Value="{x:Static local:ProceedButton.BorderSize}" />
+            <Setter Property="Padding" Value="{x:Static local:ProceedButton.BorderThickness}" />
+        </Style>
+
+        <Style x:Key="ButtonImageStyle" TargetType="Label">
+            <Setter Property="FontFamily" Value="Icons" />
+            <Setter Property="FontSize" Value="30" />
+            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="TextColor" Value="{DynamicResource SecondaryText}" />
+            <Setter Property="WidthRequest" Value="{x:Static local:ProceedButton.ButtonSize}" />
+            <Setter Property="HeightRequest" Value="{x:Static local:ProceedButton.ButtonSize}" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="VerticalOptions" Value="Start" />
+            <Setter Property="HorizontalOptions" Value="Start" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="VerticalTextAlignment" Value="Center" />
+        </Style>
+    </ContentView.Resources>
+
+    <Grid x:Name="Button" AutomationId="ProceedButton">
+        <Frame x:Name="ButtonBorder" Style="{StaticResource ButtonBorderStyle}">
+            <Frame x:Name="ButtonFrame" Style="{StaticResource ButtonFrameStyle}">
+                <Label x:Name="ButtonImage" Style="{StaticResource ButtonImageStyle}"
+                       AutomationId="ProceedButtonLabelText"/>
+            </Frame>
+        </Frame>
+
+        <Frame x:Name="ButtonDisabledOverlay"
+               Style="{StaticResource ButtonBorderStyle}"
+               BackgroundColor="White"
+               Opacity="0">
+        </Frame>
+
+        <Grid.GestureRecognizers>
+            <TapGestureRecognizer x:Name="ProceedButtonTap" Tapped="OnButtonClicked" />
+        </Grid.GestureRecognizers>
+    </Grid>
+</kernel:RenderComponentBase>

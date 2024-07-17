@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderPageBase x:Class="Render.Pages.AppStart.Login.AddProjectViaId"
+                       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:kernel="clr-namespace:Render.Kernel"
+                       xmlns:login="clr-namespace:Render.Pages.AppStart.Login;assembly=Render"
+                       xmlns:resources="clr-namespace:Render.Resources.Localization"
+                       xmlns:uiResources="clr-namespace:Render.Resources"
+                       xmlns:addViaFolder="using:Render.Components.AddViaFolder"
+                       xmlns:versionLabel="using:Render.Components.VersionLabel"
+                       xmlns:validationEntry="using:Render.Components.ValidationEntry"
+                       xmlns:backButton="clr-namespace:Render.Components.BackButton"
+                       x:TypeArguments="login:AddProjectViaIdViewModel"
+                       NavigationPage.HasNavigationBar="False"
+                       BackgroundColor="{DynamicResource LoginPageBackground}">
+    <AbsoluteLayout x:Name="TopLevelElement">
+        <Grid AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <addViaFolder:AddViaFolderView Grid.Row="0" x:Name="AddViaFolderView" HorizontalOptions="Center" />
+
+            <VerticalStackLayout Grid.Row="0" x:Name="AddProjectWrapper" VerticalOptions="CenterAndExpand">
+                <Image AutomationId="RenderFullLogo"
+                       Style="{StaticResource RenderLogoStyle}">
+                </Image>
+
+                <Label AutomationId="WelcomeLabel"
+                       Text="{x:Static resources:AppResources.WelcomeToRender}"
+                       Style="{StaticResource WelcomeLabelDefault}" />
+                <Label AutomationId="AddProjectLabel"
+                       Style="{StaticResource LoginLabel}"
+                       Margin="0,20,0,50"
+                       Text="{x:Static resources:AppResources.AddProjectViaId}" />
+
+                <!-- Add Project Entry & AddProject button -->
+                <VerticalStackLayout WidthRequest="600" HorizontalOptions="Center"
+                                     Padding="0,0">
+                    <validationEntry:ValidationEntry x:Name="ProjectIdValidationEntry"
+                                                     AutomationId="ProjectIdValidationEntry" />
+
+                    <Border x:Name="AddProjectButton"
+                            AutomationId="AddProjectButton"
+                            Style="{StaticResource ButtonBorder}">
+
+                        <Grid Style="{StaticResource ButtonBackground}">
+
+                            <Grid ColumnDefinitions="Auto,*"
+                                  ColumnSpacing="13"
+                                  HorizontalOptions="Center"
+                                  AutomationId="LoginPanel">
+                                <Label Grid.Column="0"
+                                       Style="{StaticResource ButtonIcon}"
+                                       AutomationId="RemoveIcon"
+                                       Text="{uiResources:IconExtensions AddProjectViaId}" />
+                                <Label Grid.Column="1"
+                                       Style="{StaticResource ButtonText}"
+                                       AutomationId="CancelLabel"
+                                       Text="{x:Static resources:AppResources.AddProject}" />
+                            </Grid>
+                        </Grid>
+
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="AddProjectButtonTap" />
+                        </Border.GestureRecognizers>
+                    </Border>
+
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+
+            <versionLabel:VersionLabel Grid.Row="1" VerticalOptions="End" HorizontalOptions="Center" />
+        </Grid>
+
+        <backButton:BackButton AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0,0" />
+
+    </AbsoluteLayout>
+</kernel:RenderPageBase>

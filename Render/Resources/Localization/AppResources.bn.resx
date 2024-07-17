@@ -1,0 +1,1665 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Add" xml:space="preserve">
+    <value>যোগ করুন</value>
+  </data>
+  <data name="AddAProject" xml:space="preserve">
+    <value>একটি প্রজেক্ট যোগ করুন</value>
+  </data>
+  <data name="AddASection" xml:space="preserve">
+    <value>একটি সেকশন যোগ করুন</value>
+  </data>
+  <data name="AddATeam" xml:space="preserve">
+    <value>একটি টিম যোগ করুন</value>
+  </data>
+  <data name="Added" xml:space="preserve">
+    <value>যোগ করা হয়েছে</value>
+  </data>
+  <data name="Adding" xml:space="preserve">
+    <value>যোগ করা হচ্ছে</value>
+  </data>
+  <data name="AddingProject" xml:space="preserve">
+    <value>প্রজেক্ট যোগ করা হচ্ছে...</value>
+  </data>
+  <data name="AddNew" xml:space="preserve">
+    <value>নতুন যোগ করুন</value>
+  </data>
+  <data name="AddProject" xml:space="preserve">
+    <value>প্রজেক্ট যোগ করুন</value>
+  </data>
+  <data name="AddProjectViaId" xml:space="preserve">
+    <value>আইডির মাধ্যমে প্রজেক্ট যোগ করুন</value>
+  </data>
+  <data name="AddSection" xml:space="preserve">
+    <value>সেকশন যোগ করুন</value>
+  </data>
+  <data name="AddStage" xml:space="preserve">
+    <value>স্টেজ যোগ করুন</value>
+  </data>
+  <data name="AddStageHere" xml:space="preserve">
+    <value>এখানে মঞ্চ টানুন</value>
+  </data>
+  <data name="AddTeam" xml:space="preserve">
+    <value>টিম যোগ করুন</value>
+  </data>
+  <data name="AddUser" xml:space="preserve">
+    <value>একজন ব্যবহারকারী যোগ করুন</value>
+  </data>
+  <data name="AddWorkflowStage" xml:space="preserve">
+    <value>একটি ওয়ার্কফ্লো স্টেজ যোগ করুন</value>
+  </data>
+  <data name="AllowEditing" xml:space="preserve">
+    <value>সম্পাদনা করার অনুমতি দিন</value>
+  </data>
+  <data name="AllSections" xml:space="preserve">
+    <value>সমস্ত সেকশন</value>
+  </data>
+  <data name="AllSectionsAssigned" xml:space="preserve">
+    <value>সব সেকশন নিযুক্ত করা হয়েছে।</value>
+  </data>
+  <data name="Approval" xml:space="preserve">
+    <value>অনুমোদন</value>
+  </data>
+  <data name="ApprovalSubmitted" xml:space="preserve">
+    <value>অনুমোদন সফলভাবে জমা দেওয়া হয়েছে</value>
+  </data>
+  <data name="Approve" xml:space="preserve">
+    <value>অনুমোদন করুন</value>
+  </data>
+  <data name="Approved" xml:space="preserve">
+    <value>অনুমোদিত</value>
+  </data>
+  <data name="ApprovedByLabel" xml:space="preserve">
+    <value>অনুমোদনকারী:</value>
+  </data>
+  <data name="ApprovedDraft" xml:space="preserve">
+    <value>আপনি একটি খসড়া অনুমোদন করেছেন</value>
+  </data>
+  <data name="ApproveSection" xml:space="preserve">
+    <value>সেকশন {0} অনুমোদন করুন</value>
+  </data>
+  <data name="ArchivedDrafts" xml:space="preserve">
+    <value>আর্কাইভ করা খসড়া</value>
+  </data>
+  <data name="ArchivedNotes" xml:space="preserve">
+    <value>আর্কাইভ করা নোট</value>
+  </data>
+  <data name="ArrangeWorkflowStages" xml:space="preserve">
+    <value>ওয়ার্কফ্লো স্টেজগুলো সাজান</value>
+  </data>
+  <data name="Assigned" xml:space="preserve">
+    <value>{0} নিযুক্ত করা হয়েছে</value>
+  </data>
+  <data name="AssignToTranslator" xml:space="preserve">
+    <value>অনুবাদক নিযুক্ত করুন</value>
+  </data>
+  <data name="AudioClip" xml:space="preserve">
+    <value>অডিও ক্লিপ</value>
+  </data>
+  <data name="AudioNote" xml:space="preserve">
+    <value>অডিও নোট</value>
+  </data>
+  <data name="BackTranslate" xml:space="preserve">
+    <value>ফিরতি অনুবাদ</value>
+  </data>
+  <data name="BackTranslate1" xml:space="preserve">
+    <value>ফিরতি অনুবাদ 1</value>
+  </data>
+  <data name="BackTranslate2" xml:space="preserve">
+    <value>ফিরতি অনুবাদ 2</value>
+  </data>
+  <data name="BackTranslator" xml:space="preserve">
+    <value>ফিরে যান অনুবাদক</value>
+  </data>
+  <data name="BackTranslator2" xml:space="preserve">
+    <value>ফিরতি অনুবাদক 2</value>
+  </data>
+  <data name="Both" xml:space="preserve">
+    <value>উভয়</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>বাতিল করুন</value>
+  </data>
+  <data name="Canceled" xml:space="preserve">
+    <value>বাতিল করা হয়েছে</value>
+  </data>
+  <data name="Canceling" xml:space="preserve">
+    <value>বাতিল হচ্ছে</value>
+  </data>
+  <data name="Check" xml:space="preserve">
+    <value>চেক করুন</value>
+  </data>
+  <data name="Check2" xml:space="preserve">
+    <value>চেক 2</value>
+  </data>
+  <data name="ChooseProjectsForDeviceMessage" xml:space="preserve">
+    <value>আপনি এই ডিভাইসের সাথে যুক্ত করতে চান এমন প্রজেক্টগুলি নির্বাচন করুন</value>
+  </data>
+  <data name="ChosenDraft" xml:space="preserve">
+    <value>বেছে নেওয়া খসড়া</value>
+  </data>
+  <data name="Chunk" xml:space="preserve">
+    <value>খণ্ড {0}</value>
+  </data>
+  <data name="ClearSegmentMessage1" xml:space="preserve">
+    <value>এগিয়ে চলার ফলে এই প্যাসেজটি যে সব অংশে ভাগ করা হয়েছে তার বর্তমান সেটটি পরিষ্কার করা হবে।</value>
+  </data>
+  <data name="ClearSegmentMessage2" xml:space="preserve">
+    <value>যদি আগের সেগমেন্টেশন কাস্টম রুপে তৈরি করা হয় এবং ডিফল্ট সেট না থাকে তবে এই সেগমেন্টগুলি পুনরুদ্ধার করা যাবে না।</value>
+  </data>
+  <data name="ClearSegments" xml:space="preserve">
+    <value>সেগমেন্টগুলি পরিষ্কার করুন</value>
+  </data>
+  <data name="DeleteSnapshots" xml:space="preserve">
+    <value>উভয় স্ন্যাপশট পরিষ্কার করুন</value>
+  </data>
+  <data name="ClearSnapshotsDescription" xml:space="preserve">
+    <value>উভয় স্ন্যাপশট বাতিল করা হবে। এটি সেকশনটিকে তার আগের স্ন্যাপশটে নিয়ে যাবে।</value>
+  </data>
+  <data name="CombinedBackTranslate" xml:space="preserve">
+    <value>সম্মিলিত ফিরতি অনুবাদ</value>
+  </data>
+  <data name="CombineSegmentTitle" xml:space="preserve">
+    <value>একত্রিত করুন - প্যাসেগেট {0}</value>
+  </data>
+  <data name="CommunityCheck" xml:space="preserve">
+    <value>কমিউনিটি চেক</value>
+  </data>
+  <data name="CommunityRetellPassage" xml:space="preserve">
+    <value>প্যাসেজ {0} - রিটেল</value>
+  </data>
+  <data name="CommunityRevise" xml:space="preserve">
+    <value>কমিউনিটি সংশোধন</value>
+  </data>
+  <data name="CommunitySetup" xml:space="preserve">
+    <value>কমিউনিটি সেটআপ</value>
+  </data>
+  <data name="CommunityTest" xml:space="preserve">
+    <value>কমিউনিটি টেস্ট</value>
+  </data>
+  <data name="CommunityTestRevise" xml:space="preserve">
+    <value>কমিউনিটি টেস্ট সংশোধন</value>
+  </data>
+  <data name="CommunityTestSetup" xml:space="preserve">
+    <value>কমিউনিটি সেটআপ</value>
+  </data>
+  <data name="CompleteWork" xml:space="preserve">
+    <value>কাজ সম্পূর্ণ করুন</value>
+  </data>
+  <data name="CompleteWorkMessage" xml:space="preserve">
+    <value>প্রক্রিয়াধীন কোনো কাজ প্রথমে সম্পন্ন হলে এই স্টেজটি সরানো হবে।</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>নিশ্চিত করুন</value>
+  </data>
+  <data name="Confirmation" xml:space="preserve">
+    <value>নিশ্চিতকরণ</value>
+  </data>
+  <data name="Consultant" xml:space="preserve">
+    <value>পরামর্শদাতা</value>
+  </data>
+  <data name="ConsultantApproval" xml:space="preserve">
+    <value>পরামর্শদাতার অনুমোদন</value>
+  </data>
+  <data name="ConsultantCheck" xml:space="preserve">
+    <value>কনসালটেন্ট চেক</value>
+  </data>
+  <data name="ConsultantLanguage" xml:space="preserve">
+    <value>পরামর্শকের ভাষা</value>
+  </data>
+  <data name="ConsultantRevise" xml:space="preserve">
+    <value>পরামর্শদাতার সংশোধন</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>চালিয়ে যান</value>
+  </data>
+  <data name="CopyPreviousQuestions" xml:space="preserve">
+    <value>আগের প্রশ্ন কপি করুন</value>
+  </data>
+  <data name="CopyQuestions" xml:space="preserve">
+    <value>প্রশ্ন কপি করুন</value>
+  </data>
+  <data name="Current" xml:space="preserve">
+    <value>বর্তমান {0}</value>
+  </data>
+  <data name="DeactivateStepWarning" xml:space="preserve">
+    <value>আপনি যখন একটি ধাপ বন্ধ করবেন তখন সমস্ত সেকশন ওয়ার্কফ্লোয়ের পরবর্তী ধাপে চলে যাবে</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>মুছুন</value>
+  </data>
+  <data name="DeleteSnapshotsConfirmation" xml:space="preserve">
+    <value>আপনি কি উভয় স্ন্যাপশট সাফ করার বিষয়ে নিশ্চিত?</value>
+  </data>
+  <data name="DeleteUser" xml:space="preserve">
+    <value>ব্যবহারকারী মুছুন</value>
+  </data>
+  <data name="DeleteUserMessage" xml:space="preserve">
+    <value>{0} মুছে ফেলা হলে তাদের জন্য সমস্ত সেকশব অ্যাসাইনমেন্টগুলিও মুছে যাবে। আপনি এটিকে পূর্বাবস্থায় ফেরাতে পারবেন না।</value>
+  </data>
+  <data name="DeleteUserTitle" xml:space="preserve">
+    <value>ব্যবহারকারী মুছবেন?</value>
+  </data>
+  <data name="DividePassageTitle" xml:space="preserve">
+    <value>প্যাসেজ বিভাজন করুন</value>
+  </data>
+  <data name="Do2StepBackTranslate" xml:space="preserve">
+    <value>2-ধাপ ফিরতি অনুবাদ</value>
+  </data>
+  <data name="DoNoteInterpret" xml:space="preserve">
+    <value>নোট ইন্টারপ্রেট অন্তর্ভুক্ত করুন</value>
+  </data>
+  <data name="DoNoteReview" xml:space="preserve">
+    <value>নোট রিভিউ</value>
+  </data>
+  <data name="DoPassageBackTranslate1" xml:space="preserve">
+    <value>প্যাসেজের ফিরতি অনুবাদ করুন 1</value>
+  </data>
+  <data name="DoPassageBackTranslate2" xml:space="preserve">
+    <value>প্যাসেজের ফিরতি অনুবাদ করুন 2</value>
+  </data>
+  <data name="DoPassageListen" xml:space="preserve">
+    <value>প্যাসেজ শোনা অন্তর্ভুক্ত করুন</value>
+  </data>
+  <data name="DoPassageReview" xml:space="preserve">
+    <value>প্যাসেজ রিভিউ</value>
+  </data>
+  <data name="DoPassageTranscribe" xml:space="preserve">
+    <value>প্যাসেজের ট্রান্সক্রাইব</value>
+  </data>
+  <data name="DoQuestionAndResponse" xml:space="preserve">
+    <value>প্রশ্ন ও উত্তর অন্তর্ভুক্ত করুন</value>
+  </data>
+  <data name="DoRetell" xml:space="preserve">
+    <value>রিটেল করুন</value>
+  </data>
+  <data name="DoSectionListen" xml:space="preserve">
+    <value>সেকশন শোনা অন্তর্ভুক্ত করুন</value>
+  </data>
+  <data name="DoSectionReview" xml:space="preserve">
+    <value>সেকশন রিভিউ অন্তর্ভুক্ত করুন</value>
+  </data>
+  <data name="DoSegmentBackTranslate1" xml:space="preserve">
+    <value>সেগমেন্টের ফিরতি অনুবাদ 1</value>
+  </data>
+  <data name="DoSegmentBackTranslate2" xml:space="preserve">
+    <value>সেগমেন্টের ফিরতি অনুবাদ 2</value>
+  </data>
+  <data name="DoSegmentTranscribe" xml:space="preserve">
+    <value>সেগমেন্টের ট্রান্সক্রাইব</value>
+  </data>
+  <data name="DoTranscribe" xml:space="preserve">
+    <value>ট্রান্সক্রাইব করুন</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>ডাউনলোড করুন</value>
+  </data>
+  <data name="Downloaded" xml:space="preserve">
+    <value>ডাউনলোড করা হয়েছে</value>
+  </data>
+  <data name="DownloadingProjects" xml:space="preserve">
+    <value>প্রজেক্টগুলি ডাউনলোড করা হচ্ছে</value>
+  </data>
+  <data name="Draft" xml:space="preserve">
+    <value>খসড়া</value>
+  </data>
+  <data name="DraftedByLabel" xml:space="preserve">
+    <value>খসড়া করেছেন:</value>
+  </data>
+  <data name="DraftNotes" xml:space="preserve">
+    <value>খসড়া {0} নোট</value>
+  </data>
+  <data name="DraftPassage" xml:space="preserve">
+    <value>প্যাসেজ {0} অনুবাদ করুন</value>
+  </data>
+  <data name="DraftRecord" xml:space="preserve">
+    <value>খসড়া রেকর্ড</value>
+  </data>
+  <data name="DraftReplacementModalTitle" xml:space="preserve">
+    <value>প্রতিস্থাপনের জন্য একটি খসড়া নির্বাচন করুন</value>
+  </data>
+  <data name="DraftReview" xml:space="preserve">
+    <value>খসড়া {0} রিভিউ</value>
+  </data>
+  <data name="Drafts" xml:space="preserve">
+    <value>খসড়া</value>
+  </data>
+  <data name="DraftSelect" xml:space="preserve">
+    <value>খসড়া নির্বাচন</value>
+  </data>
+  <data name="DraftSelection" xml:space="preserve">
+    <value>খসড়া নির্বাচন</value>
+  </data>
+  <data name="DraftTitle" xml:space="preserve">
+    <value>খসড়া {0}</value>
+  </data>
+  <data name="EditPassage" xml:space="preserve">
+    <value>প্যাসেজ {0} সম্পাদনা করুন</value>
+  </data>
+  <data name="EditUser" xml:space="preserve">
+    <value>ব্যবহারকারী সম্পাদনা করুন</value>
+  </data>
+  <data name="EmptyCollectionMessage" xml:space="preserve">
+    <value>প্রকল্পের তালিকা খালি।</value>
+  </data>
+  <data name="EmptyCollectionMessageTitle" xml:space="preserve">
+    <value>প্রকল্পের তালিকা খালি।</value>
+  </data>
+  <data name="EmptyOffloadCollectionMessage" xml:space="preserve">
+    <value>অফলোড করার জন্য কোন প্রকল্প নেই</value>
+  </data>
+  <data name="EmptyPassword" xml:space="preserve">
+    <value>পাসওয়ার্ড খালি রাখা যাবে না</value>
+  </data>
+  <data name="End" xml:space="preserve">
+    <value>শেষ</value>
+  </data>
+  <data name="Enter32digitId" xml:space="preserve">
+    <value>32-সংখ্যার আইডি লিখুন...</value>
+  </data>
+  <data name="EnterAProjectName" xml:space="preserve">
+    <value>প্রজেক্টের একটি নাম লিখুন</value>
+  </data>
+  <data name="EnterLanguage" xml:space="preserve">
+    <value>একটি ভাষার নাম লিখুন</value>
+  </data>
+  <data name="EnterPasswordToRestoreSection" xml:space="preserve">
+    <value>এই সেকশনটি আনলক এবং পুনরুদ্ধার করতে আপনার পাসওয়ার্ড লিখুন</value>
+  </data>
+  <data name="EnterSectionNumber" xml:space="preserve">
+    <value>একটি সেকশন নম্বর লিখুন...</value>
+  </data>
+  <data name="EnterYourPassword" xml:space="preserve">
+    <value>আপনার পাসওয়ার্ড লিখুন</value>
+  </data>
+  <data name="EnterYourUsername" xml:space="preserve">
+    <value>আপনার ইউজারনেম লিখুন</value>
+  </data>
+  <data name="ErrorAddingProject" xml:space="preserve">
+    <value>এই প্রজেক্টটি যোগ করার সময় একটি ত্রুটি ছিল।</value>
+  </data>
+  <data name="ErrorConnectLocalMachine" xml:space="preserve">
+    <value>একটি স্থানীয় মেশিনে সংযোগ করার চেষ্টা করার সময় ত্রুটি হয়েছে।</value>
+  </data>
+  <data name="ExportAudio" xml:space="preserve">
+    <value>অডিও এক্সপোর্ট করুন</value>
+  </data>
+  <data name="ExportChecked" xml:space="preserve">
+    <value>এক্সপোর্ট চেক করা হয়েছে</value>
+  </data>
+  <data name="Exporting" xml:space="preserve">
+    <value>{1} এর মধ্যে {0}টি এক্সপোর্ট হচ্ছে</value>
+  </data>
+  <data name="FontSize" xml:space="preserve">
+    <value>হরফের আকার</value>
+  </data>
+  <data name="ForTeam" xml:space="preserve">
+    <value>{0} এর জন্য</value>
+  </data>
+  <data name="Generate" xml:space="preserve">
+    <value>তৈরি করুন</value>
+  </data>
+  <data name="Generic" xml:space="preserve">
+    <value>জেনেরিক</value>
+  </data>
+  <data name="GlobalUser" xml:space="preserve">
+    <value>বৈশ্বিক ব্যবহারকারী</value>
+  </data>
+  <data name="Grid" xml:space="preserve">
+    <value>গ্রিড</value>
+  </data>
+  <data name="HaveBeenCleared" xml:space="preserve">
+    <value>পরিষ্কার করা হয়েছে</value>
+  </data>
+  <data name="HigherPriority" xml:space="preserve">
+    <value>উচ্চতর অগ্রাধিকার</value>
+  </data>
+  <data name="HowToResolve" xml:space="preserve">
+    <value>আপনি কিভাবে এই সমস্যা সমাধান করতে চান?</value>
+  </data>
+  <data name="ImproperlyFormattedId" xml:space="preserve">
+    <value>ভুলভাবে ফরম্যাট করা আইডি। অনুগ্রহ করে আবার লিখুন।</value>
+  </data>
+  <data name="IncludeBackTranslate" xml:space="preserve">
+    <value>ফিরতি অনুবাদ অন্তর্ভুক্ত করুন</value>
+  </data>
+  <data name="IncludeNoteListenGuidance" xml:space="preserve">
+    <value>নোট শোনার নির্দেশিকা অন্তর্ভুক্ত করুন</value>
+  </data>
+  <data name="IncludePassageBackTranslate" xml:space="preserve">
+    <value>প্যাসেজের ফিরতি অনুবাদ অন্তর্ভুক্ত করুন</value>
+  </data>
+  <data name="IncludePassageListen" xml:space="preserve">
+    <value>প্যাসেজ শোনা অন্তর্ভুক্ত করুন</value>
+  </data>
+  <data name="IncludePassageReview" xml:space="preserve">
+    <value>প্যাসেজের রিভিউ অন্তর্ভুক্ত করুন</value>
+  </data>
+  <data name="IncludePassageReviewAfterReRecording" xml:space="preserve">
+    <value>পুনঃ-রেকর্ডিংয়ের পরে প্যাসেজ রিভিউ অন্তর্ভুক্ত করুন</value>
+  </data>
+  <data name="IncludeSegmentBackTranslate" xml:space="preserve">
+    <value>সেগমেন্টের ফিরতি অনুবাদ অন্তর্ভুক্ত করুন</value>
+  </data>
+  <data name="IncorrectPassword" xml:space="preserve">
+    <value>এই পাসওয়ার্ডটি এই ইউজারনেমের সাথে মিলছে না</value>
+  </data>
+  <data name="IncorrectPattern" xml:space="preserve">
+    <value>ভুল প্যাটার্ন। অনুগ্রহ করে আবার চেষ্টা করুন।</value>
+  </data>
+  <data name="Input" xml:space="preserve">
+    <value>ইনপুট</value>
+  </data>
+  <data name="InsertPassword" xml:space="preserve">
+    <value>এখানে পাসওয়ার্ড লিখুন</value>
+  </data>
+  <data name="IntermediateLanguage" xml:space="preserve">
+    <value>মাঝারি ভাষা</value>
+  </data>
+  <data name="Interpret" xml:space="preserve">
+    <value>ব্যাখ্যা করুন</value>
+  </data>
+  <data name="Interpreted" xml:space="preserve">
+    <value>ব্যাখ্যা করা হয়েছে</value>
+  </data>
+  <data name="InterpretToConsultant" xml:space="preserve">
+    <value>পরামর্শদাতাকে ব্যাখ্যা করুন</value>
+  </data>
+  <data name="InterpretToTranslator" xml:space="preserve">
+    <value>অনুবাদকের কাছে ব্যাখ্যা করুন</value>
+  </data>
+  <data name="Iteration" xml:space="preserve">
+    <value>পুনরাবৃত্তি</value>
+  </data>
+  <data name="Jump" xml:space="preserve">
+    <value>যান</value>
+  </data>
+  <data name="JumpToSection" xml:space="preserve">
+    <value>সরাসরি সেকশনে যান</value>
+  </data>
+  <data name="LastCompletedStage" xml:space="preserve">
+    <value>শেষ সমাপ্ত পর্যায়</value>
+  </data>
+  <data name="LastSubmittedAudioLabel" xml:space="preserve">
+    <value>সর্বশেষ জমা দেওয়া অডিও</value>
+  </data>
+  <data name="LastSync" xml:space="preserve">
+    <value>শেষ সিঙ্ক</value>
+  </data>
+  <data name="LeaveFreeCut" xml:space="preserve">
+    <value>সেগমেন্ট ফ্রি কাট ছেড়ে দিন</value>
+  </data>
+  <data name="LeaveFreeCutMessage1" xml:space="preserve">
+    <value>আপনি যদি সেগমেন্ট ফ্রি কাট ছেড়ে যান তবে আপনি এখন পর্যন্ত তৈরি করা যেকোনো কাজ হারাবেন।</value>
+  </data>
+  <data name="LeaveFreeCutMessage2" xml:space="preserve">
+    <value>তৈরি করা যেকোনো কাজ ধরে রাখতে এই ধাপটি সম্পূর্ণ করুন।</value>
+  </data>
+  <data name="Localization" xml:space="preserve">
+    <value>স্থানীয়করণ</value>
+  </data>
+  <data name="LoggingIn" xml:space="preserve">
+    <value>লগ ইন হচ্ছে...</value>
+  </data>
+  <data name="LogIn" xml:space="preserve">
+    <value>লগ ইন</value>
+  </data>
+  <data name="LogOut" xml:space="preserve">
+    <value>লগ আউট</value>
+  </data>
+  <data name="LowerPriority" xml:space="preserve">
+    <value>নিম্ন অগ্রাধিকার</value>
+  </data>
+  <data name="ManageDivisions" xml:space="preserve">
+    <value>প্যাসেজ বিভাজন {0} পরিচালনা করুন</value>
+  </data>
+  <data name="ManageUsers" xml:space="preserve">
+    <value>ব্যবহারকারীদের পরিচালনা করুন</value>
+  </data>
+  <data name="MarkQuestions" xml:space="preserve">
+    <value>{0} প্রশ্নের প্যাসেজ চিহ্নিত করুন</value>
+  </data>
+  <data name="MicNotConnectedMessage" xml:space="preserve">
+    <value>মাইক্রোফোন সনাক্ত হয়নি।  অডিও রেকর্ড করতে আপনার সিস্টেমে একটি মাইক্রোফোন সংযোগ করুন।</value>
+  </data>
+  <data name="MicNotConnectedTitle" xml:space="preserve">
+    <value>মাইক্রোফোন সংযুক্ত নেই</value>
+  </data>
+  <data name="MicrophoneAccessMessage" xml:space="preserve">
+    <value>আপনার মাইক্রোফোন ব্যবহার করার অনুমতি নেই Render-এর নেই। এটি ঠিক করতে মাইক্রোফোনের গোপনীয়তা সেটিংসে যান এবং Render-এর জন্য মাইক্রোফোনের অ্যাক্সেস চালু করুন।</value>
+  </data>
+  <data name="MicrophoneAccessTitle" xml:space="preserve">
+    <value>মাইক্রোফোনের অ্যাক্সেস প্রয়োজন</value>
+  </data>
+  <data name="MultipleTeamAssignmentLabel" xml:space="preserve">
+    <value>একজন ব্যবহারকারীকে একাধিক টিমে নিযুক্ত করা যাবে না</value>
+  </data>
+  <data name="MultipleTeamAssignmentMessage" xml:space="preserve">
+    <value>অনুগ্রহ করে প্রতিটি টিমে একজন অনন্য ব্যবহারকারী নিযুক্ত করুন।</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>নাম</value>
+  </data>
+  <data name="NoAudio" xml:space="preserve">
+    <value>কোনো অডিও নেই</value>
+  </data>
+  <data name="NoInternetConnection" xml:space="preserve">
+    <value>কোনো ইন্টারনেট সংযোগ নেই</value>
+  </data>
+  <data name="NoReviewedSections" xml:space="preserve">
+    <value>এই সময়ে কোনো রিভিউ করা সেকশন নেই।</value>
+  </data>
+  <data name="NoSectionAudioForStage" xml:space="preserve">
+    <value>এই স্টেজের জন্য কোনো সেকশন অডিও নেই</value>
+  </data>
+  <data name="NoSelfCheck" xml:space="preserve">
+    <value>স্ব-পরীক্ষা করা হয়নি</value>
+  </data>
+  <data name="NotAbleToLogin" xml:space="preserve">
+    <value>আপনি লগইন করতে পারবেন না।</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>নোট</value>
+  </data>
+  <data name="NoteInterpret" xml:space="preserve">
+    <value>নোট ব্যাখ্যা</value>
+  </data>
+  <data name="NoteListen" xml:space="preserve">
+    <value>নোট শোনা</value>
+  </data>
+  <data name="Notes" xml:space="preserve">
+    <value>নোট</value>
+  </data>
+  <data name="NoteTranslator" xml:space="preserve">
+    <value>নোট অনুবাদক</value>
+  </data>
+  <data name="NotInWorkflow" xml:space="preserve">
+    <value>আর ওয়ার্কফ্লোয়ের অংশ নয়</value>
+  </data>
+  <data name="NoUnreviewedSections" xml:space="preserve">
+    <value>এই সময়ে কোনো রিভিউ না করা সেকশন নেই।</value>
+  </data>
+  <data name="NullUsername" xml:space="preserve">
+    <value>ইউজারনেম খালি রাখা যাবে না</value>
+  </data>
+  <data name="Offload" xml:space="preserve">
+    <value>অফলোড করুন</value>
+  </data>
+  <data name="OffloadData" xml:space="preserve">
+    <value>ডেটা অফলোড করুন</value>
+  </data>
+  <data name="Offloading" xml:space="preserve">
+    <value>অফলোডিং</value>
+  </data>
+  <data name="OffloadWarning" xml:space="preserve">
+    <value>{0} শেষবার {1} তারিখে সিঙ্ক করা হয়েছিল৷ আপনি কি নিশ্চিত যে আপনি এই প্রকল্পটি অফলোড করতে চান?</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>ঠিক আছে</value>
+  </data>
+  <data name="Original" xml:space="preserve">
+    <value>মূল</value>
+  </data>
+  <data name="OriginalLanguage" xml:space="preserve">
+    <value>মূল ভাষা</value>
+  </data>
+  <data name="OriginalNote" xml:space="preserve">
+    <value>আসল নোট</value>
+  </data>
+  <data name="OriginalPassageTitle" xml:space="preserve">
+    <value>প্যাসেজ {0} (মূল)</value>
+  </data>
+  <data name="Passage" xml:space="preserve">
+    <value>প্যাসেজ {0}</value>
+  </data>
+  <data name="PassageBackTranslate" xml:space="preserve">
+    <value>প্যাসেজের ফিরতি অনুবাদ</value>
+  </data>
+  <data name="PassageDivide" xml:space="preserve">
+    <value>প্যাসেজ বিভাজন</value>
+  </data>
+  <data name="PassageDraftListen" xml:space="preserve">
+    <value>প্যাসেজ {0} খসড়া শুনুন</value>
+  </data>
+  <data name="PassageListen" xml:space="preserve">
+    <value>প্যাসেজ শোনা</value>
+  </data>
+  <data name="PassageListenOnly" xml:space="preserve">
+    <value>প্যাসেজ শোনা কেবলমাত্র</value>
+  </data>
+  <data name="PassageListenTitle" xml:space="preserve">
+    <value>প্যাসেজ {0} শুনুন</value>
+  </data>
+  <data name="PassageNumber" xml:space="preserve">
+    <value>রচনাংশ {0}</value>
+  </data>
+  <data name="PassagePeerReview" xml:space="preserve">
+    <value>প্যাসেজ {0} পিয়ার রিভিউ</value>
+  </data>
+  <data name="PassageRetell" xml:space="preserve">
+    <value>প্যাসেজ রিটেল</value>
+  </data>
+  <data name="PassageReview" xml:space="preserve">
+    <value>প্যাসেজ রিভিউ</value>
+  </data>
+  <data name="PassageReviewAfterReRecording" xml:space="preserve">
+    <value>পুনরায় রেকর্ডিংয়ের পরে প্যাসেজ রিভিউ</value>
+  </data>
+  <data name="PassageSelect" xml:space="preserve">
+    <value>প্যাসেজ নির্বাচন করুন</value>
+  </data>
+  <data name="PassageSelection" xml:space="preserve">
+    <value>প্যাসেজ নির্বাচন</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>পাসওয়ার্ড</value>
+  </data>
+  <data name="PasswordGrid" xml:space="preserve">
+    <value>পাসওয়ার্ড গ্রিড</value>
+  </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>পাসওয়ার্ড প্রয়োজন</value>
+  </data>
+  <data name="PasswordType" xml:space="preserve">
+    <value>পাসওয়ার্ডের ধরন</value>
+  </data>
+  <data name="PeerCheck" xml:space="preserve">
+    <value>পিয়ার চেক</value>
+  </data>
+  <data name="PeerReview" xml:space="preserve">
+    <value>পিয়ার রিভিউ</value>
+  </data>
+  <data name="PeerRevise" xml:space="preserve">
+    <value>পিয়ার সংশোধন</value>
+  </data>
+  <data name="PleaseConnect" xml:space="preserve">
+    <value>অনুগ্রহ করে ইন্টারনেটের সাথে সংযোগ করুন এবং আবার Render শুরু করুন।</value>
+  </data>
+  <data name="PleaseLogIn" xml:space="preserve">
+    <value>শুরু করতে লগ ইন করুন।</value>
+  </data>
+  <data name="PrecedingAudio" xml:space="preserve">
+    <value>আগের অডিও</value>
+  </data>
+  <data name="PreviousDraft" xml:space="preserve">
+    <value>আগের খসড়া</value>
+  </data>
+  <data name="Proceed" xml:space="preserve">
+    <value>এগিয়ে যান</value>
+  </data>
+  <data name="Processes" xml:space="preserve">
+    <value>প্রক্রিয়া</value>
+  </data>
+  <data name="ProjectAddedSuccesfully" xml:space="preserve">
+    <value>এই প্রজেক্টটি সফলভাবে যোগ করা হয়েছে।</value>
+  </data>
+  <data name="ProjectConfiguration" xml:space="preserve">
+    <value>প্রজেক্ট কনফিগারেশন</value>
+  </data>
+  <data name="ProjectDeletedTitle" xml:space="preserve">
+    <value>প্রজেক্ট মুছে ফেলা হয়েছে</value>
+  </data>
+  <data name="ProjectHome" xml:space="preserve">
+    <value>প্রজেক্ট হোম</value>
+  </data>
+  <data name="ProjectId" xml:space="preserve">
+    <value>প্রজেক্ট আইডি</value>
+  </data>
+  <data name="ProjectList" xml:space="preserve">
+    <value>প্রজেক্টের তালিকা</value>
+  </data>
+  <data name="ProjectsDownloadedSuccessfully" xml:space="preserve">
+    <value>প্রজেক্টগুলি সফলভাবে ডাউনলোড করা হয়েছে।</value>
+  </data>
+  <data name="ProjectTeams" xml:space="preserve">
+    <value>প্রজেক্ট টিম</value>
+  </data>
+  <data name="ProjectUsers" xml:space="preserve">
+    <value>প্রজেক্ট ব্যবহারকারী</value>
+  </data>
+  <data name="ProjectWorkflow" xml:space="preserve">
+    <value>প্রজেক্ট ওয়ার্কফ্লো</value>
+  </data>
+  <data name="QuestionFormatted" xml:space="preserve">
+    <value>প্রশ্ন {0}</value>
+  </data>
+  <data name="QuestionAndResponse" xml:space="preserve">
+    <value>প্রশ্ন ও উত্তর</value>
+  </data>
+  <data name="QuestionPlacement" xml:space="preserve">
+    <value>প্রশ্ন বসানো</value>
+  </data>
+  <data name="QuestionSet" xml:space="preserve">
+    <value>প্রশ্ন সেট {0}</value>
+  </data>
+  <data name="Record" xml:space="preserve">
+    <value>রেকর্ড</value>
+  </data>
+  <data name="RecordedSegmentWarningConfirmation" xml:space="preserve">
+    <value>সম্পূর্ণ মার্জ করুন</value>
+  </data>
+  <data name="RecordedSegmentWarningMessage" xml:space="preserve">
+    <value>পূর্ববর্তী সেকশনে ইতোমধ্যে উত্তরের অডিও রয়েছে। আপনি যদি এই দুটি অংশকে মার্জ করেন তবে পূর্বে রেকর্ড করা অডিও হারিয়ে যাবে।</value>
+  </data>
+  <data name="RecordedSegmentWarningTitle" xml:space="preserve">
+    <value>উত্তর হারিয়ে যাবে</value>
+  </data>
+  <data name="RecordInterpretation" xml:space="preserve">
+    <value>ব্যাখ্যা রেকর্ড করুন</value>
+  </data>
+  <data name="RecordNewDraft" xml:space="preserve">
+    <value>নতুন খসড়া রেকর্ড করুন</value>
+  </data>
+  <data name="RecordQuestion" xml:space="preserve">
+    <value>প্রশ্ন রেকর্ড করুন(প্রশ্ন{0})</value>
+  </data>
+  <data name="RecordQuestionTitle" xml:space="preserve">
+    <value>প্রশ্ন রেকর্ড করুন</value>
+  </data>
+  <data name="RecordResponse" xml:space="preserve">
+    <value>উত্তর রেকর্ড করুন</value>
+  </data>
+  <data name="RecordRetell" xml:space="preserve">
+    <value>রিটেল রেকর্ড করুন</value>
+  </data>
+  <data name="RecordStandardQuestion" xml:space="preserve">
+    <value>{0} আদর্শ প্রশ্ন রেকর্ড করুন</value>
+  </data>
+  <data name="RecordTranslation" xml:space="preserve">
+    <value>অনুবাদ রেকর্ড করুন</value>
+  </data>
+  <data name="Recovery" xml:space="preserve">
+    <value>পুনরুদ্ধার</value>
+  </data>
+  <data name="References" xml:space="preserve">
+    <value>তথ্যসূত্র</value>
+  </data>
+  <data name="RemoveWork" xml:space="preserve">
+    <value>কাজ সরান</value>
+  </data>
+  <data name="RemoveWorkMessage" xml:space="preserve">
+    <value>এই স্টেজটি অবিলম্বে সরানো হবে এবং সমস্ত প্রক্রিয়াধীন কাজ হারিয়ে যাবে।</value>
+  </data>
+  <data name="RenderUser" xml:space="preserve">
+    <value>Render ব্যবহারকারী</value>
+  </data>
+  <data name="Replace" xml:space="preserve">
+    <value>প্রতিস্থাপন করুন</value>
+  </data>
+  <data name="RequireNoteListen" xml:space="preserve">
+    <value>নোট শোনার নির্দেশিকা</value>
+  </data>
+  <data name="RequireNoteReview" xml:space="preserve">
+    <value>নোট রিভিউয়ের নির্দেশিকা</value>
+  </data>
+  <data name="RequirePassageListen" xml:space="preserve">
+    <value>প্যাসেজ শোনার নির্দেশিকা</value>
+  </data>
+  <data name="RequirePassageReview" xml:space="preserve">
+    <value>প্যাসেজ রিভিউয়ের নির্দেশিকা</value>
+  </data>
+  <data name="RequirePassageTranscribeListen" xml:space="preserve">
+    <value>প্যাসেজ ট্রান্সক্রাইবের নির্দেশিকা</value>
+  </data>
+  <data name="RequireQuestionContextListen" xml:space="preserve">
+    <value>প্রশ্নের প্রসঙ্গ শোনার নির্দেশিকা</value>
+  </data>
+  <data name="RequireRecordResponse" xml:space="preserve">
+    <value>উত্তরের নির্দেশিকা অন্তর্ভুক্ত করুন</value>
+  </data>
+  <data name="RequireReviewAfterReRecording" xml:space="preserve">
+    <value>পুনরায় রেকর্ডিংয়ের পরে প্যাসেজ রিভিউয়ের নির্দেশিকা</value>
+  </data>
+  <data name="RequireSectionListen" xml:space="preserve">
+    <value>সেকশন শোনার নির্দেশিকা</value>
+  </data>
+  <data name="RequireSectionReview" xml:space="preserve">
+    <value>সেকশন রিভিউয়ের নির্দেশিকা</value>
+  </data>
+  <data name="RequireSegmentTranscribeListen" xml:space="preserve">
+    <value>সেগমেন্ট ট্রান্সক্রাইবের নির্দেশিকা</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>রিসেট</value>
+  </data>
+  <data name="ResetSection" xml:space="preserve">
+    <value>সেকশন রিসেট করুন</value>
+  </data>
+  <data name="Response" xml:space="preserve">
+    <value>উত্তর {0}</value>
+  </data>
+  <data name="Restore" xml:space="preserve">
+    <value>পুনরুদ্ধার করুন</value>
+  </data>
+  <data name="RestoreSection" xml:space="preserve">
+    <value>সেকশন পুনরুদ্ধার করুন</value>
+  </data>
+  <data name="RestoreSectionConfirmation" xml:space="preserve">
+    <value>আপনি কি এই সেকশনটি পুনরুদ্ধার করার বিষয়ে নিশ্চিত?</value>
+  </data>
+  <data name="RestoreSnapshotInfo" xml:space="preserve">
+    <value>এই স্ন্যাপশটটি পুনরুদ্ধার করা হলে ওয়ার্কফ্লো থেকে সরানো স্টেজটিকে পুনরুদ্ধার করা যাবে না।</value>
+  </data>
+  <data name="Retell" xml:space="preserve">
+    <value>রিটেল</value>
+  </data>
+  <data name="RetellCheck" xml:space="preserve">
+    <value>রিটেল চেক (প্যাসেজ {0})</value>
+  </data>
+  <data name="ReturnToLogIn" xml:space="preserve">
+    <value>লগ ইন-এ ফিরে যান</value>
+  </data>
+  <data name="Review" xml:space="preserve">
+    <value>রিভিউ করুন</value>
+  </data>
+  <data name="Reviewed" xml:space="preserve">
+    <value>রিভিউ করা হয়েছে</value>
+  </data>
+  <data name="ReviewQuestions" xml:space="preserve">
+    <value>{0} প্রশ্নের প্যাসেজ রিভিউ করুন</value>
+  </data>
+  <data name="Revise" xml:space="preserve">
+    <value>সংশোধন করুন</value>
+  </data>
+  <data name="Revision" xml:space="preserve">
+    <value>সংশোধন</value>
+  </data>
+  <data name="RoleAssignment" xml:space="preserve">
+    <value>ভূমিকা নিয়োগ</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>অনুসন্ধান করুন</value>
+  </data>
+  <data name="Section" xml:space="preserve">
+    <value>সেকশন {0}</value>
+  </data>
+  <data name="SectionAndPassageListen" xml:space="preserve">
+    <value>সেকশন এবং প্যাসেজ শোনা</value>
+  </data>
+  <data name="SectionAssignment" xml:space="preserve">
+    <value>সেকশন অ্যাসাইনমেন্ট</value>
+  </data>
+  <data name="SectionDraft" xml:space="preserve">
+    <value>সেকশন {0} খসড়া</value>
+  </data>
+  <data name="SectionFeedbackTitle" xml:space="preserve">
+    <value>সেকশন {0} ফিডব্যাক</value>
+  </data>
+  <data name="SectionInformation" xml:space="preserve">
+    <value>সেকশনের তথ্য</value>
+  </data>
+  <data name="SectionList" xml:space="preserve">
+    <value>সেকশনের তালিকা</value>
+  </data>
+  <data name="SectionListen" xml:space="preserve">
+    <value>সেকশন শোনা</value>
+  </data>
+  <data name="SectionListenOnly" xml:space="preserve">
+    <value>সেকশন শোনা কেবলমাত্র</value>
+  </data>
+  <data name="SectionListenTitle" xml:space="preserve">
+    <value>সেকশন {0} শুনুন</value>
+  </data>
+  <data name="SectionNumberLabel" xml:space="preserve">
+    <value>সেকশনের নম্বর</value>
+  </data>
+  <data name="SectionReferenceLabel" xml:space="preserve">
+    <value>পদ্যের উল্লেখ</value>
+  </data>
+  <data name="SectionReset" xml:space="preserve">
+    <value>সেকশনটি রিসেট করা হয়েছে।</value>
+  </data>
+  <data name="SectionReview" xml:space="preserve">
+    <value>সেকশন রিভিউ</value>
+  </data>
+  <data name="SectionSelect" xml:space="preserve">
+    <value>সেকশন নির্বাচন করুন</value>
+  </data>
+  <data name="SectionsMovingWarning" xml:space="preserve">
+    <value>সেকশনগুলি পরবর্তী ধাপে চলে যাবে</value>
+  </data>
+  <data name="SectionStatus" xml:space="preserve">
+    <value>সেকশনের অবস্থা</value>
+  </data>
+  <data name="SectionStepLabel" xml:space="preserve">
+    <value>বর্তমান ধাপ</value>
+  </data>
+  <data name="SectionTitle" xml:space="preserve">
+    <value>সেকশন {0} শিরোনাম</value>
+  </data>
+  <data name="SectionTitleLabel" xml:space="preserve">
+    <value>সেকশনের শিরোনাম</value>
+  </data>
+  <data name="Segment" xml:space="preserve">
+    <value>সেগমেন্ট {0}</value>
+  </data>
+  <data name="SegmentBackTranslate" xml:space="preserve">
+    <value>সেগমেন্টের ফিরতি অনুবাদ</value>
+  </data>
+  <data name="SegmentBackTranslateSelect" xml:space="preserve">
+    <value>সেগমেন্টের ফিরতি অনুবাদ নির্বাচন করুন</value>
+  </data>
+  <data name="SegmentBackTranslateTitle" xml:space="preserve">
+    <value>{0} - সেগমেন্ট {1}</value>
+  </data>
+  <data name="SegmentFreeCut" xml:space="preserve">
+    <value>সেগমেন্ট ফ্রি কাটা</value>
+  </data>
+  <data name="SegmentWillBeCleared" xml:space="preserve">
+    <value>বর্তমান সেগমেন্টগুলি সাফ করা হবে</value>
+  </data>
+  <data name="SelectADraft" xml:space="preserve">
+    <value>একটি খসড়া নির্বাচন করুন</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>সবগুলো নির্বাচন করুন</value>
+  </data>
+  <data name="SelectAProfile" xml:space="preserve">
+    <value>লগ ইন করতে একটি প্রোফাইল নির্বাচন করুন</value>
+  </data>
+  <data name="SelectAProject" xml:space="preserve">
+    <value>প্রজেক্ট নির্বাচন করুন</value>
+  </data>
+  <data name="SelectDisplay" xml:space="preserve">
+    <value>ডিসপ্লে নির্বাচন করুন</value>
+  </data>
+  <data name="SelectDraft" xml:space="preserve">
+    <value>একটি খসড়া নির্বাচন করুন</value>
+  </data>
+  <data name="SelectProjectsToImport" xml:space="preserve">
+    <value>ইমপোর্ট করার জন্য প্রজেক্ট নির্বাচন করুন</value>
+  </data>
+  <data name="SelectSection" xml:space="preserve">
+    <value>সেকশন নির্বাচন করুন</value>
+  </data>
+  <data name="SelectSnapshot" xml:space="preserve">
+    <value>একটি স্ন্যাপশট নির্বাচন করুন</value>
+  </data>
+  <data name="SelectSnapshotDescription" xml:space="preserve">
+    <value>এগিয়ে যাওয়ার জন্য একটি নির্দিষ্ট স্ন্যাপশট নির্বাচন করুন। অনির্বাচিত স্ন্যাপশট মুছে ফেলা হবে।</value>
+  </data>
+  <data name="Sequence" xml:space="preserve">
+    <value>ক্রম</value>
+  </data>
+  <data name="Snapshot" xml:space="preserve">
+    <value>স্ন্যাপশট</value>
+  </data>
+  <data name="SnapshotChosen" xml:space="preserve">
+    <value>এর জন্য নির্বাচিত স্ন্যাপশট</value>
+  </data>
+  <data name="SnapshotConflict" xml:space="preserve">
+    <value>এই বিভাগে একটি স্ন্যাপশট দ্বন্দ্ব আছে: {0}</value>
+  </data>
+  <data name="Snapshots" xml:space="preserve">
+    <value>স্ন্যাপশট</value>
+  </data>
+  <data name="SortBy" xml:space="preserve">
+    <value>এই অনুসারে বাছাই করুন</value>
+  </data>
+  <data name="Source" xml:space="preserve">
+    <value>উৎস</value>
+  </data>
+  <data name="StageName" xml:space="preserve">
+    <value>স্টেজের নাম</value>
+  </data>
+  <data name="StandardQuestion" xml:space="preserve">
+    <value>আদর্শ প্রশ্ন {0}</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>শুরু</value>
+  </data>
+  <data name="Step" xml:space="preserve">
+    <value>ধাপ</value>
+  </data>
+  <data name="Step1" xml:space="preserve">
+    <value>ধাপ 1</value>
+  </data>
+  <data name="Step2" xml:space="preserve">
+    <value>ধাপ 2</value>
+  </data>
+  <data name="SupplementaryMaterial" xml:space="preserve">
+    <value>সম্পূরক উপাদান</value>
+  </data>
+  <data name="Sync" xml:space="preserve">
+    <value>সিঙ্ক করুন</value>
+  </data>
+  <data name="TeamCheck" xml:space="preserve">
+    <value>টিম চেক</value>
+  </data>
+  <data name="TeamOne" xml:space="preserve">
+    <value>টিম 1</value>
+  </data>
+  <data name="TeamTwo" xml:space="preserve">
+    <value>টিম 2</value>
+  </data>
+  <data name="Text" xml:space="preserve">
+    <value>টেক্সট</value>
+  </data>
+  <data name="TextNote" xml:space="preserve">
+    <value>টেক্সট নোট</value>
+  </data>
+  <data name="TotalPassagesLabel" xml:space="preserve">
+    <value>মোট প্যাসেজ</value>
+  </data>
+  <data name="TotalVerses" xml:space="preserve">
+    <value>মোট পদ্য:</value>
+  </data>
+  <data name="Transcribe" xml:space="preserve">
+    <value>ট্রান্সক্রাইব</value>
+  </data>
+  <data name="Transcribe2" xml:space="preserve">
+    <value>ট্রান্সক্রাইব 2</value>
+  </data>
+  <data name="TranscribePassage" xml:space="preserve">
+    <value>প্যাসেজ ট্রান্সক্রাইব করুন</value>
+  </data>
+  <data name="TranscribeSegment" xml:space="preserve">
+    <value>সেগমেন্ট ট্রান্সক্রাইব করুন</value>
+  </data>
+  <data name="Translated" xml:space="preserve">
+    <value>অনূদিত</value>
+  </data>
+  <data name="Translation" xml:space="preserve">
+    <value>অনুবাদ</value>
+  </data>
+  <data name="Unassigned" xml:space="preserve">
+    <value>নিযুক্তি বাতিল করা হয়েছে</value>
+  </data>
+  <data name="Unreviewed" xml:space="preserve">
+    <value>রিভিউ করা হয়নি</value>
+  </data>
+  <data name="UnsavedRolesMessage" xml:space="preserve">
+    <value>আপনি যদি আপনার নির্ধারিত ভূমিকাগুলি সংরক্ষণ করতে চান তবে নীচে-ডানদিকে এগিয়ে যাওয়ার তীরটি নির্বাচন করুন।</value>
+  </data>
+  <data name="UnsavedRolesTitle" xml:space="preserve">
+    <value>অসংরক্ষিত ভূমিকা আছে</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>আপডেট করুন</value>
+  </data>
+  <data name="UpdatedPassage" xml:space="preserve">
+    <value>আপডেট করা প্যাসেজ</value>
+  </data>
+  <data name="UserLabel" xml:space="preserve">
+    <value>বর্তমান ব্যবহারকারী</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>ইউজারনেম</value>
+  </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>এই ইউজারনেমটি বিদ্যমান নেই</value>
+  </data>
+  <data name="UserSettings" xml:space="preserve">
+    <value>ব্যবহারকারীর সেটিংস</value>
+  </data>
+  <data name="UserType" xml:space="preserve">
+    <value>ব্যবহারকারীর ধরন</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>ভার্সন</value>
+  </data>
+  <data name="VesselUser" xml:space="preserve">
+    <value>ভেসেল ইউজার</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>দেখুন</value>
+  </data>
+  <data name="ViewAllUsers" xml:space="preserve">
+    <value>সমস্ত ব্যবহারকারী দেখুন</value>
+  </data>
+  <data name="ViewSectionAssignments" xml:space="preserve">
+    <value>সেকশন অ্যাসাইনমেন্ট দেখুন</value>
+  </data>
+  <data name="WelcomeToRender" xml:space="preserve">
+    <value>Render-এ স্বাগতম</value>
+  </data>
+  <data name="WhichSnapshot" xml:space="preserve">
+    <value>আপনি কোন স্ন্যাপশটে যেতে চান?</value>
+  </data>
+  <data name="WorkflowConfiguration" xml:space="preserve">
+    <value>ওয়ার্কফ্লো কনফিগারেশন</value>
+  </data>
+  <data name="WorkflowDeleteStageMessage" xml:space="preserve">
+    <value>স্টেজ অপসারণের আগে কীভাবে চলমান কাজ পরিচালনা করবেন তা চয়ন করুন:</value>
+  </data>
+  <data name="WorkflowDeleteStageTitle" xml:space="preserve">
+    <value>এই স্টেজে ডেটা রয়েছে</value>
+  </data>
+  <data name="WorkWillBeLost" xml:space="preserve">
+    <value>আপনার কাজ নষ্ট হয়ে যাবে</value>
+  </data>
+  <data name="DividePassageMessage" xml:space="preserve">
+    <value>আপনি যদি এখন প্যাসেজ ডিভাইড ছেড়ে দেন, আপনার কাজ নষ্ট হয়ে যাবে
+</value>
+  </data>
+  <data name="ErrorOccuredTryAgain" xml:space="preserve">
+    <value>একটি ত্রুটি ঘটেছে. অনুগ্রহপূর্বক আবার চেষ্টা করুন.
+</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>ত্রুটি</value>
+  </data>
+  <data name="RetellQuestionResponse" xml:space="preserve">
+    <value>রিটেল এবং প্রশ্ন ও উত্তর
+</value>
+  </data>
+  <data name="DiscardWork" xml:space="preserve">
+    <value>কাজ বাতিল করুন</value>
+  </data>
+  <data name="SectionView" xml:space="preserve">
+    <value>বিভাগ দেখুন</value>
+  </data>
+  <data name="TeamTitle" xml:space="preserve">
+    <value>টীম {0}</value>
+  </data>
+  <data name="TeamView" xml:space="preserve">
+    <value>দলদর্শক</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>কপি</value>
+  </data>
+  <data name="SegmentSelect" xml:space="preserve">
+    <value>বিভাগ নির্বাচন করুন</value>
+  </data>
+  <data name="ClearSegmentsQuestion" xml:space="preserve">
+    <value>বিভাগগুলি পরিষ্কার করবেন?</value>
+  </data>
+  <data name="ClearSegmentsConfirmation" xml:space="preserve">
+    <value>আপনি কি নিশ্চিত যে আপনি বর্তমান বিভাগগুলি সাফ করতে চান? আপনি এই ক্রিয়াটিকে পূর্বাবস্থায় ফেরাতে পারবেন না৷</value>
+  </data>
+  <data name="SegmentReview" xml:space="preserve">
+    <value>সেগমেন্ট পর্যালোচনা</value>
+  </data>
+  <data name="Question" xml:space="preserve">
+    <value>প্রশ্ন</value>
+  </data>
+  <data name="SegmentCombine" xml:space="preserve">
+    <value>সেগমেন্ট একত্রিত</value>
+  </data>
+  <data name="CombineWarningMessage" xml:space="preserve">
+    <value>লাল অংশটি ইতিমধ্যেই আবার অনুবাদ করা হয়েছে৷ অগ্রসর হলে পিছনের অনুবাদ মুছে যাবে।</value>
+  </data>
+  <data name="Configuration" xml:space="preserve">
+    <value>কনফিগারেশন</value>
+  </data>
+  <data name="ConfigureWorkflow" xml:space="preserve">
+    <value>ওয়ার্কফ্লো কনফিগার করুন</value>
+  </data>
+  <data name="AssignSections" xml:space="preserve">
+    <value>িভাগ বরাদ্দ করুন</value>
+  </data>
+  <data name="AssignRoles" xml:space="preserve">
+    <value>ভূমিকা বরাদ্দ করুন</value>
+  </data>
+  <data name="Workflow" xml:space="preserve">
+    <value>কর্মধারা</value>
+  </data>
+  <data name="SelectUser" xml:space="preserve">
+    <value>ব্যবহারকারী নির্বাচন করুন</value>
+  </data>
+  <data name="AddUserButtonText" xml:space="preserve">
+    <value>ব্যবহারকারী যোগ করুন</value>
+  </data>
+  <data name="Render" xml:space="preserve">
+    <value>Render</value>
+  </data>
+  <data name="Global" xml:space="preserve">
+    <value>বিশ্বব্যাপী</value>
+  </data>
+  <data name="TextPassword" xml:space="preserve">
+    <value>টেক্সট পাসওয়ার্ড</value>
+  </data>
+  <data name="ViewAssignments" xml:space="preserve">
+    <value>বিভাগ অ্যাসাইনমেন্ট দেখুন</value>
+  </data>
+  <data name="DeleteUserModalMessage" xml:space="preserve">
+    <value>যদি {0} তাদের জন্য বিভাগ অ্যাসাইনমেন্ট থাকে, সেগুলিও সরানো হবে৷ আপনি এই ক্রিয়াটিকে পূর্বাবস্থায় ফেরাতে পারবেন না৷</value>
+  </data>
+  <data name="Return" xml:space="preserve">
+    <value>প্রত্যাবর্তন</value>
+  </data>
+  <data name="SegmentBackTranslate1" xml:space="preserve">
+    <value>সেগমেন্ট ব্যাক অনুবাদ 1</value>
+  </data>
+  <data name="SegmentBackTranslate2" xml:space="preserve">
+    <value>সেগমেন্ট ব্যাক অনুবাদ 2</value>
+  </data>
+  <data name="PassageBackTranslate1" xml:space="preserve">
+    <value>প্যাসেজ ব্যাক অনুবাদ 1</value>
+  </data>
+  <data name="PassageBackTranslate2" xml:space="preserve">
+    <value>প্যাসেজ ব্যাক অনুবাদ 2</value>
+  </data>
+  <data name="RetellIsNotAvailable" xml:space="preserve">
+    <value>রিটেল পাওয়া যায় না</value>
+  </data>
+  <data name="QuestionAndResponseIsNotAvailable" xml:space="preserve">
+    <value>প্রশ্ন এবং উত্তর পাওয়া যায় না</value>
+  </data>
+  <data name="CommunityFeedbackGuidance" xml:space="preserve">
+    <value>কমিউনিটি ফিডব্যাক গাইডেন্স</value>
+  </data>
+  <data name="Teams" xml:space="preserve">
+    <value>দল</value>
+  </data>
+  <data name="DragTeamHere" xml:space="preserve">
+    <value>এখানে দল টেনে আনুন</value>
+  </data>
+  <data name="Configure" xml:space="preserve">
+    <value>সজ্জিত করা</value>
+  </data>
+  <data name="QuestionNumberAndTotalNumberFormatted" xml:space="preserve">
+    <value>{1} এর মধ্যে {0} প্রশ্ন</value>
+  </data>
+  <data name="GridPassword" xml:space="preserve">
+    <value>গ্রিড পাসওয়ার্ড</value>
+  </data>
+  <data name="DragSectionHere" xml:space="preserve">
+    <value>এখানে বিভাগ টানুন</value>
+  </data>
+  <data name="Sections" xml:space="preserve">
+    <value>বিভাগসমূহ</value>
+  </data>
+  <data name="PressCircleToRecord" xml:space="preserve">
+    <value>রেকর্ড করতে বৃত্ত টিপুন</value>
+  </data>
+  <data name="PressCircleToRecordOrPressArrowToAddQuestionFromLibrary" xml:space="preserve">
+    <value>রেকর্ড করতে চেনাশোনা টিপুন, অথবা লাইব্রেরি থেকে একটি প্রশ্ন {1} যোগ করতে {1} {0} টিপুন</value>
+  </data>
+  <data name="Library" xml:space="preserve">
+    <value>লাইব্রেরি</value>
+  </data>
+  <data name="NoQuestionsInTheLibrary" xml:space="preserve">
+    <value>লাইব্রেরিতে আপনার কোন প্রশ্ন নেই</value>
+  </data>
+  <data name="Questions" xml:space="preserve">
+    <value>প্রশ্ন</value>
+  </data>
+  <data name="PressArrowToAddQuestion" xml:space="preserve">
+    <value>একটি প্রশ্ন যোগ করতে {0} টিপুন</value>
+  </data>
+  <data name="Test" xml:space="preserve">
+    <value>পরীক্ষা</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>ভাষা</value>
+  </data>
+  <data name="Translate" xml:space="preserve">
+    <value>ཊེམ་པེལེཊི།</value>
+  </data>
+  <data name="RetellOnly" xml:space="preserve">
+    <value>শুধুমাত্র পুনরায় বলুন</value>
+  </data>
+  <data name="QuestionAndResponseOnly" xml:space="preserve">
+    <value>শুধুমাত্র প্রশ্ন ও উত্তর</value>
+  </data>
+  <data name="RenderAvailable" xml:space="preserve">
+    <value>রেন্ডার {0} উপলব্ধ</value>
+  </data>
+  <data name="DownloadRenderButton" xml:space="preserve">
+    <value>নতুন রেন্ডার ডাউনলোড করুন</value>
+  </data>
+  <data name="DownloadRenderMessage" xml:space="preserve">
+    <value>নতুন রেন্ডার {0} ডাউনলোড করুন এবং আপ টু ডেট থাকুন৷</value>
+  </data>
+  <data name="OneUserOneTeam" xml:space="preserve">
+    <value>একজন ব্যবহারকারী, একটি দল</value>
+  </data>
+  <data name="UsersCannotBeAssignedToMultipleTeams" xml:space="preserve">
+    <value>ব্যবহারকারীদের একাধিক দলে নিয়োগ করা যাবে না।</value>
+  </data>
+  <data name="SaveWorkAndProceed" xml:space="preserve">
+    <value>কাজ সংরক্ষণ করুন এবং এগিয়ে যান</value>
+  </data>
+  <data name="ExitAnyway" xml:space="preserve">
+    <value>যাই হোক প্রস্থান করুন</value>
+  </data>
+  <data name="SaveWorkAndProceedMessage" xml:space="preserve">
+    <value>ভূমিকা সংরক্ষণ করতে এবং এগিয়ে যেতে নীচে-ডানদিকে তীর টিপুন।</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>শিরোনাম:</value>
+  </data>
+  <data name="TotalPassages" xml:space="preserve">
+    <value>মোট প্যাসেজ:</value>
+  </data>
+  <data name="Reference" xml:space="preserve">
+    <value>তথ্যসূত্র:</value>
+  </data>
+  <data name="Process" xml:space="preserve">
+    <value>প্রক্রিয়া:</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>ব্যবহারকারী:</value>
+  </data>
+  <data name="NoSectionsAreInThisStep" xml:space="preserve">
+    <value>এই ধাপে কোন বিভাগ নেই</value>
+  </data>
+  <data name="NoteInterpretToConsultant" xml:space="preserve">
+    <value>নোট ইন্টারপ্রেট টু কনসালটেন্ট</value>
+  </data>
+  <data name="NoteInterpretToTranslator" xml:space="preserve">
+    <value>দ্রষ্টব্য অনুবাদককে ব্যাখ্যা করুন</value>
+  </data>
+  <data name="AddUserLabel" xml:space="preserve">
+    <value>একটি নতুন ব্যবহারকারী যোগ করুন</value>
+  </data>
+  <data name="ApprovedSection" xml:space="preserve">
+    <value>অনুমোদিত বিভাগ</value>
+  </data>
+  <data name="BothSnapshotsDeleted" xml:space="preserve">
+    <value>উভয় স্ন্যাপশট মুছে ফেলা হয়েছে</value>
+  </data>
+  <data name="DeleteSnapshotsFor" xml:space="preserve">
+    <value>{0}-এর স্ন্যাপশট মুছবেন?</value>
+  </data>
+  <data name="DraftWillBeLost" xml:space="preserve">
+    <value>খসড়া হারিয়ে যাবে</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>না</value>
+  </data>
+  <data name="PasswordRequiredToReset" xml:space="preserve">
+    <value>একটি বিভাগ পুনরায় সেট করতে পাসওয়ার্ড প্রয়োজন</value>
+  </data>
+  <data name="PasswordRequiredToRestore" xml:space="preserve">
+    <value>একটি স্ন্যাপশট পুনরুদ্ধার করতে পাসওয়ার্ড প্রয়োজন৷</value>
+  </data>
+  <data name="TeamWasChosen" xml:space="preserve">
+    <value>দল {0} বেছে নেওয়া হয়েছে৷</value>
+  </data>
+  <data name="UserAndTeamWereChosenForSection" xml:space="preserve">
+    <value>{1}-এর জন্য {0} বেছে নেওয়া হয়েছে</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>হ্যাঁ</value>
+  </data>
+  <data name="YouCannotUndo" xml:space="preserve">
+    <value>আপনি এই ক্রিয়াটিকে পূর্বাবস্থায় ফেরাতে পারবেন না৷</value>
+  </data>
+  <data name="YouHaveChosen" xml:space="preserve">
+    <value>তুমি বাছাই করেছ:</value>
+  </data>
+  <data name="ResetSectionWarning" xml:space="preserve">
+    <value>রিসেটিং বিভাগ খসড়া পর্যায়ে সমস্ত ডেটা মুছে ফেলবে। এই ক্রিয়াটি পূর্বাবস্থায় ফেরানো যাবে না.</value>
+  </data>
+  <data name="RemovedFromProject" xml:space="preserve">
+    <value>প্রকল্প থেকে সরানো হয়েছে</value>
+  </data>
+  <data name="DraftEdit" xml:space="preserve">
+    <value>খসড়া সম্পাদনা</value>
+  </data>
+  <data name="Stages" xml:space="preserve">
+    <value>পর্যায়</value>
+  </data>
+  <data name="SectionListenScreenTitle" xml:space="preserve">
+    <value>সেকশন শোনা</value>
+  </data>
+  <data name="PassageListenScreenTitle" xml:space="preserve">
+    <value>প্যাসেজ শোনা</value>
+  </data>
+  <data name="PassageDivideScreenTitle" xml:space="preserve">
+    <value>প্যাসেজ বিভাজন</value>
+  </data>
+  <data name="PassageReviewScreenTitle" xml:space="preserve">
+    <value>প্যাসেজ রিভিউ</value>
+  </data>
+  <data name="SectionReviewScreenTitle" xml:space="preserve">
+    <value>সেকশন রিভিউ</value>
+  </data>
+  <data name="TranscribePassageScreenTitle" xml:space="preserve">
+    <value>প্যাসেজ ট্রান্সক্রাইব করুন</value>
+  </data>
+  <data name="TranscribeSegmentScreenTitle" xml:space="preserve">
+    <value>সেগমেন্ট ট্রান্সক্রাইব করুন</value>
+  </data>
+  <data name="DoPassageTranscribeScreenTitle" xml:space="preserve">
+    <value>প্যাসেজের ট্রান্সক্রাইব</value>
+  </data>
+  <data name="DoSegmentTranscribeScreenTitle" xml:space="preserve">
+    <value>সেগমেন্টের ট্রান্সক্রাইব</value>
+  </data>
+  <data name="UserWasChosen" xml:space="preserve">
+    <value>{0} বেছে নেওয়া হয়েছে</value>
+  </data>
+  <data name="UserWasChosenForSection" xml:space="preserve">
+    <value>{1}-এর জন্য {0} বেছে নেওয়া হয়েছে</value>
+  </data>
+  <data name="NoteInterpretScreenTitle" xml:space="preserve">
+    <value>নোট ব্যাখ্যা</value>
+  </data>
+  <data name="RequirePassageListenPeerCheckSetting" xml:space="preserve">
+    <value>প্যাসেজ শোনার নির্দেশিকা</value>
+  </data>
+  <data name="RequireSectionListenPeerCheckSetting" xml:space="preserve">
+    <value>সেকশন শোনার নির্দেশিকা</value>
+  </data>
+  <data name="OffloadProject" xml:space="preserve">
+    <value>{0} অফলোড করবেন?</value>
+  </data>
+  <data name="ContactSupport" xml:space="preserve">
+    <value>সহায়তার জন্য সহায়তার সাথে যোগাযোগ করুন।</value>
+  </data>
+  <data name="ErrorWithMessage" xml:space="preserve">
+    <value>ত্রুটি [{0}]</value>
+  </data>
+  <data name="NoProjectsToDownload" xml:space="preserve">
+    <value>ডাউনলোড করার জন্য কোন প্রকল্প নেই</value>
+  </data>
+  <data name="WrongPassword" xml:space="preserve">
+    <value>ভুল পাসওয়ার্ড। অনুগ্রহ করে আবার চেষ্টা করুন।</value>
+  </data>
+  <data name="SyncFailed" xml:space="preserve">
+    <value>ব্যর্থ</value>
+  </data>
+  <data name="DragUserHere" xml:space="preserve">
+    <value>ব্যবহারকারীকে এখানে টেনে আনুন</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>ব্যবহারকারীদের</value>
+  </data>
+  <data name="DownloadFailed" xml:space="preserve">
+    <value>ডাউনলোড ব্যর্থ হয়েছে.</value>
+  </data>
+  <data name="ExportComplete" xml:space="preserve">
+    <value>রপ্তানি সম্পূর্ণ</value>
+  </data>
+  <data name="NoSectionsAvailable" xml:space="preserve">
+    <value>কোন বিভাগ উপলব্ধ নেই</value>
+  </data>
+  <data name="TryAgain" xml:space="preserve">
+    <value>অনুগ্রহপূর্বক আবার চেষ্টা করুন</value>
+  </data>
+  <data name="SelectedSnapshotMessageTemplate" xml:space="preserve">
+    <value>{0}, {1} {2} {3}, {4}</value>
+  </data>
+  <data name="TeamWasChosenForSection" xml:space="preserve">
+    <value>{0}-এর {1}, {2}, {3}-এর জন্য বেছে নেওয়া হয়েছে</value>
+  </data>
+  <data name="CombineWarningTitle" xml:space="preserve">
+    <value>পিছনে অনুবাদ মুছে ফেলা হবে</value>
+  </data>
+  <data name="January" xml:space="preserve">
+    <value>জানুয়ারি</value>
+  </data>
+  <data name="February" xml:space="preserve">
+    <value>ফেব্রুয়ারি</value>
+  </data>
+  <data name="March" xml:space="preserve">
+    <value>মার্চ</value>
+  </data>
+  <data name="April" xml:space="preserve">
+    <value>এপ্রিল</value>
+  </data>
+  <data name="May" xml:space="preserve">
+    <value>মে</value>
+  </data>
+  <data name="June" xml:space="preserve">
+    <value>জুন</value>
+  </data>
+  <data name="July" xml:space="preserve">
+    <value>জুলাই</value>
+  </data>
+  <data name="August" xml:space="preserve">
+    <value>আগস্ট</value>
+  </data>
+  <data name="September" xml:space="preserve">
+    <value>সেপ্টেম্বর</value>
+  </data>
+  <data name="October" xml:space="preserve">
+    <value>অক্টোবর</value>
+  </data>
+  <data name="November" xml:space="preserve">
+    <value>নভেম্বর</value>
+  </data>
+  <data name="December" xml:space="preserve">
+    <value>ডিসেম্বর</value>
+  </data>
+  <data name="NoSectionAssignedTitle" xml:space="preserve">
+    <value>আপনি এখনো কোনো বিভাগ বরাদ্দ করেননি</value>
+  </data>
+  <data name="NoSectionAssignedMessage" xml:space="preserve">
+    <value>এখানে দেখানোর জন্য বিভাগগুলি বরাদ্দ করা প্রয়োজন৷</value>
+  </data>
+  <data name="SegmentLabel" xml:space="preserve">
+    <value>সেগমেন্ট</value>
+  </data>
+  <data name="DeletedUser" xml:space="preserve">
+    <value>মুছে ফেলা ব্যবহারকারী</value>
+  </data>
+  <data name="CannotLoadData" xml:space="preserve">
+    <value>বিভাগ {0} এর জন্য ডেটা লোড করা যাবে না</value>
+  </data>
+  <data name="SyncAndTryAgain" xml:space="preserve">
+    <value>যদি এটি ঘটতে থাকে, দয়া করে একটি ওয়েব সিঙ্ক করার চেষ্টা করুন বা প্রকল্পের একটি অফলোড/ডাউনলোড করার চেষ্টা করুন৷</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>পুনরায় চেষ্টা করা</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>সফলতার !</value>
+  </data>
+  <data name="AddFromComputer" xml:space="preserve">
+    <value>কম্পিউটার থেকে প্রজেক্ট যোগ করুন</value>
+  </data>
+  <data name="CannotLoadAudio" xml:space="preserve">
+    <value>অডিও লোড করা যাবে না</value>
+  </data>
+</root>

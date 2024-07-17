@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="divisionPlayer:BreathPauseViewModel"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:kernel="using:Render.Kernel"
+                            xmlns:divisionPlayer="using:Render.Components.DivisionPlayer"
+                            xmlns:resources="clr-namespace:Render.Resources"
+                            x:Class="Render.Components.DivisionPlayer.BreathPause">
+    <ContentView.Content>
+        <VerticalStackLayout Margin="32,0,0,0">
+            <Button x:Name="DivisionButton"
+                    BorderColor="{StaticResource DarkBlue}"
+                    BorderWidth="2"
+                    HorizontalOptions="End"
+                    WidthRequest="64"
+                    HeightRequest="64"
+                    TranslationX="32"
+                    CornerRadius="12"
+                    FontFamily="Icons"
+                    FontSize="44"
+                    TextColor="{StaticResource White}"
+                    Text="{resources:IconExtensions DivisionOrCut}"
+                    BackgroundColor="{StaticResource Turquoise}"
+                    Command="{Binding ChangeDivisionStateCommand}"
+                    AutomationId="DivisionButton">
+            </Button>
+            <Polygon HorizontalOptions="End"
+                     HeightRequest="20"
+                     Points="20,0 45,0 33,13"
+                     TranslationX="12"
+                     TranslationY="-2"
+                     Fill="{StaticResource DarkBlue}"/>
+            <BoxView HorizontalOptions="End"
+                     BackgroundColor="{StaticResource DarkGrey}"
+                     HeightRequest="24"
+                     WidthRequest="3"
+                     TranslationX="1"
+                     TranslationY="-3"
+                     MinimumWidthRequest="1" />
+        </VerticalStackLayout>
+    </ContentView.Content>
+</kernel:RenderComponentBase>

@@ -1,0 +1,304 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net8.0</TargetFrameworks>
+    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
+    <OutputType Condition="'$(TargetFramework)' != 'net8.0'">Exe</OutputType>
+    <RootNamespace>Render</RootNamespace>
+    <UseMaui>true</UseMaui>
+    <SingleProject>true</SingleProject>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+
+    <!-- Display name -->
+    <ApplicationTitle>Render 3</ApplicationTitle>
+
+    <!-- App Identifier -->
+    <ApplicationId>com.companyname.render</ApplicationId>
+    <ApplicationIdGuid>4a6156aa-829f-4f10-bcbd-206952bd5a3a</ApplicationIdGuid>
+
+    <!-- Versions -->
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <ApplicationVersion>1</ApplicationVersion>
+
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.19041.0</SupportedOSPlatformVersion>
+    <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.19041.0</TargetPlatformMinVersion>
+    <DefaultLanguage>En-us</DefaultLanguage>
+    <Configurations>Debug;Release;AutoTests;Test;Demo</Configurations>
+    <Platforms>AnyCPU</Platforms>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(Configuration.StartsWith('Release')) or $(Configuration.StartsWith('Test')) or $(Configuration.StartsWith('AutoTests'))">
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+
+    <!-- Splash Screen -->
+    <!--WinUI 3 doesn't support splash screen yet:
+        https://github.com/microsoft/microsoft-ui-xaml/issues/4055
+        https://github.com/dotnet/maui/issues/12395 -->
+    <MauiSplashScreen Include="Resources\Splash\splash_screen.png" Color="#DEE7EB" BaseSize="620,300" />
+
+    <!-- Images -->
+    <MauiImage Include="Resources\Images\*" />
+    <MauiImage Update="Resources\Images\store_logo.png" BaseSize="48,48" />
+    <MauiImage Update="Resources\Images\square_44x44_logo.png" BaseSize="44,44" />
+    <MauiImage Update="Resources\Images\square_150x150_logo.png" BaseSize="150,150" />
+    <MauiImage Update="Resources\Images\wide_310x150_logo.png" BaseSize="310,150" />
+    <MauiImage Update="Resources\Images\small_tile.png" BaseSize="71,71" />
+    <MauiImage Update="Resources\Images\large_tile.png" BaseSize="310,310" />
+    <MauiImage Update="Resources\Images\badge_logo.png" BaseSize="24,24" />
+
+    <!-- Custom Fonts -->
+    <MauiFont Include="Resources\Fonts\*" />
+    <MauiFont Include="Resources\Icons\fonts\*" />
+
+    <!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
+    <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <!--Explicit reference for latest WindowsSDK version to support ReactiveUI dependencies-->
+  <!--Remove this after future .NET MAUI updates with latest WindwosSDK support-->
+  <ItemGroup Condition="'$(TargetFramework)' == 'net8.0-windows10.0.19041.0'">
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.5.240311000" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.3233" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('net8.0-android')) != true">
+    <Compile Remove="**\**\*.droid.cs" />
+    <None Include="**\**\*.droid.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+    <Compile Remove="**\Android\**\*.cs" />
+    <None Include="**\Android\**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+    <Compile Update="Pages\AppStart\Home\NavigationPanels\NavigationPane.xaml.cs">
+      <DependentUpon>NavigationPane.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\Configurator\WorkflowAssignment\Cards\UserCard.xaml.cs">
+      <DependentUpon>UserCard.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\Configurator\WorkflowAssignment\Cards\TeamAssignmentCard.xaml.cs">
+      <DependentUpon>TeamAssignmentCard.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\Configurator\WorkflowAssignment\Stages\WorkflowDraftStageColumn.xaml.cs">
+      <DependentUpon>WorkflowDraftStageColumn.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <None Update="AppSettings.development.json">
+      <DependentUpon>AppSettings.json</DependentUpon>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.Contains('-windows')) != true">
+    <Compile Remove="**\*.win.cs" />
+    <None Include="**\*.win.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+    <Compile Remove="**\Windows\**\*.cs" />
+    <None Include="**\Windows\**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+  </ItemGroup>
+
+  <ItemGroup Condition="!$(Configuration.StartsWith('AutoTests'))">
+    <Compile Update="Kernel\ViewModelContextProvider.general.cs" />
+    <Compile Remove="Kernel\ViewModelContextProvider.autotests.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(Configuration.StartsWith('AutoTests'))">
+    <Compile Update="Kernel\ViewModelContextProvider.autotests.cs" />
+    <Compile Remove="Kernel\ViewModelContextProvider.general.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Platforms\Windows\Shortcut\render.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Platforms\Windows\Shortcut\Render 3 (dev).lnk">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Platforms\Windows\Shortcut\Render 3 (staging).lnk">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Platforms\Windows\Shortcut\Render 3.lnk">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Platforms\Windows\Shortcut\Render 3 (test).lnk">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Maui" Version="7.0.1" />
+    <PackageReference Include="CSCore" Version="1.2.1.2" />
+    <PackageReference Include="NLog" Version="5.2.8" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="5.3.8" />
+    <PackageReference Include="NLog.Targets.AppCenter" Version="5.2.1" />
+    <PackageReference Include="NLog.Targets.MauiLog" Version="8.0.0" />
+    <PackageReference Include="ReactiveUI" Version="19.2.1" />
+    <PackageReference Include="ReactiveUI.Fody" Version="19.2.1" />
+    <PackageReference Include="ReactiveUI.Maui" Version="19.2.1" />
+    <PackageReference Include="Couchbase.Lite.Enterprise" Version="3.1.6" />
+    <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.7" />
+    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.7" />
+    <PackageReference Include="Microsoft.AppCenter" Version="5.0.3" />
+    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="5.0.3" />
+    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="5.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+    <PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.7" />
+    <PackageReference Include="Splat.NLog" Version="14.8.12" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Render.Interfaces\Render.Interfaces.csproj" />
+    <ProjectReference Include="..\Render.Mocks\Render.Mocks.csproj" Condition="$(Configuration.StartsWith('AutoTests'))" />
+    <ProjectReference Include="..\Render.Models\Render.Models.csproj" />
+    <ProjectReference Include="..\Render.Repositories\Render.Repositories.csproj" />
+    <ProjectReference Include="..\Render.Sequencer\Render.Sequencer.csproj" />
+    <ProjectReference Include="..\Render.Services\Render.Services.csproj" />
+    <ProjectReference Include="..\Render.WebAuthentication\Render.WebAuthentication.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\Localization\AppResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Localization\AppResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AppSettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AppSettings.development.json" Condition="Exists('AppSettings.development.json')">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <DependentUpon>AppSettings.json</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <MauiXaml Update="Common\LoadingBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Common\LoadingScreen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Components\AudioRecorder\NewMiniAudioRecorder.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Components\BarPlayer\BarPlayer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Components\Modal\Modal.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Components\MiniWaveformPlayer\MiniWaveformPlayer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Components\ProgressBar\RenderProgress.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Pages\BackTranslator\SegmentBackTranslate\SegmentEditing\TabletSegmentCombinePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Pages\CommunityTester\CommunityQAndR\CommunityQAndRPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Pages\CommunityTester\CommunityRetell\CommunityRetellPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Pages\Consultant\ConsultantApproval\ApproveSection.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Pages\Consultant\ConsultantApproval\SectionToApproveCard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Pages\Consultant\ConsultantApproval\SelectSectionToApprove.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Components\TitleBar\MenuActions\SyncMenuAction.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Pages\AppStart\Home\Home.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Pages\AppStart\Login\AddVesselUserLogin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Pages\AppStart\ProjectDownload\ProjectDownload.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Pages\AppStart\ProjectDownload\ProjectDownloadCard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Pages\AppStart\ProjectList\ProjectList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Pages\AppStart\ProjectSelect\ProjectSelect.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Pages\AppStart\ProjectSelect\ProjectSelectCard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Pages\AppStart\SplashScreen\SplashScreen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Components\SectionTitlePlayer\SectionTitlePlayerFresh.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Pages\Configurator\WorkflowManagement\StageTypeCard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Pages\Configurator\WorkflowManagement\StepLabel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Pages\Configurator\WorkflowManagement\WorkflowStageCard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Pages\Configurator\WorkflowManagement\WorkflowStageSettingsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Pages\Debug\DebugPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Pages\Settings\AudioExport\AllSectionsView\AllSectionsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Pages\Settings\AudioExport\AudioExportPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Pages\Settings\AudioExport\SectionToExportView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Pages\Settings\AudioExport\StageView\AudioExportStageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Pages\Settings\AudioExport\StageView\StageViewStage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Pages\Settings\ManageUsers\UserSettings.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Pages\AppStart\Home\NavigationPanels\NavigationPane.xaml">
+      <SubType>MSBuild:Compile</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Pages\Configurator\WorkflowAssignment\Cards\TeamAssignmentCard.xaml">
+      <SubType>MSBuild:Compile</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Pages\Configurator\WorkflowAssignment\Stages\WorkflowDraftStageColumn.xaml">
+      <SubType>MSBuild:Compile</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Pages\Translator\AudioEdit\AudioInsertPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Nlog.license.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

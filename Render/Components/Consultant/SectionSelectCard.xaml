@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<maui:ReactiveContentView x:TypeArguments="consultant:SectionSelectCardViewModel" 
+                              xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                              xmlns:consultant="clr-namespace:Render.Components.Consultant;assembly=Render"
+                              xmlns:uiResources="clr-namespace:Render.UIResources;assembly=Render"
+                              xmlns:maui="using:ReactiveUI.Maui"
+                              xmlns:resources="using:Render.Resources"
+                              x:Class="Render.Components.Consultant.SectionSelectCard">
+    <ContentView.Resources>
+        <Style x:Key="FrameBackground" TargetType="Frame">
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="MinimumWidthRequest" Value="30"/>
+        </Style> 
+        
+        <Style x:Key="ApproveSectionCardLabel" TargetType="Label">
+            <Setter Property="TextColor" Value="{DynamicResource GreyText}"/>
+            <Setter Property="FontSize" Value="{DynamicResource LargeFontMinus2Font}"/>
+            <Setter Property="FontFamily" Value="MediumFont" />
+            <Setter Property="LineBreakMode" Value="TailTruncation"/>
+            <Setter Property="Margin" Value="10, 10, 0, 0"/>
+        </Style> 
+    </ContentView.Resources>
+    
+    <ContentView.Content>
+        <Frame CornerRadius="8" Padding="15,5,15,10" Margin="0" 
+               HasShadow="True" BackgroundColor="{DynamicResource SecondaryText}">
+            <Grid ColumnDefinitions="Auto, *, Auto" ColumnSpacing="0" 
+                  HeightRequest="65" WidthRequest="625" MinimumWidthRequest="50">
+                
+                <Frame Grid.Column="0" 
+                       HorizontalOptions="Start" 
+                       Style="{DynamicResource FrameBackground}">
+                    <Label x:Name="SectionNumber" FontSize="27" VerticalOptions="Center" FontAttributes="Bold"
+                           TextColor="{DynamicResource MainIconColor}" AutomationId="SectionNumber"/>
+                </Frame>
+                
+                <VerticalStackLayout Grid.Column="1" 
+                                     HorizontalOptions="Start" 
+                                     Style="{DynamicResource FrameBackground}">
+                    <Label x:Name="SectionTitle" 
+                           Style="{DynamicResource ApproveSectionCardLabel}"
+                           AutomationId="SectionTitle"/>
+
+                    <Label x:Name="VerseRange" 
+                           Style="{DynamicResource ApproveSectionCardLabel}" 
+                           TextColor="{StaticResource SlateLight}"
+                           AutomationId="VerseRange"            
+                           FontSize="{DynamicResource SmallFont}" 
+                           Opacity=".7" Margin="10,0,0,0"/>
+                </VerticalStackLayout>
+
+                <Label Grid.Column="2" 
+                       x:Name="Chevron" 
+                       Text="{resources:IconExtensions ChevronRight}" 
+                       FontSize="20"
+                       FontFamily="Icons" 
+                       HorizontalOptions="End" 
+                       VerticalOptions="Center"
+                       TextColor="{DynamicResource Blue}" 
+                       AutomationId="NavigateToSectionIcon"/>
+            </Grid>
+            
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer x:Name="NavigateToSectionRow"
+                                      AutomationId="NavigateToSection"/>
+            </Frame.GestureRecognizers>
+        </Frame>
+    </ContentView.Content>
+</maui:ReactiveContentView>

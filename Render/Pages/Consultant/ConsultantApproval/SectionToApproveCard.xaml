@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<kernel:RenderComponentBase x:Class="Render.Pages.Consultant.ConsultantApproval.SectionToApproveCard"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:consultantApproval="clr-namespace:Render.Pages.Consultant.ConsultantApproval;assembly=Render"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:uiResources="clr-namespace:Render.Resources;assembly=Render"
+                            x:TypeArguments="consultantApproval:SectionToApproveCardViewModel">
+    <ContentView.Resources>
+        <Style x:Key="ApproveSectionCardLabel" TargetType="Label">
+            <Setter Property="TextColor" Value="{DynamicResource GreyText}"/>
+            <Setter Property="FontSize" Value="{DynamicResource LargeFontMinus2Font}"/>
+            <Setter Property="FontFamily" Value="MediumFont" />
+            <Setter Property="LineBreakMode" Value="TailTruncation" />
+            <Setter Property="Margin" Value="10, 10, 0, 0" />
+        </Style>
+    </ContentView.Resources>
+
+    <Border Margin="0"
+            Padding="15,5,15,15"
+            BackgroundColor="{DynamicResource SecondaryText}"
+            StrokeShape="RoundRectangle 8,8,8,8">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="sectionNumberColumm" Width="Auto" />
+                <ColumnDefinition x:Name="titleColumm" Width="*" />
+                <ColumnDefinition x:Name="chevronColumm" Width="20" />
+            </Grid.ColumnDefinitions>
+            
+            <Label x:Name="SectionNumber"
+                   AutomationId="SectionNumber"
+                   FontAttributes="Bold"
+                   FontSize="27"
+                   TextColor="{DynamicResource MainIconColor}"
+                   VerticalOptions="Center" />
+
+            <VerticalStackLayout Grid.Column="1">
+                <Label x:Name="SectionTitle"
+                       AutomationId="SectionTitle"
+                       Style="{DynamicResource ApproveSectionCardLabel}" />
+                
+                <Label x:Name="VerseRange"
+                       Margin="10,0,0,0"
+                       AutomationId="VerseRange"
+                       FontSize="{DynamicResource SmallFont}"
+                       Opacity=".7"
+                       Style="{DynamicResource ApproveSectionCardLabel}"
+                       TextColor="{StaticResource SlateLight}" />
+            </VerticalStackLayout>
+
+            <Label x:Name="Chevron"
+                   Grid.Column="2"
+                   AutomationId="NavigateToSectionIcon"
+                   FontFamily="Icons"
+                   FontSize="25"
+                   HorizontalOptions="End"
+                   Text="{uiResources:IconExtensions ChevronRight}"
+                   TextColor="{DynamicResource Blue}"
+                   Margin="0,10,0,0"
+                   VerticalOptions="Center" />
+        </Grid>
+
+        <Border.GestureRecognizers>
+            <TapGestureRecognizer x:Name="NavigateToSectionButtonGestureRecognizer"
+                                  AutomationId="NavigateToSection"
+                                  Tapped="OnButtonClicked" />
+        </Border.GestureRecognizers>
+    </Border>
+</kernel:RenderComponentBase>

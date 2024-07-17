@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<kernel:RenderPageBase x:Class="Render.Pages.Transcribe.TranscribeSegmentBackTranslate.TranscribeSegmentTranslatePage"
+                       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:barPlayer="clr-namespace:Render.Components.BarPlayer;assembly=Render"
+                       xmlns:common="using:Render.Common"
+                       xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                       xmlns:proceedButton="clr-namespace:Render.Components.ProceedButton;assembly=Render"
+                       xmlns:titleBar="clr-namespace:Render.Components.TitleBar;assembly=Render"
+                       xmlns:transcribeSegmentBackTranslate="clr-namespace:Render.Pages.Transcribe.TranscribeSegmentBackTranslate;assembly=Render"
+                       xmlns:transcribeTextBox="clr-namespace:Render.Components.TranscribeTextBox;assembly=Render"
+                       x:TypeArguments="transcribeSegmentBackTranslate:TranscribeSegmentTranslateViewModel"
+                       NavigationPage.HasNavigationBar="False">
+    <Grid x:Name="TopLevelElement"
+          BackgroundColor="{DynamicResource AlternateBackground}"
+          ColumnSpacing="0"
+          RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition x:Name="titleBarRow" Height="75" />
+            <RowDefinition x:Name="playerRow" Height="130" />
+            <RowDefinition x:Name="editorRow" Height="*" />
+            <RowDefinition x:Name="proceedRow" Height="100" />
+        </Grid.RowDefinitions>
+
+        <barPlayer:BarPlayer x:Name="BarPlayer"
+                             Grid.Row="1"
+                             Margin="25"
+                             HorizontalOptions="Start"
+                             VerticalOptions="Center"
+                             WidthRequest="428" />
+
+        <transcribeTextBox:TranscribeTextBoxController x:Name="TextBox" Grid.Row="2" />
+
+        <titleBar:TitleBar x:Name="TitleBar" Grid.Row="0" />
+
+        <proceedButton:ProceedButton x:Name="ProceedButton"
+                                     Grid.Row="3"
+                                     Margin="0,25,0,0"
+                                     HorizontalOptions="End"
+                                     VerticalOptions="End" />
+
+        <common:LoadingScreen x:Name="LoadingView"
+                              Grid.Row="0"
+                              Grid.RowSpan="4" />
+    </Grid>
+</kernel:RenderPageBase>

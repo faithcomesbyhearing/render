@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderPageBase x:TypeArguments="manageUsers:UserSettingsViewModel"
+                       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:titleBar="clr-namespace:Render.Components.TitleBar;assembly=Render"
+                       xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                       xmlns:proceedButton="clr-namespace:Render.Components.ProceedButton;assembly=Render"
+                       xmlns:resources="clr-namespace:Render.Resources;assembly=Render"
+                       xmlns:passwordGrid="clr-namespace:Render.Components.PasswordGrid;assembly=Render"
+                       xmlns:manageUsers="clr-namespace:Render.Pages.Settings.ManageUsers"
+                       xmlns:localization="clr-namespace:Render.Resources.Localization"
+                       xmlns:common="clr-namespace:Render.Common"
+                       x:Class="Render.Pages.Settings.ManageUsers.UserSettings"
+                       NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.Resources>
+        <Style x:Key="BorderStyle" TargetType="Border">
+            <Setter Property="Stroke" Value="{StaticResource Black}" />
+            <Setter Property="StrokeThickness" Value="1" />
+            <Setter Property="StrokeShape" Value="RoundRectangle 5" />
+        </Style>
+    </ContentPage.Resources>
+
+    <AbsoluteLayout x:Name="TopLevelElement" BackgroundColor="{DynamicResource AlternateBackground}">
+        <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
+                     AbsoluteLayout.LayoutFlags="All">
+
+            <!-- Title bar-->
+            <titleBar:TitleBar x:Name="TitleBar" />
+            <StackLayout WidthRequest="700" HorizontalOptions="CenterAndExpand">
+                <Label Text="{x:Static localization:AppResources.EditUser}" Style="{StaticResource SubTitle}"
+                       Margin="5,25" />
+                <!-- Separator-->
+                <Line X1="0" X2="800" Y1="0" Y2="0" StrokeThickness="1"
+                      StrokeDashOffset="2" BackgroundColor="Transparent" Margin="0,0,0,0" Opacity=".7">
+                    <Line.Stroke>
+                        <SolidColorBrush Color="{DynamicResource RecorderSeparatorLine}" />
+                    </Line.Stroke>
+                </Line>
+
+                <!-- User info section-->
+                <Grid VerticalOptions="Center"
+                      HorizontalOptions="Fill"
+                      HeightRequest="130"
+                      Padding="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Frame VerticalOptions="CenterAndExpand"
+                           Grid.Column="0"
+                           HorizontalOptions="Start"
+                           Padding="1"
+                           Margin="15"
+                           CornerRadius="80"
+                           BackgroundColor="{DynamicResource MainIconColor}">
+                        <Frame Style="{StaticResource UserIconFrame}" BackgroundColor="{DynamicResource SeparatorBar}"
+                               HeightRequest="50"
+                               WidthRequest="50"
+                               HorizontalOptions="CenterAndExpand"
+                               VerticalOptions="CenterAndExpand"
+                               Padding="0"
+                               Margin="0">
+                            <Label HorizontalOptions="Center" VerticalOptions="End" FontFamily="Icons"
+                                   Text="{resources:IconExtensions TeamSingular}"
+                                   TextColor="{DynamicResource MainIconColor}"
+                                   FontSize="50" />
+                        </Frame>
+                    </Frame>
+
+                    <!-- User name-->
+                    <Label x:Name="GlobalUserName" Grid.Column="1" FontSize="17" FontAttributes="Bold"
+                           VerticalOptions="Center" IsVisible="False" TextColor="{DynamicResource UserName}"
+                           Margin="0,0,25,0" HorizontalOptions="StartAndExpand" />
+                    <Frame Grid.Column="1" x:Name="RenderUserNameFrame" CornerRadius="5"
+                           BackgroundColor="{DynamicResource PrimaryBackground}"
+                           BorderColor="{DynamicResource MainText}" VerticalOptions="Center"
+                           HorizontalOptions="StartAndExpand"
+                           Margin="0,0,25,0"
+                           Padding="0">
+                        <Entry x:Name="RenderUserName" FontFamily="BoldFont" FontSize="17"
+                               TextColor="{DynamicResource UserName}"
+                               BackgroundColor="{DynamicResource SecondaryText}" Margin="0"
+                               Focused="UsernameEntry_OnFocused" WidthRequest="250" />
+                    </Frame>
+
+                    <!-- User type-->
+                    <Frame x:Name="UserTypeFrame"
+                           Grid.Column="3"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Fill"
+                           CornerRadius="5"
+                           Margin="0,0,10,0"
+                           Padding="0,10">
+                        <Label x:Name="UserTypeLabel" Style="{DynamicResource SmallText}"
+                               TextTransform="Uppercase"
+                               VerticalOptions="Center"
+                               Margin="10,0" />
+                    </Frame>
+
+                    <!-- Delete button-->
+                    <Frame x:Name="DeleteUserButton"
+                           CornerRadius="5"
+                           Grid.Column="5"
+                           BackgroundColor="{DynamicResource Error}"
+                           Margin="15"
+                           Padding="15,10"
+                           HorizontalOptions="End" VerticalOptions="Center">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center"
+                                     Padding="0" Margin="0">
+                            <Label FontFamily="Icons" Text="{StaticResource TrashCanIcon}"
+                                   TextColor="{DynamicResource SecondaryText}"
+                                   FontSize="20" />
+                            <Label Text="{x:Static localization:AppResources.DeleteUser}"
+                                   Margin="10,0,0,0"
+                                   TextColor="{DynamicResource SecondaryText}" />
+                        </StackLayout>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="DeleteUserGesture" AutomationId="ViewPassword" />
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                </Grid>
+
+                <Line X1="0" X2="800" Y1="0" Y2="0" StrokeThickness="1"
+                      StrokeDashOffset="2" BackgroundColor="Transparent" Margin="0,0,0,0" Opacity=".7">
+                    <Line.Stroke>
+                        <SolidColorBrush Color="{DynamicResource RecorderSeparatorLine}" />
+                    </Line.Stroke>
+                </Line>
+
+                <!-- Localization section -->
+                <VerticalStackLayout HorizontalOptions="Start"
+                                     Margin="5,0,0,0">
+                    <Label Text="{x:Static localization:AppResources.Localization}"
+                           TextColor="{DynamicResource Option}"
+                           FontFamily="BoldFont"
+                           FontSize="21"
+                           Margin="0,20,0,15" />
+
+                    <Border Style="{StaticResource BorderStyle}">
+                        <Picker x:Name="LocalizationPicker"
+                                TextColor="{DynamicResource MainText}"
+                                BackgroundColor="{StaticResource PrimaryBackground}"
+                                HorizontalOptions="StartAndExpand"
+                                WidthRequest="350">
+                        </Picker>
+                    </Border>
+                </VerticalStackLayout>
+
+                <StackLayout x:Name="EmptyPasswordSection" HorizontalOptions="FillAndExpand"
+                             VerticalOptions="FillAndExpand"
+                             BackgroundColor="{DynamicResource AlternateBackground}" Padding="0"
+                             IsVisible="False">
+
+                </StackLayout>
+                <!-- Password section -->
+                <StackLayout x:Name="PasswordSection" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                             IsVisible="False" Padding="0" Margin="5,0,0,0">
+                    <StackLayout WidthRequest="600"
+                                 HorizontalOptions="Start"
+                                 VerticalOptions="Fill">
+                        <Label Text="{x:Static localization:AppResources.PasswordType}"
+                               TextColor="{DynamicResource Option}"
+                               FontSize="{StaticResource MediumFont}"
+                               FontAttributes="Bold" Margin="0, 20, 0, 20" />
+                        <Border HorizontalOptions="Start"
+                                WidthRequest="350"
+                                Style="{StaticResource BorderStyle}">
+                            <Picker x:Name="PasswordTypePicker"
+                                    BackgroundColor="{StaticResource PrimaryBackground}"
+                                    TextColor="{DynamicResource MainText}"
+                                    WidthRequest="350"
+                                    Margin="0">
+                            </Picker>
+                        </Border>
+
+                        <!-- Text Password -->
+                        <StackLayout x:Name="TextPasswordStack" Margin="0,25" IsVisible="False">
+                            <Label Text="{x:Static localization:AppResources.TextPassword}"
+                                   TextColor="{DynamicResource Option}"
+                                   FontSize="{StaticResource MediumFont}"
+                                   FontAttributes="Bold"
+                                   Padding="0, 0, 0, 25" />
+                            <StackLayout Orientation="Horizontal" Spacing="10">
+                                <Border HorizontalOptions="Start"
+                                        Style="{StaticResource BorderStyle}">
+                                    <Entry x:Name="PasswordEntry"
+                                           Focused="PasswordEntry_OnFocused"
+                                           TextColor="{DynamicResource MainText}"
+                                           BackgroundColor="{DynamicResource PrimaryBackground}"
+                                           WidthRequest="350" />
+                                </Border>
+                                <StackLayout Orientation="Horizontal" Spacing="10" Margin="10,0">
+                                    <Frame x:Name="ViewPasswordButton" CornerRadius="5" WidthRequest="90"
+                                           BackgroundColor="{DynamicResource Option}" Margin="0" Padding="0">
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center"
+                                                     VerticalOptions="Center" Padding="0" Margin="0">
+                                            <Label Text="{StaticResource View}"
+                                                   Margin="5,0,0,0" 
+                                                   FontFamily="Icons"
+                                                   TextColor="{DynamicResource SecondaryText}"
+                                                   FontSize="20" />
+                                            <Label Text="{x:Static localization:AppResources.View}"
+                                                   Margin="10,0,0,0"
+                                                   WidthRequest="65"
+                                                   TextColor="{DynamicResource SecondaryText}"
+                                                   LineBreakMode="TailTruncation" />
+                                        </StackLayout>
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer x:Name="ViewPasswordGesture"
+                                                                  AutomationId="ViewPassword" />
+                                        </Frame.GestureRecognizers>
+                                    </Frame>
+                                    <Frame x:Name="GeneratePasswordButton" CornerRadius="5" WidthRequest="100"
+                                           BackgroundColor="{DynamicResource Option}" Margin="0" Padding="0">
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center"
+                                                     VerticalOptions="Center" Padding="0" Margin="0">
+                                            <Label FontFamily="Icons" Text="{StaticResource Generate}"
+                                                   TextColor="{DynamicResource SecondaryText}"
+                                                   FontSize="20" />
+                                            <Label Text="{x:Static localization:AppResources.Generate}"
+                                                   Margin="10,0,0,0"
+                                                   TextColor="{DynamicResource SecondaryText}" />
+                                        </StackLayout>
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer x:Name="GeneratePasswordGesture"
+                                                                  AutomationId="ViewPassword" />
+                                        </Frame.GestureRecognizers>
+                                    </Frame>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+
+                        <!-- Grid Password  -->
+                        <StackLayout x:Name="GridPasswordStack" Margin="0,25" IsVisible="False">
+                            <StackLayout Orientation="Horizontal"
+                                         HorizontalOptions="Start">
+                                <passwordGrid:PasswordGrid x:Name="PasswordGrid" WidthRequest="200" HeightRequest="200"
+                                                           VerticalOptions="Start" />
+                                <Frame x:Name="ResetGridButton" WidthRequest="125"
+                                       VerticalOptions="Start"
+                                       HorizontalOptions="Center" BackgroundColor="{DynamicResource Option}"
+                                       CornerRadius="5" Margin="0,15,0,0" Padding="0">
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="0,5,0,5">
+                                        <Label FontFamily="Icons" Text="{resources:IconExtensions Undo}"
+                                               TextColor="{DynamicResource SecondaryText}"
+                                               FontSize="25" AutomationId="UndoImageIcon" />
+                                        <Label Text="{x:Static localization:AppResources.Reset}"
+                                               VerticalOptions="Center" TextColor="{DynamicResource SecondaryText}"
+                                               Margin="10,0,0,0"
+                                               AutomationId="ResetButtonLabel" />
+                                    </StackLayout>
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer x:Name="ResetGesture" AutomationId="ResetGrid" />
+                                    </Frame.GestureRecognizers>
+                                </Frame>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+        <proceedButton:ProceedButton x:Name="ProceedButton"
+                                     AbsoluteLayout.LayoutFlags="PositionProportional"
+                                     AbsoluteLayout.LayoutBounds="1,1" />
+        <common:LoadingScreen x:Name="loadingView"
+                              AbsoluteLayout.LayoutFlags="All"
+                              AbsoluteLayout.LayoutBounds="0,0,1,1" />
+
+    </AbsoluteLayout>
+
+</kernel:RenderPageBase>

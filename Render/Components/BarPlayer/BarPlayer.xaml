@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<kernel:RenderComponentBase 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:barPlayer="clr-namespace:Render.Components.BarPlayer;assembly=Render"
+    xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+    xmlns:resources="clr-namespace:Render.Resources;assembly=Render"
+    xmlns:customRenderer="clr-namespace:Render.Kernel.CustomRenderer;assembly=Render"
+    xmlns:skia="clr-namespace:SkiaSharp.Views.Maui.Controls;assembly=SkiaSharp.Views.Maui.Controls"
+    x:TypeArguments="barPlayer:IBarPlayerViewModel"
+    x:Class="Render.Components.BarPlayer.BarPlayer"
+    x:Name="Root">
+    <ContentView.Resources>
+        <x:Double x:Key="PlayerButtonWidth">85</x:Double>
+        <x:Double x:Key="PlayerButtonFontSize">80</x:Double>
+        <x:Double x:Key="PauseButtonFontSize">76</x:Double>
+        <x:Double x:Key="MainStackBorderThickness">2</x:Double>
+        <x:Double x:Key="SecondaryButtonWidth">70</x:Double>
+
+        <Thickness x:Key="PlayerButtonPadding">16,0</Thickness>
+
+        <Style x:Key="TimerLabel" TargetType="Label">
+            <Setter Property="FontFamily" Value="MediumFont" />
+            <Setter Property="FontSize" Value="{StaticResource MediumMinus2Font}" />
+            <Setter Property="TextColor" Value="{Binding TimerLabelColor, Source={x:Reference Root}}" />
+        </Style>
+
+        <Style x:Key="PlayerSlider" TargetType="Slider">
+            <Setter Property="MinimumTrackColor" Value="{Binding MinimumTrackColor, Source={x:Reference Root}}" />
+            <Setter Property="MaximumTrackColor" Value="{Binding MaximumTrackColor, Source={x:Reference Root}}" />
+            <Setter Property="ThumbColor" Value="{Binding ThumbColor, Source={x:Reference Root}}" />
+            <Setter Property="ThumbImageSource">
+                <Setter.Value>
+                    <OnPlatform x:TypeArguments="ImageSource">
+                        <On Platform="Android"
+                            Value="{resources:ImageResource Render.Resources.Raw.PlayerScrubberOption.png}" />
+                    </OnPlatform>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="PlayerButton" TargetType="Label">
+            <Setter Property="TextColor" Value="{Binding PlayerButtonColor, Source={x:Reference Root}}" />
+            <Setter Property="FontFamily" Value="Icons" />
+            <Setter Property="FontSize" Value="{StaticResource PlayerButtonFontSize}" />
+            <Setter Property="Padding" Value="{StaticResource PlayerButtonPadding}" />
+            <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="WidthRequest" Value="{StaticResource PlayerButtonWidth}" />
+        </Style>
+
+        <!-- This style is used in runtime -->
+        <Style x:Key="RequiredPlayerButton" TargetType="Label" BasedOn="{StaticResource PlayerButton}">
+            <Setter Property="TextColor" Value="{StaticResource Required}" />
+        </Style>
+    </ContentView.Resources>
+
+    <Border StrokeShape="RoundRectangle 8,8,8,8"
+            StrokeThickness="0">
+         <!--TODO: Check if border shadow is necessary for any player implementation 
+         <Border.Shadow> 
+             <Shadow Brush="Black" 
+                 Offset="0,3" 
+                 Radius="3" 
+                 Opacity="0.75" /> 
+         </Border.Shadow>--> 
+
+        <Grid HeightRequest="{x:Static barPlayer:BarPlayer.PlayerHeight}"
+              BackgroundColor="{x:StaticResource BarPlayerSecondaryStackBackground}"
+              AutomationId="BarPlayerFrame">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="mainPlayerColumn" Width="*"/>
+                <ColumnDefinition x:Name="secondaryStackColumn" Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid x:Name="SecondaryStack"
+                  Margin="-5,0,0,0"
+                  Grid.Column="1"
+                  MinimumWidthRequest="40">
+                <Label x:Name="SecondaryButton"
+                       Style="{StaticResource PlayerButton}"
+                       FontSize="40"
+                       WidthRequest="{StaticResource SecondaryButtonWidth}"
+                       AutomationId="BarPlayerSecondaryButton">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="SecondaryGesture" Tapped="OnButtonClicked" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+
+            <Border x:Name="mainPlayerBorder"
+                    FlowDirection="LeftToRight"
+                    Grid.Column="0"
+                    StrokeShape="RoundRectangle 8,8,8,8"
+                    Stroke="{Binding MainStackBorderColor, Source={x:Reference Root}}"
+                    BackgroundColor="{Binding MainStackBackgroundColor, Source={x:Reference Root}}"
+                    StrokeThickness="1">
+                <Grid x:Name="mainPlayerStack">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition x:Name="contentBeforeColumn" Width="Auto"/>
+                        <ColumnDefinition x:Name="playerColumn" Width="*"/>
+                        <ColumnDefinition x:Name="separatorColumn" Width="{StaticResource MainStackBorderThickness}"/>
+                        <ColumnDefinition x:Name="pausePlayLoadingColumn" Width="{StaticResource PlayerButtonWidth}"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid x:Name="ContentBeforePlayerPlaceholder"
+                          Grid.Column="0"
+                          AutomationId="DraftSelectionCircle"
+                          IsVisible="False"
+                          InputTransparent="False">
+                        <!-- custom content is rendered here from ContentBeforePlayerProperty -->
+                    </Grid>
+
+                    <Grid x:Name="playerGrid"
+                          Grid.Column="1">
+                        <VerticalStackLayout Padding="10,5,10,0">
+                            <HorizontalStackLayout x:Name="playerTitleStack">
+                                <Label x:Name="AudioPlayerGlyph"
+                                       Margin="0,0,5,0"
+                                       FontFamily="Icons"
+                                       TextColor="{Binding PlayerLabelColor, Source={x:Reference Root}}"
+                                       FontSize="{StaticResource MediumFont}"
+                                       LineBreakMode="TailTruncation"
+                                       VerticalOptions="Center"
+                                       AutomationId="BarPlayerGlyphLabel" />
+
+                                <Label x:Name="AudioPlayerLabel"
+                                       FontFamily="MediumFont"
+                                       FontSize="{StaticResource MediumFont}"
+                                       TextColor="{Binding PlayerLabelColor, Source={x:Reference Root}}"
+                                       LineBreakMode="TailTruncation"
+                                       VerticalOptions="Center"
+                                       AutomationId="BarPlayerTitleLabel" />
+                            </HorizontalStackLayout>
+
+                            <Grid x:Name="playerSlider">
+                                <customRenderer:CustomSlider x:Name="AudioPlayerSlider"
+                                                             Style="{StaticResource PlayerSlider}"
+                                                             AutomationId="AudioPlayerSliderView"/>
+
+                                <!-- CanvasView is displayed on top of the player layout -->
+                                <skia:SKCanvasView x:Name="MiniPassageDivideCanvas"
+                                                   x:FieldModifier="Public"
+                                                   InputTransparent="True"
+                                                   PaintSurface="OnPaintSurface"
+                                                   AutomationId="MiniPassageDivideCanvas"
+                                                   HeightRequest="12" 
+                                                   Opacity="1"/>
+                            </Grid>
+
+                            <Grid x:Name="playerTimer">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <Label x:Name="Timer"
+                                       AutomationId="BarPlayerTimerLabel"
+                                       Style="{StaticResource TimerLabel}" />
+
+                                <Label Grid.Column="1"
+                                       x:Name="Duration"
+                                       AutomationId="BarPlayerDurationLabel"
+                                       Style="{StaticResource TimerLabel}" />
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <!-- Grid is displayed on top of the player & player labels layout -->
+                    <Grid Grid.Column="1" x:Name="ContentOverlappingPlayerPlaceholder" Padding="10, 0"
+                          IsVisible="False"
+                          InputTransparent="True">
+                        <!-- custom content is rendered here from ContentOverlappingPlayerProperty -->
+                    </Grid>
+
+                    <BoxView x:Name="Separator" 
+                             Grid.Column="2"
+                             WidthRequest="{StaticResource MainStackBorderThickness}"
+                             Color="{Binding SeparatorBorderColor, Source={x:Reference Root}}"/>
+                    <BoxView x:Name="GradientSeparator" 
+                             Grid.Column="2"
+                             IsVisible="False"
+                             WidthRequest="{StaticResource MainStackBorderThickness}">
+                        <BoxView.Background>
+                            <LinearGradientBrush EndPoint="0,1">
+                                <GradientStop Color="{Binding MainStackBackgroundColor, Source={x:Reference Root}}"
+                                    Offset="0.01" />
+                                <GradientStop Color="{Binding SeparatorBorderColor, Source={x:Reference Root}}"
+                                    Offset="0.6" />
+                                <GradientStop Color="{Binding SeparatorBorderColor, Source={x:Reference Root}}"
+                                    Offset="1.0" />
+                            </LinearGradientBrush>
+                        </BoxView.Background>
+                    </BoxView>
+
+                    <Grid x:Name="playPauseLoadingGrid"
+                          Grid.Column="3"
+                          HeightRequest="{StaticResource PlayerButtonWidth}"
+                          WidthRequest="{StaticResource PlayerButtonWidth}"
+                          VerticalOptions="Center">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="{StaticResource PlayerButtonWidth}"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label x:Name="PlayButton"
+                               Style="{StaticResource PlayerButton}"
+                               Text="{resources:IconExtensions RecorderPlay}"
+                               AutomationId="BarPlayerPlayButton">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer x:Name="PlayGesture" Tapped="OnButtonClicked" />
+                            </Label.GestureRecognizers>
+                        </Label>
+
+                        <Label x:Name="PauseButton"
+                               Style="{StaticResource PlayerButton}"
+                               FontSize="{StaticResource PauseButtonFontSize}"
+                               Text="{resources:IconExtensions Icon=RecorderPause}"
+                               AutomationId="BarPlayerPauseButton">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer x:Name="PauseGesture" Tapped="OnButtonClicked" />
+                            </Label.GestureRecognizers>
+                        </Label>
+
+                        <Label x:Name="LoadingIndicator"
+                               Style="{StaticResource PlayerButton}"
+                               FontSize="60"
+                               Padding="0"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               Text="{resources:IconExtensions LoadingSpinner}" />
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</kernel:RenderComponentBase>

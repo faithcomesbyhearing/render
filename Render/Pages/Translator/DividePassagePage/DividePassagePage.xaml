@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderPageBase x:TypeArguments="dividePassagePage:DividePassageViewModel"
+                          xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                          xmlns:dividePassagePage="clr-namespace:Render.Pages.Translator.DividePassagePage;assembly=Render"
+                          xmlns:divisionPlayer="clr-namespace:Render.Components.DivisionPlayer;assembly=Render"
+                          xmlns:proceedButton="clr-namespace:Render.Components.ProceedButton;assembly=Render"
+                          xmlns:titleBar="clr-namespace:Render.Components.TitleBar;assembly=Render"
+                          xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                          xmlns:common="using:Render.Common"
+                          x:Class="Render.Pages.Translator.DividePassagePage.DividePassagePage"
+                          Style="{DynamicResource PrimaryPage}">
+    <ContentPage.Content>
+        <Grid x:Name="TopLevelElement"
+              BackgroundColor="{StaticResource AlternateBackground}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="75"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="75"/>
+            </Grid.ColumnDefinitions>
+            <!-- TitleBar -->
+            <titleBar:TitleBar x:Name="TitleBar" 
+                               Grid.Row="0"
+                               Grid.Column="0"
+                               Grid.ColumnSpan="2" />
+            
+            <ScrollView Grid.Row="1"
+                        Grid.Column="0"
+                        Grid.RowSpan="2"
+                        Grid.ColumnSpan="2"
+                        Margin="20,80,75,0"
+                        VerticalScrollBarVisibility="Always"
+                        AutomationId="DivisionPlayerScrollView">
+                <VerticalStackLayout x:Name="DivisionPlayerStackLayout"
+                                     FlowDirection="LeftToRight"
+                                     Margin="0,0,105,0"
+                                     AutomationId="DivisionPlayerStackLayout">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <divisionPlayer:DivisionPlayer Margin="0,0,0,20"
+                                                           AutomationId="DivisionPlayer"/>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+            </ScrollView>
+            
+            <!-- Proceed button -->
+            <proceedButton:ProceedButton Grid.Row="2"
+                                         Grid.Column="1"
+                                         HorizontalOptions="End"
+                                         x:Name="ProceedButton" />
+            
+            <!-- Loading circles -->
+            <common:LoadingScreen Grid.Column="0"
+                                  Grid.Row="0"
+                                  Grid.RowSpan="3"
+                                  Grid.ColumnSpan="2"
+                                  x:Name="LoadingView" />
+        </Grid>
+    </ContentPage.Content>
+</kernel:RenderPageBase>

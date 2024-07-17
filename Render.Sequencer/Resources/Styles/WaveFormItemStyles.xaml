@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary x:Class="Render.Sequencer.Resources.Styles.WaveFormItemStyles"
+                    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:atomic="clr-namespace:Render.Sequencer.Resources.Atomic">
+    <ResourceDictionary.MergedDictionaries>
+        <atomic:Colors />
+        <atomic:Sizes />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style x:Key="UnselectedWaveFormItemStyle" TargetType="BoxView">
+        <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+        <Setter Property="Opacity" Value="0.5" />
+        <Setter Property="Margin" Value="{StaticResource WaveFormItemMargin}" />
+    </Style>
+
+    <Style x:Key="CombinableWaveFormItemBackgroundStyle" TargetType="BoxView">
+        <Setter Property="Background" Value="{StaticResource Light}" />
+        <Setter Property="Opacity" Value="0.65" />
+        <Setter Property="Margin" Value="{StaticResource WaveFormItemMargin}" />
+    </Style>
+
+    <Style x:Key="CombinableWaveFormItemStyle" TargetType="Border">
+        <Setter Property="StrokeThickness" Value="5" />
+        <Setter Property="Margin" Value="{StaticResource WaveFormItemMargin}" />
+    </Style>
+
+    <Style x:Key="LockedWaveFormItemStyle"
+           BasedOn="{StaticResource CombinableWaveFormItemStyle}"
+           TargetType="Border">
+        <Setter Property="Stroke" Value="{StaticResource Alert}" />
+    </Style>
+
+    <Style x:Key="CanCombineWaveFormItemStyle"
+           BasedOn="{StaticResource CombinableWaveFormItemStyle}"
+           TargetType="Border">
+        <Setter Property="Stroke" Value="{StaticResource AccentLight}" />
+    </Style>
+</ResourceDictionary>

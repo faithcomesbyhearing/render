@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="local:SelectedSnapshotConfirmationMessageViewModel"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:kernel="clr-namespace:Render.Kernel"
+                            xmlns:local="clr-namespace:Render.Components.Modal.ModalComponents"
+                            xmlns:resources="clr-namespace:Render.Resources.Localization"
+                            x:Class="Render.Components.Modal.ModalComponents.SelectedSnapshotConfirmationMessageView">
+
+
+    <Grid x:Name="MainGrid" RowDefinitions="Auto,Auto"
+          WidthRequest="552"
+          RowSpacing="25">
+
+        <Label x:Name="MainMessage"
+               Grid.Row="0"
+               FontSize="{StaticResource LargeFont}"
+               FontFamily="MediumFont"
+               HorizontalTextAlignment="Center"
+               TextColor="{StaticResource Grey}"
+               AutomationId="BodyMessage" />
+
+        <Label FontSize="{StaticResource LargeFont}"
+               Grid.Row="1"
+               FontFamily="RegularFont"
+               HorizontalTextAlignment="Center"
+               Text="{x:Static resources:AppResources.YouCannotUndo}"
+               TextColor="{StaticResource Grey}"
+               AutomationId="YouCannotUndoMessage" />
+    </Grid>
+
+</kernel:RenderComponentBase>

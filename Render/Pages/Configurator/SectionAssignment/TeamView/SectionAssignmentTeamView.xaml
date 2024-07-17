@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="teamView:SectionAssignmentTeamViewViewModel"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:teamView="clr-namespace:Render.Pages.Configurator.SectionAssignment.TeamView;assembly=Render"
+                            xmlns:resources="clr-namespace:Render.Resources;assembly=Render"
+                            xmlns:localization="clr-namespace:Render.Resources.Localization"
+                            x:Class="Render.Pages.Configurator.SectionAssignment.TeamView.SectionAssignmentTeamView">
+    
+    <Grid x:Name="MainGrid" ColumnDefinitions="Auto, 2, Auto, *, Auto, 2, Auto" VerticalOptions="Fill">
+        <!-- Team Panel  -->
+        <VerticalStackLayout x:Name="TeamsLayout" HorizontalOptions="FillAndExpand" VerticalOptions="Start"
+                     BackgroundColor="{StaticResource Transparent}"
+                     MaximumWidthRequest="250"
+                     MinimumWidthRequest="200"
+                     Grid.Column="0">
+            <HorizontalStackLayout Margin="10">
+                <Label FontFamily="Icons"
+                       Text="{resources:IconExtensions TeamsIcon}"
+                       TextColor="{DynamicResource Option}"
+                       FontSize="Large"
+                       Margin="10,0"/>
+                <Label 
+                       Text="{x:Static localization:AppResources.Teams}"
+                       TextColor="{DynamicResource Option}"
+                       FontAttributes="Bold"
+                       FontSize="{StaticResource LargeFont}"/>
+            </HorizontalStackLayout>
+            <ScrollView>
+                <VerticalStackLayout x:Name="TeamCollection">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <teamView:TeamViewTeamCard />
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+            </ScrollView>
+            <VerticalStackLayout HeightRequest="80"/>
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Grid.Column="1"
+                     BackgroundColor="{DynamicResource SlateLight}"/>
+        <VerticalStackLayout Grid.Column="2" x:Name="LeftSpacing" WidthRequest="80"/>
+        
+        <!-- Center Panel -->
+        <teamView:TeamViewTeamAssignments x:Name="TeamAssignments"
+                                          Grid.Column="3"/>
+        <VerticalStackLayout x:Name="RightSpacing" Grid.Column="4" WidthRequest="80"/>
+        <VerticalStackLayout Grid.Column="5"
+                     BackgroundColor="{DynamicResource SlateLight}"/>
+        <!-- Section Panel  -->
+        <Grid x:Name="SectionPanel"
+              WidthRequest="520"
+              MinimumWidthRequest="200"
+              Grid.Column="6"
+              Padding="10, 0"
+              VerticalOptions="Fill">
+            <HorizontalStackLayout>
+                <Label FontFamily="Icons" 
+                       FontSize="Large" 
+                       Margin="10,0"
+                       Text="{resources:IconExtensions SectionNew}"
+                       TextColor="{DynamicResource Option}"/>
+                <Label FontSize="{StaticResource LargeFont}"
+                       Text="{x:Static localization:AppResources.Sections}"
+                       TextColor="{DynamicResource Option}"
+                       FontAttributes="Bold"/>
+            </HorizontalStackLayout>
+            <CollectionView x:Name="SectionCollection"  Margin="0,50,0,0">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <teamView:TeamViewSectionCard/>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.EmptyView>
+                    <Label Text="{x:Static localization:AppResources.AllSectionsAssigned}"
+                           TextColor="{DynamicResource MainText}"
+                           FontSize="{DynamicResource MediumFont}"
+                           FontAttributes="Italic"/>
+                </CollectionView.EmptyView>
+            </CollectionView>
+            <VerticalStackLayout HeightRequest="80"/>
+        </Grid>
+    </Grid>
+</kernel:RenderComponentBase>

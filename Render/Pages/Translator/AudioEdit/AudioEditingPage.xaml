@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderPageBase x:TypeArguments="audioEdit:AudioEditingPageViewModel"
+                          xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                          xmlns:proceedButton="clr-namespace:Render.Components.ProceedButton;assembly=Render"
+                          xmlns:barPlayer="clr-namespace:Render.Components.BarPlayer;assembly=Render"
+                          xmlns:titleBar="clr-namespace:Render.Components.TitleBar;assembly=Render"
+                          xmlns:miniWaveformPlayer="clr-namespace:Render.Components.MiniWaveformPlayer;assembly=Render"
+                          xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                          xmlns:audioEdit="clr-namespace:Render.Pages.Translator.AudioEdit;assembly=Render"
+                          xmlns:sequencer="clr-namespace:Render.Sequencer;assembly=Render.Sequencer"
+                          xmlns:loadingCircles="clr-namespace:Render.Common"
+                          x:Class="Render.Pages.Translator.AudioEdit.AudioEditingPage"
+                          Style="{StaticResource PrimaryPage}">
+    <ContentPage.Resources>
+        <Style x:Key="MainStack" TargetType="AbsoluteLayout">
+            <Setter Property="BackgroundColor" Value="{StaticResource AlternateBackground}"/>
+            <Setter Property="HorizontalOptions" Value="Fill"/>
+            <Setter Property="VerticalOptions" Value="Fill"/>
+        </Style>
+        <Style x:Key="BarPlayers" TargetType="barPlayer:BarPlayer">
+            <Setter Property="WidthRequest" Value="428"/>
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="Margin" Value="15"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <AbsoluteLayout Style="{StaticResource MainStack}" x:Name="TopLevelElement">
+        <Grid AbsoluteLayout.LayoutFlags="All"  
+                     AbsoluteLayout.LayoutBounds="0,0,1,1">
+            <Grid.RowDefinitions>
+                <RowDefinition x:Name="TitleBarRow" Height="Auto" />
+                <RowDefinition x:Name="ReferencesRow" Height="Auto" />
+                <RowDefinition x:Name="SequencerRow" Height="*" />
+            </Grid.RowDefinitions>
+            <miniWaveformPlayer:MiniWaveformPlayer Grid.Row="1"
+                                       x:Name="MiniWaveformPlayer"
+                                       Style="{StaticResource BarPlayers}" 
+                                       AutomationId="MiniWaveformPlayer"/>
+
+            <sequencer:Sequencer Grid.Row="2" x:Name="Sequencer" />
+            
+            <titleBar:TitleBar Grid.Row="0" x:Name="TitleBar" />
+        </Grid>
+
+        <proceedButton:ProceedButton x:Name="ProceedButton" 
+                                     AbsoluteLayout.LayoutFlags="PositionProportional"
+                                     AbsoluteLayout.LayoutBounds="1,1"/>
+        <loadingCircles:LoadingScreen x:Name="loadingView" 
+                                      AbsoluteLayout.LayoutFlags="All"
+                                      AbsoluteLayout.LayoutBounds="0,0,1,1"/>
+    </AbsoluteLayout>
+
+</kernel:RenderPageBase>

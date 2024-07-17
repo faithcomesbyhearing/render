@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kernel:RenderPageBase x:TypeArguments="communityTestPages:CommunityRetellPageViewModel"
+                       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                       xmlns:titleBar="clr-namespace:Render.Components.TitleBar;assembly=Render"
+                       xmlns:proceedButton="clr-namespace:Render.Components.ProceedButton;assembly=Render"
+                       xmlns:sequencer="clr-namespace:Render.Sequencer;assembly=Render.Sequencer"
+                       xmlns:miniWaveformPlayer="clr-namespace:Render.Components.MiniWaveformPlayer;assembly=Render"
+                       xmlns:communityTestPages="clr-namespace:Render.Pages.CommunityTester.CommunityRetell;assembly=Render"
+                       xmlns:loadingCircles="clr-namespace:Render.Common"
+                       xmlns:local="clr-namespace:Render.Pages.CommunityTester.CommunityRetell"
+                       x:Class="Render.Pages.CommunityTester.CommunityRetell.CommunityRetellPage"
+                       NavigationPage.HasNavigationBar="False"
+                       Style="{DynamicResource PrimaryPage}">
+    <AbsoluteLayout x:Name="TopLevelElement">
+        <Grid RowSpacing="0"
+              AbsoluteLayout.LayoutBounds="0,0,1,1" 
+              AbsoluteLayout.LayoutFlags="All">
+            <Grid.RowDefinitions>
+                <RowDefinition x:Name="titleBarRow" Height="{x:Static titleBar:TitleBar.Size}"/>
+                <RowDefinition x:Name="miniPlayersRow" Height="125"/>
+                <RowDefinition x:Name="noteRecorderRow" Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="1"
+                  RowSpacing="0"
+                  BackgroundColor="{DynamicResource AlternateBackground}"
+                  Padding="{x:Static titleBar:TitleBar.Spacing}"
+                  ColumnSpacing="{x:Static titleBar:TitleBar.Spacing}"
+                  AutomationId="PassagePlayerContainer">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition x:Name="sectionPlayerColumn" Width="{x:Static local:CommunityRetellPage.MiniPlayerWidth}"/>
+                    <ColumnDefinition x:Name="passagePlayerColumn" Width="{x:Static local:CommunityRetellPage.MiniPlayerWidth}"/>
+                </Grid.ColumnDefinitions>
+
+                <miniWaveformPlayer:MiniWaveformPlayer x:Name="SectionPlayer"
+                                                       Grid.Column="0"/>
+
+                <miniWaveformPlayer:MiniWaveformPlayer x:Name="PassagePlayer"
+                                                       Grid.Column="1"/>
+            </Grid>
+
+            <sequencer:Sequencer x:Name="Sequencer" Grid.Row="2" BackgroundColor="{DynamicResource AlternateBackground}" />
+
+            <titleBar:TitleBar x:Name="TitleBar" Grid.Row="0"/>
+        </Grid>
+        <proceedButton:ProceedButton x:Name="ProceedButton"
+                                     AbsoluteLayout.LayoutBounds="1,1"
+                                     AbsoluteLayout.LayoutFlags="PositionProportional" />
+        <loadingCircles:LoadingScreen x:Name="loadingView" 
+                                      AbsoluteLayout.LayoutFlags="All"
+                                      AbsoluteLayout.LayoutBounds="0,0,1,1"/>
+    </AbsoluteLayout>
+</kernel:RenderPageBase>

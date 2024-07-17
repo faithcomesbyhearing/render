@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderPageBase x:TypeArguments="tablet:NoteReviewViewModel"
+                       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:barPlayer="clr-namespace:Render.Components.BarPlayer;assembly=Render"
+                       xmlns:titleBar="clr-namespace:Render.Components.TitleBar;assembly=Render"
+                       xmlns:tablet="clr-namespace:Render.Pages.Interpreter;assembly=Render"
+                       xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                       xmlns:proceedButton="clr-namespace:Render.Components.ProceedButton;assembly=Render"
+                       xmlns:resources="clr-namespace:Render.Resources"
+                       xmlns:common="clr-namespace:Render.Common"
+                       x:Class="Render.Pages.Interpreter.NoteReview"
+                       NavigationPage.HasNavigationBar="False"
+                       Style="{StaticResource PrimaryPage}">
+
+    <AbsoluteLayout Style="{StaticResource MainStack}"
+                    x:Name="TopLevelElement">
+        <Grid AbsoluteLayout.LayoutFlags="All"
+              AbsoluteLayout.LayoutBounds="0,0,1,1">
+            <Grid.RowDefinitions>
+                <RowDefinition x:Name="TitleBarRow" Height="Auto" />
+                <RowDefinition x:Name="ReferencesRow" Height="Auto" />
+                <RowDefinition x:Name="Spacing" Height="*" />
+                <RowDefinition x:Name="ToolbarRow" Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <HorizontalStackLayout Grid.Row="1"
+                                   HorizontalOptions="Start"
+                                   VerticalOptions="Start"
+                                   Margin="25,38"
+                                   Spacing="25"
+                                   AutomationId="BarPlayersCollection">
+
+                <barPlayer:BarPlayer x:Name="OriginalNotePlayer"
+                                     Style="{StaticResource BarPlayers}" />
+
+                <barPlayer:BarPlayer x:Name="InterpretedNotePlayer"
+                                     Style="{StaticResource BarPlayers}" />
+            </HorizontalStackLayout>
+
+            <Border Grid.Row="3"
+                    Style="{DynamicResource BorderStyle}"
+                    AutomationId="ToolBarHorizontalStack">
+                <Label Text="{resources:IconExtensions ReRecord}"
+                       AutomationId="ReRecord"
+                       FontFamily="Icons"
+                       TextColor="{DynamicResource Option}"
+                       FontSize="54"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center" />
+
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer x:Name="ReRecordButtonGestureRecognizer"
+                                          AutomationId="ReRecordButtonTap" />
+                </Border.GestureRecognizers>
+            </Border>
+
+            <titleBar:TitleBar Grid.Row="0"
+                               x:Name="TitleBar" />
+        </Grid>
+
+        <proceedButton:ProceedButton x:Name="ProceedButton"
+                                     AbsoluteLayout.LayoutBounds="1,1"
+                                     AbsoluteLayout.LayoutFlags="PositionProportional" />
+
+        <common:LoadingScreen x:Name="LoadingView"
+                              AbsoluteLayout.LayoutFlags="All"
+                              AbsoluteLayout.LayoutBounds="0,0,1,1" />
+    </AbsoluteLayout>
+</kernel:RenderPageBase>

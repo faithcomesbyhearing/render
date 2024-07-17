@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderPageBase x:TypeArguments="consultantCheck:ConsultantCheckSectionSelectViewModel"
+                       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:titleBar="clr-namespace:Render.Components.TitleBar;assembly=Render"
+                       xmlns:resources="clr-namespace:Render.Resources;assembly=Render"
+                       xmlns:consultantCheck="clr-namespace:Render.Pages.Consultant.ConsultantCheck;assembly=Render"
+                       xmlns:consultant="clr-namespace:Render.Components.Consultant;assembly=Render"
+                       xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                       xmlns:localization="using:Render.Resources.Localization"
+                       xmlns:common="using:Render.Common"
+                       x:Class="Render.Pages.Consultant.ConsultantCheck.ConsultantCheckSectionSelect"
+                       NavigationPage.HasNavigationBar="False"
+                       Style="{StaticResource PrimaryPage}">
+    <ContentPage.Resources>
+        <Style x:Key="MainStack" TargetType="Grid">
+            <Setter Property="BackgroundColor" Value="{DynamicResource AlternateBackground}"/>
+            <Setter Property="HorizontalOptions" Value="Fill"/>
+            <Setter Property="VerticalOptions" Value="Fill"/>
+        </Style>
+
+        <Style x:Key="ApproveStackLayout" TargetType="AbsoluteLayout">
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid Style="{DynamicResource MainStack}" x:Name="TopLevelElement">
+        <Grid.RowDefinitions>
+            <RowDefinition x:Name="TitleBarRow" Height="{x:Static titleBar:TitleBar.Size}" />
+            <RowDefinition x:Name="HeaderRow" Height="Auto" />
+            <RowDefinition x:Name="ContentRow" Height="*" />
+        </Grid.RowDefinitions>
+
+        <HorizontalStackLayout Grid.Row="1" Margin="0,15,0,15" HorizontalOptions="Center">
+            <!-- Unreviewed Frame -->
+            <Frame x:Name="UnreviewedFrame" CornerRadius="3" 
+                   BackgroundColor="{DynamicResource Option}"
+                   Margin="0" Padding="5">
+                <StackLayout Orientation="Horizontal"
+                             Margin="0">
+                    <Label x:Name="UnreviewedIcon"
+                           Style="{DynamicResource SubTitleIconLabel}" 
+                           Margin="5,0,5,0"
+                           FontFamily="Icons" 
+                           FontSize="{DynamicResource SmallFont}" 
+                           VerticalOptions="Center"
+                           Text="{resources:IconExtensions SectionsUnreviewed}"
+                           TextColor="{DynamicResource SecondaryText}"
+                           AutomationId="SectionsUnreviewedIcon"/>
+                    <Label x:Name="UnreviewedText"
+                           Text="{x:Static localization:AppResources.Unreviewed}" 
+                           VerticalOptions="Center" 
+                           TextColor="{DynamicResource SecondaryText}" 
+                           Margin="0"
+                           FontSize="{DynamicResource SmallFont}" 
+                           AutomationId="UnreviewedLabel"/>
+                </StackLayout>
+                
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer x:Name="UnreviewedButton" Tapped="OnButtonClicked" AutomationId="ConsultantCheckUnreviewedButton" />
+                </Frame.GestureRecognizers>
+            </Frame>
+
+            <Label Text="|" Margin="5,0" VerticalOptions="Center" TextColor="{DynamicResource MainText}"/>
+
+            <!-- Reviewed Frame -->
+            <Frame x:Name="ReviewedFrame" CornerRadius="3" 
+                   BackgroundColor="Transparent" 
+                   Margin="0" Padding="5">
+                <HorizontalStackLayout Margin="0">
+                    <Label x:Name="ReviewedIcon"
+                           Style="{DynamicResource SubTitleIconLabel}" 
+                           Margin="5, 0, 5,0"
+                           FontFamily="Icons" 
+                           FontSize="{DynamicResource SmallFont}" 
+                           VerticalOptions="Center"
+                           Text="{resources:IconExtensions SectionReview}"
+                           TextColor="{DynamicResource Option}" 
+                           AutomationId="SectionReviewIcon"/>
+
+                    <Label x:Name="ReviewedText"
+                           Text="{x:Static localization:AppResources.Reviewed}"   
+                           VerticalOptions="Center"
+                           TextColor="{DynamicResource Option}" 
+                           Margin="0"
+                           FontSize="{DynamicResource SmallFont}" 
+                           AutomationId="ReviewedLabel"/>
+                </HorizontalStackLayout>
+                
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer x:Name="ReviewedButton" Tapped="OnButtonClicked" AutomationId="ConsultantCheckReviewedButton" />
+                </Frame.GestureRecognizers>
+            </Frame>
+        </HorizontalStackLayout>
+
+        <ScrollView Grid.Row="2"
+                    Orientation="Vertical"
+                    HorizontalOptions="Center"
+                    MaximumWidthRequest="750"
+                    Padding="0"
+                    BackgroundColor="Transparent"
+                    VerticalScrollBarVisibility="Never">
+            <StackLayout BackgroundColor="Transparent" Margin="0" HorizontalOptions="Center">
+                <Label x:Name="NoReviewedSections"
+                        Text="{x:Static localization:AppResources.NoReviewedSections}" 
+                        FontSize="{DynamicResource MediumFont}" 
+                        FontAttributes="Bold"
+                        TextColor="{DynamicResource MainText}" 
+                        AutomationId="NoReviewedSectionsText"/>
+
+                <Label x:Name="NoUnreviewedSections" 
+                        Text="{x:Static localization:AppResources.NoUnreviewedSections}" 
+                        FontSize="{DynamicResource MediumFont}" 
+                        FontAttributes="Bold"
+                        TextColor="{DynamicResource MainText}" 
+                        AutomationId="NoUnreviewedSectionsText"/>
+
+                <VerticalStackLayout x:Name="UnreviewedCardCollection" 
+                                        Style="{DynamicResource ApproveStackLayout}" 
+                                        Padding="5" 
+                                        AutomationId="UnreviewedCollectionStack">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <consultant:SectionSelectCard Margin="0,0,0,14" AutomationId="UnreviewedSection"/>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout x:Name="ReviewedCardCollection"
+                                        Style="{DynamicResource ApproveStackLayout}" 
+                                        Padding="5" 
+                                        AutomationId="ReviewedCollectionStack">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <consultant:SectionSelectCard Margin="0,0,0,14" AutomationId="ReviewedSection"/>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+            </StackLayout>
+        </ScrollView>
+
+        <titleBar:TitleBar Grid.Row="0" x:Name="TitleBar"/>
+        <common:LoadingScreen x:Name="LoadingView" Grid.RowSpan="4" />
+    </Grid>
+</kernel:RenderPageBase>

@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="titleBar:ITitleBarViewModel"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:titleBar="clr-namespace:Render.Components.TitleBar;assembly=Render"
+                            xmlns:uiResources="clr-namespace:Render.Resources"
+                            xmlns:player="clr-namespace:Render.Components.SectionTitlePlayer;assembly=Render"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:local="clr-namespace:Render.Components.TitleBar"
+                            x:Class="Render.Components.TitleBar.TitleBar">
+    <Grid ColumnSpacing="0" BackgroundColor="{StaticResource Blue}">
+        <Grid.RowDefinitions>
+            <RowDefinition x:Name="BarContentRow" Height="{x:Static local:TitleBar.Size}" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="BackButtonColumn" Width="{x:Static local:TitleBar.Size}" />
+            <ColumnDefinition x:Name="SeparatorColumn1" Width="{x:Static local:Separator.Width}" />
+            <ColumnDefinition x:Name="SectionTitleColumn" Width="*" />
+            <ColumnDefinition x:Name="SeparatorColumn2" Width="{x:Static local:Separator.Width}" />
+            <ColumnDefinition x:Name="SectionPlayerColumn" Width="Auto" />
+            <ColumnDefinition x:Name="SeparatorColumn3" Width="{x:Static local:Separator.Width}" />
+            <ColumnDefinition x:Name="UserSettingsColumn" Width="{x:Static local:TitleBar.Size}" />
+            <ColumnDefinition x:Name="SeparatorColumn4" Width="{x:Static local:Separator.Width}" />
+            <ColumnDefinition x:Name="HomeButtonColumn" Width="{x:Static local:TitleBar.Size}" />
+            <ColumnDefinition x:Name="SeparatorColumn5" Width="{x:Static local:Separator.Width}" />
+            <ColumnDefinition x:Name="MenuButtonColumn" Width="{x:Static local:TitleBar.Size}" />
+        </Grid.ColumnDefinitions>
+
+        <Button x:Name="BackButton"
+                Grid.Column="0"
+                AutomationId="BackButton"
+                Text="{uiResources:IconExtensions ChevronLeft}"
+                Style="{StaticResource IconButton}" />
+
+        <titleBar:Separator Grid.Column="1" />
+
+        <Grid x:Name="SectionTitleGrid"
+              Grid.Column="2"
+              ColumnSpacing="{x:Static local:TitleBar.Spacing}">
+            <Grid.Resources>
+                <Style x:Key="TitleLabelStyle" TargetType="Label">
+                    <Setter Property="FontFamily" Value="BoldFont" />
+                    <Setter Property="VerticalOptions" Value="Center" />
+                    <Setter Property="LineBreakMode" Value="TailTruncation" />
+                </Style>
+            </Grid.Resources>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="IconColumn" Width="{x:Static local:TitleBar.IconWidth}" />
+                <ColumnDefinition x:Name="TitleColumn" Width="Auto" />
+                <ColumnDefinition x:Name="SeparatorColumn" Width="{x:Static local:Separator.Width}" />
+                <ColumnDefinition x:Name="SubTitleColumn" Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.Margin>
+                <Thickness Left="{x:Static local:TitleBar.Spacing}" />
+            </Grid.Margin>
+
+            <Label x:Name="IconLabel"
+                   Grid.Column="0"
+                   AutomationId="StageTitleIcon"
+                   Style="{StaticResource IconLabelStyle}" />
+
+            <Label x:Name="TitleLabel"
+                   Grid.Column="1"
+                   AutomationId="StageTitleLabel"
+                   Style="{StaticResource TitleLabelStyle}"
+                   FontSize="30"
+                   TextColor="{DynamicResource SecondaryText}" />
+
+            <titleBar:Separator Grid.Column="2"
+                                HeightRequest="22"
+                                Margin="0,4,0,0"
+                                VerticalOptions="Center" />
+
+            <Label x:Name="SubTitleLabel"
+                   Grid.Column="3"
+                   AutomationId="ScreenTitleLabel"
+                   Margin="0,4,0,0"
+                   Style="{StaticResource TitleLabelStyle}"
+                   FontSize="26"
+                   TextColor="{DynamicResource DarkGrey}" />
+        </Grid>
+
+        <titleBar:Separator Grid.Column="3" />
+
+        <player:SectionTitlePlayer x:Name="SectionTitlePlayer"
+                                   Grid.Column="4"
+                                   AutomationId="SectionTitlePlayer"
+                                   Spacing="{x:Static local:TitleBar.Spacing}"
+                                   TitleBarHeight="{x:Static local:TitleBar.Size}" />
+
+        <titleBar:Separator Grid.Column="5" />
+
+        <Button x:Name="UserSettingsButton"
+                Grid.Column="6"
+                Style="{StaticResource IconButton}"
+                Text="{uiResources:IconExtensions Settings}"
+                AutomationId="UserSettingsButton"/>
+
+        <titleBar:Separator Grid.Column="7" />
+
+        <Button x:Name="HomeButton"
+                Grid.Column="8"
+                Style="{StaticResource IconButton}"
+                Text="{uiResources:IconExtensions Logo}" 
+                AutomationId="HomeButton"/>
+
+        <titleBar:Separator Grid.Column="9" />
+
+        <Button x:Name="MenuButton"
+                Grid.Column="10"
+                AutomationId="OpenMenu"
+                Style="{StaticResource IconButton}"
+                Text="{uiResources:IconExtensions MenuVertical}" />
+    </Grid>
+</kernel:RenderComponentBase>

@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="audioExport:SectionToExport"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:audioExport="clr-namespace:Render.Pages.Settings.AudioExport;assembly=Render"
+                            xmlns:uiResources="clr-namespace:Render.Resources"
+                            xmlns:resources="clr-namespace:Render.Resources.Localization"
+                            xmlns:customRenderer="clr-namespace:Render.Kernel.CustomRenderer;assembly=Render"
+                            x:Class="Render.Pages.Settings.AudioExport.SectionToExportView">
+    <Grid RowDefinitions="*,*,*">
+        <Border x:Name="Card"
+                Grid.Row="0"
+                Margin="0,10"
+                AutomationId="CardFrame"
+                HeightRequest="115"
+                MinimumHeightRequest="80">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="8" />
+            </Border.StrokeShape>
+
+            <Grid x:Name="SectionInfo">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label x:Name="NoSectionView"
+                       Grid.ColumnSpan="3"
+                       Margin="20,0"
+                       AutomationId="NoSectionView"
+                       FontSize="{DynamicResource MediumFont}"
+                       HorizontalTextAlignment="Center"
+                       Text="{x:Static resources:AppResources.NoSectionsAvailable}"
+                       TextColor="{DynamicResource MainIconColor}"
+                       VerticalOptions="Center" />
+                <customRenderer:Panel Grid.Column="0" 
+                      x:Name="CheckmarkFrame"
+                      VerticalOptions="Center"
+                      HorizontalOptions="Center"
+                      WidthRequest="26"
+                      HeightRequest="26"
+                      Padding="0"
+                      Margin="5,0,10,0"
+                      BorderRadius="2"
+                      BorderColor="{DynamicResource Option}"
+                      BorderThickness="3">
+                    <Label x:Name="Checkmark"
+                           FontFamily="Icons"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           TextColor="{StaticResource SecondaryText}"
+                           Text="{uiResources:IconExtensions Checkmark}"
+                           FontSize="26" />
+                </customRenderer:Panel>
+                <Label x:Name="SectionNumber"
+                       Grid.Column="1"
+                       Margin="15,0,0,0"
+                       AutomationId="SectionNumberLabel"
+                       FontFamily="BoldFont"
+                       FontSize="32"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       WidthRequest="56" />
+
+                <Grid Grid.Column="2" Grid.ColumnSpan="2" VerticalOptions="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label x:Name="SectionReference"
+                           TextColor="{DynamicResource GreyText}"
+                           FontFamily="MediumFont"
+                           FontSize="{StaticResource LargeFontMinus2Font}" />
+                    <Label Grid.Row="1" 
+                           x:Name="SectionName"
+                           TextColor="{DynamicResource SlateLight}"
+                           FontFamily="MediumFont"
+                           FontSize="{StaticResource MediumPlus2Font}" />
+                    <Label Grid.Column="1" Grid.RowSpan="3"
+                           x:Name="NoAudio"
+                           Text="{x:Static resources:AppResources.NoAudio}"
+                           TextColor="{StaticResource GreyText}"
+                           FontFamily="RegularFont"
+                           Padding="26,0,0,0"
+                           LineBreakMode="NoWrap"
+                           FontSize="{StaticResource LargeFontMinus2Font}"
+                           VerticalOptions="Center"
+                           HorizontalOptions="End" />
+                </Grid>
+            </Grid>
+        </Border>
+
+        <Line Grid.Row="2" x:Name="Separator"
+              BackgroundColor="{StaticResource LightGrey}"
+              Fill="{StaticResource LightGrey}"
+              HorizontalOptions="Fill"
+              StrokeThickness="2"
+              Margin="5,0,5,0"
+              Opacity=".8" />
+        <Grid.GestureRecognizers>
+            <TapGestureRecognizer x:Name="SelectTap" />
+        </Grid.GestureRecognizers>
+    </Grid>
+</kernel:RenderComponentBase>

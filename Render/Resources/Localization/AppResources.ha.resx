@@ -1,0 +1,1660 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Add" xml:space="preserve">
+    <value>Ƙara</value>
+  </data>
+  <data name="AddAProject" xml:space="preserve">
+    <value>Ƙara Wani Aiki</value>
+  </data>
+  <data name="AddASection" xml:space="preserve">
+    <value>Ƙara wani Sashe</value>
+  </data>
+  <data name="AddATeam" xml:space="preserve">
+    <value>Ƙara ƙungiya</value>
+  </data>
+  <data name="Added" xml:space="preserve">
+    <value>An ƙara</value>
+  </data>
+  <data name="Adding" xml:space="preserve">
+    <value>Ƙarawa</value>
+  </data>
+  <data name="AddingProject" xml:space="preserve">
+    <value>Ƙara Aiki...</value>
+  </data>
+  <data name="AddNew" xml:space="preserve">
+    <value>Ƙara Sabo</value>
+  </data>
+  <data name="AddProject" xml:space="preserve">
+    <value>Ƙara Aiki</value>
+  </data>
+  <data name="AddProjectViaId" xml:space="preserve">
+    <value>Ƙara Aiki ta Shaida</value>
+  </data>
+  <data name="AddSection" xml:space="preserve">
+    <value>Ƙara Ɓangare</value>
+  </data>
+  <data name="AddStage" xml:space="preserve">
+    <value>Ƙara Fage</value>
+  </data>
+  <data name="AddStageHere" xml:space="preserve">
+    <value>Ƙara Fage A Nan</value>
+  </data>
+  <data name="AddTeam" xml:space="preserve">
+    <value>Ƙara Tawaga</value>
+  </data>
+  <data name="AddUser" xml:space="preserve">
+    <value>Ƙara Mai Amfani</value>
+  </data>
+  <data name="AddWorkflowStage" xml:space="preserve">
+    <value>Ƙara Fagen Bigiren Aiki</value>
+  </data>
+  <data name="AllowEditing" xml:space="preserve">
+    <value>Ba da damar yin gyara</value>
+  </data>
+  <data name="AllSections" xml:space="preserve">
+    <value>Dukkanin Sassa</value>
+  </data>
+  <data name="AllSectionsAssigned" xml:space="preserve">
+    <value>An Sanya Dukkan Sassa.</value>
+  </data>
+  <data name="Approval" xml:space="preserve">
+    <value>Amincewa</value>
+  </data>
+  <data name="ApprovalSubmitted" xml:space="preserve">
+    <value>an miƙa amincewa cikin nasara</value>
+  </data>
+  <data name="Approve" xml:space="preserve">
+    <value>Amince</value>
+  </data>
+  <data name="Approved" xml:space="preserve">
+    <value>An amince</value>
+  </data>
+  <data name="ApprovedByLabel" xml:space="preserve">
+    <value>Amincewa daga:</value>
+  </data>
+  <data name="ApprovedDraft" xml:space="preserve">
+    <value>Ka amince da daftari</value>
+  </data>
+  <data name="ApproveSection" xml:space="preserve">
+    <value>Amince da Sashe {0}</value>
+  </data>
+  <data name="ArchivedDrafts" xml:space="preserve">
+    <value>Gwajin Rubutun Da Aka Taskance</value>
+  </data>
+  <data name="ArchivedNotes" xml:space="preserve">
+    <value>Rubutun da Aka Taskace</value>
+  </data>
+  <data name="ArrangeWorkflowStages" xml:space="preserve">
+    <value>Tsara Matakan Bigiren Aiki</value>
+  </data>
+  <data name="Assigned" xml:space="preserve">
+    <value>{0} Da aka Sanya</value>
+  </data>
+  <data name="AssignToTranslator" xml:space="preserve">
+    <value>Bayar Da Aikin ga Mai Fassara</value>
+  </data>
+  <data name="AudioClip" xml:space="preserve">
+    <value>Sauti</value>
+  </data>
+  <data name="AudioNote" xml:space="preserve">
+    <value>Jawabin Sautin</value>
+  </data>
+  <data name="BackTranslate" xml:space="preserve">
+    <value>Juya Fassara</value>
+  </data>
+  <data name="BackTranslate1" xml:space="preserve">
+    <value>Juya Fassara 1</value>
+  </data>
+  <data name="BackTranslate2" xml:space="preserve">
+    <value>Juya Fassara 2</value>
+  </data>
+  <data name="BackTranslator" xml:space="preserve">
+    <value>Mai Daw da Fassara</value>
+  </data>
+  <data name="BackTranslator2" xml:space="preserve">
+    <value>Mai Juya Fassarar na 2</value>
+  </data>
+  <data name="Both" xml:space="preserve">
+    <value>Duka Biyun</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Soke</value>
+  </data>
+  <data name="Canceled" xml:space="preserve">
+    <value>An Fasa</value>
+  </data>
+  <data name="Canceling" xml:space="preserve">
+    <value>Fasawa</value>
+  </data>
+  <data name="Check" xml:space="preserve">
+    <value>Duba</value>
+  </data>
+  <data name="Check2" xml:space="preserve">
+    <value>Dubawa 2</value>
+  </data>
+  <data name="ChooseProjectsForDeviceMessage" xml:space="preserve">
+    <value>Zaɓi ayyukan da za ka son alaƙantawa da wannan na'ura.</value>
+  </data>
+  <data name="ChosenDraft" xml:space="preserve">
+    <value>DaftarIn rubutu da Aka Zaɓa</value>
+  </data>
+  <data name="Chunk" xml:space="preserve">
+    <value>Babban Kaso {0}</value>
+  </data>
+  <data name="ClearSegmentMessage1" xml:space="preserve">
+    <value>Ci gaba da turawa gaba zai goge ɓangarorin da aka raba wannan labarin a yanzu.</value>
+  </data>
+  <data name="ClearSegmentMessage2" xml:space="preserve">
+    <value>Idan rabawar da ta gabata an ƙirƙire ta ne bisa tsarawa ba saitin asali ba, to ba za a iya dawo da waɗannan ɓangarori ba.</value>
+  </data>
+  <data name="ClearSegments" xml:space="preserve">
+    <value>Goge Ɓangare</value>
+  </data>
+  <data name="DeleteSnapshots" xml:space="preserve">
+    <value>Goge dukkanin ɗaukar hoton</value>
+  </data>
+  <data name="ClearSnapshotsDescription" xml:space="preserve">
+    <value>Za a zubar da dukkanin ɗaukar hoton. Wannan zai bunƙasa ɓangaren zuwa ɗaukar hotonsa na baya.</value>
+  </data>
+  <data name="CombinedBackTranslate" xml:space="preserve">
+    <value>Haɗakar Juya Fassara</value>
+  </data>
+  <data name="CombineSegmentTitle" xml:space="preserve">
+    <value>Haɗa - Labari {0}</value>
+  </data>
+  <data name="CommunityCheck" xml:space="preserve">
+    <value>Dubawar Al'umma</value>
+  </data>
+  <data name="CommunityRetellPassage" xml:space="preserve">
+    <value>Labari {0} -Sake Faɗa</value>
+  </data>
+  <data name="CommunityRevise" xml:space="preserve">
+    <value>Sake Dubawar Al'umma</value>
+  </data>
+  <data name="CommunitySetup" xml:space="preserve">
+    <value>Kafa Al'umma</value>
+  </data>
+  <data name="CommunityTest" xml:space="preserve">
+    <value>Gwajin Al'umma</value>
+  </data>
+  <data name="CommunityTestRevise" xml:space="preserve">
+    <value>Sake Duba Gwajin Al'umma</value>
+  </data>
+  <data name="CommunityTestSetup" xml:space="preserve">
+    <value>Kafa Al'umma</value>
+  </data>
+  <data name="CompleteWork" xml:space="preserve">
+    <value>Kammala Aiki</value>
+  </data>
+  <data name="CompleteWorkMessage" xml:space="preserve">
+    <value>Za a ciew wannan matakin da zarar an fara kammala kowane daga cikin aikin da ke kan-aiwatarwa.</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Tabbatarwa</value>
+  </data>
+  <data name="Confirmation" xml:space="preserve">
+    <value>Tabbatarwa</value>
+  </data>
+  <data name="Consultant" xml:space="preserve">
+    <value>Mai Ba Da Shawara</value>
+  </data>
+  <data name="ConsultantApproval" xml:space="preserve">
+    <value>Amincewar Mai Ba Da Shawara</value>
+  </data>
+  <data name="ConsultantCheck" xml:space="preserve">
+    <value>Dubawar Mai Ba Da Shawara</value>
+  </data>
+  <data name="ConsultantLanguage" xml:space="preserve">
+    <value>Harshen Mai Ba Da Shawara</value>
+  </data>
+  <data name="ConsultantRevise" xml:space="preserve">
+    <value>Sake Dubawar Mai Ba Da Shawara</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>Cigaba</value>
+  </data>
+  <data name="CopyPreviousQuestions" xml:space="preserve">
+    <value>Kwafi Tambayoyin Baya</value>
+  </data>
+  <data name="CopyQuestions" xml:space="preserve">
+    <value>Kwafi Tambayoyi</value>
+  </data>
+  <data name="Current" xml:space="preserve">
+    <value>Na yanzu {0}</value>
+  </data>
+  <data name="DeactivateStepWarning" xml:space="preserve">
+    <value>Idan ka kashe wani mataki, to dukkanin ɓangarori za su matsa zuwa ga mataki na gaba a tsarin tafiyar aiki</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Goge</value>
+  </data>
+  <data name="DeleteSnapshotsConfirmation" xml:space="preserve">
+    <value>Ka tabbata cewa kana son ka goge duka ɗaukar hoton?</value>
+  </data>
+  <data name="DeleteUser" xml:space="preserve">
+    <value>Goge Mai Amfani</value>
+  </data>
+  <data name="DeleteUserMessage" xml:space="preserve">
+    <value>Goge {0} zai kuma cire dukkanin jingar ɓangare gare su. Ba za ka iya fasa wannan aikin ba.</value>
+  </data>
+  <data name="DeleteUserTitle" xml:space="preserve">
+    <value>A Goge Mai Amfani?</value>
+  </data>
+  <data name="DividePassageTitle" xml:space="preserve">
+    <value>Raba Yankin Rubutu</value>
+  </data>
+  <data name="Do2StepBackTranslate" xml:space="preserve">
+    <value>Juya Fassara Mataki 2</value>
+  </data>
+  <data name="DoNoteInterpret" xml:space="preserve">
+    <value>Haɗa da Fassara Rubutu</value>
+  </data>
+  <data name="DoNoteReview" xml:space="preserve">
+    <value>Sake Dubawar Rubutu</value>
+  </data>
+  <data name="DoPassageBackTranslate1" xml:space="preserve">
+    <value>Yi Dawo da Fassarar Yankin Rubutu 1</value>
+  </data>
+  <data name="DoPassageBackTranslate2" xml:space="preserve">
+    <value>Yi Dawo da Fassarar Yankin Rubutu 2</value>
+  </data>
+  <data name="DoPassageListen" xml:space="preserve">
+    <value>Haɗa da Saurare na Yankin Rubutu</value>
+  </data>
+  <data name="DoPassageReview" xml:space="preserve">
+    <value>Sake Duba Labari</value>
+  </data>
+  <data name="DoPassageTranscribe" xml:space="preserve">
+    <value>Mayarwa Rubutu na Yankin Rubutu</value>
+  </data>
+  <data name="DoQuestionAndResponse" xml:space="preserve">
+    <value>Haɗa da Tambaya da Amsa</value>
+  </data>
+  <data name="DoRetell" xml:space="preserve">
+    <value>Yi Sake faɗa</value>
+  </data>
+  <data name="DoSectionListen" xml:space="preserve">
+    <value>Haɗa da Saurare na Sashe</value>
+  </data>
+  <data name="DoSectionReview" xml:space="preserve">
+    <value>Haɗa da Sake Dubawar Sashe</value>
+  </data>
+  <data name="DoSegmentBackTranslate1" xml:space="preserve">
+    <value>Yi Dawo da Fassarar Ɓangare 1</value>
+  </data>
+  <data name="DoSegmentBackTranslate2" xml:space="preserve">
+    <value>Yi Dawo da Fassarar Ɓangare 2</value>
+  </data>
+  <data name="DoSegmentTranscribe" xml:space="preserve">
+    <value>Mayarwa Rubutu na Ɓangare</value>
+  </data>
+  <data name="DoTranscribe" xml:space="preserve">
+    <value>Yi Mayarwa Cikin Rubutu</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Sauke</value>
+  </data>
+  <data name="Downloaded" xml:space="preserve">
+    <value>An sauke</value>
+  </data>
+  <data name="DownloadingProjects" xml:space="preserve">
+    <value>Ana Sauke Ayyuka</value>
+  </data>
+  <data name="Draft" xml:space="preserve">
+    <value>DaftarIn rubutu</value>
+  </data>
+  <data name="DraftedByLabel" xml:space="preserve">
+    <value>Wanda ya rubuta:</value>
+  </data>
+  <data name="DraftNotes" xml:space="preserve">
+    <value>DaftarIn rubutu {0}</value>
+  </data>
+  <data name="DraftPassage" xml:space="preserve">
+    <value>Fassara Yankin Rubutu {0}</value>
+  </data>
+  <data name="DraftRecord" xml:space="preserve">
+    <value>Naɗar Daftarin Rubutu</value>
+  </data>
+  <data name="DraftReplacementModalTitle" xml:space="preserve">
+    <value>Zaɓi Daftarin Rubutu ka musanya</value>
+  </data>
+  <data name="DraftReview" xml:space="preserve">
+    <value>Bitar Daftarin Rubutu {0}</value>
+  </data>
+  <data name="Drafts" xml:space="preserve">
+    <value>Daftaran rubutu</value>
+  </data>
+  <data name="DraftSelect" xml:space="preserve">
+    <value>Zaɓar Daftarin Rubutu</value>
+  </data>
+  <data name="DraftSelection" xml:space="preserve">
+    <value>Zavar Gwajin Rubutu</value>
+  </data>
+  <data name="DraftTitle" xml:space="preserve">
+    <value>Daftaran rubutu {0}</value>
+  </data>
+  <data name="EditPassage" xml:space="preserve">
+    <value>Gyara Labari {0}</value>
+  </data>
+  <data name="EditUser" xml:space="preserve">
+    <value>Gyara Mai Amfani</value>
+  </data>
+  <data name="EmptyCollectionMessage" xml:space="preserve">
+    <value>Ƙara sabon aiki ta \ƙara Sabo\ zaɓin da ke sama.</value>
+  </data>
+  <data name="EmptyCollectionMessageTitle" xml:space="preserve">
+    <value>Ba komai a cikin jerin ayyuka.</value>
+  </data>
+  <data name="EmptyOffloadCollectionMessage" xml:space="preserve">
+    <value>A yanzu babu wani aiki da za a sauke.</value>
+  </data>
+  <data name="EmptyPassword" xml:space="preserve">
+    <value>Kalmar-shiga ba za ta kasance ba komai ba</value>
+  </data>
+  <data name="End" xml:space="preserve">
+    <value>Ƙarshe</value>
+  </data>
+  <data name="Enter32digitId" xml:space="preserve">
+    <value>Sanya lambobi 32 na Shaida...</value>
+  </data>
+  <data name="EnterAProjectName" xml:space="preserve">
+    <value>Sanya sunan aiki</value>
+  </data>
+  <data name="EnterLanguage" xml:space="preserve">
+    <value>Sanya Sunan Harshe</value>
+  </data>
+  <data name="EnterPasswordToRestoreSection" xml:space="preserve">
+    <value>Sanya lambar sirrinka ka buɗe ka kuma dawo da wannan ɓangaren</value>
+  </data>
+  <data name="EnterSectionNumber" xml:space="preserve">
+    <value>Sanya lambar ɓangare...</value>
+  </data>
+  <data name="EnterYourPassword" xml:space="preserve">
+    <value>Shigar da Kalmar-shigarka</value>
+  </data>
+  <data name="EnterYourUsername" xml:space="preserve">
+    <value>San Sunan Mai Amfaninka</value>
+  </data>
+  <data name="ErrorAddingProject" xml:space="preserve">
+    <value>An sami matsala a yayin ƙara wannan aikin.</value>
+  </data>
+  <data name="ErrorConnectLocalMachine" xml:space="preserve">
+    <value>An sami matala a ƙoƙarin haɗawa da injin gida.</value>
+  </data>
+  <data name="ExportAudio" xml:space="preserve">
+    <value>Fitar Da Sauti</value>
+  </data>
+  <data name="ExportChecked" xml:space="preserve">
+    <value>An Duba Fitarwa</value>
+  </data>
+  <data name="Exporting" xml:space="preserve">
+    <value>Ana Fitar da {0} daga {1}</value>
+  </data>
+  <data name="FontSize" xml:space="preserve">
+    <value>Girman Harafi</value>
+  </data>
+  <data name="ForTeam" xml:space="preserve">
+    <value>Ga {0}</value>
+  </data>
+  <data name="Generate" xml:space="preserve">
+    <value>Samar</value>
+  </data>
+  <data name="Generic" xml:space="preserve">
+    <value>Na rukuni</value>
+  </data>
+  <data name="GlobalUser" xml:space="preserve">
+    <value>Mai Amfani na Duniya</value>
+  </data>
+  <data name="Grid" xml:space="preserve">
+    <value>Layuka</value>
+  </data>
+  <data name="HaveBeenCleared" xml:space="preserve">
+    <value>an riga Goge</value>
+  </data>
+  <data name="HigherPriority" xml:space="preserve">
+    <value>Babban Zaɓin Fifiko</value>
+  </data>
+  <data name="HowToResolve" xml:space="preserve">
+    <value>Ta yaya za ka so warware wannan matsala?</value>
+  </data>
+  <data name="ImproperlyFormattedId" xml:space="preserve">
+    <value>Shaidar da ba a tsara ta yadda ya kamata ba. Daure ka sake sanya ta.</value>
+  </data>
+  <data name="IncludeBackTranslate" xml:space="preserve">
+    <value>Haɗa da Juya Fassara</value>
+  </data>
+  <data name="IncludeNoteListenGuidance" xml:space="preserve">
+    <value>Haɗa Da Jagoran Saurarar Jawabi</value>
+  </data>
+  <data name="IncludePassageBackTranslate" xml:space="preserve">
+    <value>Haɗa da Juya Fassarar Labari</value>
+  </data>
+  <data name="IncludePassageListen" xml:space="preserve">
+    <value>Haɗa da Saurare na Yankin Rubutu</value>
+  </data>
+  <data name="IncludePassageReview" xml:space="preserve">
+    <value>Haɗa Da Sake Duba Labari</value>
+  </data>
+  <data name="IncludePassageReviewAfterReRecording" xml:space="preserve">
+    <value>Haɗa da Sake Duba Labari Bayan Sake Naɗa</value>
+  </data>
+  <data name="IncludeSegmentBackTranslate" xml:space="preserve">
+    <value>Haɗa da Juya Fassarar Ɓangare</value>
+  </data>
+  <data name="IncorrectPassword" xml:space="preserve">
+    <value>Wannan kalmar-shiga ba ta dace da wannan sunan mai amfani ba</value>
+  </data>
+  <data name="IncorrectPattern" xml:space="preserve">
+    <value>Zane ba daidai ba. A sake jarrabawa.</value>
+  </data>
+  <data name="Input" xml:space="preserve">
+    <value>Shigarwa</value>
+  </data>
+  <data name="InsertPassword" xml:space="preserve">
+    <value>Sanya lambar sirri a nan</value>
+  </data>
+  <data name="IntermediateLanguage" xml:space="preserve">
+    <value>Harshen Tsakatsaki</value>
+  </data>
+  <data name="Interpret" xml:space="preserve">
+    <value>Fassara da baki</value>
+  </data>
+  <data name="Interpreted" xml:space="preserve">
+    <value>Wanda Aka Fassara</value>
+  </data>
+  <data name="InterpretToConsultant" xml:space="preserve">
+    <value>Yi Fassara Ga Mai Ba Da Shawara</value>
+  </data>
+  <data name="InterpretToTranslator" xml:space="preserve">
+    <value>Fassara Yi Fassara Ga Mai fassara</value>
+  </data>
+  <data name="Iteration" xml:space="preserve">
+    <value>Maimaitawa</value>
+  </data>
+  <data name="Jump" xml:space="preserve">
+    <value>Tsallaka</value>
+  </data>
+  <data name="JumpToSection" xml:space="preserve">
+    <value>Tsallaka Zuwa Ɓangare</value>
+  </data>
+  <data name="LastCompletedStage" xml:space="preserve">
+    <value>Matakin Da Aka Kammala Na ƙarshe</value>
+  </data>
+  <data name="LastSubmittedAudioLabel" xml:space="preserve">
+    <value>Sautin ƙarshe Da Aka Miƙa</value>
+  </data>
+  <data name="LastSync" xml:space="preserve">
+    <value>Daidaitawa ta Ƙarshe</value>
+  </data>
+  <data name="LeaveFreeCut" xml:space="preserve">
+    <value>Fita Daga Yanka Ɓangare</value>
+  </data>
+  <data name="LeaveFreeCutMessage1" xml:space="preserve">
+    <value>Idan ka fita daga Yanka Ɓangare za ka yi asarar duk wani aiki da aka samar zuwa nan.</value>
+  </data>
+  <data name="LeaveFreeCutMessage2" xml:space="preserve">
+    <value>Kammala wannan matakin don naɗar aikin da aka ƙirƙira.</value>
+  </data>
+  <data name="Localization" xml:space="preserve">
+    <value>Mayarwa harshen gida</value>
+  </data>
+  <data name="LoggingIn" xml:space="preserve">
+    <value>Ana kan shiga...</value>
+  </data>
+  <data name="LogIn" xml:space="preserve">
+    <value>Shiga ciki</value>
+  </data>
+  <data name="LogOut" xml:space="preserve">
+    <value>Fita</value>
+  </data>
+  <data name="LowerPriority" xml:space="preserve">
+    <value>Ƙaramin zaɓin fifiko</value>
+  </data>
+  <data name="ManageDivisions" xml:space="preserve">
+    <value>Sarrafa Yanin Rubutu na Rabe-Rabe {0}</value>
+  </data>
+  <data name="ManageUsers" xml:space="preserve">
+    <value>Sarrafa Masu Amfani</value>
+  </data>
+  <data name="MarkQuestions" xml:space="preserve">
+    <value>Yi Alama ga Yankin Rubutu na Tambaya {0}</value>
+  </data>
+  <data name="MicNotConnectedMessage" xml:space="preserve">
+    <value>Ba ji wani makirfon ba.  Da fatan za a haɗa makirufo zuwa tsarin ku don yin rikodin sauti.</value>
+  </data>
+  <data name="MicNotConnectedTitle" xml:space="preserve">
+    <value>Makirfon bai ta haɗu ba</value>
+  </data>
+  <data name="MicrophoneAccessMessage" xml:space="preserve">
+    <value>Renda ba shi da izinin yin amfani da makirfon ɗinka. Don gyara wannan je ka wirin saitin sirrin makirfon ka kunna wa Renda daamr amfani da makirfon.</value>
+  </data>
+  <data name="MicrophoneAccessTitle" xml:space="preserve">
+    <value>Ana buƙar damar amfani da makirfon</value>
+  </data>
+  <data name="MultipleTeamAssignmentLabel" xml:space="preserve">
+    <value>Ba za a iya sanya mai amfani guda ga ƙungoyiyi daban-daban ba</value>
+  </data>
+  <data name="MultipleTeamAssignmentMessage" xml:space="preserve">
+    <value>Taimaka ka sanya mai amfani daban ga kowace ƙungiya.</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Suna</value>
+  </data>
+  <data name="NoAudio" xml:space="preserve">
+    <value>Babu Sauti</value>
+  </data>
+  <data name="NoInternetConnection" xml:space="preserve">
+    <value>Babu Haɗin yanar gizo</value>
+  </data>
+  <data name="NoReviewedSections" xml:space="preserve">
+    <value>Babu ɓangarorin da aka sake dubawa a wannan lokacin.</value>
+  </data>
+  <data name="NoSectionAudioForStage" xml:space="preserve">
+    <value>Babu ɓangaren sauti a wannan matakin</value>
+  </data>
+  <data name="NoSelfCheck" xml:space="preserve">
+    <value>Babu Dubawa Ta Kai</value>
+  </data>
+  <data name="NotAbleToLogin" xml:space="preserve">
+    <value>Ba za ka iya shiga ba.</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>Jawabi</value>
+  </data>
+  <data name="NoteInterpret" xml:space="preserve">
+    <value>Fassara Rubutu</value>
+  </data>
+  <data name="NoteListen" xml:space="preserve">
+    <value>Saurarar jawabi</value>
+  </data>
+  <data name="Notes" xml:space="preserve">
+    <value>Jawabai</value>
+  </data>
+  <data name="NoteTranslator" xml:space="preserve">
+    <value>Mai Fassarar Rubutu</value>
+  </data>
+  <data name="NotInWorkflow" xml:space="preserve">
+    <value>Ba ya cikin tsarin tafiyar aiki</value>
+  </data>
+  <data name="NoUnreviewedSections" xml:space="preserve">
+    <value>Babu ɓangarorin da ba a sake dubawa ba a wannan lokacin.</value>
+  </data>
+  <data name="NullUsername" xml:space="preserve">
+    <value>Sunan mai amfani ba zai kasance ba komai ba</value>
+  </data>
+  <data name="Offload" xml:space="preserve">
+    <value>An sauke</value>
+  </data>
+  <data name="OffloadData" xml:space="preserve">
+    <value>Loda Bayanai</value>
+  </data>
+  <data name="Offloading" xml:space="preserve">
+    <value>Saukewa</value>
+  </data>
+  <data name="OffloadWarning" xml:space="preserve">
+    <value>Ka tabbatar cewa kana son sauke wannan aikin?</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>Ya yi</value>
+  </data>
+  <data name="Original" xml:space="preserve">
+    <value>Na Asali</value>
+  </data>
+  <data name="OriginalLanguage" xml:space="preserve">
+    <value>Harshen Asali</value>
+  </data>
+  <data name="OriginalNote" xml:space="preserve">
+    <value>Rubutu na Ainihi</value>
+  </data>
+  <data name="OriginalPassageTitle" xml:space="preserve">
+    <value>Labari {0} (Na Asali)</value>
+  </data>
+  <data name="Passage" xml:space="preserve">
+    <value>Yankin Rubutu {0}</value>
+  </data>
+  <data name="PassageBackTranslate" xml:space="preserve">
+    <value>Dawo da Fassarar Yankin Rubutu</value>
+  </data>
+  <data name="PassageDivide" xml:space="preserve">
+    <value>Rava Labari</value>
+  </data>
+  <data name="PassageDraftListen" xml:space="preserve">
+    <value>Sauraren Rubutu na Yankin Rubutu {0}</value>
+  </data>
+  <data name="PassageListen" xml:space="preserve">
+    <value>Saurarar Labari</value>
+  </data>
+  <data name="PassageListenOnly" xml:space="preserve">
+    <value>Sararar Labari kawai</value>
+  </data>
+  <data name="PassageListenTitle" xml:space="preserve">
+    <value>Saurare na Yankin Rubutu {0}</value>
+  </data>
+  <data name="PassageNumber" xml:space="preserve">
+    <value>Yankin Rubutu {0}</value>
+  </data>
+  <data name="PassagePeerReview" xml:space="preserve">
+    <value>Sharhin Ƙwararru na Yankin Rubu {0}</value>
+  </data>
+  <data name="PassageRetell" xml:space="preserve">
+    <value>Sake Faɗin Labari</value>
+  </data>
+  <data name="PassageReview" xml:space="preserve">
+    <value>Sake Duba Labari</value>
+  </data>
+  <data name="PassageReviewAfterReRecording" xml:space="preserve">
+    <value>Sake Duba Labari Bayan Sake Naɗa</value>
+  </data>
+  <data name="PassageSelect" xml:space="preserve">
+    <value>Zaɓar Labari</value>
+  </data>
+  <data name="PassageSelection" xml:space="preserve">
+    <value>Zaɓar Labari</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Kalmar-shiga</value>
+  </data>
+  <data name="PasswordGrid" xml:space="preserve">
+    <value>Layukan Kalmar-shiga</value>
+  </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>Ana buƙatar lambar sirri</value>
+  </data>
+  <data name="PasswordType" xml:space="preserve">
+    <value>Nau'in Kalmar-shiga</value>
+  </data>
+  <data name="PeerCheck" xml:space="preserve">
+    <value>Dubawar Ƙwararru</value>
+  </data>
+  <data name="PeerReview" xml:space="preserve">
+    <value>Sharhin Ƙwararru</value>
+  </data>
+  <data name="PeerRevise" xml:space="preserve">
+    <value>Sake Dubawar Ƙwararru</value>
+  </data>
+  <data name="PleaseConnect" xml:space="preserve">
+    <value>Taimaka ka haɗa da yanar gizo ka sake kunna Render.</value>
+  </data>
+  <data name="PleaseLogIn" xml:space="preserve">
+    <value>Taimaka ka shiga don ka fara.</value>
+  </data>
+  <data name="PrecedingAudio" xml:space="preserve">
+    <value>Sautin Da Ya Gabata</value>
+  </data>
+  <data name="PreviousDraft" xml:space="preserve">
+    <value>Daftarin Rubutu na Baya</value>
+  </data>
+  <data name="Proceed" xml:space="preserve">
+    <value>Ci Gaba</value>
+  </data>
+  <data name="Processes" xml:space="preserve">
+    <value>Hanyoyi</value>
+  </data>
+  <data name="ProjectAddedSuccesfully" xml:space="preserve">
+    <value>An ƙara wannan aikin cikin nasara.</value>
+  </data>
+  <data name="ProjectConfiguration" xml:space="preserve">
+    <value>Tsarin Aiki</value>
+  </data>
+  <data name="ProjectDeletedTitle" xml:space="preserve">
+    <value>An goge aikin</value>
+  </data>
+  <data name="ProjectHome" xml:space="preserve">
+    <value>Gidan Aiki</value>
+  </data>
+  <data name="ProjectId" xml:space="preserve">
+    <value>Shaidar Aiki</value>
+  </data>
+  <data name="ProjectList" xml:space="preserve">
+    <value>Jerin Ayyuka</value>
+  </data>
+  <data name="ProjectsDownloadedSuccessfully" xml:space="preserve">
+    <value>An yi nasarar sauke ayyuka.</value>
+  </data>
+  <data name="ProjectTeams" xml:space="preserve">
+    <value>Tawagogin Aiki</value>
+  </data>
+  <data name="ProjectUsers" xml:space="preserve">
+    <value>Masu Amfani da Aiki</value>
+  </data>
+  <data name="ProjectWorkflow" xml:space="preserve">
+    <value>Tsarin Tafiyar Aiki</value>
+  </data>
+  <data name="QuestionFormatted" xml:space="preserve">
+    <value>Tambaya {0}</value>
+  </data>
+  <data name="QuestionAndResponse" xml:space="preserve">
+    <value>Tambayoyi da Amsoshi</value>
+  </data>
+  <data name="QuestionPlacement" xml:space="preserve">
+    <value>Sanya Tambaya</value>
+  </data>
+  <data name="QuestionSet" xml:space="preserve">
+    <value>Saitin Tambaya {0}</value>
+  </data>
+  <data name="Record" xml:space="preserve">
+    <value>Ajiyayyen bayani</value>
+  </data>
+  <data name="RecordedSegmentWarningConfirmation" xml:space="preserve">
+    <value>Kammala haɗewar</value>
+  </data>
+  <data name="RecordedSegmentWarningMessage" xml:space="preserve">
+    <value>Da ma ɓangaren baya yana ɗauke da sautin amsa. Idan ka haɗe waɗannan ɓangarorin wuri guda za a yi asarar sautin da aka naɗa a baya.</value>
+  </data>
+  <data name="RecordedSegmentWarningTitle" xml:space="preserve">
+    <value>Za a yi asarar amsa</value>
+  </data>
+  <data name="RecordInterpretation" xml:space="preserve">
+    <value>Naɗi Fassarar Baki</value>
+  </data>
+  <data name="RecordNewDraft" xml:space="preserve">
+    <value>Naɗi Sabon Daftarin Rubutu</value>
+  </data>
+  <data name="RecordQuestion" xml:space="preserve">
+    <value>Naɗi Tambaya (Q{0})</value>
+  </data>
+  <data name="RecordQuestionTitle" xml:space="preserve">
+    <value>Naɗi Tambaya</value>
+  </data>
+  <data name="RecordResponse" xml:space="preserve">
+    <value>Bayanin Amsawa</value>
+  </data>
+  <data name="RecordRetell" xml:space="preserve">
+    <value>Naɗi Sake Faɗa</value>
+  </data>
+  <data name="RecordStandardQuestion" xml:space="preserve">
+    <value>Naɗi Cikakkiyar Tambaya {0}</value>
+  </data>
+  <data name="RecordTranslation" xml:space="preserve">
+    <value>Naɗi Fassara</value>
+  </data>
+  <data name="Recovery" xml:space="preserve">
+    <value>Dawo Da Abu</value>
+  </data>
+  <data name="References" xml:space="preserve">
+    <value>Mahanga</value>
+  </data>
+  <data name="RemoveWork" xml:space="preserve">
+    <value>Cire Aiki</value>
+  </data>
+  <data name="RemoveWorkMessage" xml:space="preserve">
+    <value>Za a cire wannan matakin nan take kuma za a yi asarar dukkanin aikin da ke kan-aiwatarwa.</value>
+  </data>
+  <data name="RenderUser" xml:space="preserve">
+    <value>Mai Amfani na Render</value>
+  </data>
+  <data name="Replace" xml:space="preserve">
+    <value>Misanya</value>
+  </data>
+  <data name="RequireNoteListen" xml:space="preserve">
+    <value>Jagorar Saurare na Rubutu</value>
+  </data>
+  <data name="RequireNoteReview" xml:space="preserve">
+    <value>Jagorar Sake Dubawar Rubutu</value>
+  </data>
+  <data name="RequirePassageListen" xml:space="preserve">
+    <value>Jagorar Saurare na Yankin Rubutu</value>
+  </data>
+  <data name="RequirePassageReview" xml:space="preserve">
+    <value>Jagorar Sake Dubawar Yankin Rubutu</value>
+  </data>
+  <data name="RequirePassageTranscribeListen" xml:space="preserve">
+    <value>Jagoran Rubuta Labari</value>
+  </data>
+  <data name="RequireQuestionContextListen" xml:space="preserve">
+    <value>Jagorar Saurare na Yanayin Tambaya</value>
+  </data>
+  <data name="RequireRecordResponse" xml:space="preserve">
+    <value>Haɗa Da Jagoran Amsa</value>
+  </data>
+  <data name="RequireReviewAfterReRecording" xml:space="preserve">
+    <value>Jagoran Sake Duba Labari Bayan Sake Naɗa</value>
+  </data>
+  <data name="RequireSectionListen" xml:space="preserve">
+    <value>Jagorar Saurare na Sashe</value>
+  </data>
+  <data name="RequireSectionReview" xml:space="preserve">
+    <value>Jagorar Sake Dubawar Sashe</value>
+  </data>
+  <data name="RequireSegmentTranscribeListen" xml:space="preserve">
+    <value>Jagoran Rubuta Ɓangare</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Sake saiti</value>
+  </data>
+  <data name="ResetSection" xml:space="preserve">
+    <value>Sake saita Ɓangare</value>
+  </data>
+  <data name="Response" xml:space="preserve">
+    <value>Amsawa {0}</value>
+  </data>
+  <data name="Restore" xml:space="preserve">
+    <value>Dawowa da</value>
+  </data>
+  <data name="RestoreSection" xml:space="preserve">
+    <value>Dawo Da Ɓangare</value>
+  </data>
+  <data name="RestoreSectionConfirmation" xml:space="preserve">
+    <value>Ka tabbata kana son dawo da wannan ɓangaren?</value>
+  </data>
+  <data name="RestoreSnapshotInfo" xml:space="preserve">
+    <value>Dawo da wannan ɗaukar hoton ba zai dawo da matakin da aka cire cikin tsarin tafiyar aiki ba.</value>
+  </data>
+  <data name="Retell" xml:space="preserve">
+    <value>Sake faɗa</value>
+  </data>
+  <data name="RetellCheck" xml:space="preserve">
+    <value>Duba Sake Faɗa {0}</value>
+  </data>
+  <data name="ReturnToLogIn" xml:space="preserve">
+    <value>Koma Zuwa ga Shiga Ciki</value>
+  </data>
+  <data name="Review" xml:space="preserve">
+    <value>Sake dubawa</value>
+  </data>
+  <data name="Reviewed" xml:space="preserve">
+    <value>Wanda aka sake dubawa</value>
+  </data>
+  <data name="ReviewQuestions" xml:space="preserve">
+    <value>Sake Duba Labarin Tambayoyi {0}</value>
+  </data>
+  <data name="Revise" xml:space="preserve">
+    <value>Sake dubawa</value>
+  </data>
+  <data name="Revision" xml:space="preserve">
+    <value>Bita</value>
+  </data>
+  <data name="RoleAssignment" xml:space="preserve">
+    <value>Bayar Da Aiki</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Lalube</value>
+  </data>
+  <data name="Section" xml:space="preserve">
+    <value>Sashe na {0}</value>
+  </data>
+  <data name="SectionAndPassageListen" xml:space="preserve">
+    <value>Saurarar ɓangare da Labari</value>
+  </data>
+  <data name="SectionAssignment" xml:space="preserve">
+    <value>Aikin Sashe</value>
+  </data>
+  <data name="SectionDraft" xml:space="preserve">
+    <value>Daftarin Rubutu na Sashen {0}</value>
+  </data>
+  <data name="SectionFeedbackTitle" xml:space="preserve">
+    <value>Martani na Sashen {0}</value>
+  </data>
+  <data name="SectionInformation" xml:space="preserve">
+    <value>Bayanin Ɓangare</value>
+  </data>
+  <data name="SectionList" xml:space="preserve">
+    <value>Jerin Sashe</value>
+  </data>
+  <data name="SectionListen" xml:space="preserve">
+    <value>Saurarar Ɓangare</value>
+  </data>
+  <data name="SectionListenOnly" xml:space="preserve">
+    <value>Sararar ɓangare kawai</value>
+  </data>
+  <data name="SectionListenTitle" xml:space="preserve">
+    <value>Saurare na Sashen {0}</value>
+  </data>
+  <data name="SectionNumberLabel" xml:space="preserve">
+    <value>Lambar Ɓangare</value>
+  </data>
+  <data name="SectionReferenceLabel" xml:space="preserve">
+    <value>Manazartar Aya</value>
+  </data>
+  <data name="SectionReset" xml:space="preserve">
+    <value>An sake saita ɓangaren.</value>
+  </data>
+  <data name="SectionReview" xml:space="preserve">
+    <value>Sake Duba Ɓangare</value>
+  </data>
+  <data name="SectionSelect" xml:space="preserve">
+    <value>ZaƁar Ɓangare</value>
+  </data>
+  <data name="SectionsMovingWarning" xml:space="preserve">
+    <value>Ɓangarori za su matsa zuwa ga mataki na gaba</value>
+  </data>
+  <data name="SectionStatus" xml:space="preserve">
+    <value>Matsayin Sashe</value>
+  </data>
+  <data name="SectionStepLabel" xml:space="preserve">
+    <value>Matakin Da Ake Kai</value>
+  </data>
+  <data name="SectionTitle" xml:space="preserve">
+    <value>Take na Sashen {0}</value>
+  </data>
+  <data name="SectionTitleLabel" xml:space="preserve">
+    <value>Sunan Ɓangare</value>
+  </data>
+  <data name="Segment" xml:space="preserve">
+    <value>Ɓangare {0}</value>
+  </data>
+  <data name="SegmentBackTranslate" xml:space="preserve">
+    <value>Dawo da Fassarar Ɓangare</value>
+  </data>
+  <data name="SegmentBackTranslateSelect" xml:space="preserve">
+    <value>ZaƁar Juya Fassarar Ɓangare</value>
+  </data>
+  <data name="SegmentBackTranslateTitle" xml:space="preserve">
+    <value>{0} - Ɓangare {1}</value>
+  </data>
+  <data name="SegmentFreeCut" xml:space="preserve">
+    <value>Yanka Ɓangare</value>
+  </data>
+  <data name="SegmentWillBeCleared" xml:space="preserve">
+    <value>Za a Goge Ɓangaren Da Ake Kai</value>
+  </data>
+  <data name="SelectADraft" xml:space="preserve">
+    <value>Zaɓi Daftarin Rubutu</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>Zaɓi Duka</value>
+  </data>
+  <data name="SelectAProfile" xml:space="preserve">
+    <value>Zaɓi furofayil don shiga ciki</value>
+  </data>
+  <data name="SelectAProject" xml:space="preserve">
+    <value>Zaɓar Aiki</value>
+  </data>
+  <data name="SelectDisplay" xml:space="preserve">
+    <value>Zaɓi Nunawa</value>
+  </data>
+  <data name="SelectDraft" xml:space="preserve">
+    <value>Zaɓi Daftarin Rubutu</value>
+  </data>
+  <data name="SelectProjectsToImport" xml:space="preserve">
+    <value>Zaɓi Aiki Don Shigowa da shi</value>
+  </data>
+  <data name="SelectSection" xml:space="preserve">
+    <value>Zaɓi Sashe</value>
+  </data>
+  <data name="SelectSnapshot" xml:space="preserve">
+    <value>Zaɓi ɗaukar hoto</value>
+  </data>
+  <data name="SelectSnapshotDescription" xml:space="preserve">
+    <value>Zaɓi takamaiman hoto don ci gaba da shi. Za a share hoton da ba a zaɓa ba.</value>
+  </data>
+  <data name="Sequence" xml:space="preserve">
+    <value>A jere</value>
+  </data>
+  <data name="Snapshot" xml:space="preserve">
+    <value>Ɗaukar hoto</value>
+  </data>
+  <data name="SnapshotChosen" xml:space="preserve">
+    <value>ɗaukar hoton da aka zaɓa don</value>
+  </data>
+  <data name="SnapshotConflict" xml:space="preserve">
+    <value>Wannan ɓangaren yana da rikicin ɗaukar hoto: {0}</value>
+  </data>
+  <data name="Snapshots" xml:space="preserve">
+    <value>Ɗaukar hoto</value>
+  </data>
+  <data name="SortBy" xml:space="preserve">
+    <value>Ware ta</value>
+  </data>
+  <data name="Source" xml:space="preserve">
+    <value>Tushe</value>
+  </data>
+  <data name="StageName" xml:space="preserve">
+    <value>Sunan Mataki</value>
+  </data>
+  <data name="StandardQuestion" xml:space="preserve">
+    <value>Cikakkiyar Tambaya {0}</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Fara</value>
+  </data>
+  <data name="Step" xml:space="preserve">
+    <value>Mataki</value>
+  </data>
+  <data name="Step1" xml:space="preserve">
+    <value>Mataki 1</value>
+  </data>
+  <data name="Step2" xml:space="preserve">
+    <value>Mataki 2</value>
+  </data>
+  <data name="SupplementaryMaterial" xml:space="preserve">
+    <value>Kayayyaki Na Ƙari</value>
+  </data>
+  <data name="Sync" xml:space="preserve">
+    <value>Daidaitawa</value>
+  </data>
+  <data name="TeamCheck" xml:space="preserve">
+    <value>Dubawar Tawaga</value>
+  </data>
+  <data name="TeamOne" xml:space="preserve">
+    <value>Ƙungiya 1</value>
+  </data>
+  <data name="TeamTwo" xml:space="preserve">
+    <value>Ƙungiya 2</value>
+  </data>
+  <data name="Text" xml:space="preserve">
+    <value>Rubutu</value>
+  </data>
+  <data name="TextNote" xml:space="preserve">
+    <value>Jawabin Rubutu</value>
+  </data>
+  <data name="TotalPassagesLabel" xml:space="preserve">
+    <value>Jumillar Labarai</value>
+  </data>
+  <data name="TotalVerses" xml:space="preserve">
+    <value>Jumillar Ayoyi:</value>
+  </data>
+  <data name="Transcribe" xml:space="preserve">
+    <value>Mayar rubutu</value>
+  </data>
+  <data name="Transcribe2" xml:space="preserve">
+    <value>Rubutawa 2</value>
+  </data>
+  <data name="TranscribePassage" xml:space="preserve">
+    <value>Rubuta Labari</value>
+  </data>
+  <data name="TranscribeSegment" xml:space="preserve">
+    <value>Rubuta Ɓangare</value>
+  </data>
+  <data name="Translated" xml:space="preserve">
+    <value>Wanda Aka Fassara</value>
+  </data>
+  <data name="Translation" xml:space="preserve">
+    <value>Fassara</value>
+  </data>
+  <data name="Unassigned" xml:space="preserve">
+    <value>Wanda ba a bayar ba</value>
+  </data>
+  <data name="Unreviewed" xml:space="preserve">
+    <value>Wanda ba a sake dubawa ba</value>
+  </data>
+  <data name="UnsavedRolesMessage" xml:space="preserve">
+    <value>Idan kana son adana matsayin da ka bayar, to zaɓi kibiyar cigaba a madannin dama.</value>
+  </data>
+  <data name="UnsavedRolesTitle" xml:space="preserve">
+    <value>Akwai matsayin da ba a adana ba</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Sabuntawa</value>
+  </data>
+  <data name="UpdatedPassage" xml:space="preserve">
+    <value>Sabunta Labari</value>
+  </data>
+  <data name="UserLabel" xml:space="preserve">
+    <value>Mai Amfani Na Yanzu</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Sunan mai amfani</value>
+  </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>Babu wannan sunan mai amfani</value>
+  </data>
+  <data name="UserSettings" xml:space="preserve">
+    <value>Saitunan Mai amfani</value>
+  </data>
+  <data name="UserType" xml:space="preserve">
+    <value>Nau'in Mai Amfani</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Sanfur</value>
+  </data>
+  <data name="VesselUser" xml:space="preserve">
+    <value>Mai Amfani Da Vassel</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>Duba</value>
+  </data>
+  <data name="ViewAllUsers" xml:space="preserve">
+    <value>Duba Dukkanin Masu Amfani</value>
+  </data>
+  <data name="ViewSectionAssignments" xml:space="preserve">
+    <value>Duba jingar ɓangare</value>
+  </data>
+  <data name="WelcomeToRender" xml:space="preserve">
+    <value>Barka da zuwa Render</value>
+  </data>
+  <data name="WhichSnapshot" xml:space="preserve">
+    <value>Wane ɗaukar hoto kake so ka ci gaba da shi?</value>
+  </data>
+  <data name="WorkflowConfiguration" xml:space="preserve">
+    <value>Tsarin Saita Bigiren Aiki</value>
+  </data>
+  <data name="WorkflowDeleteStageMessage" xml:space="preserve">
+    <value>Zaɓi yadda ake gudanar da aikin ci gaba kafin cire matakin:</value>
+  </data>
+  <data name="WorkflowDeleteStageTitle" xml:space="preserve">
+    <value>Wannan Matakin Yana Da Bayanai</value>
+  </data>
+  <data name="WorkWillBeLost" xml:space="preserve">
+    <value>Za a rasa aikinka</value>
+  </data>
+  <data name="DividePassageMessage" xml:space="preserve">
+    <value>Idan kun bar rabon hanya yanzu, aikinku zai ɓace</value>
+  </data>
+  <data name="ErrorOccuredTryAgain" xml:space="preserve">
+    <value>An sami kuskure Da fatan za a sake gwadawa.</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Kuskure</value>
+  </data>
+  <data name="RetellQuestionResponse" xml:space="preserve">
+    <value>Sake Bayar da Tambaya &amp; Amsa</value>
+  </data>
+  <data name="DiscardWork" xml:space="preserve">
+    <value>Yi watsi da Aiki</value>
+  </data>
+  <data name="SectionView" xml:space="preserve">
+    <value>Duban sashe</value>
+  </data>
+  <data name="TeamTitle" xml:space="preserve">
+    <value>Tawaga {0}</value>
+  </data>
+  <data name="TeamView" xml:space="preserve">
+    <value>Duban ƙungiya</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Kwafi</value>
+  </data>
+  <data name="SegmentSelect" xml:space="preserve">
+    <value>Zaɓin yanki</value>
+  </data>
+  <data name="ClearSegmentsQuestion" xml:space="preserve">
+    <value>Share Segments?</value>
+  </data>
+  <data name="ClearSegmentsConfirmation" xml:space="preserve">
+    <value>Shin kun tabbata cewa kuna son share sassan yanzu? Ba za ku iya soke wannan aikin ba.</value>
+  </data>
+  <data name="SegmentReview" xml:space="preserve">
+    <value>Sharhin Sashe</value>
+  </data>
+  <data name="Question" xml:space="preserve">
+    <value>Tambaya</value>
+  </data>
+  <data name="SegmentCombine" xml:space="preserve">
+    <value>Yanki hada</value>
+  </data>
+  <data name="CombineWarningMessage" xml:space="preserve">
+    <value>An riga an mayar da sashin jajayen fassarar. Ci gaba zai share fassarar baya.</value>
+  </data>
+  <data name="Configuration" xml:space="preserve">
+    <value>Kanfigareshan</value>
+  </data>
+  <data name="ConfigureWorkflow" xml:space="preserve">
+    <value>Sanya Gudun Aiki</value>
+  </data>
+  <data name="AssignSections" xml:space="preserve">
+    <value>Sanya Sashe</value>
+  </data>
+  <data name="AssignRoles" xml:space="preserve">
+    <value>Sanya Matsayi</value>
+  </data>
+  <data name="Workflow" xml:space="preserve">
+    <value>Gudun aiki</value>
+  </data>
+  <data name="SelectUser" xml:space="preserve">
+    <value>Zaɓi Mai amfani</value>
+  </data>
+  <data name="AddUserButtonText" xml:space="preserve">
+    <value>Ƙara Mai amfani</value>
+  </data>
+  <data name="Render" xml:space="preserve">
+    <value>Render</value>
+  </data>
+  <data name="Global" xml:space="preserve">
+    <value>duniya</value>
+  </data>
+  <data name="TextPassword" xml:space="preserve">
+    <value>Rubutun Kalmar wucewa</value>
+  </data>
+  <data name="ViewAssignments" xml:space="preserve">
+    <value>Duba Ayyukan Sashe</value>
+  </data>
+  <data name="DeleteUserModalMessage" xml:space="preserve">
+    <value>Idan {0} yana da aikin sashe gare su, waɗannan kuma za a cire su. Ba za ku iya soke wannan aikin ba.</value>
+  </data>
+  <data name="Return" xml:space="preserve">
+    <value>Komawa</value>
+  </data>
+  <data name="SegmentBackTranslate1" xml:space="preserve">
+    <value>Yanki Baya Fassara 1</value>
+  </data>
+  <data name="SegmentBackTranslate2" xml:space="preserve">
+    <value>Yanki Baya Fassara 2</value>
+  </data>
+  <data name="PassageBackTranslate1" xml:space="preserve">
+    <value>Fassara Baya 1</value>
+  </data>
+  <data name="PassageBackTranslate2" xml:space="preserve">
+    <value>Fassara Baya 2</value>
+  </data>
+  <data name="RetellIsNotAvailable" xml:space="preserve">
+    <value>Babu sake ba da labari</value>
+  </data>
+  <data name="QuestionAndResponseIsNotAvailable" xml:space="preserve">
+    <value>Babu tambaya da Amsa</value>
+  </data>
+  <data name="CommunityFeedbackGuidance" xml:space="preserve">
+    <value>Jagorar Ra'ayin Jama'a</value>
+  </data>
+  <data name="Teams" xml:space="preserve">
+    <value>Ƙungiyoyi</value>
+  </data>
+  <data name="DragTeamHere" xml:space="preserve">
+    <value>Jawo tawagar nan</value>
+  </data>
+  <data name="Configure" xml:space="preserve">
+    <value>Sanya</value>
+  </data>
+  <data name="QuestionNumberAndTotalNumberFormatted" xml:space="preserve">
+    <value>Tambaya {0} na {1}</value>
+  </data>
+  <data name="GridPassword" xml:space="preserve">
+    <value>Kalmar sirrin Grid</value>
+  </data>
+  <data name="DragSectionHere" xml:space="preserve">
+    <value>Jawo sashe nan</value>
+  </data>
+  <data name="Sections" xml:space="preserve">
+    <value>Sassan</value>
+  </data>
+  <data name="PressCircleToRecord" xml:space="preserve">
+    <value>Danna da'irar don yin rikodi</value>
+  </data>
+  <data name="PressCircleToRecordOrPressArrowToAddQuestionFromLibrary" xml:space="preserve">
+    <value>Danna da'irar don yin rikodi, ko {1} latsa {0} don ƙara tambaya {1} daga ɗakin karatu</value>
+  </data>
+  <data name="Library" xml:space="preserve">
+    <value>Laburare</value>
+  </data>
+  <data name="NoQuestionsInTheLibrary" xml:space="preserve">
+    <value>Ba ku da tambayoyi a cikin ɗakin karatu</value>
+  </data>
+  <data name="Questions" xml:space="preserve">
+    <value>Tambayoyi</value>
+  </data>
+  <data name="PressArrowToAddQuestion" xml:space="preserve">
+    <value>Latsa {0} don ƙara tambaya</value>
+  </data>
+  <data name="Test" xml:space="preserve">
+    <value>Gwaji</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Harshe</value>
+  </data>
+  <data name="Translate" xml:space="preserve">
+    <value>Fassara</value>
+  </data>
+  <data name="RetellOnly" xml:space="preserve">
+    <value>Sake faɗa kawai</value>
+  </data>
+  <data name="QuestionAndResponseOnly" xml:space="preserve">
+    <value>Tambaya &amp; Amsa kawai</value>
+  </data>
+  <data name="RenderAvailable" xml:space="preserve">
+    <value>Ana samun saƙon {0}</value>
+  </data>
+  <data name="DownloadRenderButton" xml:space="preserve">
+    <value>Zazzage sabon Render</value>
+  </data>
+  <data name="DownloadRenderMessage" xml:space="preserve">
+    <value>Zazzage sabon Render {0} kuma ku ci gaba da sabuntawa.</value>
+  </data>
+  <data name="OneUserOneTeam" xml:space="preserve">
+    <value>Mai amfani ɗaya, ƙungiya ɗaya</value>
+  </data>
+  <data name="UsersCannotBeAssignedToMultipleTeams" xml:space="preserve">
+    <value>Ba za a iya sanya masu amfani zuwa ƙungiyoyi da yawa ba.</value>
+  </data>
+  <data name="SaveWorkAndProceed" xml:space="preserve">
+    <value>Ajiye aiki kuma ci gaba</value>
+  </data>
+  <data name="ExitAnyway" xml:space="preserve">
+    <value>Fita ta yaya</value>
+  </data>
+  <data name="SaveWorkAndProceedMessage" xml:space="preserve">
+    <value>Danna kibiya a kasa-dama don ajiye ayyuka kuma a ci gaba.</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Take:</value>
+  </data>
+  <data name="TotalPassages" xml:space="preserve">
+    <value>Jumillar Labarai:</value>
+  </data>
+  <data name="Reference" xml:space="preserve">
+    <value>Magana:</value>
+  </data>
+  <data name="Process" xml:space="preserve">
+    <value>Hanyoyi:</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>Mai amfani:</value>
+  </data>
+  <data name="NoSectionsAreInThisStep" xml:space="preserve">
+    <value>Babu sassan da ke cikin wannan matakin</value>
+  </data>
+  <data name="NoteInterpretToConsultant" xml:space="preserve">
+    <value>Fassarar bayanin kula ga mai ba da shawara</value>
+  </data>
+  <data name="NoteInterpretToTranslator" xml:space="preserve">
+    <value>Bayanan kula Fassarar zuwa Mai Fassara</value>
+  </data>
+  <data name="WrongPassword" xml:space="preserve">
+    <value>Kalmar sirri mara kuskure. Da fatan za a sake gwadawa.</value>
+  </data>
+  <data name="DragUserHere" xml:space="preserve">
+    <value>Jawo mai amfani anan</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Masu amfani</value>
+  </data>
+  <data name="TeamWasChosen" xml:space="preserve">
+    <value>{0}, {1}, an zaɓi</value>
+  </data>
+  <data name="SelectedSnapshotMessageTemplate" xml:space="preserve">
+    <value>{0}, {1} {2} {3}, {4}</value>
+  </data>
+  <data name="TeamWasChosenForSection" xml:space="preserve">
+    <value>{0}, {1}, an zaɓi</value>
+  </data>
+  <data name="NoSectionsAvailable" xml:space="preserve">
+    <value>Babu Sashe Akwai</value>
+  </data>
+  <data name="DraftWillBeLost" xml:space="preserve">
+    <value>Za a rasa daftarin aiki'</value>
+  </data>
+  <data name="ResetSectionWarning" xml:space="preserve">
+    <value>Sake saitin zai share duk bayanai a matakin daftarin aiki. Ba za a iya soke wannan aikin ba.</value>
+  </data>
+  <data name="CombineWarningTitle" xml:space="preserve">
+    <value>Za a share Fassara Baya</value>
+  </data>
+  <data name="AddUserLabel" xml:space="preserve">
+    <value>Ƙara sabon mai amfani</value>
+  </data>
+  <data name="ApprovedSection" xml:space="preserve">
+    <value>Sashen Amincewa</value>
+  </data>
+  <data name="BothSnapshotsDeleted" xml:space="preserve">
+    <value>Dukkanin hotuna an goge su</value>
+  </data>
+  <data name="ContactSupport" xml:space="preserve">
+    <value>Tuntuɓi tallafi don taimako.</value>
+  </data>
+  <data name="DeleteSnapshotsFor" xml:space="preserve">
+    <value>Share Hoton don {0}?</value>
+  </data>
+  <data name="DoPassageTranscribeScreenTitle" xml:space="preserve">
+    <value>Rubutun Wuta</value>
+  </data>
+  <data name="DoSegmentTranscribeScreenTitle" xml:space="preserve">
+    <value>Rubutun sashi</value>
+  </data>
+  <data name="DownloadFailed" xml:space="preserve">
+    <value>An kasa saukewa.</value>
+  </data>
+  <data name="DraftEdit" xml:space="preserve">
+    <value>Gyaran Daftari</value>
+  </data>
+  <data name="ErrorWithMessage" xml:space="preserve">
+    <value>Kuskure [{0}</value>
+  </data>
+  <data name="ExportComplete" xml:space="preserve">
+    <value>An gama fitarwa</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>A'a</value>
+  </data>
+  <data name="NoProjectsToDownload" xml:space="preserve">
+    <value>Babu ayyukan da za a saukewa</value>
+  </data>
+  <data name="NoteInterpretScreenTitle" xml:space="preserve">
+    <value>Fassarar bayanin kula</value>
+  </data>
+  <data name="OffloadProject" xml:space="preserve">
+    <value>Zazzagewa {0}?</value>
+  </data>
+  <data name="PassageDivideScreenTitle" xml:space="preserve">
+    <value>Raba Labarin</value>
+  </data>
+  <data name="PasswordRequiredToReset" xml:space="preserve">
+    <value>Ana buƙatar kalmar wucewa don sake saita sashe</value>
+  </data>
+  <data name="PasswordRequiredToRestore" xml:space="preserve">
+    <value>Ana buƙatar kalmar sirri don mayar da hoto</value>
+  </data>
+  <data name="RemovedFromProject" xml:space="preserve">
+    <value>An cire daga aikin</value>
+  </data>
+  <data name="Stages" xml:space="preserve">
+    <value>Matakai</value>
+  </data>
+  <data name="SyncFailed" xml:space="preserve">
+    <value>Kasa</value>
+  </data>
+  <data name="TryAgain" xml:space="preserve">
+    <value>Da fatan za a sake gwadawa</value>
+  </data>
+  <data name="UserWasChosen" xml:space="preserve">
+    <value>{0} aka zabe</value>
+  </data>
+  <data name="UserWasChosenForSection" xml:space="preserve">
+    <value>{0} aka zabe domin {1}</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Iya</value>
+  </data>
+  <data name="YouCannotUndo" xml:space="preserve">
+    <value>Ba za ku iya soke wannan aikin ba</value>
+  </data>
+  <data name="YouHaveChosen" xml:space="preserve">
+    <value>Kun zabi:</value>
+  </data>
+  <data name="January" xml:space="preserve">
+    <value>Janairu</value>
+  </data>
+  <data name="February" xml:space="preserve">
+    <value>Fabrairu</value>
+  </data>
+  <data name="March" xml:space="preserve">
+    <value>Maris</value>
+  </data>
+  <data name="April" xml:space="preserve">
+    <value>Afrilu</value>
+  </data>
+  <data name="May" xml:space="preserve">
+    <value>Mayu</value>
+  </data>
+  <data name="June" xml:space="preserve">
+    <value>Yuni</value>
+  </data>
+  <data name="July" xml:space="preserve">
+    <value>Yuli</value>
+  </data>
+  <data name="August" xml:space="preserve">
+    <value>Agusta</value>
+  </data>
+  <data name="September" xml:space="preserve">
+    <value>Satumba</value>
+  </data>
+  <data name="October" xml:space="preserve">
+    <value>Oktoba</value>
+  </data>
+  <data name="November" xml:space="preserve">
+    <value>Nuwamba</value>
+  </data>
+  <data name="December" xml:space="preserve">
+    <value>Disamba</value>
+  </data>
+  <data name="PassageListenScreenTitle" xml:space="preserve">
+    <value>Saurarar Labari</value>
+  </data>
+  <data name="PassageReviewScreenTitle" xml:space="preserve">
+    <value>Sake Duba Labari</value>
+  </data>
+  <data name="RequirePassageListenPeerCheckSetting" xml:space="preserve">
+    <value>Jagorar Saurare na Yankin Rubutu</value>
+  </data>
+  <data name="RequireSectionListenPeerCheckSetting" xml:space="preserve">
+    <value>Jagorar Saurare na Sashe</value>
+  </data>
+  <data name="SectionListenScreenTitle" xml:space="preserve">
+    <value>Saurarar Ɓangare</value>
+  </data>
+  <data name="SectionReviewScreenTitle" xml:space="preserve">
+    <value>Sake Duba Ɓangare</value>
+  </data>
+  <data name="TranscribePassageScreenTitle" xml:space="preserve">
+    <value>Rubuta Labari</value>
+  </data>
+  <data name="TranscribeSegmentScreenTitle" xml:space="preserve">
+    <value>Rubuta Ɓangare</value>
+  </data>
+  <data name="NoSectionAssignedTitle" xml:space="preserve">
+    <value>Ba ku sanya kowane Sashe ba tukuna</value>
+  </data>
+  <data name="NoSectionAssignedMessage" xml:space="preserve">
+    <value>Ana buƙatar sanya sassan don nunawa a nan.</value>
+  </data>
+  <data name="SegmentLabel" xml:space="preserve">
+    <value>Ɓangare</value>
+  </data>
+  <data name="DeletedUser" xml:space="preserve">
+    <value>An goge Mai amfani</value>
+  </data>
+  <data name="CannotLoadData" xml:space="preserve">
+    <value>Ba za a iya Loda Audio ba {0}</value>
+  </data>
+  <data name="SyncAndTryAgain" xml:space="preserve">
+    <value>Idan wannan ya ci gaba da faruwa, da fatan za a gwada daidaitawar yanar gizo ko gwada saukarwa / zazzage aikin.</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>Sake gwadawa</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>
+Nasara!</value>
+  </data>
+  <data name="AddFromComputer" xml:space="preserve">
+    <value>Ƙara Project Daga Kwamfuta</value>
+  </data>
+  <data name="CannotLoadAudio" xml:space="preserve">
+    <value>Ba za a iya Loda Audio ba</value>
+  </data>
+</root>

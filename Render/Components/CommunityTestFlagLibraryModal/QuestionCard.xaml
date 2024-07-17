@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="communityTestFlagPlacementPlayer:QuestionCardViewModel" 
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:barPlayer="clr-namespace:Render.Components.BarPlayer;assembly=Render"
+                            xmlns:resources="clr-namespace:Render.Resources"
+                            xmlns:communityTestFlagPlacementPlayer="using:Render.Components.CommunityTestFlagLibraryModal"
+                            x:Class="Render.Components.CommunityTestFlagLibraryModal.QuestionCard">
+    <Frame HorizontalOptions="Fill" 
+           BackgroundColor="Transparent" 
+           Padding="0" 
+           Margin="15">
+        <Frame.Resources>
+            <Style x:Key="BarPlayerStyle" TargetType="barPlayer:BarPlayer">
+                <Setter Property="WidthRequest" Value="370" />
+                <Setter Property="Margin" Value="0,0" />
+                <Setter Property="HorizontalOptions" Value="EndAndExpand" />
+                <Setter Property="PlayerLabelColor" Value="{StaticResource White}" />
+                <Setter Property="PlayerButtonColor" Value="{StaticResource White}" />
+                <Setter Property="TimerLabelColor" Value="{StaticResource White}" />
+                <Setter Property="MainStackBackgroundColor" Value="{StaticResource Blue}" />
+                <Setter Property="MainStackBorderColor" Value="{StaticResource DarkBlue}" />
+                <Setter Property="SeparatorBorderColor" Value="{StaticResource DarkBlue}" />
+                <Setter Property="MinimumTrackColor" Value="{StaticResource AudioPlayerSliderAfterBackground}" />
+                <Setter Property="MaximumTrackColor" Value="{StaticResource AudioPlayerSliderBeforeBackground}" />
+                <Setter Property="ThumbColor" Value="{StaticResource White}" />
+            </Style>
+            
+            <Style x:Key="Icon" TargetType="Label">
+                <Setter Property="FontFamily" Value="Icons" />
+                <Setter Property="FontSize" Value="48" />
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="Margin" Value="10,0, 10,0" />
+                <Setter Property="Padding" Value="5,0"/>
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                <Setter Property="TextColor" Value="{DynamicResource Option}" />
+            </Style>
+        </Frame.Resources>
+        
+        <Grid ColumnSpacing="0" 
+              VerticalOptions="Start" 
+              Padding="0,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <Label Grid.Column="0" Style="{StaticResource Icon}"
+                   Text="{resources:IconExtensions TickerArrowLeft}"
+                   HorizontalOptions="Start" 
+                   AutomationId="AddToLibraryButton"
+                   x:Name="AddToLibraryButton">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer x:Name="AddToLibraryGesture" />
+                </Label.GestureRecognizers>
+            </Label>
+            
+            <Label Grid.Column="1" Style="{StaticResource Icon}"
+                   Text="{resources:IconExtensions Delete}"
+                   HorizontalOptions="Center" 
+                   AutomationId="DeleteFromQuestionListButton"
+                   x:Name="DeleteFromQuestionListButton">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer x:Name="DeleteFromQuestionListGesture" />
+                </Label.GestureRecognizers>
+            </Label>
+            
+            <Label Grid.Column="1" Style="{StaticResource Icon}"
+                   Text="{resources:IconExtensions DeleteUndo}"
+                   FontSize="54"
+                   Padding="0,0"
+                   Margin="6,0,10,0"
+                   HorizontalOptions="Center" 
+                   AutomationId="UndoDeleteFromQuestionListButton"
+                   x:Name="UndoDeleteFromQuestionListButton">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer x:Name="UndoDeleteFromQuestionListGesture" />
+                </Label.GestureRecognizers>
+            </Label>
+            
+            <barPlayer:BarPlayer Grid.Column="2" 
+                                 Style="{StaticResource BarPlayerStyle}"
+                                 HorizontalOptions="Fill" x:Name="BarPlayer"/>
+            <Frame Grid.Column="2" x:Name="BarPlayerDisabledOverlay"
+                                  Width="{Binding WidthRequest, Source={x:Reference BarPlayer}}"
+                                  Height="{Binding HeightRequest, Source={x:Reference BarPlayer}}"
+                                  Margin="0" CornerRadius="8" IsVisible="False"
+                                  BackgroundColor="White" Opacity="0.6">
+            </Frame>
+           
+            <Label Grid.Column="3" Style="{StaticResource Icon}"
+                   Text="{resources:IconExtensions Delete}"
+                   HorizontalOptions="Center" 
+                   AutomationId="DeleteFromLibraryButton"
+                   x:Name="DeleteFromLibraryButton">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer x:Name="DeleteFromLibraryGesture" />
+                </Label.GestureRecognizers>
+            </Label>
+            
+            <Label Grid.Column="3" Style="{StaticResource Icon}"
+                   Text="{resources:IconExtensions DeleteUndo}"
+                   FontSize="54"
+                   Padding="0,0"
+                   Margin="10,0,6,0"
+                   HorizontalOptions="Center" 
+                   AutomationId="UndoDeleteFromLibraryButton"
+                   x:Name="UndoDeleteFromLibraryButton">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer x:Name="UndoDeleteFromLibraryGesture" />
+                </Label.GestureRecognizers>
+            </Label>
+              
+            <Label Grid.Column="4" Style="{StaticResource Icon}"
+                   Text="{resources:IconExtensions TickerArrowRight}"
+                   HorizontalOptions="End" 
+                   AutomationId="AddToQuestionListButton"
+                   x:Name="AddToQuestionListButton">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer x:Name="AddToQuestionListGesture" />
+                </Label.GestureRecognizers>
+            </Label>
+        </Grid>
+    </Frame>
+</kernel:RenderComponentBase>

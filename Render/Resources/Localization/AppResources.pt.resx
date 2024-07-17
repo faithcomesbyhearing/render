@@ -1,0 +1,1663 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Add" xml:space="preserve">
+    <value>Adicionar</value>
+  </data>
+  <data name="AddAProject" xml:space="preserve">
+    <value>Adicionar um projeto</value>
+  </data>
+  <data name="AddASection" xml:space="preserve">
+    <value>Adicionar uma seção</value>
+  </data>
+  <data name="AddATeam" xml:space="preserve">
+    <value>Adicionar uma equipe</value>
+  </data>
+  <data name="Added" xml:space="preserve">
+    <value>Adicionado</value>
+  </data>
+  <data name="Adding" xml:space="preserve">
+    <value>Adicionando</value>
+  </data>
+  <data name="AddingProject" xml:space="preserve">
+    <value>Adicionando projeto...</value>
+  </data>
+  <data name="AddNew" xml:space="preserve">
+    <value>Adicionar novo</value>
+  </data>
+  <data name="AddProject" xml:space="preserve">
+    <value>Adicionar projeto</value>
+  </data>
+  <data name="AddProjectViaId" xml:space="preserve">
+    <value>Adicionar projeto por ID</value>
+  </data>
+  <data name="AddSection" xml:space="preserve">
+    <value>Adicionar seção</value>
+  </data>
+  <data name="AddStage" xml:space="preserve">
+    <value>Adicionar estágio</value>
+  </data>
+  <data name="AddStageHere" xml:space="preserve">
+    <value>Arraste o palco aqui</value>
+  </data>
+  <data name="AddTeam" xml:space="preserve">
+    <value>Adicionar equipe</value>
+  </data>
+  <data name="AddUser" xml:space="preserve">
+    <value>Adicionar um usuário</value>
+  </data>
+  <data name="AddWorkflowStage" xml:space="preserve">
+    <value>Adicionar um estágio de fluxo de trabalho</value>
+  </data>
+  <data name="AllowEditing" xml:space="preserve">
+    <value>Permitir edição</value>
+  </data>
+  <data name="AllSections" xml:space="preserve">
+    <value>Todas as seções</value>
+  </data>
+  <data name="AllSectionsAssigned" xml:space="preserve">
+    <value>Todas as seções foram atribuídas.</value>
+  </data>
+  <data name="Approval" xml:space="preserve">
+    <value>Aprovação</value>
+  </data>
+  <data name="ApprovalSubmitted" xml:space="preserve">
+    <value>a aprovação foi enviada com sucesso</value>
+  </data>
+  <data name="Approve" xml:space="preserve">
+    <value>Aprovar</value>
+  </data>
+  <data name="Approved" xml:space="preserve">
+    <value>Aprovado</value>
+  </data>
+  <data name="ApprovedByLabel" xml:space="preserve">
+    <value>Aprovado por:</value>
+  </data>
+  <data name="ApprovedDraft" xml:space="preserve">
+    <value>Você aprovou um rascunho</value>
+  </data>
+  <data name="ApproveSection" xml:space="preserve">
+    <value>Aprovar a seção {0}</value>
+  </data>
+  <data name="ArchivedDrafts" xml:space="preserve">
+    <value>Rascunhos arquivados</value>
+  </data>
+  <data name="ArchivedNotes" xml:space="preserve">
+    <value>Notas arquivadas</value>
+  </data>
+  <data name="ArrangeWorkflowStages" xml:space="preserve">
+    <value>Organizar estágios do fluxo de trabalho</value>
+  </data>
+  <data name="Assigned" xml:space="preserve">
+    <value>{0} atribuído(s)</value>
+  </data>
+  <data name="AssignToTranslator" xml:space="preserve">
+    <value>Atribuir ao tradutor</value>
+  </data>
+  <data name="AudioClip" xml:space="preserve">
+    <value>Clipe de áudio</value>
+  </data>
+  <data name="AudioNote" xml:space="preserve">
+    <value>Nota de áudio</value>
+  </data>
+  <data name="BackTranslate" xml:space="preserve">
+    <value>Tradução reversa</value>
+  </data>
+  <data name="BackTranslate1" xml:space="preserve">
+    <value>Tradução reversa 1</value>
+  </data>
+  <data name="BackTranslate2" xml:space="preserve">
+    <value>Tradução reversa 2</value>
+  </data>
+  <data name="BackTranslator" xml:space="preserve">
+    <value>Tradução reversa</value>
+  </data>
+  <data name="BackTranslator2" xml:space="preserve">
+    <value>Tradução reversa 2</value>
+  </data>
+  <data name="Both" xml:space="preserve">
+    <value>Ambos</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="Canceled" xml:space="preserve">
+    <value>Cancelado</value>
+  </data>
+  <data name="Canceling" xml:space="preserve">
+    <value>Cancelando</value>
+  </data>
+  <data name="Check" xml:space="preserve">
+    <value>Verificação</value>
+  </data>
+  <data name="Check2" xml:space="preserve">
+    <value>Verificação 2</value>
+  </data>
+  <data name="ChooseProjectsForDeviceMessage" xml:space="preserve">
+    <value>Escolha os projetos que você gostaria de associar a esse dispositivo.</value>
+  </data>
+  <data name="ChosenDraft" xml:space="preserve">
+    <value>Rascunho escolhido</value>
+  </data>
+  <data name="Chunk" xml:space="preserve">
+    <value>Parte {0}</value>
+  </data>
+  <data name="ClearSegmentMessage1" xml:space="preserve">
+    <value>Prosseguir apagará o conjunto atual de segmentos para o qual esta passagem foi dividida.</value>
+  </data>
+  <data name="ClearSegmentMessage2" xml:space="preserve">
+    <value>Se a segmentação anterior foi personalizada e não é um conjunto padrão, esses segmentos não podem ser recuperados.</value>
+  </data>
+  <data name="ClearSegments" xml:space="preserve">
+    <value>Apagar segmentos</value>
+  </data>
+  <data name="DeleteSnapshots" xml:space="preserve">
+    <value>Apagar os dois instantâneos</value>
+  </data>
+  <data name="ClearSnapshotsDescription" xml:space="preserve">
+    <value>Ambos os instantâneos serão descartados. Isso avançará a seção para o instantâneo anterior.</value>
+  </data>
+  <data name="CombinedBackTranslate" xml:space="preserve">
+    <value>Tradução reversa combinada</value>
+  </data>
+  <data name="CombineSegmentTitle" xml:space="preserve">
+    <value>Combinar - Passagem {0}</value>
+  </data>
+  <data name="CommunityCheck" xml:space="preserve">
+    <value>Verificação da comunidade</value>
+  </data>
+  <data name="CommunityRetellPassage" xml:space="preserve">
+    <value>Passagem {0} - Relato</value>
+  </data>
+  <data name="CommunityRevise" xml:space="preserve">
+    <value>Revisão da comunidade</value>
+  </data>
+  <data name="CommunitySetup" xml:space="preserve">
+    <value>Configuração da comunidade</value>
+  </data>
+  <data name="CommunityTest" xml:space="preserve">
+    <value>Teste da comunidade</value>
+  </data>
+  <data name="CommunityTestRevise" xml:space="preserve">
+    <value>Revisão de teste da comunidade</value>
+  </data>
+  <data name="CommunityTestSetup" xml:space="preserve">
+    <value>Configuração da comunidade</value>
+  </data>
+  <data name="CompleteWork" xml:space="preserve">
+    <value>Trabalho concluído</value>
+  </data>
+  <data name="CompleteWorkMessage" xml:space="preserve">
+    <value>Esse estágio será removido assim que qualquer trabalho em andamento for concluído primeiro.</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Confirmar</value>
+  </data>
+  <data name="Confirmation" xml:space="preserve">
+    <value>Confirmação</value>
+  </data>
+  <data name="Consultant" xml:space="preserve">
+    <value>Consultor</value>
+  </data>
+  <data name="ConsultantApproval" xml:space="preserve">
+    <value>Aprovação do consultor</value>
+  </data>
+  <data name="ConsultantCheck" xml:space="preserve">
+    <value>Verificação do consultor</value>
+  </data>
+  <data name="ConsultantLanguage" xml:space="preserve">
+    <value>Idioma do consultor</value>
+  </data>
+  <data name="ConsultantRevise" xml:space="preserve">
+    <value>Revisão do consultor</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>Continuar</value>
+  </data>
+  <data name="CopyPreviousQuestions" xml:space="preserve">
+    <value>Copiar perguntas anteriores</value>
+  </data>
+  <data name="CopyQuestions" xml:space="preserve">
+    <value>Copiar perguntas</value>
+  </data>
+  <data name="Current" xml:space="preserve">
+    <value>Atual {0}</value>
+  </data>
+  <data name="DeactivateStepWarning" xml:space="preserve">
+    <value>Quando você desativa uma etapa, todas as seções passam para a próxima etapa no fluxo de trabalho.</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Excluir</value>
+  </data>
+  <data name="DeleteSnapshotsConfirmation" xml:space="preserve">
+    <value>Tem certeza de que gostaria de apagar os dois instantâneos?</value>
+  </data>
+  <data name="DeleteUser" xml:space="preserve">
+    <value>Excluir usuário</value>
+  </data>
+  <data name="DeleteUserMessage" xml:space="preserve">
+    <value>A exclusão de {0} também removerá todas as tarefas de seção para eles. Você não pode desfazer esta ação.</value>
+  </data>
+  <data name="DeleteUserTitle" xml:space="preserve">
+    <value>Excluir usuário?</value>
+  </data>
+  <data name="DividePassageTitle" xml:space="preserve">
+    <value>Dividir passagem</value>
+  </data>
+  <data name="Do2StepBackTranslate" xml:space="preserve">
+    <value>Tradução reversa em 2 etapas</value>
+  </data>
+  <data name="DoNoteInterpret" xml:space="preserve">
+    <value>Incluir interpretação de notas</value>
+  </data>
+  <data name="DoNoteReview" xml:space="preserve">
+    <value>Revisão de nota</value>
+  </data>
+  <data name="DoPassageBackTranslate1" xml:space="preserve">
+    <value>Fazer tradução reversa de passagem 1</value>
+  </data>
+  <data name="DoPassageBackTranslate2" xml:space="preserve">
+    <value>Fazer tradução reversa de passagem 2</value>
+  </data>
+  <data name="DoPassageListen" xml:space="preserve">
+    <value>Incluir escutar passagem</value>
+  </data>
+  <data name="DoPassageReview" xml:space="preserve">
+    <value>Revisão de passagem</value>
+  </data>
+  <data name="DoPassageTranscribe" xml:space="preserve">
+    <value>Transcrição de passagem</value>
+  </data>
+  <data name="DoQuestionAndResponse" xml:space="preserve">
+    <value>Incluir resposta à pergunta</value>
+  </data>
+  <data name="DoRetell" xml:space="preserve">
+    <value>Fazer relato</value>
+  </data>
+  <data name="DoSectionListen" xml:space="preserve">
+    <value>Incluir escuta de seção</value>
+  </data>
+  <data name="DoSectionReview" xml:space="preserve">
+    <value>Incluir revisão de seção</value>
+  </data>
+  <data name="DoSegmentBackTranslate1" xml:space="preserve">
+    <value>Fazer tradução reversa do segmento 1</value>
+  </data>
+  <data name="DoSegmentBackTranslate2" xml:space="preserve">
+    <value>Fazer tradução reversa do segmento 2</value>
+  </data>
+  <data name="DoSegmentTranscribe" xml:space="preserve">
+    <value>Transcrição do segmento</value>
+  </data>
+  <data name="DoTranscribe" xml:space="preserve">
+    <value>Transcreva</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Baixar</value>
+  </data>
+  <data name="Downloaded" xml:space="preserve">
+    <value>Baixado</value>
+  </data>
+  <data name="DownloadingProjects" xml:space="preserve">
+    <value>Baixando projetos</value>
+  </data>
+  <data name="Draft" xml:space="preserve">
+    <value>Rascunho</value>
+  </data>
+  <data name="DraftedByLabel" xml:space="preserve">
+    <value>Rascunho criado por:</value>
+  </data>
+  <data name="DraftNotes" xml:space="preserve">
+    <value>Rascunho de {0} notas</value>
+  </data>
+  <data name="DraftPassage" xml:space="preserve">
+    <value>Traduzir passagem {0}</value>
+  </data>
+  <data name="DraftRecord" xml:space="preserve">
+    <value>Rascunho de registro</value>
+  </data>
+  <data name="DraftReplacementModalTitle" xml:space="preserve">
+    <value>Selecione um rascunho para substituir</value>
+  </data>
+  <data name="DraftReview" xml:space="preserve">
+    <value>Rascunho da análise {0}</value>
+  </data>
+  <data name="Drafts" xml:space="preserve">
+    <value>Rascunhos</value>
+  </data>
+  <data name="DraftSelect" xml:space="preserve">
+    <value>Selecionar rascunho</value>
+  </data>
+  <data name="DraftSelection" xml:space="preserve">
+    <value>Seleção de rascunho</value>
+  </data>
+  <data name="DraftTitle" xml:space="preserve">
+    <value>Rascunho {0}</value>
+  </data>
+  <data name="EditPassage" xml:space="preserve">
+    <value>Editar passagem {0}</value>
+  </data>
+  <data name="EditUser" xml:space="preserve">
+    <value>Editar usuário</value>
+  </data>
+  <data name="EmptyCollectionMessage" xml:space="preserve">
+    <value>Clique em "Adicionar novo" acima para adicionar um projeto.</value>
+  </data>
+  <data name="EmptyCollectionMessageTitle" xml:space="preserve">
+    <value>A lista de projetos está vazia.</value>
+  </data>
+  <data name="EmptyOffloadCollectionMessage" xml:space="preserve">
+    <value>Nenhum projeto para descarregar</value>
+  </data>
+  <data name="EmptyPassword" xml:space="preserve">
+    <value>A senha não pode estar vazia</value>
+  </data>
+  <data name="End" xml:space="preserve">
+    <value>Fim</value>
+  </data>
+  <data name="Enter32digitId" xml:space="preserve">
+    <value>Insira o ID de 32 dígitos...</value>
+  </data>
+  <data name="EnterAProjectName" xml:space="preserve">
+    <value>Insira o nome do projeto</value>
+  </data>
+  <data name="EnterLanguage" xml:space="preserve">
+    <value>Inserir um nome de idioma</value>
+  </data>
+  <data name="EnterPasswordToRestoreSection" xml:space="preserve">
+    <value>Insira sua senha para desbloquear e restaurar esta seção</value>
+  </data>
+  <data name="EnterSectionNumber" xml:space="preserve">
+    <value>Insira um número de seção...</value>
+  </data>
+  <data name="EnterYourPassword" xml:space="preserve">
+    <value>Insira sua senha</value>
+  </data>
+  <data name="EnterYourUsername" xml:space="preserve">
+    <value>Insira seu nome de usuário</value>
+  </data>
+  <data name="ErrorAddingProject" xml:space="preserve">
+    <value>Houve um erro ao adicionar este projeto.</value>
+  </data>
+  <data name="ErrorConnectLocalMachine" xml:space="preserve">
+    <value>Houve um erro ao tentar se conectar a uma máquina local.</value>
+  </data>
+  <data name="ExportAudio" xml:space="preserve">
+    <value>Exportar áudio</value>
+  </data>
+  <data name="ExportChecked" xml:space="preserve">
+    <value>Exportação verificada</value>
+  </data>
+  <data name="Exporting" xml:space="preserve">
+    <value>Exportando {0} de {1}</value>
+  </data>
+  <data name="FontSize" xml:space="preserve">
+    <value>Tamanho da fonte</value>
+  </data>
+  <data name="ForTeam" xml:space="preserve">
+    <value>Para {0}</value>
+  </data>
+  <data name="Generate" xml:space="preserve">
+    <value>Gerar</value>
+  </data>
+  <data name="Generic" xml:space="preserve">
+    <value>Genérico</value>
+  </data>
+  <data name="GlobalUser" xml:space="preserve">
+    <value>Usuário global</value>
+  </data>
+  <data name="Grid" xml:space="preserve">
+    <value>Grade</value>
+  </data>
+  <data name="HaveBeenCleared" xml:space="preserve">
+    <value>foram apagados</value>
+  </data>
+  <data name="HigherPriority" xml:space="preserve">
+    <value>Prioridade mais alta</value>
+  </data>
+  <data name="HowToResolve" xml:space="preserve">
+    <value>Como você gostaria de resolver esse problema?</value>
+  </data>
+  <data name="ImproperlyFormattedId" xml:space="preserve">
+    <value>ID formatada incorretamente. Insira novamente.</value>
+  </data>
+  <data name="IncludeBackTranslate" xml:space="preserve">
+    <value>Incluir tradução reversa</value>
+  </data>
+  <data name="IncludeNoteListenGuidance" xml:space="preserve">
+    <value>Incluir orientação de escuta de nota</value>
+  </data>
+  <data name="IncludePassageBackTranslate" xml:space="preserve">
+    <value>Incluir tradução reversa de passagem</value>
+  </data>
+  <data name="IncludePassageListen" xml:space="preserve">
+    <value>Incluir escutar passagem</value>
+  </data>
+  <data name="IncludePassageReview" xml:space="preserve">
+    <value>Incluir revisão de passagem</value>
+  </data>
+  <data name="IncludePassageReviewAfterReRecording" xml:space="preserve">
+    <value>Incluir revisão de passagem após regravação</value>
+  </data>
+  <data name="IncludeSegmentBackTranslate" xml:space="preserve">
+    <value>Incluir tradução reversa do segmento</value>
+  </data>
+  <data name="IncorrectPassword" xml:space="preserve">
+    <value>Esta senha não corresponde a este nome de usuário</value>
+  </data>
+  <data name="IncorrectPattern" xml:space="preserve">
+    <value>Padrão incorreto. Tente novamente.</value>
+  </data>
+  <data name="Input" xml:space="preserve">
+    <value>Entrada</value>
+  </data>
+  <data name="InsertPassword" xml:space="preserve">
+    <value>Insira a senha aqui</value>
+  </data>
+  <data name="IntermediateLanguage" xml:space="preserve">
+    <value>Idioma intermediário</value>
+  </data>
+  <data name="Interpret" xml:space="preserve">
+    <value>Intérprete</value>
+  </data>
+  <data name="Interpreted" xml:space="preserve">
+    <value>Interpretado</value>
+  </data>
+  <data name="InterpretToConsultant" xml:space="preserve">
+    <value>Intérprete para consultor</value>
+  </data>
+  <data name="InterpretToTranslator" xml:space="preserve">
+    <value>Intérprete para tradutor</value>
+  </data>
+  <data name="Iteration" xml:space="preserve">
+    <value>Iteração</value>
+  </data>
+  <data name="Jump" xml:space="preserve">
+    <value>Pular</value>
+  </data>
+  <data name="JumpToSection" xml:space="preserve">
+    <value>Pular para a seção</value>
+  </data>
+  <data name="LastCompletedStage" xml:space="preserve">
+    <value>Última etapa concluída</value>
+  </data>
+  <data name="LastSubmittedAudioLabel" xml:space="preserve">
+    <value>Último áudio enviado</value>
+  </data>
+  <data name="LastSync" xml:space="preserve">
+    <value>Última sincronização</value>
+  </data>
+  <data name="LeaveFreeCut" xml:space="preserve">
+    <value>Deixar corte livre do segmento</value>
+  </data>
+  <data name="LeaveFreeCutMessage1" xml:space="preserve">
+    <value>Se você deixar o Corte livre de segmento, perderá qualquer trabalho que tenha sido produzido até agora.</value>
+  </data>
+  <data name="LeaveFreeCutMessage2" xml:space="preserve">
+    <value>Conclua esta etapa para manter qualquer trabalho que tenha sido criado.</value>
+  </data>
+  <data name="Localization" xml:space="preserve">
+    <value>Localização</value>
+  </data>
+  <data name="LoggingIn" xml:space="preserve">
+    <value>Fazendo login...</value>
+  </data>
+  <data name="LogIn" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="LogOut" xml:space="preserve">
+    <value>Sair</value>
+  </data>
+  <data name="LowerPriority" xml:space="preserve">
+    <value>Prioridade mais baixa</value>
+  </data>
+  <data name="ManageDivisions" xml:space="preserve">
+    <value>Gerenciar divisões de passagens {0}</value>
+  </data>
+  <data name="ManageUsers" xml:space="preserve">
+    <value>Gerenciar usuários</value>
+  </data>
+  <data name="MarkQuestions" xml:space="preserve">
+    <value>Marcar passagem de perguntas {0}</value>
+  </data>
+  <data name="MicNotConnectedMessage" xml:space="preserve">
+    <value>Um microfone não foi detectado.  Conecte um microfone ao seu sistema para gravar áudio.</value>
+  </data>
+  <data name="MicNotConnectedTitle" xml:space="preserve">
+    <value>Microfone não conectado</value>
+  </data>
+  <data name="MicrophoneAccessMessage" xml:space="preserve">
+    <value>O Render não tem permissão para usar seu microfone. Para corrigir isso, acesse as configurações de privacidade do microfone e ative o acesso ao microfone para o Render.</value>
+  </data>
+  <data name="MicrophoneAccessTitle" xml:space="preserve">
+    <value>O acesso ao microfone é obrigatório</value>
+  </data>
+  <data name="MultipleTeamAssignmentLabel" xml:space="preserve">
+    <value>Um usuário não pode ser atribuído a várias equipes</value>
+  </data>
+  <data name="MultipleTeamAssignmentMessage" xml:space="preserve">
+    <value>Atribua um usuário exclusivo para cada equipe individual.</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Nome</value>
+  </data>
+  <data name="NoAudio" xml:space="preserve">
+    <value>Sem áudio</value>
+  </data>
+  <data name="NoInternetConnection" xml:space="preserve">
+    <value>Sem conexão com a Internet</value>
+  </data>
+  <data name="NoReviewedSections" xml:space="preserve">
+    <value>Não há seções revisadas no momento.</value>
+  </data>
+  <data name="NoSectionAudioForStage" xml:space="preserve">
+    <value>Nenhuma seção de áudio para este estágio</value>
+  </data>
+  <data name="NoSelfCheck" xml:space="preserve">
+    <value>Sem autoverificação</value>
+  </data>
+  <data name="NotAbleToLogin" xml:space="preserve">
+    <value>Você não pode fazer login.</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>Nota</value>
+  </data>
+  <data name="NoteInterpret" xml:space="preserve">
+    <value>Interpretação de nota</value>
+  </data>
+  <data name="NoteListen" xml:space="preserve">
+    <value>Escutar nota</value>
+  </data>
+  <data name="Notes" xml:space="preserve">
+    <value>Notas</value>
+  </data>
+  <data name="NoteTranslator" xml:space="preserve">
+    <value>Tradutor de nota</value>
+  </data>
+  <data name="NotInWorkflow" xml:space="preserve">
+    <value>Não faz mais parte do fluxo de trabalho</value>
+  </data>
+  <data name="NoUnreviewedSections" xml:space="preserve">
+    <value>Não há seções não revisadas no momento.</value>
+  </data>
+  <data name="NullUsername" xml:space="preserve">
+    <value>O nome de usuário não pode estar vazio</value>
+  </data>
+  <data name="Offload" xml:space="preserve">
+    <value>Descarregar</value>
+  </data>
+  <data name="OffloadData" xml:space="preserve">
+    <value>Descarregar dados</value>
+  </data>
+  <data name="Offloading" xml:space="preserve">
+    <value>Descarregando</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Original" xml:space="preserve">
+    <value>Original</value>
+  </data>
+  <data name="OriginalLanguage" xml:space="preserve">
+    <value>Idioma original</value>
+  </data>
+  <data name="OriginalNote" xml:space="preserve">
+    <value>Nota original</value>
+  </data>
+  <data name="OriginalPassageTitle" xml:space="preserve">
+    <value>Passagem {0} (Original)</value>
+  </data>
+  <data name="Passage" xml:space="preserve">
+    <value>Passagem {0}</value>
+  </data>
+  <data name="PassageBackTranslate" xml:space="preserve">
+    <value>Tradução reversa de passagem</value>
+  </data>
+  <data name="PassageDivide" xml:space="preserve">
+    <value>Divisão de passagem</value>
+  </data>
+  <data name="PassageDraftListen" xml:space="preserve">
+    <value>Escutar rascunho de passagem {0}</value>
+  </data>
+  <data name="PassageListen" xml:space="preserve">
+    <value>Escutar passagem</value>
+  </data>
+  <data name="PassageListenOnly" xml:space="preserve">
+    <value>Apenas escutar a passagem</value>
+  </data>
+  <data name="PassageListenTitle" xml:space="preserve">
+    <value>Escutar passagem {0}</value>
+  </data>
+  <data name="PassageNumber" xml:space="preserve">
+    <value>Passagem {0}</value>
+  </data>
+  <data name="PassagePeerReview" xml:space="preserve">
+    <value>Avaliação de colegas de passagem {0}</value>
+  </data>
+  <data name="PassageRetell" xml:space="preserve">
+    <value>Relato de passagem</value>
+  </data>
+  <data name="PassageReview" xml:space="preserve">
+    <value>Revisão de passagem</value>
+  </data>
+  <data name="PassageReviewAfterReRecording" xml:space="preserve">
+    <value>Revisão de passagem após regravação</value>
+  </data>
+  <data name="PassageSelect" xml:space="preserve">
+    <value>Seleção de passagem</value>
+  </data>
+  <data name="PassageSelection" xml:space="preserve">
+    <value>Seleção de passagem</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Senha</value>
+  </data>
+  <data name="PasswordGrid" xml:space="preserve">
+    <value>Grade de senhas</value>
+  </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>A senha é obrigatória</value>
+  </data>
+  <data name="PasswordType" xml:space="preserve">
+    <value>Tipo de senha</value>
+  </data>
+  <data name="PeerCheck" xml:space="preserve">
+    <value>Verificação de colegas</value>
+  </data>
+  <data name="PeerReview" xml:space="preserve">
+    <value>Revisão de colegas</value>
+  </data>
+  <data name="PeerRevise" xml:space="preserve">
+    <value>Revisão de colegas</value>
+  </data>
+  <data name="PleaseConnect" xml:space="preserve">
+    <value>Conecte-se à Internet e inicie o Render novamente.</value>
+  </data>
+  <data name="PleaseLogIn" xml:space="preserve">
+    <value>Faça login para começar.</value>
+  </data>
+  <data name="PrecedingAudio" xml:space="preserve">
+    <value>Áudio anterior</value>
+  </data>
+  <data name="PreviousDraft" xml:space="preserve">
+    <value>Rascunho anterior</value>
+  </data>
+  <data name="Proceed" xml:space="preserve">
+    <value>Prosseguir</value>
+  </data>
+  <data name="Processes" xml:space="preserve">
+    <value>Processos</value>
+  </data>
+  <data name="ProjectAddedSuccesfully" xml:space="preserve">
+    <value>Este projeto foi adicionado com sucesso.</value>
+  </data>
+  <data name="ProjectConfiguration" xml:space="preserve">
+    <value>Configuração do projeto</value>
+  </data>
+  <data name="ProjectDeletedTitle" xml:space="preserve">
+    <value>O projeto foi excluído</value>
+  </data>
+  <data name="ProjectHome" xml:space="preserve">
+    <value>Página inicial do projeto</value>
+  </data>
+  <data name="ProjectId" xml:space="preserve">
+    <value>ID de projeto</value>
+  </data>
+  <data name="ProjectList" xml:space="preserve">
+    <value>Lista de projetos</value>
+  </data>
+  <data name="ProjectsDownloadedSuccessfully" xml:space="preserve">
+    <value>Projetos baixados com sucesso.</value>
+  </data>
+  <data name="ProjectTeams" xml:space="preserve">
+    <value>Equipes de projetos</value>
+  </data>
+  <data name="ProjectUsers" xml:space="preserve">
+    <value>Usuários de projetos</value>
+  </data>
+  <data name="ProjectWorkflow" xml:space="preserve">
+    <value>Fluxo de trabalho do projeto</value>
+  </data>
+  <data name="QuestionFormatted" xml:space="preserve">
+    <value>Pergunta {0}</value>
+  </data>
+  <data name="QuestionAndResponse" xml:space="preserve">
+    <value>Perguntas e respostas</value>
+  </data>
+  <data name="QuestionPlacement" xml:space="preserve">
+    <value>Posicionamento de pergunta</value>
+  </data>
+  <data name="QuestionSet" xml:space="preserve">
+    <value>Conjunto de perguntas {0}</value>
+  </data>
+  <data name="Record" xml:space="preserve">
+    <value>Registro</value>
+  </data>
+  <data name="RecordedSegmentWarningConfirmation" xml:space="preserve">
+    <value>Mesclagem concluída</value>
+  </data>
+  <data name="RecordedSegmentWarningMessage" xml:space="preserve">
+    <value>O segmento anterior já contém uma áudio de resposta. Se você mesclar esses dois segmentos, o áudio gravado anteriormente será perdido.</value>
+  </data>
+  <data name="RecordedSegmentWarningTitle" xml:space="preserve">
+    <value>As respostas serão perdidas</value>
+  </data>
+  <data name="RecordInterpretation" xml:space="preserve">
+    <value>Gravar interpretação</value>
+  </data>
+  <data name="RecordNewDraft" xml:space="preserve">
+    <value>Gravar novo rascunho</value>
+  </data>
+  <data name="RecordQuestion" xml:space="preserve">
+    <value>Gravar pergunta (P {0})</value>
+  </data>
+  <data name="RecordQuestionTitle" xml:space="preserve">
+    <value>Gravar pergunta</value>
+  </data>
+  <data name="RecordResponse" xml:space="preserve">
+    <value>Registro de resposta</value>
+  </data>
+  <data name="RecordRetell" xml:space="preserve">
+    <value>Gravar relato</value>
+  </data>
+  <data name="RecordStandardQuestion" xml:space="preserve">
+    <value>Gravar pergunta padrão {0}</value>
+  </data>
+  <data name="RecordTranslation" xml:space="preserve">
+    <value>Gravar tradução</value>
+  </data>
+  <data name="Recovery" xml:space="preserve">
+    <value>Recuperação</value>
+  </data>
+  <data name="References" xml:space="preserve">
+    <value>Referências</value>
+  </data>
+  <data name="RemoveWork" xml:space="preserve">
+    <value>Remover trabalho</value>
+  </data>
+  <data name="RemoveWorkMessage" xml:space="preserve">
+    <value>Esse estágio será removido imediatamente e todo o trabalho em andamento será perdido.</value>
+  </data>
+  <data name="RenderUser" xml:space="preserve">
+    <value>Usuário do Render</value>
+  </data>
+  <data name="Replace" xml:space="preserve">
+    <value>Substituir</value>
+  </data>
+  <data name="RequireNoteListen" xml:space="preserve">
+    <value>Orientação de escuta de nota</value>
+  </data>
+  <data name="RequireNoteReview" xml:space="preserve">
+    <value>Orientação de revisão de nota</value>
+  </data>
+  <data name="RequirePassageListen" xml:space="preserve">
+    <value>Orientação para escutar passagem</value>
+  </data>
+  <data name="RequirePassageReview" xml:space="preserve">
+    <value>Orientação de revisão de passagem</value>
+  </data>
+  <data name="RequirePassageTranscribeListen" xml:space="preserve">
+    <value>Orientação de transcrição de passagem</value>
+  </data>
+  <data name="RequireQuestionContextListen" xml:space="preserve">
+    <value>Orientação de escuta de contexto de pergunta</value>
+  </data>
+  <data name="RequireRecordResponse" xml:space="preserve">
+    <value>Incluir orientação de resposta</value>
+  </data>
+  <data name="RequireReviewAfterReRecording" xml:space="preserve">
+    <value>Orientação de revisão de passagem após regravação</value>
+  </data>
+  <data name="RequireSectionListen" xml:space="preserve">
+    <value>Orientação de escuta de seção</value>
+  </data>
+  <data name="RequireSectionReview" xml:space="preserve">
+    <value>Orientação de revisão de seção</value>
+  </data>
+  <data name="RequireSegmentTranscribeListen" xml:space="preserve">
+    <value>Orientação de transcrição de segmento</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Redefinir</value>
+  </data>
+  <data name="ResetSection" xml:space="preserve">
+    <value>Redefinir seção</value>
+  </data>
+  <data name="Response" xml:space="preserve">
+    <value>Resposta {0}</value>
+  </data>
+  <data name="Restore" xml:space="preserve">
+    <value>Restaurar</value>
+  </data>
+  <data name="RestoreSection" xml:space="preserve">
+    <value>Restaurar seção</value>
+  </data>
+  <data name="RestoreSectionConfirmation" xml:space="preserve">
+    <value>Tem certeza de que deseja restaurar esta seção?</value>
+  </data>
+  <data name="RestoreSnapshotInfo" xml:space="preserve">
+    <value>A restauração desse instantâneo não restaurará o estágio removido no fluxo de trabalho.</value>
+  </data>
+  <data name="Retell" xml:space="preserve">
+    <value>Relato</value>
+  </data>
+  <data name="RetellCheck" xml:space="preserve">
+    <value>Verificação de relato (Passagem {0})</value>
+  </data>
+  <data name="ReturnToLogIn" xml:space="preserve">
+    <value>Retornar ao login</value>
+  </data>
+  <data name="Review" xml:space="preserve">
+    <value>Revisar</value>
+  </data>
+  <data name="Reviewed" xml:space="preserve">
+    <value>Revisado</value>
+  </data>
+  <data name="ReviewQuestions" xml:space="preserve">
+    <value>Revisar passagem de perguntas {0}</value>
+  </data>
+  <data name="Revise" xml:space="preserve">
+    <value>Revisar</value>
+  </data>
+  <data name="Revision" xml:space="preserve">
+    <value>Revisão</value>
+  </data>
+  <data name="RoleAssignment" xml:space="preserve">
+    <value>Tarefa de função</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Pesquisar</value>
+  </data>
+  <data name="Section" xml:space="preserve">
+    <value>Seção {0}</value>
+  </data>
+  <data name="SectionAndPassageListen" xml:space="preserve">
+    <value>Escutar a seção e a passagem</value>
+  </data>
+  <data name="SectionAssignment" xml:space="preserve">
+    <value>Tarefa de seção</value>
+  </data>
+  <data name="SectionDraft" xml:space="preserve">
+    <value>Rascunho da seção {0}</value>
+  </data>
+  <data name="SectionFeedbackTitle" xml:space="preserve">
+    <value>Feedback da seção {0}</value>
+  </data>
+  <data name="SectionInformation" xml:space="preserve">
+    <value>Informações da seção</value>
+  </data>
+  <data name="SectionList" xml:space="preserve">
+    <value>Lista de seções</value>
+  </data>
+  <data name="SectionListen" xml:space="preserve">
+    <value>Escuta de seção</value>
+  </data>
+  <data name="SectionListenOnly" xml:space="preserve">
+    <value>Apenas escutar a seção</value>
+  </data>
+  <data name="SectionListenTitle" xml:space="preserve">
+    <value>Escutar seção {0}</value>
+  </data>
+  <data name="SectionNumberLabel" xml:space="preserve">
+    <value>Número da seção</value>
+  </data>
+  <data name="SectionReferenceLabel" xml:space="preserve">
+    <value>Referência do verso</value>
+  </data>
+  <data name="SectionReset" xml:space="preserve">
+    <value>A seção foi redefinida.</value>
+  </data>
+  <data name="SectionReview" xml:space="preserve">
+    <value>Revisão da seção</value>
+  </data>
+  <data name="SectionSelect" xml:space="preserve">
+    <value>Seleção de seção</value>
+  </data>
+  <data name="SectionsMovingWarning" xml:space="preserve">
+    <value>As seções passarão para a próxima etapa</value>
+  </data>
+  <data name="SectionStatus" xml:space="preserve">
+    <value>Status da seção</value>
+  </data>
+  <data name="SectionStepLabel" xml:space="preserve">
+    <value>Etapa atual</value>
+  </data>
+  <data name="SectionTitle" xml:space="preserve">
+    <value>Título da seção {0}</value>
+  </data>
+  <data name="SectionTitleLabel" xml:space="preserve">
+    <value>Título da seção</value>
+  </data>
+  <data name="Segment" xml:space="preserve">
+    <value>Segmento  {0}</value>
+  </data>
+  <data name="SegmentBackTranslate" xml:space="preserve">
+    <value>Tradução reversa do segmento</value>
+  </data>
+  <data name="SegmentBackTranslateSelect" xml:space="preserve">
+    <value>Seleção de tradução reversa do segmento</value>
+  </data>
+  <data name="SegmentBackTranslateTitle" xml:space="preserve">
+    <value>{0} - Segmento {1}</value>
+  </data>
+  <data name="SegmentFreeCut" xml:space="preserve">
+    <value>Corte livre de segmentos</value>
+  </data>
+  <data name="SegmentWillBeCleared" xml:space="preserve">
+    <value>Os segmentos atuais serão apagados</value>
+  </data>
+  <data name="SelectADraft" xml:space="preserve">
+    <value>Selecione um rascunho</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>Selecionar tudo</value>
+  </data>
+  <data name="SelectAProfile" xml:space="preserve">
+    <value>Selecione um perfil para fazer login</value>
+  </data>
+  <data name="SelectAProject" xml:space="preserve">
+    <value>Seleção de projeto</value>
+  </data>
+  <data name="SelectDisplay" xml:space="preserve">
+    <value>Selecione Exibir</value>
+  </data>
+  <data name="SelectDraft" xml:space="preserve">
+    <value>Selecione um rascunho</value>
+  </data>
+  <data name="SelectProjectsToImport" xml:space="preserve">
+    <value>Selecionar projetos para importar</value>
+  </data>
+  <data name="SelectSection" xml:space="preserve">
+    <value>Selecione a seção</value>
+  </data>
+  <data name="SelectSnapshot" xml:space="preserve">
+    <value>Selecione um instantâneo</value>
+  </data>
+  <data name="SelectSnapshotDescription" xml:space="preserve">
+    <value>Selecione um instantâneo específico para prosseguir. O instantâneo não escolhido será excluído.</value>
+  </data>
+  <data name="Sequence" xml:space="preserve">
+    <value>Sequência</value>
+  </data>
+  <data name="Snapshot" xml:space="preserve">
+    <value>Instantâneo</value>
+  </data>
+  <data name="SnapshotChosen" xml:space="preserve">
+    <value>instantâneo escolhido para</value>
+  </data>
+  <data name="SnapshotConflict" xml:space="preserve">
+    <value>Esta seção contém um conflito de instantâneos: {0}</value>
+  </data>
+  <data name="Snapshots" xml:space="preserve">
+    <value>Instantâneos</value>
+  </data>
+  <data name="SortBy" xml:space="preserve">
+    <value>Ordenar por</value>
+  </data>
+  <data name="Source" xml:space="preserve">
+    <value>Fonte</value>
+  </data>
+  <data name="StageName" xml:space="preserve">
+    <value>Nome do estágio</value>
+  </data>
+  <data name="StandardQuestion" xml:space="preserve">
+    <value>Pergunta padrão {0}</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Iniciar</value>
+  </data>
+  <data name="Step" xml:space="preserve">
+    <value>Etapa</value>
+  </data>
+  <data name="Step1" xml:space="preserve">
+    <value>Etapa 1</value>
+  </data>
+  <data name="Step2" xml:space="preserve">
+    <value>Etapa 2</value>
+  </data>
+  <data name="SupplementaryMaterial" xml:space="preserve">
+    <value>Material complementar</value>
+  </data>
+  <data name="Sync" xml:space="preserve">
+    <value>Sincronizar</value>
+  </data>
+  <data name="TeamCheck" xml:space="preserve">
+    <value>Verificação da equipe</value>
+  </data>
+  <data name="TeamOne" xml:space="preserve">
+    <value>Equipe 1</value>
+  </data>
+  <data name="TeamTwo" xml:space="preserve">
+    <value>Equipe 2</value>
+  </data>
+  <data name="Text" xml:space="preserve">
+    <value>Texto</value>
+  </data>
+  <data name="TextNote" xml:space="preserve">
+    <value>Nota de texto</value>
+  </data>
+  <data name="TotalPassagesLabel" xml:space="preserve">
+    <value>Total de passagens</value>
+  </data>
+  <data name="TotalVerses" xml:space="preserve">
+    <value>Total de versos:</value>
+  </data>
+  <data name="Transcribe" xml:space="preserve">
+    <value>Transcrever</value>
+  </data>
+  <data name="Transcribe2" xml:space="preserve">
+    <value>Transcrever 2</value>
+  </data>
+  <data name="TranscribePassage" xml:space="preserve">
+    <value>Transcrever passagem</value>
+  </data>
+  <data name="TranscribeSegment" xml:space="preserve">
+    <value>Transcrever segmento</value>
+  </data>
+  <data name="Translated" xml:space="preserve">
+    <value>Traduzido</value>
+  </data>
+  <data name="Translation" xml:space="preserve">
+    <value>Tradução</value>
+  </data>
+  <data name="Unassigned" xml:space="preserve">
+    <value>Não atribuído</value>
+  </data>
+  <data name="Unreviewed" xml:space="preserve">
+    <value>Não revisado</value>
+  </data>
+  <data name="UnsavedRolesMessage" xml:space="preserve">
+    <value>Se você quiser salvar as funções que atribuiu, selecione a seta de prosseguir no canto inferior direito.</value>
+  </data>
+  <data name="UnsavedRolesTitle" xml:space="preserve">
+    <value>Existem funções não salvas</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Atualizar</value>
+  </data>
+  <data name="UpdatedPassage" xml:space="preserve">
+    <value>Passagem atualizada</value>
+  </data>
+  <data name="UserLabel" xml:space="preserve">
+    <value>Usuário atual</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Nome de usuário</value>
+  </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>Este nome de usuário não existe</value>
+  </data>
+  <data name="UserSettings" xml:space="preserve">
+    <value>Configurações do usuário</value>
+  </data>
+  <data name="UserType" xml:space="preserve">
+    <value>Tipo de usuário</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Versão</value>
+  </data>
+  <data name="VesselUser" xml:space="preserve">
+    <value>Usuário do Vessel</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>Exibir</value>
+  </data>
+  <data name="ViewAllUsers" xml:space="preserve">
+    <value>Exibir todos os usuários</value>
+  </data>
+  <data name="ViewSectionAssignments" xml:space="preserve">
+    <value>Exibir tarefas da seção</value>
+  </data>
+  <data name="WelcomeToRender" xml:space="preserve">
+    <value>Bem-vindo ao Render</value>
+  </data>
+  <data name="WhichSnapshot" xml:space="preserve">
+    <value>Com qual instantâneo {0} você gostaria de continuar?</value>
+  </data>
+  <data name="WorkflowConfiguration" xml:space="preserve">
+    <value>Configuração do fluxo de trabalho</value>
+  </data>
+  <data name="WorkflowDeleteStageMessage" xml:space="preserve">
+    <value>Escolha como lidar com o trabalho em andamento antes de remover o cenário:</value>
+  </data>
+  <data name="WorkflowDeleteStageTitle" xml:space="preserve">
+    <value>Este estágio contém dados</value>
+  </data>
+  <data name="WorkWillBeLost" xml:space="preserve">
+    <value>Seu trabalho será perdido</value>
+  </data>
+  <data name="DividePassageMessage" xml:space="preserve">
+    <value>Se você deixar a divisão de passagem agora, seu trabalho será perdido</value>
+  </data>
+  <data name="ErrorOccuredTryAgain" xml:space="preserve">
+    <value>Um erro ocorreu. Por favor, tente novamente.
+</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Erro</value>
+  </data>
+  <data name="RetellQuestionResponse" xml:space="preserve">
+    <value>Reconto e Pergunta &amp; Resposta</value>
+  </data>
+  <data name="DiscardWork" xml:space="preserve">
+    <value>Descartar trabalho</value>
+  </data>
+  <data name="SectionView" xml:space="preserve">
+    <value>Vista de seção</value>
+  </data>
+  <data name="TeamTitle" xml:space="preserve">
+    <value>Equipe {0}</value>
+  </data>
+  <data name="TeamView" xml:space="preserve">
+    <value>Visualização da equipe</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Cópia de</value>
+  </data>
+  <data name="SegmentSelect" xml:space="preserve">
+    <value>seleção de segmento</value>
+  </data>
+  <data name="ClearSegmentsQuestion" xml:space="preserve">
+    <value>Segmentos claros?</value>
+  </data>
+  <data name="ClearSegmentsConfirmation" xml:space="preserve">
+    <value>Tem certeza de que deseja limpar os segmentos atuais? Você não pode desfazer esta ação.</value>
+  </data>
+  <data name="SegmentReview" xml:space="preserve">
+    <value>Análise do Segmento</value>
+  </data>
+  <data name="Question" xml:space="preserve">
+    <value>Pergunta</value>
+  </data>
+  <data name="SegmentCombine" xml:space="preserve">
+    <value>Combinação de segmentos</value>
+  </data>
+  <data name="CombineWarningMessage" xml:space="preserve">
+    <value>O segmento vermelho já foi retrotraduzido. Continuar excluirá a retrotradução.</value>
+  </data>
+  <data name="Configuration" xml:space="preserve">
+    <value>Configuração</value>
+  </data>
+  <data name="ConfigureWorkflow" xml:space="preserve">
+    <value>Configurar fluxo de trabalho</value>
+  </data>
+  <data name="AssignSections" xml:space="preserve">
+    <value>Atribuir seções</value>
+  </data>
+  <data name="AssignRoles" xml:space="preserve">
+    <value>Atribuir funções</value>
+  </data>
+  <data name="Workflow" xml:space="preserve">
+    <value>Fluxo de trabalho</value>
+  </data>
+  <data name="SelectUser" xml:space="preserve">
+    <value>Selecione o usuário</value>
+  </data>
+  <data name="AddUserButtonText" xml:space="preserve">
+    <value>Adicionar usuário</value>
+  </data>
+  <data name="Render" xml:space="preserve">
+    <value>Render</value>
+  </data>
+  <data name="Global" xml:space="preserve">
+    <value>global</value>
+  </data>
+  <data name="TextPassword" xml:space="preserve">
+    <value>Senha de texto</value>
+  </data>
+  <data name="ViewAssignments" xml:space="preserve">
+    <value>Ver atribuições de seção</value>
+  </data>
+  <data name="DeleteUserModalMessage" xml:space="preserve">
+    <value>Se {0} tiver atribuições de seção para eles, elas também serão removidas. Você não pode desfazer esta ação.</value>
+  </data>
+  <data name="Return" xml:space="preserve">
+    <value>Retornar</value>
+  </data>
+  <data name="SegmentBackTranslate1" xml:space="preserve">
+    <value>Segmento Voltar Traduzir 1</value>
+  </data>
+  <data name="SegmentBackTranslate2" xml:space="preserve">
+    <value>Segmento Voltar Traduzir 2</value>
+  </data>
+  <data name="PassageBackTranslate1" xml:space="preserve">
+    <value>Passagem de volta Traduzir 1</value>
+  </data>
+  <data name="PassageBackTranslate2" xml:space="preserve">
+    <value>Passagem de volta Traduzir 2</value>
+  </data>
+  <data name="RetellIsNotAvailable" xml:space="preserve">
+    <value>Recontar não está disponível.</value>
+  </data>
+  <data name="QuestionAndResponseIsNotAvailable" xml:space="preserve">
+    <value>Pergunta e resposta não está disponível.</value>
+  </data>
+  <data name="Teams" xml:space="preserve">
+    <value>Equipes</value>
+  </data>
+  <data name="DragTeamHere" xml:space="preserve">
+    <value>Arraste a equipe aqui</value>
+  </data>
+  <data name="CommunityFeedbackGuidance" xml:space="preserve">
+    <value>Orientação de feedback da comunidade</value>
+  </data>
+  <data name="Configure" xml:space="preserve">
+    <value>configurar</value>
+  </data>
+  <data name="QuestionNumberAndTotalNumberFormatted" xml:space="preserve">
+    <value>Pergunta {0} de {1}</value>
+  </data>
+  <data name="GridPassword" xml:space="preserve">
+    <value>senha da grade</value>
+  </data>
+  <data name="DragSectionHere" xml:space="preserve">
+    <value>Arraste a seção aqui</value>
+  </data>
+  <data name="Sections" xml:space="preserve">
+    <value>Seções</value>
+  </data>
+  <data name="PressCircleToRecord" xml:space="preserve">
+    <value>Pressione o círculo para gravar</value>
+  </data>
+  <data name="PressCircleToRecordOrPressArrowToAddQuestionFromLibrary" xml:space="preserve">
+    <value>Pressione o círculo para gravar ou {1} pressione {0} para adicionar uma pergunta {1} da biblioteca</value>
+  </data>
+  <data name="Library" xml:space="preserve">
+    <value>Biblioteca</value>
+  </data>
+  <data name="NoQuestionsInTheLibrary" xml:space="preserve">
+    <value>Você não tem perguntas na biblioteca</value>
+  </data>
+  <data name="Questions" xml:space="preserve">
+    <value>Questões</value>
+  </data>
+  <data name="PressArrowToAddQuestion" xml:space="preserve">
+    <value>Pressione {0} para adicionar uma pergunta</value>
+  </data>
+  <data name="Test" xml:space="preserve">
+    <value>Teste</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Linguagem</value>
+  </data>
+  <data name="Translate" xml:space="preserve">
+    <value>Traduzir</value>
+  </data>
+  <data name="RetellOnly" xml:space="preserve">
+    <value>recontar apenas</value>
+  </data>
+  <data name="QuestionAndResponseOnly" xml:space="preserve">
+    <value>Apenas perguntas e respostas</value>
+  </data>
+  <data name="RenderAvailable" xml:space="preserve">
+    <value>A renderização {0} está disponível</value>
+  </data>
+  <data name="DownloadRenderButton" xml:space="preserve">
+    <value>Baixar nova renderização</value>
+  </data>
+  <data name="DownloadRenderMessage" xml:space="preserve">
+    <value>Baixe o novo Render {0} e mantenha-se atualizado.</value>
+  </data>
+  <data name="OneUserOneTeam" xml:space="preserve">
+    <value>Um usuário, uma equipe</value>
+  </data>
+  <data name="UsersCannotBeAssignedToMultipleTeams" xml:space="preserve">
+    <value>Os usuários não podem ser atribuídos a várias equipes.</value>
+  </data>
+  <data name="SaveWorkAndProceed" xml:space="preserve">
+    <value>Salve o trabalho e prossiga</value>
+  </data>
+  <data name="ExitAnyway" xml:space="preserve">
+    <value>Sair mesmo assim</value>
+  </data>
+  <data name="SaveWorkAndProceedMessage" xml:space="preserve">
+    <value>Pressione a seta no canto inferior direito para salvar as funções e continuar.</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Título:</value>
+  </data>
+  <data name="TotalPassages" xml:space="preserve">
+    <value>Total de passagens:</value>
+  </data>
+  <data name="Reference" xml:space="preserve">
+    <value>Referência:</value>
+  </data>
+  <data name="Process" xml:space="preserve">
+    <value>Processo:</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>Do utilizador:</value>
+  </data>
+  <data name="NoSectionsAreInThisStep" xml:space="preserve">
+    <value>Não há seções nesta etapa</value>
+  </data>
+  <data name="NoteInterpretToConsultant" xml:space="preserve">
+    <value>Nota Interpretar Para o Consultor</value>
+  </data>
+  <data name="NoteInterpretToTranslator" xml:space="preserve">
+    <value>Nota Interpret é um tradutor</value>
+  </data>
+  <data name="AddUserLabel" xml:space="preserve">
+    <value>Adicionar um novo usuário</value>
+  </data>
+  <data name="ApprovedSection" xml:space="preserve">
+    <value>Seção Aprovada</value>
+  </data>
+  <data name="BothSnapshotsDeleted" xml:space="preserve">
+    <value>Ambos os instantâneos foram excluídos</value>
+  </data>
+  <data name="DeleteSnapshotsFor" xml:space="preserve">
+    <value>Excluir instantâneos para {0}?</value>
+  </data>
+  <data name="DraftWillBeLost" xml:space="preserve">
+    <value>O rascunho será perdido</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Não</value>
+  </data>
+  <data name="PasswordRequiredToReset" xml:space="preserve">
+    <value>A senha é necessária para redefinir uma seção</value>
+  </data>
+  <data name="PasswordRequiredToRestore" xml:space="preserve">
+    <value>A senha é necessária para restaurar um instantâneo</value>
+  </data>
+  <data name="TeamWasChosen" xml:space="preserve">
+    <value>A equipe {0} foi escolhida</value>
+  </data>
+  <data name="UserAndTeamWereChosenForSection" xml:space="preserve">
+    <value>{0} foi escolhido para {1}</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Sim</value>
+  </data>
+  <data name="YouCannotUndo" xml:space="preserve">
+    <value>Você não pode desfazer esta ação</value>
+  </data>
+  <data name="YouHaveChosen" xml:space="preserve">
+    <value>Você escolheu:</value>
+  </data>
+  <data name="ResetSectionWarning" xml:space="preserve">
+    <value>A seção de redefinição excluirá todos os dados no estágio de Rascunho. Essa ação não pode ser desfeita.</value>
+  </data>
+  <data name="RemovedFromProject" xml:space="preserve">
+    <value>Removido do projeto</value>
+  </data>
+  <data name="DraftEdit" xml:space="preserve">
+    <value>Rascunho Editar</value>
+  </data>
+  <data name="Stages" xml:space="preserve">
+    <value>Estágios</value>
+  </data>
+  <data name="SectionListenScreenTitle" xml:space="preserve">
+    <value>Escuta de seção</value>
+  </data>
+  <data name="PassageListenScreenTitle" xml:space="preserve">
+    <value>Escutar passagem</value>
+  </data>
+  <data name="PassageDivideScreenTitle" xml:space="preserve">
+    <value>Divisão de passagem</value>
+  </data>
+  <data name="PassageReviewScreenTitle" xml:space="preserve">
+    <value>Revisão de passagem</value>
+  </data>
+  <data name="SectionReviewScreenTitle" xml:space="preserve">
+    <value>Revisão da seção</value>
+  </data>
+  <data name="TranscribePassageScreenTitle" xml:space="preserve">
+    <value>Transcrever passagem</value>
+  </data>
+  <data name="TranscribeSegmentScreenTitle" xml:space="preserve">
+    <value>Transcrever segmento</value>
+  </data>
+  <data name="DoPassageTranscribeScreenTitle" xml:space="preserve">
+    <value>Transcrição de passagem</value>
+  </data>
+  <data name="DoSegmentTranscribeScreenTitle" xml:space="preserve">
+    <value>Transcrição do segmento</value>
+  </data>
+  <data name="UserWasChosen" xml:space="preserve">
+    <value>{0} foi escolhido</value>
+  </data>
+  <data name="UserWasChosenForSection" xml:space="preserve">
+    <value>{0} foi escolhido para {1}</value>
+  </data>
+  <data name="NoteInterpretScreenTitle" xml:space="preserve">
+    <value>Interpretação de nota</value>
+  </data>
+  <data name="RequirePassageListenPeerCheckSetting" xml:space="preserve">
+    <value>Orientação para escutar passagem</value>
+  </data>
+  <data name="RequireSectionListenPeerCheckSetting" xml:space="preserve">
+    <value>Orientação de escuta de seção</value>
+  </data>
+  <data name="OffloadWarning" xml:space="preserve">
+    <value>{0} foi sincronizado pela última vez em {1}. Tem certeza de que deseja descarregar este projeto?</value>
+  </data>
+  <data name="OffloadProject" xml:space="preserve">
+    <value>Descarregar {0}?</value>
+  </data>
+  <data name="ContactSupport" xml:space="preserve">
+    <value>Entre em contato com o suporte para obter assistência.</value>
+  </data>
+  <data name="ErrorWithMessage" xml:space="preserve">
+    <value>Erro [{0}]</value>
+  </data>
+  <data name="NoProjectsToDownload" xml:space="preserve">
+    <value>Nenhum projeto para baixar</value>
+  </data>
+  <data name="WrongPassword" xml:space="preserve">
+    <value>Senha errada. Tente novamente.</value>
+  </data>
+  <data name="SyncFailed" xml:space="preserve">
+    <value>Fracassado</value>
+  </data>
+  <data name="DragUserHere" xml:space="preserve">
+    <value>Arraste o usuário aqui</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Usuários</value>
+  </data>
+  <data name="DownloadFailed" xml:space="preserve">
+    <value>Download falhou.</value>
+  </data>
+  <data name="ExportComplete" xml:space="preserve">
+    <value>Exportação concluída</value>
+  </data>
+  <data name="NoSectionsAvailable" xml:space="preserve">
+    <value>Nenhuma seção disponível</value>
+  </data>
+  <data name="TryAgain" xml:space="preserve">
+    <value>Por favor, tente novamente</value>
+  </data>
+  <data name="SelectedSnapshotMessageTemplate" xml:space="preserve">
+    <value>{0}, {1} {2} {3}, {4}</value>
+  </data>
+  <data name="TeamWasChosenForSection" xml:space="preserve">
+    <value>{1} de {0}, {2}, foi escolhido para {3}</value>
+  </data>
+  <data name="CombineWarningTitle" xml:space="preserve">
+    <value>A retrotradução será excluída</value>
+  </data>
+  <data name="January" xml:space="preserve">
+    <value>Janeiro</value>
+  </data>
+  <data name="February" xml:space="preserve">
+    <value>Fevereiro</value>
+  </data>
+  <data name="March" xml:space="preserve">
+    <value>Marchar</value>
+  </data>
+  <data name="April" xml:space="preserve">
+    <value>Abril</value>
+  </data>
+  <data name="May" xml:space="preserve">
+    <value>Poderia</value>
+  </data>
+  <data name="June" xml:space="preserve">
+    <value>Junho</value>
+  </data>
+  <data name="July" xml:space="preserve">
+    <value>Julho</value>
+  </data>
+  <data name="August" xml:space="preserve">
+    <value>Agosto</value>
+  </data>
+  <data name="September" xml:space="preserve">
+    <value>Setembro</value>
+  </data>
+  <data name="October" xml:space="preserve">
+    <value>Outubro</value>
+  </data>
+  <data name="November" xml:space="preserve">
+    <value>Novembro</value>
+  </data>
+  <data name="December" xml:space="preserve">
+    <value>Dezembro</value>
+  </data>
+  <data name="NoSectionAssignedTitle" xml:space="preserve">
+    <value>Você ainda não atribuiu nenhuma seção</value>
+  </data>
+  <data name="NoSectionAssignedMessage" xml:space="preserve">
+    <value>As seções precisam ser atribuídas para serem mostradas aqui.</value>
+  </data>
+  <data name="SegmentLabel" xml:space="preserve">
+    <value>Segmento </value>
+  </data>
+  <data name="DeletedUser" xml:space="preserve">
+    <value>Usuário deletado</value>
+  </data>
+  <data name="CannotLoadData" xml:space="preserve">
+    <value>Não é possível carregar dados para a seção {0}</value>
+  </data>
+  <data name="SyncAndTryAgain" xml:space="preserve">
+    <value>Se isso continuar ocorrendo, tente uma sincronização da web ou tente descarregar/baixar o projeto</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>Tentar novamente</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Sucesso!</value>
+  </data>
+  <data name="AddFromComputer" xml:space="preserve">
+    <value>Adicionar projeto do computador</value>
+  </data>
+  <data name="CannotLoadAudio" xml:space="preserve">
+    <value>Não é possível carregar o áudio</value>
+  </data>
+</root>

@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary x:Class="Render.Sequencer.Resources.Atomic.Colors"
+                    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <Color x:Key="Light">White</Color>
+    <SolidColorBrush x:Key="LightBrush" Color="{StaticResource Light}"/>
+    <Color x:Key="Neutral">#D6DADB</Color>
+    <SolidColorBrush x:Key="NeutralBrush" Color="{StaticResource Neutral}"/>
+
+    <Color x:Key="Accent">#001E29</Color>
+    <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource Accent}"/>
+    <Color x:Key="AccentLight">#00394D</Color>
+    <SolidColorBrush x:Key="AccentLightBrush" Color="{StaticResource AccentLight}"/>
+
+    <Color x:Key="Primary">#D9D9D9</Color>
+    <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
+
+    <Color x:Key="Required">#FFB700</Color>
+    <SolidColorBrush x:Key="RequiredBrush" Color="{StaticResource Required}"/>
+    <Color x:Key="Alert">#C23A00</Color>
+    <SolidColorBrush x:Key="AlertBrush" Color="{StaticResource Alert}"/>
+
+    <Color x:Key="PrimarySymbols">White</Color>
+    <SolidColorBrush x:Key="PrimarySymbolsBrush" Color="{StaticResource PrimarySymbols}"/>
+    <Color x:Key="SecondarySymbols">#ACB4B7</Color>
+    <SolidColorBrush x:Key="SecondarySymbolsBrush" Color="{StaticResource SecondarySymbols}"/>
+    <Color x:Key="TertiarySymbols">#778388</Color>
+    <SolidColorBrush x:Key="TertiarySymbolsBrush" Color="{StaticResource TertiarySymbols}"/>
+</ResourceDictionary>

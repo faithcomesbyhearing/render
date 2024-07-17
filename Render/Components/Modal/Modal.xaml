@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase
+    x:TypeArguments="local:ModalViewModel"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:uiResources="clr-namespace:Render.Resources"
+    xmlns:versionLabel="clr-namespace:Render.Components.VersionLabel;assembly=Render"
+    xmlns:kernel="clr-namespace:Render.Kernel"
+    xmlns:local="clr-namespace:Render.Components.Modal"
+    x:Class="Render.Components.Modal.Modal">
+
+    <Grid x:Name="MainGrid"
+          RowDefinitions="*"
+          BackgroundColor="Transparent"
+          VerticalOptions="Fill"
+          HorizontalOptions="Fill"
+          RowSpacing="0">
+        <Grid BackgroundColor="Black" Opacity=".1">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer x:Name="CloseModalGestureRecognizer" />
+            </Grid.GestureRecognizers>
+        </Grid>
+
+        <Border x:Name="TopLevelElement"
+                Style="{StaticResource ModalBorderStyle}">
+
+            <Grid RowDefinitions="Auto, *, Auto"
+                  WidthRequest="960"
+                  VerticalOptions="Fill"
+                  AutomationId="ModalLayout">
+
+                <!--Header-->
+                <VerticalStackLayout Grid.Row="0">
+                    <!--Modal icon and close button-->
+                    <Grid ColumnDefinitions="*, Auto, *" Margin="0,0,0,35">
+                        <Label Grid.Column="1"
+                               x:Name="Icon"
+                               FontFamily="Icons"
+                               HorizontalOptions="Center"
+                               Margin="0,50,0,0"
+                               TextColor="{DynamicResource SlateDark}"
+                               FontSize="100" />
+
+                        <Label Grid.Column="2"
+                               x:Name="CloseButton"
+                               Style="{StaticResource ModalCloseButtonLabelStyle}"
+                               Text="{uiResources:IconExtensions Remove}"
+                               HorizontalOptions="End"
+                               VerticalOptions="Start"
+                               AutomationId="CloseModalButton"
+                               Padding="20,20,20,0"
+                               FontAttributes="Bold">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer x:Name="CloseButtonGestureRecognizer"
+                                                      Tapped="OnButtonClicked"
+                                                      AutomationId="CloseButton" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+
+                    <!--Title-->
+                    <Label Style="{StaticResource ModalTitleLabelStyle}"
+                           x:Name="TitleLabel"
+                           AutomationId="TitleLabel" />
+                </VerticalStackLayout>
+                
+                <!--Message wrapper-->
+                <ScrollView Grid.Row="1">
+                    <Grid x:Name="MessageWrapper" Margin="0,15">
+                        <Label Style="{StaticResource ModalMessageLabelStyle}"
+                               x:Name="Message"
+                               AutomationId="MessageLabel"
+                               WidthRequest="700" />
+                    </Grid>
+                </ScrollView>
+
+                <!--Footer-->
+                <VerticalStackLayout x:Name="Footer"
+                                     Grid.Row="2"
+                                     BackgroundColor="{DynamicResource AlternateBackground}"
+                                     HeightRequest="162" VerticalOptions="End">
+                    <HorizontalStackLayout HorizontalOptions="Center" Padding="0,40,0,0">
+                        <Border x:Name="CancelButton"
+                                Style="{StaticResource ModalButtonBorderStyle}"
+                                Margin="0,0,13,0" Padding="39,4">
+                            <HorizontalStackLayout HorizontalOptions="StartAndExpand">
+                                <Label x:Name="CancelButtonIcon"
+                                       FontFamily="Icons"
+                                       FontSize="70"
+                                       Text="{uiResources:IconExtensions Remove}"
+                                       TextColor="{DynamicResource SecondaryText}"
+                                       VerticalOptions="CenterAndExpand"
+                                       VerticalTextAlignment="Center" Padding="0" />
+                                <Label x:Name="CancelButtonLabel"
+                                       Style="{StaticResource ModalFooterButtonLabelStyle}"
+                                       Margin="10, 0, 0, 0"
+                                       Padding="0"
+                                       AutomationId="CancelButton">
+                                </Label>
+                            </HorizontalStackLayout>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer x:Name="CancelGestureRecognizer"
+                                                      Tapped="OnButtonClicked"
+                                                      AutomationId="CancelButton" />
+                            </Border.GestureRecognizers>
+                        </Border>
+                        <Border x:Name="ConfirmButton" Style="{StaticResource ModalButtonBorderStyle}"
+                                Margin="13,0,0,0"
+                                Padding="39,4">
+                            <HorizontalStackLayout VerticalOptions="Center">
+                                <Label x:Name="ConfirmButtonIcon"
+                                       FontFamily="Icons"
+                                       FontSize="70"
+                                       Text="{uiResources:IconExtensions Checkmark}"
+                                       TextColor="{DynamicResource SecondaryText}"
+                                       VerticalOptions="CenterAndExpand"
+                                       VerticalTextAlignment="Center" Padding="0" />
+                                <Label x:Name="ConfirmButtonLabel"
+                                       Style="{StaticResource ModalFooterButtonLabelStyle}"
+                                       Margin="10,0,0,0"
+                                       Padding="0"
+                                       AutomationId="ConfirmButton">
+                                </Label>
+                            </HorizontalStackLayout>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer x:Name="ConfirmGestureRecognizer"
+                                                      Tapped="OnButtonClicked"
+                                                      AutomationId="ConfirmButton" />
+                            </Border.GestureRecognizers>
+                        </Border>
+                    </HorizontalStackLayout>
+                    <versionLabel:VersionLabel VerticalOptions="End" HorizontalOptions="Center" Margin="5" />
+                </VerticalStackLayout>
+            </Grid>
+        </Border>
+    </Grid>
+</kernel:RenderComponentBase>

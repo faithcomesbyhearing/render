@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView x:Class="Render.Sequencer.Views.WaveForm.Items.Combining.CombiningWaveFormItemView"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:atomic="clr-namespace:Render.Sequencer.Resources.Atomic"
+             xmlns:behaviours="clr-namespace:Render.Sequencer.Core.Behaviors"
+             xmlns:controls="clr-namespace:Render.Sequencer.Core.Controls"
+             xmlns:converters="clr-namespace:Render.Sequencer.Core.Converters"
+             xmlns:enums="clr-namespace:Render.Sequencer.Contracts.Enums"
+             xmlns:flags="clr-namespace:Render.Sequencer.Views.Flags"
+             xmlns:local="clr-namespace:Render.Sequencer.Views.WaveForm.Items.Combining"
+             xmlns:skia="clr-namespace:SkiaSharp.Views.Maui.Controls;assembly=SkiaSharp.Views.Maui.Controls"
+             xmlns:styles="clr-namespace:Render.Sequencer.Resources.Styles"
+             x:DataType="local:CombiningWaveFormItemViewModel">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <atomic:Colors />
+                <atomic:Sizes />
+
+                <styles:WaveFormItemStyles />
+                <styles:WaveFormItemPartsStyles />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <Grid x:Name="waveFormItemGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition x:Name="canvasRow" Height="*" />
+            <RowDefinition x:Name="labelRow" Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <HorizontalStackLayout x:Name="combinedItemsStack"
+                               BindableLayout.ItemsSource="{Binding CombinableWaveFormItems}"
+                               HorizontalOptions="Start">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <local:CombinableWaveFormItemView />
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </HorizontalStackLayout>
+
+        <Grid x:Name="labelContainer"
+              Grid.Row="1"
+              BackgroundColor="{StaticResource Accent}"
+              FlowDirection="{Binding Sequencer.IsRightToLeftDirection, Converter={converters:BoolToFlowDirectionConverter}}"
+              Style="{StaticResource AudioInfoContainerStyle}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="leftSpacer" Width="*" />
+                <ColumnDefinition x:Name="iconColumn" Width="Auto" />
+                <ColumnDefinition x:Name="labelColumn" Width="Auto" />
+                <ColumnDefinition x:Name="requiredColumn" Width="Auto" />
+                <ColumnDefinition x:Name="rightSpacer" Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Border x:Name="timerBorder"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="5"
+                    Style="{StaticResource TimerBorderStyle}">
+                <Grid ColumnSpacing="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition x:Name="currentPositionColumn" Width="auto" />
+                        <ColumnDefinition x:Name="delimiterColumn" Width="{StaticResource DelimiterWidth}" />
+                        <ColumnDefinition x:Name="totalDurationColumn" Width="auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label x:Name="currentPositionLabel"
+                           Grid.Column="0"
+                           AutomationId="CurrentPosition"
+                           Style="{StaticResource CurrentTimeStyle}"
+                           Text="{Binding CurrentPosition, Converter={converters:DoubleToTimeConverter}}" />
+
+                    <BoxView Grid.Column="1" Style="{StaticResource DelimiterStyle}" />
+
+                    <Label x:Name="audioDuraionLabel"
+                           Grid.Column="2"
+                           AutomationId="TotalDurationLabel"
+                           Style="{StaticResource OvaralTimeStyle}"
+                           Text="{Binding Duration, Converter={converters:DoubleToTimeConverter}}" />
+                </Grid>
+            </Border>
+
+            <Label x:Name="startIcon"
+                   Grid.Column="1"
+                   Style="{StaticResource AudioIconStyle}"
+                   Text="{Binding StartIcon, Converter={converters:IconKeyToGlyphConverter}}" />
+
+            <Label x:Name="audioLabel"
+                   Grid.Column="2"
+                   AutomationId="WaveFormLabel"
+                   FontSize="16"
+                   Style="{StaticResource AudioLabelStyle}"
+                   Text="{Binding Name}" />
+        </Grid>
+
+        <!--
+            When this scrubber is available, outer scrubber in the WaveFormView is disabled.
+            Despite the disabled state of outer scrubber, its SliderBehavior still receives updates through the bindings,
+            whereas, touch gestures are ignored. Therefore, scrolling works,
+            even without passing outer SccrollView reference to the SliderBehavior
+        -->
+        <controls:Scrubber x:Name="scrubber"
+                           behaviours:SliderBehavior.AttachBehavior="True"
+                           behaviours:SliderBehavior.Dragging="{Binding Sequencer.IsScrubberDragging}"
+                           behaviours:SliderBehavior.ScrollMargin="{StaticResource ScrubberScrollOffset}"
+                           AutomationId="CombiningWaveFormItemScrubber"
+                           HorizontalOptions="Start"
+                           WidthRequest="{Binding Source={x:Reference combinedItemsStack}, Path=Width}"
+                           DragCompletedCommand="{Binding Sequencer.InternalPlayer.ScrubberDragEndedCommand}"
+                           IsEnabled="{Binding IsSelected}"
+                           IsVisible="{Binding IsSelected}"
+                           Maximum="{Binding EndPosition}"
+                           Minimum="{Binding StartPosition}"
+                           Style="{StaticResource CombiningScrubberStyle}"
+                           Value="{Binding Sequencer.TotalCurrentPosition}" />
+    </Grid>
+
+    <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="AudioIconMediaQueriesGroup">
+
+            <VisualState x:Name="LessThan70Icon">
+                <VisualState.StateTriggers>
+                    <CompareStateTrigger Property="{Binding Source={x:Reference combinedItemsStack}, Path=Width, Converter={converters:WidthToBoolConverter TargetValue=70, Operator=LessThan}}" Value="True" />
+                </VisualState.StateTriggers>
+                <VisualState.Setters>
+                    <Setter TargetName="startIcon" Property="Label.WidthRequest" Value="0" />
+                </VisualState.Setters>
+            </VisualState>
+
+            <VisualState x:Name="MoreThan70Icon">
+                <VisualState.StateTriggers>
+                    <CompareStateTrigger Property="{Binding Source={x:Reference combinedItemsStack}, Path=Width, Converter={converters:WidthToBoolConverter TargetValue=70, Operator=GreaterThan}}" Value="True" />
+                </VisualState.StateTriggers>
+                <VisualState.Setters>
+                    <Setter TargetName="startIcon" Property="Label.WidthRequest" Value="NaN" />
+                </VisualState.Setters>
+            </VisualState>
+
+        </VisualStateGroup>
+
+        <VisualStateGroup x:Name="AudioLabelMediaQueriesGroup">
+
+            <VisualState x:Name="LessThan45">
+                <VisualState.StateTriggers>
+                    <CompareStateTrigger Property="{Binding Source={x:Reference combinedItemsStack}, Path=Width, Converter={converters:WidthToBoolConverter TargetValue=45, Operator=LessThan}}" Value="True" />
+                </VisualState.StateTriggers>
+                <VisualState.Setters>
+                    <Setter TargetName="audioLabel" Property="Label.WidthRequest" Value="0" />
+                </VisualState.Setters>
+            </VisualState>
+
+            <VisualState x:Name="LessThan145">
+                <VisualState.StateTriggers>
+                    <CompareStateTrigger Property="{Binding Source={x:Reference combinedItemsStack}, Path=Width, Converter={converters:WidthToBoolConverter TargetValue=145, Operator=LessThan}}" Value="True" />
+                </VisualState.StateTriggers>
+                <VisualState.Setters>
+                    <Setter TargetName="audioLabel" Property="Label.WidthRequest" Value="NaN" />
+                    <Setter TargetName="audioLabel" Property="Label.Text" Value="{Binding Number}" />
+                </VisualState.Setters>
+            </VisualState>
+
+            <VisualState x:Name="MoreThan145">
+                <VisualState.StateTriggers>
+                    <CompareStateTrigger Property="{Binding Source={x:Reference combinedItemsStack}, Path=Width, Converter={converters:WidthToBoolConverter TargetValue=145, Operator=GreaterThan}}" Value="True" />
+                </VisualState.StateTriggers>
+                <VisualState.Setters>
+                    <Setter TargetName="audioLabel" Property="Label.WidthRequest" Value="NaN" />
+                    <Setter TargetName="audioLabel" Property="Label.Text" Value="{Binding Name}" />
+                </VisualState.Setters>
+            </VisualState>
+
+        </VisualStateGroup>
+    </VisualStateManager.VisualStateGroups>
+</ContentView>

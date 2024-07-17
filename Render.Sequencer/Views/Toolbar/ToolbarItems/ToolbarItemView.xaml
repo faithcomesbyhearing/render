@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView x:Class="Render.Sequencer.Views.Toolbar.ToolbarItems.ToolbarItemView"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:atomic="clr-namespace:Render.Sequencer.Resources.Atomic"
+             xmlns:converters="clr-namespace:Render.Sequencer.Core.Converters"
+             xmlns:enums="clr-namespace:Render.Sequencer.Contracts.Enums"
+             xmlns:styles="clr-namespace:Render.Sequencer.Resources.Styles"
+             xmlns:toolbarItem="clr-namespace:Render.Sequencer.Views.Toolbar.ToolbarItems"
+             x:DataType="toolbarItem:BaseToolbarItemViewModel"
+             IsVisible="{Binding IsAvailable}">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <atomic:Colors />
+                <atomic:Sizes />
+
+                <styles:ToolbarStyles />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <Button x:Name="actionButton"
+            AutomationId="{Binding AutomationId}"
+            Style="{StaticResource ToolbarButtonStyle}"
+            Text="{Binding IconKey, Converter={converters:IconKeyToGlyphConverter}}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="ButtonVisualState">
+                    <VisualState x:Name="ActiveOptional">
+                        <VisualState.StateTriggers>
+                            <CompareStateTrigger Property="{Binding VisualState}" Value="{x:Static enums:ToolbarItemVisualState.ActiveOptional}" />
+                        </VisualState.StateTriggers>
+                        <VisualState.Setters>
+                            <Setter Property="IsEnabled" Value="True" />
+                            <Setter Property="BackgroundColor" Value="{StaticResource PrimarySymbols}" />
+                            <Setter Property="TextColor" Value="{StaticResource AccentLight}" />
+                        </VisualState.Setters>
+                    </VisualState>
+
+                    <VisualState x:Name="ActiveRequired">
+                        <VisualState.StateTriggers>
+                            <CompareStateTrigger Property="{Binding VisualState}" Value="{x:Static enums:ToolbarItemVisualState.ActiveRequired}" />
+                        </VisualState.StateTriggers>
+                        <VisualState.Setters>
+                            <Setter Property="IsEnabled" Value="True" />
+                            <Setter Property="BackgroundColor" Value="{StaticResource PrimarySymbols}" />
+                            <Setter Property="TextColor" Value="{StaticResource Required}" />
+                        </VisualState.Setters>
+                    </VisualState>
+
+                    <VisualState x:Name="ButtonDisabled">
+                        <VisualState.StateTriggers>
+                            <CompareStateTrigger Property="{Binding VisualState}" Value="{x:Static enums:ToolbarItemVisualState.Disabled}" />
+                        </VisualState.StateTriggers>
+                        <VisualState.Setters>
+                            <Setter Property="IsEnabled" Value="False" />
+                            <Setter Property="BackgroundColor" Value="{StaticResource PrimarySymbols}" />
+                            <Setter Property="TextColor" Value="{StaticResource Primary}" />
+                        </VisualState.Setters>
+                    </VisualState>
+
+                    <VisualState x:Name="ToggledOptional">
+                        <VisualState.StateTriggers>
+                            <CompareStateTrigger Property="{Binding VisualState}" Value="{x:Static enums:ToolbarItemVisualState.ToggledOptional}" />
+                        </VisualState.StateTriggers>
+                        <VisualState.Setters>
+                            <Setter Property="IsEnabled" Value="True" />
+                            <Setter Property="TextColor" Value="{StaticResource PrimarySymbols}" />
+                            <Setter Property="BackgroundColor" Value="{StaticResource AccentLight}" />
+                        </VisualState.Setters>
+                    </VisualState>
+
+                    <VisualState x:Name="ToggledRequired">
+                        <VisualState.StateTriggers>
+                            <CompareStateTrigger Property="{Binding VisualState}" Value="{x:Static enums:ToolbarItemVisualState.ToggledRequired}" />
+                        </VisualState.StateTriggers>
+                        <VisualState.Setters>
+                            <Setter Property="IsEnabled" Value="True" />
+                            <Setter Property="TextColor" Value="{StaticResource Required}" />
+                            <Setter Property="BackgroundColor" Value="{StaticResource AccentLight}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </VisualStateManager.VisualStateGroups>
+    </Button>
+</ContentView>

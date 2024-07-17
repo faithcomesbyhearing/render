@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:Class="Render.Pages.Settings.SectionStatus.Recovery.RecoverySectionCard"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:localization="clr-namespace:Render.Resources.Localization"
+                            xmlns:processesView="clr-namespace:Render.Pages.Settings.SectionStatus.Processes;assembly=Render"
+                            xmlns:resources="using:Render.Resources"
+                            x:TypeArguments="processesView:SectionCardViewModel">
+
+    <ContentView.Resources>
+        <Style x:Key="BorderCardStyle" TargetType="Border">
+            <Setter Property="Margin" Value="0,10" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="HeightRequest" Value="108" />
+            <Setter Property="MinimumHeightRequest" Value="80" />
+        </Style>
+
+        <Style x:Key="NoSectionLabelStyle" TargetType="Label">
+            <Setter Property="Margin" Value="20,0" />
+            <Setter Property="FontSize" Value="{DynamicResource MediumFont}" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="TextColor" Value="{DynamicResource MainIconColor}" />
+            <Setter Property="Text" Value="{x:Static localization:AppResources.NoSectionsAreInThisStep}" />
+        </Style>
+        
+        <Style x:Key="SectionNumberStyle" TargetType="Label">
+            <Setter Property="Margin" Value="15,0,0,0" />
+            <Setter Property="FontSize" Value="32" />
+            <Setter Property="WidthRequest" Value="56" />
+            <Setter Property="FontFamily" Value="BoldFont" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+        </Style>
+        
+        <Style x:Key="SectionScriptureReferenceStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="{DynamicResource LargeFontMinus2Font}" />
+            <Setter Property="WidthRequest" Value="515" />
+            <Setter Property="HorizontalTextAlignment" Value="Start" />
+            <Setter Property="FontFamily" Value="MediumFont" />
+            <Setter Property="LineBreakMode" Value="TailTruncation" />
+        </Style>
+        
+    </ContentView.Resources>
+
+    <Grid ColumnDefinitions="*" RowDefinitions="*,*,*">
+        <Border x:Name="Card"
+                Grid.Row="0"
+                Style="{StaticResource BorderCardStyle}"
+                AutomationId="CardFrame"
+                WidthRequest="630">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="16" />
+            </Border.StrokeShape>
+
+            <Grid HorizontalOptions="Fill">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label x:Name="NoSectionLabel"
+                       Grid.Column="0"
+                       Style="{StaticResource NoSectionLabelStyle}"
+                       AutomationId="NoSectionLabel" />
+                <Label x:Name="SectionNumber"
+                       Grid.Column="0"
+                       Style="{StaticResource SectionNumberStyle}"
+                       AutomationId="SectionNumberLabel"/>
+
+                <Grid Grid.Column="1"
+                      VerticalOptions="Center"
+                      HorizontalOptions="Start">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Label x:Name="SectionScriptureReference"
+                           Grid.Row="0"
+                           Style="{StaticResource SectionScriptureReferenceStyle}"
+                           AutomationId="SectionScriptureReferenceLabel"/>
+
+                    <Label x:Name="SectionTitle" Grid.Row="1"
+                           AutomationId="SectionTitleLabel"
+                           Style="{StaticResource SectionScriptureReferenceStyle}"
+                           TextColor="{DynamicResource TertiaryText}" />
+                </Grid>
+
+                <StackLayout Grid.Column="2" IsVisible="true" />
+
+                <Label x:Name="ConflictIcon"
+                       Grid.Column="3"
+                       AutomationId="ConflictIcon"
+                       FontFamily="Icons"
+                       Margin="0,0,5,0"
+                       FontSize="36"
+                       IsVisible="false"
+                       Text="{resources:IconExtensions Icon=InvalidInput}"
+                       TextColor="{StaticResource Error}"
+                       VerticalOptions="Center" />
+
+                <Label x:Name="ApprovedIcon"
+                       Grid.Column="3"
+                       AutomationId="ApprovedIcon"
+                       FontFamily="Icons"
+                       Margin="0,0,5,0"
+                       FontSize="39"
+                       IsVisible="false"
+                       Text="{resources:IconExtensions Icon=FinishedPassOrSubmit}"
+                       TextColor="{StaticResource SlateDark}"
+                       VerticalOptions="Center" />
+            </Grid>
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer x:Name="TapGestureRecognizer"
+                                      AutomationId="SectionCard"
+                                      Tapped="OnButtonClicked" />
+            </Border.GestureRecognizers>
+        </Border>
+        <Line Grid.Row="2"
+              BackgroundColor="{StaticResource RecorderSeparatorLine}"
+              HorizontalOptions="Fill"
+              Opacity=".8"
+              Fill="{StaticResource Grey}" 
+              HeightRequest="1" 
+              WidthRequest="630"
+              VerticalOptions="End" />
+    </Grid>
+</kernel:RenderComponentBase>

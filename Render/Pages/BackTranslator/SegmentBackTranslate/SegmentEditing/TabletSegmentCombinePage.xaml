@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<kernel:RenderPageBase x:Class="Render.Pages.BackTranslator.SegmentBackTranslate.SegmentEditing.TabletSegmentCombinePage"
+                       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:common="clr-namespace:Render.Common"
+                       xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                       xmlns:proceedButton="clr-namespace:Render.Components.ProceedButton;assembly=Render"
+                       xmlns:segmentEditing="clr-namespace:Render.Pages.BackTranslator.SegmentBackTranslate.SegmentEditing;assembly=Render"
+                       xmlns:titleBar="clr-namespace:Render.Components.TitleBar;assembly=Render"
+                       xmlns:sequencer="clr-namespace:Render.Sequencer;assembly=Render.Sequencer"
+                       x:TypeArguments="segmentEditing:TabletSegmentCombinePageViewModel"
+                       BackgroundColor="{DynamicResource AlternateBackground}"
+                       NavigationPage.HasNavigationBar="False">
+
+    <Grid x:Name="TopLevelElement" BackgroundColor="{DynamicResource AlternateBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition x:Name="titleBarRow" Height="{x:Static titleBar:TitleBar.Size}"/>    
+            <RowDefinition x:Name="contentRow" Height="*"/>    
+        </Grid.RowDefinitions>
+        
+        <sequencer:Sequencer x:Name="Sequencer"
+                             Grid.Row="1" />
+        
+        <proceedButton:ProceedButton x:Name="ProceedButton"
+                                     Grid.Row="1"
+                                     VerticalOptions="End"
+                                     HorizontalOptions="End"/>
+
+        <titleBar:TitleBar x:Name="TitleBar" />
+        
+        <common:LoadingScreen x:Name="loadingView" Grid.RowSpan="2"/>
+    </Grid>
+</kernel:RenderPageBase>

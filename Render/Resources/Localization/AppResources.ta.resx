@@ -1,0 +1,1665 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Add" xml:space="preserve">
+    <value>கூட்டு</value>
+  </data>
+  <data name="AddAProject" xml:space="preserve">
+    <value>ஒரு திட்டத்தைச் சேர்க்கவும்</value>
+  </data>
+  <data name="AddASection" xml:space="preserve">
+    <value>ஒரு பகுதியைச் சேர்க்கவும்</value>
+  </data>
+  <data name="AddATeam" xml:space="preserve">
+    <value>அணியைச் சேர்க்கவும்</value>
+  </data>
+  <data name="Added" xml:space="preserve">
+    <value>சேர்க்கப்பட்டது</value>
+  </data>
+  <data name="Adding" xml:space="preserve">
+    <value>சேர்த்து</value>
+  </data>
+  <data name="AddingProject" xml:space="preserve">
+    <value>ஒரு திட்டத்தைச் சேர்க்கவும்</value>
+  </data>
+  <data name="AddNew" xml:space="preserve">
+    <value>புதிதாக சேர்க்கவும்</value>
+  </data>
+  <data name="AddProject" xml:space="preserve">
+    <value>ஒரு திட்டத்தைச் சேர்க்கவும்</value>
+  </data>
+  <data name="AddProjectViaId" xml:space="preserve">
+    <value>ஐடி மூலம் திட்டத்தைச் சேர்க்கவும்</value>
+  </data>
+  <data name="AddSection" xml:space="preserve">
+    <value>பிரிவைச் சேர்க்கவும்</value>
+  </data>
+  <data name="AddStage" xml:space="preserve">
+    <value>மேடையைச் சேர்க்கவும்</value>
+  </data>
+  <data name="AddStageHere" xml:space="preserve">
+    <value>மேடையை இங்கே இழுக்கவும்</value>
+  </data>
+  <data name="AddTeam" xml:space="preserve">
+    <value>அணியைச் சேர்க்கவும்</value>
+  </data>
+  <data name="AddUser" xml:space="preserve">
+    <value>ஒரு பயனரைச் சேர்க்கவும்</value>
+  </data>
+  <data name="AddWorkflowStage" xml:space="preserve">
+    <value>பணிப்பாய்வு கட்டத்தைச் சேர்க்கவும்</value>
+  </data>
+  <data name="AllowEditing" xml:space="preserve">
+    <value>திருத்த அனுமதிக்கவும்</value>
+  </data>
+  <data name="AllSections" xml:space="preserve">
+    <value>அனைத்து பிரிவுகளும்</value>
+  </data>
+  <data name="AllSectionsAssigned" xml:space="preserve">
+    <value>அனைத்து பிரிவுகளும் ஒதுக்கப்பட்டுள்ளன.</value>
+  </data>
+  <data name="Approval" xml:space="preserve">
+    <value>ஒப்புதல்</value>
+  </data>
+  <data name="ApprovalSubmitted" xml:space="preserve">
+    <value>ஒப்புதல் வெற்றிகரமாக சமர்ப்பிக்கப்பட்டது</value>
+  </data>
+  <data name="Approve" xml:space="preserve">
+    <value>ஒப்புதல்</value>
+  </data>
+  <data name="Approved" xml:space="preserve">
+    <value>அங்கீகரிக்கப்பட்டது</value>
+  </data>
+  <data name="ApprovedByLabel" xml:space="preserve">
+    <value>அங்கீகரிக்கப்பட்டது:</value>
+  </data>
+  <data name="ApprovedDraft" xml:space="preserve">
+    <value>நீங்கள் ஒரு வரைவுக்கு ஒப்புதல் அளித்துள்ளீர்கள்</value>
+  </data>
+  <data name="ApproveSection" xml:space="preserve">
+    <value>பிரிவு {0}ஐ அங்கீகரிக்கவும்</value>
+  </data>
+  <data name="ArchivedDrafts" xml:space="preserve">
+    <value>காப்பகப்படுத்தப்பட்ட வரைவுகள்</value>
+  </data>
+  <data name="ArchivedNotes" xml:space="preserve">
+    <value>காப்பகப்படுத்தப்பட்ட குறிப்புகள்</value>
+  </data>
+  <data name="ArrangeWorkflowStages" xml:space="preserve">
+    <value>பணிப்பாய்வு நிலைகளை ஒழுங்கமைக்கவும்</value>
+  </data>
+  <data name="Assigned" xml:space="preserve">
+    <value>{0} ஒதுக்கப்பட்டது</value>
+  </data>
+  <data name="AssignToTranslator" xml:space="preserve">
+    <value>மொழிபெயர்ப்பாளருக்கு ஒதுக்கவும்</value>
+  </data>
+  <data name="AudioClip" xml:space="preserve">
+    <value>ஆடியோ கிளிப்</value>
+  </data>
+  <data name="AudioNote" xml:space="preserve">
+    <value>ஆடியோ குறிப்பு</value>
+  </data>
+  <data name="BackTranslate" xml:space="preserve">
+    <value>மீண்டும் மொழிபெயர்</value>
+  </data>
+  <data name="BackTranslate1" xml:space="preserve">
+    <value>மீண்டும் மொழிபெயர்ப்பாளர் 1</value>
+  </data>
+  <data name="BackTranslate2" xml:space="preserve">
+    <value>மீண்டும் மொழிபெயர்ப்பாளர் 2</value>
+  </data>
+  <data name="BackTranslator" xml:space="preserve">
+    <value>மீண்டும் மொழிபெயர்ப்பாளர்</value>
+  </data>
+  <data name="BackTranslator2" xml:space="preserve">
+    <value>மீண்டும் மொழிபெயர்ப்பாளர் 2</value>
+  </data>
+  <data name="Both" xml:space="preserve">
+    <value>இரண்டும்</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>ரத்து செய்</value>
+  </data>
+  <data name="Canceled" xml:space="preserve">
+    <value>ரத்து செய்யப்பட்டது</value>
+  </data>
+  <data name="Canceling" xml:space="preserve">
+    <value>ரத்து செய்கிறது</value>
+  </data>
+  <data name="Check" xml:space="preserve">
+    <value>சரிபார்</value>
+  </data>
+  <data name="Check2" xml:space="preserve">
+    <value>சரிபார் 2</value>
+  </data>
+  <data name="ChooseProjectsForDeviceMessage" xml:space="preserve">
+    <value>இந்தச் சாதனத்துடன் நீங்கள் இணைக்க விரும்பும் திட்டங்களைத் தேர்ந்தெடுக்கவும்.</value>
+  </data>
+  <data name="ChosenDraft" xml:space="preserve">
+    <value>தேர்ந்தெடுக்கப்பட்ட வரைவு</value>
+  </data>
+  <data name="Chunk" xml:space="preserve">
+    <value>பகுதி {0}</value>
+  </data>
+  <data name="ClearSegmentMessage1" xml:space="preserve">
+    <value>முன்னோக்கிச் செல்வது, இந்தப் பத்தியாகப் பிரிக்கப்பட்டுள்ள தற்போதைய பிரிவுகளின் தொகுப்பை அழிக்கும்.</value>
+  </data>
+  <data name="ClearSegmentMessage2" xml:space="preserve">
+    <value>முந்தைய பிரிவானது தனிப்பயன்-உருவாக்கப்பட்டிருந்தால் மற்றும் இயல்புநிலை அமைப்பாக இல்லாவிட்டால், இந்தப் பிரிவுகளை மீட்டெடுக்க முடியாது.</value>
+  </data>
+  <data name="ClearSegments" xml:space="preserve">
+    <value>பகுதிகளை அழிக்கவும்</value>
+  </data>
+  <data name="DeleteSnapshots" xml:space="preserve">
+    <value>இரண்டு ஸ்னாப்ஷாட்களையும் அழிக்கவும்</value>
+  </data>
+  <data name="ClearSnapshotsDescription" xml:space="preserve">
+    <value>இரண்டு ஸ்னாப்ஷாட்களும் நிராகரிக்கப்படும். இது பிரிவை அதன் முந்தைய ஸ்னாப்ஷாட்டுக்கு முன்னேற்றும்.</value>
+  </data>
+  <data name="CombinedBackTranslate" xml:space="preserve">
+    <value>இணைந்த பின் மொழியாக்கம்</value>
+  </data>
+  <data name="CombineSegmentTitle" xml:space="preserve">
+    <value>ஒருங்கிணை - பாசஜெட் {0}</value>
+  </data>
+  <data name="CommunityCheck" xml:space="preserve">
+    <value>சமூக சோதனை</value>
+  </data>
+  <data name="CommunityRetellPassage" xml:space="preserve">
+    <value>பத்தி {0} - மறுபரிசீலனை</value>
+  </data>
+  <data name="CommunityRevise" xml:space="preserve">
+    <value>சமூக திருத்தம்</value>
+  </data>
+  <data name="CommunitySetup" xml:space="preserve">
+    <value>சமூக அமைப்பு</value>
+  </data>
+  <data name="CommunityTest" xml:space="preserve">
+    <value>சமூக சோதனை</value>
+  </data>
+  <data name="CommunityTestRevise" xml:space="preserve">
+    <value>சமூக சோதனை திருத்தம்</value>
+  </data>
+  <data name="CommunityTestSetup" xml:space="preserve">
+    <value>சமூக அமைப்பு</value>
+  </data>
+  <data name="CompleteWork" xml:space="preserve">
+    <value>முழுமையான வேலை</value>
+  </data>
+  <data name="CompleteWorkMessage" xml:space="preserve">
+    <value>செயல்பாட்டில் உள்ள வேலைகள் முதலில் முடிந்தவுடன் இந்த நிலை அகற்றப்படும்.</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>உறுதிப்படுத்தவும்</value>
+  </data>
+  <data name="Confirmation" xml:space="preserve">
+    <value>உறுதிப்படுத்தல்</value>
+  </data>
+  <data name="Consultant" xml:space="preserve">
+    <value>ஆலோசகர்</value>
+  </data>
+  <data name="ConsultantApproval" xml:space="preserve">
+    <value>ஆலோசகர் ஒப்புதல்</value>
+  </data>
+  <data name="ConsultantCheck" xml:space="preserve">
+    <value>ஆலோசகர் சோதனை</value>
+  </data>
+  <data name="ConsultantLanguage" xml:space="preserve">
+    <value>ஆலோசகர் மொழி</value>
+  </data>
+  <data name="ConsultantRevise" xml:space="preserve">
+    <value>ஆலோசகர் திருத்தம்</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>தொடரவும்</value>
+  </data>
+  <data name="CopyPreviousQuestions" xml:space="preserve">
+    <value>முந்தைய கேள்விகளை நகலெடுக்கவும்</value>
+  </data>
+  <data name="CopyQuestions" xml:space="preserve">
+    <value>கேள்விகளை நகலெடுக்கவும்</value>
+  </data>
+  <data name="Current" xml:space="preserve">
+    <value>தற்போதைய {0}</value>
+  </data>
+  <data name="DeactivateStepWarning" xml:space="preserve">
+    <value>நீங்கள் ஒரு படியை முடக்கினால், அனைத்து பிரிவுகளும் பணிப்பாய்வு அடுத்த படிக்கு நகரும்</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>அழி</value>
+  </data>
+  <data name="DeleteSnapshotsConfirmation" xml:space="preserve">
+    <value>இரண்டு ஸ்னாப்ஷாட்களையும் அழிக்க விரும்புகிறீர்களா?</value>
+  </data>
+  <data name="DeleteUser" xml:space="preserve">
+    <value>பயனரை நீக்கு</value>
+  </data>
+  <data name="DeleteUserMessage" xml:space="preserve">
+    <value>{0}ஐ நீக்கினால், அவர்களுக்கான அனைத்துப் பிரிவு ஒதுக்கீடுகளும் அகற்றப்படும். இந்தச் செயலைச் செயல்தவிர்க்க முடியாது.</value>
+  </data>
+  <data name="DeleteUserTitle" xml:space="preserve">
+    <value>பயனரை நீக்கவா?</value>
+  </data>
+  <data name="DividePassageTitle" xml:space="preserve">
+    <value>பாதையை பிரிக்கவும்</value>
+  </data>
+  <data name="Do2StepBackTranslate" xml:space="preserve">
+    <value>2-படி பின் மொழியாக்கம்</value>
+  </data>
+  <data name="DoNoteInterpret" xml:space="preserve">
+    <value>குறிப்பு விளக்கத்தைச் சேர்க்கவும்</value>
+  </data>
+  <data name="DoNoteReview" xml:space="preserve">
+    <value>குறிப்பு விமர்சனம்</value>
+  </data>
+  <data name="DoPassageBackTranslate1" xml:space="preserve">
+    <value>பாசேஜ் மீண்டும் மொழிபெயர் 1</value>
+  </data>
+  <data name="DoPassageBackTranslate2" xml:space="preserve">
+    <value>பாசேஜ் மீண்டும் மொழிபெயர் 2</value>
+  </data>
+  <data name="DoPassageListen" xml:space="preserve">
+    <value>பத்தியில் கேட்பதைச் சேர்க்கவும்</value>
+  </data>
+  <data name="DoPassageReview" xml:space="preserve">
+    <value>பத்தியின் விமர்சனம்</value>
+  </data>
+  <data name="DoPassageTranscribe" xml:space="preserve">
+    <value>பாசேஜ் எடுத்தெழுது</value>
+  </data>
+  <data name="DoQuestionAndResponse" xml:space="preserve">
+    <value>கேள்வி &amp; பதிலைச் சேர்க்கவும்</value>
+  </data>
+  <data name="DoRetell" xml:space="preserve">
+    <value>மீண்டும் சொல்லுங்கள்</value>
+  </data>
+  <data name="DoSectionListen" xml:space="preserve">
+    <value>பகுதி கேட்கவும்</value>
+  </data>
+  <data name="DoSectionReview" xml:space="preserve">
+    <value>பிரிவு மதிப்பாய்வைச் சேர்க்கவும்</value>
+  </data>
+  <data name="DoSegmentBackTranslate1" xml:space="preserve">
+    <value>பகுதி மீண்டும் மொழிபெயர் 1</value>
+  </data>
+  <data name="DoSegmentBackTranslate2" xml:space="preserve">
+    <value>பகுதி மீண்டும் மொழிபெயர் 2</value>
+  </data>
+  <data name="DoSegmentTranscribe" xml:space="preserve">
+    <value>பிரிவு எடுத்தெழுது</value>
+  </data>
+  <data name="DoTranscribe" xml:space="preserve">
+    <value>எடுத்தெழுது</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>பதிவிறக்கம்</value>
+  </data>
+  <data name="Downloaded" xml:space="preserve">
+    <value>பதிவிறக்கம் செய்யப்பட்டது</value>
+  </data>
+  <data name="DownloadingProjects" xml:space="preserve">
+    <value>திட்டங்களைப் பதிவிறக்குகிறது</value>
+  </data>
+  <data name="Draft" xml:space="preserve">
+    <value>வரைவு</value>
+  </data>
+  <data name="DraftedByLabel" xml:space="preserve">
+    <value>மூலம் வரைவு:</value>
+  </data>
+  <data name="DraftNotes" xml:space="preserve">
+    <value>வரைவு {0} குறிப்புகள்</value>
+  </data>
+  <data name="DraftPassage" xml:space="preserve">
+    <value>பத்தியை மொழிபெயர் {0}</value>
+  </data>
+  <data name="DraftRecord" xml:space="preserve">
+    <value>வரைவு பதிவுகள்</value>
+  </data>
+  <data name="DraftReplacementModalTitle" xml:space="preserve">
+    <value>மாற்றுவதற்கு ஒரு வரைவைத் தேர்ந்தெடுக்கவும்</value>
+  </data>
+  <data name="DraftReview" xml:space="preserve">
+    <value>வரைவு {0} விமர்சனம்</value>
+  </data>
+  <data name="Drafts" xml:space="preserve">
+    <value>வரைவுகள்</value>
+  </data>
+  <data name="DraftSelect" xml:space="preserve">
+    <value>வரைவை தேர்ந்தெடுக்கவும்</value>
+  </data>
+  <data name="DraftSelection" xml:space="preserve">
+    <value>வரைவை தேர்ந்தெடுக்கவும்</value>
+  </data>
+  <data name="DraftTitle" xml:space="preserve">
+    <value>வரைவு {0}</value>
+  </data>
+  <data name="EditPassage" xml:space="preserve">
+    <value>பத்தியைத் திருத்து {0}</value>
+  </data>
+  <data name="EditUser" xml:space="preserve">
+    <value>பயனரைத் திருத்து</value>
+  </data>
+  <data name="EmptyCollectionMessage" xml:space="preserve">
+    <value>திட்டத்தைச் சேர்க்க மேலே உள்ள "புதியதைச் சேர்" என்பதைக் கிளிக் செய்யவும்.</value>
+  </data>
+  <data name="EmptyCollectionMessageTitle" xml:space="preserve">
+    <value>திட்டப் பட்டியல் காலியாக உள்ளது.</value>
+  </data>
+  <data name="EmptyOffloadCollectionMessage" xml:space="preserve">
+    <value>ஆஃப்லோட் செய்ய திட்டங்கள் இல்லை</value>
+  </data>
+  <data name="EmptyPassword" xml:space="preserve">
+    <value>கடவுச்சொல் காலியாக இருக்கக்கூடாது</value>
+  </data>
+  <data name="End" xml:space="preserve">
+    <value>முடிவு</value>
+  </data>
+  <data name="Enter32digitId" xml:space="preserve">
+    <value>32 இலக்க ஐடியை உள்ளிடவும்...</value>
+  </data>
+  <data name="EnterAProjectName" xml:space="preserve">
+    <value>திட்டத்தின் பெயரை உள்ளிடவும்</value>
+  </data>
+  <data name="EnterLanguage" xml:space="preserve">
+    <value>ஒரு மொழி பெயரை உள்ளிடவும்</value>
+  </data>
+  <data name="EnterPasswordToRestoreSection" xml:space="preserve">
+    <value>இந்தப் பிரிவைத் திறந்து மீட்டமைக்க உங்கள் கடவுச்சொல்லை உள்ளிடவும்</value>
+  </data>
+  <data name="EnterSectionNumber" xml:space="preserve">
+    <value>பிரிவு எண்ணை உள்ளிடவும்...</value>
+  </data>
+  <data name="EnterYourPassword" xml:space="preserve">
+    <value>உங்கள் கடவுச்சொல்லை உள்ளிடவும்</value>
+  </data>
+  <data name="EnterYourUsername" xml:space="preserve">
+    <value>உங்கள் பயனர்பெயரை உள்ளிடவும்</value>
+  </data>
+  <data name="ErrorAddingProject" xml:space="preserve">
+    <value>இந்தத் திட்டத்தைச் சேர்க்கும்போது பிழை ஏற்பட்டது.</value>
+  </data>
+  <data name="ErrorConnectLocalMachine" xml:space="preserve">
+    <value>உள்ளூர் இயந்திரத்துடன் இணைக்கும் முயற்சியில் பிழை ஏற்பட்டது.</value>
+  </data>
+  <data name="ExportAudio" xml:space="preserve">
+    <value>ஆடியோவை ஏற்றுமதி செய்யுங்கள்</value>
+  </data>
+  <data name="ExportChecked" xml:space="preserve">
+    <value>ஏற்றுமதி சரிபார்க்கப்பட்டது</value>
+  </data>
+  <data name="Exporting" xml:space="preserve">
+    <value>{1} இல் {0}ஐ ஏற்றுமதி செய்கிறது</value>
+  </data>
+  <data name="FontSize" xml:space="preserve">
+    <value>எழுத்துரு அளவு</value>
+  </data>
+  <data name="ForTeam" xml:space="preserve">
+    <value>{0}க்கு</value>
+  </data>
+  <data name="Generate" xml:space="preserve">
+    <value>உருவாக்கு</value>
+  </data>
+  <data name="Generic" xml:space="preserve">
+    <value>பொதுவான</value>
+  </data>
+  <data name="GlobalUser" xml:space="preserve">
+    <value>உலகளாவிய பயனர்</value>
+  </data>
+  <data name="Grid" xml:space="preserve">
+    <value>கட்டம்</value>
+  </data>
+  <data name="HaveBeenCleared" xml:space="preserve">
+    <value>அழிக்கப்பட்டுள்ளன</value>
+  </data>
+  <data name="HigherPriority" xml:space="preserve">
+    <value>அதிக முன்னுரிமை</value>
+  </data>
+  <data name="HowToResolve" xml:space="preserve">
+    <value>இந்த சிக்கலை எவ்வாறு தீர்க்க விரும்புகிறீர்கள்?</value>
+  </data>
+  <data name="ImproperlyFormattedId" xml:space="preserve">
+    <value>தவறாக வடிவமைக்கப்பட்ட ஐடி. தயவுசெய்து அதை மீண்டும் உள்ளிடவும்.</value>
+  </data>
+  <data name="IncludeBackTranslate" xml:space="preserve">
+    <value>பாசேஜ் மீண்டும் மொழிபெயர்</value>
+  </data>
+  <data name="IncludeNoteListenGuidance" xml:space="preserve">
+    <value>குறிப்பு கேட்கும் வழிகாட்டுதலைச் சேர்க்கவும்</value>
+  </data>
+  <data name="IncludePassageBackTranslate" xml:space="preserve">
+    <value>பாசேஜ் மீண்டும் மொழிபெயர்</value>
+  </data>
+  <data name="IncludePassageListen" xml:space="preserve">
+    <value>பத்தியில் கேட்பதைச் சேர்க்கவும்</value>
+  </data>
+  <data name="IncludePassageReview" xml:space="preserve">
+    <value>பத்தியின் மதிப்பாய்வைச் சேர்க்கவும்</value>
+  </data>
+  <data name="IncludePassageReviewAfterReRecording" xml:space="preserve">
+    <value>மறு-பதிவு செய்த பிறகு பத்தியின் மதிப்பாய்வு அடங்கும்</value>
+  </data>
+  <data name="IncludeSegmentBackTranslate" xml:space="preserve">
+    <value>பாசேஜ் மீண்டும் மொழிபெயர்</value>
+  </data>
+  <data name="IncorrectPassword" xml:space="preserve">
+    <value>இந்த கடவுச்சொல் இந்த பயனர்பெயருடன் பொருந்தவில்லை</value>
+  </data>
+  <data name="IncorrectPattern" xml:space="preserve">
+    <value>தவறான முறை. தயவு செய்து மீண்டும் முயற்சிக்கவும்.</value>
+  </data>
+  <data name="Input" xml:space="preserve">
+    <value>உள்ளீடு</value>
+  </data>
+  <data name="InsertPassword" xml:space="preserve">
+    <value>கடவுச்சொல்லை இங்கே செருகவும்</value>
+  </data>
+  <data name="IntermediateLanguage" xml:space="preserve">
+    <value>இடைநிலை மொழி</value>
+  </data>
+  <data name="Interpret" xml:space="preserve">
+    <value>விளக்குவது</value>
+  </data>
+  <data name="Interpreted" xml:space="preserve">
+    <value>விளக்கப்பட்டது</value>
+  </data>
+  <data name="InterpretToConsultant" xml:space="preserve">
+    <value>ஆலோசகருக்கு விளக்கம்</value>
+  </data>
+  <data name="InterpretToTranslator" xml:space="preserve">
+    <value>மொழிபெயர்ப்பாளருக்கு விளக்கம்</value>
+  </data>
+  <data name="Iteration" xml:space="preserve">
+    <value>மறு செய்கை</value>
+  </data>
+  <data name="Jump" xml:space="preserve">
+    <value>குதி</value>
+  </data>
+  <data name="JumpToSection" xml:space="preserve">
+    <value>பிரிவுக்குச் செல்லவும்</value>
+  </data>
+  <data name="LastCompletedStage" xml:space="preserve">
+    <value>கடைசியாக முடிக்கப்பட்ட நிலை</value>
+  </data>
+  <data name="LastSubmittedAudioLabel" xml:space="preserve">
+    <value>கடைசியாக சமர்ப்பிக்கப்பட்ட ஆடியோ</value>
+  </data>
+  <data name="LastSync" xml:space="preserve">
+    <value>கடைசி ஒத்திசைவு</value>
+  </data>
+  <data name="LeaveFreeCut" xml:space="preserve">
+    <value>லீவ் செக்மென்ட் பிரீ கட்</value>
+  </data>
+  <data name="LeaveFreeCutMessage1" xml:space="preserve">
+    <value>நீங்கள் பிரிவு இலவச வெட்டை விட்டு வெளியேறினால், இதுவரை தயாரிக்கப்பட்ட எந்தப் படைப்பையும் இழப்பீர்கள்.</value>
+  </data>
+  <data name="LeaveFreeCutMessage2" xml:space="preserve">
+    <value>உருவாக்கப்பட்ட எந்தப் பணியையும் தக்கவைக்க இந்தப் படிநிலையை முடிக்கவும்.</value>
+  </data>
+  <data name="Localization" xml:space="preserve">
+    <value>உள்ளூர்மயமாக்கல்</value>
+  </data>
+  <data name="LoggingIn" xml:space="preserve">
+    <value>உள்நுழைதல்...</value>
+  </data>
+  <data name="LogIn" xml:space="preserve">
+    <value>உள்நுழைய</value>
+  </data>
+  <data name="LogOut" xml:space="preserve">
+    <value>வெளியேறு</value>
+  </data>
+  <data name="LowerPriority" xml:space="preserve">
+    <value>குறைந்த முன்னுரிமை</value>
+  </data>
+  <data name="ManageDivisions" xml:space="preserve">
+    <value>பிரிவுகளின் பாதையை நிர்வகி {0}</value>
+  </data>
+  <data name="ManageUsers" xml:space="preserve">
+    <value>பயனர்களை நிர்வகிக்கவும்</value>
+  </data>
+  <data name="MarkQuestions" xml:space="preserve">
+    <value>கேள்விகள் பத்தியைக் குறிக்கவும் {0}</value>
+  </data>
+  <data name="MicNotConnectedMessage" xml:space="preserve">
+    <value>மைக்ரோஃபோன் கண்டறியப்படவில்லை.  ஆடியோவைப் பதிவுசெய்ய மைக்ரோஃபோனை உங்கள் கணினியுடன் இணைக்கவும்.</value>
+  </data>
+  <data name="MicNotConnectedTitle" xml:space="preserve">
+    <value>மைக்ரோஃபோன் இணைக்கப்படவில்லை</value>
+  </data>
+  <data name="MicrophoneAccessMessage" xml:space="preserve">
+    <value>ரெண்டருக்கு உங்கள் மைக்ரோஃபோனைப் பயன்படுத்த அனுமதி இல்லை. இதைச் சரிசெய்ய மைக்ரோஃபோன் தனியுரிமை அமைப்புகளுக்குச் சென்று ரெண்டருக்கான மைக்ரோஃபோன் அணுகலை இயக்கவும்.</value>
+  </data>
+  <data name="MicrophoneAccessTitle" xml:space="preserve">
+    <value>மைக்ரோஃபோன் அணுகல் தேவை</value>
+  </data>
+  <data name="MultipleTeamAssignmentLabel" xml:space="preserve">
+    <value>ஒரு பயனரை பல குழுக்களுக்கு ஒதுக்க முடியாது</value>
+  </data>
+  <data name="MultipleTeamAssignmentMessage" xml:space="preserve">
+    <value>ஒவ்வொரு குழுவிற்கும் தனிப்பட்ட பயனரை ஒதுக்கவும்.</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>பெயர்</value>
+  </data>
+  <data name="NoAudio" xml:space="preserve">
+    <value>ஆடியோ இல்லை</value>
+  </data>
+  <data name="NoInternetConnection" xml:space="preserve">
+    <value>இணைய இணைப்பு இல்லை</value>
+  </data>
+  <data name="NoReviewedSections" xml:space="preserve">
+    <value>தற்போது மதிப்பாய்வு செய்யப்பட்ட பிரிவுகள் எதுவும் இல்லை.</value>
+  </data>
+  <data name="NoSectionAudioForStage" xml:space="preserve">
+    <value>இந்த நிலைக்கான பிரிவு ஆடியோ இல்லை</value>
+  </data>
+  <data name="NoSelfCheck" xml:space="preserve">
+    <value>சுய சரிபார்ப்பு இல்லை</value>
+  </data>
+  <data name="NotAbleToLogin" xml:space="preserve">
+    <value>நீங்கள் உள்நுழைய முடியாது.</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>குறிப்பு</value>
+  </data>
+  <data name="NoteInterpret" xml:space="preserve">
+    <value>குறிப்பு விளக்கம்</value>
+  </data>
+  <data name="NoteListen" xml:space="preserve">
+    <value>குறிப்பு கேளுங்கள்</value>
+  </data>
+  <data name="Notes" xml:space="preserve">
+    <value>குறிப்புகள்</value>
+  </data>
+  <data name="NoteTranslator" xml:space="preserve">
+    <value>குறிப்பு மொழிபெயர்ப்பாளர்</value>
+  </data>
+  <data name="NotInWorkflow" xml:space="preserve">
+    <value>இனி பணிப்பாய்வு பகுதியாக இல்லை</value>
+  </data>
+  <data name="NoUnreviewedSections" xml:space="preserve">
+    <value>இந்த நேரத்தில் மதிப்பாய்வு செய்யப்படாத பிரிவுகள் எதுவும் இல்லை.</value>
+  </data>
+  <data name="NullUsername" xml:space="preserve">
+    <value>பயனர் பெயர் காலியாக இருக்கக்கூடாது</value>
+  </data>
+  <data name="Offload" xml:space="preserve">
+    <value>ஆஃப்லோட்</value>
+  </data>
+  <data name="OffloadData" xml:space="preserve">
+    <value>ஆஃப்லோட் டேட்டா</value>
+  </data>
+  <data name="Offloading" xml:space="preserve">
+    <value>பதிவிறக்குகிறது</value>
+  </data>
+  <data name="OffloadWarning" xml:space="preserve">
+    <value>{0} கடைசியாக {1} அன்று ஒத்திசைக்கப்பட்டது. இந்தத் திட்டத்தை நிச்சயமாக ஆஃப்லோட் செய்ய விரும்புகிறீர்களா?</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>சரி</value>
+  </data>
+  <data name="Original" xml:space="preserve">
+    <value>அசல்</value>
+  </data>
+  <data name="OriginalLanguage" xml:space="preserve">
+    <value>அசல் மொழி</value>
+  </data>
+  <data name="OriginalNote" xml:space="preserve">
+    <value>அசல் குறிப்பு</value>
+  </data>
+  <data name="OriginalPassageTitle" xml:space="preserve">
+    <value>பாதை {0} (அசல்)</value>
+  </data>
+  <data name="Passage" xml:space="preserve">
+    <value>பாதை {0}</value>
+  </data>
+  <data name="PassageBackTranslate" xml:space="preserve">
+    <value>பாசேஜ் மீண்டும் மொழிபெயர்</value>
+  </data>
+  <data name="PassageDivide" xml:space="preserve">
+    <value>பாதை பிரிப்பு</value>
+  </data>
+  <data name="PassageDraftListen" xml:space="preserve">
+    <value>பத்தி {0} வரைவு கேட்டல்</value>
+  </data>
+  <data name="PassageListen" xml:space="preserve">
+    <value>பத்தியில் கேளுங்கள்</value>
+  </data>
+  <data name="PassageListenOnly" xml:space="preserve">
+    <value>பத்தியில் மட்டும் கேளுங்கள்</value>
+  </data>
+  <data name="PassageListenTitle" xml:space="preserve">
+    <value>பத்தி {0} கேள்</value>
+  </data>
+  <data name="PassageNumber" xml:space="preserve">
+    <value>பாதை {0}</value>
+  </data>
+  <data name="PassagePeerReview" xml:space="preserve">
+    <value>பத்தி {0} சக மதிப்பாய்வு</value>
+  </data>
+  <data name="PassageRetell" xml:space="preserve">
+    <value>பாதை மறுபரிசீலனை</value>
+  </data>
+  <data name="PassageReview" xml:space="preserve">
+    <value>பத்தியின் விமர்சனம்</value>
+  </data>
+  <data name="PassageReviewAfterReRecording" xml:space="preserve">
+    <value>மறுபதிவு செய்த பிறகு பத்தியின் மதிப்பாய்வு</value>
+  </data>
+  <data name="PassageSelect" xml:space="preserve">
+    <value>பாதை தேர்வு</value>
+  </data>
+  <data name="PassageSelection" xml:space="preserve">
+    <value>வரைவை தேர்ந்தெடுக்கவும்</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>கடவுச்சொல்</value>
+  </data>
+  <data name="PasswordGrid" xml:space="preserve">
+    <value>கடவுச்சொல்</value>
+  </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>கடவுச்சொல் தேவை</value>
+  </data>
+  <data name="PasswordType" xml:space="preserve">
+    <value>கடவுச்சொல்</value>
+  </data>
+  <data name="PeerCheck" xml:space="preserve">
+    <value>சக சோதனை</value>
+  </data>
+  <data name="PeerReview" xml:space="preserve">
+    <value>சக மதிப்பாய்வு</value>
+  </data>
+  <data name="PeerRevise" xml:space="preserve">
+    <value>சக மதிப்பாய்வு</value>
+  </data>
+  <data name="PleaseConnect" xml:space="preserve">
+    <value>இணையத்துடன் இணைத்து மீண்டும் ரெண்டரைத் தொடங்கவும்.</value>
+  </data>
+  <data name="PleaseLogIn" xml:space="preserve">
+    <value>தொடங்குவதற்கு உள்நுழையவும்.</value>
+  </data>
+  <data name="PrecedingAudio" xml:space="preserve">
+    <value>முந்தைய ஆடியோ</value>
+  </data>
+  <data name="PreviousDraft" xml:space="preserve">
+    <value>முந்தைய வரைவு</value>
+  </data>
+  <data name="Proceed" xml:space="preserve">
+    <value>தொடரவும்</value>
+  </data>
+  <data name="Processes" xml:space="preserve">
+    <value>செயல்முறைகள்</value>
+  </data>
+  <data name="ProjectAddedSuccesfully" xml:space="preserve">
+    <value>இந்த திட்டம் வெற்றிகரமாக சேர்க்கப்பட்டது.</value>
+  </data>
+  <data name="ProjectConfiguration" xml:space="preserve">
+    <value>திட்ட கட்டமைப்பு</value>
+  </data>
+  <data name="ProjectDeletedTitle" xml:space="preserve">
+    <value>திட்டம் நீக்கப்பட்டது</value>
+  </data>
+  <data name="ProjectHome" xml:space="preserve">
+    <value>திட்ட முகப்பு</value>
+  </data>
+  <data name="ProjectId" xml:space="preserve">
+    <value>திட்ட ஐடி</value>
+  </data>
+  <data name="ProjectList" xml:space="preserve">
+    <value>திட்டப் பட்டியல்</value>
+  </data>
+  <data name="ProjectsDownloadedSuccessfully" xml:space="preserve">
+    <value>திட்டப்பணிகள் பதிவிறக்கம் செய்யப்பட்டன.</value>
+  </data>
+  <data name="ProjectTeams" xml:space="preserve">
+    <value>திட்டக் குழுக்கள்</value>
+  </data>
+  <data name="ProjectUsers" xml:space="preserve">
+    <value>திட்ட பயனர்கள்</value>
+  </data>
+  <data name="ProjectWorkflow" xml:space="preserve">
+    <value>திட்ட பணிப்பாய்வு</value>
+  </data>
+  <data name="QuestionFormatted" xml:space="preserve">
+    <value>கேள்வி {0}</value>
+  </data>
+  <data name="QuestionAndResponse" xml:space="preserve">
+    <value>கேள்வி &amp; பதில்</value>
+  </data>
+  <data name="QuestionPlacement" xml:space="preserve">
+    <value>கேள்வி இடம்</value>
+  </data>
+  <data name="QuestionSet" xml:space="preserve">
+    <value>கேள்வித் தொகுப்பு {0}</value>
+  </data>
+  <data name="Record" xml:space="preserve">
+    <value>பதிவு</value>
+  </data>
+  <data name="RecordedSegmentWarningConfirmation" xml:space="preserve">
+    <value>முழுமையான ஒன்றிணைப்பு</value>
+  </data>
+  <data name="RecordedSegmentWarningMessage" xml:space="preserve">
+    <value>முந்தைய பிரிவில் ஏற்கனவே பதில் ஆடியோ உள்ளது. இந்த இரண்டு பிரிவுகளையும் ஒன்றாக இணைத்தால், முன்பு பதிவு செய்யப்பட்ட ஆடியோ இழக்கப்படும்.</value>
+  </data>
+  <data name="RecordedSegmentWarningTitle" xml:space="preserve">
+    <value>பதில்கள் இழக்கப்படும்</value>
+  </data>
+  <data name="RecordInterpretation" xml:space="preserve">
+    <value>பதிவு விளக்கம்</value>
+  </data>
+  <data name="RecordNewDraft" xml:space="preserve">
+    <value>புதிய வரைவை பதிவு செய்யவும்</value>
+  </data>
+  <data name="RecordQuestion" xml:space="preserve">
+    <value>பதிவு கேள்வி (Q{0})</value>
+  </data>
+  <data name="RecordQuestionTitle" xml:space="preserve">
+    <value>பதிவு கேள்வி</value>
+  </data>
+  <data name="RecordResponse" xml:space="preserve">
+    <value>பதில் பதிவு</value>
+  </data>
+  <data name="RecordRetell" xml:space="preserve">
+    <value>பதிவு மீண்டும் சொல்லுங்கள்</value>
+  </data>
+  <data name="RecordStandardQuestion" xml:space="preserve">
+    <value>நிலையான கேள்வியை பதிவு செய்யவும் {0}</value>
+  </data>
+  <data name="RecordTranslation" xml:space="preserve">
+    <value>பதிவு மொழிபெயர்ப்பு</value>
+  </data>
+  <data name="Recovery" xml:space="preserve">
+    <value>மீட்பு</value>
+  </data>
+  <data name="References" xml:space="preserve">
+    <value>குறிப்புகள்</value>
+  </data>
+  <data name="RemoveWork" xml:space="preserve">
+    <value>வேலையை அகற்று</value>
+  </data>
+  <data name="RemoveWorkMessage" xml:space="preserve">
+    <value>இந்த நிலை உடனடியாக அகற்றப்பட்டு, செயல்பாட்டில் உள்ள அனைத்து வேலைகளும் இழக்கப்படும்.</value>
+  </data>
+  <data name="RenderUser" xml:space="preserve">
+    <value>ரெண்டர் பயனர்</value>
+  </data>
+  <data name="Replace" xml:space="preserve">
+    <value>மாற்றவும்</value>
+  </data>
+  <data name="RequireNoteListen" xml:space="preserve">
+    <value>குறிப்பு கேட்கும் வழிகாட்டல்</value>
+  </data>
+  <data name="RequireNoteReview" xml:space="preserve">
+    <value>குறிப்பு மதிப்பாய்வு வழிகாட்டல்</value>
+  </data>
+  <data name="RequirePassageListen" xml:space="preserve">
+    <value>பத்தியில் கேட்கும் வழிகாட்டுதல்</value>
+  </data>
+  <data name="RequirePassageReview" xml:space="preserve">
+    <value>பத்தியின் மறுஆய்வு வழிகாட்டல்</value>
+  </data>
+  <data name="RequirePassageTranscribeListen" xml:space="preserve">
+    <value>பாசேஜ் டிரான்ஸ்கிரைப் வழிகாட்டுதல்</value>
+  </data>
+  <data name="RequireQuestionContextListen" xml:space="preserve">
+    <value>கேள்வி சூழல் கேட்கும் வழிகாட்டுதல்</value>
+  </data>
+  <data name="RequireRecordResponse" xml:space="preserve">
+    <value>பதில் வழிகாட்டுதலைச் சேர்க்கவும்</value>
+  </data>
+  <data name="RequireReviewAfterReRecording" xml:space="preserve">
+    <value>மறுபதிவு வழிகாட்டலுக்குப் பிறகு பத்தியின் மதிப்பாய்வு</value>
+  </data>
+  <data name="RequireSectionListen" xml:space="preserve">
+    <value>பிரிவு கேட்கும் வழிகாட்டுதல்</value>
+  </data>
+  <data name="RequireSectionReview" xml:space="preserve">
+    <value>பிரிவு மதிப்பாய்வு வழிகாட்டுதல்</value>
+  </data>
+  <data name="RequireSegmentTranscribeListen" xml:space="preserve">
+    <value>செக்மென்ட் டிரான்ஸ்கிரைப் வழிகாட்டுதல்</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>மீட்டமை</value>
+  </data>
+  <data name="ResetSection" xml:space="preserve">
+    <value>பிரிவை மீட்டமைக்கவும்</value>
+  </data>
+  <data name="Response" xml:space="preserve">
+    <value>பதில் {0}</value>
+  </data>
+  <data name="Restore" xml:space="preserve">
+    <value>மீட்டமை</value>
+  </data>
+  <data name="RestoreSection" xml:space="preserve">
+    <value>பகுதியை மீட்டமை</value>
+  </data>
+  <data name="RestoreSectionConfirmation" xml:space="preserve">
+    <value>இந்தப் பிரிவை மீட்டெடுக்க விரும்புகிறீர்களா?</value>
+  </data>
+  <data name="RestoreSnapshotInfo" xml:space="preserve">
+    <value>இந்த ஸ்னாப்ஷாட்டை மீட்டமைப்பதால், அகற்றப்பட்ட கட்டத்தை பணிப்பாய்வுக்குள் மீட்டெடுக்க முடியாது.</value>
+  </data>
+  <data name="Retell" xml:space="preserve">
+    <value>மீண்டும் சொல்லுங்கள்</value>
+  </data>
+  <data name="RetellCheck" xml:space="preserve">
+    <value>மறுபரிசீலனை சரிபார்ப்பு (பத்தி {0})</value>
+  </data>
+  <data name="ReturnToLogIn" xml:space="preserve">
+    <value>உள்நுழைவுக்குத் திரும்பு</value>
+  </data>
+  <data name="Review" xml:space="preserve">
+    <value>விமர்சனம்</value>
+  </data>
+  <data name="Reviewed" xml:space="preserve">
+    <value>மதிப்பாய்வு செய்யப்பட்டது</value>
+  </data>
+  <data name="ReviewQuestions" xml:space="preserve">
+    <value>கேள்விகள் பத்தியை மதிப்பாய்வு செய்யவும் {0}</value>
+  </data>
+  <data name="Revise" xml:space="preserve">
+    <value>திருத்தவும்</value>
+  </data>
+  <data name="Revision" xml:space="preserve">
+    <value>திருத்தம்</value>
+  </data>
+  <data name="RoleAssignment" xml:space="preserve">
+    <value>பங்கு ஒதுக்கீடு</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>தேடுதல்</value>
+  </data>
+  <data name="Section" xml:space="preserve">
+    <value>பிரிவு {0}</value>
+  </data>
+  <data name="SectionAndPassageListen" xml:space="preserve">
+    <value>பகுதி மற்றும் பத்தியைக் கேளுங்கள்</value>
+  </data>
+  <data name="SectionAssignment" xml:space="preserve">
+    <value>பிரிவு ஒதுக்கீடு</value>
+  </data>
+  <data name="SectionDraft" xml:space="preserve">
+    <value>பிரிவு {0} வரைவு</value>
+  </data>
+  <data name="SectionFeedbackTitle" xml:space="preserve">
+    <value>பிரிவு {0} பின்னூட்டம்</value>
+  </data>
+  <data name="SectionInformation" xml:space="preserve">
+    <value>பிரிவு தகவல்</value>
+  </data>
+  <data name="SectionList" xml:space="preserve">
+    <value>பிரிவு பட்டியல்</value>
+  </data>
+  <data name="SectionListen" xml:space="preserve">
+    <value>பகுதி கேள்</value>
+  </data>
+  <data name="SectionListenOnly" xml:space="preserve">
+    <value>பகுதி கேட்க மட்டும்</value>
+  </data>
+  <data name="SectionListenTitle" xml:space="preserve">
+    <value>பிரிவு {0} கேள்</value>
+  </data>
+  <data name="SectionNumberLabel" xml:space="preserve">
+    <value>பிரிவு எண்</value>
+  </data>
+  <data name="SectionReferenceLabel" xml:space="preserve">
+    <value>வசன குறிப்பு</value>
+  </data>
+  <data name="SectionReset" xml:space="preserve">
+    <value>பிரிவு மீட்டமைக்கப்பட்டது.</value>
+  </data>
+  <data name="SectionReview" xml:space="preserve">
+    <value>பிரிவு மதிப்பாய்வு</value>
+  </data>
+  <data name="SectionSelect" xml:space="preserve">
+    <value>பகுதி தேர்வு</value>
+  </data>
+  <data name="SectionsMovingWarning" xml:space="preserve">
+    <value>பிரிவுகள் அடுத்த கட்டத்திற்கு நகரும்</value>
+  </data>
+  <data name="SectionStatus" xml:space="preserve">
+    <value>பிரிவு நிலை</value>
+  </data>
+  <data name="SectionStepLabel" xml:space="preserve">
+    <value>தற்போதைய படி</value>
+  </data>
+  <data name="SectionTitle" xml:space="preserve">
+    <value>பிரிவு {0} தலைப்பு</value>
+  </data>
+  <data name="SectionTitleLabel" xml:space="preserve">
+    <value>பிரிவு தலைப்பு</value>
+  </data>
+  <data name="Segment" xml:space="preserve">
+    <value>பிரிவு {0}</value>
+  </data>
+  <data name="SegmentBackTranslate" xml:space="preserve">
+    <value>பகுதி மீண்டும் மொழிபெயர்</value>
+  </data>
+  <data name="SegmentBackTranslateSelect" xml:space="preserve">
+    <value>பிரிவு மீண்டும் மொழிபெயர் தேர்ந்தெடு</value>
+  </data>
+  <data name="SegmentBackTranslateTitle" xml:space="preserve">
+    <value>{0} - பிரிவு {1}</value>
+  </data>
+  <data name="SegmentFreeCut" xml:space="preserve">
+    <value>செக்மென்ட் பிரீ கட்</value>
+  </data>
+  <data name="SegmentWillBeCleared" xml:space="preserve">
+    <value>தற்போதைய பிரிவுகள் அழிக்கப்படும்</value>
+  </data>
+  <data name="SelectADraft" xml:space="preserve">
+    <value>ஒரு வரைவைத் தேர்ந்தெடுக்கவும்</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>அனைத்தையும் தெரிவுசெய்</value>
+  </data>
+  <data name="SelectAProfile" xml:space="preserve">
+    <value>உள்நுழைய சுயவிவரத்தைத் தேர்ந்தெடுக்கவும்</value>
+  </data>
+  <data name="SelectAProject" xml:space="preserve">
+    <value>திட்டத் தேர்வு</value>
+  </data>
+  <data name="SelectDisplay" xml:space="preserve">
+    <value>காட்சியைத் தேர்ந்தெடுக்கவும்</value>
+  </data>
+  <data name="SelectDraft" xml:space="preserve">
+    <value>ஒரு வரைவைத் தேர்ந்தெடுக்கவும்</value>
+  </data>
+  <data name="SelectProjectsToImport" xml:space="preserve">
+    <value>இறக்குமதி செய்ய திட்டங்களைத் தேர்ந்தெடுக்கவும்</value>
+  </data>
+  <data name="SelectSection" xml:space="preserve">
+    <value>பிரிவைத் தேர்ந்தெடுக்கவும்</value>
+  </data>
+  <data name="SelectSnapshot" xml:space="preserve">
+    <value>ஒரு ஸ்னாப்ஷாட்டைத் தேர்ந்தெடுக்கவும்</value>
+  </data>
+  <data name="SelectSnapshotDescription" xml:space="preserve">
+    <value>தொடர குறிப்பிட்ட ஸ்னாப்ஷாட்டைத் தேர்ந்தெடுக்கவும். தேர்வு செய்யப்படாத ஸ்னாப்ஷாட் நீக்கப்படும்.</value>
+  </data>
+  <data name="Sequence" xml:space="preserve">
+    <value>வரிசை</value>
+  </data>
+  <data name="Snapshot" xml:space="preserve">
+    <value>ஸ்னாப்ஷாட்</value>
+  </data>
+  <data name="SnapshotChosen" xml:space="preserve">
+    <value>ஸ்னாப்ஷாட் தேர்வு செய்யப்பட்டது</value>
+  </data>
+  <data name="SnapshotConflict" xml:space="preserve">
+    <value>இந்தப் பிரிவில் ஸ்னாப்ஷாட் முரண்பாடு உள்ளது: {0}</value>
+  </data>
+  <data name="Snapshots" xml:space="preserve">
+    <value>ஸ்னாப்ஷாட்கள்</value>
+  </data>
+  <data name="SortBy" xml:space="preserve">
+    <value>வரிசைப்படுத்து</value>
+  </data>
+  <data name="Source" xml:space="preserve">
+    <value>ஆதாரம்</value>
+  </data>
+  <data name="StageName" xml:space="preserve">
+    <value>மேடை பெயர்</value>
+  </data>
+  <data name="StandardQuestion" xml:space="preserve">
+    <value>நிலையான கேள்வி {0}</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>தொடங்கு</value>
+  </data>
+  <data name="Step" xml:space="preserve">
+    <value>படி</value>
+  </data>
+  <data name="Step1" xml:space="preserve">
+    <value>படி 1</value>
+  </data>
+  <data name="Step2" xml:space="preserve">
+    <value>படி 2</value>
+  </data>
+  <data name="SupplementaryMaterial" xml:space="preserve">
+    <value>துணைப் பொருள்</value>
+  </data>
+  <data name="Sync" xml:space="preserve">
+    <value>ஒத்திசை</value>
+  </data>
+  <data name="TeamCheck" xml:space="preserve">
+    <value>சக சோதனை</value>
+  </data>
+  <data name="TeamOne" xml:space="preserve">
+    <value>அணி 1</value>
+  </data>
+  <data name="TeamTwo" xml:space="preserve">
+    <value>அணி 2</value>
+  </data>
+  <data name="Text" xml:space="preserve">
+    <value>உரை</value>
+  </data>
+  <data name="TextNote" xml:space="preserve">
+    <value>உரை குறிப்பு</value>
+  </data>
+  <data name="TotalPassagesLabel" xml:space="preserve">
+    <value>மொத்த பாதைகள்</value>
+  </data>
+  <data name="TotalVerses" xml:space="preserve">
+    <value>மொத்த வசனங்கள்:</value>
+  </data>
+  <data name="Transcribe" xml:space="preserve">
+    <value>எடுத்தெழுது</value>
+  </data>
+  <data name="Transcribe2" xml:space="preserve">
+    <value>எடுத்தெழுது 2</value>
+  </data>
+  <data name="TranscribePassage" xml:space="preserve">
+    <value>பத்தியை எடுத்தெழுது</value>
+  </data>
+  <data name="TranscribeSegment" xml:space="preserve">
+    <value>பிரிவை எடுத்தெழுது</value>
+  </data>
+  <data name="Translated" xml:space="preserve">
+    <value>மொழிபெயர்க்கப்பட்டது</value>
+  </data>
+  <data name="Translation" xml:space="preserve">
+    <value>மொழிபெயர்ப்பு</value>
+  </data>
+  <data name="Unassigned" xml:space="preserve">
+    <value>ஒதுக்கப்படாதது</value>
+  </data>
+  <data name="Unreviewed" xml:space="preserve">
+    <value>மதிப்பாய்வு செய்யப்படவில்லை</value>
+  </data>
+  <data name="UnsavedRolesMessage" xml:space="preserve">
+    <value>நீங்கள் ஒதுக்கிய பாத்திரங்களைச் சேமிக்க விரும்பினால், கீழ் வலதுபுறத்தில் உள்ள தொடர அம்புக்குறியைத் தேர்ந்தெடுக்கவும்.</value>
+  </data>
+  <data name="UnsavedRolesTitle" xml:space="preserve">
+    <value>சேமிக்கப்படாத பாத்திரங்கள் உள்ளன</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>புதுப்பிக்கவும்</value>
+  </data>
+  <data name="UpdatedPassage" xml:space="preserve">
+    <value>புதுப்பிக்கப்பட்ட பாதை</value>
+  </data>
+  <data name="UserLabel" xml:space="preserve">
+    <value>தற்போதைய பயனாளி</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>பயனர் பெயர்</value>
+  </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>இந்த பயனர்பெயர் இல்லை</value>
+  </data>
+  <data name="UserSettings" xml:space="preserve">
+    <value>பயனர் அமைப்புகள்</value>
+  </data>
+  <data name="UserType" xml:space="preserve">
+    <value>பயனர் வகை</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>பதிப்பு</value>
+  </data>
+  <data name="VesselUser" xml:space="preserve">
+    <value>கப்பல் பயனர்</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>காண்க</value>
+  </data>
+  <data name="ViewAllUsers" xml:space="preserve">
+    <value>அனைத்து பயனர்களையும் காண்க</value>
+  </data>
+  <data name="ViewSectionAssignments" xml:space="preserve">
+    <value>பிரிவு பணிகளைப் பார்க்கவும்</value>
+  </data>
+  <data name="WelcomeToRender" xml:space="preserve">
+    <value>Render க்கு வரவேற்கிறோம்</value>
+  </data>
+  <data name="WhichSnapshot" xml:space="preserve">
+    <value>எந்த {0} ஸ்னாப்ஷாட்டைத் தொடர விரும்புகிறீர்கள்?</value>
+  </data>
+  <data name="WorkflowConfiguration" xml:space="preserve">
+    <value>பணிப்பாய்வு கட்டமைப்பு</value>
+  </data>
+  <data name="WorkflowDeleteStageMessage" xml:space="preserve">
+    <value>கட்டத்தை அகற்றும் முன், செயல்பாட்டில் உள்ள வேலையை எவ்வாறு கையாள்வது என்பதைத் தேர்வுசெய்யவும்:</value>
+  </data>
+  <data name="WorkflowDeleteStageTitle" xml:space="preserve">
+    <value>இந்த கட்டத்தில் தரவு உள்ளது</value>
+  </data>
+  <data name="WorkWillBeLost" xml:space="preserve">
+    <value>உங்கள் வேலை இழக்கப்படும்</value>
+  </data>
+  <data name="DividePassageMessage" xml:space="preserve">
+    <value>நீங்கள் இப்போது பத்தியைப் பிரித்தால், உங்கள் வேலை இழக்கப்படும்
+</value>
+  </data>
+  <data name="ErrorOccuredTryAgain" xml:space="preserve">
+    <value>பிழை ஏற்பட்டது. தயவு செய்து மீண்டும் முயற்சிக்கவும்.</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>பிழை
+</value>
+  </data>
+  <data name="RetellQuestionResponse" xml:space="preserve">
+    <value>மறுபரிசீலனை மற்றும் கேள்வி &amp; பதில்
+</value>
+  </data>
+  <data name="DiscardWork" xml:space="preserve">
+    <value>வேலையை நிராகரிக்கவும்</value>
+  </data>
+  <data name="SectionView" xml:space="preserve">
+    <value>பகுதி பார்வை</value>
+  </data>
+  <data name="TeamTitle" xml:space="preserve">
+    <value>குழு {0}</value>
+  </data>
+  <data name="TeamView" xml:space="preserve">
+    <value>குழு பார்வை</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>நகலெடுக்கவும்</value>
+  </data>
+  <data name="SegmentSelect" xml:space="preserve">
+    <value>பிரிவு தேர்வு</value>
+  </data>
+  <data name="ClearSegmentsQuestion" xml:space="preserve">
+    <value>பகுதிகளை அழிக்கவா?</value>
+  </data>
+  <data name="ClearSegmentsConfirmation" xml:space="preserve">
+    <value>தற்போதைய பிரிவுகளை நிச்சயமாக அழிக்க விரும்புகிறீர்களா? இந்தச் செயலைச் செயல்தவிர்க்க முடியாது.</value>
+  </data>
+  <data name="SegmentReview" xml:space="preserve">
+    <value>பிரிவு மதிப்பாய்வு</value>
+  </data>
+  <data name="Question" xml:space="preserve">
+    <value>கேள்வி</value>
+  </data>
+  <data name="SegmentCombine" xml:space="preserve">
+    <value>பிரிவு இணைக்கவும்</value>
+  </data>
+  <data name="CombineWarningMessage" xml:space="preserve">
+    <value>சிவப்பு பகுதி ஏற்கனவே மீண்டும் மொழிபெயர்க்கப்பட்டுள்ளது. தொடர்வது பின் மொழிபெயர்ப்பை நீக்கும்.</value>
+  </data>
+  <data name="Configuration" xml:space="preserve">
+    <value>கட்டமைப்பு</value>
+  </data>
+  <data name="ConfigureWorkflow" xml:space="preserve">
+    <value>பணிப்பாய்வுகளை உள்ளமைக்கவும்</value>
+  </data>
+  <data name="AssignSections" xml:space="preserve">
+    <value>பிரிவுகளை ஒதுக்குங்கள்</value>
+  </data>
+  <data name="AssignRoles" xml:space="preserve">
+    <value>பாத்திரங்களை ஒதுக்குங்கள்</value>
+  </data>
+  <data name="Workflow" xml:space="preserve">
+    <value>பணிப்பாய்வு</value>
+  </data>
+  <data name="SelectUser" xml:space="preserve">
+    <value>பயனரைத் தேர்ந்தெடுக்கவும்</value>
+  </data>
+  <data name="AddUserButtonText" xml:space="preserve">
+    <value>பயனரைச் சேர்க்கவும்</value>
+  </data>
+  <data name="Render" xml:space="preserve">
+    <value>Render</value>
+  </data>
+  <data name="Global" xml:space="preserve">
+    <value>உலகளாவிய</value>
+  </data>
+  <data name="TextPassword" xml:space="preserve">
+    <value>உரை கடவுச்சொல்</value>
+  </data>
+  <data name="ViewAssignments" xml:space="preserve">
+    <value>பிரிவு பணிகளைப் பார்க்கவும்</value>
+  </data>
+  <data name="DeleteUserModalMessage" xml:space="preserve">
+    <value>{0} அவர்களுக்குப் பிரிவு ஒதுக்கீடுகள் இருந்தால், இவையும் அகற்றப்படும். இந்தச் செயலைச் செயல்தவிர்க்க முடியாது.vi</value>
+  </data>
+  <data name="Return" xml:space="preserve">
+    <value>திரும்பு</value>
+  </data>
+  <data name="SegmentBackTranslate1" xml:space="preserve">
+    <value>பகுதி மீண்டும் மொழிபெயர் 1</value>
+  </data>
+  <data name="SegmentBackTranslate2" xml:space="preserve">
+    <value>பகுதி மீண்டும் மொழிபெயர் 2</value>
+  </data>
+  <data name="PassageBackTranslate1" xml:space="preserve">
+    <value>பாசேஜ் பேக் மொழிபெயர்ப்பு 1</value>
+  </data>
+  <data name="PassageBackTranslate2" xml:space="preserve">
+    <value>பாசேஜ் பேக் மொழிபெயர்ப்பு 2</value>
+  </data>
+  <data name="RetellIsNotAvailable" xml:space="preserve">
+    <value>மறுபரிசீலனை கிடைக்கவில்லை</value>
+  </data>
+  <data name="QuestionAndResponseIsNotAvailable" xml:space="preserve">
+    <value>கேள்வி மற்றும் பதில் கிடைக்கவில்லை</value>
+  </data>
+  <data name="CommunityFeedbackGuidance" xml:space="preserve">
+    <value>சமூக கருத்து வழிகாட்டுதல்</value>
+  </data>
+  <data name="Teams" xml:space="preserve">
+    <value>அணிகள்</value>
+  </data>
+  <data name="DragTeamHere" xml:space="preserve">
+    <value>அணியை இங்கே இழுக்கவும்</value>
+  </data>
+  <data name="Configure" xml:space="preserve">
+    <value>கட்டமைக்கவும்</value>
+  </data>
+  <data name="QuestionNumberAndTotalNumberFormatted" xml:space="preserve">
+    <value>கேள்வி {0} / {1}</value>
+  </data>
+  <data name="GridPassword" xml:space="preserve">
+    <value>கட்ட கடவுச்சொல்</value>
+  </data>
+  <data name="DragSectionHere" xml:space="preserve">
+    <value>பகுதியை இங்கே இழுக்கவும்</value>
+  </data>
+  <data name="Sections" xml:space="preserve">
+    <value>பிரிவுகள்</value>
+  </data>
+  <data name="PressCircleToRecord" xml:space="preserve">
+    <value>பதிவு செய்ய வட்டத்தை அழுத்தவும்</value>
+  </data>
+  <data name="PressCircleToRecordOrPressArrowToAddQuestionFromLibrary" xml:space="preserve">
+    <value>பதிவு செய்ய வட்டத்தை அழுத்தவும் அல்லது நூலகத்திலிருந்து ஒரு கேள்வியைச் சேர்க்க {1} {0} ஐ அழுத்தவும் {1}</value>
+  </data>
+  <data name="Library" xml:space="preserve">
+    <value>நூலகம்</value>
+  </data>
+  <data name="NoQuestionsInTheLibrary" xml:space="preserve">
+    <value>நூலகத்தில் உங்களிடம் கேள்விகள் எதுவும் இல்லை</value>
+  </data>
+  <data name="Questions" xml:space="preserve">
+    <value>கேள்விகள்</value>
+  </data>
+  <data name="PressArrowToAddQuestion" xml:space="preserve">
+    <value>கேள்வியைச் சேர்க்க {0} ஐ அழுத்தவும்</value>
+  </data>
+  <data name="Test" xml:space="preserve">
+    <value>சோதனை</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>மொழி</value>
+  </data>
+  <data name="Translate" xml:space="preserve">
+    <value>மொழிபெயர்</value>
+  </data>
+  <data name="RetellOnly" xml:space="preserve">
+    <value>மீண்டும் சொல்லுங்கள்</value>
+  </data>
+  <data name="QuestionAndResponseOnly" xml:space="preserve">
+    <value>கேள்வி &amp; பதில் மட்டுமே</value>
+  </data>
+  <data name="RenderAvailable" xml:space="preserve">
+    <value>ரெண்டர் {0} கிடைக்கிறது</value>
+  </data>
+  <data name="DownloadRenderButton" xml:space="preserve">
+    <value>புதிய ரெண்டரைப் பதிவிறக்கவும்</value>
+  </data>
+  <data name="DownloadRenderMessage" xml:space="preserve">
+    <value>புதிய ரெண்டர் {0}ஐப் பதிவிறக்கி, புதுப்பித்த நிலையில் இருக்கவும்.</value>
+  </data>
+  <data name="OneUserOneTeam" xml:space="preserve">
+    <value>ஒரு பயனர், ஒரு குழு</value>
+  </data>
+  <data name="UsersCannotBeAssignedToMultipleTeams" xml:space="preserve">
+    <value>பல குழுக்களுக்கு பயனர்களை நியமிக்க முடியாது.</value>
+  </data>
+  <data name="SaveWorkAndProceed" xml:space="preserve">
+    <value>வேலையைச் சேமித்து தொடரவும்</value>
+  </data>
+  <data name="ExitAnyway" xml:space="preserve">
+    <value>எப்படியும் வெளியேறு</value>
+  </data>
+  <data name="SaveWorkAndProceedMessage" xml:space="preserve">
+    <value>பாத்திரங்களைச் சேமித்து தொடர கீழ் வலதுபுறத்தில் உள்ள அம்புக்குறியை அழுத்தவும்.</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>தலைப்பு:</value>
+  </data>
+  <data name="TotalPassages" xml:space="preserve">
+    <value>மொத்த பாதைகள்:</value>
+  </data>
+  <data name="Reference" xml:space="preserve">
+    <value>குறிப்பு:</value>
+  </data>
+  <data name="Process" xml:space="preserve">
+    <value>செயல்முறை:</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>பயனர்:</value>
+  </data>
+  <data name="NoSectionsAreInThisStep" xml:space="preserve">
+    <value>இந்த கட்டத்தில் எந்த பிரிவுகளும் இல்லை</value>
+  </data>
+  <data name="NoteInterpretToConsultant" xml:space="preserve">
+    <value>குறிப்பு ஆலோசகருக்கு விளக்கம்</value>
+  </data>
+  <data name="NoteInterpretToTranslator" xml:space="preserve">
+    <value>குறிப்பு விளக்கம் ஒரு மொழிபெயர்ப்பாளர்</value>
+  </data>
+  <data name="AddUserLabel" xml:space="preserve">
+    <value>புதிய பயனரைச் சேர்க்கவும்</value>
+  </data>
+  <data name="ApprovedSection" xml:space="preserve">
+    <value>அங்கீகரிக்கப்பட்ட பிரிவு</value>
+  </data>
+  <data name="BothSnapshotsDeleted" xml:space="preserve">
+    <value>இரண்டு ஸ்னாப்ஷாட்களும் நீக்கப்பட்டன</value>
+  </data>
+  <data name="DeleteSnapshotsFor" xml:space="preserve">
+    <value>{0}க்கான ஸ்னாப்ஷாட்களை நீக்கவா?</value>
+  </data>
+  <data name="DraftWillBeLost" xml:space="preserve">
+    <value>வரைவு இழக்கப்படும்</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>இல்லை</value>
+  </data>
+  <data name="PasswordRequiredToReset" xml:space="preserve">
+    <value>ஒரு பகுதியை மீட்டமைக்க கடவுச்சொல் தேவை</value>
+  </data>
+  <data name="PasswordRequiredToRestore" xml:space="preserve">
+    <value>ஸ்னாப்ஷாட்டை மீட்டெடுக்க கடவுச்சொல் தேவை</value>
+  </data>
+  <data name="TeamWasChosen" xml:space="preserve">
+    <value>அணி {0} தேர்வு செய்யப்பட்டது</value>
+  </data>
+  <data name="UserAndTeamWereChosenForSection" xml:space="preserve">
+    <value>{1}க்கு {0} தேர்ந்தெடுக்கப்பட்டது</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>ஆம்</value>
+  </data>
+  <data name="YouCannotUndo" xml:space="preserve">
+    <value>இந்தச் செயலைச் செயல்தவிர்க்க முடியாது</value>
+  </data>
+  <data name="YouHaveChosen" xml:space="preserve">
+    <value>நீங்கள் தேர்ந்தெடுத்தீர்கள்:</value>
+  </data>
+  <data name="ResetSectionWarning" xml:space="preserve">
+    <value>பிரிவை மீட்டமைப்பது வரைவு கட்டத்தில் உள்ள எல்லா தரவையும் நீக்கும். இந்தச் செயலைச் செயல்தவிர்க்க முடியாது.</value>
+  </data>
+  <data name="RemovedFromProject" xml:space="preserve">
+    <value>திட்டத்திலிருந்து நீக்கப்பட்டது</value>
+  </data>
+  <data name="DraftEdit" xml:space="preserve">
+    <value>வரைவு திருத்தம்</value>
+  </data>
+  <data name="Stages" xml:space="preserve">
+    <value>நிலைகள்</value>
+  </data>
+  <data name="SectionListenScreenTitle" xml:space="preserve">
+    <value>பகுதி கேள்</value>
+  </data>
+  <data name="PassageListenScreenTitle" xml:space="preserve">
+    <value>பத்தியில் கேளுங்கள்</value>
+  </data>
+  <data name="PassageDivideScreenTitle" xml:space="preserve">
+    <value>பாதை பிரிப்பு</value>
+  </data>
+  <data name="PassageReviewScreenTitle" xml:space="preserve">
+    <value>பத்தியின் விமர்சனம்</value>
+  </data>
+  <data name="SectionReviewScreenTitle" xml:space="preserve">
+    <value>பிரிவு மதிப்பாய்வு</value>
+  </data>
+  <data name="TranscribePassageScreenTitle" xml:space="preserve">
+    <value>பத்தியை எடுத்தெழுது</value>
+  </data>
+  <data name="TranscribeSegmentScreenTitle" xml:space="preserve">
+    <value>பிரிவை எடுத்தெழுது</value>
+  </data>
+  <data name="DoPassageTranscribeScreenTitle" xml:space="preserve">
+    <value>பாசேஜ் எடுத்தெழுது</value>
+  </data>
+  <data name="DoSegmentTranscribeScreenTitle" xml:space="preserve">
+    <value>பிரிவு எடுத்தெழுது</value>
+  </data>
+  <data name="UserWasChosen" xml:space="preserve">
+    <value>{0} தேர்ந்தெடுக்கப்பட்டது</value>
+  </data>
+  <data name="UserWasChosenForSection" xml:space="preserve">
+    <value>{1}க்கு {0} தேர்ந்தெடுக்கப்பட்டது</value>
+  </data>
+  <data name="NoteInterpretScreenTitle" xml:space="preserve">
+    <value>குறிப்பு விளக்கம்</value>
+  </data>
+  <data name="RequirePassageListenPeerCheckSetting" xml:space="preserve">
+    <value>பத்தியில் கேட்கும் வழிகாட்டுதல்</value>
+  </data>
+  <data name="RequireSectionListenPeerCheckSetting" xml:space="preserve">
+    <value>பிரிவு கேட்கும் வழிகாட்டுதல்</value>
+  </data>
+  <data name="OffloadProject" xml:space="preserve">
+    <value>ஆஃப்லோட் {0}?</value>
+  </data>
+  <data name="ContactSupport" xml:space="preserve">
+    <value>உதவிக்கு ஆதரவைத் தொடர்பு கொள்ளவும்.</value>
+  </data>
+  <data name="ErrorWithMessage" xml:space="preserve">
+    <value>பிழை [{0}]</value>
+  </data>
+  <data name="NoProjectsToDownload" xml:space="preserve">
+    <value>பதிவிறக்க எந்த திட்டப்பணிகளும் இல்லை</value>
+  </data>
+  <data name="WrongPassword" xml:space="preserve">
+    <value>தவறான கடவுச்சொல். மீண்டும் முயற்சிக்கவும்.</value>
+  </data>
+  <data name="SyncFailed" xml:space="preserve">
+    <value>தோல்வி</value>
+  </data>
+  <data name="DragUserHere" xml:space="preserve">
+    <value>பயனரை இங்கு இழுக்கவும்</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>பயனர்கள்</value>
+  </data>
+  <data name="DownloadFailed" xml:space="preserve">
+    <value>பதிவிறக்கம் தோல்வியடைந்தது.</value>
+  </data>
+  <data name="ExportComplete" xml:space="preserve">
+    <value>ஏற்றுமதி முடிந்தது</value>
+  </data>
+  <data name="NoSectionsAvailable" xml:space="preserve">
+    <value>பிரிவுகள் எதுவும் இல்லை</value>
+  </data>
+  <data name="TryAgain" xml:space="preserve">
+    <value>தயவு செய்து மீண்டும் முயற்சிக்கவும்</value>
+  </data>
+  <data name="SelectedSnapshotMessageTemplate" xml:space="preserve">
+    <value>{0}, {1} {2} {3}, {4}</value>
+  </data>
+  <data name="TeamWasChosenForSection" xml:space="preserve">
+    <value>{0} இன் {1}, {2}, {3}க்கு தேர்ந்தெடுக்கப்பட்டது</value>
+  </data>
+  <data name="CombineWarningTitle" xml:space="preserve">
+    <value>பின் மொழிபெயர்ப்பு நீக்கப்படும்</value>
+  </data>
+  <data name="January" xml:space="preserve">
+    <value>ஜனவரி</value>
+  </data>
+  <data name="February" xml:space="preserve">
+    <value>பிப்ரவரி</value>
+  </data>
+  <data name="March" xml:space="preserve">
+    <value>மார்ச்</value>
+  </data>
+  <data name="April" xml:space="preserve">
+    <value>ஏப்ரல்</value>
+  </data>
+  <data name="May" xml:space="preserve">
+    <value>மே</value>
+  </data>
+  <data name="June" xml:space="preserve">
+    <value>ஜூன்</value>
+  </data>
+  <data name="July" xml:space="preserve">
+    <value>ஜூலை</value>
+  </data>
+  <data name="August" xml:space="preserve">
+    <value>ஆகஸ்ட்</value>
+  </data>
+  <data name="September" xml:space="preserve">
+    <value>செப்டம்பர்</value>
+  </data>
+  <data name="October" xml:space="preserve">
+    <value>அக்டோபர்</value>
+  </data>
+  <data name="November" xml:space="preserve">
+    <value>நவம்பர்</value>
+  </data>
+  <data name="December" xml:space="preserve">
+    <value>டிசம்பர்</value>
+  </data>
+  <data name="NoSectionAssignedTitle" xml:space="preserve">
+    <value>நீங்கள் இதுவரை எந்தப் பிரிவுகளையும் ஒதுக்கவில்லை</value>
+  </data>
+  <data name="NoSectionAssignedMessage" xml:space="preserve">
+    <value>இங்கே காட்டுவதற்கு பிரிவுகள் ஒதுக்கப்பட வேண்டும்.</value>
+  </data>
+  <data name="SegmentLabel" xml:space="preserve">
+    <value>பிரிவு</value>
+  </data>
+  <data name="DeletedUser" xml:space="preserve">
+    <value>நீக்கப்பட்ட பயனர்</value>
+  </data>
+  <data name="CannotLoadData" xml:space="preserve">
+    <value>பிரிவு {0}க்கான தரவை ஏற்ற முடியாது</value>
+  </data>
+  <data name="SyncAndTryAgain" xml:space="preserve">
+    <value>இது தொடர்ந்து நடந்தால், இணைய ஒத்திசைவை முயற்சிக்கவும் அல்லது திட்டத்தை ஆஃப்லோட்/பதிவிறக்க முயற்சிக்கவும்</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>மீண்டும் முயற்சிக்கவும்</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>வெற்றி!</value>
+  </data>
+  <data name="AddFromComputer" xml:space="preserve">
+    <value>கணினியிலிருந்து திட்டத்தைச் சேர்க்கவும்</value>
+  </data>
+  <data name="CannotLoadAudio" xml:space="preserve">
+    <value>ஆடியோவை ஏற்ற முடியவில்லை</value>
+  </data>
+</root>

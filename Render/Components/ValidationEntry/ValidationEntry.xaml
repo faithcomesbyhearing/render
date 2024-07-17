@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="local:ValidationEntryViewModel"
+                            x:Class="Render.Components.ValidationEntry.ValidationEntry"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:kernel="clr-namespace:Render.Kernel"
+                            xmlns:local="clr-namespace:Render.Components.ValidationEntry"
+                            xmlns:uiResources="clr-namespace:Render.Resources;assembly=Render">
+    <ContentView.Resources>
+        <Style x:Key="EntryLabel" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource Option}" />
+            <Setter Property="FontSize" Value="{StaticResource LargeFontMinus2Font}" />
+            <Setter Property="FontFamily" Value="BoldFont" />
+            <Setter Property="Margin">
+                <x:OnIdiom Default="0,0,0,13" />
+            </Setter>
+        </Style>
+        <Style x:Key="ErrorText" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource Option}" />
+            <Setter Property="FontFamily" Value="RegularFont" />
+            <Setter Property="FontSize" Value="24" />
+        </Style>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <VerticalStackLayout VerticalOptions="Fill">
+
+            <!-- Title above the text entry -->
+            <Label x:Name="ValueLabel"
+                   AutomationId="ValidationEntryLabel"
+                   Style="{StaticResource EntryLabel}" />
+
+            <!-- Text entry. The 'Show Password' icon is displayed inside the text entry in password mode. -->
+            <Border x:Name="ValueFrame" HeightRequest="56"
+                    StrokeShape="RoundRectangle 8"
+                    Background="{StaticResource DarkGrey}"
+                    StrokeThickness="2"
+                    HorizontalOptions="Fill">
+
+                <Grid ColumnDefinitions="*,Auto" HorizontalOptions="Fill">
+                    <Entry x:Name="ValueEntry"
+                           Grid.Column="0"
+                           Grid.ColumnSpan="2"
+                           BackgroundColor="{DynamicResource SecondaryText}"
+                           FontSize="{StaticResource LargeFontMinus2Font}"
+                           TextColor="{StaticResource GreyText}"
+                           PlaceholderColor="{StaticResource SlateLight}"
+                           AutomationId="ValidationEntry" />
+
+                    <Label x:Name="ShowPassword" Grid.Column="1"
+                           AutomationId="ShowPasswordImage"
+                           WidthRequest="30"
+                           VerticalOptions="Center"
+                           FontSize="30"
+                           FontFamily="Icons"
+                           Text="{uiResources:IconExtensions View}"
+                           TextColor="{StaticResource MainIconColor}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="ShowPasswordTap" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Grid>
+            </Border>
+
+            <!-- Validation message under the text entry -->
+            <Label x:Name="ValidationLabel"
+                   AutomationId="ValidationErrorLabel"
+                   Style="{StaticResource ErrorText}"
+                   VerticalOptions="Start" />
+        </VerticalStackLayout>
+    </ContentView.Content>
+</kernel:RenderComponentBase>

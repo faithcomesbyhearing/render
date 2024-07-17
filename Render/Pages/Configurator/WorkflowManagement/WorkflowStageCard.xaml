@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="workflowManagement:WorkflowStageCardViewModel"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:workflowManagement="clr-namespace:Render.Pages.Configurator.WorkflowManagement;assembly=Render"
+                            xmlns:resources="clr-namespace:Render.Resources;assembly=Render"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:dragAndDrop="clr-namespace:Render.Kernel.DragAndDrop;assembly=Render"
+                            xmlns:localization="using:Render.Resources.Localization"
+                            x:Class="Render.Pages.Configurator.WorkflowManagement.WorkflowStageCard">
+    <ContentView.Resources>
+        <Style x:Key="BoxViewStyle" TargetType="BoxView" BasedOn="{StaticResource BaseStageCardLine}">
+            <Setter Property="Opacity" Value=".8" />
+            <Setter Property="WidthRequest" Value="330" />
+        </Style>
+
+        <Style x:Key="BorderStyle" TargetType="Border">
+            <Setter Property="StrokeThickness" Value="1" />
+            <Setter Property="StrokeShape" Value="RoundRectangle 16" />
+        </Style>
+    </ContentView.Resources>
+
+    <HorizontalStackLayout Spacing="0">
+        
+        <!-- Original Card -->
+        <Border x:Name="OriginalCard"
+                Style="{StaticResource BorderStyle}"
+                BackgroundColor="{StaticResource StageCardBackground}"
+                VerticalOptions="Fill"
+                Padding="20,0"
+                WidthRequest="354">
+            <Grid HorizontalOptions="Fill">
+                <Grid.RowDefinitions>
+                    <RowDefinition x:Name="Top" Height="Auto" />
+                    <RowDefinition x:Name="Mid" Height="*" />
+                    <RowDefinition x:Name="Bottom" Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <!-- Top half -->
+                <HorizontalStackLayout Grid.Row="0"
+                                       HeightRequest="96"
+                                       MinimumHeightRequest="96"
+                                       VerticalOptions="Fill">
+                    <Label x:Name="StageIcon"
+                           HorizontalOptions="End"
+                           MinimumWidthRequest="50"
+                           Margin="2,0,15,0"
+                           FontFamily="Icons"
+                           FontSize="54"
+                           VerticalOptions="Center"
+                           TextColor="{DynamicResource SecondaryText}"
+                           AutomationId="TopHalfStageIcon" />
+                    <Label x:Name="StageName" Style="{StaticResource StageNameLabel}"
+                           LineBreakMode="WordWrap"
+                           WidthRequest="250"
+                           VerticalOptions="Center"
+                           HorizontalOptions="FillAndExpand"
+                           Margin="0,5,0,5"
+                           AutomationId="TopHalfStageLabel" />
+                </HorizontalStackLayout>
+
+                <!-- Mid half -->
+                <Grid Grid.Row="1"
+                      Padding="0"
+                      AutomationId="MidHalfCardGrid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <BoxView Grid.Row="0"
+                             Style="{StaticResource BoxViewStyle}"
+                             AutomationId="MidHalfTopSeparator" />
+                    <ScrollView Grid.Row="1" VerticalOptions="Fill">
+                        <StackLayout x:Name="StepListView"
+                                     Spacing="10"
+                                     Padding="15,26"
+                                     VerticalOptions="FillAndExpand">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <workflowManagement:StepLabel />
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+                    </ScrollView>
+                    <BoxView Grid.Row="2"
+                             Style="{StaticResource BoxViewStyle}"
+                             AutomationId="MidHalfBottomSeparator" />
+                </Grid>
+
+                <!-- Bottom half -->
+                <Grid Grid.Row="2"
+                      HeightRequest="81"
+                      ColumnDefinitions="Auto,*,Auto"
+                      Padding="0,5">
+                    <Label Grid.Column="0"
+                           x:Name="LockIcon"
+                           HorizontalOptions="StartAndExpand"
+                           Margin="0"
+                           FontFamily="Icons"
+                           Text="{resources:IconExtensions Lock}"
+                           TextColor="{DynamicResource SecondaryText}"
+                           FontSize="50"
+                           Padding="0,5,0,0"
+                           AutomationId="LockIcon" />
+                    <StackLayout Grid.Column="0" x:Name="DeleteButton"
+                                 Padding="0" Margin="0,10,0,0"
+                                 HorizontalOptions="StartAndExpand">
+                        <Label FontFamily="Icons"
+                               Text="{resources:IconExtensions Delete}"
+                               FontSize="42"
+                               TextColor="{DynamicResource SecondaryText}"
+                               Margin="0" Padding="0"
+                               HorizontalOptions="End" AutomationId="DeleteIcon" />
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="DeleteButtonGestureRecognizer"
+                                                  AutomationId="DeleteStageButton"
+                                                  Tapped="OnButtonClicked" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <StackLayout Grid.Column="2" x:Name="SettingsIcon"
+                                 Padding="0"
+                                 HorizontalOptions="End">
+                        <Label Text="{StaticResource Settings}"
+                               FontFamily="Icons"
+                               TextColor="{DynamicResource SecondaryText}"
+                               FontSize="54"
+                               Padding="0,4,0,0" AutomationId="SettingsIcon" />
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="SettingsIconGestureRecognizer"
+                                                      AutomationId="WorkflowStageSettingsCard"
+                                                      Tapped="OnButtonClicked" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                </Grid>
+            </Grid>
+        </Border>
+
+        <Border BackgroundColor="Transparent">
+            <HorizontalStackLayout HorizontalOptions="Fill">
+
+                <!-- ArrowBeforeRectangle -->
+                <AbsoluteLayout x:Name="AfterArrow"
+                                WidthRequest="96"
+                                VerticalOptions="Center"
+                                HeightRequest="37"
+                                AutomationId="AfterArrow">
+                    <BoxView HeightRequest="5" VerticalOptions="Center"
+                             BackgroundColor="{StaticResource Option}"
+                             AbsoluteLayout.LayoutBounds="0,0,1,1"
+                             AbsoluteLayout.LayoutFlags="All" />
+                    <Label x:Name="AfterArrowhead"
+                           Text="{StaticResource StageCardArrow}"
+                           FontFamily="Icons"
+                           TextColor="{StaticResource Option}"
+                           FontSize="37"
+                           VerticalOptions="Center"
+                           AbsoluteLayout.LayoutBounds="0,0.5,1,50"
+                           AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional" />
+                </AbsoluteLayout>
+
+                <!--Add new stage-->
+                <AbsoluteLayout
+                    x:Name="AddNewStageBox"
+                    WidthRequest="354"
+                    VerticalOptions="FillAndExpand"
+                    AutomationId="AddNewStageBox">
+                    <Rectangle Fill="Transparent"
+                               RadiusX="16"
+                               RadiusY="16"
+                               StrokeThickness="2"
+                               StrokeDashArray="7,4"
+                               StrokeDashOffset="6"
+                               AbsoluteLayout.LayoutBounds="0,0,1,1"
+                               AbsoluteLayout.LayoutFlags="All">
+                        <Rectangle.Stroke>
+                            <SolidColorBrush Color="{DynamicResource Option}" />
+                        </Rectangle.Stroke>
+                    </Rectangle>
+                    <Label Style="{StaticResource NewStageCardLabel}"
+                           Text="{x:Static localization:AppResources.AddStageHere}"
+                           AutomationId="NewStageLabel"
+                           AbsoluteLayout.LayoutBounds="0,.5,1,32"
+                           AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional" />
+                </AbsoluteLayout>
+
+                <!--AfterNewStageArrow-->
+                <AbsoluteLayout x:Name="AfterNewStageArrow"
+                                HeightRequest="37"
+                                WidthRequest="96"
+                                VerticalOptions="Center"
+                                AutomationId="AfterArrow">
+                    <BoxView HeightRequest="5" VerticalOptions="Center"
+                             BackgroundColor="{StaticResource Option}"
+                             AbsoluteLayout.LayoutBounds="0,0,1,1"
+                             AbsoluteLayout.LayoutFlags="All" />
+                    <Label x:Name="AfterNewStageArrowhead"
+                           Text="{StaticResource StageCardArrow}"
+                           FontFamily="Icons"
+                           TextColor="{StaticResource Option}"
+                           FontSize="37"
+                           VerticalOptions="Center"
+                           AbsoluteLayout.LayoutBounds="0,0.5,1,50"
+                           AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional" />
+                </AbsoluteLayout>
+            </HorizontalStackLayout>
+
+            <Border.Effects>
+                <dragAndDrop:DropRecognizerEffect x:Name="DropRecognizerEffect" Drop="DropRecognizerEffect_Drop" />
+            </Border.Effects>
+        </Border>
+    </HorizontalStackLayout>
+
+</kernel:RenderComponentBase>

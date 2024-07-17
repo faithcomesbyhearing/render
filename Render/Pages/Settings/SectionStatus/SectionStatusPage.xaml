@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderPageBase x:TypeArguments="sectionStatus:SectionStatusPageViewModel"
+                       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                       xmlns:sectionStatus="clr-namespace:Render.Pages.Settings.SectionStatus;assembly=Render"
+                       xmlns:titleBar="clr-namespace:Render.Components.TitleBar"
+                       xmlns:processesView="clr-namespace:Render.Pages.Settings.SectionStatus.Processes;assembly=Render"
+                       xmlns:localization="clr-namespace:Render.Resources.Localization"
+                       xmlns:recovery="clr-namespace:Render.Pages.Settings.SectionStatus.Recovery"
+                       xmlns:common="clr-namespace:Render.Common"
+                       x:Class="Render.Pages.Settings.SectionStatus.SectionStatusPage"
+                       NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <Style x:Key="ComponentSelectLabel" TargetType="Label">
+            <Setter Property="LineBreakMode" Value="NoWrap" />
+            <Setter Property="VerticalTextAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="{StaticResource LargeFontMinus2Font}" />
+            <Setter Property="FontFamily" Value="MediumFont" />
+        </Style>
+        <Style x:Key="RequiredDot" TargetType="Frame">
+            <Setter Property="WidthRequest" Value="9"/>
+            <Setter Property="HeightRequest" Value="9"/>
+            <Setter Property="CornerRadius" Value="9"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="BackgroundColor" Value="{DynamicResource Error}"/>
+            <Setter Property="VerticalOptions" Value="Start"/>
+            <Setter Property="HorizontalOptions" Value="End"/>
+        </Style>
+    </ContentPage.Resources>
+    <Grid RowDefinitions="75, 60, *" x:Name="TopLevelElement"
+              RowSpacing="0" BackgroundColor="{DynamicResource AlternateBackground}">
+        <titleBar:TitleBar x:Name="TitleBar" />
+        <!-- View Select -->
+        <HorizontalStackLayout Grid.Row="1" HorizontalOptions="Center" x:Name="TabStack"
+                         Padding="0,20,0,0">
+            <Grid x:Name="TopMenuBar" 
+                  ColumnDefinitions="*,10,*" 
+                  ColumnSpacing="10" 
+                  HorizontalOptions="Center"
+                  HeightRequest="40">
+                <Frame x:Name="ProcessStack" Grid.Column="0" CornerRadius="8" 
+                       HorizontalOptions="End" 
+                       Padding="13, 0"
+                       AutomationId="ProcessesViewButtonFrame">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="SelectProcessesViewTap"
+                                              AutomationId="ProcessesViewButton"
+                                              Tapped="OnButtonClicked" />
+                    </Frame.GestureRecognizers>
+
+                    <Label x:Name="ProcessesViewButton" 
+                           Text="{x:Static localization:AppResources.Processes}"
+                           Style="{StaticResource ComponentSelectLabel}"
+                           AutomationId="ProcessesViewButtonLabel"/>
+                </Frame>
+
+                <HorizontalStackLayout Grid.Column="1" Padding="0" 
+                                 VerticalOptions="Center"
+                                 HorizontalOptions="Center"
+                                 AutomationId="SectionStatusBoxViewTabSeparatorLayout">
+                    <BoxView Style="{x:StaticResource WorkflowSettingsBoxViewStyle}" WidthRequest="2" 
+                                 HeightRequest="16" Margin="0,5,0,0" AutomationId="BoxViewTabSeparator"/>
+                </HorizontalStackLayout>
+
+                <Frame x:Name="RecoveryStack" Grid.Column="2"
+                       CornerRadius="8" 
+                       AutomationId="RecoveryViewButtonFrame" Padding="13,5,10,5">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="SelectRecoveryViewTap"
+                                                  AutomationId="RecoveryViewButton"
+                                                  Tapped="OnButtonClicked" />
+
+                    </Frame.GestureRecognizers>
+                    <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                        <Label x:Name="RecoveryViewButton" VerticalOptions="Center"
+                                   Text="{x:Static localization:AppResources.Recovery}"
+                                   Style="{StaticResource ComponentSelectLabel}"
+                                   AutomationId="RecoveryViewButtonLabel"/>
+
+                        <Frame x:Name="ConflictDot" IsVisible="false"
+                                   Style="{DynamicResource RequiredDot}" AutomationId="ConflictDot"/>
+                    </HorizontalStackLayout>
+                </Frame>
+            </Grid>
+        </HorizontalStackLayout>
+        <Grid Grid.Row="2" RowDefinitions="*">
+            <processesView:ProcessesView x:Name="ProcessesView" />
+            <recovery:SectionStatusRecoveryView x:Name="RecoveryView"/>
+        </Grid>
+        <common:LoadingScreen x:Name="LoadingView"
+                                          Grid.Row="0"
+                                          Grid.RowSpan="4" />
+    </Grid>
+</kernel:RenderPageBase>

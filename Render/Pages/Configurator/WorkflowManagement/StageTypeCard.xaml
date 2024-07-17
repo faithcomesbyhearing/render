@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="local:StageTypeCardViewModel"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            x:Class="Render.Pages.Configurator.WorkflowManagement.StageTypeCard"
+                            xmlns:local="clr-namespace:Render.Pages.Configurator.WorkflowManagement;assembly=Render"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:dragAndDrop="clr-namespace:Render.Kernel.DragAndDrop;assembly=Render">
+    <ContentView.Resources>
+        <Style x:Key="BorderStyle" TargetType="Border">
+            <Setter Property="StrokeThickness" Value="1" />
+            <Setter Property="StrokeShape" Value="RoundRectangle 16" />
+        </Style>
+    </ContentView.Resources>
+
+    <Border Style="{StaticResource BorderStyle}"
+            Padding="0,10"
+            HeightRequest="156"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="CenterAndExpand"
+            BackgroundColor="{StaticResource Option}">
+
+        <Grid RowDefinitions="Auto,*" VerticalOptions="Start" Margin="13,0">
+            <!-- Icon -->
+            <Label x:Name="Icon"
+                   Grid.Row="0"
+                   HorizontalOptions="Start"
+                   FontFamily="Icons"
+                   TextColor="{StaticResource SecondaryText}"
+                   FontSize="54"
+                   Padding="0" AutomationId="StageTypeCardIcon" />
+
+            <VerticalStackLayout Grid.Row="1">
+                <!-- Separator -->
+
+                <BoxView Style="{StaticResource BaseStageCardLine}"
+                         Opacity=".3"
+                         Margin="0,4,0,2"
+                         WidthRequest="172"
+                         VerticalOptions="Center"
+                         HorizontalOptions="Center"
+                         AutomationId="BoxViewCardSeparator" />
+
+                <!-- Label -->
+                <Label x:Name="Label"
+                       Style="{StaticResource StageTypeCardLabel}"
+                       AutomationId="StageTypeCardLabel" />
+            </VerticalStackLayout>
+        </Grid>
+        <Border.Effects>
+            <dragAndDrop:DragRecognizerEffect DragStarting="DragRecognizerEffect_DragStarting" />
+        </Border.Effects>
+    </Border>
+</kernel:RenderComponentBase>

@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="divisionPlayer:DivisionPlayerViewModel" 
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:divisionPlayer="clr-namespace:Render.Components.DivisionPlayer;assembly=Render"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:customRenderer="clr-namespace:Render.Kernel.CustomRenderer;assembly=Render"
+                            xmlns:resources="using:Render.Resources"
+                            xmlns:scroller="clr-namespace:Render.Components.Scroller"
+                            x:Class="Render.Components.DivisionPlayer.DivisionPlayer"
+                            x:DataType="divisionPlayer:DivisionPlayerViewModel"
+                            x:Name="Root">
+    <ContentView.Resources>
+        <x:Double x:Key="PlayerButtonWidth">85</x:Double>
+        
+        <Style x:Key="PlayerButton" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource Blue}" />
+            <Setter Property="FontFamily" Value="Icons" />
+            <Setter Property="FontSize" Value="80" />
+            <Setter Property="VerticalOptions" Value="Start" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="WidthRequest" Value="{StaticResource PlayerButtonWidth}" />
+        </Style>
+        
+        <Style x:Key="Reference" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource Blue}" />
+            <Setter Property="FontSize" Value="30" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+        </Style>
+        
+        <Style x:Key="PlayerSlider" TargetType="Slider">
+            <Setter Property="MinimumTrackColor" Value="{StaticResource TitleGrey}" />
+            <Setter Property="MaximumTrackColor" Value="{StaticResource LightGrey}" />
+            <Setter Property="ThumbColor" Value="{StaticResource SlateDark}" />
+            <Setter Property="Margin" Value="0,80,0,0" />
+            <Setter Property="VerticalOptions" Value="Start" />
+        </Style>
+    </ContentView.Resources>
+
+    <ContentView.Content>
+        <Border StrokeThickness="1"
+                FlowDirection="LeftToRight"
+                Stroke="{StaticResource GrayishWhite}">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="8" />
+            </Border.StrokeShape>
+            <Border.Shadow>
+                <Shadow Brush="Black"
+                        Offset="0,3"
+                        Radius="3"
+                        Opacity="0.75" />
+            </Border.Shadow>
+            <Grid x:Name="MainGrid"
+                  Padding="13,13,0,13"
+                  ColumnSpacing="13"
+                  BackgroundColor="{StaticResource PrimaryBackground}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="200" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="2" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                
+                <!-- Reference stack -->
+                <HorizontalStackLayout Grid.Row="0" x:Name="ReferencenameStack"
+                                       Grid.Column="0"
+                                       Grid.ColumnSpan="3"
+                                       Spacing="13"
+                                       AutomationId="ReferenceStack">
+                    <Label x:Name="ReferenceIcon"
+                           Style="{StaticResource Reference}"
+                           FontFamily="Icons"
+                           Text="{resources:IconExtensions Reference}"
+                           TextColor="{StaticResource DarkBlue}" />
+                    <Label x:Name="ReferenceNameLabel"
+                           Style="{StaticResource Reference}"
+                           FontFamily="MediumFont"
+                           TextColor="{StaticResource DarkBlue}"
+                           AutomationId="ReferenceNameLabel" />
+                    <Label x:Name="LockIcon"
+                           Style="{StaticResource Reference}"
+                           FontFamily="Icons"
+                           TextColor="{StaticResource DarkBlue}"
+                           AutomationId="LockUnlockIcon" />
+                    <HorizontalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="ReferenceNameTap" />
+                    </HorizontalStackLayout.GestureRecognizers>
+                </HorizontalStackLayout>
+                
+                <!-- Player slider and markers -->
+                <scroller:CustomScrollView x:Name="PlayerScrollView"
+                                           Orientation="Horizontal"
+                                           HorizontalScrollBarVisibility="Never"
+                                           Grid.Row="1"
+                                           Grid.Column="0"
+                                           Grid.ColumnSpan="3">
+                    <Grid x:Name="PlayerGrid">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <customRenderer:CustomSlider x:Name="AudioPlayerSlider"
+                                                     Grid.Row="0"
+                                                     Style="{StaticResource PlayerSlider}"
+                                                     AutomationId="AudioPlayerSliderView"
+                                                     ScaleY="2"
+                                                     ThumbColor="Transparent" />
+                        <HorizontalStackLayout x:Name="BreathPauseList"
+                                               Grid.Row="0"
+                                               Margin="0,5,0,0">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <divisionPlayer:BreathPause />
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                            <HorizontalStackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="BreathPauseListTapped" />
+                            </HorizontalStackLayout.GestureRecognizers>
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout Grid.Row="1"
+                                               HeightRequest="47"
+                                               x:Name="DivisionList">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <divisionPlayer:Division />
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </HorizontalStackLayout>
+                    </Grid>
+                </scroller:CustomScrollView>
+                
+                <!-- Scroller -->
+                <divisionPlayer:DivisionScroller x:Name="Scroller"
+                                                 Grid.Row="2"
+                                                 Grid.Column="0"
+                                                 Grid.ColumnSpan="3"
+                                                 HorizontalOptions="Fill"
+                                                 VerticalOptions="End" />
+
+                <Label x:Name="TimerLabel"
+                       Grid.Row="3"
+                       Grid.Column="0"
+                       FontSize="24"
+                       TextColor="{StaticResource SlateLight}"
+                       AutomationId="CurrentTimeTimer" />
+                
+                <Label x:Name="DurationLabel"
+                       Grid.Row="3"
+                       Grid.Column="2"
+                       FontSize="24"
+                       TextColor="{StaticResource SlateLight}"
+                       HorizontalOptions="End"
+                       AutomationId="TotalTimeTimer" />
+                
+                <BoxView Grid.Row="0"
+                         Grid.RowSpan="4"
+                         Grid.Column="3"
+                         WidthRequest="2"
+                         BackgroundColor="LightGrey"/>
+                
+                <Grid x:Name="PlayerButtonsGrid"
+                      Grid.Column="4"
+                      Grid.Row="1"
+                      Padding="-13,-8,-13,0"
+                      HeightRequest="{StaticResource PlayerButtonWidth}"
+                      WidthRequest="{StaticResource PlayerButtonWidth}"
+                      VerticalOptions="Start">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{StaticResource PlayerButtonWidth}"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label x:Name="PlayButton"
+                           Style="{StaticResource PlayerButton}"
+                           Text="{resources:IconExtensions RecorderPlay}"
+                           AutomationId="DivisionPlayerPlayButton">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="PlayGesture"
+                                                  Tapped="OnButtonClicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <Label x:Name="PauseButton"
+                           Style="{StaticResource PlayerButton}"
+                           Text="{resources:IconExtensions RecorderPause}"
+                           AutomationId="DivisionPlayerPauseButton">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="PauseGesture"
+                                                  Tapped="OnButtonClicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <Label x:Name="LoadingIndicator"
+                           Style="{StaticResource PlayerButton}"
+                           Text="{resources:IconExtensions LoadingSpinner}"
+                           AutomationId="DivisionPlayerLoadingIndicator"/>
+                </Grid>
+            </Grid>
+        </Border>
+    </ContentView.Content>
+</kernel:RenderComponentBase>

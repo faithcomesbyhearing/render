@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:Class="Render.Pages.Settings.SectionStatus.Recovery.SectionStatusRecoveryView"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:localization="clr-namespace:Render.Resources.Localization"
+                            xmlns:miniWaveformPlayer="clr-namespace:Render.Components.MiniWaveformPlayer;assembly=Render"
+                            xmlns:recoveryView="clr-namespace:Render.Pages.Settings.SectionStatus.Recovery;assembly=Render"
+                            xmlns:resources="clr-namespace:Render.Resources;assembly=Render"
+                            x:TypeArguments="recoveryView:SectionStatusRecoveryViewModel">
+
+    <Grid HorizontalOptions="Center" VerticalOptions="Fill">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="LeftSpacing" Width="*" />
+            <ColumnDefinition x:Name="Content" Width="Auto" />
+            <ColumnDefinition x:Name="RightSpacing" Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="108" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!--  Snapshots label  -->
+        <HorizontalStackLayout Grid.Row="0"
+                               Grid.Column="1"
+                               Spacing="13">
+            <Label AutomationId="RestoreSnapshotLabel"
+                   BackgroundColor="Transparent"
+                   FontFamily="Icons"
+                   FontSize="44"
+                   Text="{resources:IconExtensions Icon=RestoreSnapshot}"
+                   TextColor="{StaticResource Option}"
+                   VerticalOptions="Center" />
+            <Label AutomationId="SnapshotsLabel"
+                   FontFamily="BoldFont"
+                   FontSize="32"
+                   Style="{StaticResource SubTitle}"
+                   Text="{x:Static localization:AppResources.Snapshots}"
+                   TextColor="{StaticResource Option}" />
+        </HorizontalStackLayout>
+
+        <Grid Grid.Row="1"
+              Grid.Column="1"
+              ColumnSpacing="0"
+              HorizontalOptions="Center"
+              VerticalOptions="Start">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="SectionsColumn" Width="640" />
+                <ColumnDefinition x:Name="SeparatorColumn" Width="Auto" />
+                <ColumnDefinition x:Name="SectionInfoColumn" Width="570" />
+            </Grid.ColumnDefinitions>
+
+            <Grid x:Name="SectionList"
+                  Grid.Column="0"
+                  HorizontalOptions="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="108" />
+                    <RowDefinition x:Name="Sc" Height="*" />
+                </Grid.RowDefinitions>
+
+                <!--  Search  -->
+                <Grid Grid.Row="0">
+                    <HorizontalStackLayout Margin="13,0"
+                                           HeightRequest="56"
+                                           MinimumWidthRequest="50"
+                                           Spacing="26"
+                                           VerticalOptions="Center">
+                        <Label x:Name="SectionLabel"
+                               AutomationId="JumpToSectionLabel"
+                               FontFamily="MediumFont"
+                               FontSize="{DynamicResource MediumPlus2Font}"
+                               TextColor="{DynamicResource CardText}"
+                               VerticalOptions="Center" />
+
+                        <Border HorizontalOptions="Center" 
+                                Opacity=".8"
+                                VerticalOptions="Fill">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="8" />
+                            </Border.StrokeShape>
+                            <Entry x:Name="SearchEntry"
+                                   AutomationId="SearchEntry"
+                                   BackgroundColor="{DynamicResource SecondaryText}"
+                                   FontSize="{StaticResource LargeFontMinus2Font}"
+                                   Keyboard="Numeric"
+                                   TextColor="{DynamicResource MainText}" />
+                        </Border>
+                    </HorizontalStackLayout>
+
+                    <Line x:Name="RecoveryViewSeparator"
+                          AutomationId="RecorderSeparatorLine"
+                          BackgroundColor="{StaticResource RecorderSeparatorLine}"
+                          Opacity="0.7"
+                          Fill="{StaticResource Grey}" 
+                          HeightRequest="1.5"
+                          WidthRequest="640"
+                          VerticalOptions="End" />
+                </Grid>
+
+                <ScrollView Grid.Row="1"
+                            HorizontalOptions="Fill"
+                            VerticalOptions="Fill"
+                            VerticalScrollBarVisibility="Default"
+                            WidthRequest="650">
+                    <Grid ColumnDefinitions="*,13">
+                        <VerticalStackLayout x:Name="Sections"
+                                             Grid.Column="0"
+                                             Padding="0,26,0,0"
+                                             AutomationId="SectionsStack"
+                                             HorizontalOptions="Start"
+                                             MinimumWidthRequest="50">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <recoveryView:RecoverySectionCard />
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </VerticalStackLayout>
+                    </Grid>
+                </ScrollView>
+            </Grid>
+
+            <Grid Grid.Column="1" ColumnDefinitions="63,Auto,63">
+                <Line Grid.Column="1"
+                      BackgroundColor="{StaticResource RecorderSeparatorLine}"
+                      HorizontalOptions="End"
+                      Opacity="0.7"
+                      StrokeThickness="1.5">
+                    <Line.Stroke>
+                        <SolidColorBrush Color="{StaticResource RecorderSeparatorLine}" />
+                    </Line.Stroke>
+                </Line>
+            </Grid>
+
+            <Grid x:Name="SectionDetails"
+                  Grid.Column="2"
+                  Padding="0"
+                  AutomationId="SectionDetails"
+                  VerticalOptions="Fill">
+                <Grid.RowDefinitions>
+                    <RowDefinition x:Name="SectionsRow" Height="108" />
+                    <RowDefinition x:Name="ScrollRow" Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" VerticalOptions="Fill">
+                    <Grid ColumnSpacing="13"
+                          HeightRequest="65"
+                          VerticalOptions="Fill">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="56" />
+                            <ColumnDefinition Width="420" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <!--  Section number  -->
+                        <Border Grid.Column="0" HeightRequest="36">
+                            <Label x:Name="SectionNumber"
+                                   AutomationId="SectionNumberLabel"
+                                   FontFamily="BoldFont"
+                                   FontSize="32"
+                                   HorizontalTextAlignment="Center"
+                                   TextColor="{StaticResource CardText}" />
+                        </Border>
+
+                        <!--  Section Scripture Reference  -->
+                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                            <Label x:Name="SectionScriptureReference"
+                                   AutomationId="SectionScriptureReferenceLabel"
+                                   FontFamily="MediumFont"
+                                   FontSize="{StaticResource LargeFont}"
+                                   LineBreakMode="TailTruncation"
+                                   Opacity=".7" />
+                            <Label x:Name="SectionTitle"
+                                   AutomationId="SectionTitleLabel"
+                                   FontFamily="MediumFont"
+                                   FontSize="{StaticResource LargeFontMinus2Font}"
+                                   LineBreakMode="TailTruncation"
+                                   TextColor="{DynamicResource TertiaryText}" />
+                        </VerticalStackLayout>
+
+                        <Label x:Name="ConflictIcon"
+                               Grid.Column="3"
+                               AutomationId="ConflictIcon"
+                               FontFamily="Icons"
+                               FontSize="39"
+                               Text="{resources:IconExtensions Icon=InvalidInput}"
+                               TextColor="{StaticResource Error}"
+                               VerticalOptions="Center" />
+
+                        <Label x:Name="ApprovedIcon"
+                               Grid.Column="3"
+                               AutomationId="ApprovedIcon"
+                               FontFamily="Icons"
+                               FontSize="39"
+                               Opacity=".8"
+                               Text="{resources:IconExtensions Icon=FinishedPassOrSubmit}"
+                               TextColor="{StaticResource SlateDark}"
+                               VerticalOptions="Center" />
+
+                    </Grid>
+                    <Line x:Name="RecoveryView"
+                          AutomationId="RecorderSeparatorLine"
+                          BackgroundColor="{StaticResource RecorderSeparatorLine}"
+                          Opacity=".7"
+                          Fill="{StaticResource Grey}" 
+                          HeightRequest="1.5"
+                          WidthRequest="640"
+                          VerticalOptions="End" />
+                </Grid>
+
+                <!--  Scroll View  -->
+                <ScrollView x:Name="SelectionView"
+                            Grid.Row="1"
+                            AutomationId="SelectionView">
+                    <VerticalStackLayout HorizontalOptions="Start">
+                        <recoveryView:ResetCard x:Name="ResetCard"
+                                                AutomationId="ResetCardView"
+                                                HorizontalOptions="Start"
+                                                VerticalOptions="Fill" />
+
+                        <VerticalStackLayout VerticalOptions="Fill">
+                            <VerticalStackLayout x:Name="Snapshots" AutomationId="SnapshotsStack">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate>
+                                        <recoveryView:SnapshotCard AutomationId="SnapshotCardView" />
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </VerticalStackLayout>
+                            <Grid ColumnDefinitions="60,Auto"
+                                  RowDefinitions="Auto,Auto"
+                                  RowSpacing="10">
+
+                                <Label x:Name="ApprovedLabel"
+                                       Grid.Row="0"
+                                       Grid.Column="1"
+                                       Margin="15,0,0,0"
+                                       AutomationId="ApprovedLabel"
+                                       FontSize="{DynamicResource LargeFontMinus2Font}"
+                                       IsVisible="true"
+                                       Opacity="0.7"
+                                       Text="{x:Static localization:AppResources.Approved}"
+                                       TextColor="{DynamicResource CardText}" />
+
+                                <VerticalStackLayout x:Name="SectionPlayerStack"
+                                                     Grid.Row="1"
+                                                     Grid.Column="1"
+                                                     Margin="0,20,0,0"
+                                                     AutomationId="SectionPlayerStack"
+                                                     HorizontalOptions="Fill"
+                                                     VerticalOptions="Start">
+                                    <miniWaveformPlayer:MiniWaveformPlayer x:Name="SectionPlayer"
+                                                                           AutomationId="SectionPlayer"
+                                                                           MinimumWidthRequest="50"
+                                                                           WidthRequest="490" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </ScrollView>
+
+                <!--  Conflict View  -->
+                <ScrollView x:Name="ConflictView"
+                            Grid.Row="1"
+                            AutomationId="ConflictView"
+                            HorizontalOptions="Start"
+                            IsVisible="false"
+                            WidthRequest="570">
+                    <VerticalStackLayout Spacing="7">
+                        <VerticalStackLayout Margin="0,26">
+                            <Label x:Name="ConflictedStageName"
+                                   AutomationId="SelectASnapshotLabel"
+                                   FontFamily="BoldFont"
+                                   Text="{x:Static localization:AppResources.SnapshotConflict}"
+                                   FontSize="{StaticResource LargeFontMinus2Font}"
+                                   TextColor="{StaticResource Error}" />
+                            <Label
+                                AutomationId="SelectASnapshotLabel"
+                                FontFamily="MediumFont"
+                                FontSize="{StaticResource LargeFontMinus2Font}"
+                                Text="{x:Static localization:AppResources.HowToResolve}"
+                                Opacity=".8"
+                                TextColor="{StaticResource SlateDark}" />
+                        </VerticalStackLayout>
+
+                        <Border AutomationId="SelectedSectionCardFrame"
+                                BackgroundColor="{StaticResource Option}">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="8" />
+                            </Border.StrokeShape>
+
+                            <HorizontalStackLayout Spacing="26" Margin="26">
+                                <Label Margin="0,2,0,0"
+                                       Padding="0"
+                                       AutomationId="SelectASnapshotIcon"
+                                       BackgroundColor="Transparent"
+                                       FontFamily="Icons"
+                                       FontSize="54"
+                                       Text="{resources:IconExtensions Icon=SelectASnapshot}"
+                                       TextColor="{StaticResource SecondaryText}"
+                                       VerticalOptions="Start" />
+                                <Grid RowDefinitions="*,Auto" RowSpacing="13">
+                                    <Label x:Name="SelectSnapshot"
+                                           Grid.Row="0"
+                                           AutomationId="SelectASnapshotLabel"
+                                           FontFamily="BoldFont"
+                                           FontSize="{StaticResource LargeFontMinus2Font}"
+                                           Text="{x:Static localization:AppResources.SelectSnapshot}"
+                                           TextColor="{StaticResource SecondaryText}" />
+                                    <Label Grid.Row="1" x:Name="SelectSnapshotDescription"
+                                           WidthRequest="420"
+                                           LineBreakMode="WordWrap"
+                                           AutomationId="SelectSnapshotDescriptionLabel"
+                                           FontFamily="MediumFont"
+                                           FontSize="24"
+                                           Opacity=".8"
+                                           Text="{x:Static localization:AppResources.SelectSnapshotDescription}"
+                                           TextColor="{StaticResource AlternateBackground}" />
+                                </Grid>
+                            </HorizontalStackLayout>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer x:Name="SelectSnapshotGestureRecognizer"
+                                                      AutomationId="SectionCard"
+                                                      Tapped="OnButtonClicked" />
+                            </Border.GestureRecognizers>
+                        </Border>
+
+                        <Border BackgroundColor="{StaticResource Option}" Margin="0,26,0,0">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="8" />
+                            </Border.StrokeShape>
+
+                            <HorizontalStackLayout Spacing="26" Margin="26">
+                                <Label Margin="0,2,0,0"
+                                       Padding="0"
+                                       AutomationId="ClearBothSnapshotsLabel"
+                                       BackgroundColor="Transparent"
+                                       FontFamily="Icons"
+                                       FontSize="54"
+                                       Text="{resources:IconExtensions ClearBothSnapshots}"
+                                       TextColor="{StaticResource SecondaryText}"
+                                       VerticalOptions="Start" />
+
+                                <Grid RowDefinitions="*,Auto" RowSpacing="13">
+                                    <Label x:Name="ClearSnapshot"
+                                           Grid.Row="0"
+                                           AutomationId="ClearSnapshotLabel"
+                                           FontFamily="BoldFont"
+                                           FontSize="{StaticResource LargeFontMinus2Font}"
+                                           Text="{x:Static localization:AppResources.DeleteSnapshots}"
+                                           TextColor="{DynamicResource SecondaryText}" />
+                                    <Label x:Name="ClearSnapshotDescription"
+                                           Grid.Row="1"
+                                           LineBreakMode="WordWrap"
+                                           AutomationId="ClearSnapshotDescriptionLabel"
+                                           FontFamily="MediumFont"
+                                           WidthRequest="420"
+                                           FontSize="24"
+                                           Opacity=".8"
+                                           Text="{x:Static localization:AppResources.ClearSnapshotsDescription}"
+                                           TextColor="{StaticResource AlternateBackground}" />
+                                </Grid>
+                            </HorizontalStackLayout>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer x:Name="ClearSnapshotGestureRecognizer"
+                                                      AutomationId="SectionCard"
+                                                      Tapped="OnButtonClicked" />
+                            </Border.GestureRecognizers>
+                        </Border>
+                    </VerticalStackLayout>
+                </ScrollView>
+            </Grid>
+        </Grid>
+    </Grid>
+
+</kernel:RenderComponentBase>

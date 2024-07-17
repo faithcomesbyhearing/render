@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+  xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
+  xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
+  xmlns:desktop="http://schemas.microsoft.com/appx/manifest/desktop/windows10"
+  IgnorableNamespaces="uap rescap">
+
+  <Identity
+    Name="BAA1E222-D1B3-4A73-ADB4-3500D19C1B37"
+    Publisher="CN=Hosanna, O=Hosanna, L=Albuquerque, S=New Mexico, C=US"
+    Version="1.0.0.0" />
+
+  <mp:PhoneIdentity PhoneProductId="BAA1E222-D1B3-4A73-ADB4-3500D19C1B37" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+
+  <Properties>
+    <DisplayName>Render 3</DisplayName>
+    <PublisherDisplayName>Hosanna</PublisherDisplayName>
+    <Logo>store_logo.png</Logo>
+  </Properties>
+
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.17763.0" MaxVersionTested="10.0.19041.0" />
+    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.17763.0" MaxVersionTested="10.0.19041.0" />
+  </Dependencies>
+
+  <Resources>
+    <Resource Language="x-generate" />
+  </Resources>
+
+  <Applications>
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="$targetentrypoint$">
+      <uap:VisualElements
+        DisplayName="Render 3"
+        Description="Render"
+        Square150x150Logo="square_150x150_logo.png"
+        Square44x44Logo="square_44x44_logo.png"
+        BackgroundColor="#DEE7EB">
+        <uap:DefaultTile
+          Wide310x150Logo="wide_310x150_logo.png"
+          Square71x71Logo="small_tile.png"
+          Square310x310Logo="large_tile.png" ShortName="Render">
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square310x310Logo"/>
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile >
+
+        <!--WinUI 3 doesn't support splash screen yet:
+        https://github.com/microsoft/microsoft-ui-xaml/issues/4055-->
+        <!--<uap:SplashScreen Image="splash_screen.png"  BackgroundColor="#DEE7EB"/>-->
+
+        <uap:LockScreen BadgeLogo="badge_logo.png" Notification="badge"/>
+      </uap:VisualElements>
+      <Extensions>
+        <uap3:Extension Category="windows.appExecutionAlias"
+                        Executable="Render.exe"
+                        EntryPoint="Windows.FullTrustApplication">
+          <uap3:AppExecutionAlias>
+            <desktop:ExecutionAlias Alias="render.exe" />
+          </uap3:AppExecutionAlias>
+        </uap3:Extension>
+      </Extensions>
+    </Application>
+  </Applications>
+
+  <Capabilities>
+    <uap3:Capability Name="backgroundMediaPlayback"/>
+    <rescap:Capability Name="runFullTrust" />
+    <Capability Name="internetClientServer"/>
+    <Capability Name="internetClient"/>
+    <Capability Name="privateNetworkClientServer"/>
+    <DeviceCapability Name="microphone"/>
+  </Capabilities>
+
+</Package>

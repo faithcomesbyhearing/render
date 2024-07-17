@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderPageBase x:TypeArguments="communityCheckRevise:CommunityRevisePageViewModel"
+                       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:titleBar="clr-namespace:Render.Components.TitleBar;assembly=Render"
+                       xmlns:proceedButton="clr-namespace:Render.Components.ProceedButton;assembly=Render"
+                       xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                       xmlns:communityCheckRevise="clr-namespace:Render.Pages.CommunityTester.CommunityCheckRevise;assembly=Render"
+                       xmlns:common="clr-namespace:Render.Common"
+                       xmlns:sequencer="clr-namespace:Render.Sequencer;assembly=Render.Sequencer"
+                       x:Class="Render.Pages.CommunityTester.CommunityCheckRevise.CommunityRevisePage"
+                       NavigationPage.HasNavigationBar="False">
+    
+        <AbsoluteLayout x:Name="TopLevelElement" 
+                        Style="{StaticResource MainStack}">
+            <Grid AbsoluteLayout.LayoutFlags="All"
+                  AbsoluteLayout.LayoutBounds="0,0,1,1"
+                  RowSpacing="26">
+                <Grid.RowDefinitions>
+                    <RowDefinition x:Name="TitleBarRow" Height="Auto" />
+                    <RowDefinition x:Name="SequencerRow" Height="*" />
+                </Grid.RowDefinitions>
+
+                <sequencer:Sequencer Grid.Row="1" x:Name="Sequencer" />
+
+                <!--TitleBar is located in the first grid row, but should be rendered
+                after the page content in order to display Passage Number Overlay on top of the page.-->
+                <titleBar:TitleBar Grid.Row="0" x:Name="TitleBar" />
+
+            </Grid>
+            <proceedButton:ProceedButton x:Name="ProceedButton"
+                                         AbsoluteLayout.LayoutFlags="PositionProportional"
+                                         AbsoluteLayout.LayoutBounds="1,1" />
+            <common:LoadingScreen x:Name="LoadingView"
+                                  AbsoluteLayout.LayoutFlags="All"
+                                  AbsoluteLayout.LayoutBounds="0,0,1,1" />
+        </AbsoluteLayout>
+    
+
+</kernel:RenderPageBase>
