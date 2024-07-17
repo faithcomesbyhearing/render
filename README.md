@@ -14,7 +14,7 @@ model now, perhaps bazaar later).
 Render is trademarked, if you wish distribute a revised version of this app, you 
 may not call it Render, nor use the Render Icon.
 
-This release includes the ability to create a demo build (like [this](https://github.com/faithcomesbyhearing/render.git)) which includes a
+This release includes the ability to create a demo build (like [this](https://docs.google.com/document/d/1rtFBBepe5h5IjcS22NzrmoNjPNWqfq3dFClH-1Yg12Y/edit?usp=sharing)) which includes a
 working project.  However, although all sync code is included, access to
 our sync servers is not - so the build will functionally be stand-alone
 (without sync), which you can revise, test, submit pull requests, etc.
