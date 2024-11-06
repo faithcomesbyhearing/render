@@ -54,7 +54,7 @@ namespace Render.UnitTests.App.Pages.Consultant.ConsultantApproval
             .IsAny<bool>(), It.IsAny<bool>(), It.IsAny<bool>()))
                 .ReturnsAsync(_section);
             MockContextProvider.Setup(x => x.GetLoggedInUser());
-            MockGrandCentralStation.Setup(x => x.SectionsAtStep(It.IsAny<Guid>()))
+            MockStageService.Setup(x => x.SectionsAtStep(It.IsAny<Guid>()))
                 .Returns(new List<Guid>{_section.Id});            
 
             var mockAudioPlayerService = new Mock<IAudioPlayerService>();
@@ -137,7 +137,7 @@ namespace Render.UnitTests.App.Pages.Consultant.ConsultantApproval
         public async Task Select_Section_NavigatesToSection()
         {
             //Arrange
-            MockGrandCentralStation.Setup(x => x.GetStepToWorkAsync(It.IsAny<Guid>(), It.IsAny<RenderStepTypes>()))
+            MockStageService.Setup(x => x.GetStepToWorkAsync(It.IsAny<Guid>(), It.IsAny<RenderStepTypes>(), It.IsAny<Guid>()))
             .ReturnsAsync(new Step());
             var contentProvider = MockContextProvider.Object;
             var vm = await SelectSectionToApproveViewModel.CreateAsync(contentProvider, _step, _stage);

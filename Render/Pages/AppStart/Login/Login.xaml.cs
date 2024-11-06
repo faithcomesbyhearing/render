@@ -1,6 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
+using System.Reactive.Linq;
+
 using ReactiveUI;
 using Render.Components.ProfileAvatar;
 using Render.Kernel.WrappersAndExtensions;
@@ -61,6 +63,7 @@ namespace Render.Pages.AppStart.Login
                 d(this.WhenAnyValue(x => x.ViewModel.UserLoginViewModels)
                     .Subscribe(CalculateCollectionHeight));
                 d(this.WhenAnyValue(x => x.ViewModel.Loading)
+                    .ObserveOn(RxApp.MainThreadScheduler)
                     .Subscribe(loading =>
                     {
                         LoginButtonFrame.IsEnabled = !loading;
@@ -115,16 +118,6 @@ namespace Render.Pages.AppStart.Login
         {
             base.OnAppearing();
             await RenderTitle.FadeUpInAsync(distance: 50);
-        }
-
-        private async void FadeIconLoginStackAsync()
-        {
-            //await UserIconCollection.FadeInAsync();
-        }
-
-        private void IconLoginStack_OnPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            FadeIconLoginStackAsync();
         }
 
         private void CalculateTopCollectionHeight(ReadOnlyObservableCollection<UserLoginIconViewModel> data)

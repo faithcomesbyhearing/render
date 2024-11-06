@@ -38,7 +38,7 @@ namespace Render.Pages.BackTranslator.SegmentBackTranslate
         [Reactive] public ISequencerRecorderViewModel SequencerRecorderViewModel { get; private set; }
         [Reactive] public bool IsTwoStepBackTranslate { get; set; }
 
-        public static async Task<TabletSegmentTranslatePageViewModel> CreateAsync(
+        public static TabletSegmentTranslatePageViewModel Create(
             IViewModelContextProvider viewModelContextProvider,
             Step step,
             Section section,
@@ -72,7 +72,7 @@ namespace Render.Pages.BackTranslator.SegmentBackTranslate
             base(
                 urlPathSegment: "TabletSegmentTranslate",
                 viewModelContextProvider: viewModelContextProvider,
-                pageName: AppResources.BackTranslate,
+                pageName: GetStepName(step),
                 section: section,
                 stage: stage,
                 step: step,
@@ -88,8 +88,6 @@ namespace Render.Pages.BackTranslator.SegmentBackTranslate
 
             _segmentRepository = viewModelContextProvider.GetSegmentBackTranslationRepository();
 
-            DisposeOnNavigationCleared = true;
-            TitleBarViewModel.DisposeOnNavigationCleared = true;
 
             TitleBarViewModel.PageGlyph = IconExtensions
                 .BuildFontImageSource(Icon.SegmentBackTranslate,
@@ -226,7 +224,8 @@ namespace Render.Pages.BackTranslator.SegmentBackTranslate
                 SequencerRecorderViewModel.SetRecord(_segmentBackTranslation.RetellBackTranslationAudio.CreateRecordAudioModel(
                     path: ViewModelContextProvider.GetTempAudioService(_segmentBackTranslation.RetellBackTranslationAudio).SaveTempAudio(),
                     flagType: FlagType.Note,
-                    isTemp: _segmentBackTranslation.RetellBackTranslationAudio.TemporaryDeleted));
+                    isTemp: _segmentBackTranslation.RetellBackTranslationAudio.TemporaryDeleted,
+                    userId: ViewModelContextProvider.GetLoggedInUser().Id));
 
                 SequencerActionViewModel.ActionState =
                     _segmentBackTranslation.RetellBackTranslationAudio.TemporaryDeleted
@@ -243,7 +242,8 @@ namespace Render.Pages.BackTranslator.SegmentBackTranslate
                 SequencerRecorderViewModel.SetRecord(_segmentBackTranslation.CreateRecordAudioModel(
                     path: ViewModelContextProvider.GetTempAudioService(_segmentBackTranslation).SaveTempAudio(),
                     flagType: FlagType.Note,
-                    isTemp: _segmentBackTranslation.TemporaryDeleted));
+                    isTemp: _segmentBackTranslation.TemporaryDeleted,
+                    userId: ViewModelContextProvider.GetLoggedInUser().Id));
 
                 SequencerActionViewModel.ActionState =
                     _segmentBackTranslation.TemporaryDeleted
@@ -447,7 +447,8 @@ namespace Render.Pages.BackTranslator.SegmentBackTranslate
                         && x.CurrentDraftAudio.SegmentBackTranslationAudios.All(s =>
                             s.RetellBackTranslationAudio != null && s.RetellBackTranslationAudio.HasAudio)))
                 {
-                    await ViewModelContextProvider.GetGrandCentralStation().AdvanceSectionAsync(Section, Step);
+                    var sectionMovementService = ViewModelContextProvider.GetSectionMovementService();
+                    await sectionMovementService.AdvanceSectionAsync(Section, Step, GetProjectId(), GetLoggedInUserId());
 
                     return await NavigateToHomeOnMainStackAsync();
                 }
@@ -522,6 +523,16 @@ namespace Render.Pages.BackTranslator.SegmentBackTranslate
                 LogError(e);
                 throw;
             }
+        }
+
+        protected override async Task NavigatingAwayAsync()
+        {
+            if (SequencerRecorderViewModel.State is not SequencerState.Recording)
+            {
+                return;
+            }
+
+            await SequencerRecorderViewModel.StopCommand.Execute();
         }
 
         /* We have to check all but the current segment for audio, since the current

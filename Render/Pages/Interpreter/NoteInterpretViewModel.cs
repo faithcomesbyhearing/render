@@ -12,7 +12,7 @@ using Render.Models.Workflow.Stage;
 using Render.Repositories.Audio;
 using Render.Resources;
 using Render.Resources.Localization;
-using Render.Sequencer;
+using Render.Sequencer.Contracts.Enums;
 using Render.Sequencer.Contracts.Interfaces;
 using Render.Sequencer.Contracts.Models;
 using Render.Sequencer.Contracts.ToolbarItems;
@@ -44,10 +44,6 @@ namespace Render.Pages.Interpreter
             Dictionary<Draft, List<Message>> messageDictionary,
             IViewModelContextProvider viewModelContextProvider)
         {
-            var pageName = AppResources.Note + " ";
-            pageName += step.RenderStepType == RenderStepTypes.InterpretToConsultant
-                ? AppResources.InterpretToConsultant
-                : AppResources.InterpretToTranslator;
             var pageVm = new NoteInterpretViewModel(
                 step,
                 section,
@@ -55,8 +51,7 @@ namespace Render.Pages.Interpreter
                 message,
                 stage,
                 messageDictionary,
-                viewModelContextProvider,
-                pageName);
+                viewModelContextProvider);
 
             pageVm.SetupSequencer();
             return pageVm;
@@ -105,21 +100,17 @@ namespace Render.Pages.Interpreter
             Message message,
             Stage stage,
             Dictionary<Draft, List<Message>> messageDictionary,
-            IViewModelContextProvider viewModelContextProvider,
-            string pageName)
+            IViewModelContextProvider viewModelContextProvider)
             : base(
                 urlPathSegment: "NoteInterpret",
                 viewModelContextProvider: viewModelContextProvider,
-                pageName: pageName,
+                pageName: GetStepName(step),
                 section: section,
                 stage: stage,
                 step: step,
                 nonDraftTranslationId: message.Id,
                 secondPageName: AppResources.NoteInterpretScreenTitle)
         {
-            DisposeOnNavigationCleared = true;
-            TitleBarViewModel.DisposeOnNavigationCleared = true;
-
             var color = ResourceExtensions.GetColor("SecondaryText");
             if (color != null)
             {
@@ -151,6 +142,7 @@ namespace Render.Pages.Interpreter
                 recorderFactory: () => ViewModelContextProvider.GetAudioRecorderFactory().Invoke(48000));
 
             SequencerRecorderViewModel.IsRightToLeftDirection = FlowDirection is FlowDirection.RightToLeft;
+            SequencerRecorderViewModel.AllowAppendRecordMode = true;
             SequencerRecorderViewModel.SetupActivityService(ViewModelContextProvider, Disposables);
             SequencerRecorderViewModel.SetupRecordPermissionPopup(ViewModelContextProvider, Logger);
             SequencerRecorderViewModel.SetupOnRecordFailedPopup(ViewModelContextProvider, Logger);
@@ -158,7 +150,7 @@ namespace Render.Pages.Interpreter
             DeleteDraftToolBarItem = SequencerRecorderViewModel.GetToolbarItem<IDeleteToolbarItem>();
 
             SequencerRecorderViewModel.OnDeleteRecordCommand = ReactiveCommand.Create(DeleteInterpretation);
-            SequencerRecorderViewModel.OnRecordingFinishedCommand = ReactiveCommand.Create(SaveInterpretation);
+            SequencerRecorderViewModel.OnRecordingFinishedCommand = ReactiveCommand.CreateFromTask(SaveInterpretation);
             SequencerRecorderViewModel.OnUndoDeleteRecordCommand =
                 ReactiveCommand.Create(() => { SequencerActionViewModel.ActionState = ActionState.Optional; });
 
@@ -173,6 +165,21 @@ namespace Render.Pages.Interpreter
                     name: string.Empty));
                 SequencerActionViewModel.ActionState = ActionState.Optional;
             }
+
+            SequencerRecorderViewModel
+               .WhenAnyValue(player => player.State)
+               .Where(state => state == SequencerState.Recording)
+               .Subscribe(_ => { SequencerActionViewModel.ActionState = ActionState.Required; });
+        }
+
+        protected override async Task NavigatingAwayAsync()
+        {
+            if (SequencerRecorderViewModel.State is not SequencerState.Recording)
+            {
+                return;
+            }
+
+            await SequencerRecorderViewModel.StopCommand.Execute();
         }
 
         protected sealed override void SetProceedButtonIcon()
@@ -185,7 +192,7 @@ namespace Render.Pages.Interpreter
             }
         }
 
-        private async void SaveInterpretation()
+        private async Task SaveInterpretation()
         {
             IsLoading = true;
 
@@ -279,7 +286,8 @@ namespace Render.Pages.Interpreter
 
             await Task.Run(async () =>
             {
-                await ViewModelContextProvider.GetGrandCentralStation().AdvanceSectionAsync(Section, Step);
+                var sectionMovementService = ViewModelContextProvider.GetSectionMovementService();
+                await sectionMovementService.AdvanceSectionAsync(Section, Step, GetProjectId(), GetLoggedInUserId()); 
             });
 
             return await NavigateToHomeOnMainStackAsync();

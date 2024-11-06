@@ -2,5 +2,4 @@
 
 public record RecordedData(
     byte[] AudioData,
-    double ChunkDurationSec,
     double TotalDurationSec);

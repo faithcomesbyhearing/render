@@ -32,32 +32,26 @@ namespace Render.Pages.AppStart.Login
 
         [Reactive] public UserLoginIconViewModel UserLoginIconViewModel { get; private set; }
 
-        [Reactive]
-        public ReactiveCommand<Unit, Unit> BackButtonCommand { get; set; }
+        [Reactive] public ReactiveCommand<Unit, Unit> BackButtonCommand { get; set; }
 
-        [Reactive]
-        public ReactiveCommand<Unit, IRoutableViewModel> AddNewUserCommand { get; set; }
+        [Reactive] public ReactiveCommand<Unit, IRoutableViewModel> AddNewUserCommand { get; set; }
 
-        [Reactive]
-        public ReactiveCommand<Unit, IRoutableViewModel> TryLoginCommand { get; set; }
+        [Reactive] public ReactiveCommand<Unit, IRoutableViewModel> TryLoginCommand { get; set; }
 
-        [Reactive]
-        public ReactiveCommand<Unit, Unit> ViewAllUsersCommand { get; set; }
+        [Reactive] public ReactiveCommand<Unit, Unit> ViewAllUsersCommand { get; set; }
 
         [Reactive] public bool ShowBackButton { get; set; }
         [Reactive] public bool ShowAllUsers { get; set; }
 
 
         //List of 8
-        private SourceCache<UserLoginIconViewModel, Guid> UserViewModelSourceList { get; } =
-            new SourceCache<UserLoginIconViewModel, Guid>(x => x.User.Id);
+        private SourceCache<UserLoginIconViewModel, Guid> UserViewModelSourceList { get; } = new(x => x.User.Id);
 
         private readonly ReadOnlyObservableCollection<UserLoginIconViewModel> _userLoginViewModels;
         public ReadOnlyObservableCollection<UserLoginIconViewModel> UserLoginViewModels => _userLoginViewModels;
 
         //List of last 4 users logged in
-        private SourceCache<UserLoginIconViewModel, Guid> TopUserViewModelSourceList { get; } =
-            new SourceCache<UserLoginIconViewModel, Guid>(x => x.User.Id);
+        private SourceCache<UserLoginIconViewModel, Guid> TopUserViewModelSourceList { get; } = new(x => x.User.Id);
 
         private readonly ReadOnlyObservableCollection<UserLoginIconViewModel> _topUserLoginViewModels;
         public ReadOnlyObservableCollection<UserLoginIconViewModel> TopUserLoginViewModels => _topUserLoginViewModels;
@@ -115,6 +109,7 @@ namespace Render.Pages.AppStart.Login
             });
 
             Disposables.Add(this.WhenAnyValue(x => x.UserLoginIconViewModel)
+                .ObserveOn(RxApp.MainThreadScheduler)
                 .Subscribe(vm =>
                 {
                     if (vm == null)
@@ -131,8 +126,11 @@ namespace Render.Pages.AppStart.Login
                     }
                 }));
             Disposables.Add(this.WhenAnyValue(x => x.ShowIconPassword)
+                .ObserveOn(RxApp.MainThreadScheduler)
                 .Subscribe(x => ShowBackButton = ShowAllUsers || x));
-            Disposables.Add(this.WhenAnyValue(x => x.UsernameViewModel.Value).Subscribe(s =>
+            Disposables.Add(this.WhenAnyValue(x => x.UsernameViewModel.Value)
+                .ObserveOn(RxApp.MainThreadScheduler)
+                .Subscribe(s =>
             {
                 if (!UsernameViewModel.CheckValidation() && !string.IsNullOrEmpty(s))
                 {
@@ -169,9 +167,22 @@ namespace Render.Pages.AppStart.Login
         private async Task GetUsersForLoginAsync()
         {
             var machineState = await MachineLoginStateRepository.GetMachineLoginState();
-            var top4Ids = machineState.GetTopFourUserIds().ToList();
             var users = await UserRepository.GetAllUsersAsync();
+            
+            foreach (var user in users)
+            {
+                if (user is not RenderUser renderUser) continue;
+                
+                var renderProject = await ProjectsRepository.GetAsync(renderUser.ProjectId);
+                    
+                if (renderProject.IsBetaTester) continue;
+                
+                machineState.RemoveUser(renderUser.Id);
+                await MachineLoginStateRepository.SaveMachineLoginState(machineState);
+            }
 
+            var top4Ids = machineState.GetTopFourUserIds().ToList();
+            
             foreach (var userId in top4Ids)
             {
                 var user = users.FirstOrDefault(x => x.Id == userId);
@@ -195,6 +206,7 @@ namespace Render.Pages.AppStart.Login
             var projectId = machineState.LastProjectId;
             if (projectId == Guid.Empty) return;
             var project = await ProjectsRepository.GetAsync(projectId);
+
             var projectUsers = users.Where(x =>
                     (_userMembershipService.HasExplicitPermissionForProject(x, project.Id)
                      || x is RenderUser u && u.ProjectId == project.Id)
@@ -203,6 +215,8 @@ namespace Render.Pages.AppStart.Login
 
             foreach (var user in projectUsers)
             {
+                if (project.IsBetaTester is false) continue;
+
                 var userViewModel = new UserLoginIconViewModel(user, ViewModelContextProvider);
                 UserViewModelSourceList.AddOrUpdate(userViewModel);
             }
@@ -234,6 +248,12 @@ namespace Render.Pages.AppStart.Login
                 {
                     if (localProjects.CheckForDownloadedProject(renderUser.ProjectId))
                     {
+                        var project = await ProjectsRepository.GetAsync(renderUser.ProjectId);
+                        if (project.IsBetaTester is false)
+                        {
+                            continue;
+                        }
+
                         var userViewModel = new UserLoginIconViewModel(user, ViewModelContextProvider);
                         UserViewModelSourceList.AddOrUpdate(userViewModel);
                     }
@@ -274,6 +294,13 @@ namespace Render.Pages.AppStart.Login
         /// </summary>
         public async Task<IRoutableViewModel> TryLoginAsync()
         {
+#if DEMO
+            if (IsDemoDatabaseInitialized() is false)
+            {
+                ShowDemoInitializationError();
+                return null;
+            }
+#endif
             try
             {
                 PasswordViewModel.ClearValidation();
@@ -286,6 +313,7 @@ namespace Render.Pages.AppStart.Login
                 {
                     Loading = true;
                     IsLoading = true;
+
                     var user = await UserRepository.GetUserAsync(UserLoginIconViewModel.User.Id);
                     if (user != null)
                     {
@@ -299,8 +327,8 @@ namespace Render.Pages.AppStart.Login
                         {
                             PasswordViewModel.ClearValidation();
                             if (await CheckForNewSoftwareVersionAsync(
-                                user,
-                                () => AfterPasswordVerificationSuccess(user)))
+                                    user,
+                                    () => AfterPasswordVerificationSuccess(user)))
                             {
                                 IsLoading = false;
                                 return null;
@@ -369,17 +397,17 @@ namespace Render.Pages.AppStart.Login
         {
             IsLoading = true;
             var vesselUser = user.UserType == UserType.Vessel
-                && await ViewModelContextProvider.GetSyncGatewayApiWrapper().IsConnected();
+                             && await ViewModelContextProvider.GetSyncGatewayApiWrapper().IsConnected();
             if (!vesselUser)
             {
                 return await RenderUserLogin(user);
             }
 
             var authResult = await TryLoginThroughAuthenticationService(user);
-			if (authResult.OfflineError)
-			{
-				return await RenderUserLogin(user);
-			}
+            if (authResult.OfflineError)
+            {
+                return await RenderUserLogin(user);
+            }
 
             return null;
         }
@@ -387,6 +415,7 @@ namespace Render.Pages.AppStart.Login
         private async Task<IRoutableViewModel> RenderUserLogin(IUser user)
         {
             IsLoading = true;
+
             return await FinishLoginAsync(user);
         }
 
@@ -433,19 +462,22 @@ namespace Render.Pages.AppStart.Login
 
             await StartSync(user);
 
-            var userMachineSettings = await UserMachineSettingsRepository.GetUserMachineSettingsForUserAsync(user.Id);
-            var lastProjectId = user.UserType == UserType.Render ? ((RenderUser)user).ProjectId : userMachineSettings.GetLastSelectedProjectId();
-            var lastProject = await ProjectsRepository.GetAsync(lastProjectId);
-            var lastLocalProject = projects.FirstOrDefault(x => x.ProjectId == lastProjectId);
+            var (hasLastSelectedProject, lastProject) = await GetLastProjectInfo(user);
 
-            if (lastProject != null && lastProject.IsDeleted && user.UserType == UserType.Render)
+            var lastLocalProject = hasLastSelectedProject
+                ? projects.FirstOrDefault(x => x.ProjectId == lastProject.Id)
+                : null;
+
+            if (lastProject is { IsDeleted: true } && user.UserType == UserType.Render)
             {
                 Loading = false;
                 return await ShowProjectDeletedModal();
             }
 
-            if (lastProjectId == Guid.Empty || lastLocalProject == null || lastLocalProject.State == DownloadState.NotStarted ||
-               (lastProject.IsDeleted && user.UserType == UserType.Vessel))
+            if (hasLastSelectedProject is false
+                || lastLocalProject == null
+                || lastLocalProject.State == DownloadState.NotStarted
+                || (lastProject.IsDeleted && user.UserType == UserType.Vessel))
             {
                 var vm = await ProjectSelectViewModel.CreateAsync(ViewModelContextProvider);
 
@@ -457,7 +489,7 @@ namespace Render.Pages.AppStart.Login
             //This is a stop gap - if we hit an exception when navigating home, go to the project select page instead.
             try
             {
-                var homeViewModel = await HomeViewModel.CreateAsync(lastProjectId, ViewModelContextProvider);
+                var homeViewModel = await HomeViewModel.CreateAsync(lastProject.Id, ViewModelContextProvider);
 
                 Loading = false;
 
@@ -512,7 +544,7 @@ namespace Render.Pages.AppStart.Login
             {
                 viewModel.Dispose();
             }
-            _userMembershipService?.Dispose();
+
             BackButtonCommand?.Dispose();
             UserViewModelSourceList?.Dispose();
             TopUserViewModelSourceList?.Dispose();

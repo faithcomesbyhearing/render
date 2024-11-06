@@ -24,15 +24,18 @@ namespace Render.Components.TitleBar.MenuActions
         {
             CloseMenu();
 
-            var projectId = ViewModelContextProvider.GetGrandCentralStation().CurrentProjectId;
+            var projectId = GetProjectId();
             var loggedInUserId = ViewModelContextProvider.GetLoggedInUser().Id;
 
-            await ViewModelContextProvider.GetGrandCentralStation().FindWorkForUser(projectId, loggedInUserId);
+            await ViewModelContextProvider
+                .GetGrandCentralStation()
+                .FindWorkForUser(projectId, loggedInUserId);
 
-            var sectionStatusViewModel = await Task.Run(async () =>
-                await SectionStatusPageViewModel.CreateAsync(ViewModelContextProvider, projectId));
+            var sectionStatusViewModel = await Task.Run(() => SectionStatusPageViewModel.CreateAsync(
+                ViewModelContextProvider, 
+                projectId));
             
-            return await HostScreen.Router.Navigate.Execute(sectionStatusViewModel);
+            return await NavigateTo(sectionStatusViewModel);
         }
     }
 }

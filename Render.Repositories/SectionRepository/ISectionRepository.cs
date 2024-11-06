@@ -3,20 +3,20 @@ using Render.Models.Snapshot;
 
 namespace Render.Repositories.SectionRepository
 {
-    public interface ISectionRepository: IDisposable
+    public interface ISectionRepository : IDisposable
     {
         Task<Section> GetSectionAsync(Guid id, bool withReferences = false);
 
         Task<Snapshot> GetPassageDraftsAsync(
-            Snapshot snapshot, bool 
+            Snapshot snapshot, bool
             getRetellBackTranslations = false,
             bool getSegmentBackTranslations = false);
 
         Task<Section> GetSectionWithDraftsAsync(
-            Guid id, 
-            bool getRetellBackTranslations = false, 
-            bool getSegmentBackTranslations = false, 
-            bool getCommunityTest = false, 
+            Guid id,
+            bool getRetellBackTranslations = false,
+            bool getSegmentBackTranslations = false,
+            bool getCommunityTest = false,
             bool withReferences = false);
 
         Task<List<Section>> GetSectionsForProjectAsync(Guid projectId);
@@ -32,15 +32,15 @@ namespace Render.Repositories.SectionRepository
         Task<Section> RevertSectionToDefaultAsync(Section section, Guid loggedInUserId, Guid projectId);
 
         Task SaveSectionReferencesAsync(IEnumerable<SectionReferenceAudio> sectionReferences);
-        
+
         Task<Section> GetSectionWithReferencesAsync(Guid id);
 
         Task SaveSectionAndDraftAsync(Section section, Draft newDraft);
 
         Task SaveSectionWithNewDivisionsAsync(Section section);
 
-        Task Purge(Guid id);
-
         Task DeleteDraftAsync(Guid draftId);
+
+        Task UpdateRetellsWithSnapshotInfo(Passage passage, Snapshot snapshot);
     }
 }

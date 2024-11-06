@@ -6,19 +6,12 @@
                             xmlns:kernel="clr-namespace:Render.Kernel"
                             xmlns:processesView="clr-namespace:Render.Pages.Settings.SectionStatus.Processes;assembly=Render"
                             xmlns:resources="clr-namespace:Render.Resources;assembly=Render"
-                            xmlns:barPlayer="clr-namespace:Render.Components.BarPlayer;assembly=Render"
                             xmlns:localization="clr-namespace:Render.Resources.Localization"
                             xmlns:versionLabel="clr-namespace:Render.Components.VersionLabel"
+                            xmlns:barPlayers="clr-namespace:Render.Components.SectionInfo;assembly=Render"
                             x:Class="Render.Pages.Settings.SectionStatus.Processes.ProcessesView">
 
     <ContentView.Resources>
-        <Style x:Key="BarPlayerCollection" TargetType="CollectionView">
-            <Setter Property="Margin" Value="10,15,10,0" />
-            <Setter Property="VerticalOptions" Value="Start" />
-            <Setter Property="HorizontalOptions" Value="Start" />
-            <Setter Property="FlowDirection" Value="LeftToRight" />
-        </Style>
-
         <Style x:Key="InfoCardTitleStyle" TargetType="Label">
             <Setter Property="Margin" Value="10,0" />
             <Setter Property="FontSize" Value="{StaticResource LargeFontMinus2Font}" />
@@ -67,7 +60,8 @@
                                                             AutomationId="ApprovedSectionCollection" />
             </Grid>
         </ScrollView>
-
+        
+        <!--No Section Assigned Text Block-->
         <Grid x:Name="NoSectionAssigned"
               IsVisible="False"
               HeightRequest="350"
@@ -105,6 +99,7 @@
             <versionLabel:VersionLabel Grid.Row="4" HorizontalOptions="Center" VerticalOptions="End" />
         </Grid>
 
+        <!--Section Information right corner block-->
         <Grid x:Name="InfoModal"
               HorizontalOptions="End"
               VerticalOptions="Fill"
@@ -145,6 +140,13 @@
                                    FontSize="32"
                                    TextColor="{DynamicResource CardText}"
                                    FontFamily="BoldFont" />
+                            <Label x:Name="ConflictIcon"
+                                   AutomationId="ConflictIcon"
+                                   FontFamily="Icons"
+                                   FontSize="30"
+                                   Text="{resources:IconExtensions Icon=InvalidInput}"
+                                   TextColor="{StaticResource Error}" 
+                                   VerticalTextAlignment="Center" />
                         </HorizontalStackLayout>
 
                         <Line Grid.Row="1" x:Name="StepTitleBarSeparator"
@@ -207,13 +209,13 @@
                     <FlexLayout Grid.Row="7" 
                                 WidthRequest="360" 
                                 JustifyContent="Start"
-                                Direction="Row" 
+                                Direction="Row"
                                 Wrap="Wrap">
                         <Label Text="{x:Static localization:AppResources.DraftedByLabel}"
                                Style="{StaticResource InfoCardTitleStyle}"
                                Margin="5,0,0,0"
                                AutomationId="DraftedByLabel" />
-                        <Label x:Name="DraftedBy" Margin="5,0" Style="{StaticResource InfoCardMessageStyle}" />
+                        <Label x:Name="DraftedBy" Margin="5,0,0,0" Style="{StaticResource InfoCardMessageStyle}" />
                     </FlexLayout>
 
                     <Grid Grid.Row="8" ColumnDefinitions="Auto,*" Style="{StaticResource InfoCardGridStyle}">
@@ -223,20 +225,20 @@
                                AutomationId="ApprovedByLabel" />
                         <Label Grid.Column="1" x:Name="ApprovedBy" Style="{StaticResource InfoCardMessageStyle}" />
                     </Grid>
-
-                    <CollectionView Grid.Row="9" x:Name="SectionAudioBarPlayerCollection"
-                                    Style="{StaticResource BarPlayerCollection}"
-                                    WidthRequest="364"
-                                    AutomationId="SectionAudioBarPlayerCollection">
-                        <CollectionView.ItemTemplate>
+                    
+                    <VerticalStackLayout Grid.Row="9" x:Name="BarPlayerCollection"
+                                         Margin="10,15,10,10"
+                                         WidthRequest="364"
+                                         Spacing="25"
+                                         FlowDirection="LeftToRight"
+                                         AutomationId="SectionAudioBarPlayerCollection">
+                        <BindableLayout.ItemTemplate>
                             <DataTemplate>
-                                <barPlayer:BarPlayer AutomationId="SectionAudioBarPlayer" WidthRequest="364" />
+                                <barPlayers:SectionInfoPlayers WidthRequest="364"/>
                             </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                        <CollectionView.ItemsLayout>
-                            <GridItemsLayout Orientation="Vertical" VerticalItemSpacing="10" />
-                        </CollectionView.ItemsLayout>
-                    </CollectionView>
+                        </BindableLayout.ItemTemplate>
+                    </VerticalStackLayout>
+
                 </Grid>
             </ScrollView>
 

@@ -7,7 +7,5 @@ namespace Render.Repositories.LocalDataRepositories
         Task<List<UserProjectSession>> GetUserProjectSessionAsync(Guid userId, Guid projectId);
 
         Task SaveSessionStateAsync(UserProjectSession session);
-
-        Task Purge(Guid id);
     }
 }

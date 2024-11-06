@@ -37,8 +37,6 @@ public partial class Home
             d(this.OneWayBind(ViewModel, vm => vm.IsLoading, 
                 v => v.LoadingView.IsVisible));
         });
-            
-        HomeViewModel.ClearNavigationStack();
     }
     
     public bool SetVisibility(bool isVisible)
@@ -78,16 +76,16 @@ public partial class Home
 
     protected override void OnAppearing()
     {
-        ViewModel?.ResetDocumentListeners();
+        ViewModel?.EntityChangeListenerService.ResetListeners();
     }
     protected override void OnDisappearing()
     {
-        ViewModel?.RemoveWorkflowMonitors();
+        ViewModel?.EntityChangeListenerService.RemoveListeners();
     }
         
     protected override bool OnBackButtonPressed()
     {
-        ViewModel.NavigateToProjectSelectPageCommand.Execute();
+        ViewModel?.NavigateToProjectSelectPageCommand.Execute();
         return true;
     }
         

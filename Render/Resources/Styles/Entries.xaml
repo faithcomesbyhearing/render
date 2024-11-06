@@ -22,6 +22,20 @@
         <Setter Property="FontFamily" Value="RegularFont"/>
         <Setter Property="MaxLength" Value="32"/>
     </Style>
+
+    <Style x:Key="StageSettingsStepNameEntryStyle" TargetType="Entry">
+        <Setter Property="BackgroundColor" Value="{DynamicResource SecondaryText}" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="TextColor" Value="{DynamicResource GreyText}" />
+        <Setter Property="FontSize" Value="{DynamicResource MediumFont}" />
+        <Setter Property="WidthRequest" Value="400" />
+        <Setter Property="FontFamily" Value="RegularFont"/>
+        <Setter Property="MaxLength" Value="28"/>
+    </Style>
+    
+    <Style x:Key="WorkflowSettingsStepNameEntryStyle" TargetType="Entry" BasedOn="{StaticResource WorkflowSettingsEntryStyle}">
+        <Setter Property="MaxLength" Value="28"/>
+    </Style>
     
     <Style x:Key="Entry" TargetType="Entry">
         <Setter Property="TextColor" Value="{DynamicResource MainText}" />

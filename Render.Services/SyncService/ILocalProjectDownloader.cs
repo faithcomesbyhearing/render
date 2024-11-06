@@ -6,6 +6,8 @@
 
         bool BeginActiveLocalReplicationOfProject(Device device);
 
+        void CancelActiveLocalReplicationOfProject(Device device);
+
         void Dispose();
     }
 }

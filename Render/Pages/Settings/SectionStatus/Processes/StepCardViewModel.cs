@@ -15,18 +15,22 @@ namespace Render.Pages.Settings.SectionStatus.Processes
         public ReactiveCommand<Unit, Unit> ToggleSectionsCommand;
 
         [Reactive] public bool ShowSections { get; set; }
-        
+
         [Reactive] public bool LastStepCard { get; set; }
 
-        public StepCardViewModel(Step step, List<SectionCardViewModel> sectionCards, 
+        public StepCardViewModel(
+            Step step,
+            List<SectionCardViewModel> sectionCards,
             IViewModelContextProvider viewModelContextProvider,
-            Guid stageId) 
-            : base("SectionStatusStepCard", viewModelContextProvider)
+            Guid stageId)
+            : base(
+                urlPathSegment: "SectionStatusStepCard",
+                viewModelContextProvider: viewModelContextProvider)
         {
             try
             {
                 Step = step;
-                StepName = GetStepName(viewModelContextProvider, Step.RenderStepType, stageId);
+                StepName = GetStepName(Step);
                 SectionCards = new ObservableCollection<SectionCardViewModel>(sectionCards);
                 ToggleSectionsCommand = ReactiveCommand.Create(ToggleSections);
             }
@@ -35,7 +39,7 @@ namespace Render.Pages.Settings.SectionStatus.Processes
                 var message = ex.Message;
             }
         }
-        
+
         private void ToggleSections()
         {
             ShowSections = !ShowSections;
@@ -47,6 +51,7 @@ namespace Render.Pages.Settings.SectionStatus.Processes
             {
                 sectionCardViewModel.Dispose();
             }
+
             SectionCards?.Clear();
 
             Step = null;

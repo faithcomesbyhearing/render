@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Net;
+using System.Globalization;
 using Couchbase.Lite;
 using Couchbase.Lite.Sync;
 using ReactiveUI;
@@ -113,21 +114,28 @@ namespace Render.Services.SyncService
                 return;
             }
 
+            using var password = new NetworkCredential("", _syncGatewayPassword).SecurePassword;
             var target = new URLEndpoint(new Uri($"{_connectionString}{_localDatabase.Name}/"));
-            _webConfig = new ReplicatorConfiguration(_localDatabase, target)
+            _webConfig = new ReplicatorConfiguration(target)
             {
-                Authenticator = new BasicAuthenticator(_syncGatewayUsername, _syncGatewayPassword),
+                Authenticator = new BasicAuthenticator(_syncGatewayUsername, password),
                 Continuous = continuous,
                 ReplicatorType = replicatorType,
-                Channels = _projectChannels,
                 Heartbeat = TimeSpan.FromMinutes(30),
-                MaxAttempts = _maxSyncAttempts
+                MaxAttempts = _maxSyncAttempts,
                 //If we are only pushing (for the logs bucket), we don't want to replicate any deletions.
                 //This allows us to manage how many logs we keep locally without removing them from the web servers,
                 //giving us flexibility for our analytics.
             };
 
-            Completed = false;
+            var defCollectionConf = new CollectionConfiguration()
+            {
+                Channels = _projectChannels,
+                ConflictResolver = CustomConflictResolver.Instance,
+            };
+            _webConfig.AddCollection(_localDatabase.GetDefaultCollection(), defCollectionConf);
+
+			Completed = false;
             Error = false;
 
             _webReplicator?.RemoveChangeListener(_webListenerToken);

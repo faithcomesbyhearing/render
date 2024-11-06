@@ -33,7 +33,7 @@ namespace Render.Pages.Transcribe.TranscribeSegmentBackTranslate
         [Reactive] 
         public ISequencerPlayerViewModel SequencerPlayerViewModel { get; private set; }
 
-        public static async Task<TranscribeSegmentSelectPageViewModel> CreateAsync(
+        public static TranscribeSegmentSelectPageViewModel Create(
             Step step,
             Section section,
             IViewModelContextProvider viewModelContextProvider,
@@ -62,15 +62,12 @@ namespace Render.Pages.Transcribe.TranscribeSegmentBackTranslate
             : base(
                 urlPathSegment: "TabletTranscribeSegmentSelect",
                 viewModelContextProvider: viewModelContextProvider,
-                pageName: AppResources.Transcribe,
+                pageName: GetStepName(step),
                 section: section,
                 stage: stage,
                 step: step,
                 secondPageName: AppResources.SegmentSelect)
         {
-            DisposeOnNavigationCleared = true;
-            TitleBarViewModel.DisposeOnNavigationCleared = true;
-
             _previouslyTranscribedSegment = previousSegmentBackTranslation;
             
             TitleBarViewModel.PageGlyph = IconExtensions
@@ -177,7 +174,8 @@ namespace Render.Pages.Transcribe.TranscribeSegmentBackTranslate
                                 ViewModelContextProvider.GetTempAudioService(segmentBackTranslation).SaveTempAudio(),
                                 endIcon: endIcon,
                                 option: option,
-                                number: segmentNumber.ToString());
+                                number: segmentNumber.ToString(),
+                                userId: ViewModelContextProvider.GetLoggedInUser().Id);
                         }
                     }
                     else  // Step.Role == Roles.Transcribe2
@@ -201,7 +199,8 @@ namespace Render.Pages.Transcribe.TranscribeSegmentBackTranslate
                                 ViewModelContextProvider.GetTempAudioService(segmentBackTranslation.RetellBackTranslationAudio).SaveTempAudio(),
                                 endIcon: endIcon,
                                 option: option,
-                                number: segmentNumber.ToString());
+                                number: segmentNumber.ToString(),
+                                userId: ViewModelContextProvider.GetLoggedInUser().Id);
                         }
                     }
 
@@ -251,7 +250,8 @@ namespace Render.Pages.Transcribe.TranscribeSegmentBackTranslate
                     Step.Role == Roles.Transcribe2 && allSegmentBackTranslationAudios.All(x =>
                         x.RetellBackTranslationAudio?.Transcription != null))
                 {
-                    await ViewModelContextProvider.GetGrandCentralStation().AdvanceSectionAsync(Section, Step);
+                    var sectionMovementService = ViewModelContextProvider.GetSectionMovementService();
+                    await sectionMovementService.AdvanceSectionAsync(Section, Step, GetProjectId(), GetLoggedInUserId());
                     return await NavigateToHomeOnMainStackAsync();
                 }
 

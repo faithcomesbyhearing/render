@@ -9,7 +9,5 @@ namespace Render.Repositories.WorkflowRepositories
         Task SaveWorkflowAsync(RenderWorkflow renderWorkflow);
 
         Task<List<RenderWorkflow>> GetAllWorkflowsForProjectIdAsync(Guid projectId);
-
-        Task Purge(Guid id);
     }
 }

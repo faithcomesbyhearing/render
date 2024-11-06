@@ -11,6 +11,11 @@
         event EventHandler PlaybackEnded;
 
         ///<Summary>
+        /// Raised when audio playback failed
+        ///</Summary>
+        event EventHandler PlaybackFailed;
+
+        ///<Summary>
         /// Length of audio in seconds (considering StartTime & EndTime)
         ///</Summary>
         double Duration { get; }

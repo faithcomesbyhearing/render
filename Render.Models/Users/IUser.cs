@@ -49,6 +49,6 @@ namespace Render.Models.Users
 
         List<Guid> RoleIdsForProject(string claimType, string claimName);
 
-        List<Role> RolesForProject(string claimType, string claimName);
+        List<RoleName> RolesForProject(string claimType, string claimName);
     }
 }

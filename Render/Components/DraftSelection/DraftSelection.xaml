@@ -9,11 +9,6 @@
                             xmlns:barPlayer="clr-namespace:Render.Components.BarPlayer;assembly=Render"
                             x:Class="Render.Components.DraftSelection.DraftSelection">
     <ContentView.Resources>
-        <Style x:Key="BarPlayers" TargetType="barPlayer:BarPlayer">
-            <Setter Property="WidthRequest" Value="428" />
-            <Setter Property="HorizontalOptions" Value="Start" />
-            <Setter Property="VerticalOptions" Value="Center" />
-        </Style>
 
         <Style x:Key="BackgroundContainer" TargetType="Grid">
             <Setter Property="Padding" Value="10,0" />
@@ -49,7 +44,7 @@
     <ContentView.Content>
         <StackLayout>
             <Grid>
-                <miniWaveformPlayer:MiniWaveformPlayer x:Name="MiniWaveformPlayer" Style="{StaticResource BarPlayers}">
+                <miniWaveformPlayer:MiniWaveformPlayer x:Name="MiniWaveformPlayer" >
                     <miniWaveformPlayer:MiniWaveformPlayer.ContentBeforePlayer>
                         <StackLayout Orientation="Horizontal">
                             <!-- Radio button -->

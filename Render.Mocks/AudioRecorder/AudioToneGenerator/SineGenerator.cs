@@ -4,8 +4,7 @@
     {
         public static short[] GenerateSine(double frequency, uint sampleRate, int milliSeconds)
         {
-            var secondsInLength = milliSeconds / 1000d;
-            var bufferSize = (ushort)(sampleRate * secondsInLength);
+            var bufferSize = (ushort)(sampleRate * milliSeconds / 1000d);
             var dataBuffer = new short[bufferSize];
 
             const int amplitude = 32760;

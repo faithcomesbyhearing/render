@@ -31,7 +31,7 @@ public partial class UserLoginIconHorizontal
     private static void OrientationPropertyChanged(BindableObject bindable, object oldValue, object newValue)
     {
         var control = (UserLoginIconHorizontal)bindable;
-        control.Layout.Orientation = (StackOrientation)newValue;
+        control.ComponentLayout.Orientation = (StackOrientation)newValue;
         control.Label.Margin = (StackOrientation)newValue == StackOrientation.Horizontal
             ? new Thickness(5, 0, 0, 0)
             : new Thickness(0);

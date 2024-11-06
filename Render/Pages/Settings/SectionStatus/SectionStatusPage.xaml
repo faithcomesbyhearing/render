@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
 <kernel:RenderPageBase x:TypeArguments="sectionStatus:SectionStatusPageViewModel"
+                       x:Class="Render.Pages.Settings.SectionStatus.SectionStatusPage"
                        xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                        xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
@@ -10,7 +11,8 @@
                        xmlns:localization="clr-namespace:Render.Resources.Localization"
                        xmlns:recovery="clr-namespace:Render.Pages.Settings.SectionStatus.Recovery"
                        xmlns:common="clr-namespace:Render.Common"
-                       x:Class="Render.Pages.Settings.SectionStatus.SectionStatusPage"
+                       xmlns:uiResources="clr-namespace:Render.Resources"
+                       xmlns:progressBar="clr-namespace:Render.Components.ProgressBar;assembly=Render"
                        NavigationPage.HasNavigationBar="False">
     <ContentPage.Resources>
         <Style x:Key="ComponentSelectLabel" TargetType="Label">
@@ -29,68 +31,171 @@
             <Setter Property="HorizontalOptions" Value="End"/>
         </Style>
     </ContentPage.Resources>
-    <Grid RowDefinitions="75, 60, *" x:Name="TopLevelElement"
-              RowSpacing="0" BackgroundColor="{DynamicResource AlternateBackground}">
+    <Grid x:Name="TopLevelElement"
+          RowSpacing="0" 
+          BackgroundColor="{DynamicResource AlternateBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition x:Name="TitleBarRow" Height="75"></RowDefinition>
+            <RowDefinition x:Name="ProgressBarRow" Height="Auto"></RowDefinition>
+            <RowDefinition x:Name="TabStackRow" Height="60"></RowDefinition>
+            <RowDefinition x:Name="ContentRow" Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
         <titleBar:TitleBar x:Name="TitleBar" />
+        
+        <!-- Progress Bar-->
+        <Grid Grid.Row="1"
+              x:Name="ProgressStack"
+              IsVisible="True"
+              WidthRequest="960"
+              HeightRequest="108"
+              HorizontalOptions="CenterAndExpand"
+              VerticalOptions="CenterAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0"
+                   x:Name="SuccessIcon"
+                   IsVisible="False"
+                   FontFamily="Icons"
+                   FontSize="26"
+                   Margin="0,0,13,0"
+                   VerticalOptions="Center"
+                   TextColor="{StaticResource Slate}"
+                   Text="{uiResources:IconExtensions ExportFinished}" />
+            <Label Grid.Column="1"
+                   x:Name="ExportingLabel"
+                   TextColor="{DynamicResource MainText}"
+                   VerticalOptions="Center"
+                   FontFamily="RegularFont"
+                   Margin="0,0,13,0"
+                   FontSize="{StaticResource LargeFontMinus2Font}" />
+            <progressBar:RenderProgress Grid.Column="2"
+                                        x:Name="ProgressBar"
+                                        WidthRequest="640"
+                                        ProgressBarBackgroundColor="{DynamicResource ExportAudioProgressBarBackground}"
+                                        ProgressBarColor="{DynamicResource ExportAudioProgressBar}" />
+            <Label Grid.Column="3"
+                   x:Name="ProgressLabel"
+                   Margin="13,0,0,0"
+                   TextColor="{DynamicResource MainText}"
+                   VerticalOptions="Center"
+                   FontFamily="RegularFont"
+                   FontSize="{StaticResource LargeFontMinus2Font}" />
+        </Grid>
+
         <!-- View Select -->
-        <HorizontalStackLayout Grid.Row="1" HorizontalOptions="Center" x:Name="TabStack"
-                         Padding="0,20,0,0">
-            <Grid x:Name="TopMenuBar" 
+        <Grid x:Name="TabStackWithExportButton"
+              HorizontalOptions="Fill"
+              MaximumWidthRequest="960"
+              Grid.Row="2" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="LeftBorderColumn" Width="*"></ColumnDefinition>
+                <ColumnDefinition x:Name="TabStackColumn" Width="Auto"></ColumnDefinition>
+                <ColumnDefinition x:Name="ExportButtonColumn" Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            
+            <HorizontalStackLayout x:Name="TabStack"
+                                   Grid.Column="1"
+                                   HorizontalOptions="Center" 
+                                   Padding="0,20,0,0">
+                <Grid x:Name="TopMenuBar" 
                   ColumnDefinitions="*,10,*" 
                   ColumnSpacing="10" 
                   HorizontalOptions="Center"
                   HeightRequest="40">
-                <Frame x:Name="ProcessStack" Grid.Column="0" CornerRadius="8" 
+                    <Frame x:Name="ProcessStack" 
+                       Grid.Column="0" 
+                       CornerRadius="8" 
                        HorizontalOptions="End" 
                        Padding="13, 0"
                        AutomationId="ProcessesViewButtonFrame">
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer x:Name="SelectProcessesViewTap"
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="SelectProcessesViewTap"
                                               AutomationId="ProcessesViewButton"
                                               Tapped="OnButtonClicked" />
-                    </Frame.GestureRecognizers>
+                        </Frame.GestureRecognizers>
 
-                    <Label x:Name="ProcessesViewButton" 
+                        <Label x:Name="ProcessesViewButton" 
                            Text="{x:Static localization:AppResources.Processes}"
                            Style="{StaticResource ComponentSelectLabel}"
                            AutomationId="ProcessesViewButtonLabel"/>
-                </Frame>
+                    </Frame>
 
-                <HorizontalStackLayout Grid.Column="1" Padding="0" 
-                                 VerticalOptions="Center"
-                                 HorizontalOptions="Center"
-                                 AutomationId="SectionStatusBoxViewTabSeparatorLayout">
-                    <BoxView Style="{x:StaticResource WorkflowSettingsBoxViewStyle}" WidthRequest="2" 
-                                 HeightRequest="16" Margin="0,5,0,0" AutomationId="BoxViewTabSeparator"/>
-                </HorizontalStackLayout>
-
-                <Frame x:Name="RecoveryStack" Grid.Column="2"
-                       CornerRadius="8" 
-                       AutomationId="RecoveryViewButtonFrame" Padding="13,5,10,5">
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer x:Name="SelectRecoveryViewTap"
-                                                  AutomationId="RecoveryViewButton"
-                                                  Tapped="OnButtonClicked" />
-
-                    </Frame.GestureRecognizers>
-                    <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
-                        <Label x:Name="RecoveryViewButton" VerticalOptions="Center"
-                                   Text="{x:Static localization:AppResources.Recovery}"
-                                   Style="{StaticResource ComponentSelectLabel}"
-                                   AutomationId="RecoveryViewButtonLabel"/>
-
-                        <Frame x:Name="ConflictDot" IsVisible="false"
-                                   Style="{DynamicResource RequiredDot}" AutomationId="ConflictDot"/>
+                    <HorizontalStackLayout x:Name="TabSeparatorStack"
+                                       Grid.Column="1" 
+                                       Padding="0" 
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Center"
+                                       AutomationId="SectionStatusBoxViewTabSeparatorLayout">
+                        <BoxView Style="{x:StaticResource WorkflowSettingsBoxViewStyle}" 
+                             WidthRequest="2" 
+                             HeightRequest="16" 
+                             Margin="0,5,0,0" 
+                             AutomationId="BoxViewTabSeparator"/>
                     </HorizontalStackLayout>
-                </Frame>
-            </Grid>
-        </HorizontalStackLayout>
-        <Grid Grid.Row="2" RowDefinitions="*">
+
+                    <Frame x:Name="RecoveryStack" 
+                       Grid.Column="2"
+                       CornerRadius="8" 
+                       AutomationId="RecoveryViewButtonFrame" 
+                       Padding="13,5,10,5">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="SelectRecoveryViewTap"
+                                              AutomationId="RecoveryViewButton"
+                                              Tapped="OnButtonClicked" />
+                        </Frame.GestureRecognizers>
+                        <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                            <Label x:Name="RecoveryViewButton" 
+                               VerticalOptions="Center"
+                               Text="{x:Static localization:AppResources.Recovery}"
+                               Style="{StaticResource ComponentSelectLabel}"
+                               AutomationId="RecoveryViewButtonLabel"/>
+
+                            <Frame x:Name="ConflictDot" 
+                               IsVisible="false"
+                               Style="{DynamicResource RequiredDot}" 
+                               AutomationId="ConflictDot"/>
+                        </HorizontalStackLayout>
+                    </Frame>
+                </Grid>
+            </HorizontalStackLayout>
+
+            <!-- Export button -->
+            <Frame x:Name="ExportButton"
+                   Grid.Column="2"
+                   HorizontalOptions="End"
+                   Style="{StaticResource ProjectCardButtonFrameStyle}"
+                   WidthRequest="220"
+                   AutomationId="ExportButtonFrame">
+                    <StackLayout Orientation="Horizontal"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center">
+                        <Label FontFamily="Icons"
+                           Text="{uiResources:IconExtensions ExportAudio}"
+                           FontSize="25"
+                           TextColor="{DynamicResource SecondaryText}"
+                           Margin="0,0,10,0" 
+                           AutomationId="ExportButtonIcon" />
+                        <Label Style="{StaticResource ProjectCardButtonLabelStyle}"
+                           Text="{x:Static localization:AppResources.ExportChecked}"
+                           AutomationId="ExportButtonLabel" />
+                    </StackLayout>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer x:Name="ExportAudioGuGestureRecognizer"
+                                          Tapped="OnButtonClicked"
+                                          AutomationId="AudioExportPageExportButton" />
+                </Frame.GestureRecognizers>
+            </Frame>
+        </Grid>
+        <Grid Grid.Row="3" RowDefinitions="*">
             <processesView:ProcessesView x:Name="ProcessesView" />
             <recovery:SectionStatusRecoveryView x:Name="RecoveryView"/>
         </Grid>
         <common:LoadingScreen x:Name="LoadingView"
-                                          Grid.Row="0"
-                                          Grid.RowSpan="4" />
+                              Grid.Row="0"
+                              Grid.RowSpan="4" />
     </Grid>
 </kernel:RenderPageBase>

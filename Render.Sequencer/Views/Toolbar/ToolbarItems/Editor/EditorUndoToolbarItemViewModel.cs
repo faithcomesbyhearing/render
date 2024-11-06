@@ -13,11 +13,11 @@ internal class EditorUndoToolbarItemViewModel : BaseToolbarItemViewModel, IToolb
         Sequencer = sequencer;
 
         IconKey = "DeleteUndo";
-        ActionCommand = ReactiveCommand.CreateFromTask(UndoDeleteAsync);
+        ActionCommand = ReactiveCommand.Create(UndoDeleteAsync);
         AutomationId = "UndoDeleteButton";
     }
 
-    private async Task UndoDeleteAsync()
+    private void UndoDeleteAsync()
     {
         Sequencer.UndoDeleteAudio();
     }

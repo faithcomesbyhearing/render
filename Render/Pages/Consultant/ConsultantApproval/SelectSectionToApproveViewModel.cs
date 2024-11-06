@@ -18,9 +18,9 @@ namespace Render.Pages.Consultant.ConsultantApproval
             Step step,
             Stage stage)
         {
-            var grandCentralStation = viewModelContextProvider.GetGrandCentralStation();
+            var stageService = viewModelContextProvider.GetStageService();
             var sectionRepository = viewModelContextProvider.GetSectionRepository();
-            var sectionIds = grandCentralStation.SectionsAtStep(step.Id);
+            var sectionIds = stageService.SectionsAtStep(step.Id);
             var sections = new List<Section>();
 
             foreach (var sectionId in sectionIds)
@@ -28,7 +28,7 @@ namespace Render.Pages.Consultant.ConsultantApproval
                 sections.Add(await sectionRepository.GetSectionWithDraftsAsync(sectionId));
             }
 
-            return new SelectSectionToApproveViewModel(viewModelContextProvider, sections, stage);
+            return new SelectSectionToApproveViewModel(viewModelContextProvider, sections, stage, step);
         }
 
         public DynamicDataWrapper<SectionToApproveCardViewModel> SectionsToApprove = new();
@@ -36,10 +36,11 @@ namespace Render.Pages.Consultant.ConsultantApproval
         private SelectSectionToApproveViewModel(
             IViewModelContextProvider viewModelContextProvider,
             List<Section> sections,
-            Stage stage) : base(
+            Stage stage,
+            Step step) : base(
                 urlPathSegment: "SelectApproveSection",
                 viewModelContextProvider: viewModelContextProvider,
-                pageName: AppResources.ConsultantApproval,
+                pageName: GetStepName(step),
                 section: null,
                 stage: stage,
                 secondPageName: AppResources.SectionSelect)

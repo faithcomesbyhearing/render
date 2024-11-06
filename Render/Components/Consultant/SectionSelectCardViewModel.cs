@@ -30,8 +30,8 @@ public class SectionSelectCardViewModel :  SectionNavigationViewModel
 
     private async Task<IRoutableViewModel> NavigateToConsultantCheck()
     {
-        var grandCentralStation = ViewModelContextProvider.GetGrandCentralStation();
-        var step = await grandCentralStation.GetStepToWorkAsync(Section.Id, RenderStepTypes.ConsultantCheck);
+        var stageService = ViewModelContextProvider.GetStageService();
+        var step = await stageService.GetStepToWorkAsync(Section.Id, RenderStepTypes.ConsultantCheck, GetProjectId());
 
         // fix for open reviewed section
         if (step == null)
@@ -43,6 +43,9 @@ public class SectionSelectCardViewModel :  SectionNavigationViewModel
         Section = await sectionRepository.GetSectionWithDraftsAsync(Section.Id, true, true, withReferences: true);
         
         if (IsAudioMissing(Section, RenderStepTypes.ConsultantCheck, checkForBackTranslationAudio: true)) return null;
+
+        var sessionService = ViewModelContextProvider.GetSessionStateService();
+        sessionService.SetCurrentStep(step.Id, Section.Id);
 
         var consultantCheckViewModel = await ConsultantCheckViewModel.CreateAsync(ViewModelContextProvider, this, step, Stage);
         return await NavigateTo(consultantCheckViewModel);

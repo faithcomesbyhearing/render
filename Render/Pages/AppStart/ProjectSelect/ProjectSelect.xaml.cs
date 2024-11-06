@@ -35,10 +35,10 @@ public partial class ProjectSelect
             d(this.Bind(ViewModel, vm => vm.ProjectListViewModel.OffloadMode, v => v.OffloadSwitch.IsToggled));
             d(this.OneWayBind(ViewModel, vm => vm.IsLoading,
                 v => v.LoadingView.IsVisible));
-            d(this.OneWayBind(ViewModel, vm => vm.AddFromComputerViewModel,
+            d(this.OneWayBind(ViewModel, vm => vm.AddProjectViewModel.AddFromComputerViewModel,
                 v => v.AddViaFolderView.BindingContext));
             d(this.BindCommandCustom(AddAProjectFromComputerGesture, v => v.ViewModel.AddProjectFromComputerCommand));
-            d(this.WhenAnyValue(x => x.ViewModel.AddFromComputerViewModel.ShowAddFromComputer)
+            d(this.WhenAnyValue(x => x.ViewModel.AddProjectViewModel.AddFromComputerViewModel.ShowProgressView)
                 .ObserveOn(RxApp.MainThreadScheduler)
                 .Subscribe(ViewSelector));
             

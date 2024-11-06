@@ -14,23 +14,16 @@
                        Style="{DynamicResource PrimaryPage}">
     <ContentPage.Resources>
         <Style x:Key="DraftGrid" TargetType="CollectionView">
-            <Setter Property="HorizontalOptions" Value="Start" />
-            <Setter Property="VerticalOptions" Value="Start" />
-            <Setter Property="WidthRequest" Value="1350" />
+            <Setter Property="MaximumWidthRequest" Value="1450" />
             <Setter Property="VerticalScrollBarVisibility" Value="Never" />
             <Setter Property="ItemsLayout">
                 <Setter.Value>
                     <GridItemsLayout Orientation="Vertical"
                                      Span="3"
                                      VerticalItemSpacing="10"
-                                     HorizontalItemSpacing="10" />
+                                     HorizontalItemSpacing="20" />
                 </Setter.Value>
             </Setter>
-        </Style>
-        <Style x:Key="DraftSelections" TargetType="draftSelection:DraftSelection">
-            <Setter Property="HorizontalOptions" Value="Start" />
-            <Setter Property="VerticalOptions" Value="Start" />
-            <Setter Property="MinimumWidthRequest" Value="100" />
         </Style>
     </ContentPage.Resources>
 
@@ -50,7 +43,7 @@
                                Grid.Column="0"
                                Grid.ColumnSpan="2"
                                x:Name="TitleBar" />
-            
+
             <CollectionView x:Name="DraftList"
                             Grid.Row="1"
                             Grid.Column="0"
@@ -61,12 +54,12 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Grid AutomationId="DraftSelectionPanel">
-                            <draftSelection:DraftSelection Style="{StaticResource DraftSelections}" />
+                            <draftSelection:DraftSelection />
                         </Grid>
                     </DataTemplate>
-                    </CollectionView.ItemTemplate>
+                </CollectionView.ItemTemplate>
             </CollectionView>
-
+            
             <proceedButton:ProceedButton Grid.Row="2"
                                          Grid.Column="1"
                                          x:Name="ProceedButton" />

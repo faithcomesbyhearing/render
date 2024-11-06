@@ -28,7 +28,7 @@ namespace Render.Services.SyncService
 
         void CancelPassiveListener();
 
-        void CancelActiveReplications(List<Device> devicesToDisconnect);
+        void CancelActiveReplications(Device deviceToDisconnect);
 
         void Dispose();
     }

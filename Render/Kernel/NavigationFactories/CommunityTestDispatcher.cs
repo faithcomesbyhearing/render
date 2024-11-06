@@ -23,8 +23,8 @@ namespace Render.Kernel.NavigationFactories
                 var passage = SelectPassage(section, sessionService.ActiveSession);
                 var sessionPage = sessionService.GetSessionPage(step.Id, section.Id, passage.PassageNumber);
 
-                var grandCentral = viewModelContextProvider.GetGrandCentralStation();
-                var stage = grandCentral.ProjectWorkflow.GetStage(step.Id);
+                var workflowService = viewModelContextProvider.GetWorkflowService();
+                var stage = workflowService.ProjectWorkflow.GetStage(step.Id);
 
                 ViewModelBase viewModel = null;
                 if (!string.IsNullOrEmpty(sessionPage))

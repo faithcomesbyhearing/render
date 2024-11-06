@@ -8,7 +8,8 @@
                        xmlns:sectionListen="clr-namespace:Render.Pages.PeerReview.SectionListen;assembly=Render"
                        xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
                        xmlns:sequencer="clr-namespace:Render.Sequencer;assembly=Render.Sequencer"
-                       xmlns:common="clr-namespace:Render.Common"                       
+                       xmlns:common="clr-namespace:Render.Common"
+                       xmlns:revisionComponent="clr-namespace:Render.Components.Revision"
                        xmlns:localization="using:Render.Resources.Localization"
                        x:Class="Render.Pages.PeerReview.SectionListen.TabletPeerReviewSectionListenPage"
                        NavigationPage.HasNavigationBar="False">
@@ -23,32 +24,9 @@
                 <RowDefinition x:Name="SequencerRow" Height="*" />
             </Grid.RowDefinitions>
 
-            <HorizontalStackLayout Grid.Row="1"
-                                   x:Name="RevisionLayout"
-                                   IsVisible="false"
-                                   Spacing="20"
-                                   Padding="25,0"
-                                   HeightRequest="60">
-                <Label Text="{x:Static localization:AppResources.Revision}"
-                       FontFamily="MediumFont"
-                       HorizontalTextAlignment="Start"
-                       TextColor="{StaticResource MainText}"
-                       FontSize="{StaticResource LargeFontMinus2Font}"
-                       VerticalTextAlignment="Center"
-                       AutomationId="RevisionLabel" />
-
-                <Picker x:Name="RevisionPicker"
-                        Style="{StaticResource DraftPicker}"
-                        FontSize="{StaticResource MediumPlus2Font}"
-                        FontFamily="MediumFont"
-                        FontAttributes="None"
-                        VerticalOptions="Center"
-                        SelectedIndex="0"
-                        WidthRequest="400"
-                        AutomationId="RevisionPicker"
-                        ItemDisplayBinding="{Binding Value}" />
-
-            </HorizontalStackLayout>
+            <revisionComponent:MultipleRevision Grid.Row="1" 
+                                                x:Name="RevisionComponent"  
+                                                Padding="25,0"/>
 
             <sequencer:Sequencer Grid.Row="2" x:Name="Sequencer" />
 

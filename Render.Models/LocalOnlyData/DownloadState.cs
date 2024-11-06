@@ -7,6 +7,8 @@
         Offloading,
         Finished,
         Canceling,
-        FinishedPartially
+        FinishedPartially,
+        Exporting,
+        ExportDone
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Render.Services.AudioPlugins.AudioPlayer;
+using Render.Services.AudioServices;
 using Windows.Media.Core;
 using Windows.Media.Playback;
 
@@ -6,6 +7,8 @@ namespace Render.Platforms.Kernel.AudioPlayer;
 
 public class AudioPlayer : IAudioPlayer
 {
+    private IAudioDeviceMonitor _deviceMonitor;
+
     private bool _isDisposed;
 
     private double? _startTime;
@@ -15,6 +18,12 @@ public class AudioPlayer : IAudioPlayer
     /// Playback end event handler
     /// </summary>
     public event EventHandler PlaybackEnded;
+
+    /// <summary>
+    /// Playback failed event handler.
+    /// TODO: improve to send specific error codes to client
+    /// </summary>
+    public event EventHandler PlaybackFailed;
 
     /// <summary>
     /// Media Source object
@@ -34,31 +43,51 @@ public class AudioPlayer : IAudioPlayer
     /// <summary>
     /// Media player interface
     /// </summary>
-    private MediaPlayer Player => _player ??= GetPlayer();
+    private MediaPlayer Player
+    {
+        get => _player ??= GetPlayer();
+    }
+
+    private bool HasActiveDevice
+    {
+        get => _deviceMonitor.HasActiveAudioOutputDevice;
+    }
 
     ///<Summary>
     /// Length of audio in seconds (considering StartTime & EndTime)
     ///</Summary>
-    public double Duration => EndTime!.Value - StartTime!.Value;
+    public double Duration
+    {
+        get => EndTime!.Value - StartTime!.Value;
+    }
 
     ///<Summary>
     /// Total length of audio in seconds (ignoring StartTime & EndTime)
     ///</Summary>
-    public double TotalDuration => _mediaSource?.Duration?.TotalSeconds ?? 0;
+    public double TotalDuration
+    {
+        get => _mediaSource?.Duration?.TotalSeconds ?? 0;
+    }
 
     ///<Summary>
     /// Current position of audio playback in seconds (considering StartTime & EndTime)
     ///</Summary>
-    public double CurrentPosition => _player is null ?
-                                     _preloadedPosition :
-                                     _player.PlaybackSession.Position.TotalMilliseconds / 1000 - StartTime!.Value;
+    public double CurrentPosition
+    {
+        get => _player is null ?
+            _preloadedPosition :
+            _player.PlaybackSession.Position.TotalMilliseconds / 1000 - StartTime!.Value;
+    }
 
     ///<Summary>
     /// Current position of audio playback in seconds (ignoring StartTime & EndTime)
     ///</Summary>
-    public double TotalCurrentPosition => _player is null ?
-                                     _preloadedPosition :
-                                     _player.PlaybackSession.Position.TotalMilliseconds / 1000;
+    public double TotalCurrentPosition
+    {
+        get => _player is null ?
+            _preloadedPosition :
+            _player.PlaybackSession.Position.TotalMilliseconds / 1000;
+    }
 
     ///<Summary>
     /// Playback volume (0 to 1)
@@ -129,6 +158,11 @@ public class AudioPlayer : IAudioPlayer
             _endTime = value;
             OnEndTimeChanged(value);
         }
+    }
+
+    public AudioPlayer(IAudioDeviceMonitor deviceMonitor)
+    {
+        _deviceMonitor = deviceMonitor;
     }
 
     ///<Summary>
@@ -209,6 +243,11 @@ public class AudioPlayer : IAudioPlayer
     ///</Summary>
     public void Play()
     {
+        if (HasActiveDevice is false)
+        {
+            return;
+        }
+
         Player.Play();
     }
 
@@ -225,6 +264,11 @@ public class AudioPlayer : IAudioPlayer
     ///</Summary>
     public void Stop()
     {
+        if (HasActiveDevice is false)
+        {
+            return;
+        }
+
         if (_player != null)
         {
             Pause();
@@ -237,6 +281,11 @@ public class AudioPlayer : IAudioPlayer
     ///</Summary>
     public void Seek(double position)
     {
+        if (HasActiveDevice is false)
+        {
+            return;
+        }
+
         if (_player == null)
         {
             _preloadedPosition = position;

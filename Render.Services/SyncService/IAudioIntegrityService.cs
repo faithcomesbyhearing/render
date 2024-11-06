@@ -2,7 +2,11 @@ namespace Render.Services.SyncService;
 
 public interface IAudioIntegrityService
 {
-    Task<bool> IsProjectContainAudioLoss(Guid projectId);
+    Task<bool> DoesProjectContainAudioLoss(Guid id);
+    
+    Task<bool> DoesLocalDatabaseContainAudioLoss();
+    
+    Task<bool?> DoesRemoteBucketContainAudioLoss(string sourceDatabasePath);
 
     string ComputeDigest(byte[] data);
 

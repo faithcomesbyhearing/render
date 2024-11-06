@@ -29,7 +29,7 @@
                 BackgroundColor="{StaticResource StageCardBackground}"
                 VerticalOptions="Fill"
                 Padding="20,0"
-                WidthRequest="354">
+                WidthRequest="380">
             <Grid HorizontalOptions="Fill">
                 <Grid.RowDefinitions>
                     <RowDefinition x:Name="Top" Height="Auto" />
@@ -52,8 +52,7 @@
                            TextColor="{DynamicResource SecondaryText}"
                            AutomationId="TopHalfStageIcon" />
                     <Label x:Name="StageName" Style="{StaticResource StageNameLabel}"
-                           LineBreakMode="WordWrap"
-                           WidthRequest="250"
+                           WidthRequest="270"
                            VerticalOptions="Center"
                            HorizontalOptions="FillAndExpand"
                            Margin="0,5,0,5"

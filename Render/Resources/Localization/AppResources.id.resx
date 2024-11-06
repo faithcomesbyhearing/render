@@ -225,12 +225,6 @@
   <data name="BackTranslate2" xml:space="preserve">
     <value>Terjemahan Balik 2</value>
   </data>
-  <data name="BackTranslator" xml:space="preserve">
-    <value>Penerjemah Balik</value>
-  </data>
-  <data name="BackTranslator2" xml:space="preserve">
-    <value>Penerjemah Balik 2</value>
-  </data>
   <data name="Both" xml:space="preserve">
     <value>Keduanya</value>
   </data>
@@ -279,12 +273,6 @@
   <data name="CombineSegmentTitle" xml:space="preserve">
     <value>Gabungkan - Subbagian {0}</value>
   </data>
-  <data name="CommunityCheck" xml:space="preserve">
-    <value>Pemeriksaan Komunitas</value>
-  </data>
-  <data name="CommunityRetellPassage" xml:space="preserve">
-    <value>Subbagian {0} - Penyaduran</value>
-  </data>
   <data name="CommunityRevise" xml:space="preserve">
     <value>Revisi Komunitas</value>
   </data>
@@ -293,12 +281,6 @@
   </data>
   <data name="CommunityTest" xml:space="preserve">
     <value>Tes Komunitas</value>
-  </data>
-  <data name="CommunityTestRevise" xml:space="preserve">
-    <value>Revisi Tes Komunitas</value>
-  </data>
-  <data name="CommunityTestSetup" xml:space="preserve">
-    <value>Penyiapan Komunitas</value>
   </data>
   <data name="CompleteWork" xml:space="preserve">
     <value>Selesaikan Pekerjaan</value>
@@ -687,9 +669,6 @@
   <data name="Notes" xml:space="preserve">
     <value>Catatan</value>
   </data>
-  <data name="NoteTranslator" xml:space="preserve">
-    <value>Penerjemah Catatan</value>
-  </data>
   <data name="NotInWorkflow" xml:space="preserve">
     <value>Bukan bagian dari alur kerja lagi</value>
   </data>
@@ -749,9 +728,6 @@
   </data>
   <data name="PassageNumber" xml:space="preserve">
     <value>Subbagian {0}</value>
-  </data>
-  <data name="PassagePeerReview" xml:space="preserve">
-    <value>Subbagian {0} Tinjauan Sejawat</value>
   </data>
   <data name="PassageRetell" xml:space="preserve">
     <value>Penyaduran Subbagian</value>
@@ -1481,7 +1457,7 @@
     <value>Kata sandi diperlukan untuk mengatur ulang bagian</value>
   </data>
   <data name="PasswordRequiredToRestore" xml:space="preserve">
-    <value>Kata sandi diperlukan untuk memulihkan snapshot</value>
+    <value>Kata sandi diperlukan untuk memulihkan bagian</value>
   </data>
   <data name="TeamWasChosen" xml:space="preserve">
     <value>Tim {0} dipilih</value>
@@ -1662,5 +1638,49 @@
   </data>
   <data name="CannotLoadAudio" xml:space="preserve">
     <value>Tidak Dapat Memuat Audio</value>
+  </data>
+  <data name="UsbSync" xml:space="preserve">
+    <value>Sinkronisasi USB</value>
+  </data>
+  <data name="ExportingProject" xml:space="preserve">
+    <value>Mengekspor</value>
+  </data>
+  <data name="StorageAlreadyContains" xml:space="preserve">
+    <value>Penyimpanan ini sudah berisi proyek ini</value>
+  </data>
+  <data name="PleaseSelectAnotherStorage" xml:space="preserve">
+    <value>Silakan pilih folder lain atau hapus proyek ini dari penyimpanan</value>
+  </data>
+  <data name="SyncPathIsNotAvailable" xml:space="preserve">
+    <value>Jalur sinkronisasi ini tidak tersedia</value>
+  </data>
+  <data name="ChooseAnotherStorage" xml:space="preserve">
+    <value>Jalur sinkronisasi ini tidak tersedia</value>
+  </data>
+  <data name="NoProjectsToImport" xml:space="preserve">
+    <value>
+Tidak ada proyek untuk diimpor</value>
+  </data>
+  <data name="NoDataForSync" xml:space="preserve">
+    <value>Tidak ada data untuk disinkronkan</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>Ekspor</value>
+  </data>
+  <data name="Exported" xml:space="preserve">
+    <value>Diekspor</value>
+  </data>
+  <data name="SubstageName" xml:space="preserve">
+    <value>Nama subtahap</value>
+  </data>
+  <data name="RestoreSectionWarning" xml:space="preserve">
+    <value>Memulihkan bagian akan menghapus semua data dengan tahap yang dipilih. Tindakan ini tidak dapat dibatalkan.</value>
+  </data>
+  <data name="ImportFromRender" xml:space="preserve">
+    <value>
+Impor dari Render 3.7</value>
+  </data>
+  <data name="NoDataFromRender" xml:space="preserve">
+    <value>Tidak ada data dari Render 3.7</value>
   </data>
 </root>

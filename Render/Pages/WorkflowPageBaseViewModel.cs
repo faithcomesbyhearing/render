@@ -124,7 +124,7 @@ namespace Render.Pages
                 await Task.Run(async () =>
                 {
                     await SessionStateService.FinishSessionAsync();
-                    await grandCentralStation.FindWorkForUser(grandCentralStation.CurrentProjectId, loggedInUserId);
+                    await grandCentralStation.FindWorkForUser(GetProjectId(), loggedInUserId);
                 });
                 return await FinishCurrentStackAndNavigateHome();
             }

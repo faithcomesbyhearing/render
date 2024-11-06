@@ -19,6 +19,6 @@ public class ConsultantApprovalNavigationIconViewModel : WorkflowNavigationIconV
     protected override async Task<IRoutableViewModel> NavigateOnClickAsync()
     {
         var vm = await Task.Run(() => SelectSectionToApproveViewModel.CreateAsync(ViewModelContextProvider, Step, Stage));
-        return await HostScreen.Router.NavigateAndReset.Execute(vm);
+        return await NavigateToAndReset(vm);
     }
 }

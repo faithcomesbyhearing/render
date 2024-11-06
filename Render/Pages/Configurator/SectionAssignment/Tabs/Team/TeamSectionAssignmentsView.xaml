@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<kernel:RenderComponentBase x:Class="Render.Pages.Configurator.SectionAssignment.Tabs.Team.TeamSectionAssignmentsView"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:dragAndDrop="clr-namespace:Render.Kernel.DragAndDrop;assembly=Render"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:localization="clr-namespace:Render.Resources.Localization"
+                            xmlns:resources="clr-namespace:Render.Resources;assembly=Render"
+                            xmlns:teamTab="clr-namespace:Render.Pages.Configurator.SectionAssignment.Tabs.Team;assembly=Render"
+                            xmlns:sectionCards="clr-namespace:Render.Pages.Configurator.SectionAssignment.Cards.Section;assembly=Render"
+                            x:TypeArguments="teamTab:TeamViewTabViewModel">
+    <ContentView.Resources>
+        <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource Option}" />
+    </ContentView.Resources>
+
+    <Grid Margin="10,0">
+        <Grid.RowDefinitions>
+            <RowDefinition x:Name="higherPriorityRow" Height="50"/>
+            <RowDefinition x:Name="sectionsRow" Height="*"/>
+            <RowDefinition x:Name="dropZoneRow" Height="110"/>
+            <RowDefinition x:Name="lowerPriorityRow" Height="50"/>
+        </Grid.RowDefinitions>
+
+        <!--  Higher Priority  -->
+        <Grid Grid.Row="0"
+              Padding="10"
+              BackgroundColor="{StaticResource SlateLight}"
+              ColumnDefinitions="*,Auto,Auto,*">
+            
+            <Label Grid.Column="1"
+                   Margin="10,5,15,0"
+                   FontFamily="Icons"
+                   FontSize="20"
+                   Rotation="-90"
+                   Text="{resources:IconExtensions ChevronRight}"
+                   TextColor="{StaticResource SecondaryText}"
+                   TextTransform="Uppercase" />
+            
+            <Label Grid.Column="2"
+                   FontSize="Medium"
+                   Text="{x:Static localization:AppResources.HigherPriority}"
+                   TextColor="{StaticResource SecondaryText}"
+                   VerticalTextAlignment="Center" />
+        </Grid>
+
+        <!--  Section Cards  -->
+        <CollectionView x:Name="AssignedSectionCollection"
+                        Grid.Row="1"
+                        CanReorderItems="True"
+                        ItemsUpdatingScrollMode="KeepLastItemInView">
+            <CollectionView.EmptyView>
+                <Grid>
+                    <Label FontAttributes="Italic"
+                           Margin="0,10,0,0"
+                           FontSize="{StaticResource MediumFont}"
+                           Text="{x:Static localization:AppResources.NoSectionAssignedTitle}"
+                           TextColor="{StaticResource MainText}" />
+                </Grid>
+            </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <sectionCards:TeamSectionCard />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!--  Lower Priority  -->
+        <Grid Grid.Row="3"
+              Padding="10"
+              BackgroundColor="{StaticResource DarkGrey}"
+              ColumnDefinitions="*,Auto,Auto,*">
+            <Label Grid.Column="1"
+                   Margin="10,5,15,0"
+                   FontFamily="Icons"
+                   FontSize="20"
+                   Rotation="90"
+                   Text="{resources:IconExtensions ChevronRight}"
+                   TextColor="{StaticResource SecondaryText}"
+                   TextTransform="Uppercase" />
+            <Label Grid.Column="2"
+                   FontSize="Medium"
+                   Text="{x:Static localization:AppResources.LowerPriority}"
+                   TextColor="{StaticResource SecondaryText}"
+                   VerticalTextAlignment="Center" />
+        </Grid>
+
+        <!--  Drop zone  -->
+        <Border x:Name="DropRectangle"
+                Grid.Row="2"
+                HeightRequest="100"
+                VerticalOptions="Center"
+                Margin="10,0,60,0"
+                Stroke="{StaticResource BorderBrush}"
+                StrokeDashArray="4,4"
+                StrokeDashOffset="6"
+                StrokeShape="RoundRectangle 10"
+                StrokeThickness="2">
+            <Grid>
+                <BoxView BackgroundColor="{StaticResource AlternateBackground}" Opacity="0.65" />
+                <Label FontSize="{StaticResource SmallPlus2Font}"
+                       HorizontalTextAlignment="Center"
+                       InputTransparent="True"
+                       Text="{x:Static localization:AppResources.DragSectionHere}"
+                       TextColor="{StaticResource MainText}"
+                       VerticalTextAlignment="Center" />
+            </Grid>
+            <Border.Effects>
+                <dragAndDrop:DropRecognizerEffect x:Name="SectionDropEffect" />
+            </Border.Effects>
+        </Border>
+    </Grid>
+</kernel:RenderComponentBase>

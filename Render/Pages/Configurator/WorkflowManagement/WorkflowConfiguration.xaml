@@ -80,7 +80,7 @@
                   VerticalOptions="Fill">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition x:Name="Content" Width="205" />
+                    <ColumnDefinition x:Name="ContentColumnDef" Width="205" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 

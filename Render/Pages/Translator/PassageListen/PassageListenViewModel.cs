@@ -19,22 +19,33 @@ namespace Render.Pages.Translator.PassageListen
         public ReadOnlyObservableCollection<IBarPlayerViewModel> ReferenceList => _referenceList;
         private readonly ReadOnlyObservableCollection<IBarPlayerViewModel> _referenceList;
 
-        public SourceList<IBarPlayerViewModel> SupplementaryMaterialSourceList { get; } = new ();
+        public SourceList<IBarPlayerViewModel> SupplementaryMaterialSourceList { get; } = new();
 
         public ReadOnlyObservableCollection<IBarPlayerViewModel> SupplementaryMaterialList => _supplementaryMaterialList;
 
         private readonly ReadOnlyObservableCollection<IBarPlayerViewModel> _supplementaryMaterialList;
 
         public Passage Passage { get; set; }
-        
-        private PassageListenViewModel(IViewModelContextProvider viewModelContextProvider, Section section, Step step,
-            Passage passage, string pageName, string secondPageName, Stage stage) :
-            base("PassageListen", viewModelContextProvider, pageName, section, stage, step, passage.PassageNumber, secondPageName: secondPageName)
+
+        private PassageListenViewModel(
+            IViewModelContextProvider viewModelContextProvider,
+            Section section,
+            Step step,
+            Passage passage,
+            string pageName,
+            string secondPageName,
+            Stage stage)
+            : base(
+                urlPathSegment: "PassageListen",
+                viewModelContextProvider: viewModelContextProvider,
+                pageName: pageName,
+                section: section,
+                stage: stage,
+                step: step,
+                passageNumber: passage.PassageNumber,
+                secondPageName: secondPageName)
         {
             TitleBarViewModel.PageGlyph = ResourceExtensions.GetResourceValue(Icon.Record.ToString()) as string;
-            DisposeOnNavigationCleared = true;
-            TitleBarViewModel.DisposeOnNavigationCleared = true;
-
             //Reference bar players 
             var referenceChangeList = ReferenceSourceList.Connect().Publish();
             Disposables.Add(referenceChangeList
@@ -51,10 +62,7 @@ namespace Render.Pages.Translator.PassageListen
             ProceedButtonViewModel.SetCommand(NavigateToDraftingAsync);
 
             Disposables.Add(ProceedButtonViewModel.NavigateToPageCommand.IsExecuting
-                .Subscribe(isExecuting =>
-                {
-                    IsLoading = isExecuting;
-                }));
+                .Subscribe(isExecuting => { IsLoading = isExecuting; }));
             Passage = passage;
         }
 
@@ -92,10 +100,14 @@ namespace Render.Pages.Translator.PassageListen
             }
         }
 
-        public static async Task<PassageListenViewModel> CreateAsync(IViewModelContextProvider viewModelContextProvider,
-            Section section, Step step, Passage passage, Stage stage)
+        public static async Task<PassageListenViewModel> CreateAsync(
+            IViewModelContextProvider viewModelContextProvider,
+            Section section,
+            Step step,
+            Passage passage,
+            Stage stage)
         {
-            var title = GetStepName(viewModelContextProvider, RenderStepTypes.Draft, stage.Id);
+            var title = GetStepName(step);
             var secondTitle = AppResources.PassageListenScreenTitle;
 
             var passageListenViewModel = new PassageListenViewModel(viewModelContextProvider, section, step,
@@ -110,23 +122,23 @@ namespace Render.Pages.Translator.PassageListen
 
         private async Task<IRoutableViewModel> NavigateToDraftingAsync()
         {
-            var draftingViewModel =
-                await Task.Run(async () => await DraftingViewModel.CreateAsync(Section, Passage, Step,
-                    ViewModelContextProvider, Stage));
+            var draftingViewModel = await DraftingViewModel.CreateAsync(Section, Passage, Step, ViewModelContextProvider, Stage);
             return await NavigateToAndReset(draftingViewModel);
         }
-        
+
         public override void Dispose()
         {
             foreach (var reference in ReferenceList)
             {
                 reference.Dispose();
             }
+
             ReferenceSourceList?.Dispose();
             foreach (var reference in SupplementaryMaterialList)
             {
                 reference.Dispose();
             }
+
             SupplementaryMaterialSourceList?.Dispose();
             Passage = null;
 

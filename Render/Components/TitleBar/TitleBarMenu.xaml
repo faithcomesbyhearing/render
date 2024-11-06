@@ -7,6 +7,7 @@
                             xmlns:menuActions="clr-namespace:Render.Components.TitleBar.MenuActions;assembly=Render"
                             xmlns:titleBar="clr-namespace:Render.Components.TitleBar;assembly=Render"
                             xmlns:versionLabel="clr-namespace:Render.Components.VersionLabel;assembly=Render"
+                            x:DataType="titleBar:TitleBarMenuViewModel"
                             x:TypeArguments="titleBar:TitleBarMenuViewModel">
     <VerticalStackLayout x:Name="TopLevelElement" Padding="{x:Static titleBar:TitleBarMenu.TopLevelElementPadding}">
         <!--  Clickable transparent area above the Menu that allows to close the Menu Popup  -->
@@ -76,7 +77,6 @@
                 <VerticalStackLayout x:Name="ProjectRelatedItemsContainer">
                     <menuActions:MenuAction x:Name="HomeButton" AutomationId="HomeButton" />
                     <menuActions:MenuAction x:Name="SectionPageButton" AutomationId="SectionPageButton" />
-                    <menuActions:MenuAction x:Name="AudioExport" AutomationId="AudioExport" />
 
                     <Line x:Name="ProjectRelatedItemsSeparator"
                           AutomationId="SeparatorLine"
@@ -87,6 +87,7 @@
                 <!--  Bottom items  -->
                 <menuActions:MenuAction x:Name="ProjectListButton" AutomationId="ProjectListButton" />
                 <menuActions:SyncMenuAction x:Name="SyncButton" AutomationId="SyncButton" />
+                <menuActions:SyncFromUsbActionView x:Name="SyncFromUsbButton" AutomationId="SyncFromUsbButton" />
                 <menuActions:MenuAction x:Name="LogOutButton" AutomationId="LogOutButton" />
 
                 <Line AutomationId="SeparatorLine" Style="{StaticResource MenuItemsSeparator}" />

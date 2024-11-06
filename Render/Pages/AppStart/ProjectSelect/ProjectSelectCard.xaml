@@ -13,13 +13,14 @@
 
         <Grid Margin="5,15"
               ColumnSpacing="0"
-              HorizontalOptions="FillAndExpand">
+              HorizontalOptions="Fill">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition x:Name="IconColumn" Width="Auto" />
                 <ColumnDefinition x:Name="NameColumn" Width="Auto" />
                 <ColumnDefinition x:Name="EmptySpace" Width="*" />
                 <ColumnDefinition x:Name="StatusColumn" Width="Auto" />
-                <ColumnDefinition x:Name="ButtonColumn" Width="Auto" />
+                <ColumnDefinition x:Name="ExportButtonColumn" Width="Auto" />
+                <ColumnDefinition x:Name="OffloadButtonColumn" Width="Auto" />
             </Grid.ColumnDefinitions>
 
             <!--  project icon  -->
@@ -36,8 +37,7 @@
             <Label x:Name="ProjectName"
                    Grid.Column="1"
                    AutomationId="ProjectNameLabel"
-                   Style="{StaticResource ProjectNameLabelStyle}"
-                   WidthRequest="580" />
+                   Style="{StaticResource ProjectNameLabelStyle}" />
 
             <!--  project status  -->
             <HorizontalStackLayout x:Name="ProjectStatus"
@@ -59,9 +59,34 @@
                        TextColor="{StaticResource Option}" />
             </HorizontalStackLayout>
 
+            <!--  export button  -->
+            <Border x:Name="ExportButton"
+                    Grid.Column="4"
+                    Margin="0,0,20,0"
+                    AutomationId="ExportButton"
+                    Style="{StaticResource ProjectCardButtonBorderStyle}">
+                <HorizontalStackLayout Style="{StaticResource ProjectListButtonsStackLayout}">
+                    <Label AutomationId="ExportImage"
+                           FontFamily="Icons"
+                           FontSize="39"
+                           Margin="0,0,0,3"
+                           VerticalOptions="Center"
+                           Text="{uiResources:IconExtensions Export}"
+                           TextColor="{DynamicResource SecondaryText}" />
+                    <Label AutomationId="ExportLabel"
+                           Style="{StaticResource ProjectCardButtonLabelStyle}"
+                           Text="{x:Static resources:AppResources.Export}" />
+                </HorizontalStackLayout>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer x:Name="ExportButtonTap"
+                                          AutomationId="ExportButtonTap"
+                                          Tapped="OnButtonClicked" />
+                </Border.GestureRecognizers>
+            </Border>
+            
             <!--  offload button  -->
             <Border x:Name="OffloadButton"
-                    Grid.Column="4"
+                    Grid.Column="5"
                     AutomationId="OffloadButton"
                     Style="{StaticResource ProjectCardButtonBorderStyle}">
                 <HorizontalStackLayout Style="{StaticResource ProjectListButtonsStackLayout}">
@@ -85,7 +110,7 @@
 
             <!--  chevron  -->
             <Label x:Name="Chevron"
-                   Grid.Column="4"
+                   Grid.Column="5"
                    Margin="0"
                    AutomationId="ChevronImage"
                    FontFamily="Icons"

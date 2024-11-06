@@ -80,7 +80,7 @@ namespace Render.Services.AudioServices
                 {
                     await _audioEncodingService.ConcatenateIntoWavAsync(_audio.AudioSequenceList, 48000, 1, fsWav, cancellationToken);
                 }
-                catch (OperationCanceledException ex)
+                catch (OperationCanceledException)
                 {
                     fsWav.Close();
                     File.Delete(unfinishedTempAudioPath);

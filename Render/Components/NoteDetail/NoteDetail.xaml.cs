@@ -15,7 +15,7 @@ namespace Render.Components.NoteDetail
             this.WhenActivated(d =>
             {
                 d(this.OneWayBind(ViewModel, vm => vm.FlowDirection, 
-                    v => v.Layout.FlowDirection));
+                    v => v.ComponentLayout.FlowDirection));
                 d(this.OneWayBind(ViewModel, vm => vm.Title, v => v.Title.Text));
                 d(this.Bind(ViewModel, vm => vm.TextMessage, v => v.TextMessageEditor.Text));
                 d(this.BindCommandCustom(SubmitMessageGesture, v => v.ViewModel.EntryReturnCommand));

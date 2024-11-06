@@ -1,4 +1,5 @@
 ﻿using System.Reactive;
+using System.Diagnostics;
 using ReactiveUI;
 using Render.Components.TitleBar.MenuActions;
 using Render.Components.ValidationEntry;
@@ -12,7 +13,6 @@ using Render.Services.SyncService;
 using Render.Services.UserServices;
 using System.Reactive.Linq;
 using ReactiveUI.Fody.Helpers;
-using Render.Models.Project;
 using Render.Pages.AppStart.Home;
 using Render.TempFromVessel.Project;
 using Render.Repositories.Kernel;
@@ -20,7 +20,9 @@ using Render.WebAuthentication;
 using Render.Resources.Localization;
 using Render.Pages.AppStart.ProjectSelect;
 using Render.Components.Modal;
+using Render.Models.Project;
 using Version = Render.Kernel.Version;
+using Render.Utilities;
 
 namespace Render.Pages.AppStart.Login
 {
@@ -34,18 +36,16 @@ namespace Render.Pages.AppStart.Login
         public ReactiveCommand<Unit, IRoutableViewModel> LoginCommand { get; protected set; }
 
         protected readonly IDataPersistence<Project> ProjectsRepository;
-        protected readonly ISyncService SyncService;
-        protected readonly ILocalSyncService LocalSyncService;
+        private readonly ISyncManager _syncManager;
         protected readonly IAuthenticationApiWrapper AuthenticationApiWrapper;
         protected readonly IUserRepository UserRepository;
         protected readonly IMachineLoginStateRepository MachineLoginStateRepository;
-        protected AuthenticationApiWrapper.SyncGatewayUser SyncGatewayUser;
         protected readonly ILocalProjectsRepository LocalProjectsRepository;
         protected readonly IUserMachineSettingsRepository UserMachineSettingsRepository;
         private readonly IOffloadService _offloadService;
         private IOneShotReplicator _adminDownloader;
-		private readonly IDataPersistence<RenderProject> RenderProjectsRepository;
-		private readonly IUserMembershipService UserMembershipService;
+		private readonly IDataPersistence<RenderProject> _renderProjectsRepository;
+		private readonly IUserMembershipService _userMembershipService;
 
 		protected LoginViewModelBase(
 			string urlPathSegment,
@@ -54,29 +54,30 @@ namespace Render.Pages.AppStart.Login
 			List<IMenuActionViewModel> menuActionViewModels = null)
             : base(urlPathSegment, viewModelContextProvider, pageName, menuActionViewModels)
         {
-            DisposeOnNavigationCleared = true;
             AdminDownloadFinished = false;
             UsernameViewModel = new ValidationEntryViewModel(AppResources.Username, viewModelContextProvider, false,
                 AppResources.EnterYourUsername);
             PasswordViewModel = new ValidationEntryViewModel(AppResources.Password, viewModelContextProvider, true,
                 AppResources.EnterYourPassword);
 
+            _syncManager = viewModelContextProvider.GetSyncManager();
             ProjectsRepository = viewModelContextProvider.GetPersistence<Project>();
-			RenderProjectsRepository = viewModelContextProvider.GetPersistence<RenderProject>();
-			SyncService = viewModelContextProvider.GetSyncService();
-            LocalSyncService = viewModelContextProvider.GetLocalSyncService();
+			_renderProjectsRepository = viewModelContextProvider.GetPersistence<RenderProject>();
             _offloadService = viewModelContextProvider.GetOffloadService();
             UserRepository = viewModelContextProvider.GetUserRepository();
             AuthenticationApiWrapper = viewModelContextProvider.GetAuthenticationApiWrapper();
             MachineLoginStateRepository = viewModelContextProvider.GetMachineLoginStateRepository();
             LocalProjectsRepository = viewModelContextProvider.GetLocalProjectsRepository();
             UserMachineSettingsRepository = viewModelContextProvider.GetUserMachineSettingsRepository();
-			UserMembershipService = viewModelContextProvider.GetUserMembershipService();
-
+			_userMembershipService = viewModelContextProvider.GetUserMembershipService();
 		}
 
 		protected async Task<bool> CheckForNewSoftwareVersionAsync(IUser user, Func<Task> onCancelDownloadNewVersion)
 		{
+#if DEMO
+            return false;
+#endif
+
 			if (await ViewModelContextProvider.GetSyncGatewayApiWrapper().IsConnected() == false)
 			{
 				return false;
@@ -101,94 +102,14 @@ namespace Render.Pages.AppStart.Login
 		}
 
 		protected async Task StartSync(IUser user)
-        {
+		{
 #if DEMO
             return;
 #endif
-            var localProjects = await LocalProjectsRepository.GetLocalProjectsForMachine();
 
-            var projectIdList = new List<Guid>();
-            var globalUserIds = new List<Guid>();
-
-            foreach (var localProject in localProjects.GetDownloadedProjects())
-            {
-                var project = await ProjectsRepository.GetAsync(localProject.ProjectId);
-                projectIdList.Add(localProject.ProjectId);
-                if (project != null)
-                {
-                    globalUserIds.AddRange(project.GlobalUserIds);
-                }
-            }
-
-            Guid lastProjectId;
-            if (user.UserType == UserType.Vessel)
-            {
-                var userMachineSettings = await UserMachineSettingsRepository.GetUserMachineSettingsForUserAsync(user.Id);
-                lastProjectId = userMachineSettings.GetLastSelectedProjectId();
-            }
-            else
-            {
-                lastProjectId = ((RenderUser)user).ProjectId;
-            }
-
-            var originProject = await ProjectsRepository.GetAsync(lastProjectId);
-            var connected = await ViewModelContextProvider.GetSyncGatewayApiWrapper().IsConnected();
-            if (!connected)
-            {
-                var loggedUser = ViewModelContextProvider.GetLoggedInUser();
-                if (originProject != null && loggedUser is not null)
-                {
-                    LocalSyncService.StartLocalSync(loggedUser.Username, originProject.ProjectId);
-                }
-
-                return;
-            }
-
-            if (string.IsNullOrEmpty(user.SyncGatewayLogin) && SyncGatewayUser == null)
-            {
-                if (user.UserType == UserType.Vessel)
-                {
-                    SyncGatewayUser = await AuthenticationApiWrapper.AuthenticateRenderUserForSyncAsync(UsernameViewModel.Value,
-                        PasswordViewModel.Value, Guid.Empty);
-                }
-                else
-                {
-                    var renderUser = (RenderUser)user;
-
-                    SyncGatewayUser = await AuthenticationApiWrapper.AuthenticateRenderUserForSyncAsync(user.Username, user
-                        .HashedPassword, renderUser.ProjectId);
-
-                    if ((SyncGatewayUser == null
-                         || (string.IsNullOrEmpty(SyncGatewayUser.SyncGatewayPassword) && SyncGatewayUser.UserId == default))
-                        && renderUser.UserSyncCredentials != null)
-                    {
-                        SyncGatewayUser = new AuthenticationApiWrapper.SyncGatewayUser(renderUser.UserSyncCredentials.UserId,
-                            renderUser.UserSyncCredentials.UserSyncGatewayLogin);
-
-                        LogInfo("Render user uses admin credentials for sync");
-                    }
-                }
-            }
-
-            var syncGatewayPassword = string.IsNullOrEmpty(user.SyncGatewayLogin) ? SyncGatewayUser.SyncGatewayPassword : user.SyncGatewayLogin;
-            var userId = SyncGatewayUser?.UserId ?? user.Id;
-
-
-            SyncService.StartAllSync(projectIdList, globalUserIds, userId.ToString(), syncGatewayPassword);
-
-            //Update Project Statistics
-            var statisticsPersistence = ViewModelContextProvider.GetPersistence<RenderProjectStatistics>();
-            foreach (var projectId in projectIdList)
-            {
-                var projectStatistics = (await statisticsPersistence.QueryOnFieldAsync("ProjectId", projectId.ToString(), 1, false)).FirstOrDefault();
-                if (projectStatistics != null)
-                {
-                    projectStatistics.SetRenderProjectLastSyncDate(DateTimeOffset.Now);
-                    await statisticsPersistence.UpsertAsync(projectStatistics.Id, projectStatistics);
-                }
-            }
-        }
-
+			await _syncManager.StartLoginSync(user, ViewModelContextProvider.GetLoggedInUser(), UsernameViewModel.Value, PasswordViewModel.Value);
+		}
+		
         protected async Task UpdateMachineLogins(Guid userId)
         {
             var machineLoginState = await MachineLoginStateRepository.GetMachineLoginState();
@@ -203,7 +124,7 @@ namespace Render.Pages.AppStart.Login
 
         protected async Task SynchronizeAdmin(string username, string password)
         {
-            SyncGatewayUser = await AuthenticationApiWrapper.AuthenticateRenderUserForSyncAsync
+            _syncManager.SyncGatewayUser = await AuthenticationApiWrapper.AuthenticateRenderUserForSyncAsync
                 (username, password, Guid.Empty);
             
             if (_adminDownloader != null)
@@ -212,9 +133,9 @@ namespace Render.Pages.AppStart.Login
                 _adminDownloader.Dispose();
             }
 
-            _adminDownloader = SyncService.GetAdminDownloader(
-                SyncGatewayUser.UserId.ToString(),
-                SyncGatewayUser.SyncGatewayPassword,
+            _adminDownloader = _syncManager.GetWebAdminDownloader(
+	            _syncManager.SyncGatewayUser.UserId.ToString(),
+	            _syncManager.SyncGatewayUser.SyncGatewayPassword,
                 ViewModelContextProvider.LocalFolderPath);
             
             _adminDownloader.DownloadFinished += FinishLoginWhenDownloadFinished;
@@ -257,14 +178,14 @@ namespace Render.Pages.AppStart.Login
                 var userHasPermissionForProject =
 					(user.UserType == UserType.Render
                         && ((RenderUser)user).ProjectId == project.ProjectId)
-					|| UserMembershipService.HasExplicitPermissionForProject(user, project.ProjectId);
+					|| _userMembershipService.HasExplicitPermissionForProject(user, project.ProjectId);
 
                 if (!userHasPermissionForProject)
                 {
                     continue;
                 }
 
-				var renderProject = await RenderProjectsRepository
+				var renderProject = await _renderProjectsRepository
 					.QueryOnFieldAsync(nameof(project.ProjectId), project.ProjectId.ToString());
 				if (renderProject.IsBetaTester)
 				{
@@ -320,18 +241,22 @@ namespace Render.Pages.AppStart.Login
 
             await StartSync(user);
 
-            var userMachineSettings = await UserMachineSettingsRepository.GetUserMachineSettingsForUserAsync(user.Id);
-            var lastProjectId = userMachineSettings.GetLastSelectedProjectId();
-            var lastProject = await ProjectsRepository.GetAsync(lastProjectId);
-            var lastLocalProject = projects.FirstOrDefault(x => x.ProjectId == lastProjectId);
+            var (hasLastSelectedProject, lastProject) = await GetLastProjectInfo(user);
+            
+            var lastLocalProject = hasLastSelectedProject
+	            ? projects.FirstOrDefault(x => x.ProjectId == lastProject.Id)
+	            : null;
 
-            if (lastProject != null && lastProject.IsDeleted && user.UserType == UserType.Render)
+            if (lastProject is { IsDeleted: true } && user.UserType == UserType.Render)
             {
                 return await ShowProjectDeletedModal();
             }
 
-            if (lastProjectId == Guid.Empty || lastLocalProject == null || lastLocalProject.State == DownloadState.NotStarted ||
-                (lastProject.IsDeleted && user.UserType == UserType.Vessel))
+            if (hasLastSelectedProject is false
+                || lastLocalProject == null 
+                || lastLocalProject.State == DownloadState.NotStarted
+                || lastLocalProject.State == DownloadState.FinishedPartially 
+                || (lastProject.IsDeleted && user.UserType == UserType.Vessel))
             {
                 return await NavigateToAndReset(
                     await ProjectSelectViewModel.CreateAsync(ViewModelContextProvider));
@@ -340,7 +265,7 @@ namespace Render.Pages.AppStart.Login
             //This is a stop gap - if we hit an exception when navigating home, go to the project select page instead.
             try
             {
-                var homeViewModel = await HomeViewModel.CreateAsync(lastProjectId, ViewModelContextProvider);
+                var homeViewModel = await HomeViewModel.CreateAsync(lastProject.Id, ViewModelContextProvider);
                 return await NavigateToAndReset(homeViewModel);
             }
             catch (Exception e)
@@ -349,6 +274,28 @@ namespace Render.Pages.AppStart.Login
                 return await NavigateToAndReset(
                     await ProjectSelectViewModel.CreateAsync(ViewModelContextProvider));
             }
+        }
+
+        protected async Task<(bool hasLastSelectedProject, Project lastProject)> GetLastProjectInfo(IUser user)
+        {
+	        var userMachineSettings = await UserMachineSettingsRepository.GetUserMachineSettingsForUserAsync(user.Id);
+	        
+	        var lastProjectId = user.UserType == UserType.Render
+		        ? ((RenderUser)user).ProjectId
+		        : userMachineSettings.GetLastSelectedProjectId();
+	        
+	        var lastProject = await ProjectsRepository.GetAsync(lastProjectId);
+	        
+	        if (lastProject?.IsBetaTester is false)
+	        {
+		        lastProjectId = Guid.Empty;
+		        if (userMachineSettings.GetAndSetLastSelectedProject(lastProjectId))
+		        {
+			        await UserMachineSettingsRepository.UpdateUserMachineSettingsAsync(userMachineSettings);   
+		        }
+	        }
+
+	        return (lastProjectId != Guid.Empty, lastProject);
         }
 
         protected async Task<IRoutableViewModel> ShowProjectDeletedModal()
@@ -361,6 +308,18 @@ namespace Render.Pages.AppStart.Login
             return null;
         }
 
+        protected bool IsDemoDatabaseInitialized()
+        {
+            return DemoHelper.IsDatabaseInitialized;
+        }
+
+        [Conditional("DEMO")]
+        protected void ShowDemoInitializationError()
+        {
+            var modalService = ViewModelContextProvider.GetModalService();
+            _ = modalService.ShowInfoModal(Icon.InternetError, AppResources.Error, AppResources.ErrorAddingProject);
+        }
+
         public override void Dispose()
         {
             ProjectsRepository?.Dispose();
@@ -368,12 +327,12 @@ namespace Render.Pages.AppStart.Login
             MachineLoginStateRepository?.Dispose();
             LocalProjectsRepository?.Dispose();
             UserMachineSettingsRepository?.Dispose();
-            SyncGatewayUser = null;
+            _syncManager.SyncGatewayUser = null;
             LoginCommand?.Dispose();
             AuthenticationApiWrapper?.Dispose();
             UsernameViewModel?.Dispose();
             PasswordViewModel?.Dispose();
-            
+
             if (_adminDownloader != null)
             {
                 _adminDownloader.DownloadFinished -= FinishLoginWhenDownloadFinished;

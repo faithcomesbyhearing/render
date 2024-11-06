@@ -11,19 +11,6 @@ namespace Render.Models.Snapshot
     /// </summary>
     public class Snapshot : ScopeDomainEntity, IAggregateRoot, IEquatable<Snapshot>
     {
-        public static Snapshot UnitTestEmptySnapshot(Guid sectionId = default, Section section = null, string stageName = "", Guid stageId = default, Guid stepId = default)
-        {
-            if (section == null)
-            {
-                section = Section.UnitTestEmptySection();
-            }
-            var snapshot = new Snapshot(
-                sectionId == default ? section.Id : sectionId,
-                Guid.Empty, Guid.Empty, section.ApprovedDate, Guid.Empty, section.ScopeId, section.ProjectId, stageId,
-                stepId, section.Passages, new List<SectionReferenceAudioSnapshot>(), new List<Guid>(), stageName);
-            return snapshot;
-        }
-
         [JsonProperty("StageId")] public Guid StageId { get; }
 
         [JsonProperty("StepId")] public Guid StepId { get; }
@@ -112,9 +99,9 @@ namespace Render.Models.Snapshot
             }
         }
 
-        public void SetDelete(bool delete)
+        public void SetTemporary(bool value)
         {
-            Temporary = delete;
+            Temporary = value;
         }
         public void SetDeleted(bool deleted)
         {
@@ -129,6 +116,20 @@ namespace Render.Models.Snapshot
         public override string ToString()
         {
             return $"{StageName}: {DateUpdated.LocalDateTime}";
+        }
+
+        public IEnumerable<Guid> GetAllIncludedIds()
+        {
+            return new Guid[]
+            {
+                StageId,
+                SectionId,
+                ApprovedBy,
+                CheckedBy,
+            }.Union(GetSectionReferenceIncludedIds())
+            .Union(GetPassagesAllIncludedIds())
+            .Union(GetPassageDraftAllIncludedIds())
+            .Union(GetPassageBackTranslateAllIncludedIds());
         }
 
         public bool Equals(Snapshot other)
@@ -181,6 +182,43 @@ namespace Render.Models.Snapshot
         {
             var diff = DateUpdated.LocalDateTime - dateTime.LocalDateTime;
             return diff.Duration() < TimeSpan.FromSeconds(timespanInSeconds);
+        }
+
+        private IEnumerable<Guid> GetPassagesAllIncludedIds()
+        {
+            return Passages
+                .Select(passage => passage.Id)
+                .Distinct()
+                .OrderBy(a => a);
+        }
+
+        private IEnumerable<Guid> GetPassageDraftAllIncludedIds()
+        {
+            return PassageDrafts
+                .SelectMany(passageDraft => new[] { passageDraft.DraftId, passageDraft.PassageId })
+                .Distinct()
+                .OrderBy(a => a);
+        }
+
+        private IEnumerable<Guid> GetPassageBackTranslateAllIncludedIds()
+        {
+            return PassageBackTranslations
+                .SelectMany(passageBackTranslate => new[]
+                    {
+                        passageBackTranslate.PassageId,
+                        passageBackTranslate.RetellBackTranslationId,
+                    }
+                    .Union(passageBackTranslate.SegmentBackTranslationIds))
+                .Distinct()
+                .OrderBy(a => a);
+        }
+
+        private IEnumerable<Guid> GetSectionReferenceIncludedIds()
+        {
+            return SectionReferenceAudioSnapshots
+                .Select(snapshot => snapshot.SectionReferenceAudioId)
+                .Distinct()
+                .OrderBy(a => a);
         }
     }
 }

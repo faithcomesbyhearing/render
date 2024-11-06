@@ -9,9 +9,6 @@
                        x:Class="Render.Pages.Configurator.WorkflowManagement.WorkflowStageSettingsPage"
                        NavigationPage.HasNavigationBar="False"
                        Style="{StaticResource PrimaryPage}">
-    <ContentPage.Resources>
-        <!-- <stageSettings:StageSettingsTemplateSelector x:Key="Selector" /> -->
-    </ContentPage.Resources>
     <AbsoluteLayout x:Name="TopLevelElement">
         <Grid AbsoluteLayout.LayoutFlags="All"
               AbsoluteLayout.LayoutBounds="0,0,1,1"
@@ -29,7 +26,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Column="1" x:Name="MainStack" MaximumWidthRequest="960" HorizontalOptions="Center">
-                    <!-- <draftingStageSettings:DraftingStageSettings/> -->
+                    <!-- StageSettings view content added here from code behind -->
                 </Grid>
             </Grid>
 

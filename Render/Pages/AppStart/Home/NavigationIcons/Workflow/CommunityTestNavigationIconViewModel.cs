@@ -16,9 +16,9 @@ public class CommunityTestNavigationIconViewModel : WorkflowNavigationIconViewMo
 
     protected override async Task<IRoutableViewModel> NavigateOnClickAsync()
     {
-        foreach (var sectionId in GrandCentralStation.SectionsAtStep(Step.Id))
+        foreach (var sectionId in StageService.SectionsAtStep(Step.Id))
         {
-            var section = await _sectionRepository.GetSectionWithDraftsAsync(sectionId, getCommunityTest: true, withReferences: true);
+            var section = await SectionRepository.GetSectionWithDraftsAsync(sectionId, getCommunityTest: true, withReferences: true);
 
             if (IsSectionDocumentMissing(sectionId, section))
             {
@@ -32,7 +32,7 @@ public class CommunityTestNavigationIconViewModel : WorkflowNavigationIconViewMo
 
             var vm = await Task.Run(async () => await WorkflowPageViewModelFactory
                 .GetViewModelToNavigateTo(ViewModelContextProvider, Step, section));
-            return await HostScreen.Router.NavigateAndReset.Execute(vm);
+            return await NavigateToAndReset(vm);
         }
 
         return null;

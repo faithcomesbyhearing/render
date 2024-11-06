@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<kernel:RenderComponentBase x:Class="Render.Pages.Configurator.SectionAssignment.Cards.Section.TeamSectionCard"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:dragAndDrop="clr-namespace:Render.Kernel.DragAndDrop;assembly=Render"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:localization="clr-namespace:Render.Resources.Localization"
+                            xmlns:resources="clr-namespace:Render.Resources;assembly=Render"
+                            xmlns:section="clr-namespace:Render.Pages.Configurator.SectionAssignment.Cards.Section;assembly=Render"
+                            xmlns:teamView="clr-namespace:Render.Pages.Configurator.SectionAssignment.Cards.Section;assembly=Render"
+                            x:Name="TeamViewSectionAssignmentComponent"
+                            x:TypeArguments="section:SectionCardViewModel">
+
+
+        <Grid AutomationId="TeamViewSectionAssignmentRegion"
+              ColumnDefinitions="*, 50"
+              HeightRequest="105">
+
+            <Border x:Name="SectionStack"
+                    Margin="10"
+                    Padding="13,8"
+                    BackgroundColor="{StaticResource Gray}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10" />
+                </Border.StrokeShape>
+
+                <Grid ColumnDefinitions="50,*,50" RowDefinitions="*,*">
+
+                    <Label x:Name="SectionNumber"
+                           Grid.RowSpan="2"
+                           FontAttributes="Bold"
+                           FontSize="{StaticResource LargeFont}"
+                           HorizontalTextAlignment="Center"
+                           TextColor="{StaticResource MainText}"
+                           VerticalOptions="Fill"
+                           VerticalTextAlignment="Center" />
+
+                    <Label x:Name="SectionTitleLabel"
+                           Grid.Column="1"
+                           Margin="20,0"
+                           FontAttributes="Bold"
+                           FontSize="{StaticResource MediumMinus2Font}"
+                           HorizontalTextAlignment="Start"
+                           LineBreakMode="TailTruncation"
+                           TextColor="{StaticResource MainText}"
+                           VerticalTextAlignment="Center" />
+
+                    <Label x:Name="SectionReferenceLabel"
+                           Grid.Row="1"
+                           Grid.Column="1"
+                           Margin="20,0"
+                           FontSize="{StaticResource MediumMinus2Font}"
+                           HorizontalTextAlignment="Start"
+                           LineBreakMode="TailTruncation"
+                           TextColor="{StaticResource SlateLight}"
+                           VerticalTextAlignment="Center" />
+
+                    <Border x:Name="RemoveButton"
+                            Grid.Row="0"
+                            Grid.RowSpan="2"
+                            Grid.Column="2"
+                            Padding="6"
+                            AutomationId="RemoveButton"
+                            BackgroundColor="{StaticResource Option}"
+                            HeightRequest="40"
+                            StrokeShape="RoundRectangle 20"
+                            VerticalOptions="Center"
+                            WidthRequest="40">
+                        <Label FontFamily="Icons"
+                               FontSize="{StaticResource MediumFont}"
+                               HorizontalTextAlignment="Center"
+                               Text="{resources:IconExtensions Delete}"
+                               TextColor="{StaticResource SecondaryText}"
+                               VerticalOptions="Fill"
+                               VerticalTextAlignment="Center" />
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="RemoveButtonGestureRecognizer" AutomationId="Remove" />
+                        </Border.GestureRecognizers>
+                    </Border>
+                </Grid>
+            </Border>
+
+            <Label x:Name="DragImageIcon"
+                   Grid.Column="1"
+                   Margin="10,0"
+                   FontFamily="Icons"
+                   FontSize="50"
+                   HorizontalOptions="Center"
+                   Text="{resources:IconExtensions ReorderTwo}"
+                   TextColor="{StaticResource Option}"
+                   VerticalOptions="Center" />
+        </Grid>
+
+</kernel:RenderComponentBase>

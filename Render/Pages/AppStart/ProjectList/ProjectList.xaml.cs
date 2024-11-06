@@ -1,5 +1,4 @@
-﻿using System;
-using System.Reactive.Linq;
+﻿using System.Reactive.Linq;
 using ReactiveUI;
 using Render.Resources;
 using Render.Resources.Localization;
@@ -16,16 +15,7 @@ namespace Render.Pages.AppStart.ProjectList
             {
                 d(this.OneWayBind(ViewModel, vm => vm.FlowDirection,
                     v => v.TopLevelElement.FlowDirection));
-                d(this.WhenAnyValue(x => x.ViewModel.ProjectList)
-                    .ObserveOn(RxApp.MainThreadScheduler)
-                    .Subscribe(projects =>
-                    {
-                        var source = BindableLayout.GetItemsSource(ProjectsCollection);
-                        if (source == null)
-                        {
-                            BindableLayout.SetItemsSource(ProjectsCollection, projects);
-                        }
-                    }));
+                d(this.OneWayBind(ViewModel, vm => vm.ProjectList, v => v.ProjectsCollection.ItemsSource));
                 d(this.WhenAnyValue(x => x.ViewModel.HasProjects)
                     .ObserveOn(RxApp.MainThreadScheduler)
                     .Subscribe(SetStatusForEmptyCollection));
@@ -34,12 +24,12 @@ namespace Render.Pages.AppStart.ProjectList
 
         private void SetStatusForEmptyCollection(bool? hasProjects)
         {
-            ProjectsCollectionScrollView.SetValue(IsVisibleProperty, false);
+            ProjectsCollection.SetValue(IsVisibleProperty, false);
             NoProjectMessageContainer.SetValue(IsVisibleProperty, true);
             switch (hasProjects)
             {
                 case true:
-                    ProjectsCollectionScrollView.SetValue(IsVisibleProperty, true);
+                    ProjectsCollection.SetValue(IsVisibleProperty, true);
                     NoProjectMessageContainer.SetValue(IsVisibleProperty, false);
                     break;
                 case false:

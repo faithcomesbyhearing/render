@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Reactive.Linq;
+﻿using System.Reactive.Linq;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Render.Kernel;
@@ -15,6 +13,7 @@ namespace Render.Components.StageSettings.PeerCheckStageSettings
         SectionListenOnly,
         PassageListenOnly
     }
+
     public class PeerCheckStageSettingsViewModel : StageSettingsViewModelBase
     {
         private readonly Step _checkStep;
@@ -22,23 +21,32 @@ namespace Render.Components.StageSettings.PeerCheckStageSettings
 
         [Reactive]
         public bool NoSelfCheck { get; set; }
-        
+
         [Reactive]
         public bool CheckRequireSectionListen { get; set; }
-        
+
         [Reactive]
         public bool CheckRequirePassageListen { get; set; }
-        
+
         [Reactive]
         public bool CheckRequireNoteListen { get; set; }
-        
+
         [Reactive]
         public SelectedState SelectedState { get; set; }
-        
-        public PeerCheckStageSettingsViewModel(RenderWorkflow workflow,
-            Stage stage, IViewModelContextProvider viewModelContextProvider,
-            Action<Stage> updateStageCard) 
-            : base(workflow, stage, viewModelContextProvider, updateStageCard)
+
+        public StepNameViewModel CheckStepName { get; }
+
+        public StepNameViewModel ReviseStepName { get; }
+
+        public PeerCheckStageSettingsViewModel(
+            RenderWorkflow workflow,
+            Stage stage,
+            IViewModelContextProvider viewModelContextProvider,
+            Action<Stage> updateStageCard)
+            : base(renderWorkflow: workflow,
+                stage: stage,
+                viewModelContextProvider: viewModelContextProvider,
+                updateStageCard: updateStageCard)
         {
             NoSelfCheck = stage.StageSettings.GetSetting(SettingType.NoSelfCheck);
 
@@ -54,46 +62,51 @@ namespace Render.Components.StageSettings.PeerCheckStageSettings
             TranslateDoPassageReview = _reviseStep.StepSettings.GetSetting(SettingType.DoPassageReview);
             TranslateRequirePassageReview = _reviseStep.StepSettings.GetSetting(SettingType.RequirePassageReview);
             TranslateAllowEditing = _reviseStep.StepSettings.GetSetting(SettingType.AllowEditing);
-            
+
+            CheckStepName = new StepNameViewModel(_checkStep);
+            ReviseStepName = new StepNameViewModel(_reviseStep);
+
             SelectedState = checkDoSectionListen && checkDoPassageListen ? SelectedState.Both :
                 checkDoSectionListen ? SelectedState.SectionListenOnly : SelectedState.PassageListenOnly;
-            
+
             this.WhenAnyValue(x => x.SelectedState)
                 .Skip(1)
                 .Subscribe(SetRequireCheckStatus);
-            
+
             this.WhenAnyValue(x => x.TranslateDoPassageReview)
                 .Skip(1)
-                .Subscribe(b =>TranslateRequirePassageReview = b);
+                .Subscribe(b => TranslateRequirePassageReview = b);
         }
 
         protected override void UpdateWorkflow()
         {
             //Stage settings
             Workflow.SetStageSetting(Stage, SettingType.NoSelfCheck, NoSelfCheck);
-            
+
             //Check step settings
+            CheckStepName.UpdateEntity();
             Workflow.SetStepSetting(_checkStep, SettingType.RequireNoteListen, CheckRequireNoteListen);
-            
-            var checkDoSectionListen = 
+
+            var checkDoSectionListen =
                 SelectedState == SelectedState.SectionListenOnly || SelectedState == SelectedState.Both;
             Workflow.SetStepSetting(_checkStep, SettingType.DoSectionReview, checkDoSectionListen);
             if (checkDoSectionListen)
                 Workflow.SetStepSetting(_checkStep, SettingType.RequireSectionReview, CheckRequireSectionListen);
-            
+
             var checkDoPassageListen =
                 SelectedState == SelectedState.PassageListenOnly || SelectedState == SelectedState.Both;
             Workflow.SetStepSetting(_checkStep, SettingType.DoPassageReview, checkDoPassageListen);
-            if(checkDoPassageListen)
+            if (checkDoPassageListen)
                 Workflow.SetStepSetting(_checkStep, SettingType.RequirePassageReview, CheckRequirePassageListen);
-            
+
             //Revise step settings
+            ReviseStepName.UpdateEntity();
             Workflow.SetStepSetting(_reviseStep, SettingType.AllowEditing, TranslateAllowEditing);
-            
+
             Workflow.SetStepSetting(_reviseStep, SettingType.RequireNoteListen, TranslateRequireNoteListen);
 
             Workflow.SetStepSetting(_reviseStep, SettingType.DoPassageReview, TranslateDoPassageReview);
-            if(TranslateDoPassageReview)
+            if (TranslateDoPassageReview)
                 Workflow.SetStepSetting(_reviseStep, SettingType.RequirePassageReview, TranslateRequirePassageReview);
 
             base.UpdateWorkflow();

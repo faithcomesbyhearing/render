@@ -36,7 +36,7 @@ namespace Render.Pages.BackTranslator.RetellBackTranslate
         [Reactive] public ISequencerRecorderViewModel SequencerRecorderViewModel { get; private set; }
         [Reactive] public bool IsTwoStepBackTranslate { get; set; }
 
-        public static async Task<TabletRetellPassageTranslatePageViewModel> CreateAsync(
+        public static TabletRetellPassageTranslatePageViewModel Create(
             IViewModelContextProvider viewModelContextProvider,
             Step step,
             Section section,
@@ -66,7 +66,7 @@ namespace Render.Pages.BackTranslator.RetellBackTranslate
             Stage stage) :
             base(urlPathSegment: "TabletRetellBTPassageTranslate",
                 viewModelContextProvider: viewModelContextProvider,
-                pageName: AppResources.BackTranslate,
+                pageName: GetStepName(step),
                 section: section,
                 stage: stage,
                 step: step,
@@ -81,10 +81,7 @@ namespace Render.Pages.BackTranslator.RetellBackTranslate
             IsTwoStepBackTranslate = Step.Role == Roles.BackTranslate2;
 
             _retellRepository = viewModelContextProvider.GetRetellBackTranslationRepository();
-
-            DisposeOnNavigationCleared = true;
-            TitleBarViewModel.DisposeOnNavigationCleared = true;
-
+            
             TitleBarViewModel.PageGlyph = IconExtensions
                 .BuildFontImageSource(Icon.RetellBackTranslate,
                     ResourceExtensions.GetColor("SecondaryText"))?.Glyph;
@@ -211,7 +208,8 @@ namespace Render.Pages.BackTranslator.RetellBackTranslate
                         path: ViewModelContextProvider
                             .GetTempAudioService(_retellBackTranslation.RetellBackTranslationAudio).SaveTempAudio(),
                         flagType: FlagType.Note,
-                        isTemp: _retellBackTranslation.RetellBackTranslationAudio.TemporaryDeleted));
+                        isTemp: _retellBackTranslation.RetellBackTranslationAudio.TemporaryDeleted,
+                        userId: ViewModelContextProvider.GetLoggedInUser().Id));
 
                 SequencerActionViewModel.ActionState =
                     _retellBackTranslation.RetellBackTranslationAudio.TemporaryDeleted
@@ -228,7 +226,8 @@ namespace Render.Pages.BackTranslator.RetellBackTranslate
                 SequencerRecorderViewModel.SetRecord(_retellBackTranslation.CreateRecordAudioModel(
                     path: ViewModelContextProvider.GetTempAudioService(_retellBackTranslation).SaveTempAudio(),
                     flagType: FlagType.Note,
-                    isTemp: _retellBackTranslation.TemporaryDeleted));
+                    isTemp: _retellBackTranslation.TemporaryDeleted,
+                    userId: ViewModelContextProvider.GetLoggedInUser().Id));
 
                 SequencerActionViewModel.ActionState =
                     _retellBackTranslation.TemporaryDeleted
@@ -258,6 +257,16 @@ namespace Render.Pages.BackTranslator.RetellBackTranslate
 
             SequencerNoteDetailViewModel.SaveCommand = ReactiveCommand.CreateFromTask<Conversation>(SaveRetellWithNoteAsync);
             SequencerNoteDetailViewModel.DeleteMessageCommand = ReactiveCommand.CreateFromTask<Message>(DeleteMessageAsync);
+        }
+        
+        protected override async Task NavigatingAwayAsync()
+        {
+            if (SequencerRecorderViewModel.State is not SequencerState.Recording)
+            {
+                return;
+            }
+
+            await SequencerRecorderViewModel.StopCommand.Execute();
         }
 
         // We have to check all but the current passage for audio, since the current passage will never have audio at this point
@@ -480,7 +489,8 @@ namespace Render.Pages.BackTranslator.RetellBackTranslate
                     Step.Role == Roles.BackTranslate2 && Section.Passages.All(x =>
                         x.CurrentDraftAudio.RetellBackTranslationAudio?.RetellBackTranslationAudio != null))
                 {
-                    await ViewModelContextProvider.GetGrandCentralStation().AdvanceSectionAsync(Section, Step);
+                    var sectionMovementService = ViewModelContextProvider.GetSectionMovementService();
+                    await sectionMovementService.AdvanceSectionAsync(Section, Step, GetProjectId(), GetLoggedInUserId()); 
                     
                     return await NavigateToHomeOnMainStackAsync();
                 }

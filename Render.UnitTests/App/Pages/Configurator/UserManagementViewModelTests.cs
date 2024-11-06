@@ -76,10 +76,8 @@ namespace Render.UnitTests.App.Pages.Configurator
         {
             //Arrange
             var user = new RenderUser("Full Name", _projectId);
-            user.Claims.Add(new VesselClaim(RenderRolesAndClaims.ProjectUserClaimType, _projectId.ToString(),
-                RenderRolesAndClaims.GetRoleByName(RoleName.Configure).Id));
-            user.Claims.Add(new VesselClaim(RenderRolesAndClaims.ProjectUserClaimType, _projectId.ToString(),
-                RenderRolesAndClaims.GetRoleByName(RoleName.Consultant).Id));
+            user.Claims.Add(new VesselClaim(RenderRolesAndClaims.ProjectUserClaimType, _projectId.ToString(), RoleName.Configure.GetRoleId()));
+            user.Claims.Add(new VesselClaim(RenderRolesAndClaims.ProjectUserClaimType, _projectId.ToString(), RoleName.Consultant.GetRoleId()));
 
             var expected = $"{AppResources.Configure}, {AppResources.Consultant}";
             //Act

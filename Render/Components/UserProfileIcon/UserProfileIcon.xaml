@@ -16,7 +16,7 @@
             <Setter Property="Aspect" Value="AspectFill"/>
         </Style>
     </ContentView.Resources>
-    <Frame x:Name="Frame" Style="{DynamicResource UserProfileFrame}" Margin="5">
+    <Frame x:Name="ComponentFrame" Style="{DynamicResource UserProfileFrame}" Margin="5">
         <Frame x:Name="FrameInner" Style="{DynamicResource UserProfileFrame}" >
             <StackLayout x:Name="Stack">
                 <Label x:Name="Label" TextColor="{DynamicResource SecondaryText}" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"

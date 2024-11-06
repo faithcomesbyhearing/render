@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+﻿using System.Reactive.Linq;
 using Moq;
 using Render.Models.Scope;
 using Render.Models.Sections;
@@ -20,7 +20,7 @@ namespace Render.UnitTests.App.Pages.Configurator.SectionAssignment
         private readonly Mock<ISectionRepository> _mockSectionRepository = new();
         private readonly Mock<IUserRepository> _mockUserRepository = new();
         private readonly Mock<IDataPersistence<Scope>> _mockScopePersistence = new();
-        private readonly RenderWorkflow _renderWorkflow = RenderWorkflow.Create(Guid.Empty);
+        private readonly RenderWorkflow _renderWorkflow;
         private readonly Section _section;
         private readonly Guid _projectId = Guid.NewGuid();
         private readonly RenderUser _user1 = new("User1", Guid.Empty);
@@ -35,6 +35,7 @@ namespace Render.UnitTests.App.Pages.Configurator.SectionAssignment
             _scope.SetStatus("Active");
             _scope2 = new Scope(_projectId);
             _scope2.SetStatus("Inactive");
+            _renderWorkflow = RenderWorkflow.Create(_projectId);
             var project = new Project("Project", "ref", "iso");
 
             _section = Section.UnitTestEmptySection(scopeId: _scope.Id);
@@ -67,33 +68,30 @@ namespace Render.UnitTests.App.Pages.Configurator.SectionAssignment
         }
 
         [Fact]
-        public async Task TeamUpdates_AddAssignment_SavesWorkflow()
+        public async Task SelectTeam_ShowTeamTab()
         {
             //Arrange
+            var vm = await SectionAssignmentPageViewModel.CreateAsync(MockContextProvider.Object, _projectId);
 
             //Act
-            var vm = await SectionAssignmentPageViewModel.CreateAsync(MockContextProvider.Object, _projectId);
-            vm.TeamSectionAssignments.First().Team = new TeamTranslatorUser(_renderWorkflow.GetTeams().First(), _user1);
-            await vm.UpdateWorkflow(vm.TeamSectionAssignments.First());
+            await vm.SelectTeamViewCommand.Execute();
 
             //Assert
-            // _mockWorkflowRepository.Verify(x => x.SaveWorkflowAsync(_renderWorkflow));
-            _renderWorkflow.GetTeams().First().SectionAssignments.First().SectionId.Should().Be(_section.Id);
+            vm.ShowSectionView.Should().BeFalse();
         }
 
+        
         [Fact]
-        public async Task TeamUpdates_RemoveAssignment_SavesWorkflow()
+        public async Task SelectSection_ShowSectionTab()
         {
             //Arrange
-            _renderWorkflow.AddSectionAssignmentToTeam(_renderWorkflow.GetTeams().First(), _section.Id, 1);
-            //Act
             var vm = await SectionAssignmentPageViewModel.CreateAsync(MockContextProvider.Object, _projectId);
-            vm.TeamSectionAssignments.First().Team = null;
-            await vm.UpdateWorkflow(vm.TeamSectionAssignments.First());
+
+            //Act
+            await vm.SelectSectionViewCommand.Execute();
 
             //Assert
-            // _mockWorkflowRepository.Verify(x => x.SaveWorkflowAsync(_renderWorkflow));
-            _renderWorkflow.GetTeams().First().SectionAssignments.Count.Should().Be(0);
+            vm.ShowSectionView.Should().BeTrue();
         }
 
         [Fact]
@@ -107,12 +105,7 @@ namespace Render.UnitTests.App.Pages.Configurator.SectionAssignment
             //Act
             var vm = await SectionAssignmentPageViewModel.CreateAsync(MockContextProvider.Object, _projectId);
 
-            //Assert
-            _mockScopePersistence.Verify(x => x.QueryOnFieldAsync(It.IsAny<string>(),
-                It.IsAny<string>(), It.IsAny<int>(), It.IsAny<bool>(), It.IsAny<bool>()), Times.Once);
-
-            await Task.Delay(50);
-            vm.SectionViewViewModel.SectionCards.Count.Should().Be(expectedCount);
+            vm.SectionTabViewModel.Manager.AllSectionCards.Count.Should().Be(expectedCount);
         }
     }
 }

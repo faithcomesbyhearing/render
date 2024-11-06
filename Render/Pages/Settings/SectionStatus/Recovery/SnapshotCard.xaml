@@ -15,6 +15,7 @@
                            Padding="0">
         <!-- Dot and Line -->
         <VerticalStackLayout VerticalOptions="Fill">
+            
             <Line x:Name="Line"
                    HorizontalOptions="Center"
                    BackgroundColor="{StaticResource DarkGrey}"
@@ -47,31 +48,39 @@
                     MinimumWidthRequest="2"
                     HeightRequest="15"
                     AutomationId="BottomLine" />
+            
         </VerticalStackLayout>
 
         <!-- Stage and Snapshot -->
-        <VerticalStackLayout VerticalOptions="Fill"
+        <VerticalStackLayout VerticalOptions="Fill" x:Name="StageAndSnapshotLayout"
                              Margin="13,0,0,0"
                              HorizontalOptions="Fill"
                              Padding="0" >
-            <Grid x:Name="StageInfoGrid" 
+            
+            <Grid x:Name="StageInfoGrid" WidthRequest="490"
                   Margin="13,10,13,0"
                   ColumnSpacing="13" AutomationId="StageInfoGrid">
+                
                 <Grid.RowDefinitions>
                     <RowDefinition x:Name="contentRow" Height="Auto" />
                     <RowDefinition x:Name="spacerRow" Height="5" />
                 </Grid.RowDefinitions>
+                
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition x:Name="stageNameColumn" Width="2*" />
-                    <ColumnDefinition x:Name="descritpionColumn" Width="200" />
-                    <ColumnDefinition x:Name="infoIconColumn" Width="*" />
+                    <ColumnDefinition x:Name="StageNameColumn" Width="*" />
+                    <ColumnDefinition x:Name="DescritpionColumn" Width="200" />
+                    <ColumnDefinition x:Name="InfoIconColumn" Width="28" />
                 </Grid.ColumnDefinitions>
 
-                <Label x:Name="StageLabel" Opacity="0.7" 
+                <Label x:Name="StageLabel"
+                       Grid.Row="0" Grid.Column="0"
+                       Grid.ColumnSpan="{Binding StageNameColumnSpan}"
+                       x:DataType="recovery:SnapshotCardViewModel"
+                       Opacity="0.7" 
                        TextColor="{DynamicResource CardText}"
                        FontSize="{DynamicResource LargeFontMinus2Font}"
                        AutomationId="StageLabel"
-                       LineBreakMode="TailTruncation" />
+                       LineBreakMode="TailTruncation"/>
 
                 <Label Grid.Row="0" Grid.Column="1" 
                        x:Name="StageDescriptionLabel" 
@@ -175,15 +184,23 @@
                                    >
                             </Label>
                         </Grid>
+                        
                         <Border.GestureRecognizers>
                             <TapGestureRecognizer x:Name="RestoreButtonTap" />
                         </Border.GestureRecognizers>
+                        
                     </Border>
+                    
                 </Grid>
+                
             </Border>
+            
         </VerticalStackLayout>
+        
         <HorizontalStackLayout.GestureRecognizers>
             <TapGestureRecognizer x:Name="TapGestureRecognizer" AutomationId="SectionCard" Tapped="OnButtonClicked" />
         </HorizontalStackLayout.GestureRecognizers>
+        
     </HorizontalStackLayout>
+    
 </kernel:RenderComponentBase>

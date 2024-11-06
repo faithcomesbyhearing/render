@@ -26,8 +26,8 @@ namespace Render.Repositories.UserRepositories
 
             foreach (var user in vesselUsers)
             {
-                if (user.HasClaim(VesselRolesAndClaims.ProjectUserClaimType, project.Id.ToString())
-                    || user.HasClaim(VesselRolesAndClaims.AdministrativeGroupUserClaimType, project.ParentGroupId.ToString()))
+                if (user.HasClaim(RenderRolesAndClaims.ProjectUserClaimType, project.Id.ToString())
+                    || user.HasClaim(RenderRolesAndClaims.AdministrativeGroupUserClaimType, project.ParentGroupId.ToString()))
                 {
                     filteredVesselUsers.Add(user);
                 }
@@ -97,11 +97,6 @@ namespace Render.Repositories.UserRepositories
             return result;
         }
         
-        public async Task Purge(Guid id)
-        { 
-            await _renderUserPersistence.PurgeAllOfTypeForProjectId(id);
-        }
-
         public void Dispose()
         {
             _userPersistence?.Dispose();

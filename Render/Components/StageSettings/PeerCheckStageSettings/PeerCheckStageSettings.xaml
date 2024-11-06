@@ -46,11 +46,15 @@
                         </Grid.GestureRecognizers>
                     </Grid>
                 </Border>
-                
-                <!-- Check -->
-                <Label Style="{StaticResource StageSettingSettingGroupTitleStyle}" 
-                       Text="{x:Static localization:AppResources.Check}" 
-                       Margin="0,26,0,18"/>
+                                
+                <!-- CheckStepName editor -->
+                <HorizontalStackLayout Style="{StaticResource StepNameStackLayoutStyle}">
+                    <Label Style="{StaticResource StageSettingsStepNameLabelStyle}"
+                           Text="{x:Static localization:AppResources.SubstageName}"/>
+                    <Border Style="{StaticResource StageSettingStepNameEditBorderStyle}">
+                        <Entry x:Name="CheckStepName" Style="{StaticResource StageSettingsStepNameEntryStyle}"/>
+                    </Border>
+                </HorizontalStackLayout>
                 
                 <!-- Note Listen -->
                 <Border Style="{StaticResource StageSettingsSectionBorderStyle}">
@@ -206,11 +210,15 @@
                          </VerticalStackLayout>
                     </VerticalStackLayout>
                 </Border>
-                
-                <!-- Revise -->
-                <Label Style="{StaticResource StageSettingSettingGroupTitleStyle}" 
-                       Text="{x:Static localization:AppResources.Revise}" 
-                       Margin="0,26,0,18"/>
+                                
+                <!-- ReviseStepName editor -->
+                <HorizontalStackLayout Style="{StaticResource StepNameStackLayoutStyle}">
+                    <Label Style="{StaticResource StageSettingsStepNameLabelStyle}"
+                           Text="{x:Static localization:AppResources.SubstageName}"/>
+                    <Border Style="{StaticResource StageSettingStepNameEditBorderStyle}">
+                        <Entry x:Name="ReviseStepName" Style="{StaticResource StageSettingsStepNameEntryStyle}"/>
+                    </Border>
+                </HorizontalStackLayout>
                 
                 <!-- Allow Editing -->
                 <Border Style="{StaticResource StageSettingsSectionBorderStyle}">

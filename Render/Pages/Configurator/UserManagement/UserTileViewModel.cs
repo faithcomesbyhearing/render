@@ -67,9 +67,9 @@ namespace Render.Pages.Configurator.UserManagement;
         {
             Roles = "";
             var roles = _user.RolesForProject(RenderRolesAndClaims.ProjectUserClaimType, _project.Id.ToString());
-            foreach (var role in roles.Where(role => role.Name != RoleName.General))
+            foreach (var role in roles.Where(role => role != RoleName.General))
             {
-                switch (role.Name)
+                switch (role)
                 {
                     case RoleName.Configure:
                         Roles += AppResources.Configure + ", ";

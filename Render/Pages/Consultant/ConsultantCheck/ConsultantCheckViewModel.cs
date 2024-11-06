@@ -39,35 +39,48 @@ namespace Render.Pages.Consultant.ConsultantCheck
         private ConversationService _conversationService;
 
         #region RevisionsDefinitions
+
         public MultipleRevisionViewModel RevisionActionViewModel { get; set; }
+
         #endregion
 
         #region MenuDefinitions
-        public readonly DynamicDataWrapper<MenuButtonViewModel> MenuButtons = new();
+
+        public SourceList<MenuButtonViewModel> MenuButtonSource = new();
+        private ReadOnlyObservableCollection<MenuButtonViewModel> _menuButtonViewModels;
+        public ReadOnlyObservableCollection<MenuButtonViewModel> MenuButtonViewModels => _menuButtonViewModels;
+
         private MenuButtonViewModel SelectedMenuButtonViewModel { get; set; }
+
         #endregion
 
         #region SequencerDefinitions
+
         private IToolbarItem _noteToolbarItemModel;
         private IToolbarItem _transcribeToolbarItemModel;
         private IToolbarItem _referenceToolbarItemModel;
+        private ActionViewModelBase _sequencerActionViewModel;
         [Reactive] public ISequencerPlayerViewModel SequencerPlayerViewModel { get; private set; }
+
         #endregion
 
         #region ReferencesPanelDefinitions
+
         private SourceList<IBarPlayerViewModel> SectionReferenceAudioSources { get; } = new();
         private ReadOnlyObservableCollection<IBarPlayerViewModel> _barPlayerViewModels;
         public ReadOnlyObservableCollection<IBarPlayerViewModel> BarPlayerViewModels => _barPlayerViewModels;
         [Reactive] public bool ReferencesPanelIsVisible { get; private set; }
         private ReactiveCommand<Unit, Unit> SetReferencesPanelVisibilityCommand { get; }
+
         #endregion
 
         #region TranscriptionPanelDefinitions
+
         [Reactive] public bool TranscribePanelIsVisible { get; private set; }
         public TranscriptionWindowViewModel TranscriptionWindowViewModel { get; private set; }
         private ReactiveCommand<Unit, Unit> SetTranscribePanelVisibilityCommand { get; }
-        #endregion
 
+        #endregion
 
         public static async Task<ConsultantCheckViewModel> CreateAsync(IViewModelContextProvider
             viewModelContextProvider, SectionSelectCardViewModel sectionSelectCard, Step step, Stage stage)
@@ -89,18 +102,16 @@ namespace Render.Pages.Consultant.ConsultantCheck
             SectionSelectCardViewModel sectionSelectCard,
             TranscriptionWindowViewModel transcriptionWindowViewModel,
             Step step,
-            Stage stage) :
-            base(
+            Stage stage)
+            : base(
                 urlPathSegment: "ConsultantCheckPage",
                 viewModelContextProvider,
-                pageName: AppResources.ConsultantCheck,
+                pageName: GetStepName(step),
                 sectionSelectCard.Section,
                 stage,
+                step,
                 secondPageName: sectionSelectCard.Section.ScriptureReference)
         {
-            DisposeOnNavigationCleared = true;
-            TitleBarViewModel.DisposeOnNavigationCleared = true;
-
             SelectCardViewModel = sectionSelectCard;
             Step = step;
             Section = sectionSelectCard.Section;
@@ -124,34 +135,15 @@ namespace Render.Pages.Consultant.ConsultantCheck
             ProceedButtonViewModel.SetCommand(SetReviewed);
 
             BuildMenuTabs();
-
             LoadReferences();
-
+            SetupSequencer();
+            SetupConversationService(SequencerPlayerViewModel);
             SetupRevision();
-
             SetProceedButtonIcon();
         }
 
-        private void SetupListeners()
-        {
-            Disposables.Add(MenuButtons.Observable
-                .WhenPropertyChanged(button => button.IsActive)
-                .Subscribe(isActiveProperty =>
-                {
-                    if (isActiveProperty.Value)
-                    {
-                        SelectMenuButton(isActiveProperty.Sender);
-                    }
-                }));
-
-            Disposables.Add(this.WhenAnyValue(vm => vm.RevisionActionViewModel.SelectedRevisionItem)
-                .Subscribe(async (revision) => await SelectSnapshot(revision)));
-
-            Disposables.Add(ProceedButtonViewModel.NavigateToPageCommand.IsExecuting
-                .Subscribe(isExecuting => { IsLoading = isExecuting; }));
-        }
-
         #region RevisionsImplementation
+
         private void SetupRevision()
         {
             RevisionActionViewModel = new MultipleRevisionViewModel(ActionState.Optional, ViewModelContextProvider);
@@ -162,23 +154,58 @@ namespace Render.Pages.Consultant.ConsultantCheck
         {
             var snapshots = await RevisionActionViewModel.FillRevisionItems(sectionId, Stage.Id);
 
-            SetupSequencer();
-
-            _conversationService = new ConversationService(
-                this,
+            _sequencerActionViewModel = SequencerPlayerViewModel.CreateActionViewModel(
+                ViewModelContextProvider,
                 Disposables,
-                Stage,
-                Step,
-                SequencerPlayerViewModel);
+                required: true,
+                requirementId: RevisionActionViewModel.SelectedRevisionItem.Key.Id);
+            ActionViewModelBaseSourceList.Add(_sequencerActionViewModel);
 
-            _conversationService.TapFlagPostEvent = ProcessStateStatusChange;
             _conversationService.DefineFlagsToDraw(snapshots, Stage.Id);
 
-            SetupButtonStates();
-            UpdateSequencer();
-            ActionViewModelBaseSourceList.AddRange(MenuButtons.Items);
+            ActionViewModelBaseSourceList.AddRange(MenuButtonSource.Items);
 
             SetupListeners();
+        }
+
+        private void SetupListeners()
+        {
+            var changeList = MenuButtonSource
+                .Connect()
+                .Publish();
+            Disposables.Add(changeList
+                .Bind(out _menuButtonViewModels)
+                .WhenPropertyChanged(button => button.IsActive)
+                .Subscribe(isActiveProperty =>
+                {
+                    if (isActiveProperty.Value)
+                    {
+                        SelectMenuButton(isActiveProperty.Sender);
+                    }
+                }));
+            Disposables.Add(changeList.Connect());
+
+            Disposables.Add(this.WhenAnyValue(vm => vm.RevisionActionViewModel.SelectedRevisionItem)
+                .Subscribe(async (revision) => await SelectSnapshot(revision)));
+
+            Disposables.Add(ProceedButtonViewModel.NavigateToPageCommand.IsExecuting
+                .Subscribe(isExecuting => { IsLoading = isExecuting; }));
+
+            Disposables.Add(SequencerPlayerViewModel
+                .WhenAnyValue(player => player.State)
+                .Where(state => state == SequencerState.Loaded && !RevisionActionViewModel.IsCurrentRevision)
+                .Subscribe((_) => { _noteToolbarItemModel.State = ToolbarItemState.Disabled; }));
+
+            Disposables.Add(SequencerPlayerViewModel
+                .WhenAnyValue(player => player.State)
+                .Where(state => state == SequencerState.Playing && RevisionActionViewModel.IsCurrentRevision)
+                .Subscribe(_ =>
+                {
+                    if (SelectedMenuButtonViewModel.MenuTabType is MenuTabType.Original)
+                    {
+                        _sequencerActionViewModel.ActionState = ActionState.Optional;
+                    }
+                }));
         }
 
         private async Task SelectSnapshot(KeyValuePair<Snapshot, string> selectedRevision)
@@ -194,9 +221,10 @@ namespace Render.Pages.Consultant.ConsultantCheck
 
             _passages = RevisionActionViewModel.SelectedSnapshot.Passages;
 
-            MainThread.BeginInvokeOnMainThread(SetupButtonStates);
+            await MainThread.InvokeOnMainThreadAsync(SetupButtonStates);
             UpdateSequencer();
         }
+
         #endregion
 
         #region MenuImplementation
@@ -204,8 +232,8 @@ namespace Render.Pages.Consultant.ConsultantCheck
         private void BuildMenuTabs()
         {
             // Check whether second step bt is enabled
-            var gcc = ViewModelContextProvider.GetGrandCentralStation();
-            var workflow = gcc.ProjectWorkflow;
+            var workflowService = ViewModelContextProvider.GetWorkflowService();
+            var workflow = workflowService.ProjectWorkflow;
             var entrySteps = workflow.GetAllActiveWorkflowEntrySteps()
                 .Where(x => x.RenderStepType == RenderStepTypes.BackTranslate).ToList();
             var secondStepIsEnabled = entrySteps.Count > 1;
@@ -214,56 +242,59 @@ namespace Render.Pages.Consultant.ConsultantCheck
             var doRetell = lastBtStep != null && lastBtStep.StepSettings.GetSetting(SettingType.DoRetellBackTranslate);
             var doSegment = lastBtStep != null && lastBtStep.StepSettings.GetSetting(SettingType.DoSegmentBackTranslate);
 
-            MenuButtons.Add(
+            MenuButtonSource.Add(
                 new MenuButtonViewModel(
                     AppResources.OriginalLanguage,
                     ViewModelContextProvider,
-                    new MenuButtonParameters() { AudioType = ParentAudioType.Draft }));
-            MenuButtons.Add(
+                    new MenuButtonParameters()
+                    {
+                        AudioType = ParentAudioType.Draft,
+                        MenuTabType = MenuTabType.Original
+                    }));
+            MenuButtonSource.Add(
                 new MenuButtonViewModel(
                     secondStepIsEnabled ? AppResources.PassageBackTranslate1 : AppResources.PassageBackTranslate,
                     ViewModelContextProvider,
                     new MenuButtonParameters()
                     {
-                        IsBackTranslate = true,
                         IsEnabled = doRetell,
-                        AudioType = ParentAudioType.PassageBackTranslation
+                        AudioType = ParentAudioType.PassageBackTranslation,
+                        MenuTabType = MenuTabType.BackTranslate
                     }));
-            MenuButtons.Add(
+            MenuButtonSource.Add(
                 new MenuButtonViewModel(
                     AppResources.PassageBackTranslate2,
                     ViewModelContextProvider,
                     new MenuButtonParameters()
                     {
-                        IsSecondStepBackTranslate = true,
                         IsVisible = secondStepIsEnabled,
                         IsEnabled = doRetell,
-                        AudioType = ParentAudioType.PassageBackTranslation2
+                        AudioType = ParentAudioType.PassageBackTranslation2,
+                        MenuTabType = MenuTabType.BackTranslate2
                     }));
-            MenuButtons.Add(
+            MenuButtonSource.Add(
                 new MenuButtonViewModel(
                     secondStepIsEnabled ? AppResources.SegmentBackTranslate1 : AppResources.SegmentBackTranslate,
                     ViewModelContextProvider,
                     new MenuButtonParameters()
                     {
-                        IsSegmentBackTranslate = true,
                         IsEnabled = doSegment,
-                        AudioType = ParentAudioType.SegmentBackTranslation
+                        AudioType = ParentAudioType.SegmentBackTranslation,
+                        MenuTabType = MenuTabType.SegmentBackTranslate
                     }));
-            MenuButtons.Add(
+            MenuButtonSource.Add(
                 new MenuButtonViewModel(
                     AppResources.SegmentBackTranslate2,
                     ViewModelContextProvider,
                     new MenuButtonParameters()
                     {
-                        IsSegmentBackTranslate = true,
-                        IsSecondStepBackTranslate = true,
                         IsVisible = secondStepIsEnabled,
                         IsEnabled = doSegment,
-                        AudioType = ParentAudioType.SegmentBackTranslation2
+                        AudioType = ParentAudioType.SegmentBackTranslation2,
+                        MenuTabType = MenuTabType.SegmentBackTranslate2
                     }));
 
-            MenuButtons.SourceItems.First().IsActive = true;
+            MenuButtonSource.Items.First().IsActive = true;
         }
 
         private void SelectMenuButton(MenuButtonViewModel viewModel)
@@ -283,10 +314,7 @@ namespace Render.Pages.Consultant.ConsultantCheck
 
         private void UpdatePanels()
         {
-            TranscriptionWindowViewModel.UpdateTranscriptions(
-                SelectedMenuButtonViewModel.IsBackTranslate,
-                SelectedMenuButtonViewModel.IsSegmentBackTranslate,
-                SelectedMenuButtonViewModel.IsSecondStepBackTranslate);
+            TranscriptionWindowViewModel.UpdateTranscriptions(SelectedMenuButtonViewModel.MenuTabType);
 
             if (ReferencesPanelIsVisible)
             {
@@ -322,10 +350,19 @@ namespace Render.Pages.Consultant.ConsultantCheck
 
         private void SetMenuButtonRequiredState(IEnumerable<Draft> audios, MenuButtonViewModel menuButton)
         {
-            var isRequired = GetRequiredState(audios);
-            menuButton.ActionState = isRequired && menuButton.IsEnabled
-                ? ActionState.Required
-                : ActionState.Optional;
+            var originalAndNotListen = menuButton.MenuTabType is MenuTabType.Original && _sequencerActionViewModel.ActionState is ActionState.Required;
+            if (originalAndNotListen)
+            {
+                menuButton.ActionState = ActionState.Required;
+            }
+            else
+            {
+                var isRequired = GetRequiredState(audios);
+                menuButton.ActionState = isRequired && menuButton.IsEnabled
+                    ? ActionState.Required
+                    : ActionState.Optional;
+            }
+
             menuButton.IsRequired = RevisionActionViewModel.IsCurrentRevision;
         }
 
@@ -336,9 +373,8 @@ namespace Render.Pages.Consultant.ConsultantCheck
                 return;
             }
 
-            foreach (var menuButton in MenuButtons.Items)
+            foreach (var menuButton in MenuButtonViewModels)
             {
-
                 if (!menuButton.IsVisible)
                 {
                     continue;
@@ -356,9 +392,11 @@ namespace Render.Pages.Consultant.ConsultantCheck
                 }
             }
         }
+
         #endregion
 
         #region SequencerImplementation
+
         private void SetupSequencer()
         {
             SequencerPlayerViewModel = ViewModelContextProvider
@@ -381,11 +419,18 @@ namespace Render.Pages.Consultant.ConsultantCheck
 
             SequencerPlayerViewModel.SetupActivityService(ViewModelContextProvider, Disposables);
             SequencerPlayerViewModel.HasTimer(false);
+        }
 
-            SequencerPlayerViewModel
-                .WhenAnyValue(player => player.State)
-                .Where(state => state == SequencerState.Loaded && !RevisionActionViewModel.IsCurrentRevision)
-                .Subscribe((_) => { _noteToolbarItemModel.State = ToolbarItemState.Disabled; });
+        private void SetupConversationService(ISequencerPlayerViewModel sequencerPlayer)
+        {
+            _conversationService = new ConversationService(
+                this,
+                Disposables,
+                Stage,
+                Step,
+                sequencerPlayer);
+
+            _conversationService.TapFlagPostEvent = ProcessStateStatusChange;
         }
 
         private void UpdateSequencer()
@@ -404,15 +449,18 @@ namespace Render.Pages.Consultant.ConsultantCheck
                 return;
             }
 
-            var audios = _audioSelector.SelectAudioModels(_passages, SelectedMenuButtonViewModel.AudioType,
-                c => _conversationService.AllowedStageIdsForDrawingFlags.Contains(c.StageId));
+            var audios = _audioSelector.SelectAudioModels(
+                passages: _passages,
+                audioType: SelectedMenuButtonViewModel.AudioType,
+                conversationsFilter: c => _conversationService.AllowedStageIdsForDrawingFlags.Contains(c.StageId),
+                requireNoteListen: _requireNoteListen && RevisionActionViewModel.IsCurrentRevision);
             SequencerPlayerViewModel.SetAudio(audios);
 
             _conversationService.SequencerAudios = AudioSelector.SelectDraftAudios(_passages, SelectedMenuButtonViewModel.AudioType);
             _conversationService.ParentAudioType = SelectedMenuButtonViewModel.AudioType;
             _conversationService.InitializeNoteDetail(
                 _requireNoteListen && RevisionActionViewModel.IsCurrentRevision,
-                RevisionActionViewModel.IsCurrentRevision && !SelectedMenuButtonViewModel.IsBackTranslate && !_isReviewed);
+                RevisionActionViewModel.IsCurrentRevision && SelectedMenuButtonViewModel.MenuTabType is MenuTabType.Original && !_isReviewed);
         }
 
         private void UpdateTranscribeToolbarItem()
@@ -422,7 +470,7 @@ namespace Render.Pages.Consultant.ConsultantCheck
                 return;
             }
 
-            _transcribeToolbarItemModel.IsAvailable = !_isReviewed && SelectedMenuButtonViewModel.IsBackTranslate;
+            _transcribeToolbarItemModel.IsAvailable = !_isReviewed && SelectedMenuButtonViewModel.MenuTabType is not MenuTabType.Original;
 
             if (TranscribePanelIsVisible)
             {
@@ -462,8 +510,22 @@ namespace Render.Pages.Consultant.ConsultantCheck
                 return;
             }
 
-            _noteToolbarItemModel.IsAvailable = !SelectedMenuButtonViewModel.IsBackTranslate && !_isReviewed;
+            _noteToolbarItemModel.IsAvailable = SelectedMenuButtonViewModel.MenuTabType is MenuTabType.Original && !_isReviewed;
             _noteToolbarItemModel.State = RevisionActionViewModel.IsCurrentRevision ? ToolbarItemState.Active : ToolbarItemState.Disabled;
+        }
+
+        private void UpdatePlayItem()
+        {
+            var playItem = SequencerPlayerViewModel?.GetToolbarItem<IPlayToolbarItem>();
+            if (playItem != null)
+            {
+                var option = _sequencerActionViewModel.ActionState == ActionState.Optional ? ItemOption.Optional : ItemOption.Required;
+
+                playItem.Option =
+                    RevisionActionViewModel.IsCurrentRevision && SelectedMenuButtonViewModel.LabelText.Equals(AppResources.OriginalLanguage)
+                        ? option
+                        : ItemOption.Optional;
+            }
         }
 
         private void UpdateToolbarItems()
@@ -476,10 +538,13 @@ namespace Render.Pages.Consultant.ConsultantCheck
             UpdateNoteToolbarItem();
             UpdateReferenceToolbarItem();
             UpdateTranscribeToolbarItem();
+            UpdatePlayItem();
         }
+
         #endregion
 
         #region ReferencesPanelImplementation
+
         private void LoadReferences()
         {
             var referenceCount = 0;
@@ -506,15 +571,18 @@ namespace Render.Pages.Consultant.ConsultantCheck
 
             UpdateToolbarItems();
         }
+
         #endregion
 
         #region TranscribePanelImplementation
+
         private void SetTranscribePanelVisibility()
         {
             TranscribePanelIsVisible = !TranscribePanelIsVisible;
 
             UpdateToolbarItems();
         }
+
         #endregion
 
         #region ProceedButtonImplementation
@@ -540,8 +608,8 @@ namespace Render.Pages.Consultant.ConsultantCheck
                 {
                     SelectCardViewModel.Section.SetCheckedBy(ViewModelContextProvider.GetLoggedInUser().Id);
                     await _sectionRepository.SaveSectionAsync(SelectCardViewModel.Section);
-                    await ViewModelContextProvider.GetGrandCentralStation()
-                        .AdvanceSectionAfterReviewAsync(Section, Step);
+                    await ViewModelContextProvider.GetSectionMovementService()
+                        .AdvanceSectionAfterReviewAsync(Section, Step, GetProjectId(), GetLoggedInUserId());
                 }
 
                 return await ConsultantCheckSectionSelectViewModel.CreateAsync(Section.ProjectId,
@@ -551,6 +619,7 @@ namespace Render.Pages.Consultant.ConsultantCheck
 
             return await NavigateToAndReset(viewModel);
         }
+
         #endregion
 
         public override void Dispose()
@@ -565,11 +634,19 @@ namespace Render.Pages.Consultant.ConsultantCheck
             BarPlayerViewModels.DisposeCollection();
 
             SequencerPlayerViewModel.Dispose();
+            SequencerPlayerViewModel = null;
+
+            _sequencerActionViewModel?.Dispose();
+            _sequencerActionViewModel = null;
 
             RevisionActionViewModel?.Dispose();
             RevisionActionViewModel = null;
 
-            MenuButtons?.Dispose();
+            MenuButtonSource?.Clear();
+            MenuButtonSource?.Dispose();
+            MenuButtonSource = null;
+            _menuButtonViewModels = null;
+
             SelectedMenuButtonViewModel = null;
 
             TranscriptionWindowViewModel?.Dispose();

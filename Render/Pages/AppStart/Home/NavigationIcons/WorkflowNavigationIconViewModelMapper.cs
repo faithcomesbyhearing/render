@@ -7,8 +7,12 @@ namespace Render.Pages.AppStart.Home.NavigationIcons;
 
 public static class WorkflowNavigationIconViewModelMapper
     {
-        public static WorkflowNavigationIconViewModel GetNavigationIconForStepType(IViewModelContextProvider viewModelContextProvider,
-            Stage stage, Step step, int sectionsAtStep)
+        public static WorkflowNavigationIconViewModel GetNavigationIconForStepType(
+            IViewModelContextProvider viewModelContextProvider,
+            Stage stage,
+            Step step,
+            int sectionsAtStep,
+            Guid projectId)
         {
             switch (step.RenderStepType)
             {
@@ -16,7 +20,7 @@ public static class WorkflowNavigationIconViewModelMapper
                     return new ConsultantApprovalNavigationIconViewModel(viewModelContextProvider, stage, step, sectionsAtStep);
                 case RenderStepTypes.ConsultantCheck:
                     return new ConsultantCheckNavigationIconViewModel(viewModelContextProvider, stage, step, 
-                        viewModelContextProvider.GetGrandCentralStation().CurrentProjectId, sectionsAtStep);
+                        projectId, sectionsAtStep);
                 case RenderStepTypes.CommunitySetup:
                 case RenderStepTypes.CommunityTest:
                 case RenderStepTypes.CommunityRevise:

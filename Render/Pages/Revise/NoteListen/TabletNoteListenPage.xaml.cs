@@ -1,4 +1,3 @@
-using System.Reactive.Linq;
 using ReactiveUI;
 
 namespace Render.Pages.Revise.NoteListen;
@@ -17,13 +16,13 @@ public partial class TabletNoteListenPage
             d(this.OneWayBind(ViewModel, vm => vm.TitleBarViewModel, v => v.TitleBar.BindingContext));
             d(this.OneWayBind(ViewModel, vm => vm.ProceedButtonViewModel, v => v.ProceedButton.BindingContext));
             d(this.OneWayBind(ViewModel, vm => vm.IsLoading, v => v.LoadingView.IsVisible));
-
-            d(this.OneWayBind(ViewModel, vm => vm.RevisionActionViewModel.RevisionItems, v => v.RevisionPicker.ItemsSource));
-            d(this.Bind(ViewModel, vm => vm.RevisionActionViewModel.SelectedRevisionItem, v => v.RevisionPicker.SelectedItem));
-
-            d(this.WhenAnyValue(x => x.ViewModel.RevisionActionViewModel.RevisionItems.Count)
-                .Where(x => x is not 0)
-                .Subscribe(count => { RevisionLayout.SetValue(IsVisibleProperty, count > 1); }));
+            d(this.OneWayBind(ViewModel, vm => vm.RevisionActionViewModel, v => v.RevisionComponent.BindingContext));
         });
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        RevisionComponent?.Dispose();
+        base.Dispose(disposing);
     }
 }

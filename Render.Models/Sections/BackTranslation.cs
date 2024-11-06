@@ -15,10 +15,10 @@ namespace Render.Models.Sections
         /// </summary>
         [JsonProperty("FromLanguageId")]
         public Guid FromLanguageId { get; private set; }
-        
+
         //TODO Do we only need one language id where we can pull the from language from the parent draft
 
-        
+
         /// <summary>
         /// Constructor for back translation object.
         /// </summary>
@@ -27,8 +27,18 @@ namespace Render.Models.Sections
         /// <param name="fromLanguageId"></param>
         /// <param name="projectId"></param>
         /// <param name="scopeId"></param>
-        public BackTranslation(Guid parentId, Guid toLanguageId, Guid fromLanguageId, Guid projectId,
-            Guid scopeId) : base(scopeId, projectId, parentId)
+        public BackTranslation(
+            Guid parentId,
+            Guid toLanguageId,
+            Guid fromLanguageId,
+            Guid projectId,
+            Guid scopeId,
+            int documentVersion)
+            : base(
+                  scopeId,
+                  projectId,
+                  parentId,
+                  documentVersion)
         {
             ToLanguageId = toLanguageId;
             FromLanguageId = fromLanguageId;

@@ -10,7 +10,5 @@ namespace Render.Repositories.SectionRepository
         Task<CommunityTest> GetExistingCommunityTestForDraftAsync(Draft draft);
 
         Task SaveCommunityTestAsync(CommunityTest test);
-
-        Task Purge(Guid id);
     }
 }

@@ -9,8 +9,6 @@ namespace Render.Pages.AppStart.Home.NavigationPanels;
 public partial class NavigationPane
 {
     private double _widthRatio;
-    private double _heightRatio;
-    private double scale = 1.0;
     private double scrollHeight;
     private double heightRequest = 200;
     private double widthRequest = 225;
@@ -47,7 +45,6 @@ public partial class NavigationPane
         if (DeviceDisplay.MainDisplayInfo.Orientation != orientation)
         {
             orientation = DeviceDisplay.MainDisplayInfo.Orientation;
-            scale = 1.0;
             scrollHeight = default;
             heightRequest = 200;
             widthRequest = 225;

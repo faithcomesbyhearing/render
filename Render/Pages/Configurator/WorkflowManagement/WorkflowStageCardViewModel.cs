@@ -25,10 +25,10 @@ public class WorkflowStageCardViewModel : ViewModelBase
 
     [Reactive] public bool ShowAddStepAfterCard { get; set; }
 
-    public bool ShowSettingsIcon { get; set; }
+    public bool ShowSettingsIcon { get; set; } = true;
 
     public string StageIcon { get; }
-    
+
     private readonly SourceList<Step> _stepListSource = new();
     private readonly ReadOnlyObservableCollection<StepLabelViewModel> _stepList;
     public ReadOnlyObservableCollection<StepLabelViewModel> StepList => _stepList;
@@ -38,7 +38,7 @@ public class WorkflowStageCardViewModel : ViewModelBase
     public ReactiveCommand<Unit, Unit> DeleteStageCommand;
     public ReactiveCommand<StageTypes, Unit> AddStageCommand;
     public readonly ReactiveCommand<Unit, IRoutableViewModel> OpenStageSettingsCommand;
-    
+
     private readonly Action<Stage> _updateStageColumn;
 
     public WorkflowStageCardViewModel(
@@ -50,7 +50,9 @@ public class WorkflowStageCardViewModel : ViewModelBase
         Action<Stage> openStageSettingsCallback,
         IViewModelContextProvider viewModelContextProvider,
         string projectName)
-        : base("WorkflowStageCard", viewModelContextProvider)
+        : base(
+            urlPathSegment: "WorkflowStageCard",
+            viewModelContextProvider: viewModelContextProvider)
     {
         _projectName = projectName;
         Stage = stage;
@@ -58,7 +60,6 @@ public class WorkflowStageCardViewModel : ViewModelBase
         EndOfWorkflow = endOfWorkflow;
         Name = Stage.Name;
         StageIcon = stageIcon;
-        ShowSettingsIcon = Stage.StageType != StageTypes.ConsultantApproval;
         OnDragOverCommand = ReactiveCommand.Create(OnDragOver);
         OnDragLeaveCommand = ReactiveCommand.Create(OnDragLeave);
         _updateStageColumn = openStageSettingsCallback;
@@ -66,15 +67,15 @@ public class WorkflowStageCardViewModel : ViewModelBase
         OpenStageSettingsCommand = ReactiveCommand.CreateFromTask(NavigateToStageSettingsPageAsync);
 
         Disposables.Add(_stepListSource.Connect()
-            .Transform(x =>
-                new StepLabelViewModel(x.RenderStepType, viewModelContextProvider, stage.Id))
+            .Transform(step =>
+                new StepLabelViewModel(step, viewModelContextProvider, stage))
             .Bind(out _stepList)
             .Subscribe());
 
         Disposables.Add(Stage.WhenAnyValue(x => x.Name)
             .ObserveOn(RxApp.MainThreadScheduler)
             .Subscribe(x => Name = x));
-        
+
         InitializeStepList(Stage);
 
         Disposables.Add(StepList.WhenAnyValue(x => x.Count)
@@ -90,9 +91,9 @@ public class WorkflowStageCardViewModel : ViewModelBase
     {
         var steps = stage.GetAllWorkflowEntrySteps();
         var distinctSteps = new List<Step>();
-        
+
         distinctSteps.AddRange(steps.Where(step => distinctSteps.All(x => x.RenderStepType != step.RenderStepType)));
-        
+
         ViewModelContextProvider.GetEssentials().InvokeOnMainThread(() =>
         {
             _stepListSource.Clear();

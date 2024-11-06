@@ -3,8 +3,8 @@
     public interface IOffloadService
     {
         Task OffloadProject(Guid projectId);
+        Task OffloadProjectsData(List<Guid> projectsIds);
         Task OffloadFailedProjects();
-        Task OffloadIncompleteProjects();
         Task<string> GetOffloadProjectSize(Guid projectId);
     }
 }

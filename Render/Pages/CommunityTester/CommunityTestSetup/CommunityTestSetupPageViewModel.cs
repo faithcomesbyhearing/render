@@ -26,39 +26,47 @@ namespace Render.Pages.CommunityTester.CommunityTestSetup
         private Passage _passage;
         private readonly Guid _stepId;
         private readonly Stage _stage;
-        [Reactive] public ISequencerPlayerViewModel SequencerPlayerViewModel { get; private set; }
+
+        [Reactive]
+        public ISequencerPlayerViewModel SequencerPlayerViewModel { get; private set; }
+
         private DynamicDataWrapper<CommunityTestFlagMarkerViewModel> CommunityTestMarkers { get; set; }
 
         private readonly ObservableAsPropertyHelper<bool> _aQuestionHasBeenRecorded;
         private bool AQuestionHasBeenRecorded => _aQuestionHasBeenRecorded.Value;
 
         private readonly List<IMarkerFlag> _markerFlags = new();
-        
-        public static CommunityTestSetupPageViewModel Create(IViewModelContextProvider viewModelContextProvider,
-            Section section, Passage passage, Step step, Stage stage)
+
+        public static CommunityTestSetupPageViewModel Create(
+            IViewModelContextProvider viewModelContextProvider,
+            Section section,
+            Passage passage,
+            Step step,
+            Stage stage)
         {
             return new CommunityTestSetupPageViewModel(viewModelContextProvider, section, passage, step, stage);
         }
 
-        private CommunityTestSetupPageViewModel(IViewModelContextProvider viewModelContextProvider,
-            Section section, Passage passage, Step step, Stage stage)
-            : base("CommunityTestSetupPage",
-                viewModelContextProvider,
-                AppResources.CommunityTestSetup,
-                section,
-                stage,
-                step,
-                passage.PassageNumber,
+        private CommunityTestSetupPageViewModel(
+            IViewModelContextProvider viewModelContextProvider,
+            Section section,
+            Passage passage,
+            Step step,
+            Stage stage)
+            : base(urlPathSegment: "CommunityTestSetupPage",
+                viewModelContextProvider: viewModelContextProvider,
+                pageName: GetStepName(step),
+                section: section,
+                stage: stage,
+                step: step,
+                passageNumber: passage.PassageNumber,
                 secondPageName: AppResources.QuestionPlacement)
         {
-            DisposeOnNavigationCleared = true;
-            TitleBarViewModel.DisposeOnNavigationCleared = true;
-
             _section = section;
             _passage = passage;
             _stepId = step.Id;
             _stage = stage;
-            
+
             _communityTest = passage.CurrentDraftAudio.GetCommunityCheck();
 
             var color = ResourceExtensions.GetColor("SecondaryText");
@@ -69,15 +77,15 @@ namespace Render.Pages.CommunityTester.CommunityTestSetup
 
             CommunityTestMarkers = new DynamicDataWrapper<CommunityTestFlagMarkerViewModel>(SortExpressionComparer<CommunityTestFlagMarkerViewModel>
                 .Ascending(conversation => conversation.Flag.TimeMarker));
-            
+
             ProceedButtonViewModel.SetCommand(NavigateToNextPassageOrHome);
-            
+
             foreach (var flag in _communityTest.GetFlags(Stage.Id))
             {
                 var conversationMarker = new CommunityTestFlagMarkerViewModel(ViewModelContextProvider, flag);
                 CommunityTestMarkers.Add(conversationMarker);
             }
-            
+
             Disposables.Add(CommunityTestMarkers.Observable.WhenPropertyChanged(x => x.Flag.QuestionCount)
                 .ObserveOn(RxApp.MainThreadScheduler)
                 .Select(x => x.Sender.Flag)
@@ -87,18 +95,18 @@ namespace Render.Pages.CommunityTester.CommunityTestSetup
                     var marker = _markerFlags.FirstOrDefault(x => x.Key == flag.Id);
                     if (marker != null)
                     {
-                        marker.Symbol = flag.QuestionCount.ToString();   
+                        marker.Symbol = flag.QuestionCount.ToString();
                     }
                 }));
-            
+
             _aQuestionHasBeenRecorded = CommunityTestMarkers.Observable.WhenPropertyChanged(x => x.Flag.QuestionCount)
                 .Select(i => CommunityTestMarkers.SourceItems.Any(x => x.Flag.QuestionCount > 0))
                 .ToProperty(this, x => x.AQuestionHasBeenRecorded);
-            
+
             Disposables.Add(this.WhenAnyValue(x => x.AQuestionHasBeenRecorded)
                 .ObserveOn(RxApp.MainThreadScheduler)
                 .Subscribe(isActive => ProceedButtonViewModel.ProceedActive = isActive));
-            
+
             Disposables.Add(ProceedButtonViewModel.NavigateToPageCommand.IsExecuting
                 .Subscribe(isExecuting => { IsLoading = isExecuting; }));
 
@@ -122,10 +130,11 @@ namespace Render.Pages.CommunityTester.CommunityTestSetup
 
             if (nextPassage == null)
             {
-                var gcc = ViewModelContextProvider.GetGrandCentralStation();
-                var step = gcc.ProjectWorkflow?.GetStep(_stepId);
+                var sectionMovementService = ViewModelContextProvider.GetSectionMovementService();
+                var workflowService = ViewModelContextProvider.GetWorkflowService();
+                var step = workflowService.ProjectWorkflow?.GetStep(_stepId);
 
-                await gcc.AdvanceSectionAsync(_section, step);
+                await sectionMovementService.AdvanceSectionAsync(_section, step, GetProjectId(), GetLoggedInUserId()); 
 
                 return await NavigateToHomeOnMainStackAsync();
             }
@@ -148,18 +157,18 @@ namespace Render.Pages.CommunityTester.CommunityTestSetup
             SequencerPlayerViewModel.IsRightToLeftDirection = FlowDirection is FlowDirection.RightToLeft;
 
             SequencerPlayerViewModel.SetupActivityService(ViewModelContextProvider, Disposables);
-            
-            SequencerPlayerViewModel.AddFlagCommand = ReactiveCommand.CreateFromTask((IFlag flag) =>ShowConversationAsync((IMarkerFlag)flag));
+
+            SequencerPlayerViewModel.AddFlagCommand = ReactiveCommand.CreateFromTask((IFlag flag) => ShowConversationAsync((IMarkerFlag)flag));
             SequencerPlayerViewModel.TapFlagCommand = ReactiveCommand.CreateFromTask(
                 async (IFlag flag) => { await ShowConversationAsync((IMarkerFlag)flag); });
-            
+
             var markers = CommunityTestMarkers.SourceItems
                 .Select(comTestMarker => new MarkerFlagModel(comTestMarker.Flag.Id,
                     comTestMarker.Flag.TimeMarker,
                     false,
                     symbol: comTestMarker.ItemsCount.ToString(),
                     true)).ToList();
-            
+
             var audioPlayer = PlayerAudioModel.Create(
                 path: path,
                 name: string.Format(AppResources.Passage, _passage.PassageNumber.PassageNumberString),
@@ -169,7 +178,7 @@ namespace Render.Pages.CommunityTester.CommunityTestSetup
                 number: _passage.PassageNumber.PassageNumberString);
 
             SequencerPlayerViewModel.SetAudio(new[] { audioPlayer });
-            
+
             CommunityTestMarkers.SourceItems.ForEach(markerViewModel =>
             {
                 var flag = SequencerPlayerViewModel.GetFlag(markerViewModel.Flag.Id);
@@ -182,11 +191,11 @@ namespace Render.Pages.CommunityTester.CommunityTestSetup
         private async Task<bool> ShowConversationAsync(IMarkerFlag flag)
         {
             var conversationCreationMode = flag.Key == default;
-            
+
             var flagMarkerVm = conversationCreationMode
                 ? AddFlag(flag)
                 : CommunityTestMarkers.SourceItems.First(conv => conv.Flag.Id == flag.Key);
-            
+
             if (conversationCreationMode)
             {
                 flag.Key = flagMarkerVm.Flag.Id;
@@ -197,42 +206,42 @@ namespace Render.Pages.CommunityTester.CommunityTestSetup
                 _communityTest, RemoveFlagWithoutQuestions);
 
             await communityTestLibraryModal.ShowPopupAsync();
-            
+
             var marker = CommunityTestMarkers.SourceItems.FirstOrDefault(cm => cm.Flag.Id == flagMarkerVm.Flag.Id);
             if (marker is not null)
             {
                 marker.FlagState = Components.NotePlacementPlayer.FlagState.Viewed;
             }
-            
+
             return flagMarkerVm.Flag.Questions.Any();
         }
-        
+
         private CommunityTestFlagMarkerViewModel AddFlag(IFlag flag)
         {
             _markerFlags.Add((IMarkerFlag)flag);
-            
+
             var communityTestFlag = _communityTest.AddFlag(flag.PositionSec);
             var conversationMarker = new CommunityTestFlagMarkerViewModel(ViewModelContextProvider, communityTestFlag);
             CommunityTestMarkers.Add(conversationMarker);
             return conversationMarker;
         }
-        
+
         private void RemoveFlagWithoutQuestions(CommunityTestFlagMarkerViewModel flagMarkerViewModel)
         {
-			//We are interested in the flag questions for the current stage
-			if (flagMarkerViewModel.Flag.Questions.Any(x => x.StageIds.Contains(_stage.Id)))
-			{
-				return;
-			}
+            //We are interested in the flag questions for the current stage
+            if (flagMarkerViewModel.Flag.Questions.Any(x => x.StageIds.Contains(_stage.Id)))
+            {
+                return;
+            }
 
             RemoveNonExistingCustomFlags();
-			//Only remove flag when all the questions does not have anymore stages ids attached to them
-			if (flagMarkerViewModel.Flag.Questions.All(x => !x.StageIds.Any()))
-			{
-				_communityTest.RemoveFlag(flagMarkerViewModel.Flag);
-			}
-		}
-        
+            //Only remove flag when all the questions does not have anymore stages ids attached to them
+            if (flagMarkerViewModel.Flag.Questions.All(x => !x.StageIds.Any()))
+            {
+                _communityTest.RemoveFlag(flagMarkerViewModel.Flag);
+            }
+        }
+
         private void RemoveNonExistingCustomFlags()
         {
             var existingFlagIds = _communityTest.GetFlags(Stage.Id).Select(f => f.Id).ToList();
@@ -245,21 +254,21 @@ namespace Render.Pages.CommunityTester.CommunityTestSetup
                 CommunityTestMarkers.Remove(flag);
                 var sequencerFlag = SequencerPlayerViewModel.GetFlag(flag.Flag.Id);
                 if (sequencerFlag is null) continue;
-                
+
                 _markerFlags.Remove((IMarkerFlag)sequencerFlag);
                 SequencerPlayerViewModel.RemoveFlag(sequencerFlag);
             }
         }
-        
+
         public override void Dispose()
         {
             _section = null;
             _passage = null;
             _communityTest = null;
-            
+
             SequencerPlayerViewModel?.Dispose();
             SequencerPlayerViewModel = null;
-            
+
             CommunityTestMarkers?.Dispose();
             CommunityTestMarkers?.Clear();
             _markerFlags.Clear();

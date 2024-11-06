@@ -7,7 +7,7 @@
              xmlns:resources="clr-namespace:Render.Resources.Localization"
              x:Class="Render.Components.ProfileAvatar.UserLoginIconVertical">
 
-    <StackLayout x:Name="Layout" HorizontalOptions="Fill"
+    <StackLayout x:Name="ComponentLayout" HorizontalOptions="Fill"
                  VerticalOptions="Start" Margin="0"
                  AutomationId="UserProfilePanel">
         <StackLayout.GestureRecognizers>

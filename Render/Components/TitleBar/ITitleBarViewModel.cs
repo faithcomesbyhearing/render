@@ -19,7 +19,6 @@ namespace Render.Components.TitleBar
         bool ShowSettings { get; }
         bool ShowSectionPlayer { get; }
         bool ShowBackButton { get; }
-        bool DisposeOnNavigationCleared { get; set; }
         bool IsEnabled { get; set; }
 
         DynamicDataWrapper<ReactiveCommand<Unit, IRoutableViewModel>> NavigationItems { get; }
@@ -29,7 +28,7 @@ namespace Render.Components.TitleBar
 
         ReactiveCommand<Unit, Unit> ShowMenuCommand { get; }
         ReactiveCommand<Unit, IRoutableViewModel> NavigateBackCommand { get; set; }
-        ReactiveCommand<Unit,IRoutableViewModel> NavigateHomeCommand { get; }
+        ReactiveCommand<Unit,IRoutableViewModel> NavigateHomeCommand { get; set; }
         ReactiveCommand<Unit, IRoutableViewModel> NavigateToUserSettingsCommand { get; }
 
         void ToggleShowBackButton();

@@ -372,7 +372,7 @@ public class MiniAudioRecorderViewModel : ActionViewModelBase, IMiniAudioRecorde
 
     private async Task ProcessRecordFailedAsync()
     {
-        MainThread.BeginInvokeOnMainThread(async () =>
+        await MainThread.InvokeOnMainThreadAsync(async () =>
         {
             await StopRecordingAsync();
 
@@ -382,16 +382,14 @@ public class MiniAudioRecorderViewModel : ActionViewModelBase, IMiniAudioRecorde
         });
     }
 
-    private Task ProcessRecordDeviceRestoreAsync()
+    private async Task ProcessRecordDeviceRestoreAsync()
     {
-        MainThread.BeginInvokeOnMainThread(() =>
+        await MainThread.InvokeOnMainThreadAsync(() =>
         {
             var modalService = ViewModelContextProvider.GetModalService();
             modalService.Close(DialogResult.Ok);
             Logger.LogInfo("Microphone is restored");
         });
-
-        return Task.CompletedTask;
     }
 
     public override void Dispose()

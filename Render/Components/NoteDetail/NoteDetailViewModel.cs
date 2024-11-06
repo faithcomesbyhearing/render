@@ -46,7 +46,6 @@ namespace Render.Components.NoteDetail
         public ReactiveCommand<Unit, Unit> OnCloseCommand { get; private set; }
         public ReactiveCommand<Message, Unit> OnAddMessageCommand { get; private set; }
         public ReactiveCommand<Message, Unit> DeleteMessageCommand { get; private set; }
-        public ReactiveCommand<MessageContainerViewModel, Unit> OnDeleteMessageCommand { get; private set; }
 
         public bool HasAutoCloseByBackgroundClick { get; private set; }
         public bool AllowEditing { get; set; }
@@ -130,7 +129,6 @@ namespace Render.Components.NoteDetail
             DeleteMessageCommand = onDeleteMessageCommand;
             OnCloseCommand = onCloseCommand;
             OnAddMessageCommand = onAddMessageCommand;
-            OnDeleteMessageCommand = ReactiveCommand.CreateFromTask<MessageContainerViewModel>(DeleteMessageAsync);
 
             MiniAudioRecorderViewModel = viewModelContextProvider
                 .GetMiniAudioRecorderViewModel(new Audio(default, projectId, Conversation.Id));
@@ -268,20 +266,23 @@ namespace Render.Components.NoteDetail
             await ResetInput();
         }
 
-        private async Task DeleteMessageAsync(MessageContainerViewModel messageToRemoveVm)
+        private async Task DeleteMarkedMessagesAsync()
         {
-            var messageToRemove = Messages.Items.FirstOrDefault(x => x == messageToRemoveVm);
+            var deletedMessages = Messages.Items.Where(message => message.IsDeleted).ToList();
 
-            if (messageToRemove != null)
+            foreach(var deletedMessage in deletedMessages)
             {
-                if (messageToRemove.HasAudio)
+                if (deletedMessage.HasAudio)
                 {
                     var audioRepository = ViewModelContextProvider.GetAudioRepository();
-                    await audioRepository.DeleteAudioByIdAsync(messageToRemove.Message.Media.AudioId);
+                    await audioRepository.DeleteAudioByIdAsync(deletedMessage.Message.Media.AudioId);
                 }
-                Messages.Remove(messageToRemove);
-                messageToRemove.Dispose();
-                await DeleteMessageCommand.Execute(messageToRemove.Message);
+
+                Messages.Remove(deletedMessage);
+
+                deletedMessage.Dispose();
+
+                await DeleteMessageCommand.Execute(deletedMessage.Message);
             }
         }
 
@@ -322,6 +323,8 @@ namespace Render.Components.NoteDetail
             }
 
             PauseCurrentMessage();
+
+            await DeleteMarkedMessagesAsync();
 
             if (!_creationMode) //Skip if we are in creation mode. In creation mode Messages saved in AddMessageAsync already
             {
@@ -370,7 +373,6 @@ namespace Render.Components.NoteDetail
             var messageContainerViewModel = await MessageContainerViewModel.CreateAsync(
                 message: newMessage,
                 allowEditing: allowEditing,
-                onDeleteMessageCommand: OnDeleteMessageCommand,
                 viewModelContextProvider: ViewModelContextProvider,
                 canPlay: _canPlayNoteAudio);
 

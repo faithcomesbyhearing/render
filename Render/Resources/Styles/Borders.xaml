@@ -3,7 +3,15 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-    <Style x:Key="StageSettingBorder" TargetType="Border">
+    <Style x:Key="BorderBaseStyle" TargetType="Border">
+        <Style.Triggers>
+            <Trigger TargetType="Border" Property="IsEnabled" Value="False" >
+                <Setter Property="Opacity" Value="0.3"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <Style x:Key="StageSettingBorder" TargetType="Border" BasedOn="{StaticResource BorderBaseStyle}">
         <Setter Property="BackgroundColor" Value="{DynamicResource SlateDark}"/>
         <Setter Property="Padding" Value="0"/>
         <Setter Property="Stroke" Value="{DynamicResource MainIconColor}"/>
@@ -17,12 +25,6 @@
                 <RoundRectangle CornerRadius="8" />
             </Setter.Value> 
         </Setter>
-        
-        <Style.Triggers>
-            <Trigger TargetType="Border" Property="IsEnabled" Value="False" >
-                <Setter Property="Opacity" Value="0.3"/>
-            </Trigger>
-        </Style.Triggers>
     </Style>
     
     <Style x:Key="DraftPickerBorder" TargetType="Border">
@@ -69,7 +71,20 @@
             </Setter.Value> 
         </Setter>
     </Style>
-    
+    <Style x:Key="StageSettingStepNameEditBorderStyle" TargetType="Border" BasedOn="{StaticResource BorderBaseStyle}">
+        <Setter Property="Margin" Value="10,10"/>
+        <Setter Property="HeightRequest" Value="54"/>
+        <Setter Property="BackgroundColor" Value="{DynamicResource White}"/>
+        <Setter Property="Stroke" Value="{DynamicResource DarkGrey}"/>
+        <Setter Property="StrokeThickness" Value="1"/>
+
+        <Setter Property="StrokeShape">
+            <Setter.Value>
+                <RoundRectangle CornerRadius="8" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="StageSettingsSectionBorderStyle" TargetType="Border">
         <Setter Property="Margin" Value="0,0,0,26"/>
         <Setter Property="Padding" Value="0,0,0,0"/>

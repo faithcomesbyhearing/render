@@ -22,7 +22,7 @@ namespace Render.Pages.Translator.SectionReview
             Stage stage) : base(
             urlPathSegment,
             viewModelContextProvider,
-            GetStepName(viewModelContextProvider, RenderStepTypes.Draft, stage.Id),
+            GetStepName(step),
             section,
             stage,
             step,
@@ -46,7 +46,11 @@ namespace Render.Pages.Translator.SectionReview
 
         private async Task<IRoutableViewModel> NavigateHomeAsync()
         {
-            await Task.Run(async () => { await ViewModelContextProvider.GetGrandCentralStation().AdvanceSectionAsync(Section, Step); });
+            await Task.Run(async () =>
+            {
+                var sectionMovementService = ViewModelContextProvider.GetSectionMovementService();
+                await sectionMovementService.AdvanceSectionAsync(Section, Step, GetProjectId(), GetLoggedInUserId());
+            });
             return await NavigateToHomeOnMainStackAsync();
         }
 

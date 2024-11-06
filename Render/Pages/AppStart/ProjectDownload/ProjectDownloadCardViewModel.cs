@@ -17,7 +17,7 @@ namespace Render.Pages.AppStart.ProjectDownload
     public class ProjectDownloadCardViewModel : ViewModelBase
     {
         private readonly ILocalProjectsRepository _localProjectsRepository;
-        private readonly Action<LocalProject> _refreshProjectSelectCardViewList;
+        private readonly Func<LocalProject, Task> _refreshProjectSelectCardViewList;
         private readonly IOffloadService _offloadService;
         private readonly IProjectDownloadService _projectDownloadService;
         private readonly IAudioLossRetryDownloadService _audioLossRetryDownloadService;
@@ -34,7 +34,7 @@ namespace Render.Pages.AppStart.ProjectDownload
         public ReactiveCommand<Unit, Unit> CancelProjectCommand { get; }
 
         public ProjectDownloadCardViewModel(Project project, IViewModelContextProvider viewModelContextProvider,
-            DownloadState downloadState, Action<LocalProject> refreshProjectSelectCardViewList = null) :
+            DownloadState downloadState, Func<LocalProject, Task> refreshProjectSelectCardViewList = null) :
             base("ProjectDownloadCard", viewModelContextProvider)
         {
             Project = project;
@@ -134,7 +134,7 @@ namespace Render.Pages.AppStart.ProjectDownload
                         if (_localProject != null)
                         {
                             _localProject.State = DownloadState;
-                            _refreshProjectSelectCardViewList?.Invoke(_localProject);
+                            await _refreshProjectSelectCardViewList(_localProject);
                         }
                     }
                     else if (!completed && DownloadState == DownloadState.Canceling)

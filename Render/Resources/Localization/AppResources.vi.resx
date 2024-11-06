@@ -225,12 +225,6 @@
   <data name="BackTranslate2" xml:space="preserve">
     <value>Dịch Ngược Lại 2</value>
   </data>
-  <data name="BackTranslator" xml:space="preserve">
-    <value>Người Dịch Ngược Lại</value>
-  </data>
-  <data name="BackTranslator2" xml:space="preserve">
-    <value>Người Dịch Ngược Lại 2</value>
-  </data>
   <data name="Both" xml:space="preserve">
     <value>Cả hai</value>
   </data>
@@ -279,12 +273,6 @@
   <data name="CombineSegmentTitle" xml:space="preserve">
     <value>Kết hợp - Đoạn Văn Bản {0}</value>
   </data>
-  <data name="CommunityCheck" xml:space="preserve">
-    <value>Kiểm Tra Cộng Đồng</value>
-  </data>
-  <data name="CommunityRetellPassage" xml:space="preserve">
-    <value>Đoạn Văn Bản {0} - Kể lại</value>
-  </data>
   <data name="CommunityRevise" xml:space="preserve">
     <value>Sửa Đổi Cộng Đồng</value>
   </data>
@@ -293,12 +281,6 @@
   </data>
   <data name="CommunityTest" xml:space="preserve">
     <value>Thử Nghiệm Cộng Đồng</value>
-  </data>
-  <data name="CommunityTestRevise" xml:space="preserve">
-    <value>Sửa Đổi Thử Nghiệm Cộng Đồng</value>
-  </data>
-  <data name="CommunityTestSetup" xml:space="preserve">
-    <value>Thiết Lập Cộng Đồng</value>
   </data>
   <data name="CompleteWork" xml:space="preserve">
     <value>Hoàn Thành Bài Làm</value>
@@ -687,9 +669,6 @@
   <data name="Notes" xml:space="preserve">
     <value>Ghi chú</value>
   </data>
-  <data name="NoteTranslator" xml:space="preserve">
-    <value>Ghi Chú cho Người Dịch</value>
-  </data>
   <data name="NotInWorkflow" xml:space="preserve">
     <value>Không còn là một phần của quy trình làm việc</value>
   </data>
@@ -749,9 +728,6 @@
   </data>
   <data name="PassageNumber" xml:space="preserve">
     <value>Đoạn Văn Bản {0}</value>
-  </data>
-  <data name="PassagePeerReview" xml:space="preserve">
-    <value>Đoạn Văn Bản {0} Bình Duyệt</value>
   </data>
   <data name="PassageRetell" xml:space="preserve">
     <value>Kể Lại Đoạn Văn Bản</value>
@@ -1477,7 +1453,7 @@
     <value>Mật khẩu được yêu cầu để thiết lập lại một phần</value>
   </data>
   <data name="PasswordRequiredToRestore" xml:space="preserve">
-    <value>Cần có mật khẩu để khôi phục ảnh chụp nhanh</value>
+    <value>Mật khẩu là bắt buộc để khôi phục một phần</value>
   </data>
   <data name="TeamWasChosen" xml:space="preserve">
     <value>Đội {0} đã được chọn</value>
@@ -1658,5 +1634,49 @@
   </data>
   <data name="CannotLoadAudio" xml:space="preserve">
     <value>Không thể tải âm thanh</value>
+  </data>
+  <data name="UsbSync" xml:space="preserve">
+    <value>Đồng bộ hóa USB</value>
+  </data>
+  <data name="ExportingProject" xml:space="preserve">
+    <value>Xuất khẩu</value>
+  </data>
+  <data name="StorageAlreadyContains" xml:space="preserve">
+    <value>Bộ lưu trữ này đã chứa dự án này</value>
+  </data>
+  <data name="PleaseSelectAnotherStorage" xml:space="preserve">
+    <value>Vui lòng chọn thư mục khác hoặc xóa dự án này khỏi bộ lưu trữ</value>
+  </data>
+  <data name="SyncPathIsNotAvailable" xml:space="preserve">
+    <value>Đường dẫn đồng bộ hóa này không có sẵn</value>
+  </data>
+  <data name="ChooseAnotherStorage" xml:space="preserve">
+    <value>Chọn nơi lưu trữ khác</value>
+  </data>
+  <data name="NoProjectsToImport" xml:space="preserve">
+    <value>Không có dự án nào để nhập khẩu</value>
+  </data>
+  <data name="NoDataForSync" xml:space="preserve">
+    <value>
+Không có dữ liệu để đồng bộ hóa</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>Xuất khẩu</value>
+  </data>
+  <data name="Exported" xml:space="preserve">
+    <value>
+Đã xuất</value>
+  </data>
+  <data name="SubstageName" xml:space="preserve">
+    <value>Tên sân khấu phụ</value>
+  </data>
+  <data name="RestoreSectionWarning" xml:space="preserve">
+    <value>Phần khôi phục sẽ xóa tất cả dữ liệu theo giai đoạn đã chọn. Hành động này không thể hoàn tác.</value>
+  </data>
+  <data name="ImportFromRender" xml:space="preserve">
+    <value>Nhập từ Kết xuất 3.7</value>
+  </data>
+  <data name="NoDataFromRender" xml:space="preserve">
+    <value>Không có dữ liệu từ Kết xuất 3.7</value>
   </data>
 </root>

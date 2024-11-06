@@ -1,155 +1,141 @@
-﻿using System.Net;
-using System.Net.NetworkInformation;
-using System.Net.Sockets;
-using System.Text;
-using System.Timers;
-using Render.Interfaces;
+using System.Net;
 
-namespace Render.Services.SyncService
+namespace Render.Services.SyncService;
+
+public class HandshakeService : IHandshakeService
 {
-    public class HandshakeService : IHandshakeService
+    public event Action ConnectionTimeOut;
+
+    private const int BroadcastPortNumber = 15000;
+    private const int TcpConnectionPortNumber = 16000;
+    
+    private readonly INetworkConnectionService _networkConnectionService;
+    private readonly IBroadcastService _broadcastService;
+    
+    private SemaphoreSlim HandshakeSemaphoreSlim { get; } = new(1);
+    private bool _isInHandshakeProcess;
+
+    public HandshakeService(INetworkConnectionService networkConnectionService, IBroadcastService broadcastService)
     {
-        private UdpClient _discovery;
-        private IPEndPoint _listenEndPoint;
-        private readonly Guid _thisAppId = Guid.NewGuid();
-        private readonly int PortNumber = 15000;
-        private System.Timers.Timer _timer;
-        private IRenderLogger _logger;
-
-        public HandshakeService(IRenderLogger renderLogger)
+        _networkConnectionService = networkConnectionService;
+        _broadcastService = broadcastService;
+    }
+    
+    public async Task<BroadcastMessage> TryToFindBroadcastForSync(Guid projectId, bool includeTimeout = false)
+    {
+        if (includeTimeout is false)
         {
-            _logger = renderLogger;
-        }
-
-        public List<Device> AvailableDevices { get; } = new ();
-
-        public event Action<Device> DeviceAvailable;
-        public event Action Timeout;
-
-        public void BeginListener(bool includeTimeout = false)
-        {
-            if (_discovery == null)
-            {
-                _discovery = new UdpClient(PortNumber);
-            }
-
-            if (_listenEndPoint == null)
-            {
-                _listenEndPoint = new IPEndPoint(IPAddress.Any, PortNumber);
-            }
-
-            if (includeTimeout)
-            {
-                _timer = new ();
-                _timer.Interval = 30000;
-                _timer.AutoReset = false;
-                _timer.Elapsed += ListenTimeout;
-                _timer.Start();
-            }
-            
-            _discovery.BeginReceive(ReceiveResult, _listenEndPoint);
-        }
-
-        private void ListenTimeout(object sender, ElapsedEventArgs e)
-        {
-            if(_timer is null)
-            {
-                return;
-            }
-
-            if (!AvailableDevices.Any())
-            {
-                CloseUDPListener();
-                Timeout?.Invoke();
-            }
-        }
-
-        public void MakeDiscoverable(string username)
-        {
-            var endpoint = NetworkInterface
-                .GetAllNetworkInterfaces()
-                .FirstOrDefault(x => x.OperationalStatus == OperationalStatus.Up);
-
-            var ipProps = endpoint?.GetIPProperties();
-            var ip = ipProps?.UnicastAddresses
-                .FirstOrDefault(x => x.Address.AddressFamily == AddressFamily.InterNetwork);
-
-            using (var socket = new Socket(
-                addressFamily: AddressFamily.InterNetwork,
-                socketType: SocketType.Dgram,
-                protocolType: ProtocolType.Udp))
-            {
-                var group = new IPEndPoint(IPAddress.Broadcast, PortNumber);
-                socket.EnableBroadcast = true;
-                var hi = Encoding.ASCII.GetBytes($"{_thisAppId}:{ip?.Address}:{username}");
-
-                try
-                {
-                    socket.SendTo(hi, group);
-                }
-                // on android, the SocketException exception is thrown if "Network is unreachable" (10051)
-                catch (SocketException e) when (e.ErrorCode == 10051)
-                {
-                    _logger.LogInfo("HandshakeService failed. Socket Error 10051: 'Network is unreachable'");
-                }
-                finally
-                {
-                    socket.Close();
-                }
-            }
-        }
-        
-        public void CloseUDPListener()
-        {
-			_discovery?.Close();
-            _discovery = null;
-
-            _timer?.Stop();
-            _timer?.Dispose();
-            _timer = null;
-        }
-
-        private void ReceiveResult(IAsyncResult result)
-        {
+            // prevent multiple concurrent handshakes, e.g upon quick presses of sync button
+            await HandshakeSemaphoreSlim.WaitAsync();
             try
             {
-                //If we closed the connection due to a timeout, don't execute the rest of the method
-                if (_discovery?.Client == null)
+                if (_isInHandshakeProcess is false)
                 {
-                    _discovery?.Close();
-                    _discovery = null;
-
-                    return;
+                    _isInHandshakeProcess = true; // the first thread sets this and proceeds 
                 }
-
-                //new message: "appId:Ip:Name:channel,channel,channel"
-                var data = _discovery.EndReceive(result, ref _listenEndPoint);
-                var msg = Encoding.ASCII.GetString(data);
-                var msgArr = msg.Split(':');
-                var remoteId = Guid.Parse(msgArr[0]);
-                if (remoteId == _thisAppId)
-                {
-                    _discovery.BeginReceive(ReceiveResult, _listenEndPoint);
-                    return;
-                }
-
-                var remoteIp = IPAddress.Parse(msgArr[1]);
-                var name = msgArr[2];
-                var device = new Device
-                {
-                    Address = remoteIp,
-                    Name = name
-                };
-
-                AvailableDevices.Add(device);
-                DeviceAvailable?.Invoke(device);
-                _discovery.BeginReceive(ReceiveResult, _listenEndPoint);
             }
-            catch (Exception ex)
+            finally
             {
-                Console.WriteLine(ex);
-                _logger.LogError(ex);
+                HandshakeSemaphoreSlim.Release();
+            }   
+        }
+        
+        if (includeTimeout)
+        {
+            _broadcastService.Timeout += ExpirationOfTheBroadcastWaitingPeriod;
+        }
+        
+        var broadcastMessage = await _broadcastService.TryToFindABroadcastForTheProject(BroadcastPortNumber, projectId, includeTimeout);
+        return broadcastMessage;
+    }
+    
+    public void StartServerAndBroadcast(Guid projectId, string username)
+    {
+        _ = _networkConnectionService.StartListener(TcpConnectionPortNumber, _broadcastService.GetIpAddress());
+        _broadcastService.StartBroadcast(projectId, username, BroadcastPortNumber);
+    }
+    
+    public async Task<Device> StartToConnectToServer(BroadcastMessage broadcastMessage, ConnectionTask connectionTask)
+    {
+        if (broadcastMessage is not null)
+        {
+            var hubToConnect = await _networkConnectionService.StartToConnectToTheServer(
+                broadcastMessage,
+                TcpConnectionPortNumber,
+                connectionTask);
+            
+            return hubToConnect;
+        }
+
+        return null;
+    }
+    
+    public void StopServerAndBroadcast()
+    {
+        _networkConnectionService.DisconnectClientsAndCloseListener();
+        _broadcastService.StopBroadcast();
+    }
+    
+    public void DisconnectFromServer()
+    {
+        _networkConnectionService.CloseClientConnection();
+    }
+    
+    public void SubscribeOnServerDisconnected(Action onServerDisconnect)
+    {
+        _networkConnectionService.ServerWasDisconnected += onServerDisconnect;
+    }
+    
+    public void UnsubscribeOnServerDisconnected(Action onServerDisconnect)
+    {
+        _networkConnectionService.ServerWasDisconnected -= onServerDisconnect;
+    }
+
+    public Device GetConnectedServer()
+    {
+        return _networkConnectionService.AvailableDevice;
+    }
+
+    public int GetConnectedClientsCount()
+    {
+        return _networkConnectionService.ConnectedClientsCount;
+    }
+    
+    public bool CurrentDeviceShouldBecomeClient(IPAddress remoteHubIpAddress)
+    {
+        var currentIpAddress = _broadcastService.GetIpAddress();
+        var bytes1 = currentIpAddress.GetAddressBytes();
+        var bytes2 = remoteHubIpAddress.GetAddressBytes();
+
+        for (int i = 0; i < bytes1.Length; i++)
+        {
+            if (bytes1[i] > bytes2[i])
+            {
+                return true;
+            }
+
+            if (bytes1[i] < bytes2[i])
+            {
+                return false;
             }
         }
+
+        return false; // They are equal
+    }
+
+    public bool IsInHandshakeProcess()
+    {
+        return _isInHandshakeProcess;
+    }
+
+    public void ResetHandshakeProcess()
+    {
+        _isInHandshakeProcess = false;
+    }
+    
+    private void ExpirationOfTheBroadcastWaitingPeriod()
+    {
+        ConnectionTimeOut?.Invoke();
+        _broadcastService.Timeout -= ExpirationOfTheBroadcastWaitingPeriod;
     }
 }

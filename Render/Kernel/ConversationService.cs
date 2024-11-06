@@ -9,6 +9,7 @@ using Render.Models.Snapshot;
 using Render.Models.Workflow;
 using Render.Models.Workflow.Stage;
 using Render.Pages;
+using Render.Repositories.Extensions;
 using Render.Sequencer.Contracts.Interfaces;
 
 namespace Render.Kernel
@@ -45,7 +46,7 @@ namespace Render.Kernel
             _sequencerViewModel = sequencerViewModel;
             ParentAudioType = parentAudioType;
             _appendNotesForChildAudios = appendNotesForChildAudios;
-
+           
             _sequencerViewModel.AddFlagCommand =
                 ReactiveCommand.CreateFromTask<IFlag, bool>(ShowConversationAsync);
             _sequencerViewModel.TapFlagCommand = ReactiveCommand.CreateFromTask(
@@ -56,7 +57,7 @@ namespace Render.Kernel
                 });
         }
 
-        private IEnumerable<Conversation> GetAdditionalNotes(Draft audio)
+        public static IEnumerable<Conversation> GetAdditionalNotes(Draft audio)
         {
             var passageRetells = audio.RetellBackTranslationAudio?.Conversations ?? new List<Conversation>();
             passageRetells.ForEach(c =>
@@ -165,7 +166,7 @@ namespace Render.Kernel
 
                 sequencerNoteDetailViewModel.AddMessageCommand = ReactiveCommand.Create((Message _) =>
                 {
-                    _page.ViewModelContextProvider.GetGrandCentralStation()
+                    _page.ViewModelContextProvider.GetWorkflowService()
                         .SetHasNewMessageForWorkflowStep(_page.Section, _step, true);
                 });
 
@@ -209,7 +210,7 @@ namespace Render.Kernel
 
                 sequencerNoteDetailViewModel.AddMessageCommand = ReactiveCommand.Create((Message _) =>
                 {
-                    _page.ViewModelContextProvider.GetGrandCentralStation()
+                    _page.ViewModelContextProvider.GetWorkflowService()
                         .SetHasNewMessageForWorkflowStep(_page.Section, _step, true);
                 });
 
@@ -285,24 +286,20 @@ namespace Render.Kernel
             {
                 audio.UpdateOrDeleteConversation(conversation);
 
-                switch (conversation.ParentAudioType)
+                if (audio is SegmentBackTranslation segment)
                 {
-                    case ParentAudioType.Draft:
-                        await _page.ViewModelContextProvider.GetDraftRepository().SaveAsync(audio);
-                        break;
-                    case ParentAudioType.PassageBackTranslation:
-                    case ParentAudioType.PassageBackTranslation2:
-                    case ParentAudioType.SegmentBackTranslation2:
-                        await _page.ViewModelContextProvider.GetRetellBackTranslationRepository()
-                            .SaveAsync(audio as RetellBackTranslation);
-                        break;
-                    case ParentAudioType.SegmentBackTranslation:
-
-                        await _page.ViewModelContextProvider.GetSegmentBackTranslationRepository()
-                            .SaveAsync(audio as SegmentBackTranslation);
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
+                    var segmentRepository = _page.ViewModelContextProvider.GetSegmentBackTranslationRepository();
+                    await segmentRepository.SaveAsync(segment);
+                }
+                else if (audio is RetellBackTranslation retell)
+                {
+                    var retellRepository = _page.ViewModelContextProvider.GetRetellBackTranslationRepository();
+                    await retellRepository.SaveAsync(retell);
+                }
+                else
+                {
+                    var draftRepository = _page.ViewModelContextProvider.GetDraftRepository();
+                    await draftRepository.SaveAsync(audio);
                 }
 
                 TapFlagPostEvent?.Invoke();
@@ -311,7 +308,7 @@ namespace Render.Kernel
 
         private async Task DeleteMessageAsync(Message message)
         {
-            var conversations = SequencerAudios.SelectMany(a => a.Conversations);
+            var conversations = SequencerAudios.SelectMany(GetConversations).ToList();
             foreach (var conversation in conversations)
             {
                 var removed = conversation.Messages.Remove(message);
@@ -321,6 +318,12 @@ namespace Render.Kernel
                     break;
                 }
             }
+
+            if (conversations.IsNullOrEmpty())
+            {
+				await _page.ViewModelContextProvider.GetWorkflowService()
+						.SetHasNewMessageForWorkflowStep(_page.Section, _step, false);
+			}
         }
 
         public void Dispose()

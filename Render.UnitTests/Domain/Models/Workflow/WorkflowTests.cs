@@ -373,7 +373,7 @@ namespace Render.UnitTests.Domain.Models.Workflow
             var backTranslator = new User("user", "user");
             var noteTranslator = new User("noteTranslator", "noteTranslator");
             var consultant = new User("consultant", "consultant");
-            consultant.RoleIds.Add(RenderRolesAndClaims.GetRoleByName(RoleName.Consultant).Id);
+            consultant.RoleIds.Add(RoleName.Consultant.GetRoleId());
             
             //Act
             var consultantStage = workflow.GetCustomStages().First(x => x.StageType == StageTypes.ConsultantCheck);

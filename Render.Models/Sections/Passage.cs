@@ -6,9 +6,9 @@ namespace Render.Models.Sections
 {
     public class Passage : DomainEntity
     {
-        [Obsolete("Use CurrentDraftAudio.Id instead")]
+        
         [JsonProperty("CurrentPassageAudioId")]
-        public Guid CurrentDraftAudioId { get; private set; }
+        public Guid CurrentDraftAudioId { [Obsolete("Use CurrentDraftAudio.Id instead")] get; private set; }
         
         [JsonProperty("PassageNumber")] public PassageNumber PassageNumber { get; private set; }
 
@@ -44,6 +44,7 @@ namespace Render.Models.Sections
             CurrentDraftAudioId = Guid.Empty;
             CurrentDraftAudio = null;
         }
+
         public void SetPassageNumber(PassageNumber passageNumber)
         {
             PassageNumber = passageNumber;

@@ -9,7 +9,7 @@ namespace Render.Models.Sections
     {
         [JsonProperty("Name")]
         public string Name { get; private set; }
-        
+
         [JsonProperty("Transcription")]
         public string Transcription { get; private set; }
 
@@ -21,24 +21,32 @@ namespace Render.Models.Sections
 
         [JsonProperty("Revision")]
         public int Revision { get; private set; }
-        
+
         [JsonProperty("Deleted")]
         public bool Deleted { get; private set; }
-        
+
         [JsonIgnore]
         [Reactive]
         public RetellBackTranslation RetellBackTranslationAudio { get; set; }
-        
+
         [JsonIgnore]
         public List<SegmentBackTranslation> SegmentBackTranslationAudios { get; set; } = new List<SegmentBackTranslation>();
 
         [JsonIgnore] public bool HasCommunityTest => CommunityTest != null;
-        
+
         [JsonIgnore]
         private CommunityTest CommunityTest { get; set; }
-        
-        public Draft(Guid scopeId, Guid projectId, Guid parentId) : 
-            base(scopeId, projectId, parentId, 2)
+
+        public Draft(
+            Guid scopeId,
+            Guid projectId,
+            Guid parentId,
+            int documentVersion = 2)
+            : base(
+                scopeId,
+                projectId,
+                parentId,
+                documentVersion)
         {
         }
 

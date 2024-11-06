@@ -38,15 +38,13 @@ namespace Render.Pages.PeerReview.PassageListen.Tablet
             Stage stage)
             : base(urlPathSegment: "TabletPeerReviewPassageList enPage",
                 viewModelContextProvider: viewModelContextProvider,
-                pageName: AppResources.PeerCheck,
+                pageName: GetStepName(step),
                 section: section,
                 stage: stage,
                 step: step,
                 passageNumber: passage.PassageNumber,
                 secondPageName: AppResources.PassageListen)
         {
-            DisposeOnNavigationCleared = true;
-            TitleBarViewModel.DisposeOnNavigationCleared = true;
             Passage = passage;
             _requireNoteListen = step.StepSettings.GetSetting(SettingType.RequireNoteListen);
         }
@@ -151,7 +149,10 @@ namespace Render.Pages.PeerReview.PassageListen.Tablet
                 startIcon: Icon.PassageNew.ToString(),
                 endIcon: null,
                 option: AudioOption.Optional,
-                flagType: flagType) });
+                flagType: flagType,
+                userId: ViewModelContextProvider.GetLoggedInUser().Id,
+                requireNoteListen: _requireNoteListen)
+            });
             
             SequencerPlayerViewModel.SetupActivityService(ViewModelContextProvider, Disposables);
             
@@ -175,7 +176,11 @@ namespace Render.Pages.PeerReview.PassageListen.Tablet
             var nextPassageIndex = Section.Passages.IndexOf(Passage) + 1;
             if (nextPassageIndex >= Section.Passages.Count)
             {
-                await Task.Run(async () => { await ViewModelContextProvider.GetGrandCentralStation().AdvanceSectionAfterReviewAsync(Section, Step); });
+                await Task.Run(async () =>
+                {
+                    var sectionMovementService = ViewModelContextProvider.GetSectionMovementService();
+                    await sectionMovementService.AdvanceSectionAfterReviewAsync(Section, Step, GetProjectId(), GetLoggedInUserId());
+                });
                 return await NavigateToHomeOnMainStackAsync();
             }
 

@@ -5,5 +5,6 @@
         string AppData { get; }
         string Temporary { get; }
         string TempAudio { get; }
+        string DbBackup { get; }
     }
 }

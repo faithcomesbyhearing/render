@@ -12,15 +12,23 @@ namespace Render.Pages.Settings.SectionStatus.Processes
     {
         [Reactive]
         public string Glyph { get; private set; }
-        public ReactiveCommand<Unit, Unit> ToggleStepsCommand;
-        [Reactive] public bool ShowSections { get; set; }
 
-        [Reactive] public bool HasSections { get; set; }
+        [Reactive] 
+        public bool ShowSections { get; set; }
+
+        [Reactive] 
+        public bool HasSections { get; set; }
+
         public string Title { get; }
+
         public ObservableCollection<SectionCardViewModel> Sections { get; }
-        
-        public SectionCollectionAsStageCardViewModel(List<Section> unassignedSections, 
-            Func<Guid, Task> sectionSelectCallback,
+
+        public ReactiveCommand<Unit, Unit> ToggleStepsCommand;
+
+        public SectionCollectionAsStageCardViewModel(
+            List<Section> unassignedSections, 
+            Func<SectionCardViewModel, Task> sectionSelectCallback, 
+            Action<SectionCardViewModel> selectSectionToExportCallback,
             Icon icon,
             string title,
             IViewModelContextProvider viewModelContextProvider) 
@@ -29,8 +37,15 @@ namespace Render.Pages.Settings.SectionStatus.Processes
             Glyph = IconExtensions.BuildFontImageSource(icon)?.Glyph;
             Title = title;
             ToggleStepsCommand = ReactiveCommand.Create(ToggleSections);
-            Sections = new ObservableCollection<SectionCardViewModel>(unassignedSections
-                .Select(s => new SectionCardViewModel(s, viewModelContextProvider, sectionSelectCallback)));
+
+            var unassignedSectionCards = unassignedSections.Select(section => 
+                new SectionCardViewModel(
+                    section, 
+                    viewModelContextProvider, 
+                    sectionSelectCallback, 
+                    selectSectionToExportCallback));
+            Sections = new ObservableCollection<SectionCardViewModel>(unassignedSectionCards);
+
             var lastCard = Sections.LastOrDefault();
             if (lastCard != null)
             {

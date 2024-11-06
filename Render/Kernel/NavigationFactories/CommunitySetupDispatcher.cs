@@ -7,7 +7,7 @@ namespace Render.Kernel.NavigationFactories
 {
     public class CommunitySetupDispatcher : IStepViewModelDispatcher
     {
-        public async Task<ViewModelBase> GetViewModelToNavigateTo(IViewModelContextProvider viewModelContextProvider,
+        public Task<ViewModelBase> GetViewModelToNavigateTo(IViewModelContextProvider viewModelContextProvider,
             Step step, Section section)
         {
             var sessionService = viewModelContextProvider.GetSessionStateService();
@@ -15,15 +15,15 @@ namespace Render.Kernel.NavigationFactories
 
             var passage = SelectPassage(section, sessionService.ActiveSession);
           
-            var grandCentral = viewModelContextProvider.GetGrandCentralStation();
-            var stage = grandCentral.ProjectWorkflow.GetStage(step.Id);
+            var workflowService = viewModelContextProvider.GetWorkflowService();
+            var stage = workflowService.ProjectWorkflow.GetStage(step.Id);
 
-            return CommunityTestSetupPageViewModel.Create(
+            return Task.FromResult<ViewModelBase>(CommunityTestSetupPageViewModel.Create(
                 viewModelContextProvider,
                 section,
                 passage,
                 step,
-                stage);
+                stage));
         }
 
         private Passage SelectPassage(Section section, UserProjectSession session)

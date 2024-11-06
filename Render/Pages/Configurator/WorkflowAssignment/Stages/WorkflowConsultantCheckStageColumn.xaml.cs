@@ -1,5 +1,7 @@
-﻿using ReactiveUI;
+﻿using System.Reactive.Linq;
+using ReactiveUI;
 using Render.Kernel.WrappersAndExtensions;
+using Render.Models.Workflow;
 using Render.Utilities;
 
 namespace Render.Pages.Configurator.WorkflowAssignment.Stages;
@@ -13,6 +15,13 @@ namespace Render.Pages.Configurator.WorkflowAssignment.Stages;
             {
 				d(this.OneWayBind(ViewModel, vm => vm.Name, v => v.StageName.Text,
 					TailTruncationHelper.AddTailTruncation));
+                d(this.OneWayBind(ViewModel, vm => vm.ConsultantCheckStepName, v => v.ConsultantCheckStepName.Text));
+                d(this.OneWayBind(ViewModel, vm => vm.InterpretToTranslatorStepName, v => v.InterpretToTranslatorStepName.Text));
+                d(this.OneWayBind(ViewModel, vm => vm.InterpretToConsultantStepName, v => v.InterpretToConsultantStepName.Text));
+                d(this.OneWayBind(ViewModel, vm => vm.BackTranslateStepName, v => v.BackTranslateStepName.Text));
+                d(this.OneWayBind(ViewModel, vm => vm.BackTranslate2StepName, v => v.BackTranslate2StepName.Text));
+                d(this.OneWayBind(ViewModel, vm => vm.TranscribeStepName, v => v.TranscribeStepName.Text));
+                d(this.OneWayBind(ViewModel, vm => vm.Transcribe2StepName, v => v.Transcribe2StepName.Text));
                 d(this.OneWayBind(ViewModel, vm => vm.StageGlyph, v => v.IconLabel.Text));
                 d(this.WhenAnyValue(x => x.ViewModel.BackTranslateAssignmentCard)
                     .Subscribe(x =>
@@ -68,17 +77,29 @@ namespace Render.Pages.Configurator.WorkflowAssignment.Stages;
                             BindableLayout.SetItemsSource(Transcribe2Card, new List<TeamAssignmentCardViewModel>{x});
                         }
                     }));
+
+                d(this.WhenAnyValue(
+                        x => x.ViewModel.ShowNoteTranslateCard,
+                        x => x.ViewModel.HasAnyCustomInterpretStepName)
+                    .ObserveOn(RxApp.MainThreadScheduler)
+                    .Subscribe(((bool ShowNoteTranslateCard, bool HasAnyCustomInterpretStepName) props) =>
+                    {
+                        NoteTranslateLabel.IsVisible = props is { ShowNoteTranslateCard: true, HasAnyCustomInterpretStepName: false };
+                        NoteTranslateLabelCustomStepNames.IsVisible = props is { ShowNoteTranslateCard: true, HasAnyCustomInterpretStepName: true };
+                        NoteTranslateCard.IsVisible = props.ShowNoteTranslateCard;
+                    }));
+
                 d(this.BindCommandCustom(SettingsButtonGestureRecognizer, v => v.ViewModel.OpenStageSettingsCommand));
                 d(this.OneWayBind(ViewModel, vm => vm.ShowBackTranslateCard, v => v.BT1Label.IsVisible));
                 d(this.OneWayBind(ViewModel, vm => vm.ShowBackTranslateCard, v => v.BackTranslateCard.IsVisible));
                 d(this.OneWayBind(ViewModel, vm => vm.ShowBackTranslate2Card, v => v.BT2Label.IsVisible));
+                d(this.OneWayBind(ViewModel, vm => vm.ShowBackTranslate2Card, v => v.BT1LabelStep1.IsVisible));
                 d(this.OneWayBind(ViewModel, vm => vm.ShowBackTranslate2Card, v => v.BackTranslate2Card.IsVisible));
-                d(this.OneWayBind(ViewModel, vm => vm.ShowNoteTranslateCard, v => v.NTLabel.IsVisible));
-                d(this.OneWayBind(ViewModel, vm => vm.ShowNoteTranslateCard, v => v.NoteTranslateCard.IsVisible));
                 d(this.OneWayBind(ViewModel, vm => vm.ShowTranscribeCard, v => v.TranscribeCard.IsVisible));
                 d(this.OneWayBind(ViewModel, vm => vm.ShowTranscribeCard, v => v.T1Label.IsVisible));
                 d(this.OneWayBind(ViewModel, vm => vm.ShowTranscribe2Card, v => v.Transcribe2Card.IsVisible));
                 d(this.OneWayBind(ViewModel, vm => vm.ShowTranscribe2Card, v => v.T2Label.IsVisible));
+                d(this.OneWayBind(ViewModel, vm => vm.ShowTranscribe2Card, v => v.T1LabelStep1.IsVisible));
             });
         }
     }

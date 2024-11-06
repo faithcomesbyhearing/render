@@ -94,7 +94,31 @@ namespace Render.Components.DivisionPlayer
                 .ObserveOn(RxApp.MainThreadScheduler)
                 .Subscribe(_ => UpdateDivisionLabels()));
 
-            PlayAudioCommand = ReactiveCommand.Create(AudioPlayerService.Play, Observable.Return(IsAudioAvailable));
+            var canPlayAudio = this.WhenAnyValue(x => x.IsLocked,
+                x => x.IsAudioAvailable)
+            .Select(((bool isLocked, bool isAudioAvailable) x) =>
+                !x.isLocked && x.isAudioAvailable);
+
+            PlayAudioCommand = ReactiveCommand.Create(AudioPlayerService.Play, canPlayAudio);
+        }
+
+        public override void Pause()
+        {
+            if (AudioPlayerService != null && AudioPlayerService.AudioPlayerState == AudioPlayerState.Playing)
+            {
+                AudioPlayerService.Pause();
+            }
+        }
+
+        protected override void AudioPlayerServiceOnOnPlayerEnd()
+        {
+            AudioPlayerService.Seek(0);
+
+            LogInfo("Division Player Ended", new Dictionary<string, string>
+            {
+                { "Division Player Title", AudioTitle },
+                { "Division Player Position", PlayerPositionInList.ToString() }
+            });
         }
 
         private void UpdateScroller(double currentPosition)
@@ -229,16 +253,7 @@ namespace Render.Components.DivisionPlayer
             }
         }
 
-        protected override void Setup(string audioTitle, IViewModelContextProvider viewModelContextProvider,
-            IObservable<bool> canPlayAudio = null)
-        {
-            canPlayAudio = this.WhenAnyValue(x => x.IsLocked)
-                .Select(isLocked => !isLocked);
-            
-            base.Setup(audioTitle, viewModelContextProvider, canPlayAudio);
-        }
-
-		private void UpdateDivisions()
+        private void UpdateDivisions()
 		{
 			Divisions.Clear();
 

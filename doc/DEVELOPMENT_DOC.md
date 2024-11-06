@@ -148,6 +148,8 @@ It worth mentioning, that if database is missed or copied incorrectly
 the connection error popup occurred during the login process.\
 ![noconnection](assets/noconnection.png)
 
+Disclaimer: the current Render App Version is NOT intended for production purposes. The Application works with a predefined Demo project only
+
 ## Developer guide
 
 ### Solution structure

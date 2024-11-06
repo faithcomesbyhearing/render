@@ -10,171 +10,211 @@
                        xmlns:uiResources="clr-namespace:Render.Resources"
                        xmlns:validationEntry="clr-namespace:Render.Components.ValidationEntry"
                        xmlns:versionLabel="clr-namespace:Render.Components.VersionLabel"
-                       xmlns:addFromComputer="clr-namespace:Render.Components.AddViaFolder"
                        xmlns:backButton="clr-namespace:Render.Components.BackButton"
+                       xmlns:addProjectView="clr-namespace:Render.Components.AddProject"
                        x:TypeArguments="local:AddVesselUserLoginViewModel"
                        BackgroundColor="{DynamicResource LoginPageBackground}">
-    <Grid x:Name="TopLevelElement" VerticalOptions="Fill">
-        <Grid.RowDefinitions>
-            <RowDefinition x:Name="Header" Height="*" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        
-        <backButton:BackButton Grid.RowSpan="3" x:Name="LoginBackButton" />
 
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition x:Name="LeftSpacing" Width="*" />
-                <ColumnDefinition x:Name="Content" Width="Auto" />
-                <ColumnDefinition x:Name="RightSpacing" Width="*" />
-            </Grid.ColumnDefinitions>
+    <ScrollView x:Name="TopLevelElement">
+        <Grid VerticalOptions="Fill">
+            <Grid.RowDefinitions>
+                <RowDefinition x:Name="Header" Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-            <Grid Grid.Column="1"
-                  x:Name="MainLoginView"
-                  MinimumWidthRequest="864"
-                  RowDefinitions="Auto,Auto">
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition x:Name="LeftSpacing" Width="*" />
+                    <ColumnDefinition x:Name="ContentColumn" Width="Auto" />
+                    <ColumnDefinition x:Name="RightSpacing" Width="*" />
+                </Grid.ColumnDefinitions>
 
-                <Image x:Name="RenderLogo"
-                       Grid.Row="0"
-                       Style="{StaticResource RenderLogoStyle}"
-                       Margin="0"
-                       AutomationId="RenderFullLogo" />
+                <Grid Grid.Column="1"
+                      x:Name="MainLoginView"
+                      MinimumWidthRequest="864"
+                      RowDefinitions="Auto,Auto">
 
-                <Grid x:Name="LoginStack"
-                      Grid.Row="1"
-                      Padding="25,0"
-                      HorizontalOptions="Center"
-                      VerticalOptions="Center">
-                    <Grid.RowDefinitions>
-                        <RowDefinition x:Name="MessageRow" Height="Auto" />
-                        <RowDefinition x:Name="LoginEntryRow" Height="Auto" />
-                        <RowDefinition x:Name="PasswordEntryRow" Height="Auto" />
-                        <RowDefinition x:Name="LoginButtonRow" Height="Auto" />
-                        <RowDefinition x:Name="AddViaButtonsStackRow" Height="Auto" />
-                    </Grid.RowDefinitions>
+                    <Image x:Name="RenderLogo"
+                           Grid.Row="0"
+                           Style="{StaticResource RenderLogoStyle}"
+                           Margin="0"
+                           AutomationId="RenderFullLogo" />
 
-                    <Grid Grid.Row="0" RowDefinitions="Auto,Auto" RowSpacing="19" Padding="0,52">
-                        <Label x:Name="WelcomeLabel" Grid.Row="0"
-                               AutomationId="SelectAProfileLabel"
-                               IsVisible="False"
-                               Text="{x:Static resources:AppResources.WelcomeToRender}"
-                               Style="{StaticResource WelcomeLabelDefault}" />
-                        <Label x:Name="NewUserLabel" Grid.Row="1"
-                               AutomationId="AddANewUserLabel"
-                               IsVisible="False"
-                               Style="{StaticResource AddNewUserLabelStyle}"
-                               Text="{x:Static resources:AppResources.AddUserLabel}" />
-                        <Label x:Name="LoginLabel" Grid.Row="1"
-                               AutomationId="LoginLabel"
-                               IsVisible="False"
-                               Style="{StaticResource LoginLabel}"
-                               Text="{x:Static resources:AppResources.PleaseLogIn}" />
-                    </Grid>
+                    <Grid x:Name="LoginStack"
+                          Grid.Row="1"
+                          Padding="25,0"
+                          HorizontalOptions="Center"
+                          VerticalOptions="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition x:Name="MessageRow" Height="Auto" />
+                            <RowDefinition x:Name="LoginEntryRow" Height="Auto" />
+                            <RowDefinition x:Name="PasswordEntryRow" Height="Auto" />
+                            <RowDefinition x:Name="LoginButtonRow" Height="Auto" />
+                            <RowDefinition x:Name="AddViaButtonsStackRow" Height="Auto" />
+                        </Grid.RowDefinitions>
 
-                    <validationEntry:ValidationEntry Grid.Row="1" x:Name="Username"
-                                                     AutomationId="UsernameValidationEntry" />
-                    <validationEntry:ValidationEntry Grid.Row="2" x:Name="Password"
-                                                     AutomationId="PasswordValidationEntry" />
-
-                    <Border Grid.Row="3"
-                            x:Name="LoginButtonFrame"
-                            Style="{StaticResource ButtonBorder}"
-                            Margin="0,5,0,39">
-
-                        <Grid Padding="0,10" Style="{StaticResource ButtonBackground}">
-                            <Grid ColumnDefinitions="Auto,*"
-                                  ColumnSpacing="13"
-                                  HorizontalOptions="Center"
-                                  AutomationId="LoginPanel">
-                                <Label Grid.Column="0" Style="{StaticResource ButtonIcon}"
-                                       Text="{uiResources:IconExtensions Open}"
-                                       AutomationId="LoginImage" />
-                                <Label x:Name="LoginText" Grid.Column="1"
-                                       Style="{StaticResource ButtonText}"
-                                       AutomationId="LoginLabel"
-                                       Text="{x:Static resources:AppResources.LogIn}" />
-                            </Grid>
+                        <Grid Grid.Row="0" Padding="0,45,0,20">
+                            <Label x:Name="NewUserLabel"
+                                   AutomationId="AddANewUserLabel"
+                                   IsVisible="False"
+                                   Style="{StaticResource AddNewUserLabelStyle}"
+                                   Text="{x:Static resources:AppResources.AddUserLabel}" />
+                            <Label x:Name="LoginLabel"
+                                   AutomationId="LoginLabel"
+                                   IsVisible="False"
+                                   Style="{StaticResource LoginLabel}"
+                                   Text="{x:Static resources:AppResources.PleaseLogIn}" />
                         </Grid>
-                        <Border.GestureRecognizers>
-                            <TapGestureRecognizer x:Name="LoginFrameGesture" />
-                        </Border.GestureRecognizers>
-                    </Border>
 
-                    <Grid Grid.Row="4"
-                          ColumnDefinitions="Auto,*"
-                          ColumnSpacing="16"
-                          HorizontalOptions="Fill"
-                          VerticalOptions="Center"
-                          AutomationId="AddProjectsButtonStack">
+                        <validationEntry:ValidationEntry Grid.Row="1" x:Name="Username"
+                                                         AutomationId="UsernameValidationEntry" />
+                        <validationEntry:ValidationEntry Grid.Row="2" x:Name="Password"
+                                                         AutomationId="PasswordValidationEntry" />
 
-                        <Border x:Name="AddProjectViaGuidButton"
-                                Grid.Column="0"
+                        <Border Grid.Row="3"
+                                x:Name="LoginButtonFrame"
                                 Style="{StaticResource ButtonBorder}"
-                                AutomationId="AddAProjectViaGuidButton">
+                                Margin="0,5,0,39">
 
-                            <Grid ColumnDefinitions="Auto,*"
-                                  Style="{StaticResource AddProjectButtonsInternalGrid}">
-                                <Label Grid.Column="0"
-                                       Style="{StaticResource AddProjectButtonsIconStyle}"
-                                       FontSize="45"
-                                       Text="{uiResources:IconExtensions AddProjectViaId}"
-                                       AutomationId="AddViaId" />
-                                <Label Grid.Column="1"
-                                       Text="{x:Static resources:AppResources.AddProjectViaId}"
-                                       Style="{StaticResource ButtonText}"
-                                       TextColor="{DynamicResource Option}"
-                                       AutomationId="AddProjectViaGuidButtonText" />
-
+                            <Grid Padding="0,10" Style="{StaticResource ButtonBackground}">
+                                <Grid ColumnDefinitions="Auto,*"
+                                      ColumnSpacing="13"
+                                      HorizontalOptions="Center"
+                                      AutomationId="LoginPanel">
+                                    <Label Grid.Column="0" Style="{StaticResource ButtonIcon}"
+                                           Text="{uiResources:IconExtensions Open}"
+                                           AutomationId="LoginImage" />
+                                    <Label x:Name="LoginText" Grid.Column="1"
+                                           Style="{StaticResource ButtonText}"
+                                           AutomationId="LoginLabel"
+                                           Text="{x:Static resources:AppResources.LogIn}" />
+                                </Grid>
                             </Grid>
                             <Border.GestureRecognizers>
-                                <TapGestureRecognizer x:Name="AddAProjectViaIdGesture" />
+                                <TapGestureRecognizer x:Name="LoginFrameGesture" />
                             </Border.GestureRecognizers>
                         </Border>
 
-                        <Border x:Name="AddProjectFromComputer"
-                                Grid.Column="1"
-                                Style="{StaticResource ButtonBorder}"
-                                AutomationId="AddAProjectViaGuidButton">
+                        <Grid Grid.Row="4"
+                              RowSpacing="5"
+                              RowDefinitions="Auto,Auto">
 
-                            <Grid ColumnDefinitions="Auto,Auto" Style="{StaticResource AddProjectButtonsInternalGrid}">
+                            <Grid Grid.Row="0" ColumnDefinitions="Auto,*"
+                                  ColumnSpacing="16"
+                                  HorizontalOptions="Fill"
+                                  VerticalOptions="Center"
+                                  AutomationId="AddProjectsButtonStack">
 
-                                <Label Grid.Column="0"
-                                       Style="{StaticResource AddProjectButtonsIconStyle}"
-                                       FontSize="40"
-                                       Text="{uiResources:IconExtensions AddFromComputer}"
-                                       AutomationId="AddFromComputer" />
+                                <Border x:Name="AddProjectViaGuidButton"
+                                        Grid.Column="0"
+                                        Style="{StaticResource ButtonBorder}"
+                                        AutomationId="AddAProjectViaGuidButton">
 
-                                <Label Grid.Column="1"
-                                       Text="{x:Static resources:AppResources.AddFromComputer}"
-                                       Style="{StaticResource ButtonText}"
-                                       TextColor="{DynamicResource Option}"
-                                       AutomationId="AddProjectFromComputerButtonText" />
+                                    <Grid ColumnDefinitions="Auto,*"
+                                          Style="{StaticResource AddProjectButtonsInternalGrid}">
+                                        <Label Grid.Column="0"
+                                               Style="{StaticResource AddProjectButtonsIconStyle}"
+                                               FontSize="45"
+                                               Text="{uiResources:IconExtensions AddProjectViaId}"
+                                               AutomationId="AddViaId" />
+                                        <Label Grid.Column="1"
+                                               Text="{x:Static resources:AppResources.AddProjectViaId}"
+                                               Style="{StaticResource ButtonText}"
+                                               TextColor="{DynamicResource Option}"
+                                               AutomationId="AddProjectViaGuidButtonText" />
 
+                                    </Grid>
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer x:Name="AddAProjectViaIdGesture" />
+                                    </Border.GestureRecognizers>
+                                </Border>
+
+                                <Border x:Name="AddProjectFromComputer"
+                                        Grid.Column="1"
+                                        Style="{StaticResource ButtonBorder}"
+                                        AutomationId="AddAProjectViaGuidButton">
+
+                                    <Grid ColumnDefinitions="Auto,Auto"
+                                          Style="{StaticResource AddProjectButtonsInternalGrid}">
+
+                                        <Label Grid.Column="0"
+                                               Style="{StaticResource AddProjectButtonsIconStyle}"
+                                               FontSize="40"
+                                               Text="{uiResources:IconExtensions AddFromComputer}"
+                                               AutomationId="AddFromComputer" />
+
+                                        <Label Grid.Column="1"
+                                               Text="{x:Static resources:AppResources.AddFromComputer}"
+                                               Style="{StaticResource ButtonText}"
+                                               TextColor="{DynamicResource Option}"
+                                               AutomationId="AddProjectFromComputerButtonText" />
+
+                                    </Grid>
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer x:Name="AddAProjectFromComputerGesture" />
+                                    </Border.GestureRecognizers>
+                                </Border>
                             </Grid>
-                            <Border.GestureRecognizers>
-                                <TapGestureRecognizer x:Name="AddAProjectFromComputerGesture" />
-                            </Border.GestureRecognizers>
-                        </Border>
+
+                            <Border x:Name="XamarinBackup"
+                                    Grid.Row="1"
+                                    Style="{StaticResource ButtonBorder}"
+                                    HorizontalOptions="Center"
+                                    AutomationId="XamarinBackupButton">
+
+                                <Grid ColumnDefinitions="Auto,Auto"
+                                      Style="{StaticResource AddProjectButtonsInternalGrid}">
+
+                                    <Label Grid.Column="0"
+                                           Style="{StaticResource AddProjectButtonsIconStyle}"
+                                           FontSize="40"
+                                           Text="{uiResources:IconExtensions Sync}"
+                                           AutomationId="XamarinBackupIcon" />
+
+                                    <Label Grid.Column="1"
+                                           Text="{x:Static resources:AppResources.ImportFromRender}"
+                                           Style="{StaticResource ButtonText}"
+                                           TextColor="{DynamicResource Option}"
+                                           AutomationId="XamarinBackupButtonText" />
+
+                                </Grid>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer x:Name="XamarinBackupGesture" />
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </Grid>
                     </Grid>
+                    <VerticalStackLayout x:Name="LoadingStack" Grid.Row="1"
+                                         Margin="0,55,0,0"
+                                         AutomationId="LoadingStack"
+                                         HorizontalOptions="Center"
+                                         VerticalOptions="Center">
+                        <Label Style="{StaticResource LoadingTextStyle}"
+                               Text="{x:Static resources:AppResources.LoggingIn}"
+                               AutomationId="LoggingInLabel" />
+                        <loadingCircles:LoadingBar Margin="0,19,0,0" />
+                    </VerticalStackLayout>
                 </Grid>
-                <VerticalStackLayout x:Name="LoadingStack" Grid.Row="1"
-                                     Margin="0,55,0,0"
-                                     AutomationId="LoadingStack"
-                                     HorizontalOptions="Center"
-                                     VerticalOptions="Center">
-                    <Label Style="{StaticResource LoadingTextStyle}"
-                           Text="{x:Static resources:AppResources.LoggingIn}"
-                           AutomationId="LoggingInLabel" />
-                    <loadingCircles:LoadingBar Margin="0,19,0,0" />
-                </VerticalStackLayout>
+
             </Grid>
 
+            <versionLabel:VersionLabel Grid.Row="2" VerticalOptions="End" HorizontalOptions="Center" />
+
+            <addProjectView:AddProjectView Grid.Row="1"
+                                           x:Name="AddViaFolderView"
+                                           IsVisible="False"
+                                           HorizontalOptions="Center" />
+
+            <addProjectView:AddProjectView Grid.Row="1"
+                                           x:Name="XamarinBackupView"
+                                           IsVisible="False"
+                                           HorizontalOptions="Center" />
+
+            <backButton:BackButton Grid.Row="0"
+                                   Grid.RowSpan="3"
+                                   x:Name="LoginBackButton" />
         </Grid>
-
-        <versionLabel:VersionLabel Grid.Row="2" VerticalOptions="End" HorizontalOptions="Center" />
-
-        <addFromComputer:AddViaFolderView Grid.Row="1" x:Name="AddViaFolderView" HorizontalOptions="Center" />
-    </Grid>
+    </ScrollView>
 
 </kernel:RenderPageBase>

@@ -15,7 +15,7 @@ public partial class FlagDetail
             d(this.OneWayBind(ViewModel, vm => vm.Glyph, v => v.Icon.Text));
             d(this.BindCommandCustom(CloseGesture, v => v.ViewModel.CloseModalCommand));
             d(this.BindCommandCustom(BackgroundGesture, v => v.ViewModel.CloseModalCommand));
-            d(this.OneWayBind(ViewModel, vm => vm.FlowDirection, v => v.Layout.FlowDirection));
+            d(this.OneWayBind(ViewModel, vm => vm.FlowDirection, v => v.ComponentLayout.FlowDirection));
 
             d(this.WhenAnyValue(x => x.ViewModel.QuestionAndResponses)
                 .ObserveOn(RxApp.MainThreadScheduler)

@@ -11,9 +11,5 @@ namespace Render.Repositories.LocalDataRepositories
         Task SaveLocalProjectsForMachine(LocalProjects localProjects);
 
         Task SaveUpdates(LocalProjects localProjects);
-
-        Task PurgeLocalProject(Guid projectId);
-        
-        Task PurgeAllLocalProjects(Guid localProjectsEntityId);
     }
 }

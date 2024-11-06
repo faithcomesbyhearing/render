@@ -122,17 +122,14 @@ namespace Render.Repositories.SectionRepository
             // the outdated section still exists
             // we need to filtering out the outdated sections by marking them as "deleted"
             var duplicateSectionsByNumber = sections
-                .GroupBy(x => x.Number)
+                .GroupBy(x => new { x.ScopeId, x.Number })
                 .Where(g => g.Count() > 1)
-                .Select(g => g.Key)
                 .ToList();
 
-            foreach (var sectionNumber in duplicateSectionsByNumber)
+            foreach (var duplicateSections in duplicateSectionsByNumber)
             {
-                var conflictsSections = sections.Where(x => x.Number == sectionNumber).ToList();
-                var latestDeploymentNumber = conflictsSections.Max(x => x.DeploymentVersionNumber);
-
-                foreach (var conflictsSection in conflictsSections)
+                var latestDeploymentNumber = duplicateSections.Max(x => x.DeploymentVersionNumber);
+                foreach (var conflictsSection in duplicateSections)
                 {
                     if (conflictsSection.DeploymentVersionNumber < latestDeploymentNumber)
                     {
@@ -193,7 +190,7 @@ namespace Render.Repositories.SectionRepository
 
             foreach (var passage in section.Passages)
             {
-                //for backward compatibility support
+                // for backward compatibility support
                 if (passage.CurrentDraftAudioId != default)
                 {
                     var draft = await _draftRepository.GetByIdAsync(passage.CurrentDraftAudioId);
@@ -203,7 +200,7 @@ namespace Render.Repositories.SectionRepository
                 {
                     var drafts = await _draftRepository.GetMultipleByParentIdAsync(passage.Id);
                     if (drafts is null || !drafts.Any()) continue;
-                    //get the latest not deleted draft revision for the section
+                    // get the latest not deleted draft revision for the section
                     passage.ChangeCurrentDraftAudio(drafts.Where(x => x.ProjectId == section.ProjectId && !x.Deleted)
                                                           .Where(x => x.ScopeId == section.ScopeId)
                                                           .OrderByDescending(x => x.Revision)
@@ -293,10 +290,10 @@ namespace Render.Repositories.SectionRepository
 
                 //Remove Peer Flags
                 await RemoveFlagsFor(draft, stagesComplete);
-                
+
                 //Remove reverted back translations for the latest section draft revision
                 await RemoveBackTranslations(snapshot, draft, passage);
-                
+
                 //Remove Community Flags
                 await RemoveCommunityTestDataIfExists(draft, section, stagesComplete);
             }
@@ -311,11 +308,11 @@ namespace Render.Repositories.SectionRepository
 
                 //Remove Peer Flags
                 await RemoveFlagsFor(draft, stagesComplete);
-                
+
                 //Remove reverted back translations for the original snapshot draft revision
                 if (!oldSection.Passages.Select(x => x.CurrentDraftAudio.Id).Contains(draft.Id))
                 {
-                    await RemoveBackTranslations(snapshot, draft, passage);   
+                    await RemoveBackTranslations(snapshot, draft, passage);
                 }
 
                 //Remove Community Flags
@@ -359,7 +356,7 @@ namespace Render.Repositories.SectionRepository
 
             return section;
         }
-        
+
         public async Task<Section> RevertSectionToDefaultAsync(Section oldSection, Guid loggedInUserId, Guid projectId)
         {
             var section = new Section(
@@ -392,7 +389,7 @@ namespace Render.Repositories.SectionRepository
             }
 
             section.References = sectionReferenceAudioList;
-            
+
             //Supplementary Material
             foreach (var supplementaryMaterial in oldSection.SupplementaryMaterials)
             {
@@ -492,7 +489,7 @@ namespace Render.Repositories.SectionRepository
                 communityTest.RemoveRetell(item.Id);
             }
         }
-        
+
         private async Task RemoveBackTranslations(Snapshot snapshot, Draft draft, Passage passage)
         {
             var retellId = draft.RetellBackTranslationAudio?.Id ?? Guid.Empty;
@@ -546,11 +543,6 @@ namespace Render.Repositories.SectionRepository
             return snapshot;
         }
 
-        public async Task Purge(Guid id)
-        {
-            await _sectionPersistence.PurgeAllOfTypeForProjectId(id);
-        }
-
         private async Task<Section> GetPassageDraftsAsync(
             Section section,
             bool getRetellBackTranslations = false,
@@ -583,6 +575,41 @@ namespace Render.Repositories.SectionRepository
             return section;
         }
 
+        public async Task UpdateRetellsWithSnapshotInfo(Passage passage, Snapshot snapshot)
+        {
+            if (passage.CurrentDraftAudio is null)
+            {
+                return;
+            }
+
+            if (passage.CurrentDraftAudio.RetellBackTranslationAudio is not null)
+            {
+                passage.CurrentDraftAudio.RetellBackTranslationAudio.CorrespondedSnashotId = snapshot.Id; //1Btr
+                await _retellRepository.SaveAsync(passage.CurrentDraftAudio.RetellBackTranslationAudio);
+
+                if (passage.CurrentDraftAudio.RetellBackTranslationAudio.RetellBackTranslationAudio is not null)
+                {
+                    passage.CurrentDraftAudio.RetellBackTranslationAudio.RetellBackTranslationAudio.CorrespondedSnashotId = snapshot.Id;  //2Btr
+                    await _retellRepository.SaveAsync(passage.CurrentDraftAudio.RetellBackTranslationAudio.RetellBackTranslationAudio);
+                }
+            }
+
+            if (passage.CurrentDraftAudio.SegmentBackTranslationAudios is not null)
+            {
+                foreach (var segment in passage.CurrentDraftAudio.SegmentBackTranslationAudios)
+                {
+                    segment.CorrespondedSnashotId = snapshot.Id;  //1Sbtr
+                    await _segmentRepository.SaveAsync(segment);
+
+                    if (segment.RetellBackTranslationAudio is not null)
+                    {
+                        segment.RetellBackTranslationAudio.CorrespondedSnashotId = snapshot.Id; //2sbtr
+                        await _retellRepository.SaveAsync(segment.RetellBackTranslationAudio);
+                    }
+                }
+            }
+        }
+
         private async Task GetRetellBackTranslationsAsync(Passage passage)
         {
             passage.CurrentDraftAudio.RetellBackTranslationAudio = await _retellRepository
@@ -598,9 +625,8 @@ namespace Render.Repositories.SectionRepository
         private async Task GetSegmentBackTranslationsAsync(Passage passage)
         {
             var segments = await _segmentRepository.GetMultipleByParentIdAsync(passage.CurrentDraftAudio.Id);
-            passage.CurrentDraftAudio.SegmentBackTranslationAudios = segments?
-                .OrderBy(x => x.TimeMarkers.StartMarkerTime)
-                .ToList() ?? new List<SegmentBackTranslation>();
+            passage.CurrentDraftAudio.SegmentBackTranslationAudios =
+                segments?.OrderBy(x => x.TimeMarkers.StartMarkerTime).ToList() ?? [];
             //Step 2
             foreach (var segment in passage.CurrentDraftAudio.SegmentBackTranslationAudios)
             {

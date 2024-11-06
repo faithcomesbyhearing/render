@@ -9,7 +9,7 @@ namespace Render.Pages.Settings.SectionStatus.Recovery;
         {
             InitializeComponent();
 
-            this.WhenActivated(d =>
+            DisposableBindings = this.WhenActivated(d =>
             {
                 d(this.Bind(ViewModel, vm => vm.SearchString, v => v.SearchEntry.Text));
                 d(this.OneWayBind(ViewModel, vm => vm.SelectedCard.Section.ScriptureReference, 

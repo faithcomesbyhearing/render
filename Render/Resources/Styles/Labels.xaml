@@ -39,6 +39,16 @@
         <Setter Property="Margin" Value="13,0" />
         <Setter Property="FontFamily" Value="BoldFont" />
     </Style>
+    
+    <Style x:Key="StageSettingsStepNameLabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Option}" />
+        <Setter Property="FontSize" Value="26" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0,0" />
+        <Setter Property="FontFamily" Value="BoldFont" />
+    </Style>
 
     <Style x:Key="StageSettingSettingGroupTitleStyle"
            BasedOn="{StaticResource StageSettingsStageNameLabelStyle}"
@@ -175,6 +185,8 @@
         <Setter Property="HorizontalTextAlignment" Value="Start" />
         <Setter Property="VerticalOptions" Value="Center" />
         <Setter Property="TextColor" Value="{DynamicResource SecondaryText}" />
+        <Setter Property="LineBreakMode" Value="TailTruncation"/>
+        <Setter Property="MaxLines" Value="2"/>
     </Style>
 
     <Style x:Key="IconStyle" TargetType="Label">
@@ -244,6 +256,7 @@
     </Style>
     
     <Style x:Key="WorkflowStageGroupingTitle" TargetType="Label">
+        <Setter Property="LineBreakMode" Value="TailTruncation"/>
         <Setter Property="HorizontalTextAlignment" Value="Start"/>
         <Setter Property="VerticalTextAlignment" Value="Center"/>
         <Setter Property="TextColor" Value="{DynamicResource SecondaryText}"/>
@@ -255,6 +268,13 @@
     <Style x:Key="WorkflowStageGroupingTitleIcon" TargetType="Label">
         <Setter Property="FontFamily" Value="Icons"/>
         <Setter Property="FontSize" Value="24"/>
+        <Setter Property="TextColor" Value="{StaticResource SecondaryText}"/>
+        <Setter Property="Margin" Value="0,0,5,0"/>
+    </Style>
+
+    <Style x:Key="WorkflowStageGroupingTitleIconWithStepNumber" TargetType="Label">
+        <Setter Property="FontFamily" Value="Icons"/>
+        <Setter Property="FontSize" Value="{StaticResource MediumMinus2Font}"/>
         <Setter Property="TextColor" Value="{StaticResource SecondaryText}"/>
         <Setter Property="Margin" Value="0,0,5,0"/>
     </Style>

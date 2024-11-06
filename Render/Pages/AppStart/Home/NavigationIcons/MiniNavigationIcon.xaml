@@ -17,7 +17,7 @@
                    HorizontalOptions="Fill"
                    VerticalOptions="Center"
                    AutomationId="MiniNavigationRectangle"/>
-        <Frame x:Name="Frame"
+        <Frame x:Name="ComponentFrame"
                Padding="0"
                Margin="0"
                WidthRequest="24"

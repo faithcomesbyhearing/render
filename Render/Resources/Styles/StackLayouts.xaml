@@ -8,13 +8,16 @@
         <Setter Property="BackgroundColor" Value="{DynamicResource StageColumnBackground}"/>
     </Style>
     
-    <Style x:Key="WorkflowStageColumnSubtitleStack" TargetType="HorizontalStackLayout">
-        <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
-        <Setter Property="BackgroundColor" Value="Transparent"/>
+    <Style x:Key="WorkflowStageColumnSubtitle" TargetType="Grid">
         <Setter Property="Margin" Value="0,10"/>
     </Style>
     
     <Style x:Key="StageNameStackLayoutStyle" TargetType="HorizontalStackLayout">
+        <Setter Property="Margin" Value="0,27,0,0"/>
+        <Setter Property="VerticalOptions" Value="Start"/>
+    </Style>
+    
+    <Style x:Key="StepNameStackLayoutStyle" TargetType="HorizontalStackLayout">
         <Setter Property="Margin" Value="0,27,0,0"/>
         <Setter Property="VerticalOptions" Value="Start"/>
     </Style>

@@ -39,28 +39,23 @@ namespace Render.Pages.Translator.AudioEdit
             Stage stage, 
             Step step)
         {
-            var stepType = step.RenderStepType;
-            var title = string.Empty;
-            var pageGlyph = string.Empty;
             var color = ResourceExtensions.GetResourceValue<ColorReference>("SecondaryText");
+            var pageGlyph = string.Empty;
 
-            switch (stepType)
+            switch (step.RenderStepType)
             {
                 case RenderStepTypes.PeerRevise :
                     pageGlyph = IconExtensions.BuildFontImageSource(Icon.PeerRevise, color.Color)?.Glyph;
-                    title = AppResources.PeerRevise;
                     break;
                 case RenderStepTypes.CommunityRevise :
                     pageGlyph = IconExtensions.BuildFontImageSource(Icon.CommunityRevise, color.Color)?.Glyph;
-                    title = AppResources.CommunityRevise;
                     break;
                 case RenderStepTypes.ConsultantRevise :
                     pageGlyph = IconExtensions.BuildFontImageSource(Icon.ConsultantRevise, color.Color)?.Glyph;
-                    title = AppResources.ConsultantRevise;
                     break;
             }
-
-            return new AudioEditingPageViewModel(viewModelContextProvider, section, passage, stage, step, title, pageGlyph);
+            
+            return new AudioEditingPageViewModel(viewModelContextProvider, section, passage, stage, step, pageGlyph);
         }
         
         private AudioEditingPageViewModel(
@@ -69,20 +64,16 @@ namespace Render.Pages.Translator.AudioEdit
             Passage passage, 
             Stage stage, 
             Step step, 
-            string title, 
             string pageGlyph) 
             : base("AudioEditingPage", 
                     viewModelContextProvider, 
-                    title, section, stage, 
+                    GetStepName(step), section, stage, 
                     step, 
                     passage.PassageNumber, 
                     secondPageName: AppResources.DraftEdit)
         {
             _audioEncodingService = viewModelContextProvider.GetAudioEncodingService();
             _tempAudioService = viewModelContextProvider.GetTempAudioService(passage.CurrentDraftAudio);
-
-            DisposeOnNavigationCleared = true;
-            TitleBarViewModel.DisposeOnNavigationCleared = true;
 
             TitleBarViewModel.PageGlyph = pageGlyph;
 

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Reactive.Linq;
+﻿using System.Reactive.Linq;
 using ReactiveUI;
-using Render.Components.StageSettings.PeerCheckStageSettings;
 using Render.Components.StageSettings.RadioButtons;
 using Render.Extensions;
-using Render.Resources;
 using Render.Resources.Localization;
 
 namespace Render.Components.StageSettings.CommunityTestStageSettings
@@ -29,6 +26,12 @@ namespace Render.Components.StageSettings.CommunityTestStageSettings
                     v => v.AssignToTranslatorToggle.IsToggled));
                 d(this.Bind(ViewModel, vm => vm.StageName,
                     v => v.StageName.Text));
+                d(this.Bind(ViewModel, vm => vm.ReviewStepName.StepName,
+                    v => v.ReviewStepName.Text));
+                d(this.Bind(ViewModel, vm => vm.ReviseStepName.StepName,
+                    v => v.ReviseStepName.Text));
+                d(this.Bind(ViewModel, vm => vm.ResponseSetupStepName.StepName,
+                    v => v.ResponseSetupStepName.Text));
                 d(this.Bind(ViewModel, vm => vm.RetellRequireSectionListen,
                     v => v.RetellRequireSectionListenToggle.IsToggled));
                 d(this.Bind(ViewModel, vm => vm.RetellRequirePassageListen,
@@ -48,36 +51,40 @@ namespace Render.Components.StageSettings.CommunityTestStageSettings
                     v => v.AllowEditingToggle.IsToggled));
 
                 d(this.OneWayBind(ViewModel, vm => vm.SelectedState,
-                    v => v.RetellRequirePassageListenToggle.IsEnabled, 
-                    state => state == RetellQuestionResponseSettings.Retell || state == RetellQuestionResponseSettings.Both ));
+                    v => v.RetellRequirePassageListenToggle.IsEnabled,
+                    state => state == RetellQuestionResponseSettings.Retell || state == RetellQuestionResponseSettings.Both));
                 d(this.OneWayBind(ViewModel, vm => vm.SelectedState,
-                    v => v.RetellRequirePassageListenLabel.IsEnabled, 
-                    state => state == RetellQuestionResponseSettings.Retell || state == RetellQuestionResponseSettings.Both ));
+                    v => v.RetellRequirePassageListenLabel.IsEnabled,
+                    state => state == RetellQuestionResponseSettings.Retell || state == RetellQuestionResponseSettings.Both));
 
                 d(this.OneWayBind(ViewModel, vm => vm.SelectedState,
-                    v => v.RequireQuestionContextListenToggle.IsEnabled, 
-                    state => state == RetellQuestionResponseSettings.QuestionAndResponse || state == RetellQuestionResponseSettings.Both ));
+                    v => v.ResponseSetupStepNameBorder.IsEnabled,
+                    state => state == RetellQuestionResponseSettings.QuestionAndResponse || state == RetellQuestionResponseSettings.Both));
+
                 d(this.OneWayBind(ViewModel, vm => vm.SelectedState,
-                    v => v.RequireQuestionContextListenLabel.IsEnabled, 
-                    state => state == RetellQuestionResponseSettings.QuestionAndResponse || state == RetellQuestionResponseSettings.Both ));
-                
+                    v => v.RequireQuestionContextListenToggle.IsEnabled,
+                    state => state == RetellQuestionResponseSettings.QuestionAndResponse || state == RetellQuestionResponseSettings.Both));
                 d(this.OneWayBind(ViewModel, vm => vm.SelectedState,
-                    v => v.RequireRecordResponseToggle.IsEnabled, 
-                    state => state == RetellQuestionResponseSettings.QuestionAndResponse || state == RetellQuestionResponseSettings.Both ));
+                    v => v.RequireQuestionContextListenLabel.IsEnabled,
+                    state => state == RetellQuestionResponseSettings.QuestionAndResponse || state == RetellQuestionResponseSettings.Both));
+
                 d(this.OneWayBind(ViewModel, vm => vm.SelectedState,
-                    v => v.RequireRecordResponseLabel.IsEnabled, 
-                    state => state == RetellQuestionResponseSettings.QuestionAndResponse || state == RetellQuestionResponseSettings.Both ));
-                
+                    v => v.RequireRecordResponseToggle.IsEnabled,
+                    state => state == RetellQuestionResponseSettings.QuestionAndResponse || state == RetellQuestionResponseSettings.Both));
+                d(this.OneWayBind(ViewModel, vm => vm.SelectedState,
+                    v => v.RequireRecordResponseLabel.IsEnabled,
+                    state => state == RetellQuestionResponseSettings.QuestionAndResponse || state == RetellQuestionResponseSettings.Both));
+
                 d(this.Bind(ViewModel, vm => vm.TranslateDoPassageReview,
                     v => v.DoPassageReviewToggle.IsToggled));
                 d(this.Bind(ViewModel, vm => vm.TranslateRequirePassageReview,
                     v => v.RequirePassageReviewToggle.IsToggled));
-                
+
                 d(this.OneWayBind(ViewModel, vm => vm.TranslateDoPassageReview,
                     v => v.RequirePassageReviewToggle.IsEnabled));
                 d(this.OneWayBind(ViewModel, vm => vm.TranslateDoPassageReview,
                     v => v.RequirePassageReviewLabel.IsEnabled));
-                
+
                 d(this.OneWayBind(ViewModel, vm => vm.SelectedState,
                     v => v.SelectedOptionLabel.Text, state =>
                     {
@@ -100,7 +107,7 @@ namespace Render.Components.StageSettings.CommunityTestStageSettings
 
                         return value;
                     }));
-                
+
                 d(this.WhenAnyValue(x => x.ViewModel.FlowDirection)
                     .ObserveOn(RxApp.MainThreadScheduler)
                     .Subscribe(flowDirection =>
@@ -152,17 +159,17 @@ namespace Render.Components.StageSettings.CommunityTestStageSettings
         private void RequireSectionListenToggleTapped(object sender, EventArgs e)
         {
             var toggle = RequireSectionListenToggle;
-            
+
             if (toggle.IsEnabled)
             {
                 toggle.IsToggled = !toggle.IsToggled;
             }
         }
-        
+
         private void RequireCommunityFeedbackToggleTapped(object sender, EventArgs e)
         {
             var toggle = RequireCommunityFeedbackToggle;
-            
+
             if (toggle.IsEnabled)
             {
                 toggle.IsToggled = !toggle.IsToggled;
@@ -182,7 +189,7 @@ namespace Render.Components.StageSettings.CommunityTestStageSettings
             RetellExpandStackIcon.IsVisible = !RetellStack.IsVisible;
             RetellCollapseStackIcon.IsVisible = RetellStack.IsVisible;
         }
-        
+
         private void HandleCheck(object sender, CheckedChangedEventArgs e)
         {
             var radioButton = (RadioButton)sender;
@@ -222,7 +229,7 @@ namespace Render.Components.StageSettings.CommunityTestStageSettings
         {
             DoPassageReviewToggle.IsToggled = !DoPassageReviewToggle.IsToggled;
         }
-        
+
         private void RequirePassageReviewToggleTapped(object sender, EventArgs e)
         {
             if (RequirePassageReviewToggle.IsEnabled)

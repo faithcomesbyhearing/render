@@ -19,6 +19,7 @@ using Render.Sequencer.Contracts.Interfaces;
 using Render.Services.AudioPlugins.AudioPlayer;
 using Render.Services.AudioPlugins.AudioRecorder.Interfaces;
 using Render.Services.SessionStateServices;
+using Render.Services.WorkflowService;
 using Render.UnitTests.App.Kernel;
 
 namespace Render.UnitTests.App.Pages.Translator
@@ -68,13 +69,13 @@ namespace Render.UnitTests.App.Pages.Translator
         }
         
         [Fact]
-        public async Task ViewModelCreation_Succeeds()
+        public void ViewModelCreation_Succeeds()
         {
             //Arrange
             var contentProvider = MockContextProvider.Object;
 
             //Act
-            var vm = await SectionListenViewModel.CreateAsync(contentProvider, _section, _step, _stage);
+            var vm = SectionListenViewModel.Create(contentProvider, _section, _step, _stage);
 
             //Assert
             vm.UrlPathSegment.Should().NotBeNull();
@@ -89,7 +90,7 @@ namespace Render.UnitTests.App.Pages.Translator
             MockContextProvider.Setup(x => x.GetSectionRepository())
                 .Returns(mockSectionRepository.Object);
             _step.StepSettings.SetSetting(SettingType.DoPassageListen, true);
-            var vm = await SectionListenViewModel.CreateAsync(MockContextProvider.Object, _section, _step, _stage);
+            var vm = SectionListenViewModel.Create(MockContextProvider.Object, _section, _step, _stage);
             SetupViewModelForNavigationTest(vm);
             
             //Act & Assert
@@ -102,8 +103,10 @@ namespace Render.UnitTests.App.Pages.Translator
             //Arrange
             _step.StepSettings.SetSetting(SettingType.DoPassageListen, false);
 
-            MockGrandCentralStation.Setup(x => x.ProjectWorkflow).Returns(RenderWorkflow.Create(Guid.Empty));
-            var vm = await SectionListenViewModel.CreateAsync(MockContextProvider.Object, _section, _step, _stage);
+            var mockWorkflowService = new Mock<IWorkflowService>();
+            mockWorkflowService.Setup(x => x.ProjectWorkflow).Returns(RenderWorkflow.Create(Guid.Empty));
+            MockContextProvider.Setup(x => x.GetWorkflowService()).Returns(mockWorkflowService.Object);
+            var vm = SectionListenViewModel.Create(MockContextProvider.Object, _section, _step, _stage);
             SetupViewModelForNavigationTest(vm);
             
             //Act & Assert

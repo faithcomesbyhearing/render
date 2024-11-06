@@ -136,6 +136,7 @@ public class InternalPlayer : IDisposable
 
     public void Dispose()
     {
+        Timer.Elapsed -= PlayerTimerTick;
         Timer.Dispose();
         PlayerFactory = null!;
         

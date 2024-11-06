@@ -24,7 +24,7 @@ namespace Render.Pages.Revise.NoteListen
     public class TabletNoteListenPageViewModel : WorkflowPageBaseViewModel
     {
         [Reactive] public ISequencerPlayerViewModel SequencerPlayerViewModel { get; private set; }
-        private ActionViewModelBase SequencerActionViewModel { get; set; }
+        private ActionViewModelBase _sequencerActionViewModel { get; set; }
         public MultipleRevisionViewModel RevisionActionViewModel { get; set; }
 
         private IToolbarItem _noteToolbarItemModel;
@@ -34,7 +34,7 @@ namespace Render.Pages.Revise.NoteListen
         private List<Passage> _passages;
 
         private readonly bool _requireNoteListen;
-        
+
         private ConversationService _conversationService;
 
         public static async Task<TabletNoteListenPageViewModel> CreateAsync(
@@ -70,45 +70,25 @@ namespace Render.Pages.Revise.NoteListen
             Stage stage) :
             base(urlPathSegment: "TabletSectionReviewPage",
                 viewModelContextProvider: viewModelContextProvider,
-                pageName: GetStepName(viewModelContextProvider, step.RenderStepType, stage.Id),
+                pageName: GetStepName(step),
                 section: section,
                 stage: stage,
                 step: step,
                 secondPageName: AppResources.PassageSelect)
         {
-            DisposeOnNavigationCleared = true;
-            TitleBarViewModel.DisposeOnNavigationCleared = true;
-
             var icon = step.RenderStepType == RenderStepTypes.ConsultantRevise ? Icon.ConsultantRevise :
                 step.RenderStepType == RenderStepTypes.PeerRevise ? Icon.PeerRevise : Icon.CommunityRevise;
             TitleBarViewModel.PageGlyph = IconExtensions.BuildFontImageSource(icon)?.Glyph;
 
             _requireNoteListen = Step.StepSettings.GetSetting(SettingType.RequireNoteListen);
 
-			ProceedButtonViewModel.SetCommand(NavigateForwardAsync);
-            Disposables.Add(ProceedButtonViewModel.NavigateToPageCommand.IsExecuting
-                .Subscribe(isExecuting => { IsLoading = isExecuting; }));
-            
+            ProceedButtonViewModel.SetCommand(NavigateForwardAsync);
+
             NavigateToDraftingCommand = ReactiveCommand.CreateFromTask(NavigateToDraftingAsync);
-            NavigateToDraftingCommand.IsExecuting
-                .Subscribe(isExecuting => IsLoading = isExecuting);
-            
+
             SetupSequencer();
-            
-            _conversationService = new ConversationService(
-                this,
-                Disposables,
-                Stage,
-                Step,
-                SequencerPlayerViewModel,
-                appendNotesForChildAudios: Step.RenderStepType == RenderStepTypes.ConsultantRevise);
-
-            _conversationService.TapFlagPostEvent = ProcessStateStatusChange;
-
+            SetupConversationService(SequencerPlayerViewModel);
             SetupRevision();
-
-            Disposables.Add(this.WhenAnyValue(vm => vm.RevisionActionViewModel.SelectedRevisionItem)
-                .Subscribe(SelectSnapshot));
 
             SetProceedButtonIcon();
         }
@@ -128,21 +108,19 @@ namespace Render.Pages.Revise.NoteListen
             _reRecordToolbarItemModel = SequencerPlayerViewModel.AddToolbarItem(new ToolbarItemModel(ToolbarItemType.Custom, "ReRecord", NavigateToDraftingCommand), 0);
 
             SequencerPlayerViewModel.SetupActivityService(ViewModelContextProvider, Disposables);
+        }
 
-            SequencerActionViewModel = SequencerPlayerViewModel.CreateActionViewModel(
-                provider: ViewModelContextProvider,
-                disposables: Disposables);
-            ActionViewModelBaseSourceList.Add(SequencerActionViewModel);
+        private void SetupConversationService(ISequencerPlayerViewModel sequencerPlayer)
+        {
+            _conversationService = new ConversationService(
+                this,
+                Disposables,
+                Stage,
+                Step,
+                sequencerPlayer,
+                appendNotesForChildAudios: Step.RenderStepType == RenderStepTypes.ConsultantRevise);
 
-            SequencerPlayerViewModel
-                .WhenAnyValue(player => player.State)
-                .Where(state => state == SequencerState.Playing && RevisionActionViewModel.IsCurrentRevision)
-                .Subscribe((_) => { SequencerActionViewModel.ActionState = ActionState.Optional; });
-
-            SequencerPlayerViewModel
-                .WhenAnyValue(player => player.State)
-                .Where(state => state == SequencerState.Loaded && !RevisionActionViewModel.IsCurrentRevision)
-                .Subscribe((_) => { _noteToolbarItemModel.State = ToolbarItemState.Disabled; });
+            _conversationService.TapFlagPostEvent = ProcessStateStatusChange;
         }
 
         private void SetupRevision()
@@ -162,11 +140,14 @@ namespace Render.Pages.Revise.NoteListen
             _conversationService.InitializeNoteDetail(
                 isRequired: _requireNoteListen,
                 allowEditing: RevisionActionViewModel.IsCurrentRevision);
-            
-            var audios = _passages.Select(passage =>
+
+            var selectedRevItemPassages = RevisionActionViewModel.SelectedRevisionItem.Key.Passages;
+
+			var audios = _passages.Select(passage =>
             {
-                var isOriginalRecord = !RevisionActionViewModel.IsCurrentRevision || RevisionActionViewModel.SelectedRevisionItem.Key.Passages.First(x => x.Id == passage.Id)
-                        .CurrentDraftAudio.Id.Equals(passage.CurrentDraftAudio.Id);
+                var isOriginalRecord = 
+                    !RevisionActionViewModel.IsCurrentRevision ||
+					selectedRevItemPassages.First(x => x.Id == passage.Id).CurrentDraftAudio?.Id == passage.CurrentDraftAudio?.Id;
 
                 return passage.CreatePlayerAudioModel(
                     _conversationService.GetConversations(passage.CurrentDraftAudio),
@@ -175,7 +156,9 @@ namespace Render.Pages.Revise.NoteListen
                     startIcon: Icon.PassageNew.ToString(),
                     endIcon: isOriginalRecord ? string.Empty : Icon.ReRecord.ToString(),
                     option: isOriginalRecord ? AudioOption.Optional : AudioOption.Completed,
-                    flagType: FlagType.Note);
+                    flagType: FlagType.Note,
+                    userId: ViewModelContextProvider.GetLoggedInUser().Id,
+                    requireNoteListen: _requireNoteListen);
             }).ToArray();
 
             SequencerPlayerViewModel.SetAudio(audios);
@@ -203,9 +186,17 @@ namespace Render.Pages.Revise.NoteListen
         {
             await Task.Run(async () =>
             {
-                var grandCentralStation = ViewModelContextProvider.GetGrandCentralStation();
-                await grandCentralStation.CreateTemporarySnapshotAfterReRecording(Section, Step);
-                await grandCentralStation.AdvanceSectionAfterReviseAsync(Section, Step, ViewModelContextProvider.GetSessionStateService());
+                var snapshotService = ViewModelContextProvider.GetSnapshotService();
+                var sectionMovementService = ViewModelContextProvider.GetSectionMovementService();
+                
+                await snapshotService.CreateTemporarySnapshotAfterReRecording(Section, Step, GetLoggedInUserId(), default);
+                
+                await sectionMovementService.AdvanceSectionAfterReviseAsync(
+                    Section,
+                    Step,
+                    ViewModelContextProvider.GetSessionStateService(),
+                    GetProjectId(),
+                    GetLoggedInUserId());
             });
             return await NavigateToHomeOnMainStackAsync();
         }
@@ -213,15 +204,45 @@ namespace Render.Pages.Revise.NoteListen
         private async Task LoadSnapshotsAsync(Guid sectionId)
         {
             var snapshots = await RevisionActionViewModel.FillRevisionItems(sectionId, Stage.Id);
+
+            _sequencerActionViewModel = SequencerPlayerViewModel.CreateActionViewModel(
+                required: true,
+                requirementId: RevisionActionViewModel.SelectedRevisionItem.Key.Id,
+                provider: ViewModelContextProvider,
+                disposables: Disposables);
+            ActionViewModelBaseSourceList.Add(_sequencerActionViewModel);
+
             _conversationService.DefineFlagsToDraw(snapshots, Stage.Id);
 
-            MainThread.BeginInvokeOnMainThread(UpdateSequencer);
+            SetupListeners();
         }
 
-        private async void SelectSnapshot(KeyValuePair<Snapshot, string> selectedRevision)
+        private void SetupListeners()
+        {
+            Disposables.Add(ProceedButtonViewModel.NavigateToPageCommand.IsExecuting
+                .Subscribe(isExecuting => { IsLoading = isExecuting; }));
+
+            Disposables.Add(NavigateToDraftingCommand.IsExecuting
+                .Subscribe(isExecuting => IsLoading = isExecuting));
+
+            Disposables.Add(this.WhenAnyValue(vm => vm.RevisionActionViewModel.SelectedRevisionItem)
+                .Subscribe(async (revision) => await SelectSnapshot(revision)));
+
+            Disposables.Add(SequencerPlayerViewModel
+                .WhenAnyValue(player => player.State)
+                .Where(state => state == SequencerState.Playing && RevisionActionViewModel.IsCurrentRevision)
+                .Subscribe((_) => { _sequencerActionViewModel.ActionState = ActionState.Optional; }));
+
+            Disposables.Add(SequencerPlayerViewModel
+                .WhenAnyValue(player => player.State)
+                .Where(state => state == SequencerState.Loaded && !RevisionActionViewModel.IsCurrentRevision)
+                .Subscribe((_) => { _noteToolbarItemModel.State = ToolbarItemState.Disabled; }));
+        }
+
+        private async Task SelectSnapshot(KeyValuePair<Snapshot, string> selectedRevision)
         {
             var snapshot = selectedRevision.Key;
-            
+
             if (snapshot == null)
             {
                 return;
@@ -231,9 +252,9 @@ namespace Render.Pages.Revise.NoteListen
 
             _passages = RevisionActionViewModel.IsCurrentRevision ? Section.Passages : RevisionActionViewModel.SelectedSnapshot.Passages;
 
-            MainThread.BeginInvokeOnMainThread(UpdateSequencer);
+            await MainThread.InvokeOnMainThreadAsync(UpdateSequencer);
         }
-        
+
         private void UpdateSequencer()
         {
             if (SequencerPlayerViewModel != null)
@@ -246,21 +267,23 @@ namespace Render.Pages.Revise.NoteListen
         private void UpdateToolBarState()
         {
             var noteItem = SequencerPlayerViewModel?.GetToolbarItem<IFlagToolbarItem>();
-            if (noteItem == null)
+            var playItem = SequencerPlayerViewModel?.GetToolbarItem<IPlayToolbarItem>();
+            if (playItem != null && noteItem == null)
             {
-                var playItem = SequencerPlayerViewModel?.GetToolbarItem<IPlayToolbarItem>();
-
-                if (playItem != null)
-                {
-                    SequencerPlayerViewModel.AddToolbarItemAfter(playItem, _noteToolbarItemModel);
-                }
+                SequencerPlayerViewModel.AddToolbarItemAfter(playItem, _noteToolbarItemModel);
             }
 
-			_noteToolbarItemModel.State = RevisionActionViewModel.IsCurrentRevision ? ToolbarItemState.Active
-				: ToolbarItemState.Disabled;
+            _noteToolbarItemModel.State = RevisionActionViewModel.IsCurrentRevision ? ToolbarItemState.Active
+                : ToolbarItemState.Disabled;
 
-			_reRecordToolbarItemModel.State = _noteToolbarItemModel.State;
-		}
+            _reRecordToolbarItemModel.State = _noteToolbarItemModel.State;
+
+            if (playItem != null)
+            {
+                var option = _sequencerActionViewModel.ActionState == ActionState.Optional ? ItemOption.Optional : ItemOption.Required;
+                playItem.Option = RevisionActionViewModel.IsCurrentRevision ? option : ItemOption.Optional;
+            }
+        }
 
         private async Task NavigateToDraftingAsync()
         {
@@ -273,7 +296,7 @@ namespace Render.Pages.Revise.NoteListen
                 var audio = SequencerPlayerViewModel.GetCurrentAudio();
                 if (audio is null) return null;
 
-                var passage = _passages.FirstOrDefault(passage => passage.CurrentDraftAudio.Id == audio.Key);
+                var passage = _passages.FirstOrDefault(passage => passage.CurrentDraftAudio?.Id == audio.Key);
                 if (passage is null) return null;
 
                 return await DraftingViewModel.CreateAsync(Section, passage, Step, ViewModelContextProvider, Stage);
@@ -294,8 +317,8 @@ namespace Render.Pages.Revise.NoteListen
 
             SequencerPlayerViewModel?.Dispose();
             SequencerPlayerViewModel = null;
-            SequencerActionViewModel?.Dispose();
-            SequencerActionViewModel = null;
+            _sequencerActionViewModel?.Dispose();
+            _sequencerActionViewModel = null;
 
             RevisionActionViewModel?.Dispose();
             RevisionActionViewModel = null;

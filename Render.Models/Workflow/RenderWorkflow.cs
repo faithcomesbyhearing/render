@@ -353,8 +353,7 @@ namespace Render.Models.Workflow
             
             var workflowAssignment = new WorkflowAssignment(userId, stageId, stage.StageType, role);
             
-            var canBeConsultant = user.HasClaim(RenderRolesAndClaims.ProjectUserClaimType, ProjectId.ToString(),
-                RenderRolesAndClaims.GetRoleByName(RoleName.Consultant).Id);
+            var canBeConsultant = user.HasClaim(RenderRolesAndClaims.ProjectUserClaimType, ProjectId.ToString(), RoleName.Consultant.GetRoleId());
             
             switch (stage?.StageType)
             {

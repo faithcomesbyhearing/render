@@ -14,7 +14,7 @@ namespace Render.Services.SyncService
     public class LocalProjectDownloader : ReactiveObject, ILocalProjectDownloader, IDisposable
     {
         private readonly IEssentialsWrapper _essentialsWrapper;
-        private readonly List<IDisposable> _disposables = new ();
+        private readonly List<IDisposable> _disposables = new();
 
         private ILocalReplicator RenderProjectsReplicator { get; set; }
         private ILocalReplicator RenderAdminReplicator { get; set; }
@@ -71,7 +71,7 @@ namespace Render.Services.SyncService
                 portNumber: appSettings.CouchbaseStartingPort + 1,
                 peerUsername: appSettings.CouchbasePeerUsername,
                 peerPassword: appSettings.CouchbasePeerPassword);
-            
+
             _disposables.Add(this
                 .WhenAnyValue(x => x.RenderAdminReplicator.Result)
                 .Subscribe(CheckForSecondDownloadComplete));
@@ -108,13 +108,12 @@ namespace Render.Services.SyncService
                         else
                         {
                             RenderAdminReplicator.AddReplicator(
-                            device: Device,
-                            ProjectId,
-                            filterIds: project.GlobalUserIds.Select(x => x.ToString()).ToList(),
-                            oneShotDownload: true,
-                            freshDownload: true);
+                                device: Device,
+                                ProjectId,
+                                filterIds: project.GlobalUserIds.Select(x => x.ToString()).ToList(),
+                                oneShotDownload: true,
+                                freshDownload: true);
                         }
-                        
                     }
                 });
             }
@@ -123,31 +122,41 @@ namespace Render.Services.SyncService
                 FinishDownload(LocalReplicationResult.Failed);
             }
         }
-        
+
         private void CheckForSecondDownloadComplete(LocalReplicationResult result)
         {
             //Check render projects replication and recorded audio replication is done before 
             if (FirstWaveReplicationDone)
             {
-                FinishDownload(result == LocalReplicationResult.Succeeded ? 
-                    LocalReplicationResult.Succeeded : 
-                    LocalReplicationResult.Failed);
+                FinishDownload(result == LocalReplicationResult.Succeeded ? LocalReplicationResult.Succeeded : LocalReplicationResult.Failed);
             }
         }
-        
+
         public bool BeginActiveLocalReplicationOfProject(Device device)
         {
             try
             {
                 Device = device;
                 device.IsConnected = true;
-                RenderProjectsReplicator.AddReplicator(device,ProjectId, new List<string> {Channel}, oneShotDownload: true, freshDownload: true);
-                RecordedAudioReplicator.AddReplicator(device, ProjectId, new List<string> {Channel}, oneShotDownload: true, freshDownload: true);
+                RenderProjectsReplicator.AddReplicator(device, ProjectId, new List<string> { Channel }, oneShotDownload: true, freshDownload: true);
+                RecordedAudioReplicator.AddReplicator(device, ProjectId, new List<string> { Channel }, oneShotDownload: true, freshDownload: true);
                 return true;
             }
             catch (Exception)
             {
                 return false;
+            }
+        }
+
+        public void CancelActiveLocalReplicationOfProject(Device device)
+        {
+            if(device is null) return;
+            
+            RenderProjectsReplicator?.CancelActiveReplications(device);
+            RecordedAudioReplicator?.CancelActiveReplications(device);
+            if (FirstWaveReplicationDone)
+            {
+                RenderAdminReplicator?.CancelActiveReplications(device);
             }
         }
 

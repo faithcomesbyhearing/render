@@ -1,5 +1,4 @@
-﻿using System;
-using System.Reactive.Linq;
+﻿using System.Reactive.Linq;
 using ReactiveUI;
 
 namespace Render.Components.StageSettings.DraftingStageSettings
@@ -14,6 +13,9 @@ namespace Render.Components.StageSettings.DraftingStageSettings
             {
                 d(this.Bind(ViewModel, vm => vm.StageName,
                     v => v.StageName.Text));
+                d(this.Bind(ViewModel, vm => vm.DraftingStepName.StepName,
+                    v => v.DraftingStepName.Text));
+                
                 d(this.Bind(ViewModel, vm => vm.TranslateDoSectionListen,
                     v => v.DoSectionListenToggle.IsToggled));
                 d(this.Bind(ViewModel, vm => vm.TranslateRequireSectionListen,

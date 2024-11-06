@@ -20,6 +20,7 @@ namespace Render
         public string AppCenterUwpKey { get; }
         public string AppCenterAndroidKey { get; }
         public string AppCenterIOSKey { get; }
+        public string RenderXamarinAppDirName { get; }
 
         public AppSettings()
         {
@@ -40,6 +41,7 @@ namespace Render
             CouchbasePeerPassword = couchbaseConfigurationSection.GetValue<string>("PeerPassword");
             CouchbaseStartingPort = couchbaseConfigurationSection.GetValue<int>("StartingPort");
             CouchbaseMaxSyncAttempts = couchbaseConfigurationSection.GetValue<int>("MaxSyncAttempts");
+            RenderXamarinAppDirName = couchbaseConfigurationSection.GetValue<string>("RenderXamarinAppDirName");
 
             var appCenterKeysSection = config.GetSection("AppCenterKeys");
             AppCenterUwpKey = appCenterKeysSection.GetValue<string>("Uwp");

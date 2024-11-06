@@ -13,7 +13,7 @@
     <Grid HorizontalOptions="Center" VerticalOptions="Fill">
         <Grid.ColumnDefinitions>
             <ColumnDefinition x:Name="LeftSpacing" Width="*" />
-            <ColumnDefinition x:Name="Content" Width="Auto" />
+            <ColumnDefinition x:Name="ContentColumnDef" Width="Auto" />
             <ColumnDefinition x:Name="RightSpacing" Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>

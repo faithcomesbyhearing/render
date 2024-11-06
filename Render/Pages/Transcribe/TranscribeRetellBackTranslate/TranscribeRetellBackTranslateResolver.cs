@@ -13,14 +13,14 @@ namespace Render.Pages.Transcribe.TranscribeRetellBackTranslate
             IViewModelContextProvider viewModelContextProvider)
         {
             var idiom = viewModelContextProvider.GetCurrentDeviceIdiom();
-            var grandCentral = viewModelContextProvider.GetGrandCentralStation();
-            var stage = grandCentral.ProjectWorkflow.GetStage(step.Id);
+            var workflowService = viewModelContextProvider.GetWorkflowService();
+            var stage = workflowService.ProjectWorkflow.GetStage(step.Id);
 
             ViewModelBase viewModelToNavigateTo;
 
             if (idiom == DeviceIdiom.Tablet || idiom == DeviceIdiom.Desktop)
             {
-                viewModelToNavigateTo = await TranscribeRetellPassageSelectPageViewModel.CreateAsync(
+                viewModelToNavigateTo = TranscribeRetellPassageSelectPageViewModel.Create(
                     viewModelContextProvider,
                     step,
                     section,
@@ -42,8 +42,8 @@ namespace Render.Pages.Transcribe.TranscribeRetellBackTranslate
             IViewModelContextProvider viewModelContextProvider)
         {
             var idiom = viewModelContextProvider.GetCurrentDeviceIdiom();
-            var grandCentral = viewModelContextProvider.GetGrandCentralStation();
-            var stage = grandCentral.ProjectWorkflow.GetStage(step.Id);
+            var workflowService = viewModelContextProvider.GetWorkflowService();
+            var stage = workflowService.ProjectWorkflow.GetStage(step.Id);
 
             ViewModelBase viewModelToNavigateTo;
 

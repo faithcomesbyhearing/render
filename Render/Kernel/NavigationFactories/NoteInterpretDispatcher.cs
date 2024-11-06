@@ -2,7 +2,7 @@
 using Render.Models.Workflow;
 using Render.Models.Workflow.Stage;
 using Render.Pages.Interpreter;
-using Render.Services;
+using Render.Services.InterpretationService;
 using Render.Services.SessionStateServices;
 
 namespace Render.Kernel.NavigationFactories
@@ -18,8 +18,9 @@ namespace Render.Kernel.NavigationFactories
             sessionService.SetCurrentStep(step.Id, section.Id);
 
             var sessionPage = sessionService.GetSessionPage(step.Id, section.Id, null);
-            var grandCentralStation = viewModelContextProvider.GetGrandCentralStation();
-            var stage = grandCentralStation.ProjectWorkflow.GetStage(step.Id);
+            var workflowService = viewModelContextProvider.GetWorkflowService();
+            var interpretationService = viewModelContextProvider.GetInterpretationService();
+            var stage = workflowService.ProjectWorkflow.GetStage(step.Id);
 
             if (!string.IsNullOrEmpty(sessionPage))
             {
@@ -29,11 +30,11 @@ namespace Render.Kernel.NavigationFactories
                     step,
                     section,
                     stage,
-                    grandCentralStation,
+                    interpretationService,
                     sessionService);
             }
 
-            var dictionary = await grandCentralStation.FindMessagesNeedingInterpretation(section, stage.Id, step.Id, stage.StageType);
+            var dictionary = await interpretationService.FindMessagesNeedingInterpretation(section.Id, stage.Id, step.Id, stage.StageType);
             var (draft, message) = NoteInterpretViewModel.FindNextMessageNeedingInterpretation(dictionary);
 
             return NoteInterpretViewModel.Create(
@@ -52,10 +53,10 @@ namespace Render.Kernel.NavigationFactories
             Step step,
             Section section,
             Stage stage,
-            IGrandCentralStation grandCentralStation,
+            IInterpretationService interpretationService,
             ISessionStateService sessionService)
         {
-            var dictionary = await grandCentralStation.FindMessagesNeedingInterpretation(section, stage.Id, step.Id, stage.StageType);
+            var dictionary = await interpretationService.FindMessagesNeedingInterpretation(section.Id, stage.Id, step.Id, stage.StageType);
             if (sessionPage.Contains("NoteInterpret"))
             {
                 var tuple = FindDraftAndMessage(dictionary, sessionService.ActiveSession.NonDraftTranslationId);

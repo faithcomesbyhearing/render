@@ -167,7 +167,8 @@
 
             <VisualState x:Name="LessThan70Icon">
                 <VisualState.StateTriggers>
-                    <CompareStateTrigger Property="{Binding Width, Converter={converters:WidthToBoolConverter TargetValue=70, Operator=LessThan}}" Value="True" />
+                    <CompareStateTrigger x:DataType="local:CombinableWaveFormItemViewModel"
+                                         Property="{Binding Width, Converter={converters:WidthToBoolConverter TargetValue=70, Operator=LessThan}}" Value="True" />
                 </VisualState.StateTriggers>
                 <VisualState.Setters>
                     <Setter TargetName="startIcon" Property="Label.WidthRequest" Value="0" />
@@ -176,7 +177,8 @@
 
             <VisualState x:Name="MoreThan70Icon">
                 <VisualState.StateTriggers>
-                    <CompareStateTrigger Property="{Binding Width, Converter={converters:WidthToBoolConverter TargetValue=70, Operator=GreaterThan}}" Value="True" />
+                    <CompareStateTrigger x:DataType="local:CombinableWaveFormItemViewModel"
+                                         Property="{Binding Width, Converter={converters:WidthToBoolConverter TargetValue=70, Operator=GreaterThan}}" Value="True" />
                 </VisualState.StateTriggers>
                 <VisualState.Setters>
                     <Setter TargetName="startIcon" Property="Label.WidthRequest" Value="NaN" />
@@ -189,7 +191,8 @@
 
             <VisualState x:Name="LessThan45">
                 <VisualState.StateTriggers>
-                    <CompareStateTrigger Property="{Binding Width, Converter={converters:WidthToBoolConverter TargetValue=45, Operator=LessThan}}" Value="True" />
+                    <CompareStateTrigger x:DataType="local:CombinableWaveFormItemViewModel"
+                                         Property="{Binding Width, Converter={converters:WidthToBoolConverter TargetValue=45, Operator=LessThan}}" Value="True" />
                 </VisualState.StateTriggers>
                 <VisualState.Setters>
                     <Setter TargetName="audioLabel" Property="Label.WidthRequest" Value="0" />
@@ -198,7 +201,8 @@
 
             <VisualState x:Name="LessThan145">
                 <VisualState.StateTriggers>
-                    <CompareStateTrigger Property="{Binding Width, Converter={converters:WidthToBoolConverter TargetValue=145, Operator=LessThan}}" Value="True" />
+                    <CompareStateTrigger x:DataType="local:CombinableWaveFormItemViewModel"
+                                         Property="{Binding Width, Converter={converters:WidthToBoolConverter TargetValue=145, Operator=LessThan}}" Value="True" />
                 </VisualState.StateTriggers>
                 <VisualState.Setters>
                     <Setter TargetName="audioLabel" Property="Label.WidthRequest" Value="NaN" />
@@ -208,7 +212,8 @@
 
             <VisualState x:Name="MoreThan145">
                 <VisualState.StateTriggers>
-                    <CompareStateTrigger Property="{Binding Width, Converter={converters:WidthToBoolConverter TargetValue=145, Operator=GreaterThan}}" Value="True" />
+                    <CompareStateTrigger x:DataType="local:CombinableWaveFormItemViewModel"
+                                         Property="{Binding Width, Converter={converters:WidthToBoolConverter TargetValue=145, Operator=GreaterThan}}" Value="True" />
                 </VisualState.StateTriggers>
                 <VisualState.Setters>
                     <Setter TargetName="audioLabel" Property="Label.WidthRequest" Value="NaN" />
@@ -222,7 +227,8 @@
 
             <VisualState x:Name="LessThan60CentralIcons">
                 <VisualState.StateTriggers>
-                    <CompareStateTrigger Property="{Binding Width, Converter={converters:WidthToBoolConverter TargetValue=60, Operator=LessThan}}" Value="True" />
+                    <CompareStateTrigger x:DataType="local:CombinableWaveFormItemViewModel"
+                                         Property="{Binding Width, Converter={converters:WidthToBoolConverter TargetValue=60, Operator=LessThan}}" Value="True" />
                 </VisualState.StateTriggers>
                 <VisualState.Setters>
                     <Setter TargetName="canCombineIcon" Property="Label.WidthRequest" Value="0" />
@@ -233,7 +239,8 @@
 
             <VisualState x:Name="MoreThan60CentralIcons">
                 <VisualState.StateTriggers>
-                    <CompareStateTrigger Property="{Binding Width, Converter={converters:WidthToBoolConverter TargetValue=60, Operator=GreaterThan}}" Value="True" />
+                    <CompareStateTrigger x:DataType="local:CombinableWaveFormItemViewModel"
+                                         Property="{Binding Width, Converter={converters:WidthToBoolConverter TargetValue=60, Operator=GreaterThan}}" Value="True" />
                 </VisualState.StateTriggers>
                 <VisualState.Setters>
                     <Setter TargetName="canCombineIcon" Property="Label.WidthRequest" Value="NaN" />

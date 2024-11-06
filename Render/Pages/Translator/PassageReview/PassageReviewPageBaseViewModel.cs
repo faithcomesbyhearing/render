@@ -105,7 +105,11 @@ namespace Render.Pages.Translator.PassageReview
                     return await NavigateTo(vm);
                 }
 
-                await Task.Run(async () => { await ViewModelContextProvider.GetGrandCentralStation().AdvanceSectionAsync(Section, Step); });
+                await Task.Run(async () =>
+                {
+                    var sectionMovementService = ViewModelContextProvider.GetSectionMovementService();
+                    await sectionMovementService.AdvanceSectionAsync(Section, Step, GetProjectId(), GetLoggedInUserId());
+                });
                 return await NavigateToHomeOnMainStackAsync();
             }
 

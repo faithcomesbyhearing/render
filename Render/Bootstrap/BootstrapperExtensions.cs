@@ -13,6 +13,7 @@ using LogLevel = NLog.LogLevel;
 using NLog.Targets;
 using Splat.NLog;
 using Render.Interfaces;
+using Render.Services.SyncService.DbFolder;
 
 namespace Render.Bootstrap
 {
@@ -61,7 +62,8 @@ namespace Render.Bootstrap
 
         public static MauiAppBuilder AddLogging(this MauiAppBuilder builder)
         {
-#if DEBUG
+
+#if DEBUG || AUTOTESTS
             AddLogging(builder, logToConsole: true, logToFile: true);
 #elif TEST
             AddLogging(builder, logToConsole: false, logToFile: true);
@@ -79,9 +81,10 @@ namespace Render.Bootstrap
             Locator.CurrentMutable.RegisterConstant(new AudioActivityService(Locator.Current.GetService<IViewModelContextProvider>().GetLogger(typeof(AudioActivityService))), typeof(IAudioActivityService));
             Locator.CurrentMutable.RegisterConstant(new MenuPopupService(), typeof(IMenuPopupService));
             Locator.CurrentMutable.RegisterConstant(new ModalService(Locator.Current.GetService<IViewModelContextProvider>()), typeof(IModalService));
-            Locator.CurrentMutable.RegisterConstant(new AppLifecycleBus(Locator.Current.GetService<IViewModelContextProvider>()), typeof(AppLifecycleBus));
             Locator.CurrentMutable.RegisterConstant(new ProjectDownloadService(Locator.Current.GetService<IViewModelContextProvider>()), typeof(IProjectDownloadService));
-
+            Locator.CurrentMutable.RegisterConstant(new UsbSyncFolderStorageService(Locator.Current.GetService<IModalService>()), typeof(IUsbSyncFolderStorageService));
+            Locator.CurrentMutable.RegisterConstant(new DbBackupService(Locator.Current.GetService<IAppDirectory>(), Locator.Current.GetService<IAppSettings>()), typeof(IDbBackupService));
+            Locator.CurrentMutable.RegisterConstant(new AppLifecycleBus(Locator.Current.GetService<IViewModelContextProvider>()), typeof(AppLifecycleBus));
             return builder;
         }
 
@@ -92,7 +95,7 @@ namespace Render.Bootstrap
 
             return builder;
         }
-
+        
         private static void AddLogging(MauiAppBuilder builder, bool logToConsole, bool logToFile)
         {
             builder.Logging.ClearProviders();

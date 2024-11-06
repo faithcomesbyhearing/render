@@ -11,7 +11,7 @@ namespace Render.Components.Modal;
 public class ModalViewModel : ViewModelBase
 {
     [Reactive]
-    public string? Glyph { get; set; }
+    public string Glyph { get; set; }
     public string Title { get; }
     public string Message { get; }
 

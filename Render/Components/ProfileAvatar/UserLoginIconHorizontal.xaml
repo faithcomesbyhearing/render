@@ -7,7 +7,7 @@
              xmlns:resources="clr-namespace:Render.Resources.Localization"
              x:Class="Render.Components.ProfileAvatar.UserLoginIconHorizontal">
 
-    <StackLayout x:Name="Layout" HorizontalOptions="FillAndExpand"
+    <StackLayout x:Name="ComponentLayout" HorizontalOptions="FillAndExpand"
                  VerticalOptions="CenterAndExpand" Margin="0"
                  MinimumHeightRequest="100"
                  WidthRequest="250"

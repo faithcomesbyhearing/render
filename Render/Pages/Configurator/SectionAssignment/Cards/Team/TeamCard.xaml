@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<kernel:RenderComponentBase x:Class="Render.Pages.Configurator.SectionAssignment.Cards.Team.TeamCard"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:cards="clr-namespace:Render.Pages.Configurator.SectionAssignment.Cards.Team;assembly=Render"
+                            xmlns:dragAndDrop="clr-namespace:Render.Kernel.DragAndDrop;assembly=Render"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            x:TypeArguments="cards:TeamCardViewModel">
+    <Grid Margin="0"
+          Padding="0,18"
+          MinimumWidthRequest="100"
+          WidthRequest="250">
+        <Grid.Effects>
+            <dragAndDrop:DragRecognizerEffect DragStarting="DragStarting" />
+        </Grid.Effects>
+
+        <Border Margin="0,2"
+                Padding="15,0"
+                BackgroundColor="{StaticResource SecondaryText}"
+                HeightRequest="50"
+                HorizontalOptions="Start"
+                StrokeShape="RoundRectangle 10"
+                WidthRequest="220">
+            <Label x:Name="TeamNameLabel"
+                   FontAttributes="Bold"
+                   FontSize="{StaticResource SmallPlus2Font}"
+                   HorizontalOptions="Start"
+                   HorizontalTextAlignment="Start"
+                   TextColor="{StaticResource MainText}"
+                   VerticalOptions="Center" />
+        </Border>
+
+        <Border x:Name="TeamCountFrame"
+                Padding="0,0,0,4"
+                BackgroundColor="{StaticResource SecondaryText}"
+                HeightRequest="50"
+                HorizontalOptions="End"
+                Stroke="{StaticResource DarkBlue}"
+                StrokeShape="RoundRectangle 25"
+                TranslationY="-20"
+                WidthRequest="50">
+            <Label x:Name="CountLabel"
+                   BackgroundColor="{StaticResource SecondaryText}"
+                   FontAttributes="Bold"
+                   FontSize="{StaticResource SmallPlus2Font}"
+                   HorizontalTextAlignment="Center"
+                   TextColor="{StaticResource Option}"
+                   VerticalTextAlignment="Center" />
+        </Border>
+    </Grid>
+</kernel:RenderComponentBase>

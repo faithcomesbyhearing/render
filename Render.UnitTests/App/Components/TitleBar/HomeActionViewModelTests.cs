@@ -26,7 +26,7 @@ namespace Render.UnitTests.App.Components.TitleBar
         private readonly Mock<IModalService> _mockModalService = new();
         public HomeActionViewModelTests()
         {
-            MockGrandCentralStation.Setup(x => x.StepsAssignedToUser()).Returns(new List<Guid>());
+            MockStageService.Setup(x => x.StepsAssignedToUser()).Returns(new List<Guid>());
             MockContextProvider.Setup(x => x.GetLoggedInUser()).Returns(new Mock<IUser>().Object);
             
             var sessionStateService = new Mock<ISessionStateService>();
@@ -60,7 +60,7 @@ namespace Render.UnitTests.App.Components.TitleBar
             MockContextProvider.Setup(x => x.GetUserRepository())
                 .Returns(mockUserRepository.Object);
             MockContextProvider.Setup(x => x.GetRenderChangeMonitoringService())
-                .Returns(new Mock<IRenderChangeMonitoringService>().Object);
+                .Returns(new Mock<IDocumentChangeListener>().Object);
             
             var projectRepositoryMock = new Mock<IDataPersistence<Project>>();
             var project = new Project("Project Name", string.Empty, string.Empty);
@@ -167,12 +167,18 @@ namespace Render.UnitTests.App.Components.TitleBar
         private class BogusViewModelTest: IRoutableViewModel
         {
             public string UrlPathSegment { get; } = string.Empty;
+
             public IScreen HostScreen { get; } = null;
-            public event PropertyChangedEventHandler PropertyChanged;
+
+#pragma warning disable 0067
+			public event PropertyChangedEventHandler PropertyChanged;
             public event System.ComponentModel.PropertyChangingEventHandler PropertyChanging;
-            public void RaisePropertyChanging(System.ComponentModel.PropertyChangingEventArgs args)
+#pragma warning restore 0067
+
+			public void RaisePropertyChanging(System.ComponentModel.PropertyChangingEventArgs args)
             {
             }
+
             public void RaisePropertyChanged(PropertyChangedEventArgs args)
             {
             }

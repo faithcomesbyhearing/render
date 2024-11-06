@@ -10,6 +10,7 @@ using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Render.Interfaces;
 using Render.Repositories.Extensions;
+using Timer = System.Timers.Timer;
 
 namespace Render.Services.SyncService
 {
@@ -24,21 +25,35 @@ namespace Render.Services.SyncService
 
     public class LocalReplicator : ReactiveObject, ILocalReplicator, IDisposable
     {
+        internal static Func<Document, DocumentFlags, bool> GetFilterFunc(ICollection<string> filterIds)
+        {
+            return (document, flags) =>
+            {
+                var projectId = document.GetString("ProjectId");
+                if (!projectId.IsNullOrEmpty() && filterIds.Contains(projectId))
+                {
+                    return true;
+                }
+
+                var id = document.GetString("Id");
+                return !id.IsNullOrEmpty() && filterIds.Contains(id);
+            };
+        }
+
         private readonly string _databasePath;
 
-        private readonly List<(Replicator replicator, ListenerToken listenerToken, Device device)>
-            _localReplicators = new();
+        private readonly List<(Replicator Replicator, ListenerToken ListenerToken, Device Device)> _localReplicators = new();
 
         private URLEndpointListener _passiveListener;
         private Database _localDatabase;
         private readonly IRenderLogger _logger;
 
-        private System.Timers.Timer Timer { get; set; }
+        private Timer Timer { get; set; }
         private bool Listening { get; set; }
         private int PortNumber { get; set; }
         private string PeerUsername { get; set; }
         private string PeerPassword { get; set; }
-
+        
         public int PassiveConnections { get; private set; }
 
         public ReplicatorStatus CurrentStatus { get; private set; }
@@ -65,6 +80,7 @@ namespace Render.Services.SyncService
                 {
                     Directory = _databasePath,
                 };
+
             _localDatabase = new Database(databaseName, configuration);
             PortNumber = portNumber;
             PeerUsername = peerUsername;
@@ -83,7 +99,7 @@ namespace Render.Services.SyncService
                 {
                     if (args.Status.Error != null)
                     {
-                        _logger.LogError(args.Status.Error);
+                        HandleDisconnectionError(args.Status.Error);
                     }
 
                     CurrentStatus = args.Status;
@@ -103,7 +119,7 @@ namespace Render.Services.SyncService
                             //Where the replicator is disposed / removed
                             replicator.Stop();
                             replicator.Dispose();
-                            _localReplicators.Remove(_localReplicators.Find(x => x.replicator == replicator));
+                            _localReplicators.Remove(_localReplicators.Find(x => x.Replicator == replicator));
                         }
                     }
                     else
@@ -118,13 +134,15 @@ namespace Render.Services.SyncService
                             replicator.Stop();
                             replicator.Dispose();
 
-                            _localReplicators.Remove(_localReplicators.Find(x => x.replicator == replicator));
+                            _localReplicators.Remove(_localReplicators.Find(x => x.Replicator == replicator));
                         }
                     }
 
                     SyncStatusUpdate?.Invoke();
                 });
+
             replicator.Start(freshDownload);
+
             _localReplicators.Add((replicator, listenerToken, device));
         }
 
@@ -133,7 +151,7 @@ namespace Render.Services.SyncService
             if (_passiveListener != null)
             {
                 _passiveListener.Start();
-                Timer.Start();
+                Timer?.Start();
             }
             else
             {
@@ -198,19 +216,19 @@ namespace Render.Services.SyncService
 
         public void CancelPassiveListener()
         {
-            _passiveListener.Stop();
-            Timer.Stop();
+            _passiveListener?.Stop();
+            Timer?.Stop();
         }
 
-        public void CancelActiveReplications(List<Device> devicesToDisconnect)
+        public void CancelActiveReplications(Device deviceToDisconnect)
         {
-            var replicators = _localReplicators.FindAll(x => devicesToDisconnect.Contains(x.device));
+            var replicators = _localReplicators.FindAll(x => x.Device == deviceToDisconnect);
             foreach (var localReplicator in replicators)
             {
-                localReplicator.replicator.Stop();
-                localReplicator.device.IsConnected = false;
+                localReplicator.Replicator.Stop();
+                localReplicator.Device.IsConnected = false;
             }
-            Dispose();
+
             SyncStatusUpdate?.Invoke();
         }
 
@@ -268,58 +286,66 @@ namespace Render.Services.SyncService
                 ReplicatorType = oneShotDownload ? ReplicatorType.Pull : ReplicatorType.PushAndPull,
                 Continuous = !oneShotDownload,
                 AcceptOnlySelfSignedServerCertificate = false,
-                PinnedServerCertificate = null
+                PinnedServerCertificate = null,
             };
-            
             replicatorConfig.AddCollection(_localDatabase.GetDefaultCollection(), new CollectionConfiguration
             {
-                PullFilter = (document, flags) =>
-                {
-                    var projectId = document.GetString("ProjectId");
-                    if (!projectId.IsNullOrEmpty() && filterIds.Contains(projectId))
-                    {
-                        return true;
-                    }
-
-                    var id = document.GetString("Id");
-                    return !id.IsNullOrEmpty() && filterIds.Contains(id);
-                },
-
-                PushFilter = (document, flags) =>
-                {
-                    var projectId = document.GetString("ProjectId");
-                    if (!projectId.IsNullOrEmpty() && filterIds.Contains(projectId))
-                    {
-                        return true;
-                    }
-
-                    var id = document.GetString("Id");
-                    return !id.IsNullOrEmpty() && filterIds.Contains(id);
-                }
+                PullFilter = GetFilterFunc(filterIds),
+                PushFilter = GetFilterFunc(filterIds),
+                ConflictResolver = CustomConflictResolver.Instance,
             });
 
-
             return replicatorConfig;
+        }
+
+        private void HandleDisconnectionError(Exception error)
+        {
+            if (error is CouchbaseNetworkException cne)
+            {
+                switch (cne.Error)
+                {
+                    case CouchbaseLiteError.Timeout:
+                        _logger.LogError(error);
+                        return;
+                    case CouchbaseLiteError.NetworkUnreachable:
+                        _logger.LogInfo(error.Message);
+                        return;
+                }
+            }
+            if (error is CouchbaseWebsocketException cwe)
+            {
+                if (cwe.Error.CompareTo( CouchbaseLiteError.WebSocketGoingAway) == 0)
+                {
+                    _logger.LogInfo(error.Message);
+                    return;
+                }
+            }
+
+            _logger.LogError(error);
         }
 
         public void Dispose()
         {
             if (Listening)
             {
-                Timer.Stop();
-                Timer.Dispose();
+                Timer?.Stop();
+                Timer?.Dispose();
                 Timer = null;
 
-                _passiveListener.Stop();
-                _passiveListener.Dispose();
+                _passiveListener?.Stop();
+                _passiveListener?.Dispose();
+                _passiveListener = null;
+                PassiveConnections = 0;
             }
 
-            foreach (var replicator in _localReplicators)
+            foreach (var replicator in _localReplicators.ToList())
             {
-                replicator.replicator?.RemoveChangeListener(replicator.listenerToken);
-                replicator.replicator?.Stop();
-                replicator.replicator?.Dispose();
+                replicator.Replicator?.RemoveChangeListener(replicator.ListenerToken);
+                replicator.Replicator?.Stop();
+                replicator.Replicator?.Dispose();
             }
+
+            _localReplicators.Clear();
         }
     }
 }

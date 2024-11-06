@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="consultantApprovalStageSettings:ConsultantApprovalStageSettingsViewModel"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:resources="clr-namespace:Render.Resources;assembly=Render"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:localization="clr-namespace:Render.Resources.Localization"
+                            xmlns:consultantApprovalStageSettings="clr-namespace:Render.Components.StageSettings.ConsultantApprovalStageSettings"
+                            x:Class="Render.Components.StageSettings.ConsultantApprovalStageSettings.ConsultantApprovalStageSettings">
+
+    <Grid BackgroundColor="{StaticResource Transparent}" RowSpacing="0" x:Name="TopLevelElement">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Stage name with icon and stage name editor -->
+        <HorizontalStackLayout Style="{StaticResource StageNameStackLayoutStyle}"
+                               Padding="0,25,0,0">
+            <Label Style="{StaticResource StageSettingsEditStageNameIconStyle}"
+                   Text="{resources:IconExtensions Update}" />
+            <Label Style="{StaticResource StageSettingsStageNameLabelStyle}"
+                   Text="{x:Static localization:AppResources.StageName}" />
+            <Border Style="{StaticResource StageSettingStageNameEditBorderStyle}">
+                <Entry x:Name="StageName" Style="{StaticResource StageSettingsStageNameEntryStyle}" />
+            </Border>
+        </HorizontalStackLayout>
+
+        <!-- Settings panel -->
+        <ScrollView Style="{StaticResource StageSettingsScrollViewStyle}"
+                    TranslationY="-30">
+            <VerticalStackLayout>
+                <!-- Substage Name with "Consultant Approval" editor -->
+                <HorizontalStackLayout Style="{StaticResource StepNameStackLayoutStyle}">
+                    <Label Style="{StaticResource StageSettingsStepNameLabelStyle}"
+                           Text="{x:Static localization:AppResources.SubstageName}" />
+
+                    <Border Style="{StaticResource StageSettingStepNameEditBorderStyle}">
+                        <Entry x:Name="ConsultantApprovalStepName"
+                               Style="{StaticResource StageSettingsStepNameEntryStyle}" />
+                    </Border>
+                </HorizontalStackLayout>
+
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</kernel:RenderComponentBase>

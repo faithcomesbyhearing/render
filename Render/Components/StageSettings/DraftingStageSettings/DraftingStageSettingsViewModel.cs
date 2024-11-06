@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using Render.Kernel;
+﻿using Render.Kernel;
 using Render.Models.Workflow;
 using Render.Models.Workflow.Stage;
 
@@ -9,13 +7,23 @@ namespace Render.Components.StageSettings.DraftingStageSettings
     public class DraftingStageSettingsViewModel : StageSettingsViewModelBase
     {
         private readonly Step _draftingStep;
-        public DraftingStageSettingsViewModel(RenderWorkflow workflow,
+
+        public StepNameViewModel DraftingStepName { get; }
+
+        public DraftingStageSettingsViewModel(
+            RenderWorkflow workflow,
             Stage stage,
             IViewModelContextProvider viewModelContextProvider,
             Action<Stage> updateStageCard)
-            : base(workflow, stage, viewModelContextProvider, updateStageCard)
+            : base(
+                renderWorkflow: workflow,
+                stage: stage,
+                viewModelContextProvider: viewModelContextProvider,
+                updateStageCard: updateStageCard)
         {
             _draftingStep = Stage.Steps.First();
+            DraftingStepName = new StepNameViewModel(_draftingStep);
+
             TranslateDoSectionListen =
                 _draftingStep.StepSettings.GetSetting(SettingType.DoSectionListen);
             TranslateRequireSectionListen =
@@ -36,21 +44,36 @@ namespace Render.Components.StageSettings.DraftingStageSettings
 
         protected override void UpdateWorkflow()
         {
+            DraftingStepName.UpdateEntity();
+
             Workflow.SetStepSetting(_draftingStep, SettingType.DoSectionListen, TranslateDoSectionListen);
+
             if (TranslateDoSectionListen)
+            {
                 Workflow.SetStepSetting(_draftingStep, SettingType.RequireSectionListen, TranslateRequireSectionListen);
-            
+            }
+
             Workflow.SetStepSetting(_draftingStep, SettingType.DoPassageListen, TranslateDoPassageListen);
+
             if (TranslateDoPassageListen)
+            {
                 Workflow.SetStepSetting(_draftingStep, SettingType.RequirePassageListen, TranslateRequirePassageListen);
-            
+            }
+
             Workflow.SetStepSetting(_draftingStep, SettingType.DoSectionReview, TranslateDoSectionReview);
+
             if (TranslateDoSectionReview)
+            {
                 Workflow.SetStepSetting(_draftingStep, SettingType.RequireSectionReview, TranslateRequireSectionReview);
-            
+            }
+
             Workflow.SetStepSetting(_draftingStep, SettingType.DoPassageReview, TranslateDoPassageReview);
+
             if (TranslateDoPassageReview)
+            {
                 Workflow.SetStepSetting(_draftingStep, SettingType.RequirePassageReview, TranslateRequirePassageReview);
+            }
+
             base.UpdateWorkflow();
         }
     }

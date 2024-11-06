@@ -43,5 +43,8 @@ namespace Render.Services.SessionStateServices
         Task ResetPassageNumberForSectionStep(Guid stepId, Guid sectionId);
 
         Task DeleteAllTemporaryAudioAsync(List<Guid> ids);
-    }
+
+        void SetCurrentStepForDraftOrRevise(Guid stepId, Guid sectionId);
+
+	}
 }

@@ -89,7 +89,5 @@ namespace Render.Repositories.Kernel
         Task PurgeAllOfTypeForProjectId(Guid projectId);
 
         Task ResetCreatedFromAudioIds(Guid projectId, List<Guid> deletedStandardQuestions);
-        
-        Task PurgeAllOfTypeForId(Guid id);
 	}
 }

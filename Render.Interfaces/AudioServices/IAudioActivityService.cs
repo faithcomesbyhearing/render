@@ -4,6 +4,8 @@ namespace Render.Interfaces.AudioServices
 {
     public interface IAudioActivityService : IDisposable
     {
+        bool IsAudioRecording { get; }
+
         void SetStopCommand(Func<Task> command, bool isAudioRecording);
 
         void SetStopCommand(Action command, bool isAudioRecording);

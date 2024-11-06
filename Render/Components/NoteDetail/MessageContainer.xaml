@@ -124,6 +124,12 @@
             <Setter Property="VerticalOptions" Value="Center"/>
             <Setter Property="HorizontalOptions" Value="End"/>
         </Style>
+
+        <Style x:Key="DeletedMessageOverlay" TargetType="Border">
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="BackgroundColor" Value="White" />
+            <Setter Property="Opacity" Value="0.6" />
+        </Style>
     </ContentView.Resources>
 
     <ContentView.Content>
@@ -135,18 +141,29 @@
                     Text="{uiResources:IconExtensions Delete}" 
                     Style="{StaticResource MessageTrashButton}" 
                     AutomationId="MessageTrashButton"/>
-                <Border x:Name="TextMessage" Style="{StaticResource TextMessage}" AutomationId="TextMessageContainer">
-                    <VerticalStackLayout>
-                        <Label x:Name="TextMessageAuthor" Style="{StaticResource TextTitle}" AutomationId="TextMessageAuthorLabel" />
-                        <Label x:Name="TextMessageContent" Style="{StaticResource TextContent}" AutomationId="TextMessageContentLabel" />
-                    </VerticalStackLayout>
-                </Border>
-                <Border>
-                    <VerticalStackLayout>
-                        <barPlayer:BarPlayer x:Name="AudioMessage" Style="{StaticResource AudioMessage}" AutomationId="AudioMessageContainer" />
-                        <barPlayer:BarPlayer x:Name="InterpretedAudioMessage" Style="{StaticResource AudioMessage}" AutomationId="InterpretedAudioMessageContainer" />
-                    </VerticalStackLayout>
-                </Border>
+                <Button x:Name="MessageUndoTrashButton"
+                    Text="{uiResources:IconExtensions DeleteUndo}" 
+                    Style="{StaticResource MessageTrashButton}" 
+                    AutomationId="MessageUndoTrashButton"/>
+                <Grid>
+                    <Border x:Name="TextMessage" Style="{StaticResource TextMessage}" AutomationId="TextMessageContainer">
+                        <VerticalStackLayout>
+                            <Label x:Name="TextMessageAuthor" Style="{StaticResource TextTitle}" AutomationId="TextMessageAuthorLabel" />
+                            <Label x:Name="TextMessageContent" Style="{StaticResource TextContent}" AutomationId="TextMessageContentLabel" />
+                        </VerticalStackLayout>
+                    </Border>
+                    <Border>
+                        <VerticalStackLayout>
+                            <barPlayer:BarPlayer x:Name="AudioMessage" Style="{StaticResource AudioMessage}" AutomationId="AudioMessageContainer" />
+                            <barPlayer:BarPlayer x:Name="InterpretedAudioMessage" Style="{StaticResource AudioMessage}" AutomationId="InterpretedAudioMessageContainer" />
+                        </VerticalStackLayout>
+                    </Border>
+                    <Border x:Name="DeletedMessageOverlay"
+                            AutomationId="DeletedMessageOverlay"
+                            Style="{StaticResource DeletedMessageOverlay}"
+                            IsVisible="False">
+                    </Border>
+                </Grid>
             </HorizontalStackLayout>
         </Grid>
     </ContentView.Content>

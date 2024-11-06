@@ -29,15 +29,24 @@ namespace Render.Pages.Translator.DraftSelectPage
         private List<DraftViewModel> _draftViewModels;
         private Passage Passage { get; set; }
 
-        public DraftSelectViewModel(Section section, IEnumerable<DraftViewModel> drafts,
-            IViewModelContextProvider viewModelContextProvider, Passage passage, Step step, Stage stage)
-            : base("DraftSelect", viewModelContextProvider,
-                GetStepName(viewModelContextProvider, step.RenderStepType, stage.Id), section, stage,
-                step, passage.PassageNumber, secondPageName: AppResources.DraftSelect)
+        public DraftSelectViewModel(
+            Section section,
+            IEnumerable<DraftViewModel> drafts,
+            IViewModelContextProvider viewModelContextProvider,
+            Passage passage,
+            Step step,
+            Stage stage)
+            : base(
+                urlPathSegment: "DraftSelect",
+                viewModelContextProvider: viewModelContextProvider,
+                pageName: GetStepName(step),
+                section: section,
+                stage: stage,
+                step: step,
+                passageNumber: passage.PassageNumber,
+                secondPageName: AppResources.DraftSelect)
         {
-            DisposeOnNavigationCleared = true;
-            TitleBarViewModel.DisposeOnNavigationCleared = true;
-
+            
             TitleBarViewModel.PageGlyph = ResourceExtensions.GetResourceValue(Icon.Record.ToString()) as string;
 
             var draftViewModels = drafts.ToList();
@@ -98,7 +107,7 @@ namespace Render.Pages.Translator.DraftSelectPage
             {
                 var nextPassage = Section.GetNextPassage(Passage);
                 if (!Step.StepSettings.GetSetting(SettingType.DoPassageReview) &&
-                    nextPassage == null && 
+                    nextPassage == null &&
                     !Step.StepSettings.GetSetting(SettingType.DoSectionReview))
                 {
                     ProceedButtonViewModel.IsCheckMarkIcon = true;
@@ -155,12 +164,12 @@ namespace Render.Pages.Translator.DraftSelectPage
                     {
                         vm = await SectionReview.SectionReview.GetSectionReviewViewModelAsync(Section,
                             ViewModelContextProvider, Step);
-                        
+
                         return await NavigateToAndReset(vm);
                     }
                     else
                     {
-                        await ViewModelContextProvider.GetGrandCentralStation().AdvanceSectionAsync(Section, Step);
+                        await ViewModelContextProvider.GetSectionMovementService().AdvanceSectionAsync(Section, Step, GetProjectId(), GetLoggedInUserId()); 
 
                         await RemoveTempAudioFromLocalDatabase();
 
@@ -223,18 +232,12 @@ namespace Render.Pages.Translator.DraftSelectPage
             if (draftViewModel is { IsPreviousDraft: false })
             {
                 var draft = new Draft(Section.ScopeId, Section.ProjectId, passage.Id);
+
                 draft.SetAudio(draftViewModel.Audio.Data);
                 draft.SetRevision(passage.CurrentDraftAudio is null ? 0 : passage.CurrentDraftAudio.Revision + 1);
 
-                if (passage.CurrentDraftAudio != null && passage.CurrentDraftAudio.CreatedById != default)
-                {
-                    draft.SetCreatedBy(passage.CurrentDraftAudio.CreatedById, passage.CurrentDraftAudio.CreatedByName);
-                }
-                else
-                {
-                    var loggedInUser = ViewModelContextProvider.GetLoggedInUser();
-                    draft.SetCreatedBy(loggedInUser.Id, loggedInUser.Username);
-                }
+                var loggedInUser = ViewModelContextProvider.GetLoggedInUser();
+                draft.SetCreatedBy(loggedInUser.Id, string.IsNullOrEmpty(loggedInUser.FullName) ? loggedInUser.Username : loggedInUser.FullName);
 
                 draft.SavedDuration = draftViewModel.Audio.SavedDuration;
 

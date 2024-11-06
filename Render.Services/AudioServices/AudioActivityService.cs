@@ -13,6 +13,11 @@ namespace Render.Services.AudioServices
         private bool _isAudioRecording;
         private readonly IRenderLogger _renderLogger;
 
+        public bool IsAudioRecording 
+        { 
+            get => _isAudioRecording; 
+        }
+
         public AudioActivityService(IRenderLogger renderLogger)
         {
             _renderLogger = renderLogger;

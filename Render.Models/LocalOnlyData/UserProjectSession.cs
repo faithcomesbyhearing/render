@@ -119,7 +119,9 @@ namespace Render.Models.LocalOnlyData
 
         public string CheckForCurrentStep(Guid stepId, Guid sectionId, PassageNumber passageNumber)
         {
-            var isCurrent =  StepId == stepId && SectionId == sectionId && ( PassageNumber == null || (PassageNumber!= null && PassageNumber.Equals(passageNumber)));
+            var isCurrent =  StepId == stepId
+                && SectionId == sectionId
+                && (PassageNumber is null || PassageNumber.Equals(passageNumber));
             if (!isCurrent)
             {
                 //TODO : do something when current is false

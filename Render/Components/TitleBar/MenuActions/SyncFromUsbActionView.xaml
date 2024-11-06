@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<kernel:RenderComponentBase x:TypeArguments="local:SyncFromUsbActionViewModel"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:kernel="clr-namespace:Render.Kernel"
+                            xmlns:local="clr-namespace:Render.Components.TitleBar.MenuActions"
+                            xmlns:resources="clr-namespace:Render.Resources"
+                            xmlns:localization="clr-namespace:Render.Resources.Localization"
+                            x:Class="Render.Components.TitleBar.MenuActions.SyncFromUsbActionView">
+    <HorizontalStackLayout Margin="15">
+        <HorizontalStackLayout.GestureRecognizers>
+            <TapGestureRecognizer Tapped="OnButtonClicked" x:Name="GestureRecognizer" />
+        </HorizontalStackLayout.GestureRecognizers>
+        
+        <Grid ColumnDefinitions="42"
+              RowDefinitions="42"
+              HorizontalOptions="Center">
+            <Label Grid.Column="0"
+                   Grid.Row="0"
+                   x:Name="Image"
+                   Text="{resources:IconExtensions UsbIcon}"
+                   FontFamily="Icons"
+                   ZIndex="0"
+                   HorizontalOptions="Start"
+                   FontSize="36"
+                   VerticalOptions="Start"
+                   TextColor="{StaticResource Option}" />
+
+            <Border Grid.Column="0"
+                    Grid.Row="0"
+                    StrokeShape="RoundRectangle 28"
+                    BackgroundColor="{StaticResource SecondaryText}"
+                    ZIndex="1"
+                    HeightRequest="28"
+                    WidthRequest="28"
+                    VerticalOptions="End"
+                    HorizontalOptions="End">
+
+                <Label x:Name="SyncSpinner"
+                       FontFamily="Icons"
+                       FontSize="24"
+                       Text="{resources:IconExtensions Sync}"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       TextColor="{StaticResource Option}" />
+            </Border>
+        </Grid>
+        
+        <Label x:Name="Label"
+               Margin="15,0,0, 0"
+               Text="{x:Static localization:AppResources.UsbSync}" 
+               Style="{DynamicResource MediumText}"
+               VerticalOptions="Center" />
+        
+        <Label x:Name="SecondaryImage"
+               FontFamily="Icons"
+               IsVisible="False"
+               Margin="5,5,5,0"
+               HorizontalOptions="Center" 
+               FontSize="30"
+               VerticalOptions="Center"
+               TextColor="{DynamicResource Option}" />
+    </HorizontalStackLayout>
+</kernel:RenderComponentBase>

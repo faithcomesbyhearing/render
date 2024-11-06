@@ -9,7 +9,6 @@ using Render.Sequencer.Core.Utils.Extensions;
 using Render.Sequencer.Core.Utils.Helpers;
 using Render.Sequencer.Views.Scroller;
 using Render.Sequencer.Views.WaveForm;
-using Render.Sequencer.Views.WaveForm.Items.Combining;
 using Render.Services.AudioPlugins.AudioPlayer;
 
 namespace Render.Sequencer.ViewModels;
@@ -48,7 +47,7 @@ internal class SequencerCombiningPlayerViewModel : BaseSequencerViewModel<Combin
             throw new InvalidOperationException(ErrorMessages.CombiningMoreThanOnes);
         }
 
-        var combiningItem = WaveFormViewModel.CombiningItem ?? throw new InvalidOperationException(ErrorMessages.NullCombiningItem);
+        var combiningItem = WaveFormViewModel?.CombiningItem ?? throw new InvalidOperationException(ErrorMessages.NullCombiningItem);
         var baseAudio = combiningItem.CombinableWaveFormItems.First(item => item.SequencerAudio.Audio.IsBase).SequencerAudio.Audio;
 
         return new CombinedResultModel(

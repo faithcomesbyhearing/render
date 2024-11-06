@@ -3,6 +3,7 @@ using ReactiveUI.Fody.Helpers;
 using Render.Components.ProceedButton;
 using Render.Components.StageSettings;
 using Render.Components.StageSettings.CommunityTestStageSettings;
+using Render.Components.StageSettings.ConsultantApprovalStageSettings;
 using Render.Components.StageSettings.ConsultantCheckStageSettings;
 using Render.Components.StageSettings.DraftingStageSettings;
 using Render.Components.StageSettings.PeerCheckStageSettings;
@@ -15,19 +16,26 @@ using Render.Resources.Styles;
 
 namespace Render.Pages.Configurator.WorkflowManagement;
 
-//TODO: implement after https://dev.azure.com/FCBH/Software%20Development/_workitems/edit/11779
 public class WorkflowStageSettingsPageViewModel : PageViewModelBase
 {
-    [Reactive] public StageSettingsViewModelBase CurrentStageSettingsViewModel { get; set; }
+    [Reactive]
+    public StageSettingsViewModelBase CurrentStageSettingsViewModel { get; set; }
 
-    private Action<Stage> UpdateStageCard;
+    private Action<Stage> _updateStageCard;
     public ProceedButtonViewModel ProceedButtonViewModel { get; private set; }
     private RenderWorkflow Workflow { get; set; }
     private Stage Stage { get; set; }
 
-    public WorkflowStageSettingsPageViewModel(Stage stage, RenderWorkflow workflow,
-        IViewModelContextProvider viewModelContextProvider, Action<Stage> updateStageCard, string projectName)
-        : base("WorkflowStageConfiguration", viewModelContextProvider, AppResources.ConfigureWorkflow,
+    public WorkflowStageSettingsPageViewModel(
+        Stage stage,
+        RenderWorkflow workflow,
+        IViewModelContextProvider viewModelContextProvider,
+        Action<Stage> updateStageCard,
+        string projectName)
+        : base(
+            urlPathSegment: "WorkflowStageConfiguration",
+            viewModelContextProvider: viewModelContextProvider,
+            pageName: AppResources.ConfigureWorkflow,
             secondPageName: projectName)
     {
         var color = (ColorReference)ResourceExtensions.GetResourceValue("SecondaryText");
@@ -36,7 +44,7 @@ public class WorkflowStageSettingsPageViewModel : PageViewModelBase
             TitleBarViewModel.PageGlyph = IconExtensions.BuildFontImageSource(Icon.ConfigureWorkflow, color.Color)?.Glyph;
         }
 
-        UpdateStageCard = updateStageCard;
+        _updateStageCard = updateStageCard;
         Stage = stage;
         Workflow = workflow;
         ProceedButtonViewModel = new ProceedButtonViewModel(viewModelContextProvider);
@@ -61,16 +69,19 @@ public class WorkflowStageSettingsPageViewModel : PageViewModelBase
         switch (stage.StageType)
         {
             case StageTypes.Drafting:
-                CurrentStageSettingsViewModel = new DraftingStageSettingsViewModel(workflow, stage, ViewModelContextProvider, UpdateStageCard);
+                CurrentStageSettingsViewModel = new DraftingStageSettingsViewModel(workflow, stage, ViewModelContextProvider, _updateStageCard);
                 break;
             case StageTypes.PeerCheck:
-                CurrentStageSettingsViewModel = new PeerCheckStageSettingsViewModel(workflow, stage, ViewModelContextProvider, UpdateStageCard);
+                CurrentStageSettingsViewModel = new PeerCheckStageSettingsViewModel(workflow, stage, ViewModelContextProvider, _updateStageCard);
                 break;
             case StageTypes.CommunityTest:
-                CurrentStageSettingsViewModel = new CommunityTestStageSettingsViewModel(workflow, stage, ViewModelContextProvider, UpdateStageCard);
+                CurrentStageSettingsViewModel = new CommunityTestStageSettingsViewModel(workflow, stage, ViewModelContextProvider, _updateStageCard);
                 break;
             case StageTypes.ConsultantCheck:
-                CurrentStageSettingsViewModel = new ConsultantCheckStageSettingsViewModel(workflow, stage, ViewModelContextProvider, UpdateStageCard);
+                CurrentStageSettingsViewModel = new ConsultantCheckStageSettingsViewModel(workflow, stage, ViewModelContextProvider, _updateStageCard);
+                break;
+            case StageTypes.ConsultantApproval:
+                CurrentStageSettingsViewModel = new ConsultantApprovalStageSettingsViewModel(workflow, stage, ViewModelContextProvider, _updateStageCard);
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -87,7 +98,7 @@ public class WorkflowStageSettingsPageViewModel : PageViewModelBase
     {
         Workflow = null;
         Stage = null;
-        UpdateStageCard = null;
+        _updateStageCard = null;
 
         ProceedButtonViewModel?.Dispose();
         ProceedButtonViewModel = null;

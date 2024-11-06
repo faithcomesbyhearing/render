@@ -189,7 +189,7 @@ namespace Render.Components.NoteDetail
             var flag = SequencerViewModel.GetFlag(conversation.Id);
             if (flag is null)
             {
-                SequencerViewModel.AddFlag(new NoteFlagModel(conversation.Id, conversation.Flag, false, false));
+                SequencerViewModel.AddFlag(new NoteFlagModel(conversation.Id, conversation.Flag, false, true));
             }
         }
 

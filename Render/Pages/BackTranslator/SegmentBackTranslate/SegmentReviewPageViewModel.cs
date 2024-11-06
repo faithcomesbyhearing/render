@@ -68,7 +68,7 @@ namespace Render.Pages.BackTranslator.SegmentBackTranslate
             : base(
                 urlPathSegment: "SegmentReview",
                 viewModelContextProvider: viewModelContextProvider,
-                pageName: AppResources.BackTranslate,
+                pageName: GetStepName(step),
                 section: section,
                 stage: stage,
                 step: step,
@@ -82,10 +82,7 @@ namespace Render.Pages.BackTranslator.SegmentBackTranslate
             _projectLanguageName = project.GetLanguageName();
             
             IsTwoStepBackTranslate = Step.Role == Roles.BackTranslate2;
-
-            DisposeOnNavigationCleared = true;
-            TitleBarViewModel.DisposeOnNavigationCleared = true;
-
+            
             TitleBarViewModel.PageGlyph = IconExtensions
                 .BuildFontImageSource(Icon.SegmentBackTranslate,
                     ResourceExtensions.GetColor("SecondaryText"))?.Glyph;
@@ -178,7 +175,8 @@ namespace Render.Pages.BackTranslator.SegmentBackTranslate
                         x.CurrentDraftAudio.SegmentBackTranslationAudios.All(s =>
                             s.RetellBackTranslationAudio != null && s.RetellBackTranslationAudio.HasAudio)))
                 {
-                    await ViewModelContextProvider.GetGrandCentralStation().AdvanceSectionAsync(Section, Step);
+                    var sectionMovementService = ViewModelContextProvider.GetSectionMovementService();
+                    await sectionMovementService.AdvanceSectionAsync(Section, Step, GetProjectId(), GetLoggedInUserId()); 
 
                     return await NavigateToHomeOnMainStackAsync();
                 }

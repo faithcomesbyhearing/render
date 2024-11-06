@@ -1,7 +1,6 @@
 ﻿using System.Reactive.Linq;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using Render.Components.BarPlayer;
 using Render.Components.MiniWaveformPlayer;
 using Render.Kernel;
 using Render.Models.Sections;
@@ -12,10 +11,8 @@ using Render.Repositories.Audio;
 using Render.Resources.Localization;
 using Render.Resources;
 using Render.Resources.Styles;
-using Render.Sequencer;
 using Render.Sequencer.Contracts.Interfaces;
 using Render.Services.AudioServices;
-using Render.Services.SessionStateServices;
 using DynamicData;
 using Render.Extensions;
 using Render.Models.Audio;
@@ -48,16 +45,13 @@ namespace Render.Pages.CommunityTester.CommunityRetell
             bool isSectionAudioListened = false) : base(
                 urlPathSegment: "CommunityRetellPage",
                 viewModelContextProvider: viewModelContextProvider,
-                pageName: GetStepName(viewModelContextProvider, RenderStepTypes.CommunityTest, stage.Id),
+                pageName: GetStepName(step),
                 section: section,
                 stage: stage,
                 step: step,
                 passageNumber: passage.PassageNumber,
                 secondPageName: AppResources.PassageRetell)
         {
-            DisposeOnNavigationCleared = true;
-            TitleBarViewModel.DisposeOnNavigationCleared = true;
-
             var color = (ColorReference)ResourceExtensions.GetResourceValue("SecondaryText");
             if (color != null)
                 TitleBarViewModel.PageGlyph = IconExtensions.BuildFontImageSource(Icon.CommunityCheck, color.Color, 35)?.Glyph;
@@ -77,8 +71,8 @@ namespace Render.Pages.CommunityTester.CommunityRetell
 
             //Audio recorder
             _communityCheck = passage.CurrentDraftAudio.GetCommunityCheck();
-            var gcs = viewModelContextProvider.GetGrandCentralStation();
-            var stageId = gcs.ProjectWorkflow.GetStage(step.Id).Id;
+            var workflowService = viewModelContextProvider.GetWorkflowService();
+            var stageId = workflowService.ProjectWorkflow.GetStage(step.Id).Id;
             _communityRetell = _communityCheck.RetellsAllStages.FirstOrDefault(x => x.StageId == stageId);
             if (_communityRetell == null)
             {
@@ -98,8 +92,8 @@ namespace Render.Pages.CommunityTester.CommunityRetell
             SequencerRecorderViewModel.SetupOnRecordFailedPopup(ViewModelContextProvider, Logger);
 
             SequencerRecorderViewModel.OnDeleteRecordCommand = ReactiveCommand.Create(DeleteRetellAudio);
-            SequencerRecorderViewModel.OnUndoDeleteRecordCommand = ReactiveCommand.Create(SaveRetellAudio);
-            SequencerRecorderViewModel.OnRecordingFinishedCommand = ReactiveCommand.Create(SaveRetellAudio);
+            SequencerRecorderViewModel.OnUndoDeleteRecordCommand = ReactiveCommand.CreateFromTask(SaveRetellAudio);
+            SequencerRecorderViewModel.OnRecordingFinishedCommand = ReactiveCommand.CreateFromTask(SaveRetellAudio);
 
             SequencerActionViewModel = SequencerRecorderViewModel.CreateActionViewModel(ViewModelContextProvider, Disposables, required: true);
             ActionViewModelBaseSourceList.Add(SequencerActionViewModel);
@@ -132,6 +126,16 @@ namespace Render.Pages.CommunityTester.CommunityRetell
             }
         }
 
+        protected override async Task NavigatingAwayAsync()
+        {
+            if (SequencerRecorderViewModel.State is not SequencerState.Recording)
+            {
+                return;
+            }
+
+            await SequencerRecorderViewModel.StopCommand.Execute();
+        }
+
         private void InitializeMiniPlayers(
             IViewModelContextProvider viewModelContextProvider,
             Passage passage,
@@ -158,7 +162,7 @@ namespace Render.Pages.CommunityTester.CommunityRetell
             ActionViewModelBaseSourceList.Add(SectionPlayerViewModel);
         }
 
-        private async void SaveRetellAudio()
+        private async Task SaveRetellAudio()
         {
             IsLoading = true;
 
@@ -187,7 +191,9 @@ namespace Render.Pages.CommunityTester.CommunityRetell
                         wavStream: audioStream,
                         sampleRate: audioDetails.SampleRate,
                         channelCount: audioDetails.ChannelCount);
+
                     _communityRetell.SetAudio(audioData);
+
                     await _audioRepository.SaveAsync(_communityRetell);
                     await _communityTestRepository.SaveCommunityTestAsync(_communityCheck);
                 }
@@ -235,8 +241,8 @@ namespace Render.Pages.CommunityTester.CommunityRetell
                 return await NavigateTo(vm);
             }
 
-            var gcs = ViewModelContextProvider.GetGrandCentralStation();
-            await Task.Run(async () => { await gcs.AdvanceSectionAsync(Section, _step); });
+            var sectionMovementService = ViewModelContextProvider.GetSectionMovementService();
+            await Task.Run(async () => { await sectionMovementService.AdvanceSectionAsync(Section, Step, GetProjectId(), GetLoggedInUserId()); });
             return await NavigateToHomeOnMainStackAsync();
         }
 

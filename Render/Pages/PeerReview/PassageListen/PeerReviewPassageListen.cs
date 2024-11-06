@@ -12,8 +12,8 @@ namespace Render.Pages.PeerReview.PassageListen
             Section section, Passage passage, Step step)
         {
             var idiom = viewModelContextProvider.GetCurrentDeviceIdiom();
-            var grandCentral = viewModelContextProvider.GetGrandCentralStation();
-            var stage = grandCentral.ProjectWorkflow.GetStage(step.Id);
+            var workflowService = viewModelContextProvider.GetWorkflowService();
+            var stage = workflowService.ProjectWorkflow.GetStage(step.Id);
 
             ViewModelBase viewModelToNavigateTo = null;
 

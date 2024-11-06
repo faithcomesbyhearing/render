@@ -22,10 +22,14 @@ namespace Render.Pages.Translator.DividePassagePage
         public IObservableCollection<IDivisionPlayerViewModel> DivisionPlayers { get; private set; } =
             new ObservableCollectionExtended<IDivisionPlayerViewModel>();
 
-        public static DividePassageViewModel Create(IViewModelContextProvider viewModelContextProvider,
-            Section section, PassageNumber passageNumber, Step step, Stage stage)
+        public static DividePassageViewModel Create(
+            IViewModelContextProvider viewModelContextProvider,
+            Section section,
+            PassageNumber passageNumber,
+            Step step,
+            Stage stage)
         {
-            var title = AppResources.Draft;
+            var title = GetStepName(step);
             var secondTitle = AppResources.PassageDivide;
             var dividePassageViewModel = new DividePassageViewModel(
                 viewModelContextProvider,
@@ -35,7 +39,7 @@ namespace Render.Pages.Translator.DividePassagePage
                 secondTitle,
                 step,
                 stage);
-            
+
             return dividePassageViewModel;
         }
 
@@ -58,14 +62,14 @@ namespace Render.Pages.Translator.DividePassagePage
                 secondPageName: secondPageName)
         {
             TitleBarViewModel.PageGlyph = ResourceExtensions.GetResourceValue(Icon.Record.ToString()) as string;
-            
+
             TitleBarViewModel.SetNavigationCondition(AllowNavigation);
-            
+
             ProceedButtonViewModel.SetCommand(NavigateToDraftingAsync);
-            
+
             PopulateDivisionPlayers(passageNumber);
         }
-        
+
         private async Task<bool> AllowNavigation()
         {
             if (!_isChanged)
@@ -77,7 +81,7 @@ namespace Render.Pages.Translator.DividePassagePage
             var result = await modalManager.ConfirmationModal(Icon.TrashCanAudio, AppResources.WorkWillBeLost,
                 AppResources.DividePassageMessage,
                 AppResources.Cancel, AppResources.DiscardWork);
-            
+
             return result is DialogResult.Ok;
         }
 
@@ -91,18 +95,18 @@ namespace Render.Pages.Translator.DividePassagePage
                 reference, passageReferences, fullPassageTimeMarker, passageNumber);
 
             DivisionPlayers.Add(divisionPlayer);
-            
+
             ActionViewModelBaseSourceList.Add(divisionPlayer);
 
             Disposables.Add(divisionPlayer.WhenAnyValue(p => p.DivisionsCount, p => p.IsLocked)
                 .Subscribe(_ => SynchronizePlayers()));
         }
-        
+
         private async Task<IRoutableViewModel> NavigateToDraftingAsync()
         {
-            var stage = ViewModelContextProvider.GetGrandCentralStation().ProjectWorkflow.DraftingStage;
+            var stage = ViewModelContextProvider.GetWorkflowService().ProjectWorkflow.DraftingStage;
             var passage = Section.Passages.FirstOrDefault(x => x.PassageNumber.Equals(PassageNumber));
-            
+
             if (_isChanged)
             {
                 DivisionPlayers.ForEach(p => p.ApplyChanges());
@@ -118,16 +122,16 @@ namespace Render.Pages.Translator.DividePassagePage
 
                 dividedPassages.ForEach(devidedPassage =>
                 {
-					var source = Section.Passages.Find(sourcePassage =>
-						sourcePassage.PassageNumber.Number == devidedPassage.PassageNumber.Number
+                    var source = Section.Passages.Find(sourcePassage =>
+                        sourcePassage.PassageNumber.Number == devidedPassage.PassageNumber.Number
                         && (sourcePassage.ScriptureReferences?.Count ?? 0) > 0);
                     if (source is not null)
                     {
                         devidedPassage.SetScriptureReferences(source.ScriptureReferences);
                     }
-				});
-				// Passages may not be divided if the user has not made any divisions and has only locked some passages 
-				if (dividedPassages.Count != 0)
+                });
+                // Passages may not be divided if the user has not made any divisions and has only locked some passages 
+                if (dividedPassages.Count != 0)
                 {
                     Section.Passages.RemoveAll(p => p.PassageNumber.Number == PassageNumber.Number);
                     Section.Passages.AddRange(dividedPassages);
@@ -147,7 +151,7 @@ namespace Render.Pages.Translator.DividePassagePage
 
             var vm = await Task.Run(async () => await DraftingViewModel.CreateAsync(Section, passage, Step,
                 ViewModelContextProvider, stage));
-            
+
             return await NavigateToAndReset(vm);
         }
 
@@ -165,7 +169,7 @@ namespace Render.Pages.Translator.DividePassagePage
                 CreatePlayerViewModel(referenceAudio, passageReferences, fullPassageTimeMarker, passageNumber);
             }
         }
-        
+
         private void SynchronizePlayers()
         {
             var divisions = DivisionPlayers
@@ -173,9 +177,9 @@ namespace Render.Pages.Translator.DividePassagePage
                 .Select(player => player.DivisionsCount)
                 .Distinct()
                 .ToList();
-            
+
             DivisionPlayers.First().ActionState = divisions.Count > 1 || DivisionPlayers.All(player => player.IsLocked)
-                ? ActionState.Required 
+                ? ActionState.Required
                 : ActionState.Optional;
 
             _isChanged = divisions.Any(d => d != 0) || DivisionPlayers.Any(player => player.IsLocked);
@@ -185,7 +189,7 @@ namespace Render.Pages.Translator.DividePassagePage
         {
             DivisionPlayers.DisposeCollection();
             DivisionPlayers = null;
-            
+
             base.Dispose();
         }
     }

@@ -12,12 +12,12 @@ namespace Render.Pages.Translator.SectionReview
         {
             var idiom = viewModelContextProvider.GetCurrentDeviceIdiom();
             ViewModelBase viewModelToNavigateTo;
-            var grandCentral = viewModelContextProvider.GetGrandCentralStation();
-            var stage = grandCentral.ProjectWorkflow.GetStage(step.Id);
+            var workflowService = viewModelContextProvider.GetWorkflowService();
+            var stage = workflowService.ProjectWorkflow?.GetStage(step.Id);
 
             if (idiom == DeviceIdiom.Tablet || idiom == DeviceIdiom.Desktop)
             {
-                viewModelToNavigateTo = await TabletSectionReviewPageViewModel.CreateAsync(
+                viewModelToNavigateTo = TabletSectionReviewPageViewModel.Create(
                     viewModelContextProvider, 
                     section, 
                     step, 

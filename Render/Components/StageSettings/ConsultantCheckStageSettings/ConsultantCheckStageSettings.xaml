@@ -6,485 +6,509 @@
                             xmlns:consultantCheckStageSettings="clr-namespace:Render.Components.StageSettings.ConsultantCheckStageSettings;assembly=Render"
                             xmlns:resources="clr-namespace:Render.Resources;assembly=Render"
                             xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
-                            xmlns:customRenderer="clr-namespace:Render.Kernel.CustomRenderer;assembly=Render"
                             xmlns:stageSettings="clr-namespace:Render.Components.StageSettings;assembly=Render"
                             xmlns:localization="clr-namespace:Render.Resources.Localization"
+                            xmlns:customRenderer="clr-namespace:Render.Kernel.CustomRenderer;assembly=Render"
                             x:Class="Render.Components.StageSettings.ConsultantCheckStageSettings.ConsultantCheckStageSettings">
     <Grid BackgroundColor="{StaticResource Transparent}" RowSpacing="0" x:Name="TopLevelElement">
         <Grid.RowDefinitions>
-            <RowDefinition Height="150"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        
+
         <!-- Stage name with icon and stage name editor -->
         <HorizontalStackLayout Style="{StaticResource StageNameStackLayoutStyle}">
-            <Label Style="{StaticResource StageSettingsEditStageNameIconStyle}" 
+            <Label Style="{StaticResource StageSettingsEditStageNameIconStyle}"
                    Text="{resources:IconExtensions Update}" />
             <Label Style="{StaticResource StageSettingsStageNameLabelStyle}"
-                   Text="{x:Static localization:AppResources.StageName}"/>
+                   Text="{x:Static localization:AppResources.StageName}" />
             <Border Style="{StaticResource StageSettingStageNameEditBorderStyle}">
-                <Entry x:Name="StageName" Style="{StaticResource StageSettingsStageNameEntryStyle}"/>
+                <Entry x:Name="StageName" Style="{StaticResource StageSettingsStageNameEntryStyle}" />
             </Border>
         </HorizontalStackLayout>
-        
+
         <!-- Settings panel -->
-        <ScrollView x:Name="scrollView" Style="{StaticResource StageSettingsScrollViewStyle}">
+        <customRenderer:NoFocusScrollView x:Name="scrollView" Style="{StaticResource StageSettingsScrollViewStyle}">
             <VerticalStackLayout>
+                <!-- Substage Name with "Back Translate" editor -->
+                <HorizontalStackLayout Style="{StaticResource StepNameStackLayoutStyle}">
+                    <Label Style="{StaticResource StageSettingsStepNameLabelStyle}"
+                           Text="{x:Static localization:AppResources.SubstageName}" />
+                    <Border x:Name="BackTranslateStepNameBorder"
+                            Style="{StaticResource StageSettingStepNameEditBorderStyle}">
+                        <Entry x:Name="BackTranslateStepName"
+                               Style="{StaticResource StageSettingsStepNameEntryStyle}" />
+                    </Border>
+                </HorizontalStackLayout>
+
                 <!-- Include Back Translate -->
                 <Border Style="{StaticResource StageSettingsSectionBorderStyle}">
                     <Grid Style="{StaticResource StageSettingsWhiteGridStyle}">
                         <Label Text="{x:Static localization:AppResources.IncludeBackTranslate}"
                                Style="{StaticResource StageSettingsSettingLabelStyle}" />
-                                
+
                         <stageSettings:SettingsSwitch x:Name="IncludeBackTranslateToggle"
                                                       AutomationId="IncludeBackTranslateToggle"
                                                       PropertyChanged="OnButtonClicked"
                                                       Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
-                                
+
                         <Grid.GestureRecognizers>
                             <TapGestureRecognizer Tapped="IncludeBackTranslateToggleTapped" />
                         </Grid.GestureRecognizers>
                     </Grid>
                 </Border>
-                
+
                 <!-- 2-Step Back Translate -->
                 <Border Style="{StaticResource StageSettingsSectionBorderStyle}">
                     <Grid Style="{StaticResource StageSettingsWhiteGridStyle}">
                         <Label Text="{x:Static localization:AppResources.Do2StepBackTranslate}"
                                Style="{StaticResource StageSettingsSettingLabelStyle}" />
-                                
+
                         <stageSettings:SettingsSwitch x:Name="Do2StepToggle"
                                                       AutomationId="Do2StepBackTranslateToggle"
                                                       PropertyChanged="OnButtonClicked"
                                                       Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
-                                
+
                         <Grid.GestureRecognizers>
                             <TapGestureRecognizer Tapped="Do2StepToggleTapped" />
                         </Grid.GestureRecognizers>
                     </Grid>
                 </Border>
-                
-                <!-- Check -->
-                <Label Style="{StaticResource StageSettingSettingGroupTitleStyle}" 
-                       Text="{x:Static localization:AppResources.Check}" 
-                       Margin="0,26,0,18"/>
-                
-                <!-- Note Listen -->
-                <Border x:Name="ConsultantCheckNoteListenStackWrapper" Style="{StaticResource StageSettingsSectionBorderStyle}">
-                    <VerticalStackLayout>
-                        <Grid Style="{StaticResource StageSettingsCollapsedGroupGridStyle}"> 
-                            <Label Text="{x:Static localization:AppResources.NoteListen}"
-                                   Style="{StaticResource SettingGroupTitleLabel}"/>
-                            <Label x:Name="ConsultantCheckNoteListenExpandStackIcon" Text="{resources:IconExtensions Plus}"
-                                   Style="{StaticResource WorkflowSettingsPlusIconStyle}" />
-                            <Label x:Name="ConsultantCheckNoteListenCollapseStackIcon" Text="{resources:IconExtensions Minus}"
-                                   Style="{StaticResource WorkflowSettingsMinusIconStyle}"
-                                   IsVisible="False"/>
-                            
-                            <Grid.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="ConsultantCheckNoteListenStackTapped" />
-                            </Grid.GestureRecognizers>
-                        </Grid>
 
-                        <VerticalStackLayout x:Name="ConsultantCheckNoteListenStack" Style="{StaticResource StageSettingsCollapsedStackLayoutStyle}">
-                            <Grid Style="{StaticResource StageSettingsBlueGridStyle}">
-                                <Label Text="{x:Static localization:AppResources.IncludeNoteListenGuidance}"
-                                       Style="{StaticResource SettingGroupSubTitleLabel}" />
-                                
-                                <stageSettings:SettingsSwitch x:Name="RequireConsultantCheckNoteListenToggle"
-                                                              AutomationId="RequireConsultantCheckNoteListenToggle"
-                                                              PropertyChanged="OnButtonClicked"
-                                                              Style="{StaticResource StageSettingsForBlueBackgroundStyle}" />
-                                
-                                <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="RequireConsultantCheckNoteListenToggleTapped" />
-                                </Grid.GestureRecognizers>
-                            </Grid>
-                        </VerticalStackLayout>
-                    </VerticalStackLayout>
-                </Border>
-                
                 <!-- Passage Back Translate -->
                 <Border x:Name="RetellStackWrapper" Style="{StaticResource StageSettingsSectionBorderStyle}">
                     <VerticalStackLayout>
                         <!-- Section Header -->
-                        <Grid Style="{StaticResource StageSettingsCollapsedGroupGridStyle}"> 
+                        <Grid Style="{StaticResource StageSettingsCollapsedGroupGridStyle}">
                             <Label Text="{x:Static localization:AppResources.PassageBackTranslate}"
-                                   Style="{StaticResource SettingGroupTitleLabel}"/>
+                                   Style="{StaticResource SettingGroupTitleLabel}" />
                             <Label x:Name="RetellExpandStackIcon" Text="{resources:IconExtensions Plus}"
                                    Style="{StaticResource WorkflowSettingsPlusIconStyle}" />
                             <Label x:Name="RetellCollapseStackIcon" Text="{resources:IconExtensions Minus}"
                                    Style="{StaticResource WorkflowSettingsMinusIconStyle}"
-                                   IsVisible="False"/>
-                            
+                                   IsVisible="False" />
+
                             <Grid.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="RetellStackTapped" />
                             </Grid.GestureRecognizers>
-                        </Grid> 
-                        
-                       <Grid x:Name="RetellStack" IsVisible="False">
-                           <Grid.RowDefinitions>
-                               <RowDefinition Height="Auto" />
-                               <RowDefinition Height="*" />
-                           </Grid.RowDefinitions>
-                           <!-- Include Passage Back Translate -->
-                           <Grid Grid.Row="0"
-                                 Style="{StaticResource StageSettingsBlueGridStyle}">
-                               <Label Text="{x:Static localization:AppResources.IncludePassageBackTranslate}"
-                                      Style="{StaticResource SettingGroupSubTitleLabel}" />
-                                
-                               <stageSettings:SettingsSwitch x:Name="IncludePassageBackTranslateToggle"
-                                                             AutomationId="IncludePassageBackTranslateToggle"
-                                                             PropertyChanged="OnButtonClicked"
-                                                             Style="{StaticResource StageSettingsForBlueBackgroundStyle}" />
-                                
-                               <Grid.GestureRecognizers>
-                                   <TapGestureRecognizer Tapped="IncludePassageBackTranslateToggleTapped" />
-                               </Grid.GestureRecognizers>
-                           </Grid>
-                           
-                           <!-- Settings --> 
-                           <Grid Grid.Row="1"
-                                 BackgroundColor="Transparent"
-                                 ColumnSpacing="0">
-                               <Grid.ColumnDefinitions>
-                                   <ColumnDefinition Width="*"/>
-                                   <ColumnDefinition Width="2"/>
-                                   <ColumnDefinition Width="*"/>
-                               </Grid.ColumnDefinitions>
-                               
-                               <!-- Retell 1 -->
-                               <VerticalStackLayout Grid.Column="0" x:Name="Step1RetellBackTranslateStack" BackgroundColor="Transparent">
-                                  <!-- Step 1 -->
-                                  <Grid x:Name="Step1RetellFrame" Padding="26,35"
-                                        Style="{StaticResource StageSettingsWhiteGridStyle}" >
-                                      <Label Style="{StaticResource StageSettingSettingGroupTitleStyle}" 
-                                             Text="{x:Static localization:AppResources.Step1}" 
-                                             Margin="0" HorizontalOptions="Start"
-                                             x:Name="Step1RetellBackTranslateLabel"/>
+                        </Grid>
 
-                                      <stageSettings:SettingsSwitch x:Name="Step1RetellBackTranslateToggle"
-                                                                    AutomationId="Step1RetellBackTranslateToggle"
-                                                                    PropertyChanged="OnButtonClicked"
-                                                                    Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
-                                
-                                      <Grid.GestureRecognizers>
-                                          <TapGestureRecognizer Tapped="DoRetellBackTranslateToggleTapped" />
-                                      </Grid.GestureRecognizers>
-                                  </Grid>
-                                  
-                                  <BoxView Style="{StaticResource StageSettingsLineWithMargins}" 
-                                           AutomationId="SeparatorBar" />
-                                  
-                                  <!-- Step 1 Language -->
-                                  <Grid Style="{StaticResource StageSettingsLanguageWhiteGridStyle}">
-                                      <Label Style="{StaticResource StageSettingsSettingLabelStyle}" 
-                                             Text="{x:Static localization:AppResources.ConsultantLanguage}"
-                                             x:Name="Step1Language"/>
+                        <Grid x:Name="RetellStack" IsVisible="False">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <!-- Include Passage Back Translate -->
+                            <Grid Grid.Row="0"
+                                  Style="{StaticResource StageSettingsBlueGridStyle}">
+                                <Label Text="{x:Static localization:AppResources.IncludePassageBackTranslate}"
+                                       Style="{StaticResource SettingGroupSubTitleLabel}" />
 
-                                      <Border Style="{StaticResource StageSettingBorder}"
-                                              x:Name="Step1LanguageFrame">
-                                          <customRenderer:CustomEntry x:Name="RetellConsultantLanguage"
-                                                                      Style="{StaticResource WorkflowSettingsEntryStyle}"/>
-                                      </Border>
-                                  </Grid>
-                                  
-                                  <BoxView Style="{StaticResource StageSettingsLineWithMargins}" 
-                                           AutomationId="SeparatorBar" />
-                                  
-                                  <!-- Section Listen Guidance -->
-                                  <Grid Style="{StaticResource StageSettingsWhiteGridStyle}">
-                                      <Label Text="{x:Static localization:AppResources.RequireSectionListen}"
-                                             Style="{StaticResource StageSettingsSettingLabelStyle}"
-                                             x:Name="RetellBtRequireSectionListenLabel"/>
-                                        
-                                      <stageSettings:SettingsSwitch x:Name="RetellBtRequireSectionListenToggle"
-                                                                    AutomationId="RetellBtRequireSectionListenToggle"
-                                                                    PropertyChanged="OnButtonClicked"
-                                                                    Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
-                                        
-                                      <Grid.GestureRecognizers>
-                                          <TapGestureRecognizer Tapped="RetellBtRequireSectionListenToggleTapped" />
-                                      </Grid.GestureRecognizers>
-                                  </Grid>
-                                  
-                                  <BoxView Style="{StaticResource StageSettingsLineWithMargins}" 
-                                           AutomationId="SeparatorBar" />
-                                  
-                                  <!-- Passage Listen Guidance -->
-                                  <Grid Style="{StaticResource StageSettingsWhiteGridStyle}">
-                                      <Label Text="{x:Static localization:AppResources.RequirePassageListen}"
-                                             Style="{StaticResource StageSettingsSettingLabelStyle}"
-                                             x:Name="RetellBtRequirePassageListenLabel"/>
-                                        
-                                      <stageSettings:SettingsSwitch x:Name="RetellBtRequirePassageListenToggle"
-                                                                    AutomationId="RetellBtRequirePassageListenToggle"
-                                                                    PropertyChanged="OnButtonClicked"
-                                                                    Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
-                                        
-                                      <Grid.GestureRecognizers>
-                                          <TapGestureRecognizer Tapped="RetellBtRequirePassageListenToggleTapped" />
-                                      </Grid.GestureRecognizers>
-                                  </Grid>
-                                  
-                                  <BoxView Style="{StaticResource StageSettingsLineWithoutMargins}" 
-                                           AutomationId="SeparatorBar" Margin="0,0,0,13"/>
-                                  
-                                  <!-- Passage Review -->
-                                  <Grid Style="{StaticResource StageSettingsWhiteGridStyle}" Padding="26,35">
-                                      <Label Style="{StaticResource StageSettingSettingGroupTitleStyle}" 
-                                             Text="{x:Static localization:AppResources.DoPassageReview}" 
-                                             Margin="0" HorizontalOptions="Start"
-                                             x:Name="RetellBackTranslateDoPassageReviewLabel"/>
+                                <stageSettings:SettingsSwitch x:Name="IncludePassageBackTranslateToggle"
+                                                              AutomationId="IncludePassageBackTranslateToggle"
+                                                              PropertyChanged="OnButtonClicked"
+                                                              Style="{StaticResource StageSettingsForBlueBackgroundStyle}" />
 
-                                      <stageSettings:SettingsSwitch x:Name="RetellBackTranslateDoPassageReviewToggle"
-                                                                    AutomationId="RetellBtDoPassageReviewToggle"
-                                                                    PropertyChanged="OnButtonClicked"
-                                                                    Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
-                                
-                                      <Grid.GestureRecognizers>
-                                          <TapGestureRecognizer Tapped="RetellBackTranslateDoPassageReviewToggleTapped" />
-                                      </Grid.GestureRecognizers>
-                                  </Grid>
-                                  
-                                  <BoxView Style="{StaticResource StageSettingsLineWithMargins}" 
-                                           AutomationId="SeparatorBar" />
-                                  
-                                  <!-- Passage Review Guidance -->
-                                  <Grid Style="{StaticResource StageSettingsWhiteGridStyle}">
-                                      <Label Text="{x:Static localization:AppResources.RequirePassageReview}"
-                                             Style="{StaticResource StageSettingsSettingLabelStyle}"
-                                             x:Name="RetellBtRequirePassageReviewLabel"/>
-                                        
-                                      <stageSettings:SettingsSwitch x:Name="RetellBtRequirePassageReviewToggle"
-                                                                    AutomationId="RetellBtPassageReviewToggle"
-                                                                    PropertyChanged="OnButtonClicked"
-                                                                    Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
-                                        
-                                      <Grid.GestureRecognizers>
-                                          <TapGestureRecognizer Tapped="RetellBtRequirePassageReviewToggleTapped" />
-                                      </Grid.GestureRecognizers>
-                                  </Grid>
-                                  
-                                  <BoxView Style="{StaticResource StageSettingsLineWithoutMargins}" 
-                                           AutomationId="SeparatorBar" />
-                                  
-                                  <!-- Passage Transcribe -->
-                                  <Grid Style="{StaticResource StageSettingsWhiteGridStyle}" Padding="26,35">
-                                      <Label Style="{StaticResource StageSettingSettingGroupTitleStyle}" 
-                                             Text="{x:Static localization:AppResources.DoPassageTranscribe}" 
-                                             Margin="0" HorizontalOptions="Start"
-                                             x:Name="DoPassageTranscribeLabel"/>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="IncludePassageBackTranslateToggleTapped" />
+                                </Grid.GestureRecognizers>
+                            </Grid>
 
-                                      <stageSettings:SettingsSwitch x:Name="DoPassageTranscribeToggle"
-                                                                    AutomationId="DoPassageTranscribeToggle"
-                                                                    PropertyChanged="OnButtonClicked"
-                                                                    Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
-                                
-                                      <Grid.GestureRecognizers>
-                                          <TapGestureRecognizer Tapped="DoPassageTranscribeToggleTapped" />
-                                      </Grid.GestureRecognizers>
-                                  </Grid>
-                                    
-                                  <BoxView Style="{StaticResource StageSettingsLineWithMargins}" 
-                                           AutomationId="SeparatorBar" />
-                                  
-                                  <!-- Passage Transcribe Guidance-->
-                                  <Grid Style="{StaticResource StageSettingsWhiteGridStyle}">
-                                      <Label Text="{x:Static localization:AppResources.RequirePassageTranscribeListen}"
-                                             Style="{StaticResource StageSettingsSettingLabelStyle}"
-                                             x:Name="RequirePassageTranscribeListenLabel"/>
-                                        
-                                      <stageSettings:SettingsSwitch x:Name="RequirePassageTranscribeListenToggle"
-                                                                    AutomationId="RequirePassageTranscribeListenToggle"
-                                                                    PropertyChanged="OnButtonClicked"
-                                                                    Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
-                                        
-                                      <Grid.GestureRecognizers>
-                                          <TapGestureRecognizer Tapped="RequirePassageTranscribeListenToggleTapped" />
-                                      </Grid.GestureRecognizers>
-                                  </Grid>
-                              </VerticalStackLayout>
-                               
-                               <BoxView Grid.Column="1" Style="{StaticResource StageSettingsVerticalLineWithMargins}" 
-                                       AutomationId="SeparatorBar" x:Name="Step1Step2Separator"/>
-                              
-                               <!-- Retell 2 -->
-                               <VerticalStackLayout Grid.Column="2" x:Name="Step2RetellBackTranslateStack" BackgroundColor="Transparent">
-                                  <!-- Step 2 -->
-                                  <Grid Padding="26,35"
-                                        Style="{StaticResource StageSettingsWhiteGridStyle}">
-                                      <Label Style="{StaticResource StageSettingSettingGroupTitleStyle}" 
-                                             Text="{x:Static localization:AppResources.Step2}" 
-                                             Margin="0" HorizontalOptions="Start"
-                                             x:Name="Step2RetellBackTranslateLabel"/>
+                            <!-- Settings -->
+                            <Grid Grid.Row="1"
+                                  BackgroundColor="Transparent"
+                                  ColumnSpacing="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="2" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                </Grid.RowDefinitions>
 
-                                      <stageSettings:SettingsSwitch x:Name="Step2RetellBackTranslateToggle"
-                                                                    AutomationId="Step2RetellBackTranslateToggle"
-                                                                    PropertyChanged="OnButtonClicked"
-                                                                    Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
-                                
-                                      <Grid.GestureRecognizers>
-                                          <TapGestureRecognizer Tapped="DoRetellBackTranslate2ToggleTapped" />
-                                      </Grid.GestureRecognizers>
-                                  </Grid>
-                                  
-                                  <BoxView Style="{StaticResource StageSettingsLineWithMargins}" 
-                                           AutomationId="SeparatorBar" />
-                                  
-                                  <!-- Step 2 Language -->
-                                  <Grid Style="{StaticResource StageSettingsLanguageWhiteGridStyle}">
-                                      <Label Style="{StaticResource StageSettingsSettingLabelStyle}" 
-                                             Text="{x:Static localization:AppResources.ConsultantLanguage}"
-                                             x:Name="Step2Language"/>
+                                <!-- [ ROW 0 ] -->
+                                <!-- Retell 1 -->
+                                <VerticalStackLayout Grid.Column="0" x:Name="Step1RetellBackTranslateStack" BackgroundColor="Transparent">
+                                    <!-- Step 1 -->
+                                    <Grid x:Name="Step1RetellFrame" Padding="26,35"
+                                          Style="{StaticResource StageSettingsWhiteGridStyle}">
+                                        <Label Style="{StaticResource StageSettingSettingGroupTitleStyle}"
+                                               Text="{x:Static localization:AppResources.Step1}"
+                                               Margin="0" HorizontalOptions="Start"
+                                               x:Name="Step1RetellBackTranslateLabel" />
 
-                                      <Border Style="{StaticResource StageSettingBorder}"
-                                              x:Name="Step2LanguageFrame">
-                                          <customRenderer:CustomEntry x:Name="RetellConsultantLanguage2" 
-                                                                      Style="{StaticResource WorkflowSettingsEntryStyle}"
-                                                                      Placeholder="{x:Static localization:AppResources.Language}"/>
-                                      </Border>
-                                  </Grid>
-                                  
-                                  <BoxView Style="{StaticResource StageSettingsLineWithMargins}" 
-                                           AutomationId="SeparatorBar" />
-                                  
-                                  <!-- Section Listen Guidance -->
-                                  <Grid Style="{StaticResource StageSettingsWhiteGridStyle}">
-                                      <Label Text="{x:Static localization:AppResources.RequireSectionListen}"
-                                             Style="{StaticResource StageSettingsSettingLabelStyle}"
-                                             x:Name="RetellBt2RequireSectionListenLabel"/>
-                                        
-                                      <stageSettings:SettingsSwitch x:Name="RetellBt2RequireSectionListenToggle"
-                                                                    AutomationId="RetellBt2RequireSectionListenToggle"
-                                                                    PropertyChanged="OnButtonClicked"
-                                                                    Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
-                                        
-                                      <Grid.GestureRecognizers>
-                                          <TapGestureRecognizer Tapped="RetellBt2RequireSectionListenToggleTapped" />
-                                      </Grid.GestureRecognizers>
-                                  </Grid>
-                                  
-                                  <BoxView Style="{StaticResource StageSettingsLineWithMargins}" 
-                                           AutomationId="SeparatorBar" />
-                                  
-                                  <!-- Passage Listen Guidance -->
-                                  <Grid Style="{StaticResource StageSettingsWhiteGridStyle}">
-                                      <Label Text="{x:Static localization:AppResources.RequirePassageListen}"
-                                             Style="{StaticResource StageSettingsSettingLabelStyle}"
-                                             x:Name="RetellBt2RequirePassageListenLabel"/>
-                                        
-                                      <stageSettings:SettingsSwitch x:Name="RetellBt2RequirePassageListenToggle"
-                                                                    AutomationId="RetellBt2RequirePassageListenToggle"
-                                                                    PropertyChanged="OnButtonClicked"
-                                                                    Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
-                                        
-                                      <Grid.GestureRecognizers>
-                                          <TapGestureRecognizer Tapped="RetellBt2RequirePassageListenToggleTapped" />
-                                      </Grid.GestureRecognizers>
-                                  </Grid>
-                                  
-                                  <BoxView Style="{StaticResource StageSettingsLineWithoutMargins}" 
-                                           AutomationId="SeparatorBar" Margin="0,0,0,13"/>
-                                  
-                                  <!-- Passage Review -->
-                                  <Grid Style="{StaticResource StageSettingsWhiteGridStyle}" Padding="26,35">
-                                      <Label Style="{StaticResource StageSettingSettingGroupTitleStyle}" 
-                                             Text="{x:Static localization:AppResources.DoPassageReview}" 
-                                             Margin="0" HorizontalOptions="Start"
-                                             x:Name="RetellBackTranslate2DoPassageReviewLabel"/>
+                                        <stageSettings:SettingsSwitch x:Name="Step1RetellBackTranslateToggle"
+                                                                      AutomationId="Step1RetellBackTranslateToggle"
+                                                                      PropertyChanged="OnButtonClicked"
+                                                                      Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
 
-                                      <stageSettings:SettingsSwitch x:Name="RetellBackTranslate2DoPassageReviewToggle"
-                                                                    AutomationId="RetellBackTranslate2DoPassageReviewToggle"
-                                                                    PropertyChanged="OnButtonClicked"
-                                                                    Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
-                                
-                                      <Grid.GestureRecognizers>
-                                          <TapGestureRecognizer Tapped="RetellBackTranslate2DoPassageReviewToggleTapped" />
-                                      </Grid.GestureRecognizers>
-                                  </Grid>
-                                  
-                                  <BoxView Style="{StaticResource StageSettingsLineWithMargins}" 
-                                           AutomationId="SeparatorBar" /> 
-                                        
-                                  <!-- Passage Review Guidance -->
-                                  <Grid Style="{StaticResource StageSettingsWhiteGridStyle}">
-                                      <Label Text="{x:Static localization:AppResources.RequirePassageReview}"
-                                             Style="{StaticResource StageSettingsSettingLabelStyle}"
-                                             x:Name="RetellBt2RequirePassageReviewLabel"/>
-                                        
-                                      <stageSettings:SettingsSwitch x:Name="RetellBt2RequirePassageReviewToggle"
-                                                                    AutomationId="RetellBt2RequirePassageReviewToggle"
-                                                                    PropertyChanged="OnButtonClicked"
-                                                                    Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
-                                        
-                                      <Grid.GestureRecognizers>
-                                          <TapGestureRecognizer Tapped="RetellBt2RequirePassageReviewToggleTapped" />
-                                      </Grid.GestureRecognizers>
-                                  </Grid>
-                                  
-                                  <BoxView Style="{StaticResource StageSettingsLineWithoutMargins}" 
-                                           AutomationId="SeparatorBar" />
-                                  
-                                  <!-- Passage Transcribe -->
-                                  <Grid Style="{StaticResource StageSettingsWhiteGridStyle}" Padding="26,35">
-                                      <Label Style="{StaticResource StageSettingSettingGroupTitleStyle}" 
-                                             Text="{x:Static localization:AppResources.DoPassageTranscribe}" 
-                                             Margin="0" HorizontalOptions="Start"
-                                             x:Name="DoPassage2TranscribeLabel"/>
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="DoRetellBackTranslateToggleTapped" />
+                                        </Grid.GestureRecognizers>
+                                    </Grid>
 
-                                      <stageSettings:SettingsSwitch x:Name="DoPassage2TranscribeToggle"
-                                                                    AutomationId="DoPassage2TranscribeToggle"
-                                                                    PropertyChanged="OnButtonClicked"
-                                                                    Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
-                                
-                                      <Grid.GestureRecognizers>
-                                          <TapGestureRecognizer Tapped="DoPassage2TranscribeToggleTapped" />
-                                      </Grid.GestureRecognizers>
-                                  </Grid>
-                                  
-                                  <BoxView Style="{StaticResource StageSettingsLineWithMargins}" 
-                                           AutomationId="SeparatorBar" />
-                                  
-                                  <!-- Passage Transcribe Guidance-->
-                                  <Grid Style="{StaticResource StageSettingsWhiteGridStyle}">
-                                      <Label Text="{x:Static localization:AppResources.RequirePassageTranscribeListen}"
-                                             Style="{StaticResource StageSettingsSettingLabelStyle}"
-                                             x:Name="RequirePassage2TranscribeListenLabel"/>
-                                        
-                                      <stageSettings:SettingsSwitch x:Name="RequirePassage2TranscribeListenToggle"
-                                                                    AutomationId="RequirePassage2TranscribeListenToggle"
-                                                                    PropertyChanged="OnButtonClicked"
-                                                                    Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
-                                        
-                                      <Grid.GestureRecognizers>
-                                          <TapGestureRecognizer Tapped="RequirePassage2TranscribeListenToggleTapped" />
-                                      </Grid.GestureRecognizers>
-                                  </Grid>
-                              </VerticalStackLayout>
-                           </Grid>
-                       </Grid>
+                                    <!-- Step 1 Language -->
+                                    <Grid Style="{StaticResource StageSettingsLanguageWhiteGridStyle}">
+                                        <Label Style="{StaticResource StageSettingsSettingLabelStyle}"
+                                               Text="{x:Static localization:AppResources.ConsultantLanguage}"
+                                               x:Name="Step1Language" />
+
+                                        <Border Style="{StaticResource StageSettingBorder}"
+                                                x:Name="Step1LanguageFrame">
+                                            <Entry x:Name="RetellConsultantLanguage"
+                                                   Style="{StaticResource WorkflowSettingsEntryStyle}" />
+                                        </Border>
+                                    </Grid>
+
+                                    <BoxView Style="{StaticResource StageSettingsLineWithMargins}"
+                                             AutomationId="SeparatorBar" />
+
+                                    <!-- Section Listen Guidance -->
+                                    <Grid Style="{StaticResource StageSettingsWhiteGridStyle}">
+                                        <Label Text="{x:Static localization:AppResources.RequireSectionListen}"
+                                               Style="{StaticResource StageSettingsSettingLabelStyle}"
+                                               x:Name="RetellBtRequireSectionListenLabel" />
+
+                                        <stageSettings:SettingsSwitch x:Name="RetellBtRequireSectionListenToggle"
+                                                                      AutomationId="RetellBtRequireSectionListenToggle"
+                                                                      PropertyChanged="OnButtonClicked"
+                                                                      Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
+
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="RetellBtRequireSectionListenToggleTapped" />
+                                        </Grid.GestureRecognizers>
+                                    </Grid>
+
+                                    <BoxView Style="{StaticResource StageSettingsLineWithMargins}"
+                                             AutomationId="SeparatorBar" />
+
+                                    <!-- Passage Listen Guidance -->
+                                    <Grid Style="{StaticResource StageSettingsWhiteGridStyle}">
+                                        <Label Text="{x:Static localization:AppResources.RequirePassageListen}"
+                                               Style="{StaticResource StageSettingsSettingLabelStyle}"
+                                               x:Name="RetellBtRequirePassageListenLabel" />
+
+                                        <stageSettings:SettingsSwitch x:Name="RetellBtRequirePassageListenToggle"
+                                                                      AutomationId="RetellBtRequirePassageListenToggle"
+                                                                      PropertyChanged="OnButtonClicked"
+                                                                      Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
+
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="RetellBtRequirePassageListenToggleTapped" />
+                                        </Grid.GestureRecognizers>
+                                    </Grid>
+
+                                    <BoxView Style="{StaticResource StageSettingsLineWithoutMargins}"
+                                             AutomationId="SeparatorBar" Margin="0,0,0,13" />
+
+                                    <!-- Passage Review -->
+                                    <Grid Style="{StaticResource StageSettingsWhiteGridStyle}" Padding="26,35">
+                                        <Label Style="{StaticResource StageSettingSettingGroupTitleStyle}"
+                                               Text="{x:Static localization:AppResources.DoPassageReview}"
+                                               Margin="0" HorizontalOptions="Start"
+                                               x:Name="RetellBackTranslateDoPassageReviewLabel" />
+
+                                        <stageSettings:SettingsSwitch x:Name="RetellBackTranslateDoPassageReviewToggle"
+                                                                      AutomationId="RetellBtDoPassageReviewToggle"
+                                                                      PropertyChanged="OnButtonClicked"
+                                                                      Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
+
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="RetellBackTranslateDoPassageReviewToggleTapped" />
+                                        </Grid.GestureRecognizers>
+                                    </Grid>
+
+                                    <BoxView Style="{StaticResource StageSettingsLineWithMargins}"
+                                             AutomationId="SeparatorBar" />
+
+                                    <!-- Passage Review Guidance -->
+                                    <Grid Style="{StaticResource StageSettingsWhiteGridStyle}">
+                                        <Label Text="{x:Static localization:AppResources.RequirePassageReview}"
+                                               Style="{StaticResource StageSettingsSettingLabelStyle}"
+                                               x:Name="RetellBtRequirePassageReviewLabel" />
+
+                                        <stageSettings:SettingsSwitch x:Name="RetellBtRequirePassageReviewToggle"
+                                                                      AutomationId="RetellBtPassageReviewToggle"
+                                                                      PropertyChanged="OnButtonClicked"
+                                                                      Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
+
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="RetellBtRequirePassageReviewToggleTapped" />
+                                        </Grid.GestureRecognizers>
+                                    </Grid>
+
+                                    <BoxView Style="{StaticResource StageSettingsLineWithoutMargins}"
+                                             AutomationId="SeparatorBar" />
+
+                                </VerticalStackLayout>
+
+                                <BoxView Grid.Column="1"
+                                         x:Name="Step1Step2Separator"
+                                         AutomationId="SeparatorBar"
+                                         Style="{StaticResource StageSettingsVerticalLineWithMargins}"
+                                         Margin="0,26,0,0" />
+
+                                <!-- Retell 2 -->
+                                <VerticalStackLayout Grid.Column="2" x:Name="Step2RetellBackTranslateStack" BackgroundColor="Transparent">
+                                    <!-- Step 2 -->
+                                    <Grid Padding="26,35"
+                                          Style="{StaticResource StageSettingsWhiteGridStyle}">
+                                        <Label Style="{StaticResource StageSettingSettingGroupTitleStyle}"
+                                               Text="{x:Static localization:AppResources.Step2}"
+                                               Margin="0" HorizontalOptions="Start"
+                                               x:Name="Step2RetellBackTranslateLabel" />
+
+                                        <stageSettings:SettingsSwitch x:Name="Step2RetellBackTranslateToggle"
+                                                                      AutomationId="Step2RetellBackTranslateToggle"
+                                                                      PropertyChanged="OnButtonClicked"
+                                                                      Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
+
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="DoRetellBackTranslate2ToggleTapped" />
+                                        </Grid.GestureRecognizers>
+                                    </Grid>
+
+                                    <!-- Step 2 Language -->
+                                    <Grid Style="{StaticResource StageSettingsLanguageWhiteGridStyle}">
+                                        <Label Style="{StaticResource StageSettingsSettingLabelStyle}"
+                                               Text="{x:Static localization:AppResources.ConsultantLanguage}"
+                                               x:Name="Step2Language" />
+
+                                        <Border Style="{StaticResource StageSettingBorder}"
+                                                x:Name="Step2LanguageFrame">
+                                            <Entry x:Name="RetellConsultantLanguage2"
+                                                   Style="{StaticResource WorkflowSettingsEntryStyle}"
+                                                   Placeholder="{x:Static localization:AppResources.Language}" />
+                                        </Border>
+                                    </Grid>
+
+                                    <BoxView Style="{StaticResource StageSettingsLineWithMargins}"
+                                             AutomationId="SeparatorBar" />
+
+                                    <!-- Section Listen Guidance -->
+                                    <Grid Style="{StaticResource StageSettingsWhiteGridStyle}">
+                                        <Label Text="{x:Static localization:AppResources.RequireSectionListen}"
+                                               Style="{StaticResource StageSettingsSettingLabelStyle}"
+                                               x:Name="RetellBt2RequireSectionListenLabel" />
+
+                                        <stageSettings:SettingsSwitch x:Name="RetellBt2RequireSectionListenToggle"
+                                                                      AutomationId="RetellBt2RequireSectionListenToggle"
+                                                                      PropertyChanged="OnButtonClicked"
+                                                                      Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
+
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="RetellBt2RequireSectionListenToggleTapped" />
+                                        </Grid.GestureRecognizers>
+                                    </Grid>
+
+                                    <BoxView Style="{StaticResource StageSettingsLineWithMargins}"
+                                             AutomationId="SeparatorBar" />
+
+                                    <!-- Passage Listen Guidance -->
+                                    <Grid Style="{StaticResource StageSettingsWhiteGridStyle}">
+                                        <Label Text="{x:Static localization:AppResources.RequirePassageListen}"
+                                               Style="{StaticResource StageSettingsSettingLabelStyle}"
+                                               x:Name="RetellBt2RequirePassageListenLabel" />
+
+                                        <stageSettings:SettingsSwitch x:Name="RetellBt2RequirePassageListenToggle"
+                                                                      AutomationId="RetellBt2RequirePassageListenToggle"
+                                                                      PropertyChanged="OnButtonClicked"
+                                                                      Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
+
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="RetellBt2RequirePassageListenToggleTapped" />
+                                        </Grid.GestureRecognizers>
+                                    </Grid>
+
+                                    <BoxView Style="{StaticResource StageSettingsLineWithoutMargins}"
+                                             AutomationId="SeparatorBar"
+                                             Margin="0,0,0,13" />
+
+                                    <!-- Passage Review -->
+                                    <Grid Style="{StaticResource StageSettingsWhiteGridStyle}" Padding="26,35">
+                                        <Label Style="{StaticResource StageSettingSettingGroupTitleStyle}"
+                                               Text="{x:Static localization:AppResources.DoPassageReview}"
+                                               Margin="0" HorizontalOptions="Start"
+                                               x:Name="RetellBackTranslate2DoPassageReviewLabel" />
+
+                                        <stageSettings:SettingsSwitch x:Name="RetellBackTranslate2DoPassageReviewToggle"
+                                                                      AutomationId="RetellBackTranslate2DoPassageReviewToggle"
+                                                                      PropertyChanged="OnButtonClicked"
+                                                                      Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
+
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="RetellBackTranslate2DoPassageReviewToggleTapped" />
+                                        </Grid.GestureRecognizers>
+                                    </Grid>
+
+                                    <BoxView Style="{StaticResource StageSettingsLineWithMargins}"
+                                             AutomationId="SeparatorBar" />
+
+                                    <!-- Passage Review Guidance -->
+                                    <Grid Style="{StaticResource StageSettingsWhiteGridStyle}">
+                                        <Label Text="{x:Static localization:AppResources.RequirePassageReview}"
+                                               Style="{StaticResource StageSettingsSettingLabelStyle}"
+                                               x:Name="RetellBt2RequirePassageReviewLabel" />
+
+                                        <stageSettings:SettingsSwitch x:Name="RetellBt2RequirePassageReviewToggle"
+                                                                      AutomationId="RetellBt2RequirePassageReviewToggle"
+                                                                      PropertyChanged="OnButtonClicked"
+                                                                      Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
+
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="RetellBt2RequirePassageReviewToggleTapped" />
+                                        </Grid.GestureRecognizers>
+                                    </Grid>
+
+                                    <BoxView Style="{StaticResource StageSettingsLineWithoutMargins}"
+                                             AutomationId="SeparatorBar" />
+
+
+                                </VerticalStackLayout>
+
+
+                                <!-- [ ROW 1 ] -->
+                                <!-- Substage Name with "Transcribe" editor -->
+                                <Grid Grid.ColumnSpan="3"
+                                      Grid.Row="1"
+                                      Style="{StaticResource StageSettingsLanguageWhiteGridStyle}"
+                                      ColumnDefinitions="*, Auto"
+                                      BackgroundColor="{StaticResource Blue}"
+                                      Padding="26,20"
+                                      Margin="0,20,0,0">
+                                    <Label Style="{StaticResource StageSettingsSettingLabelStyle}"
+                                           Text="{x:Static localization:AppResources.SubstageName}"
+                                           TextColor="{StaticResource White}" />
+                                    <Border x:Name="TranscribeStepNameBorder"
+                                            Style="{StaticResource StageSettingBorder}"
+                                            WidthRequest="350">
+                                        <Entry x:Name="TranscribeStepName"
+                                               Style="{StaticResource WorkflowSettingsStepNameEntryStyle}" />
+                                    </Border>
+                                </Grid>
+
+                                <!-- [ ROW 2 ] -->
+                                <VerticalStackLayout Grid.Column="0"
+                                                     Grid.Row="2"
+                                                     x:Name="Step1RetellBackTranslateStackRow2"
+                                                     BackgroundColor="Transparent">
+
+                                    <!-- Passage Transcribe -->
+                                    <Grid Style="{StaticResource StageSettingsWhiteGridStyle}" Padding="26,35">
+                                        <Label Style="{StaticResource StageSettingSettingGroupTitleStyle}"
+                                               Text="{x:Static localization:AppResources.Step1}"
+                                               Margin="0" HorizontalOptions="Start"
+                                               x:Name="DoPassageTranscribeLabel" />
+
+                                        <stageSettings:SettingsSwitch x:Name="DoPassageTranscribeToggle"
+                                                                      AutomationId="DoPassageTranscribeToggle"
+                                                                      PropertyChanged="OnButtonClicked"
+                                                                      Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
+
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="DoPassageTranscribeToggleTapped" />
+                                        </Grid.GestureRecognizers>
+                                    </Grid>
+
+
+                                    <BoxView Style="{StaticResource StageSettingsLineWithMargins}"
+                                             AutomationId="SeparatorBar" />
+
+                                    <!-- Passage Transcribe Guidance-->
+                                    <Grid Style="{StaticResource StageSettingsWhiteGridStyle}">
+                                        <Label Text="{x:Static localization:AppResources.RequirePassageTranscribeListen}"
+                                               Style="{StaticResource StageSettingsSettingLabelStyle}"
+                                               x:Name="RequirePassageTranscribeListenLabel" />
+
+                                        <stageSettings:SettingsSwitch x:Name="RequirePassageTranscribeListenToggle"
+                                                                      AutomationId="RequirePassageTranscribeListenToggle"
+                                                                      PropertyChanged="OnButtonClicked"
+                                                                      Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
+
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="RequirePassageTranscribeListenToggleTapped" />
+                                        </Grid.GestureRecognizers>
+                                    </Grid>
+
+                                </VerticalStackLayout>
+
+                                <BoxView Grid.Column="1"
+                                         Grid.Row="2"
+                                         x:Name="Step1Step2SeparatorRow2"
+                                         AutomationId="SeparatorBar"
+                                         Style="{StaticResource StageSettingsVerticalLineWithMargins}" />
+
+
+                                <VerticalStackLayout Grid.Column="2"
+                                                     Grid.Row="2"
+                                                     x:Name="Step2RetellBackTranslateStackRow2"
+                                                     BackgroundColor="Transparent">
+
+                                    <!-- Passage Transcribe -->
+                                    <Grid Style="{StaticResource StageSettingsWhiteGridStyle}" Padding="26,35">
+                                        <Label Style="{StaticResource StageSettingSettingGroupTitleStyle}"
+                                               Text="{x:Static localization:AppResources.Step2}"
+                                               Margin="0" HorizontalOptions="Start"
+                                               x:Name="DoPassage2TranscribeLabel" />
+
+                                        <stageSettings:SettingsSwitch x:Name="DoPassage2TranscribeToggle"
+                                                                      AutomationId="DoPassage2TranscribeToggle"
+                                                                      PropertyChanged="OnButtonClicked"
+                                                                      Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
+
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="DoPassage2TranscribeToggleTapped" />
+                                        </Grid.GestureRecognizers>
+                                    </Grid>
+
+                                    <BoxView Style="{StaticResource StageSettingsLineWithMargins}"
+                                             AutomationId="SeparatorBar" />
+
+
+                                    <!-- Passage Transcribe Guidance-->
+                                    <Grid Style="{StaticResource StageSettingsWhiteGridStyle}">
+                                        <Label Text="{x:Static localization:AppResources.RequirePassageTranscribeListen}"
+                                               Style="{StaticResource StageSettingsSettingLabelStyle}"
+                                               x:Name="RequirePassage2TranscribeListenLabel" />
+
+                                        <stageSettings:SettingsSwitch x:Name="RequirePassage2TranscribeListenToggle"
+                                                                      AutomationId="RequirePassage2TranscribeListenToggle"
+                                                                      PropertyChanged="OnButtonClicked"
+                                                                      Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
+
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="RequirePassage2TranscribeListenToggleTapped" />
+                                        </Grid.GestureRecognizers>
+                                    </Grid>
+
+                                </VerticalStackLayout>
+
+                            </Grid>
+                        </Grid>
                     </VerticalStackLayout>
                 </Border>
-                
+
                 <!-- Segment Back Translate -->
                 <Border x:Name="SegmentStackWrapper" Style="{StaticResource StageSettingsSectionBorderStyle}">
                     <VerticalStackLayout>
                         <!-- Section Header -->
-                        <Grid Style="{StaticResource StageSettingsCollapsedGroupGridStyle}"> 
+                        <Grid Style="{StaticResource StageSettingsCollapsedGroupGridStyle}">
                             <Label Text="{x:Static localization:AppResources.SegmentBackTranslate}"
-                                   Style="{StaticResource SettingGroupTitleLabel}"/>
+                                   Style="{StaticResource SettingGroupTitleLabel}" />
                             <Label x:Name="SegmentExpandStackIcon" Text="{resources:IconExtensions Plus}"
                                    Style="{StaticResource WorkflowSettingsPlusIconStyle}" />
                             <Label x:Name="SegmentCollapseStackIcon" Text="{resources:IconExtensions Minus}"
                                    Style="{StaticResource WorkflowSettingsMinusIconStyle}"
-                                   IsVisible="False"/>
-                            
+                                   IsVisible="False" />
+
                             <Grid.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="SegmentStackTapped" />
                             </Grid.GestureRecognizers>
-                        </Grid> 
-                        
+                        </Grid>
+
                         <Grid x:Name="SegmentStack" IsVisible="False">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
@@ -494,330 +518,382 @@
                             <Grid Grid.Row="0" Style="{StaticResource StageSettingsBlueGridStyle}">
                                 <Label Text="{x:Static localization:AppResources.IncludeSegmentBackTranslate}"
                                        Style="{StaticResource SettingGroupSubTitleLabel}" />
-                                
+
                                 <stageSettings:SettingsSwitch x:Name="IncludeSegmentBackTranslateToggle"
                                                               AutomationId="IncludeSegmentBackTranslateToggle"
                                                               PropertyChanged="OnButtonClicked"
                                                               Style="{StaticResource StageSettingsForBlueBackgroundStyle}" />
-                                
+
                                 <Grid.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="IncludeSegmentBackTranslateToggleTapped" />
                                 </Grid.GestureRecognizers>
                             </Grid>
-                            
-                            <!-- Settings --> 
+
+                            <!-- Settings -->
                             <Grid Grid.Row="1" BackgroundColor="Transparent" ColumnSpacing="0">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="2"/>
-                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="2" />
+                                    <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                </Grid.RowDefinitions>
+
+                                <!-- [ ROW 0 ] -->
                                 <!-- Segment 1 -->
                                 <VerticalStackLayout Grid.Column="0" x:Name="Step1SegmentBackTranslateStack" BackgroundColor="Transparent">
                                     <!-- Step 1 -->
                                     <Grid x:Name="Step1SegmentFrame" Padding="26,35"
-                                          Style="{StaticResource StageSettingsWhiteGridStyle}" >
-                                        <Label Style="{StaticResource StageSettingSettingGroupTitleStyle}" 
-                                               Text="{x:Static localization:AppResources.Step1}" 
+                                          Style="{StaticResource StageSettingsWhiteGridStyle}">
+                                        <Label Style="{StaticResource StageSettingSettingGroupTitleStyle}"
+                                               Text="{x:Static localization:AppResources.Step1}"
                                                Margin="0" HorizontalOptions="Start"
-                                               x:Name="Step1SegmentBackTranslateLabel"/>
+                                               x:Name="Step1SegmentBackTranslateLabel" />
 
                                         <stageSettings:SettingsSwitch x:Name="Step1SegmentBackTranslateToggle"
                                                                       AutomationId="Step1SegmentBackTranslateToggle"
                                                                       PropertyChanged="OnButtonClicked"
                                                                       Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
-                                
+
                                         <Grid.GestureRecognizers>
                                             <TapGestureRecognizer Tapped="DoSegmentBackTranslateToggleTapped" />
                                         </Grid.GestureRecognizers>
                                     </Grid>
-                                    
-                                    <BoxView Style="{StaticResource StageSettingsLineWithMargins}" 
+
+                                    <BoxView Style="{StaticResource StageSettingsLineWithMargins}"
                                              AutomationId="SeparatorBar" />
-                                    
+
                                     <!-- Step 1 Language -->
                                     <Grid Style="{StaticResource StageSettingsLanguageWhiteGridStyle}">
-                                        <Label Style="{StaticResource StageSettingsSettingLabelStyle}" 
+                                        <Label Style="{StaticResource StageSettingsSettingLabelStyle}"
                                                Text="{x:Static localization:AppResources.ConsultantLanguage}"
-                                               x:Name="SegmentStep1Language"/>
+                                               x:Name="SegmentStep1Language" />
 
                                         <Border Style="{StaticResource StageSettingBorder}"
                                                 x:Name="SegmentStep1LanguageFrame">
-                                            <customRenderer:CustomEntry x:Name="SegmentConsultantLanguage" 
-                                                                        Style="{StaticResource WorkflowSettingsEntryStyle}"/>
+                                            <Entry x:Name="SegmentConsultantLanguage"
+                                                   Style="{StaticResource WorkflowSettingsEntryStyle}" />
                                         </Border>
                                     </Grid>
-                                    
-                                    <BoxView Style="{StaticResource StageSettingsLineWithMargins}" 
+
+                                    <BoxView Style="{StaticResource StageSettingsLineWithMargins}"
                                              AutomationId="SeparatorBar" />
-                                    
+
                                     <!-- Section Listen Guidance -->
                                     <Grid Style="{StaticResource StageSettingsWhiteGridStyle}">
                                         <Label Text="{x:Static localization:AppResources.RequireSectionListen}"
                                                Style="{StaticResource StageSettingsSettingLabelStyle}"
-                                               x:Name="SegmentBtRequireSectionListenLabel"/>
-                                        
+                                               x:Name="SegmentBtRequireSectionListenLabel" />
+
                                         <stageSettings:SettingsSwitch x:Name="SegmentBtRequireSectionListenToggle"
                                                                       AutomationId="SegmentBtRequireSectionListenToggle"
                                                                       PropertyChanged="OnButtonClicked"
                                                                       Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
-                                        
+
                                         <Grid.GestureRecognizers>
                                             <TapGestureRecognizer Tapped="SegmentBtRequireSectionListenToggleTapped" />
                                         </Grid.GestureRecognizers>
                                     </Grid>
-                                    
-                                    <BoxView Style="{StaticResource StageSettingsLineWithMargins}" 
+
+                                    <BoxView Style="{StaticResource StageSettingsLineWithMargins}"
                                              AutomationId="SeparatorBar" />
-                                    
+
                                     <!-- Passage Listen Guidance -->
                                     <Grid Style="{StaticResource StageSettingsWhiteGridStyle}">
                                         <Label Text="{x:Static localization:AppResources.RequirePassageListen}"
                                                Style="{StaticResource StageSettingsSettingLabelStyle}"
-                                               x:Name="SegmentBtRequirePassageListenLabel"/>
-                                        
+                                               x:Name="SegmentBtRequirePassageListenLabel" />
+
                                         <stageSettings:SettingsSwitch x:Name="SegmentBtRequirePassageListenToggle"
                                                                       AutomationId="SegmentBtRequirePassageListenToggle"
                                                                       PropertyChanged="OnButtonClicked"
                                                                       Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
-                                        
+
                                         <Grid.GestureRecognizers>
                                             <TapGestureRecognizer Tapped="SegmentBtRequirePassageListenToggleTapped" />
                                         </Grid.GestureRecognizers>
                                     </Grid>
-                                    
-                                    <BoxView Style="{StaticResource StageSettingsLineWithoutMargins}" 
-                                             AutomationId="SeparatorBar" Margin="0,0,0,13"/>
-                                    
+
+                                    <BoxView Style="{StaticResource StageSettingsLineWithoutMargins}"
+                                             AutomationId="SeparatorBar" Margin="0,0,0,13" />
+
                                     <!-- Passage Review -->
                                     <Grid Style="{StaticResource StageSettingsWhiteGridStyle}" Padding="26,35">
-                                        <Label Style="{StaticResource StageSettingSettingGroupTitleStyle}" 
-                                               Text="{x:Static localization:AppResources.DoPassageReview}" 
+                                        <Label Style="{StaticResource StageSettingSettingGroupTitleStyle}"
+                                               Text="{x:Static localization:AppResources.DoPassageReview}"
                                                Margin="0" HorizontalOptions="Start"
-                                               x:Name="SegmentBackTranslateDoPassageReviewLabel"/>
+                                               x:Name="SegmentBackTranslateDoPassageReviewLabel" />
 
                                         <stageSettings:SettingsSwitch x:Name="SegmentBackTranslateDoPassageReviewToggle"
                                                                       AutomationId="SegmentBackTranslateDoPassageReviewToggle"
                                                                       PropertyChanged="OnButtonClicked"
                                                                       Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
-                                
+
                                         <Grid.GestureRecognizers>
                                             <TapGestureRecognizer Tapped="SegmentBackTranslateDoPassageReviewToggleTapped" />
                                         </Grid.GestureRecognizers>
                                     </Grid>
-                                    
-                                    <BoxView Style="{StaticResource StageSettingsLineWithMargins}" 
+
+                                    <BoxView Style="{StaticResource StageSettingsLineWithMargins}"
                                              AutomationId="SeparatorBar" />
-                                    
+
                                     <!-- Passage Review Guidance -->
                                     <Grid Style="{StaticResource StageSettingsWhiteGridStyle}">
                                         <Label Text="{x:Static localization:AppResources.RequirePassageReview}"
                                                Style="{StaticResource StageSettingsSettingLabelStyle}"
-                                               x:Name="SegmentBtRequirePassageReviewLabel"/>
-                                        
+                                               x:Name="SegmentBtRequirePassageReviewLabel" />
+
                                         <stageSettings:SettingsSwitch x:Name="SegmentBtRequirePassageReviewToggle"
                                                                       AutomationId="SegmentBtRequirePassageReviewToggle"
                                                                       PropertyChanged="OnButtonClicked"
                                                                       Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
-                                        
+
                                         <Grid.GestureRecognizers>
                                             <TapGestureRecognizer Tapped="SegmentBtRequirePassageReviewToggleTapped" />
                                         </Grid.GestureRecognizers>
                                     </Grid>
-                                    
-                                    <BoxView Style="{StaticResource StageSettingsLineWithoutMargins}" 
-                                             AutomationId="SeparatorBar" />
-                                  
-                                    <!-- Segment Transcribe -->
-                                    <Grid Style="{StaticResource StageSettingsWhiteGridStyle}" Padding="26,35">
-                                        <Label Style="{StaticResource StageSettingSettingGroupTitleStyle}" 
-                                               Text="{x:Static localization:AppResources.DoSegmentTranscribe}" 
-                                               Margin="0" HorizontalOptions="Start"
-                                               x:Name="DoSegmentTranscribeLabel"/>
 
-                                        <stageSettings:SettingsSwitch x:Name="DoSegmentTranscribeToggle"
-                                                                      AutomationId="DoSegmentTranscribeToggle"
-                                                                      PropertyChanged="OnButtonClicked"
-                                                                      Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
-                                
-                                        <Grid.GestureRecognizers>
-                                            <TapGestureRecognizer Tapped="DoSegmentTranscribeToggleTapped" />
-                                        </Grid.GestureRecognizers>
-                                    </Grid>
-                                    
-                                    <BoxView Style="{StaticResource StageSettingsLineWithMargins}" 
+                                    <BoxView Style="{StaticResource StageSettingsLineWithoutMargins}"
                                              AutomationId="SeparatorBar" />
-                                    
-                                    <!-- Segment Transcribe Guidance-->
-                                    <Grid Style="{StaticResource StageSettingsWhiteGridStyle}">
-                                        <Label Text="{x:Static localization:AppResources.RequireSegmentTranscribeListen}"
-                                               Style="{StaticResource StageSettingsSettingLabelStyle}"
-                                               x:Name="RequireSegmentTranscribeListenLabel"/>
-                                        
-                                        <stageSettings:SettingsSwitch x:Name="RequireSegmentTranscribeListenToggle"
-                                                                      AutomationId="RequireSegmentTranscribeListenToggle"
-                                                                      PropertyChanged="OnButtonClicked"
-                                                                      Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
-                                        
-                                        <Grid.GestureRecognizers>
-                                            <TapGestureRecognizer Tapped="RequireSegmentTranscribeListenToggleTapped" />
-                                        </Grid.GestureRecognizers>
-                                    </Grid>
+
+
                                 </VerticalStackLayout>
-                                
-                                <BoxView Grid.Column="1" Style="{StaticResource StageSettingsVerticalLineWithMargins}" 
-                                         AutomationId="SeparatorBar" x:Name="Step1Step2SegmentsSeparator"/>
-                                
+
+                                <BoxView Grid.Column="1"
+                                         Style="{StaticResource StageSettingsVerticalLineWithMargins}"
+                                         AutomationId="SeparatorBar"
+                                         x:Name="Step1Step2SegmentsSeparator"
+                                         Margin="0,26,0,0" />
+
                                 <!-- Segment 2 -->
                                 <VerticalStackLayout Grid.Column="2" x:Name="Step2SegmentBackTranslateStack" BackgroundColor="Transparent">
                                     <!-- Step 2 -->
                                     <Grid Padding="26,35"
-                                          Style="{StaticResource StageSettingsWhiteGridStyle}" >
-                                        <Label Style="{StaticResource StageSettingSettingGroupTitleStyle}" 
-                                               Text="{x:Static localization:AppResources.Step2}" 
+                                          Style="{StaticResource StageSettingsWhiteGridStyle}">
+                                        <Label Style="{StaticResource StageSettingSettingGroupTitleStyle}"
+                                               Text="{x:Static localization:AppResources.Step2}"
                                                Margin="0" HorizontalOptions="Start"
-                                               x:Name="Step2SegmentBackTranslateLabel"/>
+                                               x:Name="Step2SegmentBackTranslateLabel" />
 
                                         <stageSettings:SettingsSwitch x:Name="Step2SegmentBackTranslateToggle"
                                                                       AutomationId="Step2SegmentBackTranslateToggle"
                                                                       PropertyChanged="OnButtonClicked"
                                                                       Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
-                                
+
                                         <Grid.GestureRecognizers>
                                             <TapGestureRecognizer Tapped="DoSegmentBackTranslate2ToggleTapped" />
                                         </Grid.GestureRecognizers>
                                     </Grid>
-                                    
-                                    <BoxView Style="{StaticResource StageSettingsLineWithMargins}" 
+
+                                    <BoxView Style="{StaticResource StageSettingsLineWithMargins}"
                                              AutomationId="SeparatorBar" />
-                                    
+
                                     <!-- Step 2 Language -->
                                     <Grid Style="{StaticResource StageSettingsLanguageWhiteGridStyle}">
-                                        <Label Style="{StaticResource StageSettingsSettingLabelStyle}" 
+                                        <Label Style="{StaticResource StageSettingsSettingLabelStyle}"
                                                Text="{x:Static localization:AppResources.ConsultantLanguage}"
-                                               x:Name="SegmentStep2Language"/>
+                                               x:Name="SegmentStep2Language" />
 
                                         <Border Style="{StaticResource StageSettingBorder}"
-                                               x:Name="SegmentStep2LanguageFrame">
-                                            <customRenderer:CustomEntry x:Name="SegmentConsultantLanguage2" 
-                                                                        Style="{StaticResource WorkflowSettingsEntryStyle}"
-                                                                        Placeholder="{x:Static localization:AppResources.Language}"/>
+                                                x:Name="SegmentStep2LanguageFrame">
+                                            <Entry x:Name="SegmentConsultantLanguage2"
+                                                   Style="{StaticResource WorkflowSettingsEntryStyle}"
+                                                   Placeholder="{x:Static localization:AppResources.Language}" />
 
                                         </Border>
                                     </Grid>
-                                    
-                                    <BoxView Style="{StaticResource StageSettingsLineWithMargins}" 
+
+                                    <BoxView Style="{StaticResource StageSettingsLineWithMargins}"
                                              AutomationId="SeparatorBar" />
-                                    
+
                                     <!-- Section Listen Guidance -->
                                     <Grid Style="{StaticResource StageSettingsWhiteGridStyle}">
                                         <Label Text="{x:Static localization:AppResources.RequireSectionListen}"
                                                Style="{StaticResource StageSettingsSettingLabelStyle}"
-                                               x:Name="SegmentBt2RequireSectionListenLabel"/>
-                                        
+                                               x:Name="SegmentBt2RequireSectionListenLabel" />
+
                                         <stageSettings:SettingsSwitch x:Name="SegmentBt2RequireSectionListenToggle"
                                                                       AutomationId="SegmentBt2RequireSectionListenToggle"
                                                                       PropertyChanged="OnButtonClicked"
                                                                       Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
-                                        
+
                                         <Grid.GestureRecognizers>
                                             <TapGestureRecognizer Tapped="SegmentBt2RequireSectionListenToggleTapped" />
                                         </Grid.GestureRecognizers>
                                     </Grid>
-                                    
-                                    <BoxView Style="{StaticResource StageSettingsLineWithMargins}" 
+
+                                    <BoxView Style="{StaticResource StageSettingsLineWithMargins}"
                                              AutomationId="SeparatorBar" />
-                                    
+
                                     <!-- Passage Listen Guidance -->
                                     <Grid Style="{StaticResource StageSettingsWhiteGridStyle}">
                                         <Label Text="{x:Static localization:AppResources.RequirePassageListen}"
                                                Style="{StaticResource StageSettingsSettingLabelStyle}"
-                                               x:Name="SegmentBt2RequirePassageListenLabel"/>
-                                        
+                                               x:Name="SegmentBt2RequirePassageListenLabel" />
+
                                         <stageSettings:SettingsSwitch x:Name="SegmentBt2RequirePassageListenToggle"
                                                                       AutomationId="SegmentBt2RequirePassageListenToggle"
                                                                       PropertyChanged="OnButtonClicked"
                                                                       Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
-                                        
+
                                         <Grid.GestureRecognizers>
                                             <TapGestureRecognizer Tapped="SegmentBt2RequirePassageListenToggleTapped" />
                                         </Grid.GestureRecognizers>
                                     </Grid>
-                                    
-                                    <BoxView Style="{StaticResource StageSettingsLineWithoutMargins}" 
-                                             AutomationId="SeparatorBar" Margin="0,0,0,13"/>
-                                    
+
+                                    <BoxView Style="{StaticResource StageSettingsLineWithoutMargins}"
+                                             AutomationId="SeparatorBar" Margin="0,0,0,13" />
+
                                     <!-- Passage Review -->
                                     <Grid Style="{StaticResource StageSettingsWhiteGridStyle}" Padding="26,35">
-                                        <Label Style="{StaticResource StageSettingSettingGroupTitleStyle}" 
-                                               Text="{x:Static localization:AppResources.DoPassageReview}" 
+                                        <Label Style="{StaticResource StageSettingSettingGroupTitleStyle}"
+                                               Text="{x:Static localization:AppResources.DoPassageReview}"
                                                Margin="0" HorizontalOptions="Start"
-                                               x:Name="SegmentBackTranslate2DoPassageReviewLabel"/>
+                                               x:Name="SegmentBackTranslate2DoPassageReviewLabel" />
 
                                         <stageSettings:SettingsSwitch x:Name="SegmentBackTranslate2DoPassageReviewToggle"
                                                                       AutomationId="SegmentBackTranslate2DoPassageReviewToggle"
                                                                       PropertyChanged="OnButtonClicked"
                                                                       Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
-                                
+
                                         <Grid.GestureRecognizers>
                                             <TapGestureRecognizer Tapped="SegmentBackTranslate2DoPassageReviewToggleTapped" />
                                         </Grid.GestureRecognizers>
                                     </Grid>
-                                    
-                                    <BoxView Style="{StaticResource StageSettingsLineWithMargins}" 
+
+                                    <BoxView Style="{StaticResource StageSettingsLineWithMargins}"
                                              AutomationId="SeparatorBar" />
-                                    
+
                                     <!-- Passage Review Guidance -->
                                     <Grid Style="{StaticResource StageSettingsWhiteGridStyle}">
                                         <Label Text="{x:Static localization:AppResources.RequirePassageReview}"
                                                Style="{StaticResource StageSettingsSettingLabelStyle}"
-                                               x:Name="SegmentBt2RequirePassageReviewLabel"/>
-                                        
+                                               x:Name="SegmentBt2RequirePassageReviewLabel" />
+
                                         <stageSettings:SettingsSwitch x:Name="SegmentBt2RequirePassageReviewToggle"
                                                                       AutomationId="SegmentBt2RequirePassageReviewToggle"
                                                                       PropertyChanged="OnButtonClicked"
                                                                       Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
-                                        
+
                                         <Grid.GestureRecognizers>
                                             <TapGestureRecognizer Tapped="SegmentBtRequire2PassageReviewToggleTapped" />
                                         </Grid.GestureRecognizers>
                                     </Grid>
-                                    
-                                    <BoxView Style="{StaticResource StageSettingsLineWithoutMargins}" 
+
+                                    <BoxView Style="{StaticResource StageSettingsLineWithoutMargins}"
                                              AutomationId="SeparatorBar" />
-                                    
+
+
+                                </VerticalStackLayout>
+
+                                <!-- [ ROW 1 ] -->
+                                <!-- Substage Name with "Transcribe" editor -->
+                                <Grid Grid.ColumnSpan="3"
+                                      Grid.Row="1"
+                                      Style="{StaticResource StageSettingsLanguageWhiteGridStyle}"
+                                      ColumnDefinitions="*, Auto"
+                                      BackgroundColor="{StaticResource Blue}"
+                                      Padding="26,20"
+                                      Margin="0,20,0,0">
+                                    <Label Style="{StaticResource StageSettingsSettingLabelStyle}"
+                                           Text="{x:Static localization:AppResources.SubstageName}"
+                                           TextColor="{StaticResource White}" />
+                                    <Border x:Name="SegmentTranscribeStepNameBorder"
+                                            Style="{StaticResource StageSettingBorder}"
+                                            WidthRequest="350">
+                                        <Entry x:Name="SegmentTranscribeStepName"
+                                               Style="{StaticResource WorkflowSettingsStepNameEntryStyle}" />
+                                    </Border>
+                                </Grid>
+
+                                <!-- [ ROW 2 ] -->
+                                <VerticalStackLayout Grid.Column="0"
+                                                     Grid.Row="2"
+                                                     x:Name="Step1SegmentBackTranslateStackRow2"
+                                                     BackgroundColor="Transparent">
                                     <!-- Segment Transcribe -->
                                     <Grid Style="{StaticResource StageSettingsWhiteGridStyle}" Padding="26,35">
-                                        <Label Style="{StaticResource StageSettingSettingGroupTitleStyle}" 
-                                               Text="{x:Static localization:AppResources.DoSegmentTranscribe}" 
+                                        <Label Style="{StaticResource StageSettingSettingGroupTitleStyle}"
+                                               Text="{x:Static localization:AppResources.Step1}"
                                                Margin="0" HorizontalOptions="Start"
-                                               x:Name="DoSegment2TranscribeLabel"/>
+                                               x:Name="DoSegmentTranscribeLabel" />
+
+                                        <stageSettings:SettingsSwitch x:Name="DoSegmentTranscribeToggle"
+                                                                      AutomationId="DoSegmentTranscribeToggle"
+                                                                      PropertyChanged="OnButtonClicked"
+                                                                      Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
+
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="DoSegmentTranscribeToggleTapped" />
+                                        </Grid.GestureRecognizers>
+                                    </Grid>
+
+                                    <BoxView Style="{StaticResource StageSettingsLineWithMargins}"
+                                             AutomationId="SeparatorBar" />
+
+                                    <!-- Segment Transcribe Guidance-->
+                                    <Grid Style="{StaticResource StageSettingsWhiteGridStyle}">
+                                        <Label Text="{x:Static localization:AppResources.RequireSegmentTranscribeListen}"
+                                               Style="{StaticResource StageSettingsSettingLabelStyle}"
+                                               x:Name="RequireSegmentTranscribeListenLabel" />
+
+                                        <stageSettings:SettingsSwitch x:Name="RequireSegmentTranscribeListenToggle"
+                                                                      AutomationId="RequireSegmentTranscribeListenToggle"
+                                                                      PropertyChanged="OnButtonClicked"
+                                                                      Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
+
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="RequireSegmentTranscribeListenToggleTapped" />
+                                        </Grid.GestureRecognizers>
+                                    </Grid>
+
+                                </VerticalStackLayout>
+
+                                <BoxView Grid.Column="1"
+                                         Grid.Row="2"
+                                         x:Name="Step1Step2SegmentsSeparatorRow2"
+                                         Style="{StaticResource StageSettingsVerticalLineWithMargins}" />
+
+
+                                <VerticalStackLayout Grid.Column="2"
+                                                     Grid.Row="2"
+                                                     x:Name="Step2SegmentBackTranslateStackRow2"
+                                                     BackgroundColor="Transparent">
+
+                                    <!-- Segment Transcribe -->
+                                    <Grid Style="{StaticResource StageSettingsWhiteGridStyle}" Padding="26,35">
+                                        <Label Style="{StaticResource StageSettingSettingGroupTitleStyle}"
+                                               Text="{x:Static localization:AppResources.Step2}"
+                                               Margin="0" HorizontalOptions="Start"
+                                               x:Name="DoSegment2TranscribeLabel" />
 
                                         <stageSettings:SettingsSwitch x:Name="DoSegment2TranscribeToggle"
                                                                       AutomationId="DoSegment2TranscribeToggle"
                                                                       PropertyChanged="OnButtonClicked"
                                                                       Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
-                                
+
                                         <Grid.GestureRecognizers>
                                             <TapGestureRecognizer Tapped="DoSegment2TranscribeToggleTapped" />
                                         </Grid.GestureRecognizers>
                                     </Grid>
-                                    
-                                    <BoxView Style="{StaticResource StageSettingsLineWithMargins}" 
+
+                                    <BoxView Style="{StaticResource StageSettingsLineWithMargins}"
                                              AutomationId="SeparatorBar" />
-                                    
+
                                     <!-- Segment Transcribe Guidance-->
                                     <Grid Style="{StaticResource StageSettingsWhiteGridStyle}">
                                         <Label Text="{x:Static localization:AppResources.RequireSegmentTranscribeListen}"
                                                Style="{StaticResource StageSettingsSettingLabelStyle}"
-                                               x:Name="RequireSegment2TranscribeListenLabel"/>
-                                        
+                                               x:Name="RequireSegment2TranscribeListenLabel" />
+
                                         <stageSettings:SettingsSwitch x:Name="RequireSegment2TranscribeListenToggle"
                                                                       AutomationId="RequireSegment2TranscribeListenToggle"
                                                                       PropertyChanged="OnButtonClicked"
                                                                       Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
-                                        
+
                                         <Grid.GestureRecognizers>
                                             <TapGestureRecognizer Tapped="RequireSegment2TranscribeListenToggleTapped" />
                                         </Grid.GestureRecognizers>
@@ -827,87 +903,175 @@
                         </Grid>
                     </VerticalStackLayout>
                 </Border>
-                
+
+                <!-- Substage Name with "Consultant Check" editor -->
+                <HorizontalStackLayout Style="{StaticResource StepNameStackLayoutStyle}">
+                    <Label Style="{StaticResource StageSettingsStepNameLabelStyle}"
+                           Text="{x:Static localization:AppResources.SubstageName}" />
+                    <Border x:Name="CheckStepNameBorder"
+                            Style="{StaticResource StageSettingStepNameEditBorderStyle}">
+                        <Entry x:Name="CheckStepName"
+                               Style="{StaticResource StageSettingsStepNameEntryStyle}" />
+                    </Border>
+                </HorizontalStackLayout>
+
+                <!-- Note Listen -->
+                <Border x:Name="ConsultantCheckNoteListenStackWrapper" Style="{StaticResource StageSettingsSectionBorderStyle}">
+                    <VerticalStackLayout>
+                        <Grid Style="{StaticResource StageSettingsCollapsedGroupGridStyle}">
+                            <Label Text="{x:Static localization:AppResources.NoteListen}"
+                                   Style="{StaticResource SettingGroupTitleLabel}" />
+                            <Label x:Name="ConsultantCheckNoteListenExpandStackIcon" Text="{resources:IconExtensions Plus}"
+                                   Style="{StaticResource WorkflowSettingsPlusIconStyle}" />
+                            <Label x:Name="ConsultantCheckNoteListenCollapseStackIcon" Text="{resources:IconExtensions Minus}"
+                                   Style="{StaticResource WorkflowSettingsMinusIconStyle}"
+                                   IsVisible="False" />
+
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="ConsultantCheckNoteListenStackTapped" />
+                            </Grid.GestureRecognizers>
+                        </Grid>
+
+                        <VerticalStackLayout x:Name="ConsultantCheckNoteListenStack" Style="{StaticResource StageSettingsCollapsedStackLayoutStyle}">
+                            <Grid Style="{StaticResource StageSettingsBlueGridStyle}">
+                                <Label Text="{x:Static localization:AppResources.IncludeNoteListenGuidance}"
+                                       Style="{StaticResource SettingGroupSubTitleLabel}" />
+
+                                <stageSettings:SettingsSwitch x:Name="RequireConsultantCheckNoteListenToggle"
+                                                              AutomationId="RequireConsultantCheckNoteListenToggle"
+                                                              PropertyChanged="OnButtonClicked"
+                                                              Style="{StaticResource StageSettingsForBlueBackgroundStyle}" />
+
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="RequireConsultantCheckNoteListenToggleTapped" />
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
                 <!-- Note Interpret -->
                 <Border x:Name="NoteInterpretStackWrapper" Style="{StaticResource StageSettingsSectionBorderStyle}">
                     <VerticalStackLayout>
                         <!-- Section Header -->
-                        <Grid Style="{StaticResource StageSettingsCollapsedGroupGridStyle}"> 
+                        <Grid Style="{StaticResource StageSettingsCollapsedGroupGridStyle}">
                             <Label Text="{x:Static localization:AppResources.NoteInterpret}"
-                                   Style="{StaticResource SettingGroupTitleLabel}"/>
+                                   Style="{StaticResource SettingGroupTitleLabel}" />
                             <Label x:Name="NoteInterpretExpandStackIcon" Text="{resources:IconExtensions Plus}"
                                    Style="{StaticResource WorkflowSettingsPlusIconStyle}" />
                             <Label x:Name="NoteInterpretCollapseStackIcon" Text="{resources:IconExtensions Minus}"
                                    Style="{StaticResource WorkflowSettingsMinusIconStyle}"
-                                   IsVisible="False"/>
-                            
+                                   IsVisible="False" />
+
                             <Grid.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="NoteInterpretStackTapped" />
                             </Grid.GestureRecognizers>
                         </Grid>
-                        
+
                         <VerticalStackLayout x:Name="NoteInterpretStack" Style="{StaticResource StageSettingsCollapsedStackLayoutStyle}">
-                            <Grid Style="{StaticResource StageSettingsBlueGridStyle}">
-                                <Label Text="{x:Static localization:AppResources.DoNoteInterpret}"
-                                       Style="{StaticResource SettingGroupSubTitleLabel}" />
-                                
-                                <stageSettings:SettingsSwitch x:Name="DoNoteInterpretToggle"
+                            <Grid Style="{StaticResource StageSettingsBlueGridStyle}"
+                                  ColumnDefinitions="*,400"
+                                  RowDefinitions="Auto,Auto,Auto"
+                                  RowSpacing="10">
+                                <Label Grid.Column="0"
+                                       Grid.Row="0"
+                                       Text="{x:Static localization:AppResources.DoNoteInterpret}"
+                                       Style="{StaticResource SettingGroupSubTitleLabel}">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="DoNoteInterpretToggleTapped" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+
+                                <stageSettings:SettingsSwitch Grid.Column="1"
+                                                              Grid.Row="0"
+                                                              x:Name="DoNoteInterpretToggle"
                                                               PropertyChanged="OnButtonClicked"
                                                               AutomationId="DoNoteInterpretToggle"
-                                                              Style="{StaticResource StageSettingsForBlueBackgroundStyle}" />
-                                
-                                <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="DoNoteInterpretToggleTapped" />
-                                </Grid.GestureRecognizers>
-                            </Grid>            
-                            
+                                                              Style="{StaticResource StageSettingsForBlueBackgroundStyle}">
+                                    <stageSettings:SettingsSwitch.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="DoNoteInterpretToggleTapped" />
+                                    </stageSettings:SettingsSwitch.GestureRecognizers>
+                                </stageSettings:SettingsSwitch>
+
+                                <!-- Substage Name with "Note Interpret To Consultant" editor -->
+                                <Label Grid.Column="0"
+                                       Grid.Row="1"
+                                       Style="{StaticResource SettingGroupSubTitleLabel}"
+                                       Padding="0,10,0,0"
+                                       Text="{x:Static localization:AppResources.SubstageName}" />
+
+                                <Border Grid.Column="1"
+                                        Grid.Row="1"
+                                        x:Name="InterpretToConsultantStepNameBorder"
+                                        Style="{StaticResource StageSettingBorder}">
+                                    <Entry
+                                        x:Name="InterpretToConsultantStepName"
+                                        Style="{StaticResource WorkflowSettingsStepNameEntryStyle}" />
+                                </Border>
+
+                                <!-- Substage Name with "Note Interpret To Translator" editor -->
+                                <Label Grid.Column="0"
+                                       Grid.Row="2"
+                                       Style="{StaticResource SettingGroupSubTitleLabel}"
+                                       Text="{x:Static localization:AppResources.SubstageName}" />
+
+                                <Border Grid.Column="1"
+                                        Grid.Row="2"
+                                        x:Name="InterpretToTranslatorStepNameBorder"
+                                        Style="{StaticResource StageSettingBorder}">
+                                    <Entry
+                                        x:Name="InterpretToTranslatorStepName"
+                                        Style="{StaticResource WorkflowSettingsStepNameEntryStyle}" />
+                                </Border>
+                            </Grid>
+
                             <Grid Style="{StaticResource StageSettingsWhiteGridStyle}">
                                 <Label Text="{x:Static localization:AppResources.RequireNoteListen}"
-                                       Style="{StaticResource StageSettingsSettingLabelStyle}" 
-                                       x:Name="RequireNoteListenLabel"/>
-                                
+                                       Style="{StaticResource StageSettingsSettingLabelStyle}"
+                                       x:Name="RequireNoteListenLabel" />
+
                                 <stageSettings:SettingsSwitch x:Name="RequireNoteListenToggle"
                                                               AutomationId="RequireNoteListenToggle"
                                                               PropertyChanged="OnButtonClicked"
                                                               Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
-                                
+
                                 <Grid.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="RequireNoteListenToggleTapped" />
                                 </Grid.GestureRecognizers>
                             </Grid>
-                                 
-                            <BoxView Style="{StaticResource StageSettingsLineWithoutMargins}" 
-                                     AutomationId="SeparatorBar" Margin="0,13,0,13"/>
-                            
+
+                            <BoxView Style="{StaticResource StageSettingsLineWithoutMargins}"
+                                     AutomationId="SeparatorBar" Margin="0,13,0,13" />
+
                             <Grid Style="{StaticResource StageSettingsWhiteGridStyle}" Padding="26,35">
-                                <Label Style="{StaticResource StageSettingSettingGroupTitleStyle}" 
-                                       Text="{x:Static localization:AppResources.DoNoteReview}" 
+                                <Label Style="{StaticResource StageSettingSettingGroupTitleStyle}"
+                                       Text="{x:Static localization:AppResources.DoNoteReview}"
                                        Margin="0" HorizontalOptions="Start"
-                                       x:Name="DoNoteReviewLabel"/>
+                                       x:Name="DoNoteReviewLabel" />
 
                                 <stageSettings:SettingsSwitch x:Name="DoNoteReviewToggle"
                                                               AutomationId="DoNoteReviewToggle"
                                                               PropertyChanged="OnButtonClicked"
                                                               Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
-                                
+
                                 <Grid.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="DoNoteReviewToggleTapped" />
                                 </Grid.GestureRecognizers>
                             </Grid>
-                            
-                            <BoxView Style="{StaticResource StageSettingsLineWithMargins}" 
+
+                            <BoxView Style="{StaticResource StageSettingsLineWithMargins}"
                                      AutomationId="SeparatorBar" />
-                            
+
                             <Grid Style="{StaticResource StageSettingsWhiteGridStyle}">
                                 <Label Text="{x:Static localization:AppResources.RequireNoteReview}"
                                        Style="{StaticResource StageSettingsSettingLabelStyle}"
-                                       x:Name="RequireNoteReviewLabel"/>
-                                        
+                                       x:Name="RequireNoteReviewLabel" />
+
                                 <stageSettings:SettingsSwitch x:Name="RequireNoteReviewToggle"
                                                               AutomationId="RequireNoteReviewToggle"
                                                               PropertyChanged="OnButtonClicked"
                                                               Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
-                                        
+
                                 <Grid.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="RequireNoteReviewToggleTapped" />
                                 </Grid.GestureRecognizers>
@@ -915,42 +1079,46 @@
                         </VerticalStackLayout>
                     </VerticalStackLayout>
                 </Border>
-                      
-                <!-- Revise -->
-                <Label Style="{StaticResource StageSettingSettingGroupTitleStyle}" 
-                       Text="{x:Static localization:AppResources.Revise}" 
-                       Margin="0,26,0,18"/>
-                
+
+                <!-- Substage Name with "Consultant Revise" editor -->
+                <HorizontalStackLayout Grid.Row="1" Style="{StaticResource StepNameStackLayoutStyle}">
+                    <Label Style="{StaticResource StageSettingsStepNameLabelStyle}"
+                           Text="{x:Static localization:AppResources.SubstageName}" />
+                    <Border Style="{StaticResource StageSettingStepNameEditBorderStyle}">
+                        <Entry x:Name="ReviseStepName" Style="{StaticResource StageSettingsStepNameEntryStyle}" />
+                    </Border>
+                </HorizontalStackLayout>
+
                 <!-- Allow Editing -->
                 <Border Style="{StaticResource StageSettingsSectionBorderStyle}">
                     <Grid Style="{StaticResource StageSettingsWhiteGridStyle}">
                         <Label Text="{x:Static localization:AppResources.AllowEditing}"
                                Style="{StaticResource StageSettingsSettingLabelStyle}" />
-                                
+
                         <stageSettings:SettingsSwitch x:Name="AllowEditingToggle"
                                                       AutomationId="AllowEditingToggle"
                                                       PropertyChanged="OnButtonClicked"
                                                       Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
-                                
+
                         <Grid.GestureRecognizers>
                             <TapGestureRecognizer Tapped="AllowEditingToggleTapped" />
                         </Grid.GestureRecognizers>
                     </Grid>
                 </Border>
-                
+
                 <!-- Note Listen -->
-                 <Border x:Name="ReviseNoteListenStackWrapper" Style="{StaticResource StageSettingsSectionBorderStyle}">
+                <Border x:Name="ReviseNoteListenStackWrapper" Style="{StaticResource StageSettingsSectionBorderStyle}">
                     <VerticalStackLayout>
                         <!-- Section Header -->
-                        <Grid Style="{StaticResource StageSettingsCollapsedGroupGridStyle}"> 
+                        <Grid Style="{StaticResource StageSettingsCollapsedGroupGridStyle}">
                             <Label Text="{x:Static localization:AppResources.NoteListen}"
-                                   Style="{StaticResource SettingGroupTitleLabel}"/>
+                                   Style="{StaticResource SettingGroupTitleLabel}" />
                             <Label x:Name="ReviseNoteListenExpandStackIcon" Text="{resources:IconExtensions Plus}"
                                    Style="{StaticResource WorkflowSettingsPlusIconStyle}" />
                             <Label x:Name="ReviseNoteListenCollapseStackIcon" Text="{resources:IconExtensions Minus}"
                                    Style="{StaticResource WorkflowSettingsMinusIconStyle}"
-                                   IsVisible="False"/>
-                            
+                                   IsVisible="False" />
+
                             <Grid.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="ReviseNoteListenStackTapped" />
                             </Grid.GestureRecognizers>
@@ -960,12 +1128,12 @@
                             <Grid Style="{StaticResource StageSettingsBlueGridStyle}">
                                 <Label Text="{x:Static localization:AppResources.IncludeNoteListenGuidance}"
                                        Style="{StaticResource SettingGroupSubTitleLabel}" />
-                                
+
                                 <stageSettings:SettingsSwitch x:Name="ReviseRequireNoteListenToggle"
                                                               AutomationId="RequireNoteListenToggle"
                                                               PropertyChanged="OnButtonClicked"
                                                               Style="{StaticResource StageSettingsForBlueBackgroundStyle}" />
-                                
+
                                 <Grid.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="ReviseRequireNoteListenToggleTapped" />
                                 </Grid.GestureRecognizers>
@@ -976,47 +1144,47 @@
 
                 <!-- Passage Review After Re-Recording -->
                 <Border x:Name="PassageReviewStackWrapper" Style="{StaticResource StageSettingsSectionBorderStyle}">
-                     <VerticalStackLayout>
-                         <!-- Section Header -->
-                         <Grid Style="{StaticResource StageSettingsCollapsedGroupGridStyle}"> 
+                    <VerticalStackLayout>
+                        <!-- Section Header -->
+                        <Grid Style="{StaticResource StageSettingsCollapsedGroupGridStyle}">
                             <Label Text="{x:Static localization:AppResources.PassageReviewAfterReRecording}"
-                                   Style="{StaticResource SettingGroupTitleLabel}"/>
+                                   Style="{StaticResource SettingGroupTitleLabel}" />
                             <Label x:Name="PassageReviewExpandStackIcon" Text="{resources:IconExtensions Plus}"
                                    Style="{StaticResource WorkflowSettingsPlusIconStyle}" />
                             <Label x:Name="PassageReviewCollapseStackIcon" Text="{resources:IconExtensions Minus}"
                                    Style="{StaticResource WorkflowSettingsMinusIconStyle}"
-                                   IsVisible="False"/>
-                            
+                                   IsVisible="False" />
+
                             <Grid.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="PassageReviewStackTapped" />
                             </Grid.GestureRecognizers>
                         </Grid>
-                        
+
                         <VerticalStackLayout x:Name="PassageReviewStack" Style="{StaticResource StageSettingsCollapsedStackLayoutStyle}">
                             <Grid Style="{StaticResource StageSettingsBlueGridStyle}">
                                 <Label Text="{x:Static localization:AppResources.IncludePassageReviewAfterReRecording}"
                                        Style="{StaticResource SettingGroupSubTitleLabel}" />
-                                
+
                                 <stageSettings:SettingsSwitch x:Name="DoPassageReviewToggle"
-                                                PropertyChanged="OnButtonClicked"
-                                                AutomationId="DoPassageReviewToggle"
-                                                Style="{StaticResource StageSettingsForBlueBackgroundStyle}" />
-                                
+                                                              PropertyChanged="OnButtonClicked"
+                                                              AutomationId="DoPassageReviewToggle"
+                                                              Style="{StaticResource StageSettingsForBlueBackgroundStyle}" />
+
                                 <Grid.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="DoPassageReviewToggleTapped" />
                                 </Grid.GestureRecognizers>
                             </Grid>
-                           
+
                             <Grid Style="{StaticResource StageSettingsWhiteGridStyle}">
                                 <Label Text="{x:Static localization:AppResources.RequireReviewAfterReRecording}"
-                                       Style="{StaticResource StageSettingsSettingLabelStyle}" 
-                                       x:Name="RequirePassageReviewLabel"/>
-                                
+                                       Style="{StaticResource StageSettingsSettingLabelStyle}"
+                                       x:Name="RequirePassageReviewLabel" />
+
                                 <stageSettings:SettingsSwitch x:Name="RequirePassageReviewToggle"
                                                               AutomationId="RequirePassageReviewToggle"
                                                               PropertyChanged="OnButtonClicked"
                                                               Style="{StaticResource StageSettingsForWhiteBackgroundStyle}" />
-                                
+
                                 <Grid.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="RequirePassageReviewToggleTapped" />
                                 </Grid.GestureRecognizers>
@@ -1025,6 +1193,6 @@
                     </VerticalStackLayout>
                 </Border>
             </VerticalStackLayout>
-        </ScrollView>
+        </customRenderer:NoFocusScrollView>
     </Grid>
 </kernel:RenderComponentBase>

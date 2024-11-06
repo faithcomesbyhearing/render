@@ -225,12 +225,6 @@
   <data name="BackTranslate2" xml:space="preserve">
     <value>बैक ट्रांसलेटर 2</value>
   </data>
-  <data name="BackTranslator" xml:space="preserve">
-    <value>बैक ट्रांसलेटर</value>
-  </data>
-  <data name="BackTranslator2" xml:space="preserve">
-    <value>बैक ट्रांसलेटर 2</value>
-  </data>
   <data name="Both" xml:space="preserve">
     <value>दोनों</value>
   </data>
@@ -279,12 +273,6 @@
   <data name="CombineSegmentTitle" xml:space="preserve">
     <value>संयुक्त - पासागेट {0}</value>
   </data>
-  <data name="CommunityCheck" xml:space="preserve">
-    <value>सामुदायिक चेक</value>
-  </data>
-  <data name="CommunityRetellPassage" xml:space="preserve">
-    <value>गद्यांश {0} - रिटेल</value>
-  </data>
   <data name="CommunityRevise" xml:space="preserve">
     <value>सामुदायिक संशोधन</value>
   </data>
@@ -293,12 +281,6 @@
   </data>
   <data name="CommunityTest" xml:space="preserve">
     <value>सामुदायिक टेस्ट</value>
-  </data>
-  <data name="CommunityTestRevise" xml:space="preserve">
-    <value>सामुदायिक परीक्षण संशोधन</value>
-  </data>
-  <data name="CommunityTestSetup" xml:space="preserve">
-    <value>सामुदायिक सेटअप</value>
   </data>
   <data name="CompleteWork" xml:space="preserve">
     <value>काम पूर्ण करें</value>
@@ -687,9 +669,6 @@
   <data name="Notes" xml:space="preserve">
     <value>नोट्स</value>
   </data>
-  <data name="NoteTranslator" xml:space="preserve">
-    <value>नोट ट्रांसलेटर</value>
-  </data>
   <data name="NotInWorkflow" xml:space="preserve">
     <value>अब कार्यप्रवाह का हिस्सा नहीं है</value>
   </data>
@@ -749,9 +728,6 @@
   </data>
   <data name="PassageNumber" xml:space="preserve">
     <value>गद्यांश {0}</value>
-  </data>
-  <data name="PassagePeerReview" xml:space="preserve">
-    <value>गद्यांश {0} पीयर समीक्षा</value>
   </data>
   <data name="PassageRetell" xml:space="preserve">
     <value>पैसेज रिटेल</value>
@@ -1481,7 +1457,7 @@
     <value>किसी अनुभाग को रीसेट करने के लिए पासवर्ड आवश्यक है</value>
   </data>
   <data name="PasswordRequiredToRestore" xml:space="preserve">
-    <value>स्नैपशॉट को पुनर्स्थापित करने के लिए पासवर्ड आवश्यक है</value>
+    <value>सेक्शन को बहाल करने के लिए पासवर्ड ज़रूरी है</value>
   </data>
   <data name="TeamWasChosen" xml:space="preserve">
     <value>टीम {0} चुनी गई</value>
@@ -1662,5 +1638,48 @@
   </data>
   <data name="CannotLoadAudio" xml:space="preserve">
     <value>ऑडियो लोड नहीं किया जा सकता</value>
+  </data>
+  <data name="UsbSync" xml:space="preserve">
+    <value>यूएसबी सिंक</value>
+  </data>
+  <data name="ExportingProject" xml:space="preserve">
+    <value>निर्यात</value>
+  </data>
+  <data name="StorageAlreadyContains" xml:space="preserve">
+    <value>इस संग्रहण में पहले से ही यह प्रोजेक्ट शामिल है</value>
+  </data>
+  <data name="PleaseSelectAnotherStorage" xml:space="preserve">
+    <value>कृपया कोई अन्य फ़ोल्डर चुनें या इस प्रोजेक्ट को स्टोरेज से हटा दें</value>
+  </data>
+  <data name="SyncPathIsNotAvailable" xml:space="preserve">
+    <value>यह सिंक्रनाइज़ेशन पथ उपलब्ध नहीं है</value>
+  </data>
+  <data name="ChooseAnotherStorage" xml:space="preserve">
+    <value>कोई अन्य संग्रहण चुनें</value>
+  </data>
+  <data name="NoProjectsToImport" xml:space="preserve">
+    <value>
+आयात करने के लिए कोई परियोजना नहीं</value>
+  </data>
+  <data name="NoDataForSync" xml:space="preserve">
+    <value>सिंक करने के लिए कोई डेटा नहीं</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>निर्यात</value>
+  </data>
+  <data name="Exported" xml:space="preserve">
+    <value>निर्यात किए गए</value>
+  </data>
+  <data name="SubstageName" xml:space="preserve">
+    <value>उप-चरण का नाम</value>
+  </data>
+  <data name="RestoreSectionWarning" xml:space="preserve">
+    <value>पुनर्स्थापना अनुभाग चयनित चरण द्वारा सभी डेटा को हटा देगा। इस कार्रवाई को पूर्ववत नहीं किया जा सकता।</value>
+  </data>
+  <data name="ImportFromRender" xml:space="preserve">
+    <value>रेंडर 3.7 से आयात करें</value>
+  </data>
+  <data name="NoDataFromRender" xml:space="preserve">
+    <value>रेंडर 3.7 से कोई डेटा नहीं</value>
   </data>
 </root>

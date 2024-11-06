@@ -11,7 +11,6 @@ namespace Render.Pages.AppStart.Login;
 public class AddProjectViaIdLocalViewModel : ReactiveObject, IDisposable
 {
     private Guid _projectId;
-    private Device _device;
     private readonly IViewModelContextProvider _viewModelContextProvider;
     private readonly IHandshakeService _handshakeService;
     private readonly ILocalProjectsRepository _localProjectsRepository;
@@ -28,52 +27,46 @@ public class AddProjectViaIdLocalViewModel : ReactiveObject, IDisposable
         _audioLossRetryDownloadService = audioLossRetryDownloadService;
     }
 
-    public void Initialize()
+    public async Task StartProjectDownload(Guid projectId)
     {
-        _handshakeService.DeviceAvailable += HandshakeServiceOnDeviceAvailable;
-        _handshakeService.BeginListener();
-    }
-
-    public void StartProjectDownload(Guid projectId)
-    {
-        _projectId = projectId;
         AddProjectState = AddProjectState.Loading;
 
-        if (_device == null)
+        _handshakeService.ConnectionTimeOut += OnHandshakeTimeout;
+        var broadcastMessage = await _handshakeService.TryToFindBroadcastForSync(projectId, includeTimeout: true);
+        if (broadcastMessage != null)
         {
-            _handshakeService.DeviceAvailable -= HandshakeServiceOnDeviceAvailable;
-            _handshakeService.DeviceAvailable += StartSyncOnDeviceLocated;
-            _handshakeService.Timeout -= OnHandshakeTimeout;
-            _handshakeService.Timeout += OnHandshakeTimeout;
-            _handshakeService.BeginListener(true);
-            return;
+            var hubToConnect = await 
+                _handshakeService.StartToConnectToServer(broadcastMessage, ConnectionTask.DownloadProject);
+            StartSyncOnDeviceLocated(hubToConnect, projectId);
         }
-
-        StartSyncOnDeviceLocated(_device);
     }
 
     public void StopProjectDownload()
     {
-        _handshakeService.Timeout -= OnHandshakeTimeout;
-        _handshakeService.CloseUDPListener();
+        _handshakeService.ConnectionTimeOut -= OnHandshakeTimeout;
+        _handshakeService.DisconnectFromServer();
+        _handshakeService.UnsubscribeOnServerDisconnected(OnHandshakeTimeout);
         
         if (_localProjectDownloader != null)
         {
+            StopReplicationProcess();
             _localProjectDownloader.DownloadFinished -= CheckIfLocalGuidProjectDownloadState;
             _localProjectDownloader.Dispose();
         }
     }
 
-    private void StartSyncOnDeviceLocated(Device device)
+    private void StartSyncOnDeviceLocated(Device device, Guid projectId)
     {
+        _projectId = projectId;
+        _handshakeService.ConnectionTimeOut -= OnHandshakeTimeout;
         //Need to ignore any other devices that are found later in the middle of sync
-        _handshakeService.DeviceAvailable -= StartSyncOnDeviceLocated;
-        _device = device;
         if (_localProjectDownloader != null)
         {
+            _handshakeService.UnsubscribeOnServerDisconnected(OnHandshakeTimeout);
             _localProjectDownloader.DownloadFinished -= CheckIfLocalGuidProjectDownloadState;
         }
-
+        
+        _handshakeService.SubscribeOnServerDisconnected(OnHandshakeTimeout);
         _localProjectDownloader = _viewModelContextProvider.GetLocalProjectDownloader(_projectId);
         _localProjectDownloader.BeginActiveLocalReplicationOfProject(device);
         _localProjectDownloader.DownloadFinished += CheckIfLocalGuidProjectDownloadState;
@@ -81,6 +74,10 @@ public class AddProjectViaIdLocalViewModel : ReactiveObject, IDisposable
 
     private async void CheckIfLocalGuidProjectDownloadState(LocalReplicationResult result)
     {
+        _handshakeService.ConnectionTimeOut -= OnHandshakeTimeout;
+        _handshakeService.DisconnectFromServer();
+        _handshakeService.UnsubscribeOnServerDisconnected(OnHandshakeTimeout);
+        
         switch (result)
         {
             case LocalReplicationResult.ProjectNotFound:
@@ -93,43 +90,37 @@ public class AddProjectViaIdLocalViewModel : ReactiveObject, IDisposable
                 AddProjectState = AddProjectState.ErrorConnectingToLocalMachine;
                 break;
             case LocalReplicationResult.Succeeded:
-                var downloadResult = await _audioLossRetryDownloadService.RetryDownloadIfAudioLoss(() =>
-                {
-                    StartProjectDownload(_projectId);
-                    return Task.CompletedTask;
-                }, _projectId, 3);
-                
+                var downloadResult = await _audioLossRetryDownloadService.RetryDownloadIfAudioLoss(() => StartProjectDownload(_projectId), _projectId, 3);
+
                 if (downloadResult.AudioIsBroken && downloadResult.AutomaticRetryCompleted is false)
                 {
-                    break;   
+                    break;
                 }
-                
+
                 AddProjectState = AddProjectState.ProjectAddedSuccessfully;
                 _ = _localProjectsRepository.SaveLocalProject(_projectId, true);
-                _handshakeService.Timeout -= OnHandshakeTimeout;
                 break;
             default:
                 AddProjectState = AddProjectState.None;
                 break;
         }
     }
-
-    private void HandshakeServiceOnDeviceAvailable(Device device)
-    {
-        _device = device;
-    }
-
+    
     private void OnHandshakeTimeout()
     {
         AddProjectState = AddProjectState.ErrorConnectingToLocalMachine;
+        StopProjectDownload();
+    }
+
+    private void StopReplicationProcess()
+    {
+        var connectedHub = _handshakeService.GetConnectedServer();
+        _localProjectDownloader.CancelActiveLocalReplicationOfProject(connectedHub);
     }
 
     public void Dispose()
     {
-        _handshakeService.CloseUDPListener();
-        _handshakeService.Timeout -= OnHandshakeTimeout;
-        _handshakeService.DeviceAvailable -= HandshakeServiceOnDeviceAvailable;
-        _handshakeService.DeviceAvailable -= StartSyncOnDeviceLocated;
+        _handshakeService.ConnectionTimeOut -= OnHandshakeTimeout;
 
         if (_localProjectDownloader != null)
         {

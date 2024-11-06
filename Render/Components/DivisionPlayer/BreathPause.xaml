@@ -6,7 +6,8 @@
                             xmlns:kernel="using:Render.Kernel"
                             xmlns:divisionPlayer="using:Render.Components.DivisionPlayer"
                             xmlns:resources="clr-namespace:Render.Resources"
-                            x:Class="Render.Components.DivisionPlayer.BreathPause">
+                            x:Class="Render.Components.DivisionPlayer.BreathPause"
+                            x:DataType="divisionPlayer:BreathPauseViewModel">
     <ContentView.Content>
         <VerticalStackLayout Margin="32,0,0,0">
             <Button x:Name="DivisionButton"

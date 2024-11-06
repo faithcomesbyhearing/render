@@ -25,29 +25,26 @@ namespace Render.Pages.Translator.SectionReview
         private ActionViewModelBase SequencerActionViewModel { get; set; }
         private ReactiveCommand<Unit, Unit> NavigateToDraftingCommand { get; set; }
 
-        public static async Task<TabletSectionReviewPageViewModel> CreateAsync(
-            IViewModelContextProvider viewModelContextProvider,
-            Section section,
-            Step step,
-            Stage stage)
-        {
-            // WorkflowPageBaseViewModel base constructor initializes SessionStateService and should be invoked at the beginning
-            var pageVm = new TabletSectionReviewPageViewModel(viewModelContextProvider, section, step, stage);
+		public static TabletSectionReviewPageViewModel Create(
+			IViewModelContextProvider viewModelContextProvider,
+			Section section,
+			Step step,
+			Stage stage)
+		{
+			// WorkflowPageBaseViewModel base constructor initializes SessionStateService and should be invoked at the beginning
+			var pageVm = new TabletSectionReviewPageViewModel(viewModelContextProvider, section, step, stage);
 
-            pageVm.Initialize();
-            return pageVm;
-        }
-        
-        private TabletSectionReviewPageViewModel(
+			pageVm.Initialize();
+			return pageVm;
+		}
+
+		private TabletSectionReviewPageViewModel(
             IViewModelContextProvider viewModelContextProvider,
             Section section,
             Step step,
             Stage stage) :
             base(viewModelContextProvider, section, step, "TabletSectionReviewPage", stage)
         {
-            DisposeOnNavigationCleared = true;
-            TitleBarViewModel.DisposeOnNavigationCleared = true;
-            
             References = new DynamicDataWrapper<IBarPlayerViewModel>();
         }
 
@@ -90,10 +87,11 @@ namespace Render.Pages.Translator.SectionReview
 
             SequencerPlayerViewModel.IsRightToLeftDirection = FlowDirection is FlowDirection.RightToLeft;
 
-            var audios = Section.Passages.Select(passage => passage
-                .CreatePlayerAudioModel(ViewModelContextProvider
-                    .GetTempAudioService(passage.CurrentDraftAudio)
-                    .SaveTempAudio(), FlagType.Note)).ToArray();
+            var audios = Section.Passages
+                .Select(passage => passage.CreatePlayerAudioModel(path: ViewModelContextProvider.GetTempAudioService(passage.CurrentDraftAudio).SaveTempAudio(), 
+                                                                  flagType: FlagType.Note,
+                                                                  userId: ViewModelContextProvider.GetLoggedInUser().Id))
+                .ToArray();
 
             SequencerPlayerViewModel.SetAudio(audios);
             
@@ -139,7 +137,7 @@ namespace Render.Pages.Translator.SectionReview
 
                 sequencerNoteDetailViewModel.AddMessageCommand = ReactiveCommand.Create((Message _) =>
                 {
-                    ViewModelContextProvider.GetGrandCentralStation().SetHasNewMessageForWorkflowStep(Section, Step, true);
+                    ViewModelContextProvider.GetWorkflowService().SetHasNewMessageForWorkflowStep(Section, Step, true);
                 });
 
                 PassageSequencerNoteDetailViewModels.Add(passage.Id, sequencerNoteDetailViewModel);

@@ -1,20 +1,15 @@
 ﻿using DynamicData;
-using DynamicData.Aggregation;
 using DynamicData.Binding;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using Render.Sequencer.Contracts.Enums;
 using Render.Sequencer.Core;
 using Render.Sequencer.Core.Audio;
 using Render.Sequencer.Core.Base;
 using Render.Sequencer.Core.Painters;
 using Render.Sequencer.Core.Utils.Extensions;
-using Render.Sequencer.Core.Utils.Helpers;
-using Render.Sequencer.Views.Flags.Base;
 using Render.Sequencer.Views.WaveForm.MiniItems;
 using System.Collections.ObjectModel;
 using System.Reactive.Linq;
-using System.Windows.Input;
 
 namespace Render.Sequencer.Views.Scroller;
 
@@ -48,12 +43,6 @@ public abstract class BaseScrollerViewModel : BaseViewModel
     public bool HasScrubber { get; set; }
 
     public ObservableCollection<BaseMiniWaveFormItemViewModel> MiniWaveFormItems { get; set; }
-
-    private ReadOnlyObservableCollection<BaseFlagViewModel>? _flags;
-    public ReadOnlyObservableCollection<BaseFlagViewModel> Flags
-    {
-        get => _flags!;
-    }
 
     public BaseScrollerViewModel(InternalSequencer sequencer)
     {

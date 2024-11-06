@@ -14,6 +14,7 @@ namespace Render.Pages.AppStart.ProjectDownload
                     v => v.TopLevelElement.FlowDirection));
                 d(this.Bind(ViewModel, vm => vm.SearchString, v => v.SearchEntry.Text));
 
+                d(this.OneWayBind(ViewModel, vm => vm.ProjectCards, v => v.ProjectsToDownloadCollection.ItemsSource));
                 d(this.WhenAnyValue(x => x.ViewModel.IsLoading)
                     .ObserveOn(RxApp.MainThreadScheduler)
                     .Subscribe(isLoading =>
@@ -22,12 +23,6 @@ namespace Render.Pages.AppStart.ProjectDownload
                         {
                             SetNoProjectMessageVisible(false);
                             return;
-                        }
-
-                        var source = BindableLayout.GetItemsSource(ProjectsToDownloadCollection);
-                        if (source == null)
-                        {
-                            BindableLayout.SetItemsSource(ProjectsToDownloadCollection, ViewModel.ProjectCards);
                         }
 
                         SetProjectListVisible(ViewModel.HasProjectsToDownload);
@@ -39,7 +34,7 @@ namespace Render.Pages.AppStart.ProjectDownload
         private void SetProjectListVisible(bool visible)
         {
             SearchEntryBorder.SetValue(IsVisibleProperty, visible);
-            ProjectsToDownloadScrollView.SetValue(IsVisibleProperty, visible);
+            ProjectsToDownloadCollection.SetValue(IsVisibleProperty, visible);
         }
 
         private void SetNoProjectMessageVisible(bool visible)

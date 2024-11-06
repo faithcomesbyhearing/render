@@ -96,8 +96,22 @@ namespace Render.Kernel
                 x => x.IsLoading)
                 .Subscribe(value => IsLoading = value.Item1 || value.Item2));
 
-            // Stop any playback/recording activity before a new page started.
-            ViewModelContextProvider.GetAudioActivityService().Stop();
+            TryStopPlaybackActivity();
+        }
+
+        /// <summary>
+        /// Stops playback only and ignores recording, 
+        /// due to the asynchronious nature of stoppting recording process.
+        /// </summary>
+        private void TryStopPlaybackActivity()
+        {
+            var activityService = ViewModelContextProvider.GetAudioActivityService();
+            if (activityService.IsAudioRecording)
+            {
+                return;
+            }
+
+            activityService.Stop();
         }
 
         public void PauseSectionTitlePlayer()

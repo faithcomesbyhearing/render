@@ -26,7 +26,9 @@ namespace Render.Components.BarPlayer
         ImageSource SecondaryButtonIcon { get;  }
         Color SecondaryButtonBackgroundColor { get; set; }
 
-        AudioPlayerState AudioPlayerState { get; set; }
+		Color GlyphColor { get; }
+		
+		AudioPlayerState AudioPlayerState { get; set; }
 
         ReactiveCommand<Unit, IRoutableViewModel> SecondaryButtonClickCommand { get; }
         ReactiveCommand<Unit, Unit> PlayAudioCommand { get; }
@@ -41,5 +43,7 @@ namespace Render.Components.BarPlayer
         void SetPassages(List<TimeMarkers> passageMarkers);
 
         void SetSecondaryButtonBackgroundColor(Color color);
-    }
+
+		void SetGlyphColor(Color color);
+	}
 }

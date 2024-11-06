@@ -10,7 +10,7 @@ namespace Render.Pages.Settings.SectionStatus.Processes
         public ProcessesView()
         {
             InitializeComponent();
-            this.WhenActivated(d =>
+            DisposableBindings = this.WhenActivated(d =>
             {
                 d(this.OneWayBind(ViewModel, vm => vm.UnassignedSectionCollectionAsStageCardViewModel,
                     v => v.UnassignedSectionCollectionAsStageCardView.BindingContext));
@@ -39,8 +39,11 @@ namespace Render.Pages.Settings.SectionStatus.Processes
                 d(this.OneWayBind(ViewModel, vm => vm.ShowSectionInformation,
                     v => v.InfoModal.IsVisible));
                 d(this.OneWayBind(ViewModel, vm => vm.IsNotAssignedAnything, v => v.NoSectionAssigned.IsVisible));
-                d(this.OneWayBind(ViewModel, vm => vm.SectionAudioPlayers,
-                    v => v.SectionAudioBarPlayerCollection.ItemsSource));
+                d(this.WhenAnyValue(v => v.ViewModel.SectionInfoPlayers)
+                    .Subscribe(observableCollection =>
+                    {
+                        BindableLayout.SetItemsSource(BarPlayerCollection, observableCollection);
+                    }));
                 d(this.BindCommand(ViewModel, vm => vm.CloseInfoCommand,
                     v => v.CloseGestureRecognizer));
                 d(this.WhenAnyValue(x => x.ViewModel.StageCards)
@@ -53,6 +56,10 @@ namespace Render.Pages.Settings.SectionStatus.Processes
                         NoSectionAssigned.IsVisible = empty;
                         OuterScrollView.IsVisible = !NoSectionAssigned.IsVisible;
                     }));
+                d(this.WhenAnyValue(x => x.ViewModel.HasConflict).Subscribe(hasConflict =>
+                   {
+                       ConflictIcon.IsVisible = hasConflict;
+                   }));
             });
 
             SizeChanged += OnSizeChanged;

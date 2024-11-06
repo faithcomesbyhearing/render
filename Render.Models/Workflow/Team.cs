@@ -125,5 +125,22 @@ namespace Render.Models.Workflow
             var newAssignment = sectionAssignment.IncreasePriorityBy1();
             _sectionAssignments.Replace(sectionAssignment, newAssignment);
         }
+        
+        public void RemoveAssignments(Guid userId)
+        {
+            var assignments = GetWorkflowAssignmentsForUser(userId);
+            if (assignments is not null)
+            {
+                foreach (var assignment in assignments)
+                {
+                    RemoveAssignment(assignment.StageId, assignment.Role);
+                }
+            }
+
+            if (TranslatorId == userId)
+            {
+                RemoveTranslator();
+            }
+        }
     }
 }

@@ -14,8 +14,9 @@ using Render.Repositories.SectionRepository;
 using Render.Repositories.UserRepositories;
 using Render.Repositories.WorkflowRepositories;
 using Render.Resources.Localization;
-using Render.Services;
 using Render.Services.SessionStateServices;
+using Render.Services.StageService;
+using Render.Services.WorkflowService;
 using Render.TempFromVessel.Project;
 using Render.UnitTests.App.Kernel;
 
@@ -38,14 +39,14 @@ namespace Render.UnitTests.App.Pages.Settings
             MockContextProvider.Setup(x => x.GetUserRepository()).Returns(_mockUserRepository.Object);
             MockContextProvider.Setup(x => x.GetWorkflowRepository()).Returns(_mockWorkflowRepository.Object);
             MockContextProvider.Setup(x => x.GetLocalizationService()).Returns(mockLocalizationService.Object);
-
             _project = new Project("Test", "TST", "ISO");
             mockProjectRepository.Setup(x => x.GetAsync(It.IsAny<Guid>())).ReturnsAsync(_project);
             mockProjectRepository.Setup(x => x.GetAllOfTypeAsync(It.IsAny<int>(),
                 It.IsAny<bool>())).ReturnsAsync(new List<Project>());
             MockContextProvider.Setup(x => x.GetPersistence<Project>()).Returns(mockProjectRepository.Object);
-            MockGrandCentralStation.Setup(x => x.ProjectWorkflow).Returns(new RenderWorkflow(Guid.Empty));
-            MockGrandCentralStation.Setup(x => x.GetStepToWorkAsync(It.IsAny<Guid>(), It.IsAny<RenderStepTypes>()))
+            var mockWorkflowService = new Mock<IWorkflowService>();
+            mockWorkflowService.Setup(x => x.ProjectWorkflow).Returns(new RenderWorkflow(Guid.Empty));
+            MockStageService.Setup(x => x.GetStepToWorkAsync(It.IsAny<Guid>(), It.IsAny<RenderStepTypes>(), It.IsAny<Guid>()))
                 .ReturnsAsync(new Step());
             MockContextProvider.Setup(x => x.GetSectionRepository()).Returns(_mockSectionRepository.Object);
             MockContextProvider.Setup(x => x.GetWorkflowRepository())
@@ -222,14 +223,13 @@ namespace Render.UnitTests.App.Pages.Settings
             var userName = "Test User";
             _user = new RenderUser(userName, _project.Id);
             MockContextProvider.Setup(x => x.GetLoggedInUser()).Returns(_user);
-            var mockGrandCentralStation = new Mock<IGrandCentralStation>();
-            MockContextProvider.Setup(x => x.GetGrandCentralStation())
-                .Returns(mockGrandCentralStation.Object);
-            mockGrandCentralStation.Setup(x => x.StepsAssignedToUser())
+            var mockStageService = new Mock<IStageService>();
+            MockContextProvider.Setup(x => x.GetStageService())
+                .Returns(mockStageService.Object);
+            mockStageService.Setup(x => x.StepsAssignedToUser())
                 .Returns(new List<Guid>());
-            mockGrandCentralStation.Setup(x => x.SectionsAtStep(It.IsAny<Guid>()))
+            mockStageService.Setup(x => x.SectionsAtStep(It.IsAny<Guid>()))
                 .Returns(new List<Guid>());
-            mockGrandCentralStation.Setup(x => x.ProjectWorkflow).Returns(MockRenderWorkflow.Object);
             var vm = await UserSettingsViewModel.CreateAsync(MockContextProvider.Object, _project.Id, false);
             var homeVm = await HomeViewModel.CreateAsync(_project.Id, MockContextProvider.Object);
             vm.SelectedLocalizationResource = new LocalizationResource("ta", "Tamil");

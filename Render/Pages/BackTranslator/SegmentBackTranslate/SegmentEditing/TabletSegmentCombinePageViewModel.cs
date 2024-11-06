@@ -54,15 +54,13 @@ namespace Render.Pages.BackTranslator.SegmentBackTranslate.SegmentEditing
             Passage passage) : base(
                 urlPathSegment: "TabletSegmentCombine",
                 viewModelContextProvider: viewModelContextProvider,
-                pageName: AppResources.BackTranslate,
+                pageName: GetStepName(step),
                 section: section,
                 stage: stage,
                 step: step,
                 passageNumber: passage?.PassageNumber,
                 secondPageName: AppResources.SegmentCombine)
         {
-            DisposeOnNavigationCleared = true;
-            TitleBarViewModel.DisposeOnNavigationCleared = true;
             TitleBarViewModel.PageGlyph = ((FontImageSource)ResourceExtensions.GetResourceValue("SegmentBackTranslateWhite"))?.Glyph;
 
             _passage = passage;

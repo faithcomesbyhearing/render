@@ -1,11 +1,11 @@
 ﻿using System.Reactive;
 using System.Reactive.Linq;
 using DynamicData;
-using Newtonsoft.Json;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Render.Components.FlagDetail;
 using Render.Extensions;
+using Render.Models.Extensions;
 using Render.Kernel;
 using Render.Models.Sections;
 using Render.Models.Snapshot;
@@ -56,15 +56,12 @@ namespace Render.Pages.CommunityTester.CommunityCheckRevise
             Stage stage) : base(
             urlPathSegment: "CommunityRevisePage",
             viewModelContextProvider,
-            pageName: AppResources.CommunityRevise,
+            pageName: GetStepName(step),
             section,
             stage,
             step,
             secondPageName: AppResources.PassageSelect)
         {
-            DisposeOnNavigationCleared = true;
-            TitleBarViewModel.DisposeOnNavigationCleared = true;
-
             TitleBarViewModel.PageGlyph =
                 ResourceExtensions.GetResourceValue<string>(Icon.CommunityRevise.ToString());
 
@@ -181,16 +178,16 @@ namespace Render.Pages.CommunityTester.CommunityCheckRevise
             {
                 return (string.Empty, AudioOption.Optional);
             }
-            var isOriginalAudio = OriginalSnapshot.Passages.Any(x => x.CurrentDraftAudio.Id == passage.CurrentDraftAudio.Id);
-            return isOriginalAudio ? (string.Empty, AudioOption.Optional) : (Icon.ReRecord.ToString(), AudioOption.Completed);
+			var isOriginalAudio = OriginalSnapshot.Passages.Any(x => x.CurrentDraftAudio.Id == passage.CurrentDraftAudio.Id);
+			return isOriginalAudio ? (string.Empty, AudioOption.Optional) : (Icon.ReRecord.ToString(), AudioOption.Completed);
         }
 
         private async Task<IRoutableViewModel> NavigateHomeAsync()
         {
             await Task.Run(async () =>
             {
-                await ViewModelContextProvider.GetGrandCentralStation()
-                    .AdvanceSectionAfterReviseAsync(Section, Step, ViewModelContextProvider.GetSessionStateService());
+                await ViewModelContextProvider.GetSectionMovementService()
+                    .AdvanceSectionAfterReviseAsync(Section, Step, ViewModelContextProvider.GetSessionStateService(), GetProjectId(), GetLoggedInUserId());
             });
             return await NavigateToHomeOnMainStackAsync();
         }

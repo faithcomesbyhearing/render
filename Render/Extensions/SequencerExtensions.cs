@@ -55,12 +55,16 @@ public static class SequencerExtensions
             .WhenAnyValue(vm => vm.State)
             .Subscribe(state =>
             {
-                if (state == SequencerState.Playing || state == SequencerState.Recording)
+                if (state is SequencerState.Loaded or SequencerState.Initial)
                 {
-                    provider
-                        .GetAudioActivityService()
-                        .SetStopCommand(sequencer.StopCommand, true);
+                    return;
                 }
+
+                provider
+                    .GetAudioActivityService()
+                    .SetStopCommand(
+                        command: sequencer.StopCommand, 
+                        isAudioRecording: state is SequencerState.Recording);
             }));
     }
 
@@ -108,7 +112,7 @@ public static class SequencerExtensions
     {
         sequencer.OnRecordFailedCommand = ReactiveCommand.CreateFromTask(async () =>
         {
-            MainThread.BeginInvokeOnMainThread(async () =>
+			await MainThread.InvokeOnMainThreadAsync(async () =>
             {
                 if (sequencer is ISequencerViewModel sequencerViewModel
                         && sequencerViewModel.StopCommand is not null)
@@ -122,9 +126,9 @@ public static class SequencerExtensions
             });
         });
 
-        sequencer.OnRecordDeviceRestoreCommand = ReactiveCommand.Create(() =>
+        sequencer.OnRecordDeviceRestoreCommand = ReactiveCommand.CreateFromTask(async () =>
         {
-            MainThread.BeginInvokeOnMainThread(async () =>
+            await MainThread.InvokeOnMainThreadAsync(() =>
             {
                 var modalService = provider.GetModalService();
                 modalService.Close(DialogResult.Ok);
@@ -140,7 +144,7 @@ public static class SequencerExtensions
         List<IDisposable> disposables,
         bool isRequired)
     {
-        var conversationMarker = new ConversationViewModel(conversation, Components.NotePlacementPlayer.FlagState.Optional, provider, isRequired);
+        var conversationMarker = new ConversationViewModel(conversation, provider, isRequired);
 
         var disposable = conversationMarker
                     .WhenAnyValue(marker => marker.FlagState)
@@ -175,13 +179,13 @@ public static class SequencerExtensions
     }
 
     public static PlayerAudioModel CreatePlayerAudioModel(this Passage passage, string path, FlagType flagType = FlagType.None,
-        string endIcon = null, AudioOption option = AudioOption.Optional)
+        string endIcon = null, AudioOption option = AudioOption.Optional, Guid? userId = null, bool requireNoteListen = false)
     {
         List<NoteFlagModel> notes = null;
 
         if (flagType == FlagType.Note)
         {
-            notes = CreateNoteFlagModels(passage.CurrentDraftAudio.Conversations);
+            notes = CreateNoteFlagModels(passage.CurrentDraftAudio.Conversations, userId, requireNoteListen);
         }
 
         return PlayerAudioModel.Create(
@@ -202,13 +206,15 @@ public static class SequencerExtensions
         string startIcon,
         string endIcon,
         AudioOption option,
-        FlagType flagType = FlagType.None)
+        FlagType flagType = FlagType.None,
+        Guid? userId = null,
+        bool requireNoteListen = false)
     {
         List<NoteFlagModel> notes = null;
 
         if (flagType == FlagType.Note)
         {
-            notes = CreateNoteFlagModels(conversations);
+            notes = CreateNoteFlagModels(conversations, userId, requireNoteListen);
         }
 
         return PlayerAudioModel.Create(
@@ -216,7 +222,7 @@ public static class SequencerExtensions
             name: name,
             startIcon: startIcon,
             endIcon: endIcon,
-            key: passage.CurrentDraftAudio.Id,
+            key: passage.CurrentDraftAudio?.Id,
             option: option,
             flags: notes,
             number: passage.PassageNumber.PassageNumberString);
@@ -225,13 +231,15 @@ public static class SequencerExtensions
     public static RecordAudioModel CreateRecordAudioModel(this BackTranslation backTranslation,
         string path,
         FlagType flagType = FlagType.None,
-        bool isTemp = false)
+        bool isTemp = false,
+        Guid? userId = null,
+        bool requireNoteListen = false)
     {
         List<NoteFlagModel> notes = null;
 
         if (flagType == FlagType.Note)
         {
-            notes = CreateNoteFlagModels(backTranslation.Conversations);
+            notes = CreateNoteFlagModels(backTranslation.Conversations, userId, requireNoteListen);
         }
 
         return RecordAudioModel.Create(
@@ -241,20 +249,37 @@ public static class SequencerExtensions
             isTemp: isTemp);
     }
 
-    private static List<NoteFlagModel> CreateNoteFlagModels(IEnumerable<Conversation> conversations)
+    private static List<NoteFlagModel> CreateNoteFlagModels(IEnumerable<Conversation> conversations, Guid? userId = null, bool requireNoteListen = false)
     {
-        return conversations
-            .Select(conversation => new NoteFlagModel(conversation.Id, conversation.FlagOverride, false, false))
-            .ToList();
+        var models = new List<NoteFlagModel>(conversations.Count());
+
+        foreach(var conversation in conversations)
+        {
+            bool seen = false;
+            if(userId is not null)
+            {
+                seen = conversation.Messages.All(message => message.UserId == userId.Value || message.GetSeenStatus(userId.Value));
+            }
+
+            models.Add(new NoteFlagModel(conversation.Id, conversation.FlagOverride, requireNoteListen, seen));
+        }
+
+        return models;
     }
 
-    public static PlayerAudioModel CreatePlayerAudioModel(this Draft draftAudio, ParentAudioType audioType, string name,
-        string path, string endIcon = null, AudioOption option = AudioOption.Optional, string number = null, Predicate<Conversation> conversationsFilter = null)
+    public static PlayerAudioModel CreatePlayerAudioModel(this Draft draftAudio, 
+        ParentAudioType audioType, 
+        string name,
+        string path, 
+        string endIcon = null, 
+        AudioOption option = AudioOption.Optional, 
+        string number = null, 
+        Predicate<Conversation> conversationsFilter = null,
+        Guid? userId = null,
+        bool requireNoteListen = false)
     {
         var conversations = conversationsFilter is null ? draftAudio.Conversations : draftAudio.Conversations.Where(c => conversationsFilter(c));
-        var flags = conversations
-            .Select(conversation => new NoteFlagModel(conversation.Id, conversation.FlagOverride, false, false))
-            .ToList();
+        var flags = CreateNoteFlagModels(conversations, userId, requireNoteListen);
 
         switch (audioType)
         {
@@ -291,13 +316,15 @@ public static class SequencerExtensions
         string path,
         bool isTemp,
         bool canDelete,
-        FlagType flagType = FlagType.None)
+        FlagType flagType = FlagType.None,
+        Guid? userId = null,
+        bool requireNoteListen = false)
     {
         List<NoteFlagModel> notes = null;
 
         if (flagType == FlagType.Note)
         {
-            notes = CreateNoteFlagModels(conversations);
+            notes = CreateNoteFlagModels(conversations, userId, requireNoteListen);
         }
 
         return RecordAudioModel.Create(

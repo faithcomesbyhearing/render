@@ -8,6 +8,7 @@ using Splat;
 using System.Globalization;
 using Couchbase.Lite.Logging;
 using Render.Interfaces;
+using Render.Services.SyncService.DbFolder;
 
 namespace Render;
 
@@ -34,7 +35,11 @@ public partial class App : Application, IScreen
     {
         var window = base.CreateWindow(activationState);
 
+#if DEMO
+        window.Title = "Render Demo";
+#else
         window.Title = "Render";
+#endif
 
         return window;
     }
@@ -43,18 +48,25 @@ public partial class App : Application, IScreen
     {
         // Handle when your app starts
         var appSettings = Locator.Current.GetService<IAppSettings>();
-        var tempAudioDir = Locator.Current.GetService<IAppDirectory>().TempAudio;
-        if (Directory.Exists(tempAudioDir) is false)
+        var appDirectory = Locator.Current.GetService<IAppDirectory>();
+        var directoryHelper = Locator.Current.GetService<IDbBackupService>();
+        
+        if (Directory.Exists(appDirectory.TempAudio) is false)
         {
-            Directory.CreateDirectory(tempAudioDir);
+            Directory.CreateDirectory(appDirectory.TempAudio);
         }
 
-        EnableCouchbaseLogging(tempAudioDir);
+        if (Directory.Exists(appDirectory.DbBackup))
+        {
+            directoryHelper.RemoveAllDatabaseBackupsAsync();
+        }
+
+        EnableCouchbaseLogging(appDirectory.TempAudio);
 
         AppCenter.SetCountryCode(CultureInfo.CurrentCulture.Name);
         AppCenter.Start(appSettings.AppCenterUwpKey, typeof(Analytics), typeof(Crashes));
 
-        RemoveTempAudios(tempAudioDir);
+        RemoveTempAudios(appDirectory.TempAudio);
 
         base.OnStart();
     }
@@ -84,16 +96,24 @@ public partial class App : Application, IScreen
 
     private static void EnableCouchbaseLogging(string tempAudioDir)
     {
-#if DEBUG
-        var tempFolder = Path.Combine(tempAudioDir, "cbllog");
-        var cbConfig = new LogFileConfiguration(tempFolder)
+#if DEBUG || TEST
+		var appSettings = Locator.Current.GetService<IAppSettings>();
+        var isDevEnvironment = appSettings.Environment is "dev";
+
+        if(isDevEnvironment is false)
         {
-            MaxRotateCount = 5,
-            MaxSize = 10000000, // 10 MB
-            UsePlaintext = true
-        };
-        Couchbase.Lite.Database.Log.File.Config = cbConfig; // Apply configuration
-        Couchbase.Lite.Database.Log.File.Level = Couchbase.Lite.Logging.LogLevel.Debug;
+            return;
+		}
+
+		var tempFolder = Path.Combine(tempAudioDir, "cbllog");
+		var cbConfig = new LogFileConfiguration(tempFolder)
+		{
+			MaxRotateCount = 5,
+			MaxSize = 10000000, // 10 MB
+			UsePlaintext = true
+		};
+		Couchbase.Lite.Database.Log.File.Config = cbConfig; // Apply configuration
+		Couchbase.Lite.Database.Log.File.Level = Couchbase.Lite.Logging.LogLevel.Debug;
 #endif
     }
 }

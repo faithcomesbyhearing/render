@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using System.Reactive;
 using DynamicData;
 using ReactiveUI;
@@ -19,25 +19,24 @@ namespace Render.Components.TitleBar
 
         public string Username { get; }
 
-        private ObservableCollection<IMenuActionViewModel> MenuItems = new ObservableCollection<IMenuActionViewModel>();
+        private ObservableCollection<IMenuActionViewModel> MenuItems = new ();
 
-        public DynamicDataWrapper<IMenuActionViewModel> Actions { get; private set; } = new DynamicDataWrapper<IMenuActionViewModel>();
+        public DynamicDataWrapper<IMenuActionViewModel> Actions { get; private set; } = new ();
 
         // maintain a list of menu item which will navigate away from the current page
         // it is used to display loading screen
-        public DynamicDataWrapper<IMenuActionViewModel> NavigationItems { get; } = new DynamicDataWrapper<IMenuActionViewModel>();
+        public DynamicDataWrapper<IMenuActionViewModel> NavigationItems { get; } = new ();
 
         public IMenuActionViewModel HomeViewModel { get; }
         public IMenuActionViewModel SectionStatusActionViewModel { get; }
         public IMenuActionViewModel LogOutViewModel { get; }
-        public IMenuActionViewModel AudioExportViewModel { get; }
         public IMenuActionViewModel ProjectListMenuViewModel { get; }
         public SyncMenuActionViewModel SyncViewModel { get; }
+        public SyncFromUsbActionViewModel SyncFromUsbViewModel { get; }
         public IMenuActionViewModel DividePassageViewModel { get; }
 
         public bool ShowUser { get; }
         public bool ShowActionItems { get; }
-        public bool ShowAudioExport { get; }
         public bool ShowProjectHome { get; }
         public bool ShowSectionStatus { get; }
         public bool ShowProjectList { get; }
@@ -57,7 +56,7 @@ namespace Render.Components.TitleBar
             _pageName = pageName;
             _menuPopupService = viewModelContextProvider.GetMenuPopupService();
             CloseCommand = ReactiveCommand.Create(_menuPopupService.Close);
-
+            
             Actions.AddRange(menuActions);
             NavigationItems.AddRange(menuActions);
             MenuItems.AddRange(menuActions);
@@ -82,7 +81,7 @@ namespace Render.Components.TitleBar
                 NavigationItems.Add(DividePassageViewModel);
             }
 
-            var projectId = viewModelContextProvider.GetGrandCentralStation()?.CurrentProjectId ?? Guid.Empty; 
+            var projectId = GetProjectId(); 
             ShowUser = viewModelContextProvider.GetLoggedInUser() != null;
             Username = ShowUser ? viewModelContextProvider.GetLoggedInUser().FullName : "";
 
@@ -104,47 +103,42 @@ namespace Render.Components.TitleBar
                 NavigationItems.Add(SectionStatusActionViewModel);
             }
 
-            SyncViewModel = new SyncMenuActionViewModel(viewModelContextProvider, pageName);
+            SyncViewModel = new SyncMenuActionViewModel(viewModelContextProvider);
 
+            SyncFromUsbViewModel = new SyncFromUsbActionViewModel(viewModelContextProvider);
+            
             LogOutViewModel = new LogOutActionViewModel(viewModelContextProvider, pageName);
             NavigationItems.Add(LogOutViewModel);
             MenuItems.Add(LogOutViewModel);
 
-            if (ShowProjectList  && projectId != Guid.Empty)
-            {
-                ShowAudioExport = urlPath != "AudioExportPage";
-                AudioExportViewModel = new AudioExportActionViewModel(viewModelContextProvider, projectId, pageName);
-                NavigationItems.Add(AudioExportViewModel);
-            }
-
             Disposables.Add(this.WhenAnyValue(x => x.SyncViewModel.CurrentSyncStatus)
-                .Subscribe(CheckIfCompleteAsync));
+                .Subscribe(CheckIfComplete));
 
             Disposables.Add(this.WhenAnyValue(x => x.LogOutViewModel.IsActionExecuting)
                 .Subscribe(value => IsLoading = value));
         }
 
-        private async void CheckIfCompleteAsync(CurrentSyncStatus syncStatus)
-        {
-            // Set to close modal when sync finishes
-            if (syncStatus == CurrentSyncStatus.ActiveReplication)
-            {
-                _closeOnSyncComplete = true;
-            }
+		private void CheckIfComplete(CurrentSyncStatus syncStatus)
+		{
+			// Set to close modal when sync finishes
+			if (syncStatus == CurrentSyncStatus.ActiveReplication)
+			{
+				_closeOnSyncComplete = true;
+			}
 
-            // If sync has been started, and is now complete close the modal
-            if (syncStatus == CurrentSyncStatus.Finished && _closeOnSyncComplete && SyncViewModel.IsManualSync)
-            {
-                await CloseModalAsync();
-            }
+			// If sync has been started, and is now complete close the modal
+			if (syncStatus == CurrentSyncStatus.Finished && _closeOnSyncComplete && SyncViewModel.IsManualSync)
+			{
+				CloseModal();
+			}
 
-            if (SyncViewModel.IsWebSync)
-            {
-                LogOutViewModel.CanActionExecute = syncStatus != CurrentSyncStatus.ActiveReplication;   
-            }
-        }
+			if (SyncViewModel?.SyncManager.IsWebSync == true)
+			{
+				LogOutViewModel.CanActionExecute = syncStatus != CurrentSyncStatus.ActiveReplication;
+			}
+		}
 
-        private async Task CloseModalAsync()
+		private void CloseModal()
         {
             _menuPopupService.Close();
             // If the menu is closing because sync is completed, and we are on the home page, reload the page. 
@@ -161,7 +155,6 @@ namespace Render.Components.TitleBar
             HomeViewModel?.SetCommandCondition(condition);
             SectionStatusActionViewModel?.SetCommandCondition(condition);
             LogOutViewModel?.SetCommandCondition(condition);
-            AudioExportViewModel?.SetCommandCondition(condition);
             ProjectListMenuViewModel?.SetCommandCondition(condition);
 
             foreach (var action in Actions.SourceItems)
@@ -175,7 +168,7 @@ namespace Render.Components.TitleBar
             HomeViewModel?.Dispose();
             SectionStatusActionViewModel?.Dispose();
             LogOutViewModel?.Dispose();
-            AudioExportViewModel?.Dispose();
+            SyncFromUsbViewModel?.Dispose();
             ProjectListMenuViewModel?.Dispose();
             SyncViewModel?.Dispose();
             DividePassageViewModel?.Dispose();

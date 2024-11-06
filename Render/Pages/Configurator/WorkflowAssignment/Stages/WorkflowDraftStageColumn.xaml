@@ -18,7 +18,7 @@
         <Grid RowSpacing="0">
             <Grid.RowDefinitions>
                 <RowDefinition x:Name="StgName" Height="Auto" />
-                <RowDefinition x:Name="Content" Height="*" />
+                <RowDefinition x:Name="ContentRow" Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 

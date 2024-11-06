@@ -37,9 +37,9 @@ namespace Render.Components.TitleBar
         {
             CloseMenu();
 
-            var vm = await Task.Run(async () => await DividePassageDispatcher.GetDividePassagePageViewModelAsync(
-                    Section, PassageNumber, ViewModelContextProvider, Step));
-            return await NavigateTo(vm);
+			var vm = DividePassageDispatcher.GetDividePassagePageViewModel(Section, PassageNumber, ViewModelContextProvider, Step);
+
+			return await NavigateTo(vm);
         }
 
         public override void Dispose()

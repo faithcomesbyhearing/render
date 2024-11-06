@@ -106,12 +106,7 @@ namespace Render.Repositories.SectionRepository
 			test.AddResponses(responses);
 			return test;
 		}
-
-		public async Task Purge(Guid id)
-        { 
-            await _communityTestPersistence.PurgeAllOfTypeForProjectId(id);
-        }
-
+        
         public void Dispose()
         {
             _responseRepository?.Dispose();

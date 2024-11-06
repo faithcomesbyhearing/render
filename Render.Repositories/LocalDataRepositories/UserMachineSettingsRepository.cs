@@ -22,11 +22,6 @@ namespace Render.Repositories.LocalDataRepositories
             await _userMachineSettingsPersistence.UpsertAsync(userMachineSettings.Id, userMachineSettings);
         }
         
-        public async Task Purge(Guid id)
-        { 
-            await _userMachineSettingsPersistence.PurgeAllOfTypeForProjectId(id);
-        }
-
         public void Dispose()
         {
             _userMachineSettingsPersistence.Dispose();

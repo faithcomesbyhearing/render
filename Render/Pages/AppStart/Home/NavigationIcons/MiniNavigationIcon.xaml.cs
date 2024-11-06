@@ -14,7 +14,7 @@ public partial class MiniNavigationIcon
         DisposableBindings = this.WhenActivated(d =>
         {
             d(this.OneWayBind(ViewModel, vm => vm.ActionState, 
-                v => v.Frame.BackgroundColor, Selector));
+                v => v.ComponentFrame.BackgroundColor, Selector));
             d(this.OneWayBind(ViewModel, vm => vm.IsFirstIcon,
                 v => v.Rectangle.IsVisible, Selector));
         });

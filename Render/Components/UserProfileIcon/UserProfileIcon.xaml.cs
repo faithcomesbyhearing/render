@@ -61,7 +61,7 @@
             var cornerRadius = width / 2;
             control.Stack.HeightRequest = width;
             control.Stack.WidthRequest = width;
-            control.Frame.CornerRadius = (float)cornerRadius;
+            control.ComponentFrame.CornerRadius = (float)cornerRadius;
             control.FrameInner.CornerRadius = (float)cornerRadius;
         }
 

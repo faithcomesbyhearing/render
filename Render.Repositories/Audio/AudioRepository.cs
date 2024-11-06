@@ -76,11 +76,6 @@ namespace Render.Repositories.Audio
             }
         }
         
-        public async Task Purge(Guid id)
-        {
-            await _audioRepository.PurgeAllOfTypeForProjectId(id);
-        }
-
         // Used when the StandardQuestion (Library Question) is deleted.
         // Resets the CreatedFromAudioId property for all NotableAudio entities that reference the specified standard questions.
         public async Task ResetCreatedFromAudioIds(Guid projectId, List<Guid> deletedStandardQuestions)

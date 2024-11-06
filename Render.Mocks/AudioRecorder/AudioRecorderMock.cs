@@ -9,9 +9,12 @@ namespace Render.Mocks.AudioRecorder
     {
         private const int ToneLengthMs = 100;
 
-        public event EventHandler<string> OnRecordFailed;
+ #pragma warning disable 0067
+		public event EventHandler<string> OnRecordFailed;
         public event EventHandler<string> OnRecordDeviceRestore;
-        public event EventHandler<string> OnRecordFinished;
+#pragma warning restore 0067
+
+		public event EventHandler<string> OnRecordFinished;
 
         private readonly string _defaultFileName = "Mock_ARS_recording_{0}.wav";
         private readonly string _defaultTempRecordPath;
@@ -19,23 +22,19 @@ namespace Render.Mocks.AudioRecorder
         private readonly System.Timers.Timer _timer;
         private readonly AudioDataChunk _sineToneChunk;
 
-        private int _byteCount;
         private bool _isRecording;
         private bool _isInnerStream;
 
+        private MemoryStream _recordingStream;
+
         private FileStream _fileStream;
-        private StreamWriter _streamWriter;
         private BinaryWriter _binaryWriter;
 
-        public bool IsRecording 
-		{ 
-			get => _isRecording; 
-			private set 
-			{
-				_isRecording = value;
-				IAudioRecorder.IsRecordingChanged?.Invoke(value);
-			}
-		}
+        public bool IsRecording
+        {
+            get => _isRecording;
+            private set => _isRecording = value;
+        }
 
         public AudioDetails AudioStreamDetails { get; }
 
@@ -46,7 +45,7 @@ namespace Render.Mocks.AudioRecorder
 
             AudioStreamDetails = new AudioDetails
             {
-                ChannelCount = 2,
+                ChannelCount = 1,
                 BitsPerSample = 16,
                 SampleRate = preferredSampleRate,
             };
@@ -56,9 +55,7 @@ namespace Render.Mocks.AudioRecorder
             _timer.AutoReset = true;
 
             _sineToneChunk = new AudioDataChunk();
-            _sineToneChunk.AddSampleData(
-                leftChannelBuffer: SineGenerator.GenerateSine(697.0f, (uint)AudioStreamDetails.SampleRate, ToneLengthMs),
-                rightChannelBuffer: SineGenerator.GenerateSine(1209.0f, (uint)AudioStreamDetails.SampleRate, ToneLengthMs));
+            _sineToneChunk.SetSampleData(SineGenerator.GenerateSine(1209.0f, (uint)AudioStreamDetails.SampleRate, ToneLengthMs));
         }
 
         public string GetAudioFilePath()
@@ -83,8 +80,9 @@ namespace Render.Mocks.AudioRecorder
 
             _isInnerStream = stream is null;
             _fileStream = stream ?? new FileStream(_defaultTempRecordPath, FileMode.Create, FileAccess.Write, FileShare.Read);
-            _streamWriter = new StreamWriter(_fileStream);
-            _binaryWriter = new BinaryWriter(_streamWriter.BaseStream, System.Text.Encoding.UTF8);
+            _binaryWriter = new BinaryWriter(_fileStream, System.Text.Encoding.UTF8);
+
+            _recordingStream = new MemoryStream();
 
             _timer.Start();
 
@@ -101,73 +99,51 @@ namespace Render.Mocks.AudioRecorder
             _timer.Stop();
 
             await Task.Delay(ToneLengthMs);
-            WriteWavHeader(
-                channelCount: AudioStreamDetails.ChannelCount,
-                sampleRate: AudioStreamDetails.SampleRate,
-                bitsPerSample: AudioStreamDetails.BitsPerSample,
-                audioLength: _byteCount);
+
+            var audio = new Audio(Guid.Empty, Guid.Empty, Guid.Empty);
+
+            _recordingStream.Position = 0;
+            audio.SetAudio(_recordingStream.ToArray());
+            audio.WriteWavHeader();
+
+            _fileStream.Position = 0;
+            _fileStream.Write(audio.Data);
+            _fileStream.Flush();
 
             IsRecording = false;
             OnRecordFinished?.Invoke(this, _defaultTempRecordPath);
 
             Reset();
+
             return _defaultTempRecordPath;
         }
 
         private void AddGeneratedTone(object sender, ElapsedEventArgs e)
         {
-            _byteCount += _sineToneChunk.WaveDataBytes.Length;
+            _recordingStream.Write(_sineToneChunk.WaveDataBytes);
             _binaryWriter.Write(_sineToneChunk.WaveDataBytes);
         }
 
         private void Reset()
         {
-            _byteCount = 0;
+            _recordingStream?.Close();
+            _recordingStream?.Dispose();
+            _recordingStream = null;
+
+            _binaryWriter?.Close();
+            _binaryWriter?.Dispose();
+            _binaryWriter = null;
 
             if (_isInnerStream)
             {
-                _streamWriter?.Close();
-                _binaryWriter?.Close();
                 _fileStream?.Close();
+                _fileStream?.Dispose();
+                _fileStream = null;
             }
-        }
-
-        private void WriteWavHeader(int channelCount, int sampleRate, int bitsPerSample, int audioLength = -1)
-        {
-            var blockAlign = (short)(channelCount * (bitsPerSample / 8));
-            var averageBytesPerSecond = sampleRate * blockAlign;
-
-            if (_binaryWriter.BaseStream.CanSeek)
-            {
-                _binaryWriter.Seek(0, SeekOrigin.Begin);
-            }
-
-            _binaryWriter.Write(System.Text.Encoding.UTF8.GetBytes("RIFF"));
-            if (audioLength > -1)
-            {
-                _binaryWriter.Write(audioLength - 8);
-            }
-            else
-            {
-                _binaryWriter.Write(audioLength);
-            }
-
-            _binaryWriter.Write(System.Text.Encoding.UTF8.GetBytes("WAVE"));
-            _binaryWriter.Write(System.Text.Encoding.UTF8.GetBytes("fmt "));
-            _binaryWriter.Write(16);
-            _binaryWriter.Write((short)1);
-            _binaryWriter.Write((short)channelCount);
-            _binaryWriter.Write(sampleRate);
-            _binaryWriter.Write(averageBytesPerSecond);
-            _binaryWriter.Write(blockAlign);
-            _binaryWriter.Write((short)bitsPerSample);
-            _binaryWriter.Write(System.Text.Encoding.UTF8.GetBytes("data"));
-            _binaryWriter.Write(audioLength - 44);
         }
 
         public void Dispose()
         {
-            StopRecording();
             Reset();
         }
     }

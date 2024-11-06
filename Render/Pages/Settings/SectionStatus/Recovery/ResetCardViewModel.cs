@@ -8,7 +8,7 @@ namespace Render.Pages.Settings.SectionStatus.Recovery;
 
 public class ResetCardViewModel : ViewModelBase
 {
-    private Func<Guid, Task> _resetSectionCallback;
+    private Func<Guid, bool, Task> _resetSectionCallback;
 
     private Section Section { get; set; }
 
@@ -19,7 +19,7 @@ public class ResetCardViewModel : ViewModelBase
     public ResetCardViewModel(
         IViewModelContextProvider viewModelContextProvider,
         Section section,
-        Func<Guid, Task> sectionResetCallback, bool sectionHasSnapshots = false) :
+        Func<Guid, bool, Task> sectionResetCallback, bool sectionHasSnapshots = false) :
         base("SnapshotCard", viewModelContextProvider)
     {
         _resetSectionCallback = sectionResetCallback;
@@ -30,7 +30,7 @@ public class ResetCardViewModel : ViewModelBase
 
     private void ResetSection()
     {
-        _resetSectionCallback?.Invoke(Guid.Empty);
+        _resetSectionCallback?.Invoke(Guid.Empty, false);
     }
 
     public override void Dispose()

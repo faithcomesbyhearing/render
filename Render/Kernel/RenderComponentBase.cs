@@ -12,12 +12,13 @@ namespace Render.Kernel
         protected virtual void OnButtonClicked(object sender, EventArgs e)
         {
             var element = (Element)sender;
-            var name = element.AutomationId;
+            var name = element.AutomationId ?? "No AutomationId!";
+            var viewModelType  = ViewModel?.GetType()?.ToString() ?? "Undefined";
             
             var properties = new Dictionary<string, string>
             {
                 {"Button Name", name},
-                {"ViewModel", nameof(ViewModel.GetType)}
+                {"ViewModel", viewModelType}
             };
             LogInfo("Button Click", properties);
         }

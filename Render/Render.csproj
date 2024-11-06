@@ -8,9 +8,8 @@
     <SingleProject>true</SingleProject>
     <ImplicitUsings>enable</ImplicitUsings>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-
-    <!-- Display name -->
-    <ApplicationTitle>Render 3</ApplicationTitle>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <SelfContained>true</SelfContained>
 
     <!-- App Identifier -->
     <ApplicationId>com.companyname.render</ApplicationId>
@@ -29,26 +28,44 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="$(Configuration.StartsWith('Release')) or $(Configuration.StartsWith('Test')) or $(Configuration.StartsWith('AutoTests'))">
+    <ApplicationTitle>Render 3</ApplicationTitle>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(Configuration.StartsWith('Demo'))">
+    <ApplicationTitle>Render 3 Demo</ApplicationTitle>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(Configuration.StartsWith('Release')) or $(Configuration.StartsWith('Test')) or $(Configuration.StartsWith('AutoTests'))">
     <DebugType>none</DebugType>
   </PropertyGroup>
 
-  <ItemGroup>
+  <!-- Images -->
+  <ItemGroup Condition="!$(Configuration.StartsWith('Demo'))">
+    <MauiImage Include="Resources\Images\store_logo.png" BaseSize="48,48" />
+    <MauiImage Include="Resources\Images\square_44x44_logo.png" BaseSize="44,44" />
+    <MauiImage Include="Resources\Images\square_150x150_logo.png" BaseSize="150,150" />
+    <MauiImage Include="Resources\Images\wide_310x150_logo.png" BaseSize="310,150" />
+    <MauiImage Include="Resources\Images\small_tile.png" BaseSize="71,71" />
+    <MauiImage Include="Resources\Images\large_tile.png" BaseSize="310,310" />
+    <MauiImage Include="Resources\Images\badge_logo.png" BaseSize="24,24" />
+  </ItemGroup>
 
+  <ItemGroup Condition="$(Configuration.StartsWith('Demo'))">
+    <MauiImage Include="Resources\Images\store_logo_demo.png" BaseSize="48,48" />
+    <MauiImage Include="Resources\Images\square_44x44_logo_demo.png" BaseSize="44,44" />
+    <MauiImage Include="Resources\Images\square_150x150_logo_demo.png" BaseSize="150,150" />
+    <MauiImage Include="Resources\Images\wide_310x150_logo_demo.png" BaseSize="310,150" />
+    <MauiImage Include="Resources\Images\small_tile_demo.png" BaseSize="71,71" />
+    <MauiImage Include="Resources\Images\large_tile_demo.png" BaseSize="310,310" />
+    <MauiImage Include="Resources\Images\badge_logo_demo.png" BaseSize="24,24" />
+  </ItemGroup>
+
+  <ItemGroup>
     <!-- Splash Screen -->
     <!--WinUI 3 doesn't support splash screen yet:
         https://github.com/microsoft/microsoft-ui-xaml/issues/4055
         https://github.com/dotnet/maui/issues/12395 -->
     <MauiSplashScreen Include="Resources\Splash\splash_screen.png" Color="#DEE7EB" BaseSize="620,300" />
-
-    <!-- Images -->
-    <MauiImage Include="Resources\Images\*" />
-    <MauiImage Update="Resources\Images\store_logo.png" BaseSize="48,48" />
-    <MauiImage Update="Resources\Images\square_44x44_logo.png" BaseSize="44,44" />
-    <MauiImage Update="Resources\Images\square_150x150_logo.png" BaseSize="150,150" />
-    <MauiImage Update="Resources\Images\wide_310x150_logo.png" BaseSize="310,150" />
-    <MauiImage Update="Resources\Images\small_tile.png" BaseSize="71,71" />
-    <MauiImage Update="Resources\Images\large_tile.png" BaseSize="310,310" />
-    <MauiImage Update="Resources\Images\badge_logo.png" BaseSize="24,24" />
 
     <!-- Custom Fonts -->
     <MauiFont Include="Resources\Fonts\*" />
@@ -86,9 +103,6 @@
       <DependentUpon>WorkflowDraftStageColumn.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <None Update="AppSettings.development.json">
-      <DependentUpon>AppSettings.json</DependentUpon>
-    </None>
   </ItemGroup>
 
   <ItemGroup Condition="$(TargetFramework.Contains('-windows')) != true">
@@ -179,6 +193,44 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup Condition="$(Configuration.StartsWith('Demo'))">
+    <EmbeddedResource Include="Demo\demo_database\localonlydata.cblite2\db.sqlite3" />
+    <EmbeddedResource Include="Demo\demo_database\localonlydata.cblite2\db.sqlite3-shm" />
+    <EmbeddedResource Include="Demo\demo_database\localonlydata.cblite2\db.sqlite3-wal" />
+    <EmbeddedResource Include="Demo\demo_database\render.cblite2\db.sqlite3" />
+    <EmbeddedResource Include="Demo\demo_database\render.cblite2\db.sqlite3-shm" />
+    <EmbeddedResource Include="Demo\demo_database\render.cblite2\db.sqlite3-wal" />
+    <EmbeddedResource Include="Demo\demo_database\renderaudio.cblite2\Attachments\0JmMHF21Aol1xeE7+EsM8MKHclQ=.blob" />
+    <EmbeddedResource Include="Demo\demo_database\renderaudio.cblite2\Attachments\1DVRcVthlP1tcPyejLY9AJRz3U0=.blob" />
+    <EmbeddedResource Include="Demo\demo_database\renderaudio.cblite2\Attachments\2EFb3boO3Bbd935m3Gex1NGhOUY=.blob" />
+    <EmbeddedResource Include="Demo\demo_database\renderaudio.cblite2\Attachments\2vtOrhSHnYVSsUTDKAF6dZ2INRc=.blob" />
+    <EmbeddedResource Include="Demo\demo_database\renderaudio.cblite2\Attachments\44NFZAWJXeO920cpC92RkDSzX1M=.blob" />
+    <EmbeddedResource Include="Demo\demo_database\renderaudio.cblite2\Attachments\CTiezgvb05rElFaFxhGO0ntKhKc=.blob" />
+    <EmbeddedResource Include="Demo\demo_database\renderaudio.cblite2\Attachments\D87OQh646PBL4ETOTKXaBUNs7SQ=.blob" />
+    <EmbeddedResource Include="Demo\demo_database\renderaudio.cblite2\Attachments\diZaDf4v_7iQMykHHEjti4E7HJc=.blob" />
+    <EmbeddedResource Include="Demo\demo_database\renderaudio.cblite2\Attachments\DZaZr3yG06Tp96xSwChAVltYzUQ=.blob" />
+    <EmbeddedResource Include="Demo\demo_database\renderaudio.cblite2\Attachments\hqEBaHCpk5NALbHoxUMXSXLkrAE=.blob" />
+    <EmbeddedResource Include="Demo\demo_database\renderaudio.cblite2\Attachments\i5V0BIhVf1s8G2dLDqfHOIuB7hg=.blob" />
+    <EmbeddedResource Include="Demo\demo_database\renderaudio.cblite2\Attachments\IjhqfC1ZLykZiSGq7hkDm9nMAeg=.blob" />
+    <EmbeddedResource Include="Demo\demo_database\renderaudio.cblite2\Attachments\iqnUmmUMNE2hj51iKfHlJu4AAXQ=.blob" />
+    <EmbeddedResource Include="Demo\demo_database\renderaudio.cblite2\Attachments\K78GWzxKIAv5KelMeIFwDKzPA9k=.blob" />
+    <EmbeddedResource Include="Demo\demo_database\renderaudio.cblite2\Attachments\LwH3shYumYr9dRB8xfkkn3ERYnk=.blob" />
+    <EmbeddedResource Include="Demo\demo_database\renderaudio.cblite2\Attachments\M0SYQVPGsK8s0PmmCiucuHm7IGA=.blob" />
+    <EmbeddedResource Include="Demo\demo_database\renderaudio.cblite2\Attachments\mrLdTRtU+Bp_oaeG0lOH3XWHpM8=.blob" />
+    <EmbeddedResource Include="Demo\demo_database\renderaudio.cblite2\Attachments\NdE5qd3ahDa1b_WNsa11uIk7Tj0=.blob" />
+    <EmbeddedResource Include="Demo\demo_database\renderaudio.cblite2\Attachments\oKobAb9mnBPO__WUtmkmZUx3qjo=.blob" />
+    <EmbeddedResource Include="Demo\demo_database\renderaudio.cblite2\Attachments\otrx9bRk3xWuTqVkgo1YUo9bUDc=.blob" />
+    <EmbeddedResource Include="Demo\demo_database\renderaudio.cblite2\Attachments\Qj9gHJp2bi6RqzA4Es+dghEPguE=.blob" />
+    <EmbeddedResource Include="Demo\demo_database\renderaudio.cblite2\Attachments\s9jh_z5frEKYfHvgEW6VJd4qBRk=.blob" />
+    <EmbeddedResource Include="Demo\demo_database\renderaudio.cblite2\Attachments\SmySyjOsPq8E2UT1D8j7IIeBIMw=.blob" />
+    <EmbeddedResource Include="Demo\demo_database\renderaudio.cblite2\Attachments\VMNxRc9bQdHLBQ9bALlWD1Kfi1U=.blob" />
+    <EmbeddedResource Include="Demo\demo_database\renderaudio.cblite2\Attachments\xSNWKVqKQsrKTgnEfqZcvMQCRYY=.blob" />
+    <EmbeddedResource Include="Demo\demo_database\renderaudio.cblite2\Attachments\_dFcJbrY9css1XneuBSlGcHTAPw=.blob" />
+    <EmbeddedResource Include="Demo\demo_database\renderaudio.cblite2\db.sqlite3" />
+    <EmbeddedResource Include="Demo\demo_database\renderaudio.cblite2\db.sqlite3-shm" />
+    <EmbeddedResource Include="Demo\demo_database\renderaudio.cblite2\db.sqlite3-wal" />
+  </ItemGroup>
+
   <ItemGroup>
     <MauiXaml Update="Common\LoadingBar.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -201,6 +253,12 @@
     <MauiXaml Update="Components\ProgressBar\RenderProgress.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
+    <MauiXaml Update="Components\Revision\MultipleRevision.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Components\SectionInfo\SectionInfoPlayers.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
     <MauiXaml Update="Pages\BackTranslator\SegmentBackTranslate\SegmentEditing\TabletSegmentCombinePage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
@@ -208,6 +266,33 @@
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="Pages\CommunityTester\CommunityRetell\CommunityRetellPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Pages\Configurator\SectionAssignment\Cards\Section\TeamSectionCard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Pages\Configurator\SectionAssignment\Cards\Section\UnassignedSectionCard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Pages\Configurator\SectionAssignment\SectionAssignmentPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Pages\Configurator\SectionAssignment\Tabs\Team\TeamViewTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Pages\Configurator\SectionAssignment\Tabs\Section\SectionViewTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Pages\Configurator\SectionAssignment\Cards\Section\PrioritySectionCard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Pages\Configurator\SectionAssignment\Tabs\Team\TeamSectionAssignmentsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Pages\Configurator\SectionAssignment\Cards\Team\TeamCard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Pages\Configurator\SectionAssignment\Cards\Team\SelectableTeamCard.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="Pages\Consultant\ConsultantApproval\ApproveSection.xaml">
@@ -264,21 +349,6 @@
     <MauiXaml Update="Pages\Debug\DebugPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
-    <MauiXaml Update="Pages\Settings\AudioExport\AllSectionsView\AllSectionsView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </MauiXaml>
-    <MauiXaml Update="Pages\Settings\AudioExport\AudioExportPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </MauiXaml>
-    <MauiXaml Update="Pages\Settings\AudioExport\SectionToExportView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </MauiXaml>
-    <MauiXaml Update="Pages\Settings\AudioExport\StageView\AudioExportStageView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </MauiXaml>
-    <MauiXaml Update="Pages\Settings\AudioExport\StageView\StageViewStage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </MauiXaml>
     <MauiXaml Update="Pages\Settings\ManageUsers\UserSettings.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
@@ -293,6 +363,9 @@
     </MauiXaml>
     <MauiXaml Update="Pages\Translator\AudioEdit\AudioInsertPageView.xaml">
       <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Components\StageSettings\ConsultantApprovalStageSettings\ConsultantApprovalStageSettings.xaml">
+      <SubType>Designer</SubType>
     </MauiXaml>
   </ItemGroup>
 

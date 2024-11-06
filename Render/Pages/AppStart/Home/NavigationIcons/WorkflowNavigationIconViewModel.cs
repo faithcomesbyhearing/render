@@ -6,7 +6,8 @@ using Render.Models.Sections;
 using Render.Models.Workflow;
 using Render.Models.Workflow.Stage;
 using Render.Repositories.SectionRepository;
-using Render.Services;
+using Render.Services.SnapshotService;
+using Render.Services.StageService;
 
 namespace Render.Pages.AppStart.Home.NavigationIcons;
 
@@ -14,19 +15,26 @@ public class WorkflowNavigationIconViewModel : NavigationIconViewModel
 {
     public Stage Stage { get; private set; }
     protected Step Step { get; private set; }
-    protected IGrandCentralStation GrandCentralStation { get; private set; }
-    protected ISectionRepository _sectionRepository { get; private set; }
+    protected IStageService StageService { get; private set; }
+    protected ISnapshotService SnapshotService { get; private set; }
+    protected ISectionRepository SectionRepository { get; private set; }
 
-    public WorkflowNavigationIconViewModel(IViewModelContextProvider viewModelContextProvider, Stage stage,
-        Step step, int sectionsAtStep, string title = null)
-        : base(viewModelContextProvider,
-            title ?? GetStepName(viewModelContextProvider, step.RenderStepType, stage.Id))
+    public WorkflowNavigationIconViewModel(
+        IViewModelContextProvider viewModelContextProvider,
+        Stage stage,
+        Step step,
+        int sectionsAtStep,
+        string title = null)
+        : base(
+            viewModelContextProvider: viewModelContextProvider,
+            title: title ?? GetStepName(step))
     {
         IconImageGlyph = IconMapper.GetIconGlyphForStepType(step.RenderStepType);
         IconName = IconMapper.GetIconNameForStepType(step.RenderStepType);
         StageNumber = stage.StageNumber;
-        GrandCentralStation = viewModelContextProvider.GetGrandCentralStation();
-        _sectionRepository = viewModelContextProvider.GetSectionRepository();
+        StageService = viewModelContextProvider.GetStageService();
+        SectionRepository = viewModelContextProvider.GetSectionRepository();
+        SnapshotService = viewModelContextProvider.GetSnapshotService();
         NavigateToPageCommand = ReactiveCommand.CreateFromTask(NavigateOnClickAsync, CanExecute);
         Stage = stage;
         Step = step;
@@ -37,18 +45,20 @@ public class WorkflowNavigationIconViewModel : NavigationIconViewModel
     {
         var viewModel = await Task.Run(async () =>
         {
-            foreach (var sectionId in await GrandCentralStation.FilterOutConflicts(Step))
+            foreach (var sectionId in await SnapshotService.FilterOutConflicts(Step))
             {
-                var section = await _sectionRepository.GetSectionWithDraftsAsync(sectionId, true,
+                var section = await SectionRepository.GetSectionWithDraftsAsync(sectionId, true,
                     true, true, true);
                 if (IsSectionDocumentMissing(sectionId, section))
                 {
                     continue;
                 }
+
                 if (IsAudioMissing(section, Step.RenderStepType))
                 {
                     return null;
                 }
+
                 return await WorkflowPageViewModelFactory
                     .GetViewModelToNavigateTo(ViewModelContextProvider, Step, section);
             }
@@ -57,7 +67,7 @@ public class WorkflowNavigationIconViewModel : NavigationIconViewModel
         });
         if (viewModel != null)
         {
-            return await HostScreen.Router.NavigateAndReset.Execute(viewModel);
+            return await NavigateToAndReset(viewModel);
         }
 
         return null;
@@ -68,10 +78,10 @@ public class WorkflowNavigationIconViewModel : NavigationIconViewModel
         if (section == null)
         {
             LogInfo("Missing section skipped", new Dictionary<string, string>
-                {
-                    {"Section Id", sectionId.ToString()},
-                    {"Step", Step.RenderStepType.ToString()}
-                });
+            {
+                { "Section Id", sectionId.ToString() },
+                { "Step", Step.RenderStepType.ToString() }
+            });
             return true;
         }
 
@@ -80,12 +90,14 @@ public class WorkflowNavigationIconViewModel : NavigationIconViewModel
 
     public override void Dispose()
     {
-        _sectionRepository?.Dispose();
-
+        SectionRepository?.Dispose();
+        SnapshotService?.Dispose();
+        
         Stage = null;
         Step = null;
-        GrandCentralStation = null;
-        _sectionRepository = null;
+        StageService = null;
+        SnapshotService = null;
+        SectionRepository = null;
 
         base.Dispose();
     }

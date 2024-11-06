@@ -7,7 +7,7 @@ namespace Render.Models.Users
     /// <summary>
     /// Model class for the User entity.
     /// </summary>
-    public class User : DomainEntity, IAggregateRoot, IUser
+    public class User : DomainEntity, IAggregateRoot, IUser, ISoftDeletable
     {
         [JsonIgnore]
         public UserType UserType => UserType.Vessel;
@@ -196,11 +196,24 @@ namespace Render.Models.Users
             return Claims.Where(x => x.Type == claimType && x.Value == claimName).Select(x => x.RoleId).ToList();
         }
         
-        public List<Role> RolesForProject(string claimType, string claimName)
+        public List<RoleName> RolesForProject(string claimType, string claimName)
         {
-            return Claims.Where(x => x.Type == claimType && x.Value == claimName).Select(x => RenderRolesAndClaims.GetRoleById(x.RoleId)).ToList();
+            return Claims
+                .Where(x => x.Type == claimType && x.Value == claimName)
+                .Select(x => RenderRolesAndClaims.GetRoleName(x.RoleId))
+                .ToList();
         }
         
-        private const int Version = 3;
+        /// <summary>
+        /// The security stamp is a unique string that changes whenever something significant
+        /// about the user's security profile is modified (Password, IsDeleted, PrimaryOrganizationId properties)
+        /// </summary>
+        [JsonProperty("SecurityStamp")]
+        public string SecurityStamp { get; set; }    
+        
+        [JsonProperty("IsDeleted")]
+        public bool IsDeleted { get; set; }
+        
+        private const int Version = 4;
     }
 }

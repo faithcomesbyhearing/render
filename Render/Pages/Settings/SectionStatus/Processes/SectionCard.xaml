@@ -6,44 +6,89 @@
                             xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
                             xmlns:localization="clr-namespace:Render.Resources.Localization"
                             xmlns:processesView="clr-namespace:Render.Pages.Settings.SectionStatus.Processes;assembly=Render"
+                            xmlns:uiResources="clr-namespace:Render.Resources"
+                            xmlns:customRenderer="clr-namespace:Render.Kernel.CustomRenderer;assembly=Render"
                             x:TypeArguments="processesView:SectionCardViewModel">
 
-    <Grid x:Name="SectionCardGrid"  RowDefinitions="*,*,*" HorizontalOptions="Fill">
-        <Border Grid.Row="0" x:Name="Card"
+    <Grid x:Name="SectionCardGrid"  
+          RowDefinitions="*,*,*" 
+          HorizontalOptions="Fill">
+        <Border x:Name="Card"
+                Grid.Row="0" 
                 Margin="91,10,36,10"
                 HorizontalOptions="Fill"
-                AutomationId="CardFrame"
-                HeightRequest="108">
+                HeightRequest="108"
+                AutomationId="CardFrame">
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="16" />
             </Border.StrokeShape>
 
-            <Grid HorizontalOptions="Fill">
+            <Grid x:Name="SectionInfoGrid">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition x:Name="noSectionLabelColumn" Width="Auto" />
+                    <ColumnDefinition x:Name ="checkBoxColumn" Width="Auto" />
+                    <ColumnDefinition x:Name="sectionNumberColumn" Width="*" />
+                    <ColumnDefinition x:Name="sectionDescriptionColumn" Width="Auto" />
+                    <ColumnDefinition x:Name="sectionStateIconColumn" Width="Auto" />
+                </Grid.ColumnDefinitions>
                 <Label x:Name="NoSectionLabel"
+                       Grid.Column="1"
+                       Grid.ColumnSpan="3"
                        Margin="20,0"
                        FontSize="{DynamicResource MediumFont}"
-                       HorizontalTextAlignment="Center"
                        Text="{x:Static localization:AppResources.NoSectionsAreInThisStep}"
                        TextColor="{DynamicResource MainIconColor}"
-                       LineBreakMode="TailTruncation"
                        VerticalOptions="Center"
+                       HorizontalTextAlignment="Center"
+                       LineBreakMode="TailTruncation"
                        AutomationId="NoSectionLabel" />
+
+                <Grid x:Name="ExportCheckBox">
+                    <customRenderer:Panel x:Name="CheckmarkFrame"
+                                          Grid.Column="0"
+                                          Padding="0"
+                                          Margin="5,0,10,0"
+                                          BorderRadius="2"
+                                          BorderColor="{DynamicResource Option}"
+                                          BorderThickness="3"
+                                          VerticalOptions="Center"
+                                          HorizontalOptions="Center"
+                                          WidthRequest="26"
+                                          HeightRequest="26">
+                        <Label x:Name="Checkmark"
+                               FontFamily="Icons"
+                               TextColor="{StaticResource SecondaryText}"
+                               Text="{uiResources:IconExtensions Checkmark}"
+                               FontSize="26"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center" />
+                    </customRenderer:Panel>
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="SelectToExport" />
+                    </Grid.GestureRecognizers>
+                </Grid>
+
                 <Label x:Name="SectionNumber"
+                       Grid.Column="1"
                        Margin="13,0,0,0"
                        FontFamily="BoldFont"
                        FontSize="32"
-                       HorizontalOptions="Fill"
                        HorizontalTextAlignment="Start"
-                       LineBreakMode="TailTruncation"
                        VerticalOptions="Center"
+                       HorizontalOptions="Fill"
+                       LineBreakMode="TailTruncation"
                        AutomationId="SectionNumberLabel" />
 
-                <Grid VerticalOptions="Center" HorizontalOptions="Fill" Margin="60,0,0,0">
+                <Grid Grid.Column="2" 
+                      Grid.ColumnSpan="2"  
+                      Margin="60,0,0,0"
+                      VerticalOptions="Center" 
+                      HorizontalOptions="Fill">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-
                     <Label Grid.Row="0" x:Name="SectionScriptureReference"
                            HorizontalOptions="Fill"
                            FontFamily="MediumFont"
@@ -52,6 +97,7 @@
                            HorizontalTextAlignment="Start"
                            FontSize="{DynamicResource LargeFontMinus2Font}"
                            AutomationId="SectionScriptureReferenceLabel" />
+                    
                     <Label Grid.Row="1" x:Name="SectionTitle"
                            FontFamily="MediumFont"
                            Padding="0,0,40,0"
@@ -63,6 +109,7 @@
                 </Grid>
 
                 <Label x:Name="CenterIcon"
+                       Grid.Column="4"
                        Margin="5,0"
                        Padding="0"
                        FontFamily="Icons"

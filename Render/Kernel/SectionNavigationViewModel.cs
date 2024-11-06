@@ -23,8 +23,8 @@ namespace Render.Kernel
             var foundMissingAudio = false;
             
             var passagesWithMissingAudio = section.Passages
-                .Where(x => x.CurrentDraftAudioId != Guid.Empty && IsAudioEmptyOrCorrupted(x.CurrentDraftAudio))
-                .ToList();
+				.Where(x => x.CurrentDraftAudioId != Guid.Empty && IsAudioEmptyOrCorrupted(x.CurrentDraftAudio))
+				.ToList();
             
             foreach (var passage in passagesWithMissingAudio)
             {
@@ -35,8 +35,8 @@ namespace Render.Kernel
                 {
                     { "Section Id", section.Id.ToString() },
                     { "Passage Id", passage.Id.ToString() },
-                    { "Draft Id", passage.CurrentDraftAudioId.ToString() },
-                    { "Draft Document In Local DB", isDocumentPresent.ToString() },
+					{ "Draft Id", passage.CurrentDraftAudioId.ToString() },
+					{ "Draft Document In Local DB", isDocumentPresent.ToString() },
                     { "Step", stepType.ToString() }
                 });
             }

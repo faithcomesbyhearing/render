@@ -1,6 +1,4 @@
-using System.Reflection;
 using Render.WebAuthentication;
-using Microsoft.Extensions.Configuration;
 using System.Reactive;
 using ReactiveUI;
 using ReactiveUI.Maui;
@@ -46,36 +44,53 @@ using Render.Services.WaveformService;
 using Render.Sequencer.Contracts.Interfaces;
 using Render.Sequencer;
 using Render.Interfaces.WrappersAndExtensions;
+using Render.Kernel.SyncServices;
+using Render.Models.Project;
 using Render.Services.AudioPlugins.AudioPlayer;
+using Render.Services.EntityChangeListenerServices;
+using Render.Services.GrandCentralStation;
+using Render.Services.InterpretationService;
+using Render.Services.SectionMovementService;
 using Render.Services.SyncService.DbFolder;
+using Render.Services.SnapshotService;
+using Render.Services.StageService;
+using Render.Services.WorkflowService;
 
 namespace Render.Kernel
 {
     public partial class ViewModelContextProvider : IViewModelContextProvider
     {
-        private ISyncService SyncService { get; }
+        private ISyncManager SyncManager { get; set; }
+        private IWebSyncService WebSyncService { get; }
+        private ILocalSyncService LocalSyncService { get; }
+        private ISyncGatewayApiWrapper SyncGatewayApiWrapper { get; }
+        private IConnectivityService ConnectivityService { get; }
         private IGrandCentralStation GrandCentralStation { get; }
+        private IWorkflowService WorkflowService { get; }
+        private IStageService StageService { get; }
+        private ISectionMovementService SectionMovementService { get; }
         private IUser LoggedInUser { get; set; }
         private IEssentialsWrapper EssentialsWrapper { get; }
         private IDateTimeWrapper DateTimeWrapper { get; }
         private ISessionStateService SessionStateService { get; }
-        private IHandshakeService HandshakeService { get; }
         private IDatabaseWrapper RenderDatabase { get; }
         private IDatabaseWrapper RenderAudioDatabase { get; }
         private IDatabaseWrapper LocalDatabase { get; }
         private ISequencerFactory SequencerFactory { get; }
 
-        public ILocalSyncService LocalSyncService { get; set; }
+        public IEntityChangeListenerService UserChangeListenerService { get; set; }
 
         private string _localFolderPath;
-        public string LocalFolderPath 
-        { 
+
+        public string LocalFolderPath
+        {
             get
             {
                 if (_localFolderPath is null)
                 {
                     _localFolderPath = Locator.Current.GetService<IAppDirectory>().AppData;
                 }
+
                 return _localFolderPath;
             }
         }
@@ -87,7 +102,7 @@ namespace Render.Kernel
 
             return new RoutedViewHost();
         }
-        
+
         private IDatabaseWrapper GetDatabase<T>(IBucketMapper bucketMapper)
         {
             var databaseName = bucketMapper.GetBucketName<T>();
@@ -95,10 +110,12 @@ namespace Render.Kernel
             {
                 return RenderDatabase;
             }
+
             if (databaseName == Buckets.renderaudio.ToString())
             {
                 return RenderAudioDatabase;
             }
+
             if (databaseName == Buckets.localonlydata.ToString())
             {
                 return LocalDatabase;
@@ -117,14 +134,9 @@ namespace Render.Kernel
             });
         }
 
-        public ISyncService GetSyncService()
-        {
-            return SyncService;
-        }
-
         public ISyncGatewayApiWrapper GetSyncGatewayApiWrapper()
         {
-            return new SyncGatewayApiWrapper(Locator.Current.GetService<IAppSettings>() ,new HttpClient(), GetLogger(typeof(SyncGatewayApiWrapper)));
+            return SyncGatewayApiWrapper;
         }
 
         public IGrandCentralStation GetGrandCentralStation()
@@ -191,7 +203,7 @@ namespace Render.Kernel
         public IAudioRepository<Draft> GetDraftRepository()
         {
             return new NotableAudioRepository<Draft>(
-                audioRepository: GetAudioPersistence<Draft>(), 
+                audioRepository: GetAudioPersistence<Draft>(),
                 conversationRepository: GetAudioRepository());
         }
 
@@ -206,7 +218,7 @@ namespace Render.Kernel
                 audioRepository: GetAudioPersistence<NotableAudio>(),
                 conversationRepository: GetAudioRepository());
         }
-        
+
         public IAudioRepository<StandardQuestion> GetStandardQuestionAudioRepository()
         {
             return new NotableAudioRepository<StandardQuestion>(GetAudioPersistence<StandardQuestion>(), GetAudioRepository());
@@ -232,7 +244,7 @@ namespace Render.Kernel
         {
             return new AudioPlayerService(Locator.Current.GetService<IAudioPlayer>());
         }
-        
+
         public IAudioPlayerService GetAudioPlayerService(Action stopAudioActivityCommand)
         {
             return new AudioPlayerService(
@@ -240,7 +252,7 @@ namespace Render.Kernel
                 audioActivityService: GetAudioActivityService(),
                 stopAudioActivityCommand: stopAudioActivityCommand);
         }
-        
+
         public IPasswordService GetPasswordService()
         {
             return new PasswordService();
@@ -250,7 +262,7 @@ namespace Render.Kernel
         {
             return new CouchbaseLocal<T>(GetDatabase<T>(new BucketMapper()));
         }
-        
+
         public IDataPersistence<T> GetAudioPersistence<T>() where T : Audio
         {
             return new CouchbaseLocalAudio<T>(GetDatabase<T>(new BucketMapper()));
@@ -266,9 +278,9 @@ namespace Render.Kernel
             LocalDatabase = new DatabaseWrapper(GetLogger(typeof(DatabaseWrapper)), Buckets.localonlydata.ToString(), LocalFolderPath);
 
             var appSettings = Locator.Current.GetService<IAppSettings>();
-            var syncServiceLogger = GetLogger(typeof(SyncService));
+            var syncServiceLogger = GetLogger(typeof(WebSyncService));
 
-            SyncService = new SyncService(
+            WebSyncService = new WebSyncService(
                 appSettings,
                 syncServiceLogger,
                 GetUserRepository(),
@@ -279,27 +291,44 @@ namespace Render.Kernel
 
             var localSyncServiceLogger = GetLogger(typeof(LocalSyncService));
 
-            LocalSyncService = new LocalSyncService(
-                appSettings,
-                localSyncServiceLogger,
-                new LocalReplicator(localSyncServiceLogger, LocalFolderPath), 
-                new LocalReplicator(localSyncServiceLogger, LocalFolderPath), 
+            var localReplicationService = new LocalReplicationService(appSettings,
+                new LocalReplicator(localSyncServiceLogger, LocalFolderPath),
+                new LocalReplicator(localSyncServiceLogger, LocalFolderPath),
                 new LocalReplicator(localSyncServiceLogger, LocalFolderPath));
 
-            GrandCentralStation = new GrandCentralStation(
-                GetWorkflowRepository(),
+            SyncGatewayApiWrapper = new SyncGatewayApiWrapper(Locator.Current.GetService<IAppSettings>(), new HttpClient(), GetLogger(typeof(SyncGatewayApiWrapper)));
+
+            ConnectivityService = new ConnectivityService(SyncGatewayApiWrapper);
+
+            LocalSyncService = new LocalSyncService(
+                GetHandshakeService(), localReplicationService, localSyncServiceLogger);
+
+            WorkflowService = new WorkflowService(
                 GetPersistence<WorkflowStatus>(),
-                GetSnapshotRepository(),
+                GetWorkflowRepository(),
+                GetLogger(typeof(WorkflowService)));
+
+            StageService = new StageService(WorkflowService, GetSectionRepository(), GetInterpretationService());
+
+            SectionMovementService = new SectionMovementService(
+                WorkflowService,
+                StageService,
                 GetSectionRepository(),
+                GetSnapshotService(),
                 GetCommunityTestService(),
-                GetLogger(typeof(GrandCentralStation)));
+                GetInterpretationService());
+
+            GrandCentralStation = new GrandCentralStation(
+                WorkflowService,
+                StageService,
+                SectionMovementService,
+                GetSnapshotService());
 
             SessionStateService = new SessionStateService(
                 new SessionStateRepository(
-                    GetPersistence<UserProjectSession>()), 
-                    GetTemporaryAudioRepository());
+                    GetPersistence<UserProjectSession>()),
+                GetTemporaryAudioRepository());
 
-            HandshakeService = new HandshakeService(GetLogger(typeof(HandshakeService)));
             SequencerFactory = new SequencerFactory();
         }
 
@@ -308,13 +337,9 @@ namespace Render.Kernel
             GrandCentralStation = grandCentralStation;
         }
 
-        //TODO user membership doesn't need a user repository for production code
         public IUserMembershipService GetUserMembershipService()
         {
-            return new UserMembershipService(
-                GetPersistence<User>(),
-                GetPersistence<AdministrativeGroup>(),
-                GetPersistence<Project>(), GetUserRepository());
+            return new UserMembershipService();
         }
 
         public void SetLoggedInUser(IUser user)
@@ -328,7 +353,7 @@ namespace Render.Kernel
             {
                 username = user.Username;
             }
-            
+
             GrandCentralStation.ResetWorkForUser();
 
             GetLocalizationService().SetLocalization(user.LocaleId);
@@ -393,8 +418,7 @@ namespace Render.Kernel
         {
             return new BarPlayerViewModel(media, this, actionState, title, timeMarkers, canPlayAudio: canPlayAudio);
         }
-        
-                
+
         public IBarPlayerViewModel GetBarPlayerViewModel(AudioPlayback audioPlayback,
             ActionState actionState,
             string title,
@@ -446,10 +470,10 @@ namespace Render.Kernel
                 showSecondaryButton,
                 glyph);
         }
-        
+
         public IMiniWaveformPlayerViewModel GetMiniWaveformPlayerViewModel(AudioPlayback audio,
             ActionState actionState,
-            string title, 
+            string title,
             TimeMarkers timeMarkers = null,
             List<TimeMarkers> passageMarkers = null,
             ImageSource secondaryButtonIcon = null,
@@ -476,18 +500,23 @@ namespace Render.Kernel
         {
             return new DraftSelectionViewModel(miniWaveformPlayerViewModel, this, actionState);
         }
-        
+
         public IUserRepository GetUserRepository()
         {
             return new UserRepository(GetPersistence<User>(), GetPersistence<RenderUser>());
         }
 
+        public IEntityChangeListenerService GetUserChangeListenerService(List<Guid> userIds)
+        {
+            return new UserChangeListenerService(GetRenderChangeMonitoringService(), userIds);
+        }
+
         public IAuthenticationApiWrapper GetAuthenticationApiWrapper()
         {
             var appSettings = Locator.Current.GetService<IAppSettings>();
-			return new AuthenticationApiWrapper(new HttpClient(), appSettings.ApiEndpoint, appSettings.MaxAuthenticationAttempts);
-		}
-        
+            return new AuthenticationApiWrapper(new HttpClient(), appSettings.ApiEndpoint, appSettings.MaxAuthenticationAttempts);
+        }
+
         public IAppCenterApiWrapper GetAppCenterApiWrapper()
         {
             var appSettings = Locator.Current.GetService<IAppSettings>();
@@ -513,15 +542,15 @@ namespace Render.Kernel
         {
             return new SnapshotRepository(GetPersistence<Snapshot>(), GetSectionRepository(), GetDraftRepository());
         }
-               
+
         public ICommunityTestService GetCommunityTestService() => new CommunityTestService(GetCommunityTestRepository(), GetSectionRepository());
 
         public ICommunityTestRepository GetCommunityTestRepository()
         {
-            return new CommunityTestRepository(GetPersistence<CommunityTest>(),  
-                GetCommunityRetellAudioRepository(), 
+            return new CommunityTestRepository(GetPersistence<CommunityTest>(),
+                GetCommunityRetellAudioRepository(),
                 GetNotableAudioRepository(),
-                GetStandardQuestionAudioRepository(), 
+                GetStandardQuestionAudioRepository(),
                 GetResponseRepository());
         }
 
@@ -540,16 +569,6 @@ namespace Render.Kernel
             return new MachineLoginStateRepository(GetPersistence<MachineLoginState>());
         }
 
-        public ILocalSyncService GetLocalSyncService()
-        {
-            return LocalSyncService;
-        }
-
-        public IHandshakeService GetHandshakeService()
-        {
-            return HandshakeService;
-        }
-        
         public ICloseApplication GetCloseApplication()
         {
             return Splat.Locator.Current.GetService(typeof(ICloseApplication)) as ICloseApplication;
@@ -559,7 +578,7 @@ namespace Render.Kernel
         {
             return Splat.Locator.Current.GetService(typeof(IDownloadService)) as IDownloadService;
         }
-        
+
         public ILocalizationService GetLocalizationService()
         {
             return Splat.Locator.Current.GetService(typeof(ILocalizationService)) as ILocalizationService;
@@ -569,15 +588,21 @@ namespace Render.Kernel
         {
             return new FileNameGeneratorService();
         }
-        
+
         public IOffloadService GetOffloadService()
         {
-            return new OffloadService(this);
+            return new OffloadService(
+                GetPersistence<Project>(),
+                GetLocalProjectsRepository(),
+                new OffloadRepository(LocalDatabase, RenderDatabase, RenderAudioDatabase),
+                GetSessionStateService(),
+                GetAudioIntegrityService(),
+                GetLogger(typeof(OffloadService)));
         }
 
-        public IRenderChangeMonitoringService GetRenderChangeMonitoringService()
+        public IDocumentChangeListener GetRenderChangeMonitoringService()
         {
-            return new LocalRenderChangeMonitoringService(LocalFolderPath);
+            return new DocumentChangeListener(GetLogger(typeof(DocumentChangeListener)), Buckets.render.ToString(), LocalFolderPath);
         }
 
         public IAudioActivityService GetAudioActivityService()
@@ -613,21 +638,21 @@ namespace Render.Kernel
                 GetEssentialsWrapper(),
                 LocalFolderPath);
         }
-        
+
         public IOneShotReplicator GetOneShotReplicator(List<Guid> projectChannels, List<Guid> userChannels,
             string syncGatewayUsername = null, string syncGatewayPassword = null)
         {
-            syncGatewayUsername = syncGatewayUsername ?? SyncService.SyncGatewayUsername;
-            syncGatewayPassword = syncGatewayPassword ?? SyncService.SyncGatewayPassword;
+            syncGatewayUsername = syncGatewayUsername ?? WebSyncService.SyncGatewayUsername;
+            syncGatewayPassword = syncGatewayPassword ?? WebSyncService.SyncGatewayPassword;
             var replicator = new OneShotReplicator(
-                logger: GetLogger(typeof(SyncService)),
-                connectionString: SyncService.ConnectionString, 
-                maxSyncAttempts: SyncService.MaxSyncAttempts,
-                syncGatewayUsername: syncGatewayUsername, 
-                syncGatewayPassword: syncGatewayPassword, 
-                projectChannels: 
-                projectChannels, 
-                userChannels: userChannels, 
+                logger: GetLogger(typeof(WebSyncService)),
+                connectionString: WebSyncService.ConnectionString,
+                maxSyncAttempts: WebSyncService.MaxSyncAttempts,
+                syncGatewayUsername: syncGatewayUsername,
+                syncGatewayPassword: syncGatewayPassword,
+                projectChannels:
+                projectChannels,
+                userChannels: userChannels,
                 databasePath: LocalFolderPath,
                 GetPersistence<Project>(), GetPersistence<WorkflowStatus>(), GetEssentialsWrapper());
 
@@ -640,15 +665,20 @@ namespace Render.Kernel
 
         public IWaveFormService GetWaveFormService() => new WaveFormService(GetLogger(typeof(WaveFormService)));
 
-        public ITempAudioService GetTempAudioService(Audio audio, string audioPath = null, bool mutable = false) 
+        public ITempAudioService GetTempAudioService(Audio audio, string audioPath = null, bool mutable = false)
             => new TempAudioService(audio, audioPath, mutable, GetAppDirectory(), GetAudioEncodingService());
-        
+
         public ITempAudioService GetTempAudioService(AudioPlayback audio)
             => new TempAudioService(audio, GetAppDirectory(), GetAudioEncodingService());
 
         public IAppDirectory GetAppDirectory()
         {
             return Locator.Current.GetService<IAppDirectory>();
+        }
+
+        public IAppSettings GetAppSettings()
+        {
+            return Locator.Current.GetService<IAppSettings>();
         }
 
         public ISequencerFactory GetSequencerFactory()
@@ -661,14 +691,14 @@ namespace Render.Kernel
             return Locator.Current.GetService(typeof(IProjectDownloadService)) as IProjectDownloadService;
         }
 
-        public IDbLocalReplicator GetFolderProjectsDownloader()
+        public ILocalDatabaseReplicationManager GetLocalDatabaseReplicationManager()
         {
-            return (new DbLocalReplicator(GetLogger(typeof(DbLocalReplicator)), LocalFolderPath));
+            return (new LocalDatabaseReplicationManager(GetDbBackupService(), GetLogger(typeof(LocalDatabaseReplicationManager)), LocalFolderPath));
         }
-        
+
         public IAudioIntegrityService GetAudioIntegrityService()
         {
-            return new AudioIntegrityService(RenderAudioDatabase, GetLogger(typeof(AudioIntegrityService)) );
+            return new AudioIntegrityService(RenderAudioDatabase, GetLogger(typeof(AudioIntegrityService)));
         }
 
         public IAudioLossRetryDownloadService GetAudioLossRetryDownloadService()
@@ -676,9 +706,98 @@ namespace Render.Kernel
             return new AudioLossRetryDownloadService(GetOffloadService(), GetAudioIntegrityService(), GetModalService());
         }
 
-        public IOffloadAudioRepository GetOffloadAudioRepository()
+        public IEntityChangeListenerService GetDocumentSubscriptionManagerService()
         {
-            return new OffloadAudioRepository(RenderAudioDatabase);
+            var gcs = GetGrandCentralStation();
+            return new WorkflowChangeListenerService(GetRenderChangeMonitoringService(), WorkflowService.ProjectWorkflow, WorkflowService.FullWorkflowStatusList);
+        }
+
+        public IUsbSyncFolderStorageService GetUsbSyncFolderStorageService()
+        {
+            return Locator.Current.GetService(typeof(IUsbSyncFolderStorageService)) as IUsbSyncFolderStorageService;
+        }
+
+        public ISyncManager GetSyncManager()
+        {
+            if (SyncManager is not null)
+            {
+                return SyncManager;
+            }
+
+            var usbSyncService = new UsbSyncService(
+                GetLocalDatabaseReplicationManager(),
+                GetDownloadService(),
+                GetUsbSyncFolderStorageService(),
+                GetModalService(),
+                GetPersistence<Project>());
+
+            SyncManager = new SyncManager(
+                WebSyncService,
+                LocalSyncService,
+                usbSyncService,
+                GetSyncGatewayApiWrapper(),
+                GetLocalProjectsRepository(),
+                GetPersistence<Project>(),
+                GetPersistence<RenderProjectStatistics>(),
+                GetUserMachineSettingsRepository(),
+                GetAuthenticationApiWrapper(),
+                ConnectivityService,
+                new SyncStateService(),
+                GetLogger(typeof(SyncManager)));
+
+            return SyncManager;
+        }
+
+        public IDbBackupService GetDbBackupService()
+        {
+            return Locator.Current.GetService(typeof(IDbBackupService)) as IDbBackupService;
+        }
+
+        public ISectionMovementService GetSectionMovementService()
+        {
+            return SectionMovementService;
+        }
+
+        public IWorkflowService GetWorkflowService()
+        {
+            return WorkflowService;
+        }
+
+        public IStageService GetStageService()
+        {
+            return StageService;
+        }
+
+        public IDeletedUserCleanService GetDeletedUserCleanService(Guid projectId)
+        {
+            return new DeletedUserCleanService(GetUserRepository(), GetWorkflowRepository(), projectId);
+        }
+
+        public ISnapshotService GetSnapshotService()
+        {
+            return new SnapshotService(
+                GetSnapshotRepository(),
+                WorkflowService,
+                StageService,
+                GetSectionRepository(),
+                GetAudioRepository(),
+                GetDraftRepository(),
+                GetRetellBackTranslationRepository(),
+                GetSegmentBackTranslationRepository(),
+                GetUserRepository());
+        }
+
+        public IInterpretationService GetInterpretationService()
+        {
+            return new InterpretationService(WorkflowService, GetSectionRepository());
+        }
+
+        public IHandshakeService GetHandshakeService()
+        {
+            var handshakeServiceLogger = GetLogger(typeof(HandshakeService));
+            return new HandshakeService(
+                new NetworkConnectionService(handshakeServiceLogger),
+                new BroadcastService(handshakeServiceLogger));
         }
     }
 }

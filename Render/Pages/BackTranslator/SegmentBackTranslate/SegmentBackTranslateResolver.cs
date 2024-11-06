@@ -16,8 +16,8 @@ namespace Render.Pages.BackTranslator.SegmentBackTranslate
             SegmentBackTranslation selectedSegment = null)
         {
             var idiom = viewModelContextProvider.GetCurrentDeviceIdiom();
-            var grandCentral = viewModelContextProvider.GetGrandCentralStation();
-            var stage = grandCentral.ProjectWorkflow.GetStage(step.Id);
+            var workflowService = viewModelContextProvider.GetWorkflowService();
+            var stage = workflowService.ProjectWorkflow.GetStage(step.Id);
 
             ViewModelBase viewModelToNavigateTo;
 
@@ -54,7 +54,7 @@ namespace Render.Pages.BackTranslator.SegmentBackTranslate
 
             if (idiom == DeviceIdiom.Tablet || idiom == DeviceIdiom.Desktop)
             {
-                viewModelToNavigateTo = await TabletSegmentTranslatePageViewModel.CreateAsync(
+                viewModelToNavigateTo = TabletSegmentTranslatePageViewModel.Create(
                     viewModelContextProvider,
                     step,
                     section,

@@ -1,5 +1,8 @@
-﻿namespace Render.Models.Workflow
+﻿using System.ComponentModel;
+
+namespace Render.Models.Workflow
 {
+	// Do not change the RenderStepTypes enum values order because sometimes values are stored as an Integer in DB.
 	public enum RenderStepTypes
 	{
         NotSpecial,
@@ -16,19 +19,28 @@
         ConsultantCheck,
         ConsultantRevise,
         ConsultantApproval,
-        HoldingTank
+        HoldingTank,
+        Unknown, // A step that is created in the newest app version, but is not supported by the current app version
+        CIT
 	}
 
 	public enum StageTypes
 	{
-		Generic,
-		Drafting,
-		PeerCheck,
-		CommunityTest,
-		ConsultantCheck,
-		ConsultantApproval,
-		Approved
-	}
+        [Description("Generic")]
+        Generic,
+        [Description("Draft")]
+        Drafting,
+        [Description("Peer Check")]
+        PeerCheck,
+        [Description("Community Test")]
+        CommunityTest,
+        [Description("Consultant Check")]
+        ConsultantCheck,
+        [Description("Consultant Approval")]
+        ConsultantApproval,
+        [Description("Approved")]
+        Approved
+    }
 	
 	public enum StageState
 	{

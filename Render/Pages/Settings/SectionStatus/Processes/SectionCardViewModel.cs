@@ -1,54 +1,82 @@
-﻿using System.Reactive;
-using ReactiveUI;
+﻿using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Render.Kernel;
 using Render.Models.Sections;
+using Render.Models.Workflow.Stage;
+using System.Reactive;
 
 namespace Render.Pages.Settings.SectionStatus.Processes
 {
     public class SectionCardViewModel : ViewModelBase
     {
+        private Func<SectionCardViewModel, Task> _sectionSelectCallback;
+        private Action<SectionCardViewModel> _sectionSelectToExportCallback;
 
-        private  Func<Guid, Task> SectionSelectCallback;
+        [Reactive]
+        public Section Section { get; private set; }
+
+        [Reactive]
+        public string ScriptureRange { get; set; }
+
+        [Reactive]
+        public bool IsSelected { get; set; }
+
+        [Reactive]
+        public bool IsApproved { get; set; }
+
+        [Reactive]
+        public bool HasConflict { get; set; }
+
+        [Reactive]
+        public bool IsLastSectionCard { get; set; }
+
+        [Reactive]
+        public bool SelectedToExport { get; set; }
+
+        public Guid ViewModelId { get; private set; } = Guid.NewGuid();
+
+        public ReactiveCommand<Unit, Unit> SelectSectionToExportCommand { get; private set; }
 
         public ReactiveCommand<Unit, Unit> SelectSectionCommand { get; private set; }
 
-        [Reactive] public Section Section { get; private set; }
-        [Reactive] public string ScriptureRange { get; set; }
-        [Reactive] public bool IsSelected { get; set; }
-        [Reactive] public bool IsApproved { get; set; }
-        [Reactive] public bool HasConflict { get; set; }
-        [Reactive] public bool IsLastSectionCard { get; set; }
+        public bool IsEmpty { get; }
+
+        public Stage StageFrom { get; set; }
 
         public SectionCardViewModel(
             Section section,
             IViewModelContextProvider viewModelContextProvider,
-            Func<Guid, Task> sectionSelectCallback) : base("SectionStatusSectionCard", viewModelContextProvider)
+            Func<SectionCardViewModel, Task> sectionSelectCallback,
+            Action<SectionCardViewModel> selectSectionToExportCallback = null,
+            Stage stageFrom = null)
+            : base("SectionStatusSectionCard", viewModelContextProvider)
         {
-            try
-            {
-                Section = section;
-                HasConflict = false;
-                Disposables
-                    .Add(this.WhenAnyValue(x => x.Section)
-                        .WhereNotNull()
-                        .Subscribe(s =>
+            Section = section;
+            HasConflict = false;
+            IsEmpty = section is null
+                || section.Passages.Any(p => p.CurrentDraftAudioId != Guid.Empty) is false;     // using CurrentDraftAudioId instead of CurrentDraftAudio
+                                                                                                // because setting of CurrentDraftAudio property happens
+                                                                                                // at the moment of SectionRepository.GetSectionWithDraftsAsync()
+
+            StageFrom = stageFrom;
+
+            Disposables
+                .Add(this.WhenAnyValue(x => x.Section)
+                    .WhereNotNull()
+                    .Subscribe(s =>
+                    {
+                        if (s.ApprovedBy != Guid.Empty)
                         {
-                            if (s.ApprovedBy != Guid.Empty)
-                            {
-                                IsApproved = true;
-                            }
+                            IsApproved = true;
+                        }
 
-                            ScriptureRange = s.ScriptureReference;
-                        }));
+                        ScriptureRange = s.ScriptureReference;
+                    }));
 
-                SectionSelectCallback = sectionSelectCallback;
-                SelectSectionCommand = ReactiveCommand.Create(SelectSection);
-            }
-            catch (Exception ex)
-            {
-                var message = ex.Message;
-            }
+            _sectionSelectCallback = sectionSelectCallback;
+            _sectionSelectToExportCallback = selectSectionToExportCallback;
+            SelectSectionCommand = ReactiveCommand.Create(SelectSection);
+            SelectSectionToExportCommand = ReactiveCommand.Create(SelectSectionToExport);
         }
 
         public void SetSection(Section section)
@@ -61,7 +89,15 @@ namespace Render.Pages.Settings.SectionStatus.Processes
         {
             if (Section != null)
             {
-                SectionSelectCallback.Invoke(Section.Id);
+                _sectionSelectCallback.Invoke(this);
+            }
+        }
+
+        private void SelectSectionToExport()
+        {
+            if (Section != null)
+            {
+                _sectionSelectToExportCallback.Invoke(this);
             }
         }
 
@@ -69,10 +105,13 @@ namespace Render.Pages.Settings.SectionStatus.Processes
         {
             Section = null;
 
+            SelectSectionToExportCommand?.Dispose();
+            SelectSectionToExportCommand = null;
             SelectSectionCommand?.Dispose();
             SelectSectionCommand = null;
 
-            SectionSelectCallback = null;
+            _sectionSelectCallback = null;
+            _sectionSelectToExportCallback = null;
 
             base.Dispose();
         }

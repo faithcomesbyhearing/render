@@ -11,7 +11,7 @@ namespace Render.Pages.Settings.SectionStatus.Recovery;
 
 public class SnapshotCardViewModel : ViewModelBase
 {
-    private Func<Guid, Task> _restoreSnapshotConfirmationCallback;
+    private Func<Guid, bool, Task> _restoreSnapshotConfirmationCallback;
     private Func<Snapshot, Task> _snapshotSelectedCallback;
 
     public Stage Stage { get; private set; }
@@ -24,8 +24,9 @@ public class SnapshotCardViewModel : ViewModelBase
     [Reactive] public bool CurrentSnapshot { get; set; }
     [Reactive] public bool IsSelected { get; set; }
     [Reactive] public SnapshotCardState SnapshotCardState { get; set; }
+    [Reactive] public int StageNameColumnSpan { get; set; } = 1;
 
-    public ReactiveCommand<Unit, Unit> SelectSnapshotCommand;
+	public ReactiveCommand<Unit, Unit> SelectSnapshotCommand;
     public ReactiveCommand<Unit, Unit> RestoreSnapshotCommand;
 
     public SnapshotCardViewModel(
@@ -34,7 +35,7 @@ public class SnapshotCardViewModel : ViewModelBase
         bool first,
         bool last,
         bool currentSnapshot,
-        Func<Guid, Task> restoreSnapshotConfirmationCallback,
+        Func<Guid, bool, Task> restoreSnapshotConfirmationCallback,
         Func<Snapshot, Task> snapshotSelectedCallback,
         Snapshot snapshot = null) : base("SnapshotCard", viewModelContextProvider)
     {
@@ -79,6 +80,13 @@ public class SnapshotCardViewModel : ViewModelBase
                 }
             }));
 
+        Disposables.Add(this.WhenAnyValue(vm => vm.ShowDescription)
+            .ObserveOn(RxApp.MainThreadScheduler)
+            .Subscribe(x =>
+            {
+                StageNameColumnSpan = x ? 1 : 3;
+			}));
+
         SelectSnapshotCommand = ReactiveCommand.Create(SelectSnapshot);
         RestoreSnapshotCommand = ReactiveCommand.Create(RestoreSnapshot);
         Disposables.Add(RestoreSnapshotCommand.IsExecuting
@@ -97,7 +105,7 @@ public class SnapshotCardViewModel : ViewModelBase
 
     private void RestoreSnapshot()
     {
-        _restoreSnapshotConfirmationCallback?.Invoke(Snapshot.Id);
+        _restoreSnapshotConfirmationCallback?.Invoke(Snapshot.Id, true);
     }
 
     public override void Dispose()

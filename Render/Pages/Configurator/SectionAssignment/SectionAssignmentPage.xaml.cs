@@ -9,36 +9,21 @@ namespace Render.Pages.Configurator.SectionAssignment
         public SectionAssignmentPage()
         {
             InitializeComponent();
+
             this.WhenActivated(d =>
             {
-                d(this.OneWayBind(ViewModel, vm => vm.FlowDirection, 
-                    v => v.TopLevelElement.FlowDirection));
-                d(this.OneWayBind(ViewModel, vm => vm.SectionViewViewModel,
-                    v => v.SectionView.BindingContext));
-                d(this.OneWayBind(ViewModel, vm => vm.TeamViewViewModel,
-                    v => v.TeamView.BindingContext));
-                d(this.OneWayBind(ViewModel, vm => vm.ProceedButtonViewModel, 
-                   v => v.ProceedButton.BindingContext));
-                d(this.OneWayBind(ViewModel, vm => vm.TitleBarViewModel, 
-                   v => v.TitleBar.BindingContext));
-                d(this.OneWayBind(ViewModel, vm => vm.ShowSectionView, 
-                   v => v.SectionView.IsVisible));
-                d(this.OneWayBind(ViewModel, vm => vm.ShowSectionView, 
-                   v => v.TeamView.IsVisible, Selector));
-
-                d(this.BindCommand(ViewModel, vm => vm.SelectSectionViewCommand,
-                    v => v.SelectSectionViewTap));
-                d(this.BindCommand(ViewModel, vm => vm.SelectTeamViewCommand,
-                    v => v.SelectTeamViewTap));
+                d(this.OneWayBind(ViewModel, vm => vm.FlowDirection, v => v.TopLevelElement.FlowDirection));
+                d(this.OneWayBind(ViewModel, vm => vm.SectionTabViewModel, v => v.SectionView.BindingContext));
+                d(this.OneWayBind(ViewModel, vm => vm.TeamTabViewModel, v => v.TeamView.BindingContext));
+                d(this.OneWayBind(ViewModel, vm => vm.ProceedButtonViewModel, v => v.ProceedButton.BindingContext));
+                d(this.OneWayBind(ViewModel, vm => vm.TitleBarViewModel, v => v.TitleBar.BindingContext));
+                d(this.OneWayBind(ViewModel, vm => vm.ShowSectionView, v => v.SectionView.IsVisible));
+                d(this.OneWayBind(ViewModel, vm => vm.ShowSectionView, v => v.TeamView.IsVisible, isVisible => !isVisible));
+                d(this.BindCommand(ViewModel, vm => vm.SelectSectionViewCommand, v => v.SelectSectionViewTap));
+                d(this.BindCommand(ViewModel, vm => vm.SelectTeamViewCommand, v => v.SelectTeamViewTap));
                 d(this.OneWayBind(ViewModel, vm => vm.IsLoading, v => v.LoadingView.IsVisible));
-                d(this.WhenAnyValue(x => x.ViewModel.ShowSectionView)
-                   .Subscribe(ChangeLabelColors));
+                d(this.WhenAnyValue(v => v.ViewModel.ShowSectionView).Subscribe(ChangeLabelColors));
             });
-        }
-
-        public bool Selector(bool isVisible)
-        {
-            return !isVisible;
         }
 
         private void ChangeLabelColors(bool showSectionView)
@@ -59,6 +44,7 @@ namespace Render.Pages.Configurator.SectionAssignment
         {
             var option = (ColorReference)ResourceExtensions.GetResourceValue("Option");
             var textColor = (ColorReference)ResourceExtensions.GetResourceValue("SecondaryText");
+
             labelButton.SetValue(BackgroundColorProperty, option);
             labelButton.SetValue(Label.TextColorProperty, textColor);
         }
@@ -67,8 +53,19 @@ namespace Render.Pages.Configurator.SectionAssignment
         {
             var offBackground = (ColorReference)ResourceExtensions.GetResourceValue("AlternateBackground");
             var offText = (ColorReference)ResourceExtensions.GetResourceValue("Option");
+
             labelButton.SetValue(BackgroundColorProperty, offBackground);
             labelButton.SetValue(Label.TextColorProperty, offText);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+
+            SectionView.Dispose();
+            TeamView.Dispose();
+            TitleBar.Dispose();
+            ProceedButton.Dispose();
         }
     }
 }
