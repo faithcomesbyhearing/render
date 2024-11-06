@@ -23,16 +23,16 @@ namespace Render.Utilities
             _logger = GetLogger(loggerType.ToString());
         }
         
-        void IRenderLogger.LogError(Exception exception, IDictionary<string, string> properties = null)
+        void IRenderLogger.LogError(Exception exception, IDictionary<string, string> properties)
             => Log(_logger, LogLevel.Error, null, exception, properties);
         
-        void IRenderLogger.LogInfo(string message, IDictionary<string, string> properties = null)
+        void IRenderLogger.LogInfo(string message, IDictionary<string, string> properties)
             => Log(_logger, LogLevel.Info, message, properties: properties);
         
-        void IRenderLogger.LogDebug(string message, IDictionary<string, string> properties = null)
+        void IRenderLogger.LogDebug(string message, IDictionary<string, string> properties)
             => Log(_logger, LogLevel.Debug, message, properties: properties);
         
-        void IRenderLogger.LogTrace(string message, IDictionary<string, string> properties = null)
+        void IRenderLogger.LogTrace(string message, IDictionary<string, string> properties)
             => Log(_logger, LogLevel.Trace, message, properties: properties);
     }
 }

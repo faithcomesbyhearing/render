@@ -9,7 +9,7 @@ namespace Render.Platforms.Kernel
 {
 	public class CustomPickerHandler : PickerHandler
 	{
-		private AnimatedIcon? _pickerIcon;
+		private AnimatedIcon _pickerIcon;
 
 		static CustomPickerHandler()
 		{

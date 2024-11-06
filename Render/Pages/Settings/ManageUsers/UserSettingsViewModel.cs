@@ -35,12 +35,12 @@ namespace Render.Pages.Settings.ManageUsers
         [Reactive] public LocalizedPasswordTypes SelectedLocalizedPasswordType { get; set; }
         [Reactive] public PasswordType SelectedPasswordType { get; set; }
         [Reactive] public bool HidePassword { get; set; } = true;
-        
+
         public bool IsRenderUser { get; }
         public bool ShowDeleteButton { get; }
         public string UserTypeString { get; }
         private IUser _user;
-        
+
         public readonly ReactiveCommand<Unit, Unit> ToggleShowPasswordCommand;
         public readonly ReactiveCommand<Unit, Unit> ResetGridPasswordCommand;
         public readonly ReactiveCommand<Unit, Unit> GeneratePasswordCommand;
@@ -50,11 +50,11 @@ namespace Render.Pages.Settings.ManageUsers
         public List<LocalizationResource> LocalizationResources { get; } = new List<LocalizationResource>();
         private bool isCreate;
         private Project _project;
-        
+
         public static async Task<UserSettingsViewModel> CreateAsync(
-            IViewModelContextProvider viewModelContextProvider, 
-            Guid projectId, 
-            bool createMode, 
+            IViewModelContextProvider viewModelContextProvider,
+            Guid projectId,
+            bool createMode,
             IUser user = null)
         {
             Project project = default;
@@ -66,14 +66,14 @@ namespace Render.Pages.Settings.ManageUsers
 
             return new UserSettingsViewModel(viewModelContextProvider, project, createMode, user);
         }
-        
+
         public List<LocalizedPasswordTypes> PasswordTypes { get; } = new List<LocalizedPasswordTypes>
         {
             new LocalizedPasswordTypes(PasswordType.Grid, AppResources.GridPassword),
             new LocalizedPasswordTypes(PasswordType.Text, AppResources.TextPassword)
         };
-        
-        private UserSettingsViewModel(IViewModelContextProvider viewModelContextProvider, Project project, bool createMode, IUser user = null) : 
+
+        private UserSettingsViewModel(IViewModelContextProvider viewModelContextProvider, Project project, bool createMode, IUser user = null) :
             base("UserSettings", viewModelContextProvider, AppResources.ManageUsers, null, null, secondPageName: project == null ? "" : project.Name)
         {
             isCreate = createMode;
@@ -100,15 +100,10 @@ namespace Render.Pages.Settings.ManageUsers
             PasswordGridViewModel = new PasswordGridViewModel(viewModelContextProvider, gridPassword);
             ProceedButtonViewModel.SetCommand(SaveUserAsync);
             Disposables.Add(ProceedButtonViewModel.NavigateToPageCommand.IsExecuting
-                .Subscribe(isExecuting =>
-                {
-                    IsLoading = isExecuting;
-                }));
+                .Subscribe(isExecuting => { IsLoading = isExecuting; }));
             _userRepository = viewModelContextProvider.GetUserRepository();
             Disposables.Add(this.WhenAnyValue(x => x.PasswordGridViewModel.Password)
-                .Subscribe(gridPW => {
-                    Password = gridPW;
-                }));
+                .Subscribe(gridPW => { Password = gridPW; }));
             var availableCultures = Utilities.Utilities.GetAvailableCultures().OrderBy(x => x.DisplayName);
             Disposables.Add(this.WhenAnyValue(x => x.SelectedLocalizedPasswordType)
                 .Skip(1)
@@ -119,12 +114,12 @@ namespace Render.Pages.Settings.ManageUsers
                     {
                         PasswordGridViewModel.ResetPassword();
                     }
-                    
+
                     Password = "";
                 }));
             Disposables.Add(this.WhenAnyValue(x => x.Password, x => x.UserName)
                 .Subscribe(DetermineProceedButtonActive));
-            
+
             if (!_user.IsGridPassword)
             {
                 Password = _user.HashedPassword;
@@ -140,12 +135,12 @@ namespace Render.Pages.Settings.ManageUsers
                 }
             }
         }
-        
+
         private void ResetGridPassword()
         {
             PasswordGridViewModel?.ResetPassword();
         }
-        
+
         private void GeneratePassword()
         {
             var passwordService = ViewModelContextProvider.GetPasswordService();
@@ -161,7 +156,7 @@ namespace Render.Pages.Settings.ManageUsers
                                                     !string.IsNullOrEmpty(Password)
                                                     || Password?.Length > 2);
         }
-        
+
         private async Task<IRoutableViewModel> SaveUserAsync()
         {
             try
@@ -202,19 +197,15 @@ namespace Render.Pages.Settings.ManageUsers
                         });
                     }
                 }
-                
+
                 if (!changesMade) return await NavigateBack();
 
                 await _userRepository.SaveUserAsync(_user);
-
 #if !DEMO
-                ViewModelContextProvider.GetSyncService().StartAllSync(
-                    projectIds: new List<Guid>(),
-                    globalUserIds: new List<Guid>() { _user.Id },
-                    syncGatewayUsername: _user.Id.ToString(),
-                    syncGatewayPassword: _user.SyncGatewayLogin);
+                await ViewModelContextProvider.GetSyncManager().StartSync(GetProjectId(),
+                    _user,
+                    _user.SyncGatewayLogin);
 #endif
-                
                 var userManagementViewModel =
                     HostScreen.Router.NavigationStack.FirstOrDefault(x => x is UserManagementPageViewModel);
                 if (userManagementViewModel != null)
@@ -240,7 +231,7 @@ namespace Render.Pages.Settings.ManageUsers
                 throw;
             }
         }
-        
+
         private async Task<IRoutableViewModel> DeleteUserAsync()
         {
             if (_user.UserType == UserType.Render)
@@ -253,63 +244,62 @@ namespace Render.Pages.Settings.ManageUsers
                 var workflowRepository = ViewModelContextProvider.GetWorkflowRepository();
                 var workflow = await workflowRepository.GetWorkflowForProjectIdAsync(_project.Id);
                 var teams = workflow.GetTeams();
-                var userTeam = teams.FirstOrDefault(team => team.WorkflowAssignments.Select(x => x.UserId).Any(x => x == _user.Id));
+                var translatorTeam = teams.FirstOrDefault(x => x.TranslatorId == _user.Id);
+                var userTeam = translatorTeam is null ? 
+                               teams.FirstOrDefault(team => team.WorkflowAssignments.Select(x => x.UserId).Any(x => x == _user.Id)) :
+                               translatorTeam;
 
                 if (userTeam != null)
                 {
-                    var sectionAssignments = userTeam.SectionAssignments;
+                    var sectionRepository = ViewModelContextProvider.GetSectionRepository();
+                    var modalService = ViewModelContextProvider.GetModalService();
+                    var allSections = await sectionRepository.GetSectionsForProjectAsync(_project.Id);
+                    var enableSectionAssignment = teams.All(team => team.TranslatorId != Guid.Empty && allSections.Count != 0);
 
-                    if (sectionAssignments is { Count: > 0 })
-                    {
-                        var sectionRepository = ViewModelContextProvider.GetSectionRepository();
-                        var modalService = ViewModelContextProvider.GetModalService();
-                        var allSections = await sectionRepository.GetSectionsForProjectAsync(_project.Id);
-                        var enableSectionAssignment = teams.All(team => team.TranslatorId != Guid.Empty && allSections.Count != 0);
+                    var deleteUserComponent = new DeleteUserComponentViewModel(
+                        ViewModelContextProvider,
+                        userTeam.Id,
+                        _user.FullName,
+                        enableSectionAssignment);
 
-                        var deleteUserComponent = new DeleteUserComponentViewModel(
-                            ViewModelContextProvider,
-                            userTeam.Id,
-                            _user.FullName,
-                            enableSectionAssignment);
-
-                        Disposables.Add(deleteUserComponent.ViewSectionAssignmentsCommand.IsExecuting
-                            .ObserveOn(RxApp.MainThreadScheduler)
-                            .Subscribe(isExecuting =>
-                            {
-                                IsLoading = isExecuting;
-                                if (isExecuting)
-                                {
-                                    modalService.Close(DialogResult.Cancel);
-                                }
-                            }));
-
-                        var confirmationResult = await modalService.ConfirmationModal(
-                            Icon.DeleteWarning,
-                            AppResources.DeleteUserTitle,
-                            deleteUserComponent,
-                            new ModalButtonViewModel(AppResources.Cancel),
-                            new ModalButtonViewModel(AppResources.OK));
-
-                        if (confirmationResult != DialogResult.Ok)
+                    Disposables.Add(deleteUserComponent.ViewSectionAssignmentsCommand.IsExecuting
+                        .ObserveOn(RxApp.MainThreadScheduler)
+                        .Subscribe(isExecuting =>
                         {
-                            return null;
-                        }
-					}
+                            IsLoading = isExecuting;
+                            if (isExecuting)
+                            {
+                                modalService.Close(DialogResult.Cancel);
+                            }
+                        }));
 
-					var assignments = userTeam.GetWorkflowAssignmentsForUser(_user.Id);
+                    var confirmationResult = await modalService.ConfirmationModal(
+                        Icon.DeleteWarning,
+                        AppResources.DeleteUserTitle,
+                        deleteUserComponent,
+                        new ModalButtonViewModel(AppResources.Cancel),
+                        new ModalButtonViewModel(AppResources.OK));
+
+                    if (confirmationResult != DialogResult.Ok)
+                    {
+                        return null;
+                    }
+
+                    var assignments = userTeam.GetWorkflowAssignmentsForUser(_user.Id);
                     if (assignments is not null)
                     {
-						foreach (var assignment in assignments)
-						{
-							userTeam.RemoveAssignment(assignment.StageId, assignment.Role);
-						}
-					}
+                        foreach (var assignment in assignments)
+                        {
+                            userTeam.RemoveAssignment(assignment.StageId, assignment.Role);
+                        }
+                    }
 
-					if (userTeam.TranslatorId == _user.Id)
-					{
-						userTeam.RemoveTranslator();
-					}
-					await workflowRepository.SaveWorkflowAsync(workflow);
+                    if (userTeam.TranslatorId == _user.Id)
+                    {
+                        userTeam.RemoveTranslator();
+                    }
+
+                    await workflowRepository.SaveWorkflowAsync(workflow);
                 }
             }
 
@@ -333,16 +323,16 @@ namespace Render.Pages.Settings.ManageUsers
             {
                 ((UserManagementPageViewModel)userManagementPageViewModel)?.UpdateUser(_user);
             }
-                    
+
             return await NavigateBack();
         }
-        
+
         private void ToggleShowPassword()
         {
             HidePassword = !HidePassword;
         }
     }
-    
+
     public class LocalizationResource
     {
         public string Resource { get; }
@@ -354,7 +344,7 @@ namespace Render.Pages.Settings.ManageUsers
             ResourceDisplayName = resourceDisplayName;
         }
     }
-    
+
     public class LocalizedPasswordTypes
     {
         public PasswordType PasswordType { get; private set; }

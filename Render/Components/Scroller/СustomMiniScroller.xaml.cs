@@ -15,7 +15,7 @@ public partial class CustomMiniScroller
             d(this.OneWayBind(ViewModel, vm => vm.FrameWidth,
                 v => v.VisibleArea.WidthRequest));
             d(this.OneWayBind(ViewModel, vm => vm.FrameWidth,
-                v => v.Frame.WidthRequest));
+                v => v.ComponentLayout.WidthRequest));
             d(this.OneWayBind(ViewModel, vm => vm.TotalWidth, v => v.HiddenScroller.Maximum));
             d(this.Bind(ViewModel, vm => vm.InputScrollX, v => v.HiddenScroller.Value));
             

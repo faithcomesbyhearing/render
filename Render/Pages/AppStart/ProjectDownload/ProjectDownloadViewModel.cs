@@ -1,9 +1,10 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using System.Reactive.Linq;
 using DynamicData;
 using DynamicData.Binding;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using Render.Components.AddFromComputer;
 using Render.Kernel;
 using Render.Models.LocalOnlyData;
 using Render.Repositories.Kernel;
@@ -17,6 +18,8 @@ namespace Render.Pages.AppStart.ProjectDownload
 {
     public class ProjectDownloadViewModel : PageViewModelBase
     {
+        public AddFromComputerViewModel AddFromComputerViewModel { get; }
+        
         private readonly IDataPersistence<Project> _projectRepository;
         private readonly IUserMembershipService _userMembershipService;
 
@@ -38,10 +41,10 @@ namespace Render.Pages.AppStart.ProjectDownload
 
         [Reactive] public string SearchString { get; private set; } = "";
 
-        private readonly Action<LocalProject> _refreshProjectSelectCardViewList;
+        private readonly Func<LocalProject, Task> _refreshProjectSelectCardViewList;
 
         public static async Task<ProjectDownloadViewModel> CreateAsync(IViewModelContextProvider contextProvider,
-            Action<LocalProject> refreshProjectSelectCardViewList)
+			Func<LocalProject, Task> refreshProjectSelectCardViewList)
         {
             var viewModel = new ProjectDownloadViewModel(contextProvider, refreshProjectSelectCardViewList);
             viewModel.IsLoading = true;
@@ -56,7 +59,7 @@ namespace Render.Pages.AppStart.ProjectDownload
         /// This constructor is private. Always use the static CreateAsync() method to get this viewmodel, so that the
         /// async initialization of the viewmodel can occur before you navigate.
         /// </summary>
-        private ProjectDownloadViewModel(IViewModelContextProvider viewModelContextProvider, Action<LocalProject> refreshProjectSelectCardViewList)
+        private ProjectDownloadViewModel(IViewModelContextProvider viewModelContextProvider, Func<LocalProject, Task> refreshProjectSelectCardViewList)
             : base("ProjectDownload", viewModelContextProvider, AppResources.AddProject)
         {
             _refreshProjectSelectCardViewList = refreshProjectSelectCardViewList;
@@ -68,6 +71,8 @@ namespace Render.Pages.AppStart.ProjectDownload
 
             _projectRepository = viewModelContextProvider.GetPersistence<Project>();
             _userMembershipService = viewModelContextProvider.GetUserMembershipService();
+            
+            AddFromComputerViewModel = new AddFromComputerViewModel(viewModelContextProvider, AppResources.Return, actionOnDownloadCompleted: RefreshProjectsCollection);
             
             Disposables.Add(_sourceCache.Connect()
                 .AutoRefreshOnObservable(x => this.WhenAnyValue(s => s.SearchString), TimeSpan.FromMilliseconds(10))
@@ -139,6 +144,8 @@ namespace Render.Pages.AppStart.ProjectDownload
                             var vm = new ProjectDownloadCardViewModel(project, ViewModelContextProvider, state, _refreshProjectSelectCardViewList);
                             result.Add(vm);
                         }
+                        
+                        RemoveDuplicatedCards(localProjects, project, state);
                     }
                 }
 
@@ -152,6 +159,15 @@ namespace Render.Pages.AppStart.ProjectDownload
             }
         }
 
+        private void RemoveDuplicatedCards(LocalProjects localProjects, Project project, DownloadState state)
+        {
+            if (_sourceCache.Items.Any(x => x.Project.ProjectId == localProjects.GetProject(project.Id).ProjectId)
+                && state == DownloadState.Finished)
+            {
+                _sourceCache.Remove(project.ProjectId);
+            }
+        }
+        
         private async Task RefreshProjectsCollection()
         {
             var projects = await Task.Run(async () =>
@@ -163,7 +179,7 @@ namespace Render.Pages.AppStart.ProjectDownload
             
             var alreadyDownloadedProjectIds = _projectCards
                 .Where(p => p.DownloadState == DownloadState.Finished)
-                .Select(p => p.Project.Id);
+                .Select(p => p.Project.Id).ToList();
 
             _sourceCache.Edit(sourceCache => 
             {

@@ -1,4 +1,5 @@
-﻿using System.Reactive.Linq;
+﻿using System.Reactive;
+using System.Reactive.Linq;
 using System.Windows.Input;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
@@ -105,15 +106,9 @@ public class BaseFlagViewModel : BaseViewModel, IFlag
             .ToDisposables(Disposables);
 
         this
-            .WhenAnyValue(item => item.State)
+            .WhenAnyValue(item => item.State, item => item.Option)
             .ObserveOn(RxApp.MainThreadScheduler)
-            .Subscribe((value) => VisualState = GetVisualState(value, Option))
-            .ToDisposables(Disposables);
-        
-        this
-            .WhenAnyValue(item => item.Option)
-            .ObserveOn(RxApp.MainThreadScheduler)
-            .Subscribe((value) => VisualState = GetVisualState(State, value))
+            .Subscribe((value) => VisualState = GetVisualState(value.Item1, value.Item2))
             .ToDisposables(Disposables);
     }
 

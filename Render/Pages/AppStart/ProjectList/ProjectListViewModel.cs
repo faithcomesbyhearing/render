@@ -30,8 +30,7 @@ namespace Render.Pages.AppStart.ProjectList
         private readonly IUserMembershipService _userMembershipService;
         private readonly ILocalProjectsRepository _localProjectsRepository;
 
-        private readonly SourceCache<ProjectSelectCardViewModel, Guid> _projectListSourceCache = new
-            SourceCache<ProjectSelectCardViewModel, Guid>(x => x.Project.Id);
+        private readonly SourceCache<ProjectSelectCardViewModel, Guid> _projectListSourceCache = new(x => x.Project.Id);
 
         private readonly ReadOnlyObservableCollection<ProjectSelectCardViewModel> _projectList;
 
@@ -42,9 +41,9 @@ namespace Render.Pages.AppStart.ProjectList
         [Reactive] public bool? HasProjects { get; private set; }
 
         [Reactive] public bool OffloadMode { get; set; }
-        
-        [Reactive] public bool OnOffloaded { get; set; }
 
+        [Reactive] public bool OnOffloaded { get; set; }
+        
         public static async Task<ProjectListViewModel> CreateAsync(IViewModelContextProvider contextProvider)
         {
             var viewModel = new ProjectListViewModel(contextProvider);
@@ -67,42 +66,19 @@ namespace Render.Pages.AppStart.ProjectList
             _loginStateRepository = viewModelContextProvider.GetMachineLoginStateRepository();
             _userRepository = viewModelContextProvider.GetUserRepository();
 
-            Disposables.Add(_projectListSourceCache.Connect()
+            var projectListSource = _projectListSourceCache.Connect();
+            
+            Disposables.Add(projectListSource
                 .Sort(SortExpressionComparer<ProjectSelectCardViewModel>.Ascending(x => x.Project.Name))
                 .ObserveOn(RxApp.MainThreadScheduler)
                 .Bind(out _projectList)
                 .Subscribe());
-            Disposables.Add(_projectListSourceCache.Connect()
+
+            Disposables.Add(projectListSource
                 .WhenPropertyChanged(x => x.DownloadState)
                 .ObserveOn(RxApp.MainThreadScheduler)
                 .Select(x => x.Sender)
-                .Subscribe(async vm =>
-                {
-                    if (vm.DownloadState != DownloadState.NotStarted) return;
-                    
-                    OnOffloaded = true;
-                    
-                    await Task.Run(async () => //This is needed to reset work for user and update the title bar and action menu
-                    {
-                        if (await IsOffloadedSelectedProject(vm.Project.Id))
-                        {
-                            var grandCentralStation = ViewModelContextProvider.GetGrandCentralStation();
-                            grandCentralStation.ResetWorkForUser();
-                            var projectSelect = await ProjectSelectViewModel.CreateAsync(viewModelContextProvider);
-                            await NavigateToAndReset(projectSelect);
-                        }
-                    });
-
-                    _projectListSourceCache.Remove(vm);
-
-                    if (_projectListSourceCache.Count != 0) return;
-                    await Task.Run(async () =>
-                    {
-                        await CleanDataAndLogout();
-                    });
-                            
-                    HasProjects = vm.OffloadMode ? (bool?)null : false;
-                }));
+                .Subscribe(async vm => await OnProjectDownloadStateChanged(vm)));
 
             Disposables.Add(this.WhenAnyValue(x => x.OffloadMode)
                 .ObserveOn(RxApp.MainThreadScheduler)
@@ -129,16 +105,16 @@ namespace Render.Pages.AppStart.ProjectList
 
         public async Task GetAllProjectsForUser(LocalProject downloadedProject = null)
         {
-            bool HideProject (DownloadState state)
+            bool HideProject(DownloadState state)
             {
-                return state == DownloadState.NotStarted 
+                return state == DownloadState.NotStarted
                        || state == DownloadState.Canceling
                        || state == DownloadState.FinishedPartially;
             }
-            
+
             var localProjectsData = await _localProjectsRepository.GetLocalProjectsForMachine();
             var listOfProjects = localProjectsData.GetProjects();
-            
+
             // Set matching local project state to be finished.
             if (downloadedProject != null)
             {
@@ -160,7 +136,7 @@ namespace Render.Pages.AppStart.ProjectList
             foreach (var localProject in listOfProjects)
             {
                 if (HideProject(localProject.State)) continue;
-                
+
                 var project = await _projectRepository.GetAsync(localProject.ProjectId);
                 if (project == null && localProject.State != DownloadState.Downloading)
                 {
@@ -184,10 +160,8 @@ namespace Render.Pages.AppStart.ProjectList
                     _projectListSourceCache.AddOrUpdate(new ProjectSelectCardViewModel(project, renderProject,
                         ViewModelContextProvider, localProject.State));
                 }
-                
             }
-
-
+            
             foreach (var item in _projectListSourceCache.Items)
             {
                 item.OffloadMode = OffloadMode;
@@ -196,12 +170,8 @@ namespace Render.Pages.AppStart.ProjectList
             Disposables.Add(_projectListSourceCache.Items
                 .AsObservableChangeSet()
                 .MergeMany(item => item.NavigateToProjectCommand.IsExecuting)
-                .Subscribe(isExecuting =>
-                {
-                    IsLoading = isExecuting;
-                }));
+                .Subscribe(isExecuting => { IsLoading = isExecuting; }));
             HasProjects = _projectListSourceCache.Count > 0;
-
         }
 
         private void SetProjectListStatus(bool offload)
@@ -224,18 +194,65 @@ namespace Render.Pages.AppStart.ProjectList
         {
             var userMachineSettingsRepository =
                 ViewModelContextProvider.GetUserMachineSettingsRepository();
-            var machineStateSettingsRepository = await 
+            var machineStateSettingsRepository = await
                 userMachineSettingsRepository.GetUserMachineSettingsForUserAsync(ViewModelContextProvider
                     .GetLoggedInUser().Id);
             return machineStateSettingsRepository.GetLastSelectedProjectId() == projectId;
         }
+
+        private async Task OnProjectDownloadStateChanged(ProjectSelectCardViewModel vm)
+        {
+            switch (vm.DownloadState)
+            {
+                case DownloadState.Exporting:
+                    SetAllExportButtonsState(exportAllowed: false);
+                    break;
+                
+                case DownloadState.FinishedPartially:
+                case DownloadState.ExportDone:
+                    SetAllExportButtonsState(exportAllowed: true);
+                    break;
+                
+                case DownloadState.NotStarted: //Means that the current project has been offloaded.
+                {
+                    OnOffloaded = true;
+
+                    await Task.Run(async () => //This is needed to reset work for user and update the title bar and action menu
+                    {
+                        if (await IsOffloadedSelectedProject(vm.Project.Id))
+                        {
+                            var grandCentralStation = ViewModelContextProvider.GetGrandCentralStation();
+                            grandCentralStation.ResetWorkForUser();
+                            var projectSelect = await ProjectSelectViewModel.CreateAsync(ViewModelContextProvider);
+                            await NavigateToAndReset(projectSelect);
+                        }
+                    });
+
+                    _projectListSourceCache.Remove(vm);
+
+                    if (_projectListSourceCache.Count != 0) return;
+                    await Task.Run(async () => { await CleanDataAndLogout(); });
+
+                    HasProjects = vm.OffloadMode ? null : false;
+                    break;
+                }
+            }
+        }
         
-         private async Task CleanDataAndLogout()
+        private void SetAllExportButtonsState(bool exportAllowed)
+        {
+            foreach (var projectCard in _projectList)
+            {
+                projectCard.CanBeExported = exportAllowed;
+            }
+        }
+
+        private async Task CleanDataAndLogout()
         {
             var localProjectsData = await _localProjectsRepository.GetLocalProjectsForMachine();
 
             var hasProjectOnDevice = localProjectsData.GetProjects().Any(x => x.State == DownloadState.Finished);
-            
+
             if (ViewModelContextProvider.GetLoggedInUser().UserType == UserType.Render && hasProjectOnDevice)
             {
                 LogInfo("LogOut Render user after Offload project", new Dictionary<string, string>
@@ -245,8 +262,8 @@ namespace Render.Pages.AppStart.ProjectList
 
                 ViewModelContextProvider.ClearLoggedInUser();
                 var loginViewModel = await LoginViewModel.CreateAsync(ViewModelContextProvider);
-                await HostScreen.Router.NavigateAndReset.Execute(loginViewModel);
-                
+                await NavigateToAndReset(loginViewModel);
+
                 return;
             }
 
@@ -263,9 +280,10 @@ namespace Render.Pages.AppStart.ProjectList
                         machineState.RemoveUser(userId);
                     }
                 }
+
                 machineState.SetProjectLogin(Guid.Empty);
                 await _loginStateRepository.SaveMachineLoginState(machineState);
-                
+
                 localProjectsData.RemoveNotStartedProjectsFromMachine();
                 await _localProjectsRepository.SaveUpdates(localProjectsData);
 
@@ -273,11 +291,13 @@ namespace Render.Pages.AppStart.ProjectList
                 {
                     { "Username", ViewModelContextProvider.GetLoggedInUser().Username }
                 });
-                
-                ViewModelContextProvider.GetLocalSyncService().StopLocalSync();
+
+                var syncManager = ViewModelContextProvider.GetSyncManager();
+                syncManager.StopLocalSync();
+                syncManager.UnsubscribeOnConnectivityChanged();
                 ViewModelContextProvider.ClearLoggedInUser();
                 var splashCScreen = new SplashScreenViewModel(ViewModelContextProvider);
-                await HostScreen.Router.NavigateAndReset.Execute(splashCScreen);   
+                await NavigateToAndReset(splashCScreen);
             }
         }
     }

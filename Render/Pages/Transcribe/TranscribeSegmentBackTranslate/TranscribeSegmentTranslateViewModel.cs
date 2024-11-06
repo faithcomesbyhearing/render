@@ -21,20 +21,25 @@ namespace Render.Pages.Transcribe.TranscribeSegmentBackTranslate
         [Reactive] public TranscribeTextBoxViewModel TranscribeTextBoxViewModel { get; private set; }
         [Reactive] public bool LoopAudio { get; set; }
         public IBarPlayerViewModel BarPlayerViewModel { get; }
-        
-        public static async Task<TranscribeSegmentTranslateViewModel> CreateAsync(IViewModelContextProvider
-            viewModelContextProvider, Step step, Section section, Passage passage, 
-            SegmentBackTranslation segmentBackTranslation, string segmentName, Stage stage)
+
+        public static async Task<TranscribeSegmentTranslateViewModel> CreateAsync(
+            IViewModelContextProvider viewModelContextProvider,
+            Step step,
+            Section section,
+            Passage passage,
+            SegmentBackTranslation segmentBackTranslation,
+            string segmentName,
+            Stage stage)
         {
-            var pageTitle = string.Format(AppResources.Transcribe);
-            
+            var pageTitle = GetStepName(step);
+
             var transcriptionText = step.Role == Roles.Transcribe2
                 ? segmentBackTranslation.RetellBackTranslationAudio.Transcription ?? string.Empty
                 : segmentBackTranslation.Transcription ?? string.Empty;
 
-            var transcriptionWindowViewModel = await TranscribeTextBoxViewModel.CreateAsync(viewModelContextProvider, 
+            var transcriptionWindowViewModel = await TranscribeTextBoxViewModel.CreateAsync(viewModelContextProvider,
                 transcriptionText);
-            
+
             var pageViewModel = new TranscribeSegmentTranslateViewModel(
                 viewModelContextProvider,
                 pageTitle,
@@ -45,11 +50,11 @@ namespace Render.Pages.Transcribe.TranscribeSegmentBackTranslate
                 segmentBackTranslation,
                 segmentName,
                 stage);
-            
+
             return pageViewModel;
         }
 
-        protected TranscribeSegmentTranslateViewModel(
+        private TranscribeSegmentTranslateViewModel(
             IViewModelContextProvider viewModelContextProvider,
             string pageName,
             Step step,
@@ -58,19 +63,23 @@ namespace Render.Pages.Transcribe.TranscribeSegmentBackTranslate
             TranscribeTextBoxViewModel transcribeTextBoxViewModel,
             SegmentBackTranslation segmentBackTranslation,
             string segmentName,
-            Stage stage) : 
-            base("TabletTranscribeSegmentTranslate", viewModelContextProvider, pageName, section, stage, step,
-                passage.PassageNumber, segmentBackTranslation.Id, secondPageName: AppResources.DoSegmentTranscribe)
+            Stage stage) :
+            base(urlPathSegment: "TabletTranscribeSegmentTranslate",
+                viewModelContextProvider: viewModelContextProvider,
+                pageName: pageName,
+                section: section,
+                stage: stage,
+                step: step,
+                passageNumber: passage.PassageNumber,
+                nonDraftTranslationId: segmentBackTranslation.Id,
+                secondPageName: AppResources.DoSegmentTranscribe)
         {
-            DisposeOnNavigationCleared = true;
-            TitleBarViewModel.DisposeOnNavigationCleared = true;
-
             SegmentBackTranslation = segmentBackTranslation;
             TranscribeTextBoxViewModel = transcribeTextBoxViewModel;
-            
+
             var titleIconColor = (ColorReference)ResourceExtensions.GetResourceValue("SecondaryText") ?? new ColorReference();
-            TitleBarViewModel.PageGlyph = IconExtensions.BuildFontImageSource(Icon.Transcribe, titleIconColor)?.Glyph;                   
-            
+            TitleBarViewModel.PageGlyph = IconExtensions.BuildFontImageSource(Icon.Transcribe, titleIconColor)?.Glyph;
+
             var color = (ColorReference)ResourceExtensions.GetResourceValue("Option") ?? new ColorReference();
             var loopIcon = IconExtensions.BuildFontImageSource(Icon.Loop, color.Color, 30);
             var requireToListen = step.StepSettings.GetSetting(SettingType.RequireSegmentTranscribeListen);
@@ -95,7 +104,7 @@ namespace Render.Pages.Transcribe.TranscribeSegmentBackTranslate
 
             ActionViewModelBaseSourceList.Add(TranscribeTextBoxViewModel);
             ActionViewModelBaseSourceList.Add(BarPlayerViewModel);
-            
+
             //Listens for looping audio
             Disposables.Add(this.WhenAnyValue(
                     vm => vm.LoopAudio,
@@ -107,9 +116,10 @@ namespace Render.Pages.Transcribe.TranscribeSegmentBackTranslate
                     {
                         return;
                     }
+
                     BarPlayerViewModel.PlayAudioCommand.Execute().Subscribe();
                 }));
-            
+
             //Change the loop button background color when loop audio is set
             Disposables.Add(this.WhenAnyValue(
                     vm => vm.LoopAudio)
@@ -122,30 +132,31 @@ namespace Render.Pages.Transcribe.TranscribeSegmentBackTranslate
                         BarPlayerViewModel.SetSecondaryButtonBackgroundColor(selectedColor);
                         return;
                     }
+
                     selectedColor = (ColorReference)ResourceExtensions.GetResourceValue("RenderUserType") ?? new ColorReference();
                     BarPlayerViewModel.SetSecondaryButtonBackgroundColor(selectedColor);
                 }));
         }
-        
-         private async Task<IRoutableViewModel> LoopAudioAsync()
+
+        private async Task<IRoutableViewModel> LoopAudioAsync()
         {
             LoopAudio = !LoopAudio;
             await Task.CompletedTask;
             return default;
         }
-        
+
         protected async Task<IRoutableViewModel> NavigateForwardAsync()
         {
             try
             {
                 await SaveTranscriptionAsync();
-                
-                var viewModel =  await TranscribeSegmentBackTranslateResolver.GetSegmentSelectPageViewModel(
+
+                var viewModel = await TranscribeSegmentBackTranslateResolver.GetSegmentSelectPageViewModel(
                     Section,
                     Step,
                     ViewModelContextProvider,
                     SegmentBackTranslation);
-                
+
                 return await NavigateToAndReset(viewModel);
             }
             catch (Exception e)
@@ -154,7 +165,7 @@ namespace Render.Pages.Transcribe.TranscribeSegmentBackTranslate
                 throw;
             }
         }
-        
+
         private async Task SaveTranscriptionAsync()
         {
             var transcription = TranscribeTextBoxViewModel.Input;
@@ -185,7 +196,7 @@ namespace Render.Pages.Transcribe.TranscribeSegmentBackTranslate
             SegmentBackTranslation = null;
             BarPlayerViewModel?.Dispose();
             TranscribeTextBoxViewModel?.Dispose();
-            
+
             base.Dispose();
         }
     }

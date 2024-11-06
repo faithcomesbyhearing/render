@@ -9,9 +9,9 @@ using Render.Models.Audio;
 using Render.Pages.AppStart.ProjectSelect;
 using Render.Resources;
 using Render.Resources.Localization;
-using Render.Services;
 using Render.Pages.Settings.ManageUsers;
 using Render.Services.AudioPlugins.AudioRecorder.Interfaces;
+using Render.Services.GrandCentralStation;
 
 namespace Render.Components.TitleBar
 {
@@ -61,7 +61,7 @@ namespace Render.Components.TitleBar
         [Reactive]
         public ISectionTitlePlayerViewModel SectionTitlePlayerViewModel { get; private set; }
 
-        public ReactiveCommand<Unit, IRoutableViewModel> NavigateHomeCommand { get; private set; }
+        public ReactiveCommand<Unit, IRoutableViewModel> NavigateHomeCommand { get; set; }
         public ReactiveCommand<Unit, IRoutableViewModel> NavigateToUserSettingsCommand { get; private set; }
 
         public TitleBarViewModel(List<TitleBarElements> elementsToActivate,
@@ -124,23 +124,6 @@ namespace Render.Components.TitleBar
                 : new SectionTitlePlayerViewModel(sectionTitleAudio, viewModelContextProvider, sectionNumber, passageNumber);
 
             PageGlyph = ((FontImageSource)ResourceExtensions.GetResourceValue("PlaceholderWhite"))?.Glyph;
-
-            AddRecordingSubscription(pageTitle);
-        }
-
-        /// <summary>
-        /// This code is awful workaround for the BUG 26272.
-        /// We have issues with page disposing, therefore remove all subscriptions when we are on the Home page.
-        /// Will be fixed in the scope of the PBI 26566.
-        /// </summary>
-        private void AddRecordingSubscription(string pageTitle)
-        {
-            if (pageTitle == AppResources.ProjectHome)
-            {
-                IAudioRecorder.IsRecordingChanged = null;
-            }
-
-            IAudioRecorder.IsRecordingChanged += RecordingChanged;
         }
 
         private void RecordingChanged(bool isRecording)
@@ -183,15 +166,12 @@ namespace Render.Components.TitleBar
 
         private async Task<IRoutableViewModel> NavigateToUserSettingsPage()
         {
-            var projectId = ViewModelContextProvider.GetGrandCentralStation().CurrentProjectId;
-            var userSettings = await UserSettingsViewModel.CreateAsync(ViewModelContextProvider, projectId, false);
+            var userSettings = await UserSettingsViewModel.CreateAsync(ViewModelContextProvider, GetProjectId(), createMode: false);
             return await NavigateTo(userSettings);
         }
 
         public override void Dispose()
         {
-            IAudioRecorder.IsRecordingChanged -= RecordingChanged;
-            
             SectionTitlePlayerViewModel?.Dispose();
             SectionTitlePlayerViewModel = null;
 

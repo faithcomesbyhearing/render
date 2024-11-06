@@ -18,6 +18,7 @@ using Version = Render.Kernel.Version;
 using Window = Microsoft.UI.Xaml.Window;
 using Microsoft.UI;
 using Microsoft.Maui.Platform;
+using Render.Native;
 
 namespace Render.WinUI;
 
@@ -41,6 +42,9 @@ public partial class App : MauiWinUIApplication
 
     protected override MauiApp CreateMauiApp()
     {
+#if DEMO
+        InitializeDemoDatabase();
+#endif
         Locator.CurrentMutable.RegisterConstant(
             new AppDirectory(FileSystem.Current.AppDataDirectory, ApplicationData.Current.TemporaryFolder.Path),
             typeof(IAppDirectory));
@@ -64,6 +68,7 @@ public partial class App : MauiWinUIApplication
                     // When window.ExtendsContentIntoTitleBar is false, the window title contains the default noname icon.
                     // Set 'Render.ico' resource for the window title.
                     window.AppWindow.SetIcon(@"Platforms\Windows\Shortcut\render.ico");
+                    WndProcessService.StartProcess(window);
                 });
             });
         });
@@ -75,7 +80,13 @@ public partial class App : MauiWinUIApplication
             addPlatformDependencies: Bootstrapper.AddDependencies);
     }
 
-    private void SetupWindowClosing(Window window)
+    [Conditional("DEMO")]
+	private void InitializeDemoDatabase()
+	{
+        DemoHelper.InitializeDatabase(FileSystem.Current.AppDataDirectory);
+	}
+
+	private void SetupWindowClosing(Window window)
     {
         window.GetAppWindow().Closing += async (s, a) =>
         {
@@ -107,7 +118,7 @@ public partial class App : MauiWinUIApplication
             ? $"{appSettings.Environment}-{version.Major}.{version.Minor}.{version.Build}"
             : $"{version.Major}.{version.Minor}.{version.Build}";
 
-        Version.SoftwareVersionWithFourthNumber = $"{version.Major}.{version.Minor}.{version.Build}.0";
+        Version.SoftwareVersionWithFourthNumber = $"{version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
     }
 
     private static void SetSingleAppInstance()

@@ -163,7 +163,6 @@ public class ObservableRecordFileStream : FileStream
     {
         AudioDataRecorded?.Invoke(new RecordedData(
             AudioData: audioData,
-            ChunkDurationSec: chunkDurationSec,
             TotalDurationSec: _totalDurationSec));
     }
 

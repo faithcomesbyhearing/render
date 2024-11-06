@@ -140,9 +140,9 @@ public class SequencerAudio : ReactiveObject, IDisposable
     /// <summary>
     /// Updates duration while recording.
     /// </summary>
-    internal void AddDuration(double offset)
+    internal void SetDuration(double duration)
     {
-        Duration += offset;
+        Duration = duration;
     }
 
     internal void Play()
@@ -182,6 +182,8 @@ public class SequencerAudio : ReactiveObject, IDisposable
 
         LastSamples = audioSamples.LastSamples;
         TotalSamples = audioSamples.TotalSamples;
+
+        CommitSamples();
     }
 
     internal void RefreshRecorderSamples(BuildSamplesParams buildParams)
@@ -190,6 +192,8 @@ public class SequencerAudio : ReactiveObject, IDisposable
 
         LastSamples = audioSamples.LastSamples;
         TotalSamples = audioSamples.TotalSamples;
+
+        CommitSamples();
     }
 
     internal void RefreshRecorderSamples(byte[] dataChunk, BuildSamplesParams buildParams)
@@ -198,6 +202,8 @@ public class SequencerAudio : ReactiveObject, IDisposable
 
         LastSamples = audioSamples.LastSamples;
         TotalSamples = audioSamples.TotalSamples;
+
+        CommitSamples();
     }
 
     internal void AddFlag(FlagModel flag)
@@ -231,6 +237,14 @@ public class SequencerAudio : ReactiveObject, IDisposable
     internal void RemovePlaybackEndedHandlers()
     {
         PlaybackEnded = null;
+    }
+
+    internal void CommitSamples()
+    {
+        if (Audio is not null)
+        {
+            Audio.Samples = TotalSamples;
+        }
     }
 
     public void Dispose()

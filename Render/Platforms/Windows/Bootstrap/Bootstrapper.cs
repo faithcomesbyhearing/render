@@ -1,4 +1,5 @@
-﻿using Render.Platforms.Kernel;
+﻿using Splat;
+using Render.Platforms.Kernel;
 using Render.Kernel.CustomRenderer;
 using Render.Kernel;
 using Render.Platforms.Kernel.AudioPlayer;
@@ -7,6 +8,8 @@ using Render.Platforms.Kernel.AudioRecorder;
 using Render.Services.AudioPlugins.AudioRecorder.Interfaces;
 using Render.Platforms.Permissions;
 using Render.Services;
+using Render.Services.AudioServices;
+using Render.Platforms.Kernel.AudioTools;
 
 namespace Render.Platforms.Win.Bootstrap
 {
@@ -23,6 +26,8 @@ namespace Render.Platforms.Win.Bootstrap
             handlers.AddHandler(typeof(CustomSwitch), typeof(CustomSwitchHandler));
             handlers.AddHandler(typeof(ToolTipButton), typeof(ToolTipButtonHandler));
             handlers.AddHandler(typeof(Panel), typeof(PanelHandler));
+            handlers.AddHandler(typeof(NavigationPage), typeof(CustomNavigationViewHandler));
+            handlers.AddHandler(typeof(NoFocusScrollView), typeof(NoFocusScrollViewHandler));
         }
 
         public static void AddEffects(IEffectsBuilder builder)
@@ -35,13 +40,14 @@ namespace Render.Platforms.Win.Bootstrap
 
         public static void AddDependencies()
         {
-            Splat.Locator.CurrentMutable.Register(() => new CustomMicrophone(), typeof(ICustomMicrophonePermission));
-            Splat.Locator.CurrentMutable.Register(() => new AudioRecorderFactory(), typeof(IAudioRecorderFactory));
-            Splat.Locator.CurrentMutable.Register(() => new AudioPlayer(), typeof(IAudioPlayer));
-            Splat.Locator.CurrentMutable.Register(() => new CloseApplication(), typeof(ICloseApplication));
-            Splat.Locator.CurrentMutable.Register(() => new DownloadService(), typeof(IDownloadService));
-            Splat.Locator.CurrentMutable.Register(() => new TextMeter(), typeof(ITextMeter));
-            Splat.Locator.CurrentMutable.Register(() => new LocalizationService(), typeof(ILocalizationService));
+            Locator.CurrentMutable.Register(() => new CustomMicrophone(), typeof(ICustomMicrophonePermission));
+            Locator.CurrentMutable.Register(() => new AudioRecorderFactory(), typeof(IAudioRecorderFactory));
+            Locator.CurrentMutable.Register(() => new AudioPlayer(Locator.Current.GetService<IAudioDeviceMonitor>()), typeof(IAudioPlayer));
+            Locator.CurrentMutable.Register(() => new CloseApplication(), typeof(ICloseApplication));
+            Locator.CurrentMutable.Register(() => new DownloadService(), typeof(IDownloadService));
+            Locator.CurrentMutable.Register(() => new TextMeter(), typeof(ITextMeter));
+            Locator.CurrentMutable.Register(() => new LocalizationService(), typeof(ILocalizationService));
+            Locator.CurrentMutable.RegisterConstant<IAudioDeviceMonitor>(new AudioDeviceMonitor());
         }
     }
 }

@@ -92,9 +92,8 @@ public class UserManagementPageViewModel : WorkflowPageBaseViewModel
 
     private async Task<IRoutableViewModel> NavigateHomeAsync()
     {
-        var projectId = ViewModelContextProvider.GetGrandCentralStation().CurrentProjectId;
-        var homeViewModel = await Task.Run(async () => await HomeViewModel.CreateAsync(projectId, ViewModelContextProvider));
-        return await HostScreen.Router.NavigateAndReset.Execute(homeViewModel);
+        var homeViewModel = await Task.Run(async () => await HomeViewModel.CreateAsync(GetProjectId(), ViewModelContextProvider));
+        return await NavigateToAndReset(homeViewModel);
     }
 
     public void AddUser(IUser user)

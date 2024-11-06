@@ -60,8 +60,8 @@ namespace Render.UnitTests.App.Pages.AppStart
             //Arrange
             foreach (var passage in _section.Passages)
             {
-                var communityTest = new CommunityTest(passage.CurrentDraftAudioId, Guid.Empty, Guid.Empty);
-                var flag = new Flag(100);
+				var communityTest = new CommunityTest(passage.CurrentDraftAudioId, Guid.Empty, Guid.Empty);
+				var flag = new Flag(100);
                 flag.AddQuestion(Guid.Empty, Guid.Empty, Guid.Empty);
                 var question = flag.Questions.First();
                 question.QuestionAudio.SetAudio(new byte[] {0,1,2});
@@ -86,8 +86,8 @@ namespace Render.UnitTests.App.Pages.AppStart
             //Arrange
             foreach (var passage in _section.Passages)
             {
-                var communityTest = new CommunityTest(passage.CurrentDraftAudioId, Guid.Empty, Guid.Empty);
-                var flag = new Flag(100);
+				var communityTest = new CommunityTest(passage.CurrentDraftAudioId, Guid.Empty, Guid.Empty);
+				var flag = new Flag(100);
                 flag.AddQuestion(Guid.Empty, Guid.Empty, Guid.Empty);
                 var question = flag.Questions.First();
                 question.QuestionAudio.SetAudio(new byte[] {0,1,2});
@@ -111,8 +111,8 @@ namespace Render.UnitTests.App.Pages.AppStart
             //Arrange
             foreach (var passage in _section.Passages)
             {
-                var communityTest = new CommunityTest(passage.CurrentDraftAudioId, Guid.Empty, Guid.Empty);
-                var flag = new Flag(100);
+				var communityTest = new CommunityTest(passage.CurrentDraftAudioId, Guid.Empty, Guid.Empty);
+				var flag = new Flag(100);
                 flag.AddQuestion(Guid.Empty, Guid.Empty, Guid.Empty);
                 var question = flag.Questions.First();
                 question.QuestionAudio.SetAudio(new byte[] {0,1,2});
@@ -135,8 +135,8 @@ namespace Render.UnitTests.App.Pages.AppStart
             //Arrange
             foreach (var passage in _section.Passages)
             {
-                var communityTest = new CommunityTest(passage.CurrentDraftAudioId, Guid.Empty, Guid.Empty);
-                var flag = new Flag(100);
+				var communityTest = new CommunityTest(passage.CurrentDraftAudioId, Guid.Empty, Guid.Empty);
+				var flag = new Flag(100);
                 flag.AddQuestion(Guid.Empty, Guid.Empty, Guid.Empty);
                 communityTest.AddFlag(flag);
                 passage.CurrentDraftAudio.SetCommunityTest(communityTest);

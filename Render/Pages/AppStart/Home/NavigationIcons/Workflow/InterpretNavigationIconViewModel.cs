@@ -17,9 +17,9 @@ public class InterpretNavigationIconViewModel : WorkflowNavigationIconViewModel
 
     protected override async Task<IRoutableViewModel> NavigateOnClickAsync()
     {
-        foreach (var sectionId in GrandCentralStation.SectionsAtStep(Step.Id))
+        foreach (var sectionId in StageService.SectionsAtStep(Step.Id))
         {
-            var section = await _sectionRepository.GetSectionWithDraftsAsync(sectionId, true, true);
+            var section = await SectionRepository.GetSectionWithDraftsAsync(sectionId, true, true);
             
             if (IsSectionDocumentMissing(sectionId, section))
             {
@@ -33,7 +33,7 @@ public class InterpretNavigationIconViewModel : WorkflowNavigationIconViewModel
             
             var vm = await Task.Run(async () => await WorkflowPageViewModelFactory
                 .GetViewModelToNavigateTo(ViewModelContextProvider, Step, section));
-            return await HostScreen.Router.NavigateAndReset.Execute(vm);
+            return await NavigateToAndReset(vm);
         }
 
         return default;

@@ -54,9 +54,8 @@ namespace Render.Components.TitleBar
                 d(this.OneWayBind(ViewModel, vm => vm.ShowProjectList, v => v.ProjectListButton.IsVisible));
 
                 d(this.OneWayBind(ViewModel, vm => vm.SyncViewModel, v => v.SyncButton.BindingContext));
+                d(this.OneWayBind(ViewModel, vm => vm.SyncFromUsbViewModel, v => v.SyncFromUsbButton.BindingContext));
                 d(this.OneWayBind(ViewModel, vm => vm.ShowUser, v => v.SyncButton.IsVisible));
-                d(this.OneWayBind(ViewModel, vm => vm.AudioExportViewModel, v => v.AudioExport.BindingContext));
-                d(this.OneWayBind(ViewModel, vm => vm.ShowAudioExport, v => v.AudioExport.IsVisible));
             });
 
 #if DEMO

@@ -4,6 +4,7 @@ using Render.Kernel.WrappersAndExtensions;
 using Render.Models.Workflow;
 using Render.Resources;
 using Render.Resources.Styles;
+using TailTruncationHelper = Render.Utilities.TailTruncationHelper;
 
 namespace Render.Pages.Configurator.WorkflowManagement;
 
@@ -19,7 +20,8 @@ public partial class WorkflowStageCard
             d(this.OneWayBind(ViewModel, vm => vm.FlowDirection, v => v.AfterNewStageArrowhead.Rotation, SetArrowDirection));
             d(this.OneWayBind(ViewModel, vm => vm.Locked, v => v.LockIcon.IsVisible));
             d(this.OneWayBind(ViewModel, vm => vm.Locked, v => v.DeleteButton.IsVisible, Selector));
-            d(this.OneWayBind(ViewModel, vm => vm.Name, v => v.StageName.Text));
+            d(this.OneWayBind(ViewModel, vm => vm.Name, v => v.StageName.Text,
+					TailTruncationHelper.AddTailTruncation));
             d(this.OneWayBind(ViewModel, vm => vm.Stage.StageType, v => v.OriginalCard.BackgroundColor, Selector));
             d(this.OneWayBind(ViewModel, vm => vm.StageIcon, v => v.StageIcon.Text));
             d(this.OneWayBind(ViewModel, vm => vm.ShowAddStepAfterCard, v => v.AddNewStageBox.IsVisible));

@@ -40,8 +40,8 @@ namespace Render.Pages.CommunityTester.CommunityQAndR
 
         [Reactive] public IMiniWaveformPlayerViewModel AudioClipPlayer { get; private set; }
         [Reactive] public bool ShowAudioClipPlayer { get; private set; }
-		[Reactive] public bool ShowQuestionPlayer { get; private set; }
-		[Reactive] public IMiniWaveformPlayerViewModel SectionPlayer { get; private set; }
+        [Reactive] public bool ShowQuestionPlayer { get; private set; }
+        [Reactive] public IMiniWaveformPlayerViewModel SectionPlayer { get; private set; }
         [Reactive] public IMiniWaveformPlayerViewModel PassagePlayer { get; private set; }
         [Reactive] public IBarPlayerViewModel QuestionPlayer { get; private set; }
         [Reactive] public ISequencerRecorderViewModel SequencerRecorderViewModel { get; private set; }
@@ -60,7 +60,8 @@ namespace Render.Pages.CommunityTester.CommunityQAndR
             return Create(viewModelContextProvider, section, passage, stage, step, question);
         }
 
-        public static CommunityQAndRPageViewModel Create(IViewModelContextProvider viewModelContextProvider,
+        public static CommunityQAndRPageViewModel Create(
+            IViewModelContextProvider viewModelContextProvider,
             Section section,
             Passage passage,
             Stage stage,
@@ -79,7 +80,8 @@ namespace Render.Pages.CommunityTester.CommunityQAndR
             return pageVm;
         }
 
-        private CommunityQAndRPageViewModel(IViewModelContextProvider viewModelContextProvider,
+        private CommunityQAndRPageViewModel(
+            IViewModelContextProvider viewModelContextProvider,
             Section section,
             Passage passage,
             Stage stage,
@@ -87,18 +89,16 @@ namespace Render.Pages.CommunityTester.CommunityQAndR
             CommunityTest communityTest,
             Question question,
             bool isSectionAudioListened)
-            : base("CommunityQAndRPage", viewModelContextProvider,
-                GetStepName(viewModelContextProvider, RenderStepTypes.CommunityTest, stage.Id),
-                section,
-                stage,
-                step,
-                passage.PassageNumber,
+            : base(urlPathSegment: "CommunityQAndRPage",
+                viewModelContextProvider: viewModelContextProvider,
+                pageName: GetStepName(step),
+                section: section,
+                stage: stage,
+                step: step,
+                passageNumber: passage.PassageNumber,
                 secondPageName: AppResources.RecordResponse,
                 nonDraftTranslationId: question?.Id ?? default)
         {
-            DisposeOnNavigationCleared = true;
-            TitleBarViewModel.DisposeOnNavigationCleared = true;
-
             _responseRepository = viewModelContextProvider.GetResponseRepository();
 
             _isSectionAudioListened = isSectionAudioListened;
@@ -111,27 +111,27 @@ namespace Render.Pages.CommunityTester.CommunityQAndR
 
             _communityTest = communityTest;
             _currentQuestion = question;
-			var communityCheck = passage.CurrentDraftAudio.GetCommunityCheck();
-			ShowQuestionPlayer = _currentQuestion is not null;
-			if (ShowQuestionPlayer)
+            var communityCheck = passage.CurrentDraftAudio.GetCommunityCheck();
+            ShowQuestionPlayer = _currentQuestion is not null;
+            if (ShowQuestionPlayer)
             {
-				_currentFlag = _communityTest.GetCurrentFlag(_currentQuestion) ?? null;
-				_response = _currentQuestion.Responses.FirstOrDefault(x => x.StageId == Stage.Id);
+                _currentFlag = _communityTest.GetCurrentFlag(_currentQuestion) ?? null;
+                _response = _currentQuestion.Responses.FirstOrDefault(x => x.StageId == Stage.Id);
 
-				if (_response == null)
-				{
-					_response = new Response(Stage.Id, Section.ScopeId, Section.ProjectId, _currentQuestion.Id);
-					_currentQuestion.AddResponse(_response);
-				}
-			}
+                if (_response == null)
+                {
+                    _response = new Response(Stage.Id, Section.ScopeId, Section.ProjectId, _currentQuestion.Id);
+                    _currentQuestion.AddResponse(_response);
+                }
+            }
             else
             {
-				_currentQuestion = new Question(Stage.Id);
-				var response = passage.CurrentDraftAudio.GetCommunityCheck().GetResponses(stage.Id).FirstOrDefault();
-				
-				_response = response ?? new Response(Stage.Id, Section.ScopeId, Section.ProjectId, communityCheck.Id);
-				_currentQuestion.AddResponse(_response);
-			}
+                _currentQuestion = new Question(Stage.Id);
+                var response = passage.CurrentDraftAudio.GetCommunityCheck().GetResponses(stage.Id).FirstOrDefault();
+
+                _response = response ?? new Response(Stage.Id, Section.ScopeId, Section.ProjectId, communityCheck.Id);
+                _currentQuestion.AddResponse(_response);
+            }
         }
 
         private void Initialize()
@@ -152,12 +152,12 @@ namespace Render.Pages.CommunityTester.CommunityQAndR
             InitializeSectionAndPassagePlayers();
             if (_currentQuestion is not null && _currentQuestion.QuestionAudio is not null)
             {
-				InitializeAudioClipPlayer();
-				InitializeQuestionPlayer();
-			}
+                InitializeAudioClipPlayer();
+                InitializeQuestionPlayer();
+            }
 
-			InitializeAudioRecorderViewModel();
-		}
+            InitializeAudioRecorderViewModel();
+        }
 
         private void InitializeSectionAndPassagePlayers()
         {
@@ -223,8 +223,8 @@ namespace Render.Pages.CommunityTester.CommunityQAndR
             SequencerRecorderViewModel.SetupOnRecordFailedPopup(ViewModelContextProvider, Logger);
 
             SequencerRecorderViewModel.OnDeleteRecordCommand = ReactiveCommand.Create(DeleteResponseAudio);
-            SequencerRecorderViewModel.OnUndoDeleteRecordCommand = ReactiveCommand.Create(SaveResponseAudio);
-            SequencerRecorderViewModel.OnRecordingFinishedCommand = ReactiveCommand.Create(SaveResponseAudio);
+            SequencerRecorderViewModel.OnUndoDeleteRecordCommand = ReactiveCommand.CreateFromTask(SaveResponseAudio);
+            SequencerRecorderViewModel.OnRecordingFinishedCommand = ReactiveCommand.CreateFromTask(SaveResponseAudio);
 
             SequencerActionViewModel = SequencerRecorderViewModel.CreateActionViewModel(ViewModelContextProvider, Disposables, required: _requireResponseRecord);
 
@@ -261,6 +261,16 @@ namespace Render.Pages.CommunityTester.CommunityQAndR
             ActionViewModelBaseSourceList.Add(SequencerActionViewModel);
         }
 
+        protected override async Task NavigatingAwayAsync()
+        {
+            if (SequencerRecorderViewModel.State is not SequencerState.Recording)
+            {
+                return;
+            }
+
+            await SequencerRecorderViewModel.StopCommand.Execute();
+        }
+
         protected sealed override void SetProceedButtonIcon()
         {
             var nextQuestion = _currentQuestion is not null ? _communityTest.GetNextQuestion(Stage.Id, _currentQuestion) : null;
@@ -272,7 +282,7 @@ namespace Render.Pages.CommunityTester.CommunityQAndR
             }
         }
 
-        private async void SaveResponseAudio()
+        private async Task SaveResponseAudio()
         {
             IsLoading = true;
 
@@ -315,8 +325,8 @@ namespace Render.Pages.CommunityTester.CommunityQAndR
             {
                 await _responseRepository.DeleteAudioByIdAsync(_response.Id);
             });
-			SequencerActionViewModel.ActionState = _requireResponseRecord ? ActionState.Required : ActionState.Optional;
-		}
+            SequencerActionViewModel.ActionState = _requireResponseRecord ? ActionState.Required : ActionState.Optional;
+        }
 
         private async Task<IRoutableViewModel> NavigateForwardOrHomeAsync()
         {
@@ -363,8 +373,8 @@ namespace Render.Pages.CommunityTester.CommunityQAndR
 
             await Task.Run(async () =>
             {
-                var gcs = ViewModelContextProvider.GetGrandCentralStation();
-                await gcs.AdvanceSectionAsync(Section, _step);
+                var sectionMovementService = ViewModelContextProvider.GetSectionMovementService();
+                await sectionMovementService.AdvanceSectionAsync(Section, _step, GetProjectId(), GetLoggedInUserId());
             });
             return await NavigateToHomeOnMainStackAsync();
         }

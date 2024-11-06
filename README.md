@@ -11,25 +11,25 @@ release snapshots
 ([cathedral](https://en.wikipedia.org/wiki/The_Cathedral_and_the_Bazaar)
 model now, perhaps bazaar later).
 
-Render is trademarked, if you wish distribute a revised version of this app, you 
+Render is trademarked, if you wish to distribute a revised version of this app, you 
 may not call it Render, nor use the Render Icon.
 
-This release includes the ability to create a demo build (like [this](https://docs.google.com/document/d/1rtFBBepe5h5IjcS22NzrmoNjPNWqfq3dFClH-1Yg12Y/edit?usp=sharing)) which includes a
+This release includes the ability to create a demo build (like [this](https://renderpartners.freshdesk.com/en/support/solutions/articles/47001264344-download-render-3-demo-)) which includes a
 working project.  However, although all sync code is included, access to
 our sync servers is not - so the build will functionally be stand-alone
 (without sync), which you can revise, test, submit pull requests, etc.
 
 For sync, you'll need to setup a [Couchbase](https://www.couchbase.com/)
 service, or revise render to use something else.  In addition, render
-projects are created via a separate web app called LaunchPad, which we will
-also open-source, or you could revise render to use something else.
+projects are created via a separate web app called LaunchPad (please contact us if you would like details),
+or you could revise render to use something else for project creation.
 
 So this initial release does not include everything needed to immediately
 duplicate a production infrastructure, but it is a significant first step
 toward collaborative open development.  
 
 See [Render documentation](doc/RENDER_DOC.md) to get started, and user
-documentation [here](https://renderpartners.freshdesk.com/support/solutions/22000109062).
+documentation [here](https://renderpartners.freshdesk.com/support/solutions).
 
 For technical details see [Developer documentation.](doc/DEVELOPMENT_DOC.md) 
 

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Reactive.Linq;
+﻿using System.Reactive.Linq;
 using ReactiveUI;
 using Render.Kernel.WrappersAndExtensions;
-using Render.Resources;
 using Render.Resources.Localization;
 
 namespace Render.Components.StageSettings.ConsultantCheckStageSettings
@@ -15,13 +13,19 @@ namespace Render.Components.StageSettings.ConsultantCheckStageSettings
 
             this.WhenActivated(d =>
             {
-                d(this.Bind(ViewModel, vm => vm.StageName,
-                    v => v.StageName.Text));
-				d(this.OneWayBind(ViewModel, vm => vm.DoStepBackTranslation,
-					v => v.IncludeBackTranslateToggle.IsToggled));
-				d(this.OneWayBind(ViewModel, vm => vm.DoStepBackTranslation,
-                    v => v.Do2StepToggle.IsEnabled));
-				d(this.WhenAnyValue(x => x.IncludeBackTranslateToggle.IsToggled)
+                d(this.Bind(ViewModel, vm => vm.StageName, v => v.StageName.Text));
+                d(this.Bind(ViewModel, vm => vm.CheckStepName.StepName, v => v.CheckStepName.Text));
+                d(this.Bind(ViewModel, vm => vm.ReviseStepName.StepName, v => v.ReviseStepName.Text));
+                d(this.Bind(ViewModel, vm => vm.BackTranslateStepName.StepName, v => v.BackTranslateStepName.Text));
+
+                d(this.Bind(ViewModel, vm => vm.TranscribeStepName.StepName, v => v.TranscribeStepName.Text));
+                d(this.Bind(ViewModel, vm => vm.TranscribeStepName.StepName, v => v.SegmentTranscribeStepName.Text));
+                d(this.Bind(ViewModel, vm => vm.InterpretToConsultantStepName.StepName, v => v.InterpretToConsultantStepName.Text));
+                d(this.Bind(ViewModel, vm => vm.InterpretToTranslatorStepName.StepName, v => v.InterpretToTranslatorStepName.Text));
+                d(this.OneWayBind(ViewModel, vm => vm.DoStepBackTranslation, v => v.IncludeBackTranslateToggle.IsToggled));
+                d(this.OneWayBind(ViewModel, vm => vm.DoStepBackTranslation, v => v.Do2StepToggle.IsEnabled));
+
+                d(this.WhenAnyValue(x => x.IncludeBackTranslateToggle.IsToggled)
                     .Skip(1)
                     .Subscribe(async backTranslate =>
                     {
@@ -39,7 +43,7 @@ namespace Render.Components.StageSettings.ConsultantCheckStageSettings
                         if (!backTranslate && ViewModel.Allow2StepBackTranslation)
                         {
                             Do2StepToggle.IsToggled = false;
-						}
+                        }
                     }));
                 d(this.OneWayBind(ViewModel, vm => vm.Allow2StepBackTranslation,
                     v => v.Do2StepToggle.IsEnabled));
@@ -363,6 +367,10 @@ namespace Render.Components.StageSettings.ConsultantCheckStageSettings
                     v => v.RequireNoteReviewToggle.IsEnabled));
                 d(this.OneWayBind(ViewModel, vm => vm.NoteInterpretIsActive,
                     v => v.RequireNoteReviewLabel.IsEnabled));
+                d(this.OneWayBind(ViewModel, vm => vm.NoteInterpretIsActive,
+                    v => v.InterpretToConsultantStepNameBorder.IsEnabled));
+                d(this.OneWayBind(ViewModel, vm => vm.NoteInterpretIsActive,
+                    v => v.InterpretToTranslatorStepNameBorder.IsEnabled));
                 d(this.OneWayBind(ViewModel, vm => vm.DoNoteReview,
                     v => v.RequireNoteReviewToggle.IsEnabled));
                 d(this.OneWayBind(ViewModel, vm => vm.DoNoteReview,
@@ -406,17 +414,38 @@ namespace Render.Components.StageSettings.ConsultantCheckStageSettings
                     {
                         Step1RetellFrame.SetValue(IsVisibleProperty, x);
                         Step1Step2Separator.SetValue(IsVisibleProperty, x);
+                        Step1Step2SeparatorRow2.SetValue(IsVisibleProperty, x);
                         Step2RetellBackTranslateStack.SetValue(IsVisibleProperty, x);
+                        Step2RetellBackTranslateStackRow2.SetValue(IsVisibleProperty, x);
                         Step1RetellBackTranslateStack.SetValue(Grid.ColumnSpanProperty, x ? 1 : 3);
+                        Step1RetellBackTranslateStackRow2.SetValue(Grid.ColumnSpanProperty, x ? 1 : 3);
                         Step1SegmentBackTranslateLabel.SetValue(IsVisibleProperty, x);
                         Step1SegmentFrame.SetValue(IsVisibleProperty, x);
                         Step2SegmentBackTranslateStack.SetValue(IsVisibleProperty, x);
+                        Step2SegmentBackTranslateStackRow2.SetValue(IsVisibleProperty, x);
                         Step1Step2SegmentsSeparator.SetValue(IsVisibleProperty, x);
+                        Step1Step2SegmentsSeparatorRow2.SetValue(IsVisibleProperty, x);
                         Step1SegmentBackTranslateStack.SetValue(Grid.ColumnSpanProperty, x ? 1 : 3);
+                        Step1SegmentBackTranslateStackRow2.SetValue(Grid.ColumnSpanProperty, x ? 1 : 3);
                         Step1Language.Text = x ? AppResources.IntermediateLanguage : AppResources.ConsultantLanguage;
                         RetellConsultantLanguage.Placeholder = x ? AppResources.Language : AppResources.EnterLanguage;
                         SegmentConsultantLanguage.Placeholder = x ? AppResources.Language : AppResources.EnterLanguage;
                         SegmentStep1Language.Text = x ? AppResources.IntermediateLanguage : AppResources.ConsultantLanguage;
+                    }));
+
+                d(this.WhenAnyValue(x => x.ViewModel.Do2StepBackTranslation, x => x.ViewModel.TranscribeStepName.StepName)
+                    .Subscribe(((bool Do2StepBackTranslation, string TranscribeStepName) options) =>
+                    {
+                        if (options.Do2StepBackTranslation)
+                        {
+                            DoPassageTranscribeLabel.Text = AppResources.Step1;
+                            DoSegmentTranscribeLabel.Text = AppResources.Step1;
+                            return;
+                        }
+
+                        DoPassageTranscribeLabel.Text = ViewModel?.TranscribeStepName.StepName;
+                        DoSegmentTranscribeLabel.Text = ViewModel?.TranscribeStepName.StepName;
+
                     }));
 
                 d(this.WhenAnyValue(x => x.ViewModel.FlowDirection)
@@ -510,7 +539,7 @@ namespace Render.Components.StageSettings.ConsultantCheckStageSettings
 
                     ViewModel.DoPassageTranscribeIsActive = b;
                 }));
-            
+
             d(this.OneWayBind(ViewModel, vm => vm.RetellIsActive,
                 v => v.DoPassageTranscribeToggle.IsEnabled));
             d(this.OneWayBind(ViewModel, vm => vm.RetellIsActive,
@@ -550,6 +579,29 @@ namespace Render.Components.StageSettings.ConsultantCheckStageSettings
                 v => v.RequirePassage2TranscribeListenToggle.IsEnabled));
             d(this.OneWayBind(ViewModel, vm => vm.DoPassage2TranscribeIsActive,
                 v => v.RequirePassage2TranscribeListenLabel.IsEnabled));
+
+            d(this.WhenAnyValue(
+                x => x.ViewModel.RetellIsActive,
+                x => x.ViewModel.DoPassageTranscribeIsActive,
+                x => x.ViewModel.DoPassage2TranscribeIsActive)
+                   .Subscribe(((bool RetellIsActive, bool DoPassageTranscribeIsActive, bool DoPassage2TranscribeIsActive) options) =>
+                   {
+                       TranscribeStepNameBorder.IsEnabled = options.RetellIsActive
+                            && (options.DoPassageTranscribeIsActive || options.DoPassage2TranscribeIsActive);
+
+                   }));
+
+            d(this.WhenAnyValue(
+                x => x.ViewModel.DoStepBackTranslation,
+                x => x.ViewModel.SegmentTranscribeIsActive,
+                x => x.ViewModel.Segment2TranscribeIsActive)
+                    .Subscribe(((bool DoStepBackTranslation, bool SegmentTranscribeIsActive, bool Segment2TranscribeIsActive) options) =>
+                    {
+                        SegmentTranscribeStepNameBorder.IsEnabled = options.DoStepBackTranslation
+                            && (options.SegmentTranscribeIsActive || options.Segment2TranscribeIsActive);
+
+                    }));
+
         }
 
         #region Toggle event methods
@@ -741,7 +793,7 @@ namespace Render.Components.StageSettings.ConsultantCheckStageSettings
                 SegmentBackTranslate2DoPassageReviewToggle.IsToggled = !SegmentBackTranslate2DoPassageReviewToggle.IsToggled;
             }
         }
-        
+
         private void SegmentBtRequire2PassageReviewToggleTapped(object sender, EventArgs e)
         {
             if (SegmentBt2RequirePassageReviewToggle.IsEnabled)
@@ -794,7 +846,7 @@ namespace Render.Components.StageSettings.ConsultantCheckStageSettings
                 ReviseRequireNoteListenToggle.IsToggled = !ReviseRequireNoteListenToggle.IsToggled;
             }
         }
-        
+
         private void DoPassageReviewToggleTapped(object sender, EventArgs e)
         {
             DoPassageReviewToggle.IsToggled = !DoPassageReviewToggle.IsToggled;
@@ -807,12 +859,12 @@ namespace Render.Components.StageSettings.ConsultantCheckStageSettings
                 RequirePassageReviewToggle.IsToggled = !RequirePassageReviewToggle.IsToggled;
             }
         }
-        
+
         private void AllowEditingToggleTapped(object sender, EventArgs e)
         {
             AllowEditingToggle.IsToggled = !AllowEditingToggle.IsToggled;
         }
-        
+
         private void RequireConsultantCheckNoteListenToggleTapped(object sender, EventArgs e)
         {
             if (RequireConsultantCheckNoteListenToggle.IsEnabled)
@@ -837,7 +889,7 @@ namespace Render.Components.StageSettings.ConsultantCheckStageSettings
                 ScrollToElement(ReviseNoteListenStackWrapper);
             }
         }
-        
+
         private void PassageReviewStackTapped(object sender, EventArgs e)
         {
             PassageReviewStack.IsVisible = !PassageReviewStack.IsVisible;
@@ -889,7 +941,7 @@ namespace Render.Components.StageSettings.ConsultantCheckStageSettings
                 ScrollToElement(SegmentStackWrapper);
             }
         }
-        
+
         private void ConsultantCheckNoteListenStackTapped(object sender, EventArgs e)
         {
             ConsultantCheckNoteListenStack.IsVisible = !ConsultantCheckNoteListenStack.IsVisible;
@@ -912,12 +964,12 @@ namespace Render.Components.StageSettings.ConsultantCheckStageSettings
             await Task.Delay(50);
             await scrollView.ScrollToAsync(element, ScrollToPosition.Start, true);
         }
-        
+
         #endregion
 
         private void IncludePassageBackTranslateToggleTapped(object sender, EventArgs e)
         {
-            if(IncludePassageBackTranslateToggle.IsEnabled)
+            if (IncludePassageBackTranslateToggle.IsEnabled)
             {
                 IncludePassageBackTranslateToggle.IsToggled = !IncludePassageBackTranslateToggle.IsToggled;
             }
@@ -925,7 +977,7 @@ namespace Render.Components.StageSettings.ConsultantCheckStageSettings
 
         private void IncludeSegmentBackTranslateToggleTapped(object sender, EventArgs e)
         {
-            if(IncludeSegmentBackTranslateToggle.IsEnabled)
+            if (IncludeSegmentBackTranslateToggle.IsEnabled)
             {
                 IncludeSegmentBackTranslateToggle.IsToggled = !IncludeSegmentBackTranslateToggle.IsToggled;
             }
@@ -934,7 +986,7 @@ namespace Render.Components.StageSettings.ConsultantCheckStageSettings
         private void RequirePassageTranscribeListenToggleTapped(object sender, EventArgs e)
         {
             var toggle = RequirePassageTranscribeListenToggle;
-            
+
             if (toggle.IsEnabled)
             {
                 toggle.IsToggled = !toggle.IsToggled;
@@ -944,7 +996,7 @@ namespace Render.Components.StageSettings.ConsultantCheckStageSettings
         private void RequirePassage2TranscribeListenToggleTapped(object sender, EventArgs e)
         {
             var toggle = RequirePassage2TranscribeListenToggle;
-            
+
             if (toggle.IsEnabled)
             {
                 toggle.IsToggled = !toggle.IsToggled;
@@ -954,7 +1006,7 @@ namespace Render.Components.StageSettings.ConsultantCheckStageSettings
         private void RequireSegmentTranscribeListenToggleTapped(object sender, EventArgs e)
         {
             var toggle = RequireSegmentTranscribeListenToggle;
-            
+
             if (toggle.IsEnabled)
             {
                 toggle.IsToggled = !toggle.IsToggled;
@@ -964,7 +1016,7 @@ namespace Render.Components.StageSettings.ConsultantCheckStageSettings
         private void RequireSegment2TranscribeListenToggleTapped(object sender, EventArgs e)
         {
             var toggle = RequireSegment2TranscribeListenToggle;
-            
+
             if (toggle.IsEnabled)
             {
                 toggle.IsToggled = !toggle.IsToggled;

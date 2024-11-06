@@ -12,7 +12,7 @@
                        xmlns:stageSettings="clr-namespace:Render.Components.StageSettings;assembly=Render"
                        xmlns:titleBar="clr-namespace:Render.Components.TitleBar"
                        xmlns:resources1="clr-namespace:Render.Resources"
-                       xmlns:addViaFolder="clr-namespace:Render.Components.AddViaFolder"
+                       xmlns:addProject="using:Render.Components.AddProject"
                        x:TypeArguments="local:ProjectSelectViewModel">
     <ContentPage.Resources>
         <Style x:Key="ComponentLabel" TargetType="Label">
@@ -171,7 +171,7 @@
                                       AbsoluteLayout.LayoutBounds="0,0,1,1"
                                       AbsoluteLayout.LayoutFlags="All" />
         
-        <addViaFolder:AddViaFolderView x:Name="AddViaFolderView" 
+        <addProject:AddProjectView x:Name="AddViaFolderView" 
                                        AbsoluteLayout.LayoutBounds="0,0,1,1"
                                        AbsoluteLayout.LayoutFlags="All"
                                        VerticalOptions="Center" HorizontalOptions="Center" />

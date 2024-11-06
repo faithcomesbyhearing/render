@@ -57,7 +57,7 @@ namespace Render.Pages.Consultant.ConsultantApproval
         {
             if (IsAudioMissing(Section, RenderStepTypes.ConsultantApproval, checkForBackTranslationAudio: true)) return null;
 
-            var vm = await ApproveSectionViewModel.CreateAsync(ViewModelContextProvider, Section.Id, RemoveApproveSectionAction);
+            var vm = await ApproveSectionViewModel.CreateAsync(ViewModelContextProvider, Section.Id, RemoveApproveSectionAction, GetProjectId());
             return await NavigateTo(vm);
         }
 

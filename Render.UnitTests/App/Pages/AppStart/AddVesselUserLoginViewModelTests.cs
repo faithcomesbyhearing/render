@@ -1,10 +1,8 @@
 ﻿using Render.WebAuthentication;
-using FluentAssertions;
 using Moq;
 using Render.Models.Users;
 using Render.Pages.AppStart.Login;
 using Render.Repositories.UserRepositories;
-using Render.Services.SyncService;
 using Render.UnitTests.App.Kernel;
 using Render.Resources.Localization;
 
@@ -13,11 +11,8 @@ namespace Render.UnitTests.App.Pages.AppStart
     public class AddVesselUserLoginViewModelTests : ViewModelTestBase
     {
         private readonly User _user;
-
         private readonly Mock<IUserRepository> _userRepository;
         private readonly Mock<IAuthenticationApiWrapper> _mockAuthenticationApiWrapper;
-        private readonly Mock<ISyncService> _syncService;
-        private readonly Mock<IOneShotReplicator> _mockOneShotReplicator;
 
         public AddVesselUserLoginViewModelTests()
         {
@@ -28,8 +23,6 @@ namespace Render.UnitTests.App.Pages.AppStart
 
             _userRepository = new Mock<IUserRepository>();
             _mockAuthenticationApiWrapper = new Mock<IAuthenticationApiWrapper>();
-            _syncService = new Mock<ISyncService>();
-            _mockOneShotReplicator = new Mock<IOneShotReplicator>();
 
             _userRepository.Setup(x => x.GetAllUsersAsync()).ReturnsAsync(new List<IUser> { _user });
             _userRepository.Setup(x => x.GetUserAsync(_user.Username)).ReturnsAsync((User)null);
@@ -38,13 +31,9 @@ namespace Render.UnitTests.App.Pages.AppStart
                 .ReturnsAsync(new AuthenticationApiWrapper.AuthenticationResult(true, Guid.NewGuid().ToString()));
             _mockAuthenticationApiWrapper.Setup(x => x.AuthenticateRenderUserForSyncAsync(It.IsAny<string>(), It.IsAny<string>(), Guid.Empty))
                 .ReturnsAsync(new AuthenticationApiWrapper.SyncGatewayUser(_user.Id, "login"));
-
-            _syncService.Setup(x => x.GetAdminDownloader(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
-                .Returns(_mockOneShotReplicator.Object);
-
+            
             MockContextProvider.Setup(x => x.GetUserRepository()).Returns(_userRepository.Object);
             MockContextProvider.Setup(x => x.GetAuthenticationApiWrapper()).Returns(_mockAuthenticationApiWrapper.Object);
-            MockContextProvider.Setup(x => x.GetSyncService()).Returns(_syncService.Object);
         }
 
         [Fact]

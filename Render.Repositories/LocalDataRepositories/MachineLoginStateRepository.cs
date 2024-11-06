@@ -23,16 +23,6 @@ namespace Render.Repositories.LocalDataRepositories
             await _machineLoginStatePersistence.UpsertAsync(machineLoginState.Id, machineLoginState);
         }
         
-        public async Task PurgeForProject(Guid projectId)
-        { 
-            await _machineLoginStatePersistence.PurgeAllOfTypeForProjectId(projectId);
-        }
-        
-        public async Task PurgeAllLoginState(Guid machineLoginStateEntityId)
-        {
-            await _machineLoginStatePersistence.PurgeAllOfTypeForId(machineLoginStateEntityId);
-        }
-
         public void Dispose()
         {
             _machineLoginStatePersistence.Dispose();

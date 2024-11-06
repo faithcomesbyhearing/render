@@ -39,23 +39,16 @@
         </Border>
 
         <!--  Project list  -->
-        <ScrollView x:Name="ProjectsToDownloadScrollView"
-                    Grid.Row="1"
-                    Margin="0,39,0,0"
-                    VerticalScrollBarVisibility="Default">
-            <Grid Padding="0" ColumnDefinitions="*,Auto,*">
-                <VerticalStackLayout x:Name="ProjectsToDownloadCollection"
-                                     Grid.Column="1"
-                                     AutomationId="SelectProjectsCollection"
-                                     HorizontalOptions="CenterAndExpand">
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate>
-                            <projectDownload:ProjectDownloadCard Padding="0,0,0,26" />
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
-                </VerticalStackLayout>
-            </Grid>
-        </ScrollView>
+        <CollectionView x:Name="ProjectsToDownloadCollection" 
+                        Grid.Row="1" 
+                        Margin="0,39,0,0"
+                        AutomationId="SelectProjectsCollection">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <projectDownload:ProjectDownloadCard Padding="0,0,0,26" />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
         <!--  'No Projects' message  -->
         <Grid x:Name="NoProjectMessageContainer"

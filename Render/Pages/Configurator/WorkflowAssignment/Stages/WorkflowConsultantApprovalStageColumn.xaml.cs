@@ -1,4 +1,5 @@
 ﻿using ReactiveUI;
+using Render.Kernel.WrappersAndExtensions;
 using Render.Utilities;
 
 namespace Render.Pages.Configurator.WorkflowAssignment.Stages;
@@ -23,6 +24,8 @@ public partial class WorkflowConsultantApprovalStageColumn
                         BindableLayout.SetItemsSource(TeamCollection, x);
                     }
                 }));
+
+            d(this.BindCommandCustom(SettingsButtonGestureRecognizer, v => v.ViewModel.OpenStageSettingsCommand));
         });
     }
 }

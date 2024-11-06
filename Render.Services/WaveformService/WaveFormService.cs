@@ -87,6 +87,77 @@ public class WaveFormService : IWaveFormService
         return barArray;
     }
 
+    /// <summary>
+    /// Upsampling\Downsampling existings bars to specified count of bars.
+    /// </summary>
+    public float[] InterpolateBars(float[] bars, int requiredCount = MiniWaveFormBarsCount)
+    {
+        // Check if the required count is valid
+        if (requiredCount < 1)
+        {
+            throw new ArgumentException("Required count must be greater than zero.");
+        }
+
+        if(bars.Length == requiredCount || bars.Length == 0)
+        {
+            return bars;
+        }
+
+        int originalCount = bars.Length;
+        float[] newBars = new float[requiredCount];
+        float scaleFactor = (float)(originalCount) / requiredCount;
+
+        if (requiredCount < originalCount)
+        {
+            // Downsampling
+            for (int i = 0; i < requiredCount; i++)
+            {
+                float start = i * scaleFactor;
+                float end = (i + 1) * scaleFactor;
+
+                int startIndex = (int)Math.Floor(start);
+                int endIndex = (int)Math.Min(Math.Ceiling(end), originalCount - 1);
+
+                float sum = 0;
+                int count = 0;
+
+                for (int j = startIndex; j <= endIndex; j++)
+                {
+                    sum += bars[j];
+                    count++;
+                }
+
+                newBars[i] = sum / count;
+            }
+        }
+        else
+        {
+            // Upsampling
+            for (int i = 0; i < requiredCount; i++)
+            {
+                float position = i * scaleFactor;
+                int leftIndex = (int)Math.Floor(position);
+                int rightIndex = Math.Min((int)Math.Ceiling(position), originalCount - 1);
+
+                if (leftIndex == rightIndex)
+                {
+                    // Exact match or at the boundaries
+                    newBars[i] = bars[leftIndex];
+                }
+                else
+                {
+                    // Linear interpolation
+                    float leftValue = bars[leftIndex];
+                    float rightValue = bars[rightIndex];
+                    float t = position - leftIndex;
+                    newBars[i] = leftValue * (1 - t) + rightValue * t;
+                }
+            }
+        }
+
+        return newBars;
+    }
+
     public float[] ConvertAudioDataToFloat(byte[] audioData, int bitPerSample)
     {
         try

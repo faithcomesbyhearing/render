@@ -194,9 +194,19 @@ namespace Render.Components.BarPlayer
                     .Subscribe(glyph =>
                     {
                         AudioPlayerGlyph.IsVisible = string.IsNullOrEmpty(glyph) == false;
-                    }));
+					}));
 
-                d(this
+				d(this
+				   .WhenAnyValue(x => x.ViewModel.GlyphColor)
+				   .Subscribe(color =>
+				   {
+					   if (ViewModel != null && ViewModel.Glyph != null)
+					   {
+						   AudioPlayerGlyph.TextColor = color;
+					   }
+				   }));
+
+				d(this
                     .WhenAnyValue(x => x.ViewModel.SecondaryButtonBackgroundColor)
                     .Subscribe(s =>
                     {
@@ -343,7 +353,7 @@ namespace Render.Components.BarPlayer
                 var canvas = e.Surface.Canvas;
                 var visualElement = (VisualElement)sender;
 
-                ViewModel.PassagePainter.Paint(canvas, canvas.DeviceClipBounds, visualElement.HeightRequest);
+                ViewModel.PassagePainter?.Paint(canvas, canvas.DeviceClipBounds, visualElement.HeightRequest);
             }
         }
 

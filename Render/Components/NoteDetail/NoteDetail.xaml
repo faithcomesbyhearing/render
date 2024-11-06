@@ -72,7 +72,7 @@
         </Style>
     </ContentView.Resources>
 
-    <Grid x:Name="Layout" HorizontalOptions="Fill" VerticalOptions="Fill">
+    <Grid x:Name="ComponentLayout" HorizontalOptions="Fill" VerticalOptions="Fill">
         <Grid BackgroundColor="Black" Opacity="0.1">
             <Grid.GestureRecognizers>
                 <TapGestureRecognizer x:Name="BackgroundGesture" />

@@ -456,24 +456,6 @@ namespace Render.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Back Translator.
-        /// </summary>
-        public static string BackTranslator {
-            get {
-                return ResourceManager.GetString("BackTranslator", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Back Translator 2.
-        /// </summary>
-        public static string BackTranslator2 {
-            get {
-                return ResourceManager.GetString("BackTranslator2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Both.
         /// </summary>
         public static string Both {
@@ -681,29 +663,11 @@ namespace Render.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Community Check.
-        /// </summary>
-        public static string CommunityCheck {
-            get {
-                return ResourceManager.GetString("CommunityCheck", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Community Feedback Guidance.
         /// </summary>
         public static string CommunityFeedbackGuidance {
             get {
                 return ResourceManager.GetString("CommunityFeedbackGuidance", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Passage {0} - Retell.
-        /// </summary>
-        public static string CommunityRetellPassage {
-            get {
-                return ResourceManager.GetString("CommunityRetellPassage", resourceCulture);
             }
         }
         
@@ -731,24 +695,6 @@ namespace Render.Resources.Localization {
         public static string CommunityTest {
             get {
                 return ResourceManager.GetString("CommunityTest", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Community Test Revise.
-        /// </summary>
-        public static string CommunityTestRevise {
-            get {
-                return ResourceManager.GetString("CommunityTestRevise", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Community Setup.
-        /// </summary>
-        public static string CommunityTestSetup {
-            get {
-                return ResourceManager.GetString("CommunityTestSetup", resourceCulture);
             }
         }
         
@@ -1752,6 +1698,15 @@ namespace Render.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Import from Render 3.7.
+        /// </summary>
+        public static string ImportFromRender {
+            get {
+                return ResourceManager.GetString("ImportFromRender", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Improperly formatted ID. Please re-enter it..
         /// </summary>
         public static string ImproperlyFormattedId {
@@ -2211,6 +2166,15 @@ namespace Render.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No data from Render 3.7.
+        /// </summary>
+        public static string NoDataFromRender {
+            get {
+                return ResourceManager.GetString("NoDataFromRender", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No Internet Connection.
         /// </summary>
         public static string NoInternetConnection {
@@ -2378,15 +2342,6 @@ namespace Render.Resources.Localization {
         public static string Notes {
             get {
                 return ResourceManager.GetString("Notes", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Note Translator.
-        /// </summary>
-        public static string NoteTranslator {
-            get {
-                return ResourceManager.GetString("NoteTranslator", resourceCulture);
             }
         }
         
@@ -2643,15 +2598,6 @@ namespace Render.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Passage {0} Peer Review.
-        /// </summary>
-        public static string PassagePeerReview {
-            get {
-                return ResourceManager.GetString("PassagePeerReview", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Passage Retell.
         /// </summary>
         public static string PassageRetell {
@@ -2742,7 +2688,7 @@ namespace Render.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Password is required to restore a snapshot.
+        ///   Looks up a localized string similar to Password is required to restore a section.
         /// </summary>
         public static string PasswordRequiredToRestore {
             get {
@@ -3431,6 +3377,15 @@ namespace Render.Resources.Localization {
         public static string RestoreSectionConfirmation {
             get {
                 return ResourceManager.GetString("RestoreSectionConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Restoring section will delete all data by the stage selected. This action cannot be undone..
+        /// </summary>
+        public static string RestoreSectionWarning {
+            get {
+                return ResourceManager.GetString("RestoreSectionWarning", resourceCulture);
             }
         }
         
@@ -4169,6 +4124,15 @@ namespace Render.Resources.Localization {
         public static string StorageAlreadyContains {
             get {
                 return ResourceManager.GetString("StorageAlreadyContains", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Substage Name.
+        /// </summary>
+        public static string SubstageName {
+            get {
+                return ResourceManager.GetString("SubstageName", resourceCulture);
             }
         }
         

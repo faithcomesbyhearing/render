@@ -28,7 +28,7 @@ namespace Render.Repositories.Kernel
 
         public IDataSourceAs GetDataSource()
         {
-            return DataSource.Database(Database);
+            return DataSource.Collection(Database.GetDefaultCollection());
         }
 
         public void Save(MutableDocument document)
@@ -36,7 +36,7 @@ namespace Render.Repositories.Kernel
             SemaphoreSlim.Wait();
             try
             {
-                Database.Save(document);
+                Database.GetDefaultCollection().Save(document);
             }
             finally
             {
@@ -49,7 +49,7 @@ namespace Render.Repositories.Kernel
             SemaphoreSlim.Wait();
             try
             {
-                Database.Delete(document);
+                Database.GetDefaultCollection().Delete(document);
             }
             finally
             {
@@ -59,7 +59,7 @@ namespace Render.Repositories.Kernel
 
         public Document GetDocument(string key)
         {
-            return Database?.GetDocument(key);
+            return Database?.GetDefaultCollection().GetDocument(key);
         }
 
         public void CompactDatabase()
@@ -80,7 +80,7 @@ namespace Render.Repositories.Kernel
             SemaphoreSlim.Wait();
             try
             {
-                Database.Purge(document);
+                Database.GetDefaultCollection().Purge(document);
             }
             finally
             {
@@ -97,7 +97,7 @@ namespace Render.Repositories.Kernel
                 {
                     foreach (var mutableDocument in list)
                     {
-                        Database.Save(mutableDocument);
+                        Database.GetDefaultCollection().Save(mutableDocument);
                     }
                 });
             }
@@ -130,12 +130,12 @@ namespace Render.Repositories.Kernel
                     foreach (var row in result)
                     {
                         string documentId = row.GetString(0);
-                        MutableDocument document = Database.GetDocument(documentId).ToMutable();
+                        MutableDocument document = Database.GetDefaultCollection().GetDocument(documentId).ToMutable();
 
                         // Update the document with the new values
                         updateAction(document);
 
-                        Database.Save(document);
+                        Database.GetDefaultCollection().Save(document);
                     }
                 });
             }
@@ -177,7 +177,7 @@ namespace Render.Repositories.Kernel
                 {
                     foreach (var document in documentList)
                     {
-                        Database.Delete(document);
+                        Database.GetDefaultCollection().Delete(document);
                     }
                 });
             }
@@ -198,38 +198,38 @@ namespace Render.Repositories.Kernel
             switch (databaseName)
             {
                 case "render":
-                    Database.CreateIndex(
+                    Database.GetDefaultCollection().CreateIndex(
                         "idx_Type",
                         IndexBuilder.ValueIndex(ValueIndexItem.Expression(Expression.Property("Type"))));
-                    Database.CreateIndex(
+                    Database.GetDefaultCollection().CreateIndex(
                         "idx_Username",
                         IndexBuilder.ValueIndex(ValueIndexItem.Expression(Expression.Property("Username"))));
-                    Database.CreateIndex(
+                    Database.GetDefaultCollection().CreateIndex(
                         "idx_ProjectId",
                         IndexBuilder.ValueIndex(ValueIndexItem.Expression(Expression.Property("ProjectId"))));
-                    Database.CreateIndex(
+                    Database.GetDefaultCollection().CreateIndex(
                         "idx_Id",
                         IndexBuilder.ValueIndex(ValueIndexItem.Expression(Expression.Property("Id"))));
                     break;
                 case "renderaudio":
-                    Database.CreateIndex(
+                    Database.GetDefaultCollection().CreateIndex(
                         "idx_Type",
                         IndexBuilder.ValueIndex(ValueIndexItem.Expression(Expression.Property("Type"))));
-                    Database.CreateIndex(
+                    Database.GetDefaultCollection().CreateIndex(
                         "idx_ProjectId",
                         IndexBuilder.ValueIndex(ValueIndexItem.Expression(Expression.Property("ProjectId"))));
-                    Database.CreateIndex(
+                    Database.GetDefaultCollection().CreateIndex(
                         "idx_ParentId",
                         IndexBuilder.ValueIndex(ValueIndexItem.Expression(Expression.Property("ParentId"))));
-                    Database.CreateIndex(
+                    Database.GetDefaultCollection().CreateIndex(
                         "idx_ParentAudioId",
                         IndexBuilder.ValueIndex(ValueIndexItem.Expression(Expression.Property("ParentAudioId"))));
                     break;
                 case "localonlydata":
-                    Database.CreateIndex(
+                    Database.GetDefaultCollection().CreateIndex(
                         "idx_UserId",
                         IndexBuilder.ValueIndex(ValueIndexItem.Expression(Expression.Property("UserId"))));
-                    Database.CreateIndex(
+                    Database.GetDefaultCollection().CreateIndex(
                         "idx_ProjectId",
                         IndexBuilder.ValueIndex(ValueIndexItem.Expression(Expression.Property("ProjectId"))));
                     break;

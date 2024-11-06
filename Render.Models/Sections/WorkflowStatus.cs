@@ -8,6 +8,8 @@ namespace Render.Models.Sections
 {
     public class WorkflowStatus : ScopeDomainEntity, IAggregateRoot
     {
+        private const int Version = 1;
+        
         /// <summary>
         /// The step in the workflow the section is currently in
         /// </summary>
@@ -18,7 +20,22 @@ namespace Render.Models.Sections
         /// The step type of the current step
         /// </summary>
         [JsonProperty("CurrentStepType")]
-        public RenderStepTypes CurrentStepType { get; private set; }
+        private string CurrentStepTypeString { get; set; }
+
+        [JsonIgnore]
+        public RenderStepTypes CurrentStepType
+        {
+            get => Enum.TryParse(CurrentStepTypeString, true, out RenderStepTypes enumValue) && Enum.IsDefined(typeof(RenderStepTypes), enumValue)
+                ? enumValue
+                : RenderStepTypes.Unknown;
+            private set
+            {
+                if (value != RenderStepTypes.Unknown)
+                {
+                    CurrentStepTypeString = value.ToString();
+                }
+            }
+        }
 
         /// <summary>
         /// The stage in the workflow the section is currently in
@@ -30,7 +47,7 @@ namespace Render.Models.Sections
         /// The workflow that the section is currently traversing
         /// </summary>
         [JsonProperty("WorkflowId")]
-        public Guid WorkflowId { get; }
+        public Guid WorkflowId { get; private set; }
 
         /// <summary>
         /// The user that generated this workflow status
@@ -49,7 +66,7 @@ namespace Render.Models.Sections
         /// The section this object corresponds to.
         /// </summary>
         [JsonProperty("ParentSectionId")]
-        public Guid ParentSectionId { get; }
+        public Guid ParentSectionId { get; private set; }
 
         [JsonProperty("SectionHasNotesToInterpret")]
         public bool SectionHasNotesToInterpret { get; private set; }
@@ -60,8 +77,13 @@ namespace Render.Models.Sections
         [JsonProperty("HasNewDrafts")]
         public bool HasNewDrafts { get; private set; }
 
+        [JsonConstructor]
+        private WorkflowStatus(Guid projectId, Guid scopeId) : base(scopeId, projectId, Version)
+        {
+        }
+
         public WorkflowStatus(Guid parentSectionId, Guid workflowId, Guid projectId, Guid stepId, Guid scopeId,
-            Guid currentStageId, RenderStepTypes currentStepType) : base(scopeId, projectId, 1)
+            Guid currentStageId, RenderStepTypes currentStepType) : base(scopeId, projectId, Version)
         {
             ParentSectionId = parentSectionId;
             WorkflowId = workflowId;

@@ -49,7 +49,7 @@ public class ProjectDownloadService : IProjectDownloadService
         if (Replicators.ContainsKey(projectId)) return GetReplicator(projectId);
 
         var replicator = new OneShotReplicatorRetryProxy(
-            _viewModelContextProvider.GetLogger(typeof(SyncService)),
+            _viewModelContextProvider.GetLogger(typeof(WebSyncService)),
             projectId,
             () => _viewModelContextProvider.GetOneShotReplicator(
                 new List<Guid> { projectId },

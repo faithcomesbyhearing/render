@@ -5,8 +5,8 @@ using Windows.Media;
 using Windows.Media.Capture;
 using Windows.Media.MediaProperties;
 using Windows.Storage;
-using CSCore.CoreAudioAPI;
 using Render.Utilities;
+using Render.Services.AudioServices;
 
 namespace Render.Platforms.Kernel.AudioRecorder
 {
@@ -16,35 +16,30 @@ namespace Render.Platforms.Kernel.AudioRecorder
 		private readonly string _defaultTempRecordPath;
 		private readonly string _tempAudioDirectory;
 
-		private readonly MMDeviceEnumerator _deviceEnumerator;
-		private readonly MMNotificationClient _notificationClient;
-
         private string _currentTempRecordPath;
         private string _deviceId = string.Empty;
         private bool _isInitialized;
         private bool _isRecording;
 		private MediaCapture _mediaCapture;
 		private LowLagMediaRecording _mediaRecording;
+        private IAudioDeviceMonitor _deviceMonitor;
 
-		public bool IsRecording 
-		{ 
-			get => _isRecording; 
-			private set 
-			{
-				_isRecording = value;
-				IAudioRecorder.IsRecordingChanged?.Invoke(value);
-			}
-		}
+		public bool IsRecording
+        {
+            get => _isRecording;
+            private set => _isRecording = value;
+        }
 
-		public AudioDetails AudioStreamDetails { get; }
+        public AudioDetails AudioStreamDetails { get; }
 
         public event EventHandler<string> OnRecordFailed;
         public event EventHandler<string> OnRecordDeviceRestore;
 		public event EventHandler<string> OnRecordFinished;
 
-        public AudioRecorder(string tempAudioDirectory, int preferredSampleRate)
+        public AudioRecorder(string tempAudioDirectory, int preferredSampleRate, IAudioDeviceMonitor deviceMonitor)
         {
             _tempAudioDirectory = tempAudioDirectory;
+            _deviceMonitor = deviceMonitor;
             _defaultFileName = string.Format(_defaultFileName, Guid.NewGuid());
             _defaultTempRecordPath = Path.Combine(tempAudioDirectory, _defaultFileName);
             _currentTempRecordPath = _defaultTempRecordPath;
@@ -56,9 +51,7 @@ namespace Render.Platforms.Kernel.AudioRecorder
                 SampleRate = preferredSampleRate
             };
 
-            _deviceEnumerator = new MMDeviceEnumerator();
-            _notificationClient = new MMNotificationClient(_deviceEnumerator);
-			_notificationClient.DefaultDeviceChanged += OnDefaultDeviceChanged;
+			_deviceMonitor.AudioInputDeviceChanged += OnDefaultDeviceChanged;
         }
 
         public string GetAudioFilePath()
@@ -189,38 +182,32 @@ namespace Render.Platforms.Kernel.AudioRecorder
             _isInitialized = false;
         }
 
-        private void OnDefaultDeviceChanged(object s, DefaultDeviceChangedEventArgs eventArgs)
+		/// <summary>
+		/// Since we don't handle switching between multiple microphones,
+		/// any change in DeviceId is considered a microphone restore
+		/// </summary>
+        private void OnDefaultDeviceChanged(string deviceId)
         {
-			if (eventArgs.DataFlow == DataFlow.Capture
-                && eventArgs.Role == Role.Multimedia
-                && !string.IsNullOrEmpty(eventArgs.DeviceId)
-                && _deviceId != eventArgs.DeviceId)
+            if (string.IsNullOrEmpty(deviceId) || _deviceId == deviceId)
             {
-                // Since we don't handle switching between multiple microphones,
-                // any change in DeviceId is considered a microphone restore
-                OnRecordDeviceRestore?.Invoke(this, eventArgs.DeviceId);
-                
-                _isInitialized = false;
+                return;
             }
+
+            OnRecordDeviceRestore?.Invoke(this, deviceId);
+            _isInitialized = false;
         }
 
         private void SetCurrentDevice()
         {
 			try
 			{
-				var hasActiveDevice = _deviceEnumerator
-					.EnumAudioEndpoints(DataFlow.Capture, DeviceState.Active)
-					.Any();
-
-				_deviceId = hasActiveDevice
-					? _deviceEnumerator.GetDefaultAudioEndpoint(DataFlow.Capture, Role.Multimedia)?.DeviceID
-                    : string.Empty;
+				_deviceId = _deviceMonitor.GetCurrentInputDeviceId();
 			}
-			catch(Exception ex)
+			catch (Exception exception)
 			{
                 RenderLogger.LogInfo(nameof(SetCurrentDevice), new Dictionary<string, string>()
                 {
-                    { nameof(ex.Message), ex.Message },
+                    { nameof(exception.Message), exception.Message },
                 });
             }
         }
@@ -236,7 +223,6 @@ namespace Render.Platforms.Kernel.AudioRecorder
 			await StopRecording();
 
 			_mediaCapture.Failed -= MediaCaptureFailed;
-			_notificationClient.Dispose();
             _mediaCapture.Dispose();
 			_mediaCapture = null;
 		}
@@ -247,10 +233,8 @@ namespace Render.Platforms.Kernel.AudioRecorder
 			OnRecordDeviceRestore = null;
 			OnRecordFinished = null;
 
-			_notificationClient.DefaultDeviceChanged -= OnDefaultDeviceChanged;
-			
-			_deviceEnumerator.Dispose();
-			_notificationClient.Dispose();
+			_deviceMonitor.AudioInputDeviceChanged -= OnDefaultDeviceChanged;
+			_deviceMonitor = null;
 
 			if (_mediaCapture != null)
 			{

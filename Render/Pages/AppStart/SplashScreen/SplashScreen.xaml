@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<rxui:ReactiveContentPage x:TypeArguments="splashscreen:SplashScreenViewModel" 
+<rxui:ReactiveContentPage x:Class="Render.Pages.AppStart.SplashScreen.SplashScreen"
                           xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                          xmlns:loadingCircles="clr-namespace:Render.Common;assembly=Render"
                           xmlns:rxui="clr-namespace:ReactiveUI.Maui;assembly=ReactiveUI.Maui"
                           xmlns:splashscreen="clr-namespace:Render.Pages.AppStart.SplashScreen;assembly=Render"
                           xmlns:uiResources="clr-namespace:Render.Resources;assembly=Render"
-                          xmlns:loadingCircles="clr-namespace:Render.Common;assembly=Render"
-                          x:Class="Render.Pages.AppStart.SplashScreen.SplashScreen"
-                          NavigationPage.HasNavigationBar="False"
-                          BackgroundColor="{DynamicResource LoginPageBackground}">
+                          x:TypeArguments="splashscreen:SplashScreenViewModel"
+                          BackgroundColor="{DynamicResource LoginPageBackground}"
+                          NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
-        <VerticalStackLayout HorizontalOptions="CenterAndExpand"
-                             VerticalOptions="CenterAndExpand">
-            <Image Source="LogoCorrected.png" 
+        <VerticalStackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+            <Image x:Name="RenderTitle"
+                   Margin="25"
                    HorizontalOptions="Center"
-                   x:Name="RenderTitle"
-                   Margin="25" 
-                   WidthRequest="400"
-                   Scale="1" />
-            
+                   Scale="1"
+                   Source="LogoCorrected.png"
+                   WidthRequest="400" />
+
             <loadingCircles:LoadingBar />
         </VerticalStackLayout>
     </ContentPage.Content>

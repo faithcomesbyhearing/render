@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 
 <kernel:RenderComponentBase x:Class="Render.Pages.Configurator.WorkflowAssignment.Stages.WorkflowConsultantCheckStageColumn"
                             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -8,7 +8,7 @@
                             xmlns:stages="clr-namespace:Render.Pages.Configurator.WorkflowAssignment.Stages"
                             xmlns:workflowAssignment="clr-namespace:Render.Pages.Configurator.WorkflowAssignment;assembly=Render"
                             x:TypeArguments="stages:WorkflowConsultantCheckStageColumnViewModel">
-    
+
     <Border Padding="26"
             BackgroundColor="{StaticResource StageColumnBackground}"
             Style="{StaticResource StageColumnBorderStyle}"
@@ -29,7 +29,7 @@
                            AutomationId="StageIcon"
                            Style="{StaticResource AssignementColumnIconStyle}" />
 
-                    <Label x:Name="StageName" Style="{DynamicResource WorkflowStageColumnTopLabel}" />
+                    <Label x:Name="StageName" Style="{StaticResource WorkflowStageColumnTopLabel}" />
                 </HorizontalStackLayout>
 
                 <BoxView Margin="0"
@@ -41,20 +41,36 @@
             </VerticalStackLayout>
 
             <!--  Team Assignment Cards  -->
-            <ScrollView Grid.Row="1" 
-                            Padding="0,0,5,0"
-                            VerticalOptions="Start"
-                            WidthRequest="300"
-                            VerticalScrollBarVisibility="Default">
-                
+            <ScrollView Grid.Row="1"
+                        Padding="0,0,5,0"
+                        VerticalOptions="Start"
+                        WidthRequest="300"
+                        VerticalScrollBarVisibility="Default">
+
                 <Grid ColumnDefinitions="*, 10">
                     <VerticalStackLayout Grid.Column="0">
                         <!--  Back Translate  -->
-                        <HorizontalStackLayout x:Name="BT1Label" Style="{DynamicResource WorkflowStageColumnSubtitleStack}">
-                            <Label Style="{DynamicResource WorkflowStageGroupingTitleIcon}" Text="{StaticResource BackTranslate}" />
+                        <Grid ColumnDefinitions="Auto,*"
+                              RowDefinitions="Auto, Auto"
+                              x:Name="BT1Label"
+                              Style="{StaticResource WorkflowStageColumnSubtitle}">
 
-                            <Label Style="{StaticResource WorkflowStageGroupingTitle}" Text="{x:Static localization:AppResources.BackTranslator}" />
-                        </HorizontalStackLayout>
+                            <Label Grid.RowSpan="2"
+                                   VerticalOptions="Center"
+                                   Style="{StaticResource WorkflowStageGroupingTitleIcon}"
+                                   Text="{StaticResource BackTranslate}" />
+
+                            <Label Grid.Column="1"
+                                   x:Name="BackTranslateStepName"
+                                   Style="{StaticResource WorkflowStageGroupingTitle}" />
+
+                            <Label Grid.Column="1"
+                                   Grid.Row="2"
+                                   x:Name="BT1LabelStep1"
+                                   Text="{x:Static localization:AppResources.Step1}"
+                                   Style="{StaticResource WorkflowStageGroupingTitleIconWithStepNumber}" />
+
+                        </Grid>
 
                         <VerticalStackLayout x:Name="BackTranslateCard">
                             <BindableLayout.ItemTemplate>
@@ -65,11 +81,26 @@
                         </VerticalStackLayout>
 
                         <!--  Back Translate 2  -->
-                        <HorizontalStackLayout x:Name="BT2Label" Style="{DynamicResource WorkflowStageColumnSubtitleStack}">
-                            <Label Style="{DynamicResource WorkflowStageGroupingTitleIcon}" Text="{StaticResource BackTranslate}" />
+                        <Grid ColumnDefinitions="Auto,*"
+                              RowDefinitions="Auto, Auto"
+                              x:Name="BT2Label"
+                              Style="{StaticResource WorkflowStageColumnSubtitle}">
 
-                            <Label Style="{DynamicResource WorkflowStageGroupingTitle}" Text="{x:Static localization:AppResources.BackTranslator2}" />
-                        </HorizontalStackLayout>
+                            <Label Grid.RowSpan="2"
+                                   VerticalOptions="Center"
+                                   Style="{StaticResource WorkflowStageGroupingTitleIcon}"
+                                   Text="{StaticResource BackTranslate}" />
+
+                            <Label Grid.Column="1"
+                                   x:Name="BackTranslate2StepName"
+                                   Style="{StaticResource WorkflowStageGroupingTitle}" />
+
+                            <Label Grid.Column="1"
+                                   Grid.Row="2"
+                                   Text="{x:Static localization:AppResources.Step2}"
+                                   Style="{StaticResource WorkflowStageGroupingTitleIconWithStepNumber}" />
+                        </Grid>
+
 
                         <VerticalStackLayout x:Name="BackTranslate2Card">
                             <BindableLayout.ItemTemplate>
@@ -80,11 +111,40 @@
                         </VerticalStackLayout>
 
                         <!--  Note Translate  -->
-                        <HorizontalStackLayout x:Name="NTLabel" Style="{DynamicResource WorkflowStageColumnSubtitleStack}">
-                            <Label Style="{DynamicResource WorkflowStageGroupingTitleIcon}" Text="{StaticResource NoteTranslate}" />
+                        <Grid ColumnDefinitions="Auto,*"
+                              x:Name="NoteTranslateLabel"
+                              Style="{StaticResource WorkflowStageColumnSubtitle}">
 
-                            <Label Style="{DynamicResource WorkflowStageGroupingTitle}" Text="{x:Static localization:AppResources.NoteTranslator}" />
-                        </HorizontalStackLayout>
+                            <Label Style="{StaticResource WorkflowStageGroupingTitleIcon}"
+                                   Text="{StaticResource NoteTranslate}" />
+
+                            <Label Grid.Column="1"
+                                   Style="{StaticResource WorkflowStageGroupingTitle}"
+                                   Text="{x:Static localization:AppResources.NoteInterpretScreenTitle}" />
+                        </Grid>
+                        <Grid x:Name="NoteTranslateLabelCustomStepNames"
+                              ColumnDefinitions="Auto,*"
+                              RowDefinitions="Auto, Auto"
+                              Style="{StaticResource WorkflowStageColumnSubtitle}"
+                              Margin="0,15,0,10">
+
+                            <Label Style="{StaticResource WorkflowStageGroupingTitleIcon}"
+                                   Text="{StaticResource NoteTranslate}" />
+                            <Label Grid.Column="1"
+                                   x:Name="InterpretToConsultantStepName"
+                                   Style="{StaticResource WorkflowStageGroupingTitle}" />
+
+                            <Label Grid.Column="0"
+                                   Grid.Row="1"
+                                   Style="{StaticResource WorkflowStageGroupingTitleIcon}"
+                                   Margin="0,5,0,0"
+                                   Text="{StaticResource NoteTranslate}" />
+                            <Label Grid.Column="1"
+                                   Grid.Row="1"
+                                   x:Name="InterpretToTranslatorStepName"
+                                   Style="{StaticResource WorkflowStageGroupingTitle}"
+                                   Margin="0,5,0,0" />
+                        </Grid>
 
                         <VerticalStackLayout x:Name="NoteTranslateCard">
                             <BindableLayout.ItemTemplate>
@@ -95,10 +155,25 @@
                         </VerticalStackLayout>
 
                         <!--  Transcribe  -->
-                        <HorizontalStackLayout x:Name="T1Label" Style="{DynamicResource WorkflowStageColumnSubtitleStack}">
-                            <Label Style="{DynamicResource WorkflowStageGroupingTitleIcon}" Text="{StaticResource Transcribe}" />
-                            <Label Style="{DynamicResource WorkflowStageGroupingTitle}" Text="{x:Static localization:AppResources.Transcribe}" />
-                        </HorizontalStackLayout>
+                        <Grid ColumnDefinitions="Auto,*"
+                              RowDefinitions="Auto, Auto"
+                              x:Name="T1Label"
+                              Style="{StaticResource WorkflowStageColumnSubtitle}">
+
+                            <Label Grid.RowSpan="2"
+                                   VerticalOptions="Center"
+                                   Text="{StaticResource Transcribe}"
+                                   Style="{StaticResource WorkflowStageGroupingTitleIcon}" />
+                            <Label Grid.Column="1"
+                                   x:Name="TranscribeStepName"
+                                   Style="{StaticResource WorkflowStageGroupingTitle}" />
+
+                            <Label Grid.Column="1"
+                                   Grid.Row="2"
+                                   x:Name="T1LabelStep1"
+                                   Text="{x:Static localization:AppResources.Step1}"
+                                   Style="{StaticResource WorkflowStageGroupingTitleIconWithStepNumber}" />
+                        </Grid>
 
                         <VerticalStackLayout x:Name="TranscribeCard">
                             <BindableLayout.ItemTemplate>
@@ -109,10 +184,24 @@
                         </VerticalStackLayout>
 
                         <!--  Transcribe 2  -->
-                        <HorizontalStackLayout x:Name="T2Label" Style="{DynamicResource WorkflowStageColumnSubtitleStack}">
-                            <Label Style="{DynamicResource WorkflowStageGroupingTitleIcon}" Text="{StaticResource Transcribe}" />
-                            <Label Style="{DynamicResource WorkflowStageGroupingTitle}" Text="{x:Static localization:AppResources.Transcribe2}" />
-                        </HorizontalStackLayout>
+                        <Grid ColumnDefinitions="Auto,*"
+                              RowDefinitions="Auto, Auto"
+                              x:Name="T2Label"
+                              Style="{StaticResource WorkflowStageColumnSubtitle}">
+
+                            <Label Grid.RowSpan="2"
+                                   VerticalOptions="Center"
+                                   Text="{StaticResource Transcribe}"
+                                   Style="{StaticResource WorkflowStageGroupingTitleIcon}" />
+                            <Label Grid.Column="1"
+                                   x:Name="Transcribe2StepName"
+                                   Style="{StaticResource WorkflowStageGroupingTitle}" />
+
+                            <Label Grid.Column="1"
+                                   Grid.Row="2"
+                                   Text="{x:Static localization:AppResources.Step2}"
+                                   Style="{StaticResource WorkflowStageGroupingTitleIconWithStepNumber}" />
+                        </Grid>
 
                         <VerticalStackLayout x:Name="Transcribe2Card">
                             <BindableLayout.ItemTemplate>
@@ -123,10 +212,10 @@
                         </VerticalStackLayout>
 
                         <!--  Consultant  -->
-                        <HorizontalStackLayout Style="{DynamicResource WorkflowStageColumnSubtitleStack}">
-                            <Label Style="{DynamicResource WorkflowStageGroupingTitleIcon}" Text="{StaticResource ConsultantCheck}" />
-                            <Label Style="{DynamicResource WorkflowStageGroupingTitle}" Text="{x:Static localization:AppResources.ConsultantCheck}" />
-                        </HorizontalStackLayout>
+                        <Grid ColumnDefinitions="Auto,*" Style="{StaticResource WorkflowStageColumnSubtitle}">
+                            <Label Style="{StaticResource WorkflowStageGroupingTitleIcon}" Text="{StaticResource ConsultantCheck}" />
+                            <Label Grid.Column="1" x:Name="ConsultantCheckStepName" Style="{StaticResource WorkflowStageGroupingTitle}" />
+                        </Grid>
 
                         <VerticalStackLayout x:Name="ConsultantCard">
                             <BindableLayout.ItemTemplate>
@@ -139,7 +228,7 @@
                 </Grid>
 
             </ScrollView>
-            
+
             <!--  Bottom half  -->
             <VerticalStackLayout Grid.Row="2">
                 <BoxView Margin="0,26,0,13"
@@ -157,7 +246,7 @@
                     <Label FontFamily="Icons"
                            FontSize="54"
                            Text="{StaticResource Settings}"
-                           TextColor="{DynamicResource SecondaryText}" />
+                           TextColor="{StaticResource SecondaryText}" />
 
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer x:Name="SettingsButtonGestureRecognizer" AutomationId="DraftStageSettings" />

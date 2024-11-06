@@ -24,6 +24,6 @@ public class ConsultantCheckNavigationIconViewModel : WorkflowNavigationIconView
             async () => await ConsultantCheckSectionSelectViewModel.CreateAsync(_projectId, 
                 ViewModelContextProvider, Stage, Step));
         
-        return await HostScreen.Router.NavigateAndReset.Execute(vm);
+        return await NavigateToAndReset(vm);
     }
 }

@@ -7,7 +7,9 @@ using Render.Services.PasswordServices;
 using System.Reactive;
 using System.Reactive.Linq;
 using ReactiveUI.Fody.Helpers;
-using Render.Components.AddViaFolder;
+using Render.Components.AddFromComputer;
+using Render.Components.XamarinBackup;
+using Render.Models.Users;
 using Render.Repositories.Extensions;
 
 namespace Render.Pages.AppStart.Login
@@ -16,8 +18,10 @@ namespace Render.Pages.AppStart.Login
     {
         public ReactiveCommand<Unit, IRoutableViewModel> NavigateToAddProjectId { get; set; }
         
-        public AddFromComputerViewModel AddFromComputerViewModel { get; }
+        public AddFromComputerViewModel AddFromComputerViewModel { get; private set; }
         public ReactiveCommand<Unit, Unit> AddProjectFromComputerCommand { get; private set; }
+        public XamarinBackupViewModel XamarinBackupViewModel { get; private set; }
+        public ReactiveCommand<Unit, Unit> XamarinBackupCommand { get; private set; }
         
         public bool ShowBackButton { get; }
         public bool ShowAddNewUserLabel { get; }
@@ -33,10 +37,16 @@ namespace Render.Pages.AppStart.Login
             PasswordViewModel.OnEnterCommand = ReactiveCommand.CreateFromTask(async () => { await TryLoginAsync(); });
             NavigateToAddProjectId = ReactiveCommand.CreateFromTask(NavigateToAddAProjectViaIdAsync);
             
-            AddFromComputerViewModel = new AddFromComputerViewModel(viewModelContextProvider, AppResources.ReturnToLogIn, NavigateToLogin);
+            AddFromComputerViewModel = new AddFromComputerViewModel(viewModelContextProvider, AppResources.ReturnToLogIn, navigateOnCompletedCommand: NavigateToLogin);
             AddProjectFromComputerCommand = ReactiveCommand.CreateFromTask(async () =>
             {
                 await AddFromComputerViewModel.OpenFileAndStartImport();
+            });
+            
+            XamarinBackupViewModel = new XamarinBackupViewModel(viewModelContextProvider, AppResources.ReturnToLogIn, navigateOnCompletedCommand: NavigateToLogin);
+            XamarinBackupCommand = ReactiveCommand.CreateFromTask(async () =>
+            {
+                await XamarinBackupViewModel.StartBackup();
             });
             
             //Hide the back button on initial load of Render otherwise we have navigated to this page from another page then show button.
@@ -52,7 +62,7 @@ namespace Render.Pages.AppStart.Login
         private async Task<IRoutableViewModel> NavigateToAddAProjectViaIdAsync()
         {
             IsLoading = true;
-            var vm = await Task.Run(async () => await AddProjectViaIdViewModel.CreateAsync(ViewModelContextProvider));
+            var vm = new AddProjectViaIdViewModel(ViewModelContextProvider);
             PasswordViewModel.IsPassword = true;
             var result = await NavigateTo(vm);
             IsLoading = false;
@@ -70,6 +80,13 @@ namespace Render.Pages.AppStart.Login
         }
         public async Task<IRoutableViewModel> TryLoginAsync()
         {
+#if DEMO
+            if (IsDemoDatabaseInitialized() is false)
+            {
+                ShowDemoInitializationError();
+                return null;
+            }
+#endif
             UsernameViewModel.ClearValidation();
             PasswordViewModel.ClearValidation();
 
@@ -94,6 +111,13 @@ namespace Render.Pages.AppStart.Login
 
             var username = UsernameViewModel.Value;
             var userOnMachine = await UserRepository.GetUserAsync(username);
+
+            if (userOnMachine?.UserType == UserType.Render)
+            {
+                PasswordViewModel.SetValidation(AppResources.IncorrectPassword);
+                return null;
+            }
+            
 			Loading = true;
 			if (userOnMachine == null)
             {
@@ -152,10 +176,8 @@ namespace Render.Pages.AppStart.Login
 
 					if (!await ViewModelContextProvider.GetSyncGatewayApiWrapper().IsConnected())
 					{
-						Loading = false;
-						await ShowNoConnectionModal();
-						return null;
-					}
+                        return await FinishLoginAsync();
+                    }
 
 					async Task afterLogin()
 					{
@@ -208,6 +230,9 @@ namespace Render.Pages.AppStart.Login
         {
             NavigateToAddProjectId?.Dispose();
             AddFromComputerViewModel?.Dispose();
+            AddProjectFromComputerCommand?.Dispose();
+            XamarinBackupViewModel?.Dispose();
+            XamarinBackupCommand?.Dispose();
             base.Dispose();
         }
     }

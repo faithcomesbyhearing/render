@@ -2,13 +2,15 @@
 <ContentView x:Class="Render.Sequencer.Sequencer"
              xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sequencerVms="clr-namespace:Render.Sequencer.Contracts.Interfaces"
              xmlns:atomic="clr-namespace:Render.Sequencer.Resources.Atomic"
              xmlns:resources="clr-namespace:Render.Sequencer.Resources"
              xmlns:scroller="clr-namespace:Render.Sequencer.Views.Scroller"
              xmlns:behaviours="clr-namespace:Render.Sequencer.Core.Behaviors"
              xmlns:toolbar="clr-namespace:Render.Sequencer.Views.Toolbar"
              xmlns:viewModels="clr-namespace:Render.Sequencer.ViewModels"
-             xmlns:waveform="clr-namespace:Render.Sequencer.Views.WaveForm">
+             xmlns:waveform="clr-namespace:Render.Sequencer.Views.WaveForm"
+             x:DataType="sequencerVms:ISequencerViewModel">
     <ContentView.Behaviors>
         <behaviours:EventToCommandBehavior EventName="Loaded"
                                            Command="{Binding LoadedCommand}"/>

@@ -4,7 +4,6 @@ using DynamicData;
 using DynamicData.Binding;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using Render.Components.AddViaFolder;
 using Render.Kernel;
 using Render.Models.LocalOnlyData;
 using Render.Models.Users;
@@ -24,8 +23,6 @@ namespace Render.Pages.AppStart.ProjectSelect
         
         [Reactive]
         public ProjectDownloadViewModel AddProjectViewModel { get; private set; }
-        
-        public AddFromComputerViewModel AddFromComputerViewModel { get; }
         
         public bool IsRenderUser { get; private set; }
 
@@ -77,11 +74,10 @@ namespace Render.Pages.AppStart.ProjectSelect
             
             OnSelectedProjectList = ReactiveCommand.Create(OnSelectProjectList);
             OnSelectedAddProject = ReactiveCommand.Create(OnSelectAddProject);
-
-            AddFromComputerViewModel = new AddFromComputerViewModel(viewModelContextProvider, AppResources.Return);
+            
             AddProjectFromComputerCommand = ReactiveCommand.CreateFromTask(async () =>
             {
-                await AddFromComputerViewModel.OpenFileAndStartImport();
+                await AddProjectViewModel.AddFromComputerViewModel.OpenFileAndStartImport();
             });
             
             Disposables.Add(this.WhenAnyValue(x => x.ShowProjectListPanel)
@@ -148,10 +144,17 @@ namespace Render.Pages.AppStart.ProjectSelect
             ShowProjectListPanel = false;
         }
 
-        private void RefreshProjectSelectCardViewList(LocalProject project)
+        private async Task RefreshProjectSelectCardViewList(LocalProject project)
         {
-            ProjectListViewModel.GetAllProjectsForUser(project);
+            await ProjectListViewModel.GetAllProjectsForUser(project);
         }
-        
+
+        public override void Dispose()
+        {
+            ProjectListViewModel?.Dispose();
+            AddProjectViewModel?.Dispose();
+
+            base.Dispose();
+        }
     }
 }

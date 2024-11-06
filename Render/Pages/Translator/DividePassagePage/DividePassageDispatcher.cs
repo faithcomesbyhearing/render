@@ -8,14 +8,14 @@ namespace Render.Pages.Translator.DividePassagePage
 {
     public static class DividePassageDispatcher
     {
-        public static async Task<ViewModelBase> GetDividePassagePageViewModelAsync(Section section,
+        public static ViewModelBase GetDividePassagePageViewModel(Section section,
             PassageNumber passageNumber,
             IViewModelContextProvider viewModelContextProvider, Step step)
         {
             try
             {
-                var grandCentral = viewModelContextProvider.GetGrandCentralStation();
-                var stage = grandCentral.ProjectWorkflow.GetStage(step.Id);
+                var workflowService = viewModelContextProvider.GetWorkflowService();
+                var stage = workflowService.ProjectWorkflow.GetStage(step.Id);
 
                 ViewModelBase viewModelToNavigateTo = DividePassageViewModel.Create(
                     viewModelContextProvider,

@@ -7,17 +7,17 @@ namespace Render;
 
 public class AppLifecycleBus
 {
-    private ISyncService _webSyncService;
+    private readonly ISyncManager _syncManager;
 
     public AppLifecycleBus(IViewModelContextProvider contextProvider)
     {
-        _webSyncService = contextProvider.GetSyncService();
+        _syncManager = contextProvider.GetSyncManager();
     }
 
     public async Task<bool> OnAppClosingAsync()
     {
         await TryStopGlobalSyncAsync();
-
+        TryStopLocalSync();
         return true;
     }
 
@@ -27,25 +27,35 @@ public class AppLifecycleBus
     /// </summary>
     private async Task TryStopGlobalSyncAsync()
     {
-        if (_webSyncService.CurrentSyncStatus is not CurrentSyncStatus.ActiveReplication)
+        if (_syncManager.CurrentWebSyncStatus is not CurrentSyncStatus.ActiveReplication)
         {
             return;
         }
 
-        _webSyncService.StopAllSync();
+        _syncManager.StopWebSync();
 
         var tcs = new TaskCompletionSource();
-        var subscription = _webSyncService
-            .WhenAnyValue(service => service.CurrentSyncStatus)
+        var subscription = _syncManager
+            .WhenAnyValue(service => service.CurrentWebSyncStatus)
             .Where(status => status is not CurrentSyncStatus.ActiveReplication)
             .Subscribe(_ => tcs.TrySetResult());
 
-        if (_webSyncService.CurrentSyncStatus is not CurrentSyncStatus.ActiveReplication)
+        if (_syncManager.CurrentWebSyncStatus is not CurrentSyncStatus.ActiveReplication)
         {
             subscription.Dispose();
             tcs.TrySetResult();
         }
 
         await tcs.Task;
+    }
+    
+    private void TryStopLocalSync()
+    {
+        if (_syncManager?.CurrentLocalSyncStatus is not CurrentSyncStatus.ActiveReplication)
+        {
+            return;
+        }
+
+        _syncManager?.StopLocalSync();
     }
 }

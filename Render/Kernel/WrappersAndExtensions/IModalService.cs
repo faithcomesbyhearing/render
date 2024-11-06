@@ -20,8 +20,10 @@ namespace Render.Kernel.WrappersAndExtensions
 
         Task<DialogResult> ConfirmationModal(
             Icon icon,
-            string title, string message,
-            string cancelText, string confirmText);
+            string title,
+            string message,
+            string cancelText,
+            string confirmText);
 
         Task<DialogResult> ConfirmationModal(
             Icon icon,
@@ -29,7 +31,7 @@ namespace Render.Kernel.WrappersAndExtensions
             string message,
             ModalButtonViewModel cancelButtonViewModel,
             ModalButtonViewModel confirmButtonViewModel);
-        
+
         Task<DialogResult> ConfirmationModal(
             Icon icon,
             string title,

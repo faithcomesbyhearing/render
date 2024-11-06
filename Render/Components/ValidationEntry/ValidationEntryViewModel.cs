@@ -14,6 +14,7 @@ namespace Render.Components.ValidationEntry
         public string Label { get; set; }
         [Reactive] public ReactiveCommand<Unit, Unit> OnEnterCommand { get; set; }
         [Reactive] public bool IsPassword { get; set; }
+        [Reactive] public int MaxLength { get; set; } = int.MaxValue;
         [Reactive] public bool ShowTogglePasswordButton { get; private set; }
         
         public string PlaceholderText;

@@ -14,14 +14,14 @@ namespace Render.Repositories.SnapshotRepository
         Task SaveAsync(Snapshot snapshot);
 
         Task BatchDeleteAsync(List<Snapshot> snapshots, Section section);
-
-        Task Purge(Guid id);
-
+        
         List<Snapshot> FilterSnapshotByStageId(List<Snapshot> snapshots, Guid stageId);
 
+        Task BatchSetTemporaryAsync(List<Snapshot> snapshots, Section section);
+
         Task BatchSoftDeleteAsync(List<Snapshot> snapshots, Section section);
-        
-        Task<Snapshot> GetPassageDraftsForSnapshot(Snapshot snapshot, bool getRetellBackTranslations = false,
+
+		Task<Snapshot> GetPassageDraftsForSnapshot(Snapshot snapshot, bool getRetellBackTranslations = false,
             bool getSegmentBackTranslations = false);
     }
 }

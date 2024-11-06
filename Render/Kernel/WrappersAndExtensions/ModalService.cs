@@ -45,8 +45,8 @@ namespace Render.Kernel.WrappersAndExtensions
             Func<Task> onOkPressed = null)
         {
             var modalViewModel = new ModalViewModel(_viewModelContextProvider, this, icon, title, message, okButtonViewModel, onClosed);
-            
-            if(onOkPressed != null)
+
+            if (onOkPressed != null)
             {
                 modalViewModel.AfterConfirmCommand = ReactiveCommand.CreateFromTask(onOkPressed);
             }
@@ -77,7 +77,14 @@ namespace Render.Kernel.WrappersAndExtensions
             ModalButtonViewModel cancelButtonViewModel,
             ModalButtonViewModel confirmButtonViewModel)
         {
-            var modalViewModel = new ModalViewModel(_viewModelContextProvider, this, icon, title, message,cancelButtonViewModel, confirmButtonViewModel);
+            var modalViewModel = new ModalViewModel(
+                _viewModelContextProvider,
+                this,
+                icon,
+                title,
+                message,
+                cancelButtonViewModel,
+                confirmButtonViewModel);
 
             RenderLogger.LogInfo("Confirmation Modal", new Dictionary<string, string>
             {
@@ -117,7 +124,7 @@ namespace Render.Kernel.WrappersAndExtensions
         {
             _taskCompletionSource = new TaskCompletionSource<DialogResult>();
             _modalViewModel = modalViewModel;
-            
+
             _modalView = new Modal()
             {
                 BindingContext = _modalViewModel
@@ -144,11 +151,11 @@ namespace Render.Kernel.WrappersAndExtensions
             {
                 _popup.Close();
             });
-            
+
             _modalViewModel?.Dispose();
             _modalViewModel = null;
             _popup = null;
-            
+
             _taskCompletionSource.SetResult(result);
         }
     }

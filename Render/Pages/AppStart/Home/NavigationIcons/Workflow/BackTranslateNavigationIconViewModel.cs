@@ -19,9 +19,9 @@ public class BackTranslateNavigationIconViewModel : WorkflowNavigationIconViewMo
     {
         var vm = await Task.Run(async () =>
         {
-            foreach (var sectionId in GrandCentralStation.SectionsAtStep(Step.Id))
+            foreach (var sectionId in StageService.SectionsAtStep(Step.Id))
                 {
-                var section = await _sectionRepository.GetSectionWithDraftsAsync(sectionId, true, true);
+                var section = await SectionRepository.GetSectionWithDraftsAsync(sectionId, true, true);
             
                 if (IsSectionDocumentMissing(sectionId, section))
                 {
@@ -41,7 +41,7 @@ public class BackTranslateNavigationIconViewModel : WorkflowNavigationIconViewMo
 
         if (vm != null)
         {
-            return await HostScreen.Router.NavigateAndReset.Execute(vm);
+            return await NavigateToAndReset(vm);
         }
 
         return null;

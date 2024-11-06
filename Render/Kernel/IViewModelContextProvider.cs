@@ -31,24 +31,32 @@ using Render.Components.DraftSelection;
 using Render.Services.PasswordServices;
 using Render.Interfaces;
 using Render.Components.DivisionPlayer;
+using Render.Kernel.SyncServices;
 using Render.Services.WaveformService;
 using Render.Sequencer.Contracts.Interfaces;
 using Render.Services.AudioPlugins.AudioRecorder.Interfaces;
 using Render.Services.AudioPlugins.AudioPlayer;
+using Render.Services.EntityChangeListenerServices;
+using Render.Services.GrandCentralStation;
+using Render.Services.InterpretationService;
+using Render.Services.SectionMovementService;
 using Render.Services.SyncService.DbFolder;
+using Render.Services.SnapshotService;
+using Render.Services.StageService;
+using Render.Services.WorkflowService;
 
 namespace Render.Kernel
 {
     public interface IViewModelContextProvider
     {
         string LocalFolderPath { get; }
+        
+        IEntityChangeListenerService UserChangeListenerService { get; set; }
 
         Task CompactDatabasesAsync();
 
         Page CreateLaunchPage(RoutingState routingState);
-
-        ISyncService GetSyncService();
-
+        
         ISyncGatewayApiWrapper GetSyncGatewayApiWrapper();
 
         IGrandCentralStation GetGrandCentralStation();
@@ -183,6 +191,8 @@ namespace Render.Kernel
             ActionState actionState);
 
         IUserRepository GetUserRepository();
+        
+        IEntityChangeListenerService GetUserChangeListenerService(List<Guid> userIds);
 
         IAuthenticationApiWrapper GetAuthenticationApiWrapper();
 
@@ -209,14 +219,10 @@ namespace Render.Kernel
         IAudioRepository<CommunityRetell> GetCommunityRetellRepository();
 
         IAudioRepository<Response> GetResponseRepository();
-
-        ILocalSyncService GetLocalSyncService();
-
-        IHandshakeService GetHandshakeService();
         
         IOffloadService GetOffloadService();
 
-        IRenderChangeMonitoringService GetRenderChangeMonitoringService();
+        IDocumentChangeListener GetRenderChangeMonitoringService();
 
         ILocalizationService GetLocalizationService();
 
@@ -252,18 +258,40 @@ namespace Render.Kernel
         
         IAppDirectory GetAppDirectory();
 
+        IAppSettings GetAppSettings();
+
         ISequencerFactory GetSequencerFactory();
 
         Func<int, IAudioRecorder> GetAudioRecorderFactory();
 
         IProjectDownloadService GetProjectDownloaderService();
 
-        IDbLocalReplicator GetFolderProjectsDownloader();
+        ILocalDatabaseReplicationManager GetLocalDatabaseReplicationManager();
         
         IAudioIntegrityService GetAudioIntegrityService();
         
         IAudioLossRetryDownloadService GetAudioLossRetryDownloadService();
+        
+        IEntityChangeListenerService GetDocumentSubscriptionManagerService();
 
-        IOffloadAudioRepository GetOffloadAudioRepository();
+        IUsbSyncFolderStorageService GetUsbSyncFolderStorageService();
+        
+        ISyncManager GetSyncManager();
+
+        IDbBackupService GetDbBackupService();
+
+        ISnapshotService GetSnapshotService();
+        
+        ISectionMovementService GetSectionMovementService();
+
+        IWorkflowService GetWorkflowService();
+
+        IStageService GetStageService();
+
+        IDeletedUserCleanService GetDeletedUserCleanService(Guid projectId);
+
+        IInterpretationService GetInterpretationService();
+
+        IHandshakeService GetHandshakeService();
     }
 }

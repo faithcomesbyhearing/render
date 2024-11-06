@@ -225,12 +225,6 @@
   <data name="BackTranslate2" xml:space="preserve">
     <value>மீண்டும் மொழிபெயர்ப்பாளர் 2</value>
   </data>
-  <data name="BackTranslator" xml:space="preserve">
-    <value>மீண்டும் மொழிபெயர்ப்பாளர்</value>
-  </data>
-  <data name="BackTranslator2" xml:space="preserve">
-    <value>மீண்டும் மொழிபெயர்ப்பாளர் 2</value>
-  </data>
   <data name="Both" xml:space="preserve">
     <value>இரண்டும்</value>
   </data>
@@ -279,12 +273,6 @@
   <data name="CombineSegmentTitle" xml:space="preserve">
     <value>ஒருங்கிணை - பாசஜெட் {0}</value>
   </data>
-  <data name="CommunityCheck" xml:space="preserve">
-    <value>சமூக சோதனை</value>
-  </data>
-  <data name="CommunityRetellPassage" xml:space="preserve">
-    <value>பத்தி {0} - மறுபரிசீலனை</value>
-  </data>
   <data name="CommunityRevise" xml:space="preserve">
     <value>சமூக திருத்தம்</value>
   </data>
@@ -293,12 +281,6 @@
   </data>
   <data name="CommunityTest" xml:space="preserve">
     <value>சமூக சோதனை</value>
-  </data>
-  <data name="CommunityTestRevise" xml:space="preserve">
-    <value>சமூக சோதனை திருத்தம்</value>
-  </data>
-  <data name="CommunityTestSetup" xml:space="preserve">
-    <value>சமூக அமைப்பு</value>
   </data>
   <data name="CompleteWork" xml:space="preserve">
     <value>முழுமையான வேலை</value>
@@ -687,9 +669,6 @@
   <data name="Notes" xml:space="preserve">
     <value>குறிப்புகள்</value>
   </data>
-  <data name="NoteTranslator" xml:space="preserve">
-    <value>குறிப்பு மொழிபெயர்ப்பாளர்</value>
-  </data>
   <data name="NotInWorkflow" xml:space="preserve">
     <value>இனி பணிப்பாய்வு பகுதியாக இல்லை</value>
   </data>
@@ -749,9 +728,6 @@
   </data>
   <data name="PassageNumber" xml:space="preserve">
     <value>பாதை {0}</value>
-  </data>
-  <data name="PassagePeerReview" xml:space="preserve">
-    <value>பத்தி {0} சக மதிப்பாய்வு</value>
   </data>
   <data name="PassageRetell" xml:space="preserve">
     <value>பாதை மறுபரிசீலனை</value>
@@ -1480,7 +1456,7 @@
     <value>ஒரு பகுதியை மீட்டமைக்க கடவுச்சொல் தேவை</value>
   </data>
   <data name="PasswordRequiredToRestore" xml:space="preserve">
-    <value>ஸ்னாப்ஷாட்டை மீட்டெடுக்க கடவுச்சொல் தேவை</value>
+    <value>ஒரு பகுதியை மீட்டெடுக்க கடவுச்சொல் தேவை</value>
   </data>
   <data name="TeamWasChosen" xml:space="preserve">
     <value>அணி {0} தேர்வு செய்யப்பட்டது</value>
@@ -1661,5 +1637,48 @@
   </data>
   <data name="CannotLoadAudio" xml:space="preserve">
     <value>ஆடியோவை ஏற்ற முடியவில்லை</value>
+  </data>
+  <data name="UsbSync" xml:space="preserve">
+    <value>USB ஒத்திசைவு</value>
+  </data>
+  <data name="ExportingProject" xml:space="preserve">
+    <value>ஏற்றுமதி செய்கிறது</value>
+  </data>
+  <data name="StorageAlreadyContains" xml:space="preserve">
+    <value>இந்தச் சேமிப்பகத்தில் ஏற்கனவே இந்தத் திட்டம் உள்ளது</value>
+  </data>
+  <data name="PleaseSelectAnotherStorage" xml:space="preserve">
+    <value>மற்றொரு கோப்புறையைத் தேர்ந்தெடுக்கவும் அல்லது சேமிப்பகத்திலிருந்து இந்தத் திட்டத்தை நீக்கவும்</value>
+  </data>
+  <data name="SyncPathIsNotAvailable" xml:space="preserve">
+    <value>இந்த ஒத்திசைவு பாதை கிடைக்கவில்லை</value>
+  </data>
+  <data name="ChooseAnotherStorage" xml:space="preserve">
+    <value>மற்றொரு சேமிப்பிடத்தைத் தேர்ந்தெடுக்கவும்</value>
+  </data>
+  <data name="NoProjectsToImport" xml:space="preserve">
+    <value>இறக்குமதி செய்ய திட்டங்கள் இல்லை</value>
+  </data>
+  <data name="NoDataForSync" xml:space="preserve">
+    <value>
+ஒத்திசைக்க தரவு இல்லை</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>ஏற்றுமதி</value>
+  </data>
+  <data name="Exported" xml:space="preserve">
+    <value>ஏற்றுமதி செய்யப்பட்டது</value>
+  </data>
+  <data name="SubstageName" xml:space="preserve">
+    <value>துணை நிலை பெயர்</value>
+  </data>
+  <data name="RestoreSectionWarning" xml:space="preserve">
+    <value>மீட்டெடுக்கும் பிரிவு தேர்ந்தெடுக்கப்பட்ட கட்டத்தின் மூலம் அனைத்து தரவையும் நீக்கும். இந்தச் செயலைச் செயல்தவிர்க்க முடியாது.</value>
+  </data>
+  <data name="ImportFromRender" xml:space="preserve">
+    <value>ரெண்டர் 3.7 இலிருந்து இறக்குமதி செய்யவும்</value>
+  </data>
+  <data name="NoDataFromRender" xml:space="preserve">
+    <value>ரெண்டர் 3.7 இலிருந்து தரவு இல்லை</value>
   </data>
 </root>

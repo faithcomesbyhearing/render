@@ -60,7 +60,7 @@
         </Grid>
         <!-- Content -->
         <Grid Grid.Row="2">
-            <VerticalStackLayout PropertyChanged="IconLoginStack_OnPropertyChanged" x:Name="IconLoginStack"
+            <VerticalStackLayout x:Name="IconLoginStack"
                                  HorizontalOptions="Center"
                                  WidthRequest="750">
                 <Label FontSize="20" FontFamily="LightFont" Text="{x:Static localization:AppResources.SelectAProfile}"

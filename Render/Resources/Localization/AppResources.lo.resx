@@ -225,12 +225,6 @@
   <data name="BackTranslate2" xml:space="preserve">
     <value>ແປກັບຫຼັງ 2</value>
   </data>
-  <data name="BackTranslator" xml:space="preserve">
-    <value>ນັກແປກັບຫຼັງ</value>
-  </data>
-  <data name="BackTranslator2" xml:space="preserve">
-    <value>ນັກແປກັບຫຼັງ 2</value>
-  </data>
   <data name="Both" xml:space="preserve">
     <value>ທັງສອງ</value>
   </data>
@@ -279,12 +273,6 @@
   <data name="CombineSegmentTitle" xml:space="preserve">
     <value>ລວມ - ທາງຜ່ານ {0}</value>
   </data>
-  <data name="CommunityCheck" xml:space="preserve">
-    <value>ການກວດສອບຊຸມຊົນ</value>
-  </data>
-  <data name="CommunityRetellPassage" xml:space="preserve">
-    <value>ທາງຜ່ານ {0} - ບອກຄືນ</value>
-  </data>
   <data name="CommunityRevise" xml:space="preserve">
     <value>ກວດແກ້ຊຸມຊົນ</value>
   </data>
@@ -293,12 +281,6 @@
   </data>
   <data name="CommunityTest" xml:space="preserve">
     <value>ການທົດສອບຊຸມຊົນ</value>
-  </data>
-  <data name="CommunityTestRevise" xml:space="preserve">
-    <value>ກວດແກ້ການທົດສອບຊຸມຊົນ</value>
-  </data>
-  <data name="CommunityTestSetup" xml:space="preserve">
-    <value>ຕັ້ງຄ່າຊຸມຊົນ</value>
   </data>
   <data name="CompleteWork" xml:space="preserve">
     <value>ສໍາເລັດການເຮັດວຽກ</value>
@@ -687,9 +669,6 @@
   <data name="Notes" xml:space="preserve">
     <value>ໝາຍ​ເຫດ</value>
   </data>
-  <data name="NoteTranslator" xml:space="preserve">
-    <value>ບັນທຶກບັກແປ</value>
-  </data>
   <data name="NotInWorkflow" xml:space="preserve">
     <value>ບໍ່ແມ່ນສ່ວນໜຶ່ງຂອງຂັ້ນຕອນວຽກອີກຕໍ່ໄປ</value>
   </data>
@@ -749,9 +728,6 @@
   </data>
   <data name="PassageNumber" xml:space="preserve">
     <value>ທາງຜ່ານ {0}</value>
-  </data>
-  <data name="PassagePeerReview" xml:space="preserve">
-    <value>ທາງຜ່ານ {0} ການທົບທວນເພື່ອນມິດ</value>
   </data>
   <data name="PassageRetell" xml:space="preserve">
     <value>ບອກຄືນທາງຜ່ານ</value>
@@ -1475,7 +1451,7 @@
     <value>ຕ້ອງໃຊ້ລະຫັດຜ່ານເພື່ອຣີເຊັດພາກສ່ວນໃດໜຶ່ງ</value>
   </data>
   <data name="PasswordRequiredToRestore" xml:space="preserve">
-    <value>ຕ້ອງໃຊ້ລະຫັດຜ່ານເພື່ອກູ້ພາບຖ່າຍຄືນມາ</value>
+    <value>ຕ້ອງມີລະຫັດຜ່ານເພື່ອຟື້ນຟູພາກສ່ວນ</value>
   </data>
   <data name="TeamWasChosen" xml:space="preserve">
     <value>ທີມ {0} ຖືກເລືອກ</value>
@@ -1662,5 +1638,49 @@
   </data>
   <data name="CannotLoadAudio" xml:space="preserve">
     <value>ບໍ່ສາມາດໂຫຼດສຽງໄດ້</value>
+  </data>
+  <data name="UsbSync" xml:space="preserve">
+    <value>ຊິງຄ໌ USB</value>
+  </data>
+  <data name="ExportingProject" xml:space="preserve">
+    <value>ການສົ່ງອອກ</value>
+  </data>
+  <data name="StorageAlreadyContains" xml:space="preserve">
+    <value>ບ່ອນຈັດເກັບຂໍ້ມູນນີ້ມີໂຄງການນີ້ຢູ່ກ່ອນແລ້ວ</value>
+  </data>
+  <data name="PleaseSelectAnotherStorage" xml:space="preserve">
+    <value>ກະລຸນາເລືອກໂຟນເດີອື່ນ ຫຼືລຶບໂຄງການນີ້ອອກຈາກບ່ອນເກັບຂໍ້ມູນ</value>
+  </data>
+  <data name="SyncPathIsNotAvailable" xml:space="preserve">
+    <value>ເສັ້ນທາງ synchronization ນີ້ບໍ່ສາມາດໃຊ້ໄດ້</value>
+  </data>
+  <data name="ChooseAnotherStorage" xml:space="preserve">
+    <value>ເລືອກບ່ອນເກັບຂໍ້ມູນອື່ນ</value>
+  </data>
+  <data name="NoProjectsToImport" xml:space="preserve">
+    <value>ບໍ່ມີໂຄງການທີ່ຈະນໍາເຂົ້າ</value>
+  </data>
+  <data name="NoDataForSync" xml:space="preserve">
+    <value>ບໍ່ມີຂໍ້ມູນໃຫ້ຊິ້ງ</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>ສົ່ງອອກ</value>
+  </data>
+  <data name="Exported" xml:space="preserve">
+    <value>
+ສົ່ງອອກ</value>
+  </data>
+  <data name="SubstageName" xml:space="preserve">
+    <value>ຊື່ຍ່ອຍ</value>
+  </data>
+  <data name="RestoreSectionWarning" xml:space="preserve">
+    <value>ການຟື້ນຟູພາກສ່ວນຈະລຶບຂໍ້ມູນທັງໝົດໂດຍຂັ້ນຕອນທີ່ເລືອກ. ການກະທຳນີ້ບໍ່ສາມາດຍົກເລີກໄດ້.</value>
+  </data>
+  <data name="ImportFromRender" xml:space="preserve">
+    <value>ນໍາເຂົ້າຈາກ Render 3.7</value>
+  </data>
+  <data name="NoDataFromRender" xml:space="preserve">
+    <value>
+ບໍ່ມີຂໍ້ມູນຈາກ Render 3.7</value>
   </data>
 </root>

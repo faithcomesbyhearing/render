@@ -4,12 +4,6 @@ namespace Render.Services.AudioPlugins.AudioRecorder.Interfaces
 {
     public interface IAudioRecorder : IDisposable
     {
-        /// <summary>
-        /// This code is awful workaround for the BUG 26272.
-        /// Will be fixed in the scope of the PBI 26566.
-        /// </summary>
-        static Action<bool> IsRecordingChanged;
-
         bool IsRecording { get; }
 
         event EventHandler<string> OnRecordFailed;

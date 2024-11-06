@@ -55,7 +55,7 @@ public class SequencerFlagDetailViewModel : IDisposable
         _requireCommunityFeedback = requireCommunityFeedback;
 
         _sessionStateService = provider.GetSessionStateService();
-        var workflowStages = provider.GetGrandCentralStation().ProjectWorkflow.GetAllStages(includeDeactivatedStages:true);
+        var workflowStages = provider.GetWorkflowService().ProjectWorkflow.GetAllStages(includeDeactivatedStages:true);
         var communityTestService = provider.GetCommunityTestService();
         CommunityTestForStages = communityTestService.GetCommunityTestForStage(_stage, _communityTest, workflowStages);
 

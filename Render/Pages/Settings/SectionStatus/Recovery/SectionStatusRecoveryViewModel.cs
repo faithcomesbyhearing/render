@@ -22,8 +22,11 @@ using Render.Repositories.SectionRepository;
 using Render.Repositories.SnapshotRepository;
 using Render.Resources;
 using Render.Resources.Localization;
-using Render.Services;
-using Render.Services.AudioServices;
+using Render.Services.GrandCentralStation;
+using Render.Services.SectionMovementService;
+using Render.Services.SnapshotService;
+using Render.Services.StageService;
+using Render.Services.WorkflowService;
 
 namespace Render.Pages.Settings.SectionStatus.Recovery;
 
@@ -33,6 +36,11 @@ public class SectionStatusRecoveryViewModel : ViewModelBase
     private readonly ISnapshotRepository _snapshotRepository;
     private readonly ISectionRepository _sectionRepository;
     private readonly IGrandCentralStation _grandCentralStation;
+    private readonly IWorkflowService _workflowService;
+    private readonly IStageService _stageService;
+    private readonly ISectionMovementService _sectionMovementService;
+    private readonly ISnapshotService _snapshotService;
+
 
     private SourceList<SectionCardViewModel> SectionCardViewModelSourceList { get; set; } = new();
     private readonly ReadOnlyObservableCollection<SectionCardViewModel> _sectionCardViewModels;
@@ -69,13 +77,13 @@ public class SectionStatusRecoveryViewModel : ViewModelBase
         if (vm.SectionCardViewModelSourceList.Count > 0)
         {
             //Check for snapshot conflict
-            var grandCentralStation = viewModelContextProvider.GetGrandCentralStation();
+            var snapshotService = viewModelContextProvider.GetSnapshotService();
             foreach (var sectionCard in vm._sectionCardViewModels)
             {
-                sectionCard.HasConflict = await grandCentralStation.CheckForSnapshotConflicts(sectionCard.Section.Id);
+                sectionCard.HasConflict = await snapshotService.CheckForSnapshotConflicts(sectionCard.Section.Id);
             }
 
-            await vm.SelectSectionCardAsync(vm.SectionCardViewModels.First().Section.Id);
+            await vm.SelectSectionCardAsync(vm.SectionCardViewModels.First());
         }
 
         return vm;
@@ -88,6 +96,10 @@ public class SectionStatusRecoveryViewModel : ViewModelBase
         _snapshotRepository = ViewModelContextProvider.GetSnapshotRepository();
         _sectionRepository = ViewModelContextProvider.GetSectionRepository();
         _grandCentralStation = ViewModelContextProvider.GetGrandCentralStation();
+        _workflowService = ViewModelContextProvider.GetWorkflowService();
+        _stageService = ViewModelContextProvider.GetStageService();
+        _sectionMovementService = ViewModelContextProvider.GetSectionMovementService();
+        _snapshotService = ViewModelContextProvider.GetSnapshotService();
         StageName = "";
 
         FirstPass = true;
@@ -118,7 +130,7 @@ public class SectionStatusRecoveryViewModel : ViewModelBase
 
                     if (x.Sender.Section != null)
                     {
-                        await SelectSectionCardAsync(x.Sender.Section.Id);
+                        await SelectSectionCardAsync(x.Sender);
                     }
                 }
             }));
@@ -173,19 +185,25 @@ public class SectionStatusRecoveryViewModel : ViewModelBase
         DeleteSnapshotsCommand = ReactiveCommand.CreateFromTask(ShowClearSnapshots);
     }
 
-    private async Task<Stage> GetConflictedStage(Guid sectionId) => await _grandCentralStation.GetConflictedStage(sectionId);
-    
-    private async Task SelectSectionCardAsync(Guid clickedSectionId)
+    private async Task<Stage> GetConflictedStage(Guid sectionId) => await _snapshotService.GetConflictedStage(sectionId);
+
+    private async Task SelectSectionCardAsync(SectionCardViewModel clickedSectionCardViewModel = null)
     {
         IsLoading = true;
 
         foreach (var sectionCard in _sectionCardViewModels)
         {
-            if (sectionCard.Section.Id == clickedSectionId)
+            if (clickedSectionCardViewModel is null)
+            {
+                sectionCard.IsSelected = false;
+                continue;
+            }
+
+            if (sectionCard.Section.Id == clickedSectionCardViewModel.Section.Id)
             {
                 // Check that no conflicts have come up from syncing since entering the page
                 sectionCard.HasConflict =
-                    await _grandCentralStation.CheckForSnapshotConflicts(clickedSectionId);
+                    await _snapshotService.CheckForSnapshotConflicts(clickedSectionCardViewModel.Section.Id);
                 sectionCard.IsSelected = true;
                 var sectionWithDrafts = await _sectionRepository.GetSectionWithDraftsAsync(sectionCard.Section.Id);
                 sectionCard.Section.SetPassages(sectionWithDrafts.Passages);
@@ -193,13 +211,13 @@ public class SectionStatusRecoveryViewModel : ViewModelBase
                 ConflictMode = sectionCard.HasConflict;
                 if (sectionCard.HasConflict)
                 {
-                    ConflictedStage = await GetConflictedStage(clickedSectionId);
+                    ConflictedStage = await GetConflictedStage(clickedSectionCardViewModel.Section.Id);
                     StageName = Utilities.Utilities.GetStageName(ConflictedStage);
                 }
-                
-                var snapshotList = await _snapshotRepository.GetPermanentSnapshotsForSectionAsync(clickedSectionId);
+
+                var snapshotList = await _snapshotRepository.GetPermanentSnapshotsForSectionAsync(clickedSectionCardViewModel.Section.Id);
                 var latestSnapshot = snapshotList.LastOrDefault();
-                var workflow = _grandCentralStation.ProjectWorkflow;
+                var workflow = _workflowService.ProjectWorkflow;
                 var stageList = workflow.GetAllStages(includeDeactivatedStages: true);
 
                 foreach (var disposable in SnapshotCardViewModelSourceList.Items)
@@ -232,7 +250,7 @@ public class SectionStatusRecoveryViewModel : ViewModelBase
                 }
 
                 SectionApproved = sectionCard.Section.ApprovedBy != Guid.Empty;
-                
+
                 var sectionPlayer = await Task.Run(() => GetSectionPlayer(
                     passages: sectionCard.Section.Passages,
                     playerTitle: SectionApproved
@@ -261,7 +279,7 @@ public class SectionStatusRecoveryViewModel : ViewModelBase
             SectionRecovered?.Invoke();
             return;
         }
-        
+
         var snapshotList = await _snapshotRepository.GetSnapshotsForSectionAsync(SelectedCard.Section.Id);
         var selectedSnapshot = _snapshotCardViewModels.First(x => x.Snapshot != null && x.Snapshot.Id == clickedSnapshotId)?.Snapshot;
         var sectionRepo = ViewModelContextProvider.GetSectionRepository();
@@ -290,9 +308,9 @@ public class SectionStatusRecoveryViewModel : ViewModelBase
         //Delete Note Interpretations if necessary
         var interpretationIdsToDelete = new HashSet<Guid>();
         foreach (var interpretationId in from snapshotToDelete in snapshotsToDelete
-                 from interpretationId in snapshotToDelete.NoteInterpretationIds
-                 where !selectedSnapshot.NoteInterpretationIds.Contains(interpretationId)
-                 select interpretationId)
+                                         from interpretationId in snapshotToDelete.NoteInterpretationIds
+                                         where !selectedSnapshot.NoteInterpretationIds.Contains(interpretationId)
+                                         select interpretationId)
         {
             interpretationIdsToDelete.Add(interpretationId);
         }
@@ -319,11 +337,17 @@ public class SectionStatusRecoveryViewModel : ViewModelBase
                 }
             }
         }
-        
-        await _snapshotRepository.BatchSoftDeleteAsync(snapshotsToDelete, newSection);
+
+        await _snapshotRepository.BatchSetTemporaryAsync(snapshotsToDelete, newSection);
         await workflowRepo.SaveWorkflowAsync(renderWorkflow);
-        await _grandCentralStation.AdvanceSectionAfterRecoveryAsync(newSection, step);
-        await _grandCentralStation.FindWorkForUser(_grandCentralStation.CurrentProjectId, GetLoggedInUserId());
+
+        await _sectionMovementService.AdvanceSectionAfterRecoveryAsync(
+            newSection,
+            step,
+            GetProjectId(),
+            GetLoggedInUserId());
+
+        await _grandCentralStation.FindWorkForUser(GetProjectId(), GetLoggedInUserId());
         SelectedCard.SetSection(newSection);
         SectionRecovered?.Invoke();
     }
@@ -331,13 +355,9 @@ public class SectionStatusRecoveryViewModel : ViewModelBase
 
     // This method handles choosing a user's snapshots, and deleting all conflicted snapshots.
     // Not picking a snapshot deletes all snapshots at the conflict point and later
-    public async Task ChooseSnapshot(Snapshot chosenSnapshot = default)
+    public async Task ResolveConflictWithRevert(Snapshot chosenSnapshot = default)
     {
-        await ResolveConflict(chosenSnapshot);
-
-        //Update UI
-        await SelectSectionCardAsync(SelectedCard.Section.Id);
-
+        await ResolveSnapshotConflict(chosenSnapshot);
         var newMostRecent = _snapshotCardViewModels.LastOrDefault(x => x.Snapshot != null)?.Snapshot;
         if (newMostRecent != null)
         {
@@ -348,6 +368,13 @@ public class SectionStatusRecoveryViewModel : ViewModelBase
             //All the snapshots were deleted so we need to reset the section
             await RevertSectionToDefault(SelectedCard.Section);
         }
+    }
+
+    public async Task ResolveSnapshotConflict(Snapshot chosenSnapshot = default)
+    {
+        await ResolveConflict(chosenSnapshot);
+        //Update UI
+        await SelectSectionCardAsync(SelectedCard);
     }
 
     private async Task ResolveConflict(Snapshot chosenSnapshot)
@@ -384,7 +411,9 @@ public class SectionStatusRecoveryViewModel : ViewModelBase
         var renderWorkflow = await workflowRepo.GetWorkflowForProjectIdAsync(SelectedCard.Section.ProjectId);
         var step = renderWorkflow.DraftingStage.Steps.First();
         //resets workflow status back to drafting
-        await _grandCentralStation.ReplaceWorkflowStatus(newSection, step, renderWorkflow);
+
+        await _workflowService.ReplaceWorkflowStatus(newSection, step, renderWorkflow, _stageService.StepsWithWork);
+
         var teams = renderWorkflow.GetTeams();
         foreach (var team in teams)
         {
@@ -398,9 +427,9 @@ public class SectionStatusRecoveryViewModel : ViewModelBase
                 }
             }
         }
-        
+
         var snapshotList = await _snapshotRepository.GetSnapshotsForSectionAsync(SelectedCard.Section.Id);
-        await _snapshotRepository.BatchSoftDeleteAsync(snapshotList, newSection);
+        await _snapshotRepository.BatchSetTemporaryAsync(snapshotList, newSection);
         SelectedCard.SetSection(newSection);
         await workflowRepo.SaveWorkflowAsync(renderWorkflow);
     }
@@ -410,7 +439,7 @@ public class SectionStatusRecoveryViewModel : ViewModelBase
         var section = SelectedCard.Section;
         var snapshots = await _snapshotRepository.GetSnapshotsForSectionAsync(section.Id);
         var userRepository = ViewModelContextProvider.GetUserRepository();
-        var currentWorkflow = _grandCentralStation.ProjectWorkflow;
+        var currentWorkflow = _workflowService.ProjectWorkflow;
         var pairs = new List<(IUser, Snapshot, Team)>();
         //Get users for conflicted snapshots
         foreach (var snapshot in snapshots)
@@ -448,7 +477,7 @@ public class SectionStatusRecoveryViewModel : ViewModelBase
         if (snapshotSelectModalViewModelResult != DialogResult.Ok) return;
 
         var selectedSnapshotMessage = new SelectedSnapshotConfirmationMessageViewModel(snapshotSelectModalViewModel.SelectedPair, section, ViewModelContextProvider);
-        
+
         var selectASnapshotsModal = new ModalViewModel(
             ViewModelContextProvider,
             modalService,
@@ -457,7 +486,7 @@ public class SectionStatusRecoveryViewModel : ViewModelBase
             selectedSnapshotMessage,
             new ModalButtonViewModel(AppResources.No), new ModalButtonViewModel(AppResources.Yes))
         {
-            AfterConfirmCommand = ReactiveCommand.CreateFromTask(async () => { await ChooseSnapshot(snapshotSelectModalViewModel.SelectedPair.Snapshot); })
+            AfterConfirmCommand = ReactiveCommand.CreateFromTask(async () => { await ResolveConflictWithRevert(snapshotSelectModalViewModel.SelectedPair.Snapshot); })
         };
 
         var selectASnapshotsModalResult = await modalService.ConfirmationModal(selectASnapshotsModal);
@@ -488,7 +517,7 @@ public class SectionStatusRecoveryViewModel : ViewModelBase
             string.Format(AppResources.DeleteSnapshotsConfirmation, SelectedCard.Section.ScriptureReference),
             new ModalButtonViewModel(AppResources.No), new ModalButtonViewModel(AppResources.Yes))
         {
-            AfterConfirmCommand = ReactiveCommand.CreateFromTask(async () => await ChooseSnapshot())
+            AfterConfirmCommand = ReactiveCommand.CreateFromTask(async () => await ResolveConflictWithRevert())
         };
 
         var clearSnapshotsModalResult = await modalService.ConfirmationModal(clearSnapshotsModal);
@@ -496,9 +525,11 @@ public class SectionStatusRecoveryViewModel : ViewModelBase
         if (clearSnapshotsModalResult != DialogResult.Ok) return;
 
         await modalService.ShowInfoModal(Icon.ClearBothSnapshots, AppResources.BothSnapshotsDeleted, AppResources.SectionReset);
+
+        SectionRecovered?.Invoke();
     }
 
-    private async Task ShowConfirmation(Guid snapshotId)
+    private async Task ShowConfirmation(Guid snapshotId, bool isRestoring)
     {
         var modalService = ViewModelContextProvider.GetModalService();
         var approveSectionComponent = new SectionApproveComponentViewModel(ViewModelContextProvider);
@@ -508,18 +539,18 @@ public class SectionStatusRecoveryViewModel : ViewModelBase
             modalService,
             Icon.PopUpWarning,
             AppResources.DraftWillBeLost,
-            AppResources.ResetSectionWarning,
+            isRestoring ? AppResources.RestoreSectionWarning : AppResources.ResetSectionWarning,
             new ModalButtonViewModel(AppResources.Cancel),
-            new ModalButtonViewModel(AppResources.ResetSection));
+            new ModalButtonViewModel(isRestoring ? AppResources.RestoreSection : AppResources.ResetSection));
 
         var result = await modalService.ConfirmationModal(lossDataWarningConfirmationModal);
         if (result != DialogResult.Ok) return;
 
-        var resetSectionConfirmationModal = new ModalViewModel(
+        var passwordRequiredConfirmationModal = new ModalViewModel(
             ViewModelContextProvider,
             modalService,
             Icon.ExportLayerPassword,
-            AppResources.PasswordRequired,
+            isRestoring ? AppResources.PasswordRequiredToRestore : AppResources.PasswordRequiredToReset,
             approveSectionComponent,
             new ModalButtonViewModel(AppResources.Cancel),
             new ModalButtonViewModel(AppResources.Confirm))
@@ -528,7 +559,7 @@ public class SectionStatusRecoveryViewModel : ViewModelBase
             AfterConfirmCommand = ReactiveCommand.CreateFromTask(() => RevertSnapshotAsync(snapshotId))
         };
 
-        await modalService.ConfirmationModal(resetSectionConfirmationModal);
+        await modalService.ConfirmationModal(passwordRequiredConfirmationModal);
     }
 
     private async Task StageCardSelected(Snapshot selectedSnapshot)
@@ -547,12 +578,12 @@ public class SectionStatusRecoveryViewModel : ViewModelBase
         }
         else
         {
-            var snapshotWithAudio = await _snapshotRepository.GetPassageDraftsForSnapshot(selectedSnapshot);   
+            var snapshotWithAudio = await _snapshotRepository.GetPassageDraftsForSnapshot(selectedSnapshot);
             sectionPlayer = await Task.Run(() => GetSectionPlayer(
-                passages:  snapshotWithAudio.Passages,
+                passages: snapshotWithAudio.Passages,
                 playerTitle: selectedSnapshot.StageName));
         }
-        
+
         ResetSectionPlayer(sectionPlayer);
 
         IsLoading = false;

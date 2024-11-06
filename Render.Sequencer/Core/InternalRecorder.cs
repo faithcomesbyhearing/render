@@ -192,15 +192,14 @@ public class InternalRecorder : IDisposable
     
     private void AudioDataRecorded(RecordedData data)
     {
-        _sequencer.CurrentAudio.AddDuration(data.ChunkDurationSec);
+        _sequencer.CurrentAudio.SetDuration(data.TotalDurationSec);
         _sequencer.CurrentPosition = _sequencer.TotalDuration;
         _sequencer.TotalCurrentPosition = _sequencer.TotalDuration;
 
         _sequencer.CurrentAudio.RefreshRecorderSamples(
             dataChunk: data.AudioData,
             buildParams: _sequencer.GetRecordingBuildSamplesParams(
-                totalDurationSec: _sequencer.CurrentAudio.Duration, 
-                chunkDurationSec: data.ChunkDurationSec));
+                totalDurationSec: _sequencer.CurrentAudio.Duration));
     }
 
     private void ResetRecorder()

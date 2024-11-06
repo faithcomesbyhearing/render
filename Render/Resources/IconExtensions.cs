@@ -264,6 +264,7 @@ namespace Render.Resources
         LockPlus,
         NoAssigned,
         Retry,
-        AddFromComputer
+        AddFromComputer,
+        UsbIcon
     }
 }

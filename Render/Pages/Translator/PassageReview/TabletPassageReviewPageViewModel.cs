@@ -26,17 +26,22 @@ namespace Render.Pages.Translator.PassageReview
 
         [Reactive]
         public ISequencerPlayerViewModel SequencerPlayerViewModel { get; private set; }
+
         private ActionViewModelBase SequencerActionViewModel { get; set; }
         private ReactiveCommand<Unit, Unit> NavigateToDraftingCommand { get; set; }
 
         private ConversationService _conversationService;
 
-        public static async Task<TabletPassageReviewPageViewModel> CreateAsync(IViewModelContextProvider
-            viewModelContextProvider, Section section, Passage passage, Step step, Stage stage)
+        public static TabletPassageReviewPageViewModel Create(
+            IViewModelContextProvider viewModelContextProvider,
+            Section section,
+            Passage passage,
+            Step step,
+            Stage stage)
         {
             var pageViewModel = new TabletPassageReviewPageViewModel(
                 viewModelContextProvider: viewModelContextProvider,
-                pageName: GetStepName(viewModelContextProvider, step.RenderStepType, stage.Id),
+                pageName: GetStepName(step),
                 secondPageName: AppResources.PassageReview,
                 section: section,
                 passage: passage,
@@ -54,12 +59,17 @@ namespace Render.Pages.Translator.PassageReview
             Section section,
             Passage passage,
             Step step,
-            Stage stage) :
-            base(viewModelContextProvider, pageName, secondPageName, section, passage, step, "TabletPassageReviewPage", stage)
+            Stage stage)
+            : base(
+                viewModelContextProvider: viewModelContextProvider,
+                pageName: pageName,
+                secondPageName: secondPageName,
+                section: section,
+                passage: passage,
+                step: step,
+                urlPathSegment: "TabletPassageReviewPage",
+                stage: stage)
         {
-            DisposeOnNavigationCleared = true;
-            TitleBarViewModel.DisposeOnNavigationCleared = true;
-
             References = new DynamicDataWrapper<IBarPlayerViewModel>();
             _snapshotRepository = viewModelContextProvider.GetSnapshotRepository();
         }
@@ -118,7 +128,7 @@ namespace Render.Pages.Translator.PassageReview
 
             SequencerActionViewModel = SequencerPlayerViewModel.CreateActionViewModel(
                 required: Step.StepSettings.GetSetting(SettingType.RequirePassageReview),
-                requirementId: Passage.CurrentDraftAudio.Id,
+                requirementId: Passage.CurrentDraftAudio?.Id,
                 provider: ViewModelContextProvider,
                 disposables: Disposables);
             ActionViewModelBaseSourceList.Add(SequencerActionViewModel);
@@ -137,14 +147,14 @@ namespace Render.Pages.Translator.PassageReview
         private async Task SetupConversationService()
         {
             var snapshots = await _snapshotRepository.GetSnapshotsForSectionAsync(Section.Id);
-            var filteredSnapshots = _snapshotRepository.FilterSnapshotByStageId(snapshots, Stage.Id);
 
             _conversationService = new ConversationService(
                 this,
                 Disposables,
                 Stage,
                 Step,
-                SequencerPlayerViewModel);
+                SequencerPlayerViewModel,
+                appendNotesForChildAudios: Step.RenderStepType == RenderStepTypes.ConsultantRevise);
 
             _conversationService.TapFlagPostEvent = ProcessStateStatusChange;
             _conversationService.DefineFlagsToDraw(snapshots, Stage.Id);
@@ -165,7 +175,8 @@ namespace Render.Pages.Translator.PassageReview
                 startIcon: null,
                 endIcon: null,
                 option: AudioOption.Optional,
-                flagType: flagType);
+                flagType: flagType,
+                userId: ViewModelContextProvider.GetLoggedInUser().Id);
 
             SequencerPlayerViewModel.SetAudio([audio]);
 

@@ -10,7 +10,8 @@
         string CouchbasePeerPassword { get; }
         int CouchbaseStartingPort { get; }
         int CouchbaseMaxSyncAttempts { get; }
-
+        string RenderXamarinAppDirName { get; }
+        
         int? MaxAuthenticationAttempts { get; }
         string WebSocketProtocol { get; }
         string ReplicationPort { get; }

@@ -45,7 +45,12 @@ namespace Render.Models.Project
 
         private void CreateRoleIdList()
         {
-            ProjectRoleIds = RenderRolesAndClaims.Roles.Select(x => x.Id).ToList();
+            ProjectRoleIds = new List<Guid>
+            {
+                RoleName.General.GetRoleId(),
+                RoleName.Configure.GetRoleId(),
+                RoleName.Consultant.GetRoleId()
+            };
         }
 
         [JsonProperty("ReferenceIds")]

@@ -27,13 +27,24 @@ namespace Render.Pages.Translator.SectionListen
         public ReadOnlyObservableCollection<IBarPlayerViewModel> SupplementaryMaterialList => _supplementaryMaterialList;
         private readonly ReadOnlyObservableCollection<IBarPlayerViewModel> _supplementaryMaterialList;
 
-        private SectionListenViewModel(IViewModelContextProvider viewModelContextProvider, Section section,
-            string pageName, string secondPageName, Step step, Stage stage) : base("SectionListen", viewModelContextProvider, pageName,
-            section, stage, step, secondPageName: secondPageName)
+        private SectionListenViewModel(
+            IViewModelContextProvider viewModelContextProvider,
+            Section section,
+            string pageName,
+            string secondPageName,
+            Step step,
+            Stage stage)
+            : base(
+                urlPathSegment: "SectionListen",
+                viewModelContextProvider: viewModelContextProvider,
+                pageName: pageName,
+                section: section,
+                stage: stage,
+                step: step,
+                secondPageName: secondPageName)
         {
             TitleBarViewModel.PageGlyph = ResourceExtensions.GetResourceValue(Icon.Record.ToString()) as string;
-            DisposeOnNavigationCleared = true;
-            TitleBarViewModel.DisposeOnNavigationCleared = true;
+            
             ProceedButtonViewModel.SetCommand(NavigateForwardAsync);
 
             //Reference bar players 
@@ -94,10 +105,13 @@ namespace Render.Pages.Translator.SectionListen
             }
         }
 
-        public static async Task<SectionListenViewModel> CreateAsync(IViewModelContextProvider viewModelContextProvider,
-            Section section, Step step, Stage stage)
+        public static SectionListenViewModel Create(
+            IViewModelContextProvider viewModelContextProvider,
+            Section section,
+            Step step,
+            Stage stage)
         {
-            var title = GetStepName(viewModelContextProvider, RenderStepTypes.Draft, stage.Id);
+            var title = GetStepName(step);
             var secondTitle = AppResources.SectionListenScreenTitle;
             var sectionListenViewModel = new SectionListenViewModel(viewModelContextProvider, section, title, secondTitle,
                 step, stage);
@@ -114,7 +128,7 @@ namespace Render.Pages.Translator.SectionListen
             }
             else
             {
-                var draftingStage = ViewModelContextProvider.GetGrandCentralStation().ProjectWorkflow.DraftingStage;
+                var draftingStage = ViewModelContextProvider.GetWorkflowService().ProjectWorkflow.DraftingStage;
                 vm = await DraftingViewModel.CreateAsync(Section, Section.Passages.First(), Step,
                     ViewModelContextProvider, draftingStage);
             }

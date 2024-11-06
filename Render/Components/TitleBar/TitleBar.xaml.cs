@@ -88,7 +88,7 @@ public partial class TitleBar
         GridLength size)
     {
         controlColumn.Width = makeVisible ? size : 0;
-        separatorColumn.Width = makeVisible ? Separator.Width : 0;
+        separatorColumn.Width = makeVisible ? Separator.ColumnWidth : 0;
     }
     
     private void ChangeControlAvailability(bool isEnabled)

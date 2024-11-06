@@ -16,15 +16,15 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition x:Name="BackButtonColumn" Width="{x:Static local:TitleBar.Size}" />
-            <ColumnDefinition x:Name="SeparatorColumn1" Width="{x:Static local:Separator.Width}" />
+            <ColumnDefinition x:Name="SeparatorColumn1" Width="{x:Static local:Separator.ColumnWidth}" />
             <ColumnDefinition x:Name="SectionTitleColumn" Width="*" />
-            <ColumnDefinition x:Name="SeparatorColumn2" Width="{x:Static local:Separator.Width}" />
+            <ColumnDefinition x:Name="SeparatorColumn2" Width="{x:Static local:Separator.ColumnWidth}" />
             <ColumnDefinition x:Name="SectionPlayerColumn" Width="Auto" />
-            <ColumnDefinition x:Name="SeparatorColumn3" Width="{x:Static local:Separator.Width}" />
+            <ColumnDefinition x:Name="SeparatorColumn3" Width="{x:Static local:Separator.ColumnWidth}" />
             <ColumnDefinition x:Name="UserSettingsColumn" Width="{x:Static local:TitleBar.Size}" />
-            <ColumnDefinition x:Name="SeparatorColumn4" Width="{x:Static local:Separator.Width}" />
+            <ColumnDefinition x:Name="SeparatorColumn4" Width="{x:Static local:Separator.ColumnWidth}" />
             <ColumnDefinition x:Name="HomeButtonColumn" Width="{x:Static local:TitleBar.Size}" />
-            <ColumnDefinition x:Name="SeparatorColumn5" Width="{x:Static local:Separator.Width}" />
+            <ColumnDefinition x:Name="SeparatorColumn5" Width="{x:Static local:Separator.ColumnWidth}" />
             <ColumnDefinition x:Name="MenuButtonColumn" Width="{x:Static local:TitleBar.Size}" />
         </Grid.ColumnDefinitions>
 
@@ -50,7 +50,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition x:Name="IconColumn" Width="{x:Static local:TitleBar.IconWidth}" />
                 <ColumnDefinition x:Name="TitleColumn" Width="Auto" />
-                <ColumnDefinition x:Name="SeparatorColumn" Width="{x:Static local:Separator.Width}" />
+                <ColumnDefinition x:Name="SeparatorColumn" Width="{x:Static local:Separator.ColumnWidth}" />
                 <ColumnDefinition x:Name="SubTitleColumn" Width="*" />
             </Grid.ColumnDefinitions>
 

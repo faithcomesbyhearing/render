@@ -225,12 +225,6 @@
   <data name="BackTranslate2" xml:space="preserve">
     <value>الترجمة الارتدادية 2</value>
   </data>
-  <data name="BackTranslator" xml:space="preserve">
-    <value>مترجم ترجمة ارتدادية</value>
-  </data>
-  <data name="BackTranslator2" xml:space="preserve">
-    <value>المترجم الذي يقوم بالترجمة الارتدادية 2</value>
-  </data>
   <data name="Both" xml:space="preserve">
     <value>كلاهما</value>
   </data>
@@ -279,12 +273,6 @@
   <data name="CombineSegmentTitle" xml:space="preserve">
     <value>دمج - الفقرة {0}</value>
   </data>
-  <data name="CommunityCheck" xml:space="preserve">
-    <value>الفحص المجتمعي</value>
-  </data>
-  <data name="CommunityRetellPassage" xml:space="preserve">
-    <value>الفقرة {0} - إعادة سرد</value>
-  </data>
   <data name="CommunityRevise" xml:space="preserve">
     <value>مراجعة المجتمع</value>
   </data>
@@ -293,12 +281,6 @@
   </data>
   <data name="CommunityTest" xml:space="preserve">
     <value>اختبار مجتمعي</value>
-  </data>
-  <data name="CommunityTestRevise" xml:space="preserve">
-    <value>مراجعة اختبار المجتمع</value>
-  </data>
-  <data name="CommunityTestSetup" xml:space="preserve">
-    <value>إعداد المجتمع</value>
   </data>
   <data name="CompleteWork" xml:space="preserve">
     <value>إكمال العمل</value>
@@ -687,9 +669,6 @@
   <data name="Notes" xml:space="preserve">
     <value>الملاحظات</value>
   </data>
-  <data name="NoteTranslator" xml:space="preserve">
-    <value>مترجم الملاحظات</value>
-  </data>
   <data name="NotInWorkflow" xml:space="preserve">
     <value>لم تعد جزءًا من سير العمل</value>
   </data>
@@ -749,9 +728,6 @@
   </data>
   <data name="PassageNumber" xml:space="preserve">
     <value>الفقرة {0}</value>
-  </data>
-  <data name="PassagePeerReview" xml:space="preserve">
-    <value>الفقرة {0} مراجعة الأقران</value>
   </data>
   <data name="PassageRetell" xml:space="preserve">
     <value>تكرار الكلام في المقطع</value>
@@ -1477,7 +1453,7 @@
     <value>كلمة المرور مطلوبة لإعادة تعيين قسم</value>
   </data>
   <data name="PasswordRequiredToRestore" xml:space="preserve">
-    <value>كلمة المرور مطلوبة لاستعادة لقطة</value>
+    <value>كلمة المرور مطلوبة لاستعادة قسم</value>
   </data>
   <data name="TeamWasChosen" xml:space="preserve">
     <value>تم اختيار الفريق {0}</value>
@@ -1661,5 +1637,49 @@
   </data>
   <data name="CannotLoadAudio" xml:space="preserve">
     <value>ا يمكن تحميل الصوت</value>
+  </data>
+  <data name="UsbSync" xml:space="preserve">
+    <value>مزامنة USB</value>
+  </data>
+  <data name="ExportingProject" xml:space="preserve">
+    <value>تصدير</value>
+  </data>
+  <data name="StorageAlreadyContains" xml:space="preserve">
+    <value>اكتمل التصدير</value>
+  </data>
+  <data name="PleaseSelectAnotherStorage" xml:space="preserve">
+    <value>الرجاء تحديد مجلد آخر أو حذف هذا المشروع من التخزين
+</value>
+  </data>
+  <data name="SyncPathIsNotAvailable" xml:space="preserve">
+    <value>مسار المزامنة هذا غير متوفر</value>
+  </data>
+  <data name="ChooseAnotherStorage" xml:space="preserve">
+    <value>اختر وحدة تخزين أخرى</value>
+  </data>
+  <data name="NoProjectsToImport" xml:space="preserve">
+    <value>لا توجد مشاريع للاستيراد</value>
+  </data>
+  <data name="NoDataForSync" xml:space="preserve">
+    <value>لا توجد بيانات للمزامنة</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>يصدّر</value>
+  </data>
+  <data name="Exported" xml:space="preserve">
+    <value>تصدير</value>
+  </data>
+  <data name="SubstageName" xml:space="preserve">
+    <value>اسم المرحلة الفرعية</value>
+  </data>
+  <data name="RestoreSectionWarning" xml:space="preserve">
+    <value>سيؤدي قسم الاستعادة إلى حذف جميع البيانات حسب المرحلة المحددة. لا يمكن التراجع عن هذا الإجراء.</value>
+  </data>
+  <data name="ImportFromRender" xml:space="preserve">
+    <value>الاستيراد من الإصدار 3.7</value>
+  </data>
+  <data name="NoDataFromRender" xml:space="preserve">
+    <value>لا توجد بيانات من Render 3.7
+</value>
   </data>
 </root>

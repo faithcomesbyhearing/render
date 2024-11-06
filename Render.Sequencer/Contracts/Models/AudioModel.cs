@@ -150,6 +150,11 @@ public record AudioModel
     /// </summary>
     public string? AudioNumber { get; }
 
+    /// <summary>
+    /// Audio samples to draw wave form
+    /// </summary>
+    public float[]? Samples { get; set; }
+
     protected AudioModel(
         string path,
         string? name = null,

@@ -36,7 +36,7 @@
         </Style>
     </ContentView.Resources>
 
-    <AbsoluteLayout x:Name="Layout" HorizontalOptions="Fill" VerticalOptions="Fill">
+    <AbsoluteLayout x:Name="ComponentLayout" HorizontalOptions="Fill" VerticalOptions="Fill">
         <Grid BackgroundColor="Black" 
               Opacity="0.2"
               AbsoluteLayout.LayoutBounds="0,0,1,1"

@@ -13,22 +13,14 @@
     <Grid x:Name="TopLevelElement">
 
         <!--  Project list  -->
-        <ScrollView x:Name="ProjectsCollectionScrollView"
-                    AutomationId="ProjectsCollectionScrollView"
-                    VerticalScrollBarVisibility="Default">
-            <Grid Padding="0" ColumnDefinitions="*,Auto,*">
-                <VerticalStackLayout x:Name="ProjectsCollection"
-                                     Grid.Column="1"
-                                     AutomationId="SelectProjectsCollection"
-                                     HorizontalOptions="CenterAndExpand">
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate>
-                            <projectSelect:ProjectSelectCard Padding="0,0,0,26" />
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
-                </VerticalStackLayout>
-            </Grid>
-        </ScrollView>
+        <CollectionView x:Name="ProjectsCollection"
+                        AutomationId="SelectProjectsCollection">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <projectSelect:ProjectSelectCard Padding="0,0,0,26" />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
         <!--  'No Projects' message  -->
         <Grid x:Name="NoProjectMessageContainer"

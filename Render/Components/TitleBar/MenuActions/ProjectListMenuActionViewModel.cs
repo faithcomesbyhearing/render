@@ -14,7 +14,6 @@ namespace Render.Components.TitleBar.MenuActions
         public ProjectListMenuActionViewModel(IViewModelContextProvider viewModelContextProvider, string pageName)
             : base("ProjectListMenuAction", viewModelContextProvider, pageName)
         {
-            DisposeOnNavigationCleared = true;
             var title = AppResources.ProjectList;
             var command = ReactiveCommand.CreateFromTask(NavigateToAsync);
             var color = ((ColorReference)ResourceExtensions.GetResourceValue("Option")) ?? new ColorReference();

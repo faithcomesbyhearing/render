@@ -11,7 +11,7 @@ using Render.Sequencer.Core.Utils.Collection;
 
 namespace Render.Sequencer.Views.WaveForm;
 
-internal abstract class BaseWaveFormViewModel : BaseViewModel
+public abstract class BaseWaveFormViewModel : BaseViewModel
 {
     [Reactive]
     public bool HasScrubber { get; set; }

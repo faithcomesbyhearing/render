@@ -35,6 +35,7 @@
     <styles:ColorReference x:Key="Option" Color="{StaticResource Blue}"/>
     <styles:ColorReference x:Key="SelectedBlue" Color="{StaticResource Azure}"/>
     <styles:ColorReference x:Key="Required" Color="{StaticResource Yellow}"/>
+    <styles:ColorReference x:Key="AlternateRequired" Color="{StaticResource DarkYellow}"/>
     <styles:ColorReference x:Key="AlternateButton" Color="{StaticResource DarkGrey}"/>
     <styles:ColorReference x:Key="Error" Color="{StaticResource Red}"/>
     <styles:ColorReference x:Key="MainIconColor" Color="{StaticResource SlateDark}"/>

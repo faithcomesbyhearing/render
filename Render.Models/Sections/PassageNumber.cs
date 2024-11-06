@@ -19,7 +19,9 @@ namespace Render.Models.Sections
         public string PassageNumberString => DivisionNumber == 0 ? $"{Number}" : $"{Number}.{DivisionNumber}";
         
         public static bool BothAreNullOrEqual(PassageNumber p1, PassageNumber p2) => p1 == null && p2 == null || (p1 != null && p1.Equals(p2));
-        
+
+        public static bool BothAreNotNullAndNotEqual(PassageNumber p1, PassageNumber p2) => p1 is not null && p2 is not null && !p1.Equals(p2);
+
         public int CompareTo(object obj)
         {
             var other = obj as PassageNumber;

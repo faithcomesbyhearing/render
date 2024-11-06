@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reactive.Linq;
+﻿using System.Reactive.Linq;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Render.Kernel;
@@ -15,11 +12,21 @@ namespace Render.Components.StageSettings.ConsultantCheckStageSettings
         private readonly Step _backTranslateStep;
         private readonly Step _backTranslate2Step;
         private readonly List<Step> _noteInterpretSteps;
-        private readonly List<Step> _transcribeSteps = new List<Step>();
+        private readonly List<Step> _transcribeSteps = new();
         private readonly Step _checkStep;
         private readonly Step _reviseStep;
         private readonly Step _transcribeStep;
         private readonly Step _transcribe2Step;
+
+        public StepNameViewModel CheckStepName { get; }
+        public StepNameViewModel ReviseStepName { get; }
+        public StepNameViewModel InterpretToTranslatorStepName { get; }
+        public StepNameViewModel InterpretToConsultantStepName { get; }
+        public StepNameViewModel Transcribe2StepName { get; }
+        public StepNameViewModel TranscribeStepName { get; }
+        public StepNameViewModel BackTranslate2StepName { get; }
+        public StepNameViewModel BackTranslateStepName { get; }
+
         [Reactive] public bool AllowStepBackTranslation { get; set; }
         [Reactive] public bool Allow2StepBackTranslation { get; set; }
         [Reactive] public bool RetellStepBackTranslation { get; set; }
@@ -44,7 +51,7 @@ namespace Render.Components.StageSettings.ConsultantCheckStageSettings
         [Reactive] public bool Retell2RequirePassageReview { get; set; }
         [Reactive] public bool AllowTurnOnRetell2 { get; set; }
         [Reactive] public string ConsultantLanguage { get; set; } //If two step back translation is on, this is the Immediate language for step 1.
-        [Reactive] public string ConsultantLanguage2 { get; set; }//If two step back translation is on, this is the Consultant language for step 2.
+        [Reactive] public string ConsultantLanguage2 { get; set; } //If two step back translation is on, this is the Consultant language for step 2.
 
         #endregion
 
@@ -91,16 +98,21 @@ namespace Render.Components.StageSettings.ConsultantCheckStageSettings
         [Reactive] public bool RequireSegment2TranscribeListenIsActive { get; set; }
 
         #endregion
-        
-        public ConsultantCheckStageSettingsViewModel(RenderWorkflow workflow,
+
+        public ConsultantCheckStageSettingsViewModel(
+            RenderWorkflow workflow,
             Stage stage,
             IViewModelContextProvider viewModelContextProvider,
             Action<Stage> updateStageCard)
-            : base(workflow, stage, viewModelContextProvider, updateStageCard)
+            : base(
+                renderWorkflow: workflow,
+                stage: stage,
+                viewModelContextProvider: viewModelContextProvider,
+                updateStageCard: updateStageCard)
         {
             _checkStep = stage.Steps.First(x => x.RenderStepType == RenderStepTypes.ConsultantCheck);
             CheckRequireNoteListen = _checkStep.StepSettings.GetSetting(SettingType.RequireNoteListen);
-            
+
             #region Retell Back Translate Settings
 
             var btMultiStep = stage.Steps.First(x => x.Order == Step.Ordering.Parallel).GetSubSteps()
@@ -132,7 +144,7 @@ namespace Render.Components.StageSettings.ConsultantCheckStageSettings
             Disposables.Add(this.WhenAnyValue(x => x.RetellDoPassageReview)
                 .Skip(1)
                 .Subscribe(b => RetellRequirePassageReview = b));
-            
+
             //Retell 1 Transcribe
             _transcribeStep = btMultiStep.GetSubSteps().First(x => x.Order == Step.Ordering.Parallel)
                 .GetSubSteps().First(x => x.RenderStepType == RenderStepTypes.Transcribe);
@@ -169,7 +181,7 @@ namespace Render.Components.StageSettings.ConsultantCheckStageSettings
             Disposables.Add(this.WhenAnyValue(x => x.Retell2DoPassageReview)
                 .Skip(1)
                 .Subscribe(b => Retell2RequirePassageReview = b));
-            
+
             Disposables.Add(this.WhenAnyValue(x => x.RetellIsActive)
                 .Subscribe(b =>
                 {
@@ -184,14 +196,15 @@ namespace Render.Components.StageSettings.ConsultantCheckStageSettings
             _transcribeSteps.Add(_transcribe2Step);
             DoPassage2TranscribeIsActive = _transcribe2Step.StepSettings.GetSetting(SettingType.DoPassageTranscribe);
             RequirePassage2TranscribeListenIsActive = _transcribeStep.StepSettings.GetSetting(SettingType.RequirePassageTranscribeListen);
-            
+
             Disposables.Add(this.WhenAnyValue(x => x.DoPassage2TranscribeIsActive)
                 .Skip(1)
                 .Subscribe(b => RequirePassage2TranscribeListenIsActive = b));
+
             #endregion
 
             #region Segment Back Translate Settings
-            
+
             SegmentIsActive = _backTranslateStep.StepSettings.GetSetting(SettingType.DoSegmentBackTranslate);
             SegmentRequireSectionListen =
                 _backTranslateStep.StepSettings.GetSetting(SettingType.RequireSegmentBTSectionListen);
@@ -220,11 +233,11 @@ namespace Render.Components.StageSettings.ConsultantCheckStageSettings
             Disposables.Add(this.WhenAnyValue(x => x.SegmentDoPassageReview)
                 .Skip(1)
                 .Subscribe(b => SegmentRequirePassageReview = b));
-            
+
             //Segment 1 Transcribe
             SegmentTranscribeIsActive = _transcribeStep.StepSettings.GetSetting(SettingType.DoSegmentTranscribe);
             RequireSegmentTranscribeListenIsActive = _transcribeStep.StepSettings.GetSetting(SettingType.RequireSegmentTranscribeListen);
-            
+
             Disposables.Add(this.WhenAnyValue(x => x.SegmentTranscribeIsActive)
                 .Skip(1)
                 .Subscribe(b => RequireSegmentTranscribeListenIsActive = b));
@@ -256,18 +269,18 @@ namespace Render.Components.StageSettings.ConsultantCheckStageSettings
             Disposables.Add(this.WhenAnyValue(x => x.Segment2DoPassageReview)
                 .Skip(1)
                 .Subscribe(b => Segment2RequirePassageReview = b));
-            
+
             Disposables.Add(this.WhenAnyValue(x => x.SegmentIsActive)
                 .Subscribe(b =>
                 {
                     if ((DoStepBackTranslation || Do2StepBackTranslation) && !b)
                         Segment2IsActive = false;
                 }));
-            
+
             //Segment 2 Transcribe
             Segment2TranscribeIsActive = _transcribe2Step.StepSettings.GetSetting(SettingType.DoSegmentTranscribe);
             RequireSegment2TranscribeListenIsActive = _transcribeStep.StepSettings.GetSetting(SettingType.RequireSegmentTranscribeListen);
-            
+
             Disposables.Add(this.WhenAnyValue(x => x.Segment2TranscribeIsActive)
                 .Skip(1)
                 .Subscribe(b => RequireSegment2TranscribeListenIsActive = b));
@@ -275,6 +288,7 @@ namespace Render.Components.StageSettings.ConsultantCheckStageSettings
             #endregion
 
             #region Note Interpret Settings
+
             //Note Interpret Settings: There is a step for "ToConsultant" and "ToTranslator", so we need to account for both
             _noteInterpretSteps = stage.Steps.Where(x => x.RenderStepType == RenderStepTypes.InterpretToConsultant ||
                                                          x.RenderStepType == RenderStepTypes.InterpretToTranslator).ToList();
@@ -295,22 +309,23 @@ namespace Render.Components.StageSettings.ConsultantCheckStageSettings
                 .Subscribe(b => RequireNoteReview = b));
 
             #endregion
-            Disposables.Add(this.WhenAnyValue(x => x.RetellIsActive, x => x.SegmentIsActive, 
+
+            Disposables.Add(this.WhenAnyValue(x => x.RetellIsActive, x => x.SegmentIsActive,
                     x => x.DoStepBackTranslation, x => x.Do2StepBackTranslation)
-                .Subscribe(args => 
+                .Subscribe(args =>
                     AllowStepBackTranslation = args.Item4 || args.Item1 || args.Item2 || args.Item3));
-            Disposables.Add(this.WhenAnyValue(x => x.RetellIsActive, x => x.SegmentIsActive, 
+            Disposables.Add(this.WhenAnyValue(x => x.RetellIsActive, x => x.SegmentIsActive,
                     x => x.Do2StepBackTranslation)
-                .Subscribe(args => 
+                .Subscribe(args =>
                     Allow2StepBackTranslation = args.Item3 || args.Item1 || args.Item2));
-            
+
             RetellStepBackTranslation = RetellIsActive || RetellRequireSectionListen || RetellRequirePassageListen ||
                                         RetellDoPassageReview || RetellRequirePassageReview || DoPassageTranscribeIsActive;
-            SegmentStepBackTranslation = SegmentIsActive || SegmentRequireSectionListen || SegmentRequirePassageListen || 
-                                         SegmentDoPassageReview || SegmentRequirePassageReview|| SegmentTranscribeIsActive;
+            SegmentStepBackTranslation = SegmentIsActive || SegmentRequireSectionListen || SegmentRequirePassageListen ||
+                                         SegmentDoPassageReview || SegmentRequirePassageReview || SegmentTranscribeIsActive;
             DoStepBackTranslation = RetellStepBackTranslation || SegmentStepBackTranslation || RetellIsActive || Retell2IsActive;
             Do2StepBackTranslation = Retell2IsActive || Segment2IsActive;
-            
+
             Disposables.Add(this.WhenAnyValue(x => x.SegmentStepBackTranslation,
                     x => x.Do2StepBackTranslation,
                     x => x.DoStepBackTranslation)
@@ -326,7 +341,7 @@ namespace Render.Components.StageSettings.ConsultantCheckStageSettings
                                 //All options should be on except transcribe
                                 SegmentIsActive = true;
                                 Segment2IsActive = true;
-                            } 
+                            }
                             else
                             {
                                 //All options are off
@@ -360,13 +375,12 @@ namespace Render.Components.StageSettings.ConsultantCheckStageSettings
                     {
                         //Turn off all options
                         SegmentIsActive = false;
-                        SegmentTranscribeIsActive = false;    
+                        SegmentTranscribeIsActive = false;
                         Segment2IsActive = false;
                         Segment2TranscribeIsActive = false;
                     }
-                    
                 }));
-            
+
             Disposables.Add(this.WhenAnyValue(x => x.RetellStepBackTranslation,
                     x => x.Do2StepBackTranslation,
                     x => x.DoStepBackTranslation)
@@ -421,7 +435,7 @@ namespace Render.Components.StageSettings.ConsultantCheckStageSettings
                         DoPassage2TranscribeIsActive = false;
                     }
                 }));
-            
+
             Disposables.Add(this.WhenAnyValue(x => x.DoStepBackTranslation)
                 .Skip(1)
                 .Subscribe(b =>
@@ -429,6 +443,7 @@ namespace Render.Components.StageSettings.ConsultantCheckStageSettings
                     RetellStepBackTranslation = b;
                     SegmentStepBackTranslation = b;
                 }));
+
             #region Revise Settings
 
             _reviseStep = stage.Steps.First(x => x.RenderStepType == RenderStepTypes.ConsultantRevise);
@@ -438,16 +453,41 @@ namespace Render.Components.StageSettings.ConsultantCheckStageSettings
             TranslateAllowEditing = _reviseStep.StepSettings.GetSetting(SettingType.AllowEditing);
 
             #endregion
+
+            CheckStepName = new StepNameViewModel(_checkStep);
+            ReviseStepName = new StepNameViewModel(_reviseStep);
+            BackTranslateStepName = new StepNameViewModel(_backTranslateStep);
+            BackTranslate2StepName = new StepNameViewModel(_backTranslate2Step);
+            TranscribeStepName = new StepNameViewModel(_transcribeStep);
+            Transcribe2StepName = new StepNameViewModel(_transcribe2Step);
+
+            var interpretToConsultantStep = stage.Steps.FirstOrDefault(x => x.RenderStepType == RenderStepTypes.InterpretToConsultant);
+            var interpretToTranslator = stage.Steps.FirstOrDefault(x => x.RenderStepType == RenderStepTypes.InterpretToTranslator);
+            InterpretToConsultantStepName = new StepNameViewModel(interpretToConsultantStep);
+            InterpretToTranslatorStepName = new StepNameViewModel(interpretToTranslator);
         }
-        
+
         protected override void UpdateWorkflow()
         {
             Workflow.SetStepSetting(_checkStep, SettingType.RequireNoteListen, CheckRequireNoteListen);
-            
+
+            CheckStepName.UpdateEntity();
+            ReviseStepName.UpdateEntity();
+            InterpretToConsultantStepName.UpdateEntity();
+            InterpretToTranslatorStepName.UpdateEntity();
+
+            BackTranslateStepName.UpdateEntity();
+            BackTranslate2StepName.StepName = BackTranslateStepName.StepName;
+            BackTranslate2StepName.UpdateEntity();
+
+            TranscribeStepName.UpdateEntity();
+            Transcribe2StepName.StepName = TranscribeStepName.StepName;
+            Transcribe2StepName.UpdateEntity();
+
             //turn the step off if both retell and segment are off
             bool isBackTranslateActive = RetellIsActive || SegmentIsActive;
             Workflow.SetStepSetting(_backTranslateStep, SettingType.IsActive, isBackTranslateActive);
-            
+
             bool isBackTranslate2Active = Retell2IsActive || Segment2IsActive;
             Workflow.SetStepSetting(_backTranslate2Step, SettingType.IsActive, isBackTranslate2Active);
 
@@ -459,7 +499,7 @@ namespace Render.Components.StageSettings.ConsultantCheckStageSettings
             {
                 Workflow.SetStepSetting(_transcribeStep, SettingType.IsActive, true);
             }
-            
+
             if (!DoPassage2TranscribeIsActive && !Segment2TranscribeIsActive)
             {
                 Workflow.SetStepSetting(_transcribe2Step, SettingType.IsActive, false);
@@ -468,7 +508,7 @@ namespace Render.Components.StageSettings.ConsultantCheckStageSettings
             {
                 Workflow.SetStepSetting(_transcribe2Step, SettingType.IsActive, true);
             }
-            
+
             //Retell step settings
             Workflow.SetStepSetting(_backTranslateStep, SettingType.DoRetellBackTranslate, RetellIsActive);
             Workflow.SetStepSetting(_backTranslateStep, SettingType.RequireRetellBTSectionListen,
@@ -495,7 +535,7 @@ namespace Render.Components.StageSettings.ConsultantCheckStageSettings
                 false, ConsultantLanguage);
             Workflow.SetStepSetting(_backTranslate2Step, SettingType.Consultant2StepLanguage,
                 false, ConsultantLanguage2);
-            
+
             //Segment step settings
             Workflow.SetStepSetting(_backTranslateStep, SettingType.DoSegmentBackTranslate, SegmentIsActive);
             Workflow.SetStepSetting(_backTranslateStep, SettingType.RequireSegmentBTSectionListen,
@@ -539,7 +579,7 @@ namespace Render.Components.StageSettings.ConsultantCheckStageSettings
             Workflow.SetStepSetting(_transcribeStep, SettingType.RequirePassageTranscribeListen, RequirePassageTranscribeListenIsActive);
             Workflow.SetStepSetting(_transcribeStep, SettingType.DoSegmentTranscribe, SegmentTranscribeIsActive);
             Workflow.SetStepSetting(_transcribeStep, SettingType.RequireSegmentTranscribeListen, RequireSegmentTranscribeListenIsActive);
-            
+
             Workflow.SetStepSetting(_transcribe2Step, SettingType.DoPassageTranscribe, DoPassage2TranscribeIsActive);
             Workflow.SetStepSetting(_transcribe2Step, SettingType.RequirePassageTranscribeListen, RequirePassage2TranscribeListenIsActive);
             Workflow.SetStepSetting(_transcribe2Step, SettingType.DoSegmentTranscribe, Segment2TranscribeIsActive);
@@ -547,7 +587,7 @@ namespace Render.Components.StageSettings.ConsultantCheckStageSettings
 
             //Revise step settings
             Workflow.SetStepSetting(_reviseStep, SettingType.AllowEditing, TranslateAllowEditing);
-            
+
             Workflow.SetStepSetting(_reviseStep, SettingType.RequireNoteListen, TranslateRequireNoteListen);
 
             Workflow.SetStepSetting(_reviseStep, SettingType.DoPassageReview, TranslateDoPassageReview);

@@ -9,9 +9,13 @@ namespace Render.Components.TitleBar.MenuActions
 {
     public class LogOutActionViewModel : MenuActionViewModel
     {
+        private readonly ISyncManager _syncManager;
+        
         public LogOutActionViewModel(IViewModelContextProvider viewModelContextProvider, string pageName) : base("LogOutAction",
             viewModelContextProvider, pageName)
         {
+            _syncManager = viewModelContextProvider.GetSyncManager();
+            
             var imageSource = (FontImageSource)ResourceExtensions.GetResourceValue("LogOutIcon");
             var title = AppResources.LogOut;
             var command = ReactiveCommand.CreateFromTask(async () =>
@@ -48,11 +52,12 @@ namespace Render.Components.TitleBar.MenuActions
                     { "Username", ViewModelContextProvider.GetLoggedInUser()?.Username }
                 });
 
-                ViewModelContextProvider.GetLocalSyncService().StopLocalSync();
+                _syncManager.StopLocalSync();
+                _syncManager.UnsubscribeOnConnectivityChanged();
                 var loginViewModel = await Task.Run(async () => await LoginViewModel.CreateAsync(ViewModelContextProvider));
                 ViewModelContextProvider.ClearLoggedInUser();
                 IsActionExecuting = false;
-                return await HostScreen.Router.NavigateAndReset.Execute(loginViewModel);
+                return await NavigateToAndReset(loginViewModel);
             }
             catch (Exception e)
             {

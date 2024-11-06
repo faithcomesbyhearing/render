@@ -46,17 +46,7 @@ namespace Render.Repositories.LocalDataRepositories
         {
             await _localProjectsDataAccess.UpsertAsync(localProjects.Id, localProjects);
         }
-
-        public async Task PurgeLocalProject(Guid projectId)
-        { 
-            await _localProjectsDataAccess.PurgeAllOfTypeForProjectId(projectId);
-        }
-
-        public async Task PurgeAllLocalProjects(Guid localProjectsEntityId)
-        {
-            await _localProjectsDataAccess.PurgeAllOfTypeForId(localProjectsEntityId);
-        }
-
+        
         public void Dispose()
         {
             _localProjectsDataAccess.Dispose();

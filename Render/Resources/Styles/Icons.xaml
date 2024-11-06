@@ -1,8 +1,7 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
-    
-    <!-- Static icons -->
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!--  Static icons  -->
     <x:String x:Key="Sync">&#xf15f;</x:String>
     <x:String x:Key="AddFlag">&#xf101;</x:String>
     <x:String x:Key="AddOrAppend">&#xe901;</x:String>
@@ -70,7 +69,7 @@
     <x:String x:Key="PassageReview">&#xf13b;</x:String>
     <x:String x:Key="Passage">&#xf13c;</x:String>
     <x:String x:Key="PeerReview">&#xe97b;</x:String>
-    <x:String x:Key="PeerRevise">&#xe97a;</x:String>   
+    <x:String x:Key="PeerRevise">&#xe97a;</x:String>
     <x:String x:Key="Placeholder">&#xf13f;</x:String>
     <x:String x:Key="PleaseTryAgain">&#xf141;</x:String>
     <x:String x:Key="PrimaryGeneral">&#xe944;</x:String>
@@ -225,209 +224,418 @@
     <x:String x:Key="NoAssigned">&#xe989;</x:String>
     <x:String x:Key="Retry">&#xe98c;</x:String>
     <x:String x:Key="AddFromComputer">&#xe98d;</x:String>
+    <x:String x:Key="UsbIcon">&#xe98e;</x:String>
 
-    <FontImageSource x:Key="ChevronRightIcon" Glyph="{StaticResource ChevronRight}" FontFamily="Icons"
-                     Color="{DynamicResource TertiaryText}"/>    
-    <FontImageSource x:Key="GlobalUserIcon" Glyph="{StaticResource GlobalUser}" FontFamily="Icons"
-                     Color="{DynamicResource TitleBarBackground}"/>   
-    <FontImageSource x:Key="SegmentFreeCutSource" Glyph="{StaticResource ManualAudioEdit}" FontFamily="Icons"
-                     Color="{DynamicResource SecondaryText}"/>
-    <FontImageSource x:Key="SectionStatusIcon" Glyph="{StaticResource SectionStatus}" FontFamily="Icons"
-                     Color="{DynamicResource SecondaryText}"/>    
-    <FontImageSource x:Key="OffloadItemSource" Glyph="{StaticResource OffloadItem}" FontFamily="Icons"
-                     Color="{DynamicResource SecondaryText}"/>
-    <FontImageSource x:Key="TranscribeSource" Glyph="{StaticResource Transcribe}" FontFamily="Icons"
-                     Color="{DynamicResource Option}"/>
-    <FontImageSource x:Key="SyncIcon" Glyph="&#xf15f;" FontFamily="Icons" Size="40"
-                     Color="{DynamicResource Option}"/>
-    <FontImageSource x:Key="SettingsIconWhite" Glyph="{StaticResource Settings}" FontFamily="Icons"
-                     Color="{DynamicResource SecondaryText}"/>
-    <FontImageSource x:Key="SettingsIcon" Glyph="{StaticResource Settings}" FontFamily="Icons"
-                     Color="{DynamicResource Option}" Size="40"/>
-    <FontImageSource x:Key="LogOutIcon" Glyph="{StaticResource LogOut}" FontFamily="Icons" Size="40" 
-                     Color="{DynamicResource Option}"/>
-    <FontImageSource x:Key="SuccessIcon" Glyph="{StaticResource Checkmark}" FontFamily="Icons" Size="25"
-                     Color="{DynamicResource MainIconColor}"/>
-    <FontImageSource x:Key="RightArrowIcon" Glyph="{StaticResource RightArrow}" FontFamily="Icons" Size="25"
-                     Color="{DynamicResource MainIconColor}"/>
-    <FontImageSource x:Key="LeftArrowIcon" Glyph="{StaticResource LeftArrow}" FontFamily="Icons" Size="25"
-                     Color="{DynamicResource SecondaryText}"/>
-    <FontImageSource x:Key="RecordIcon" Glyph="{StaticResource RecorderRecord}" FontFamily="Icons" Size="40"
-                     Color="{DynamicResource MainIconColor}"/>
-    <FontImageSource x:Key="StopIcon" Glyph="{StaticResource RecorderStop}" FontFamily="Icons" Size="25"
-                     Color="{DynamicResource MainIconColor}"/>
-    <FontImageSource x:Key="PauseIconRequired" Glyph="{StaticResource RecorderPause}" FontFamily="Icons" Size="40"
-                     Color="{DynamicResource Required}"/>
-    <FontImageSource x:Key="PauseIconOption" Glyph="{StaticResource RecorderPause}" FontFamily="Icons" Size="40"
-                     Color="{DynamicResource Option}"/>
-    <FontImageSource x:Key="PauseIconWhite" Glyph="{StaticResource RecorderPause}" FontFamily="Icons" Size="25"
-                     Color="{DynamicResource SecondaryText}"/>
-    <FontImageSource x:Key="PlayIconRequired" Glyph="{StaticResource RecorderPlay}" FontFamily="Icons" Size="40"
-                     Color="{DynamicResource Required}"/>
-    <FontImageSource x:Key="PlayIconOption" Glyph="{StaticResource RecorderPlay}" FontFamily="Icons" Size="40"
-                     Color="{DynamicResource Option}"/>
-    <FontImageSource x:Key="PlayIconWhite" Glyph="{StaticResource RecorderPlay}" FontFamily="Icons" Size="25"
-                     Color="{DynamicResource SecondaryText}"/>
-    <FontImageSource x:Key="PlaceholderSource" Glyph="{StaticResource Placeholder}" FontFamily="Icons" Size="40"
-                     Color="{DynamicResource MainIconColor}"/>
-    <FontImageSource x:Key="PlaceholderWhite" Glyph="{StaticResource Placeholder}" FontFamily="Icons" Size="40"
-                     Color="{DynamicResource SecondaryText}"/>
-    <FontImageSource x:Key="PlaceholderOption" Glyph="{StaticResource Placeholder}" FontFamily="Icons" Size="40"
-                     Color="{DynamicResource Option}"/>
-    <FontImageSource x:Key="Menu" Glyph="{StaticResource MorePreferences}" FontFamily="Icons" Size="40"
-                     Color="{DynamicResource SecondaryText}"/>
-    <FontImageSource x:Key="PlaceholderGray" Glyph="{StaticResource Placeholder}" FontFamily="Icons" Size="30"
-                     Color="{DynamicResource Title}"/>
-    <FontImageSource x:Key="ChevronUp" Glyph="{StaticResource IncreaseFontSize}" FontFamily="Icons"
-                     Color="{DynamicResource SecondaryText}"/>
-    <FontImageSource x:Key="ChevronUpGray" Glyph="{StaticResource IncreaseFontSize}" FontFamily="Icons"
-                     Color="{DynamicResource AlternateButton}"/>
+    <FontImageSource x:Key="ChevronRightIcon"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource ChevronRight}"
+                     Color="{DynamicResource TertiaryText}" />
+    <FontImageSource x:Key="GlobalUserIcon"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource GlobalUser}"
+                     Color="{DynamicResource TitleBarBackground}" />
+    <FontImageSource x:Key="SegmentFreeCutSource"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource ManualAudioEdit}"
+                     Color="{DynamicResource SecondaryText}" />
+    <FontImageSource x:Key="SectionStatusIcon"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource SectionStatus}"
+                     Color="{DynamicResource SecondaryText}" />
+    <FontImageSource x:Key="OffloadItemSource"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource OffloadItem}"
+                     Color="{DynamicResource SecondaryText}" />
+    <FontImageSource x:Key="TranscribeSource"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource Transcribe}"
+                     Color="{DynamicResource Option}" />
+    <FontImageSource x:Key="SyncIcon"
+                     FontFamily="Icons"
+                     Glyph="&#xf15f;"
+                     Size="40"
+                     Color="{DynamicResource Option}" />
+    <FontImageSource x:Key="SettingsIconWhite"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource Settings}"
+                     Color="{DynamicResource SecondaryText}" />
+    <FontImageSource x:Key="SettingsIcon"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource Settings}"
+                     Size="40"
+                     Color="{DynamicResource Option}" />
+    <FontImageSource x:Key="LogOutIcon"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource LogOut}"
+                     Size="40"
+                     Color="{DynamicResource Option}" />
+    <FontImageSource x:Key="SuccessIcon"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource Checkmark}"
+                     Size="25"
+                     Color="{DynamicResource MainIconColor}" />
+    <FontImageSource x:Key="RightArrowIcon"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource RightArrow}"
+                     Size="25"
+                     Color="{DynamicResource MainIconColor}" />
+    <FontImageSource x:Key="LeftArrowIcon"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource LeftArrow}"
+                     Size="25"
+                     Color="{DynamicResource SecondaryText}" />
+    <FontImageSource x:Key="RecordIcon"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource RecorderRecord}"
+                     Size="40"
+                     Color="{DynamicResource MainIconColor}" />
+    <FontImageSource x:Key="StopIcon"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource RecorderStop}"
+                     Size="25"
+                     Color="{DynamicResource MainIconColor}" />
+    <FontImageSource x:Key="PauseIconRequired"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource RecorderPause}"
+                     Size="40"
+                     Color="{DynamicResource Required}" />
+    <FontImageSource x:Key="PauseIconOption"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource RecorderPause}"
+                     Size="40"
+                     Color="{DynamicResource Option}" />
+    <FontImageSource x:Key="PauseIconWhite"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource RecorderPause}"
+                     Size="25"
+                     Color="{DynamicResource SecondaryText}" />
+    <FontImageSource x:Key="PlayIconRequired"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource RecorderPlay}"
+                     Size="40"
+                     Color="{DynamicResource Required}" />
+    <FontImageSource x:Key="PlayIconOption"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource RecorderPlay}"
+                     Size="40"
+                     Color="{DynamicResource Option}" />
+    <FontImageSource x:Key="PlayIconWhite"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource RecorderPlay}"
+                     Size="25"
+                     Color="{DynamicResource SecondaryText}" />
+    <FontImageSource x:Key="PlaceholderSource"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource Placeholder}"
+                     Size="40"
+                     Color="{DynamicResource MainIconColor}" />
+    <FontImageSource x:Key="PlaceholderWhite"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource Placeholder}"
+                     Size="40"
+                     Color="{DynamicResource SecondaryText}" />
+    <FontImageSource x:Key="PlaceholderOption"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource Placeholder}"
+                     Size="40"
+                     Color="{DynamicResource Option}" />
+    <FontImageSource x:Key="Menu"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource MorePreferences}"
+                     Size="40"
+                     Color="{DynamicResource SecondaryText}" />
+    <FontImageSource x:Key="PlaceholderGray"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource Placeholder}"
+                     Size="30"
+                     Color="{DynamicResource Title}" />
+    <FontImageSource x:Key="ChevronUp"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource IncreaseFontSize}"
+                     Color="{DynamicResource SecondaryText}" />
+    <FontImageSource x:Key="ChevronUpGray"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource IncreaseFontSize}"
+                     Color="{DynamicResource AlternateButton}" />
 
-    <FontImageSource x:Key="CombineIcon" Glyph="{StaticResource Combine}" FontFamily="Icons" Size="40"
-                     Color="{DynamicResource Option}"/>
-    <FontImageSource x:Key="ChevronDownGray" Glyph="{StaticResource DecreaseFontSize}" FontFamily="Icons"
-                     Color="{DynamicResource AlternateButton}"/>
-    <FontImageSource x:Key="Cut" Glyph="{StaticResource DivisionOrCut}" FontFamily="Icons"
-                     Color="{DynamicResource Option}"/>
-    <FontImageSource x:Key="CutInactive" Glyph="{StaticResource DivisionOrCut}" FontFamily="Icons"
-                     Color="{DynamicResource InactiveIconColor}"/>
-    <FontImageSource x:Key="TrashCan" Glyph="{StaticResource Delete}" FontFamily="Icons"
-                     Color="{DynamicResource Option}"/>
-    <FontImageSource x:Key="TrashCanWhite" Glyph="{StaticResource Delete}" FontFamily="Icons"
-                     Color="{DynamicResource SecondaryText}"/>
-    <FontImageSource x:Key="TrashCanInactive" Glyph="{StaticResource Delete}" FontFamily="Icons"
-                     Color="{DynamicResource InactiveIconColor}"/>
-    <FontImageSource x:Key="CheckMarkOption" Glyph="{StaticResource Checkmark}" FontFamily="Icons"
-                     Color="{DynamicResource Option}"/>    
-    <FontImageSource x:Key="CheckMarkWhite" Glyph="{StaticResource Checkmark}" FontFamily="Icons"
-                     Color="{DynamicResource SecondaryText}"/>    
-    <FontImageSource x:Key="CheckMarkRequired" Glyph="{StaticResource Checkmark}" FontFamily="Icons"
-                     Color="{DynamicResource Required}"/>
-    <FontImageSource x:Key="CheckMarkInactive" Glyph="{StaticResource Checkmark}" FontFamily="Icons"
-                     Color="{DynamicResource AlternateBackground}"/>
-    <FontImageSource x:Key="Triangle" Glyph="{StaticResource RecorderPlay}" FontFamily="Icons"
-                     Color="{DynamicResource Option}"/>
-    <FontImageSource x:Key="EditIcon" Glyph="{StaticResource Edit}" FontFamily="Icons"
-                     Color="{DynamicResource Option}"/>
-    <FontImageSource x:Key="Append" Glyph="{StaticResource RecorderAppend}" FontFamily="Icons"
-                     Color="{DynamicResource Option}"/>
-    <FontImageSource x:Key="AppendInactive" Glyph="{StaticResource RecorderAppend}" FontFamily="Icons"
-                     Color="{DynamicResource InactiveIconColor}"/>
+    <FontImageSource x:Key="CombineIcon"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource Combine}"
+                     Size="40"
+                     Color="{DynamicResource Option}" />
+    <FontImageSource x:Key="ChevronDownGray"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource DecreaseFontSize}"
+                     Color="{DynamicResource AlternateButton}" />
+    <FontImageSource x:Key="Cut"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource DivisionOrCut}"
+                     Color="{DynamicResource Option}" />
+    <FontImageSource x:Key="CutInactive"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource DivisionOrCut}"
+                     Color="{DynamicResource InactiveIconColor}" />
+    <FontImageSource x:Key="TrashCan"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource Delete}"
+                     Color="{DynamicResource Option}" />
+    <FontImageSource x:Key="TrashCanWhite"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource Delete}"
+                     Color="{DynamicResource SecondaryText}" />
+    <FontImageSource x:Key="TrashCanInactive"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource Delete}"
+                     Color="{DynamicResource InactiveIconColor}" />
+    <FontImageSource x:Key="CheckMarkOption"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource Checkmark}"
+                     Color="{DynamicResource Option}" />
+    <FontImageSource x:Key="CheckMarkWhite"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource Checkmark}"
+                     Color="{DynamicResource SecondaryText}" />
+    <FontImageSource x:Key="CheckMarkRequired"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource Checkmark}"
+                     Color="{DynamicResource Required}" />
+    <FontImageSource x:Key="CheckMarkInactive"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource Checkmark}"
+                     Color="{DynamicResource AlternateBackground}" />
+    <FontImageSource x:Key="Triangle"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource RecorderPlay}"
+                     Color="{DynamicResource Option}" />
+    <FontImageSource x:Key="EditIcon"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource Edit}"
+                     Color="{DynamicResource Option}" />
+    <FontImageSource x:Key="Append"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource RecorderAppend}"
+                     Color="{DynamicResource Option}" />
+    <FontImageSource x:Key="AppendInactive"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource RecorderAppend}"
+                     Color="{DynamicResource InactiveIconColor}" />
 
-    <FontImageSource x:Key="TriangleGray" Glyph="{StaticResource RecorderPlay}" FontFamily="Icons"
-                     Color="{DynamicResource StageCardAfterArrowColor}"/>
-    <FontImageSource x:Key="TranslateSource" Glyph="{StaticResource Translate}" FontFamily="Icons"
-                     Color="{DynamicResource MainIconColor}"/>
-   
-    <FontImageSource x:Key="AddSource" Glyph="{StaticResource Add}" FontFamily="Icons"
-                     Color="{DynamicResource Option}"/>    
-    <FontImageSource x:Key="AddOrAppendSource" Glyph="{StaticResource AddOrAppend}" FontFamily="Icons"
-                     Color="{DynamicResource Option}"/>
-    <FontImageSource x:Key="ReRecordSource" Glyph="{StaticResource ReRecord}" FontFamily="Icons"
-                     Color="{DynamicResource Option}"/>    
-    <FontImageSource x:Key="ReRecordWhite" Glyph="{StaticResource ReRecord}" FontFamily="Icons"
-                     Color="{DynamicResource SecondaryText}"/>
-    
-    <!-- Stage Icons -->
-    <FontImageSource x:Key="MicrophoneSource" Glyph="{StaticResource Record}" FontFamily="Icons"
-                     Color="{DynamicResource MainIconColor}"/>
-    <FontImageSource x:Key="PeerCheckSource" Glyph="{StaticResource PeerReview}" FontFamily="Icons"
-                     Color="{DynamicResource MainIconColor}"/>
-    <FontImageSource x:Key="CommunityTestSource" Glyph="{StaticResource CommunityCheck}" FontFamily="Icons"
-                     Color="{DynamicResource MainIconColor}"/>
-    <FontImageSource x:Key="ConsultantCheckSource" Glyph="{StaticResource ConsultantCheck}" FontFamily="Icons"
-                     Color="{DynamicResource MainIconColor}"/>
-    <FontImageSource x:Key="ConsultantCheckOriginalSource" Glyph="{StaticResource ConsultantCheckOriginal}" FontFamily="Icons"
-                     Color="{DynamicResource MainIconColor}"/>
+    <FontImageSource x:Key="TriangleGray"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource RecorderPlay}"
+                     Color="{DynamicResource StageCardAfterArrowColor}" />
+    <FontImageSource x:Key="TranslateSource"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource Translate}"
+                     Color="{DynamicResource MainIconColor}" />
 
-    <FontImageSource x:Key="MicrophoneWhite" Glyph="{StaticResource Record}" FontFamily="Icons"
-                     Color="{DynamicResource SecondaryText}"/>
-    <FontImageSource x:Key="PeerCheckWhite" Glyph="{StaticResource PeerReview}" FontFamily="Icons"
-                     Color="{DynamicResource SecondaryText}"/>
-    <FontImageSource x:Key="CommunityTestWhite" Glyph="{StaticResource CommunityCheck}" FontFamily="Icons"
-                     Color="{DynamicResource SecondaryText}"/>
-    <FontImageSource x:Key="ConsultantCheckWhite" Glyph="{StaticResource ConsultantCheck}" FontFamily="Icons"
-                     Color="{DynamicResource SecondaryText}"/>
-    
-    <!-- Stage Settings -->
-    <FontImageSource x:Key="StageSettingsSource" Glyph="{StaticResource Update}" FontFamily="Icons"
-                     Color="{DynamicResource TertiaryText}"/>
-    <FontImageSource x:Key="PlusIcon" Glyph="{StaticResource Plus}" FontFamily="Icons"
-                     Color="{DynamicResource TertiaryText}"/>
-    <FontImageSource x:Key="MinusIcon" Glyph="{StaticResource Minus}" FontFamily="Icons"
-                     Color="{DynamicResource TertiaryText}"/>
-    
+    <FontImageSource x:Key="AddSource"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource Add}"
+                     Color="{DynamicResource Option}" />
+    <FontImageSource x:Key="AddOrAppendSource"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource AddOrAppend}"
+                     Color="{DynamicResource Option}" />
+    <FontImageSource x:Key="ReRecordSource"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource ReRecord}"
+                     Color="{DynamicResource Option}" />
+    <FontImageSource x:Key="ReRecordWhite"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource ReRecord}"
+                     Color="{DynamicResource SecondaryText}" />
+
+    <!--  Stage Icons  -->
+    <FontImageSource x:Key="MicrophoneSource"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource Record}"
+                     Color="{DynamicResource MainIconColor}" />
+    <FontImageSource x:Key="PeerCheckSource"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource PeerReview}"
+                     Color="{DynamicResource MainIconColor}" />
+    <FontImageSource x:Key="CommunityTestSource"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource CommunityCheck}"
+                     Color="{DynamicResource MainIconColor}" />
+    <FontImageSource x:Key="ConsultantCheckSource"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource ConsultantCheck}"
+                     Color="{DynamicResource MainIconColor}" />
+    <FontImageSource x:Key="ConsultantCheckOriginalSource"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource ConsultantCheckOriginal}"
+                     Color="{DynamicResource MainIconColor}" />
+
+    <FontImageSource x:Key="MicrophoneWhite"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource Record}"
+                     Color="{DynamicResource SecondaryText}" />
+    <FontImageSource x:Key="PeerCheckWhite"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource PeerReview}"
+                     Color="{DynamicResource SecondaryText}" />
+    <FontImageSource x:Key="CommunityTestWhite"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource CommunityCheck}"
+                     Color="{DynamicResource SecondaryText}" />
+    <FontImageSource x:Key="ConsultantCheckWhite"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource ConsultantCheck}"
+                     Color="{DynamicResource SecondaryText}" />
+
+    <!--  Stage Settings  -->
+    <FontImageSource x:Key="StageSettingsSource"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource Update}"
+                     Color="{DynamicResource TertiaryText}" />
+    <FontImageSource x:Key="PlusIcon"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource Plus}"
+                     Color="{DynamicResource TertiaryText}" />
+    <FontImageSource x:Key="MinusIcon"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource Minus}"
+                     Color="{DynamicResource TertiaryText}" />
+
     <Style x:Key="SubTitleIconLabel" TargetType="Label">
         <!--<Setter Property="HeightRequest" Value="35"/>
         <Setter Property="WidthRequest" Value="35"/>-->
-        <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="BackgroundColor" Value="Transparent" />
     </Style>
     <Style x:Key="SubTitleIcon" TargetType="Image">
-        <Setter Property="HeightRequest" Value="35"/>
-        <Setter Property="WidthRequest" Value="35"/>
-        <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="HeightRequest" Value="35" />
+        <Setter Property="WidthRequest" Value="35" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
     </Style>
-    <FontImageSource x:Key="RecordNote" Glyph="{StaticResource RecordANoteOrSuggestRevision}" FontFamily="Icons"
+    <FontImageSource x:Key="RecordNote"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource RecordANoteOrSuggestRevision}"
                      Size="40"
-                     Color="{DynamicResource Option}"/>
-    <FontImageSource x:Key="AddFlagSource" Glyph="{StaticResource AddFlag}" FontFamily="Icons"
-                     Color="{DynamicResource Option}"/>    
-    <FontImageSource x:Key="FlagOption" Glyph="{StaticResource Flag}" FontFamily="Icons"
-                     Color="{DynamicResource Option}"/>
-    <FontImageSource x:Key="FlagInverted" Glyph="{StaticResource Flag}" FontFamily="Icons"
-                     Color="{DynamicResource SecondaryText}"/>    
-    <FontImageSource x:Key="FlagRequired" Glyph="{StaticResource Flag}" FontFamily="Icons" 
-                     Color="{DynamicResource Required}"/>
-    <FontImageSource x:Key="RecordMic" Glyph="{StaticResource Record}" FontFamily="Icons"
-                     Color="{DynamicResource Option}"/>
-    <FontImageSource x:Key="RemoveSource" Glyph="{StaticResource Remove}" FontFamily="Icons"
-                     Color="{DynamicResource Option}"/>
+                     Color="{DynamicResource Option}" />
+    <FontImageSource x:Key="AddFlagSource"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource AddFlag}"
+                     Color="{DynamicResource Option}" />
+    <FontImageSource x:Key="FlagOption"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource Flag}"
+                     Color="{DynamicResource Option}" />
+    <FontImageSource x:Key="FlagInverted"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource Flag}"
+                     Color="{DynamicResource SecondaryText}" />
+    <FontImageSource x:Key="FlagRequired"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource Flag}"
+                     Color="{DynamicResource Required}" />
+    <FontImageSource x:Key="RecordMic"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource Record}"
+                     Color="{DynamicResource Option}" />
+    <FontImageSource x:Key="RemoveSource"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource Remove}"
+                     Color="{DynamicResource Option}" />
 
-    <FontImageSource x:Key="AddUserIcon" Glyph="{StaticResource AddUser}" FontFamily="Icons" Size="25"
-                     Color="{DynamicResource Option}"/>
-    <FontImageSource x:Key="UserIcon" Glyph="{StaticResource User}" FontFamily="Icons" Size="25"
-                     Color="{DynamicResource MainIconColor}"/>
-    <FontImageSource x:Key="ProjectIcon" Glyph="{StaticResource Project}" FontFamily="Icons" Size="25"
-                     Color="{DynamicResource SecondaryText}"/>
-    <FontImageSource x:Key="HomeIcon" Glyph="{StaticResource Home}" FontFamily="Icons" Size="25"
-                     Color="{DynamicResource SecondaryText}"/>
-    
-    <FontImageSource x:Key="SegmentBackTranslateWhite" Glyph="&#xe975;" FontFamily="Icons"
-                     Color="{DynamicResource SecondaryText}"/>    
-    <FontImageSource x:Key="RetellBackTranslateWhite" Glyph="&#xe97d;" FontFamily="Icons"
-                     Color="{DynamicResource SecondaryText}"/>
-    <FontImageSource x:Key="SetsIcon" Glyph="&#xf15c;" FontFamily="Icons"
-                     Color="{DynamicResource MainIconColor}"/>    
-    <FontImageSource x:Key="PassageIcon" Glyph="&#xf13c;" FontFamily="Icons"
-                     Color="{DynamicResource MainIconColor}"/>    
-    <FontImageSource x:Key="ReviewIcon" Glyph="&#xf153;" FontFamily="Icons"
-                     Color="{DynamicResource MainIconColor}"/>
-    <FontImageSource x:Key="LockIcon" Glyph="&#xe933;" FontFamily="Icons"
-                     Color="{DynamicResource Error}"/>
-    
-    <FontImageSource x:Key="SelectedSegmentWhite" Glyph="{StaticResource PrimaryGeneral}" FontFamily="Icons"
-                     Color="{DynamicResource SecondaryText}"/>  
-    <FontImageSource x:Key="ProjectInformationSource" Glyph="{StaticResource ProjectInformation}" FontFamily="Icons"
-                     Color="{DynamicResource MainIconColor}"/>    
-    <FontImageSource x:Key="SnapshotRecoverySource" Glyph="{StaticResource SnapshotRecovery}" FontFamily="Icons"
-                     Color="{DynamicResource MainIconColor}"/>    
-    <FontImageSource x:Key="RestoreSnapshotSource" Glyph="{StaticResource RestoreSnapshot}" FontFamily="Icons"
-                     Color="{DynamicResource MainIconColor}"/>      
-    <FontImageSource x:Key="SelectedQuestionSetSource" Glyph="{StaticResource SelectedQuestionSet}" FontFamily="Icons"
-                     Color="{DynamicResource MainIconColor}"/>  
-    <FontImageSource x:Key="ClearBothSnapshotsSource" Glyph="{StaticResource ClearBothSnapshots}" FontFamily="Icons"
-                     Color="{DynamicResource MainIconColor}"/>  
-    <FontImageSource x:Key="SelectASnapshotSource" Glyph="{StaticResource SelectASnapshot}" FontFamily="Icons"
-                     Color="{DynamicResource MainIconColor}"/>  
-    <FontImageSource x:Key="DeleteUndoOption" Glyph="{StaticResource DeleteUndo}" FontFamily="Icons"
-                     Color="{DynamicResource Option}"/>
-    <FontImageSource x:Key="DialogCancelButtonImageSource"  Glyph="{StaticResource Remove}" FontFamily="Icons" Size="30"
+    <FontImageSource x:Key="AddUserIcon"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource AddUser}"
+                     Size="25"
+                     Color="{DynamicResource Option}" />
+    <FontImageSource x:Key="UserIcon"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource User}"
+                     Size="25"
+                     Color="{DynamicResource MainIconColor}" />
+    <FontImageSource x:Key="ProjectIcon"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource Project}"
+                     Size="25"
                      Color="{DynamicResource SecondaryText}" />
-    <FontImageSource x:Key="DialogConfirmButtonImageSource"  Glyph="{StaticResource Checkmark}" FontFamily="Icons" Size="30"
+    <FontImageSource x:Key="HomeIcon"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource Home}"
+                     Size="25"
                      Color="{DynamicResource SecondaryText}" />
-    
-    <FontImageSource x:Key="TickerArrowLeftIcon"  Glyph="{StaticResource TickerArrowLeft}" FontFamily="Icons" Size="30"
+
+    <FontImageSource x:Key="SegmentBackTranslateWhite"
+                     FontFamily="Icons"
+                     Glyph="&#xe975;"
                      Color="{DynamicResource SecondaryText}" />
-    <FontImageSource x:Key="TickerArrowRightIcon"  Glyph="{StaticResource TickerArrowRight}" FontFamily="Icons" Size="30"
+    <FontImageSource x:Key="RetellBackTranslateWhite"
+                     FontFamily="Icons"
+                     Glyph="&#xe97d;"
+                     Color="{DynamicResource SecondaryText}" />
+    <FontImageSource x:Key="SetsIcon"
+                     FontFamily="Icons"
+                     Glyph="&#xf15c;"
+                     Color="{DynamicResource MainIconColor}" />
+    <FontImageSource x:Key="PassageIcon"
+                     FontFamily="Icons"
+                     Glyph="&#xf13c;"
+                     Color="{DynamicResource MainIconColor}" />
+    <FontImageSource x:Key="ReviewIcon"
+                     FontFamily="Icons"
+                     Glyph="&#xf153;"
+                     Color="{DynamicResource MainIconColor}" />
+    <FontImageSource x:Key="LockIcon"
+                     FontFamily="Icons"
+                     Glyph="&#xe933;"
+                     Color="{DynamicResource Error}" />
+
+    <FontImageSource x:Key="SelectedSegmentWhite"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource PrimaryGeneral}"
+                     Color="{DynamicResource SecondaryText}" />
+    <FontImageSource x:Key="ProjectInformationSource"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource ProjectInformation}"
+                     Color="{DynamicResource MainIconColor}" />
+    <FontImageSource x:Key="SnapshotRecoverySource"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource SnapshotRecovery}"
+                     Color="{DynamicResource MainIconColor}" />
+    <FontImageSource x:Key="RestoreSnapshotSource"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource RestoreSnapshot}"
+                     Color="{DynamicResource MainIconColor}" />
+    <FontImageSource x:Key="SelectedQuestionSetSource"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource SelectedQuestionSet}"
+                     Color="{DynamicResource MainIconColor}" />
+    <FontImageSource x:Key="ClearBothSnapshotsSource"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource ClearBothSnapshots}"
+                     Color="{DynamicResource MainIconColor}" />
+    <FontImageSource x:Key="SelectASnapshotSource"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource SelectASnapshot}"
+                     Color="{DynamicResource MainIconColor}" />
+    <FontImageSource x:Key="DeleteUndoOption"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource DeleteUndo}"
+                     Color="{DynamicResource Option}" />
+    <FontImageSource x:Key="DialogCancelButtonImageSource"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource Remove}"
+                     Size="30"
+                     Color="{DynamicResource SecondaryText}" />
+    <FontImageSource x:Key="DialogConfirmButtonImageSource"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource Checkmark}"
+                     Size="30"
+                     Color="{DynamicResource SecondaryText}" />
+
+    <FontImageSource x:Key="TickerArrowLeftIcon"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource TickerArrowLeft}"
+                     Size="30"
+                     Color="{DynamicResource SecondaryText}" />
+    <FontImageSource x:Key="TickerArrowRightIcon"
+                     FontFamily="Icons"
+                     Glyph="{StaticResource TickerArrowRight}"
+                     Size="30"
                      Color="{DynamicResource SecondaryText}" />
 </ResourceDictionary>

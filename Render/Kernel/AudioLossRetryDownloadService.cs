@@ -33,7 +33,7 @@ public class AudioLossRetryDownloadService : IAudioLossRetryDownloadService
     {
         var retryDownloadStatusResult = new AudioLossRetryDownloadStatus();
 
-        if (await _audioIntegrityService.IsProjectContainAudioLoss(projectId) is false)
+        if (await _audioIntegrityService.DoesProjectContainAudioLoss(projectId) is false)
         {
             retryDownloadStatusResult.AudioIsBroken = false;
             return retryDownloadStatusResult;

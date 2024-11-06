@@ -65,7 +65,7 @@ namespace Render.Pages.BackTranslator.SegmentBackTranslate
             : base(
                 urlPathSegment: "TabletSegmentSelect",
                 viewModelContextProvider: viewModelContextProvider,
-                pageName: AppResources.BackTranslate,
+                pageName: GetStepName(step),
                 section: section,
                 stage: stage,
                 step: step,
@@ -75,10 +75,7 @@ namespace Render.Pages.BackTranslator.SegmentBackTranslate
         {
             _passage = passage;
             _selectedSegment = selectedSegment;
-
-            DisposeOnNavigationCleared = true;
-            TitleBarViewModel.DisposeOnNavigationCleared = true;
-
+            
             TitleBarViewModel.PageGlyph = IconExtensions
                 .BuildFontImageSource(Icon.SegmentBackTranslate, ResourceExtensions.GetColor("SecondaryText"))?.Glyph;
 
@@ -229,7 +226,8 @@ namespace Render.Pages.BackTranslator.SegmentBackTranslate
                         ViewModelContextProvider.GetTempAudioService(segmentBackTranslation).SaveTempAudio(),
                         endIcon: endIcon,
                         option: option,
-                        number: segmentNumber.ToString());
+                        number: segmentNumber.ToString(),
+                        userId: ViewModelContextProvider.GetLoggedInUser().Id);
 
                     audioList.Add(audio);
 

@@ -16,7 +16,5 @@ namespace Render.Repositories.UserRepositories
         Task<List<IUser>> GetAllUsersAsync();
 
         Task<IUser> GetUserAsync(string username);
-        
-        Task Purge(Guid id);
     }
 }

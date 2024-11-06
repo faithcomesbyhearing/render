@@ -1,4 +1,6 @@
-﻿using DynamicData;
+﻿using System.Reactive.Linq;
+using System.Collections.ObjectModel;
+using DynamicData;
 using DynamicData.Binding;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
@@ -23,8 +25,6 @@ using Render.Sequencer.Contracts.Interfaces;
 using Render.Sequencer.Contracts.Models;
 using Render.Sequencer.Contracts.ToolbarItems;
 using Render.Services.AudioServices;
-using System.Collections.ObjectModel;
-using System.Reactive.Linq;
 
 namespace Render.Pages.Translator.DraftingPage
 {
@@ -46,8 +46,7 @@ namespace Render.Pages.Translator.DraftingPage
         public ReadOnlyObservableCollection<IBarPlayerViewModel> BarPlayerViewModels => _barPlayerViewModels;
         public ReadOnlyObservableCollection<DraftViewModel> DraftViewModels => _draftViewModels;
 
-        [Reactive]
-        public ISequencerRecorderViewModel SequencerRecorderViewModel { get; private set; }
+        [Reactive] public ISequencerRecorderViewModel SequencerRecorderViewModel { get; private set; }
 
         private ActionViewModelBase SequencerActionViewModel { get; set; }
 
@@ -64,10 +63,7 @@ namespace Render.Pages.Translator.DraftingPage
             Stage stage,
             bool needToLoadSessionStageDrafts = true)
         {
-            var title = GetStepName(viewModelContextProvider, step.RenderStepType, stage.Id);
-            var secondTitle = AppResources.DraftRecord;
-
-            var vm = new DraftingViewModel(section, passage, step, viewModelContextProvider, title, secondTitle, stage);
+            var vm = new DraftingViewModel(section, passage, step, viewModelContextProvider, stage);
 
             if (!needToLoadSessionStageDrafts)
             {
@@ -108,10 +104,15 @@ namespace Render.Pages.Translator.DraftingPage
                         return;
                     }
 
+                    var audio = await _temporaryAudioRepository.GetByIdAsync(draftId);
+                    if (audio?.ParentId != _passage.Id)
+                    {
+                        continue;
+                    }
+
                     _audioDraftSourceList.RemoveKey(draftVm.Audio.Id);
                     _sequencerRecorderAudioList.Remove(draftVm.Audio.Id);
 
-                    var audio = await _temporaryAudioRepository.GetByIdAsync(draftId);
                     draftVm.SetAudio(audio);
                     _sequencerRecorderAudioList.Add(audio.Id, new NotableAudio(audio.ScopeId, audio.ProjectId, audio.ParentId));
 
@@ -138,18 +139,16 @@ namespace Render.Pages.Translator.DraftingPage
             Passage currentPassage,
             Step step,
             IViewModelContextProvider viewModelContextProvider,
-            string title,
-            string secondTitle,
-            Stage stage) :
-            base(
+            Stage stage)
+            : base(
                 urlPathSegment: "Drafting",
                 viewModelContextProvider: viewModelContextProvider,
-                pageName: title,
+                pageName: GetStepName(step),
                 section: section,
                 stage: stage,
                 step: step,
                 passageNumber: currentPassage.PassageNumber,
-                secondPageName: secondTitle)
+                secondPageName: AppResources.DraftRecord)
         {
             _passage = currentPassage;
 
@@ -157,8 +156,6 @@ namespace Render.Pages.Translator.DraftingPage
             _temporaryAudioRepository = viewModelContextProvider.GetTemporaryAudioRepository();
             _snapshotRepository = viewModelContextProvider.GetSnapshotRepository();
 
-            DisposeOnNavigationCleared = true;
-            TitleBarViewModel.DisposeOnNavigationCleared = true;
 
             var draftChangeList = _audioDraftSourceList
                 .Connect()
@@ -168,11 +165,11 @@ namespace Render.Pages.Translator.DraftingPage
                 .WhenPropertyChanged(x => x.Selected)
                 .Select(c => c.Sender)
                 .ObserveOn(RxApp.MainThreadScheduler)
-                .Subscribe(vm =>
+                .Subscribe(async vm =>
                 {
                     if (vm.Selected)
                     {
-                        OnDraftSelected(vm);
+                        await OnDraftSelected(vm);
                     }
                 }));
 
@@ -194,13 +191,18 @@ namespace Render.Pages.Translator.DraftingPage
             {
                 var audioFromPassage = new NotableAudio(section.ScopeId, section.ProjectId, currentPassage.Id);
                 audioFromPassage.SetAudio(currentPassage.CurrentDraftAudio.Data);
-                audioFromPassage.Conversations = currentPassage.CurrentDraftAudio.Conversations;
+
+                audioFromPassage.Conversations =
+                    currentPassage.CurrentDraftAudio.Conversations
+                        .Union(ConversationService.GetAdditionalNotes(currentPassage.CurrentDraftAudio)).ToList();
+
                 _sequencerRecorderAudioList.Add(currentPassage.CurrentDraftAudio.Id, audioFromPassage);
                 // remove the old previous audio id from the audio id list in active session
                 if (SessionStateService.AudioIds.Contains(SessionStateService.ActiveSession.PreviousDraftId))
                 {
                     SessionStateService.AudioIds.Remove(SessionStateService.ActiveSession.PreviousDraftId);
                 }
+
                 var draft = CreateDraftViewModel(viewModelContextProvider, audioFromPassage, canSelectDraft, true, true);
                 _audioDraftSourceList.AddOrUpdate(draft);
                 _draftNumber++;
@@ -255,7 +257,7 @@ namespace Render.Pages.Translator.DraftingPage
                 foreach (var sectionReferenceAudio in section.References.Where(x => !x.LockedReferenceByPassageNumbersList.Contains(passageNumber)))
                 {
                     var passageReference = sectionReferenceAudio.PassageReferences.SingleOrDefault(x =>
-                            x.PassageNumber.Equals(currentPassage.PassageNumber));
+                        x.PassageNumber.Equals(currentPassage.PassageNumber));
                     if (passageReference != null)
                     {
                         var vm = ViewModelContextProvider.GetBarPlayerViewModel(sectionReferenceAudio,
@@ -315,9 +317,9 @@ namespace Render.Pages.Translator.DraftingPage
             {
                 EditPassageToolbarItem = SequencerRecorderViewModel.AddToolbarItem(
                     item: new ToolbarItemModel(ToolbarItemType.Custom,
-                    icon: "Edit",
-                    actionCommand: ReactiveCommand.CreateFromTask(NavigateToAudioEditPageAsync),
-                    automationId: "EditButton"), 0);
+                        icon: "Edit",
+                        actionCommand: ReactiveCommand.CreateFromTask(NavigateToAudioEditPageAsync),
+                        automationId: "EditButton"), 0);
             }
 
             SequencerRecorderViewModel.OnRecordingStartedCommand = ReactiveCommand.Create(OnDraftRecordingStarted);
@@ -332,14 +334,14 @@ namespace Render.Pages.Translator.DraftingPage
         private async Task SetupConversationService(Guid sectionId)
         {
             var snapshots = await _snapshotRepository.GetSnapshotsForSectionAsync(sectionId);
-            var filteredSnapshots = _snapshotRepository.FilterSnapshotByStageId(snapshots, Stage.Id);
 
             _conversationService = new ConversationService(
                 this,
                 Disposables,
                 Stage,
                 Step,
-                SequencerRecorderViewModel);
+                SequencerRecorderViewModel,
+                appendNotesForChildAudios: Step.RenderStepType == RenderStepTypes.ConsultantRevise);
 
             _conversationService.TapFlagPostEvent = ProcessStateStatusChange;
             _conversationService.DefineFlagsToDraw(snapshots, Stage.Id);
@@ -361,6 +363,16 @@ namespace Render.Pages.Translator.DraftingPage
             }
 
             return draft;
+        }
+
+        protected override async Task NavigatingAwayAsync()
+        {
+            if (SequencerRecorderViewModel.State is not SequencerState.Recording)
+            {
+                return;
+            }
+
+            await SequencerRecorderViewModel.StopCommand.Execute();
         }
 
         private void OnDraftRecordingStarted()
@@ -403,6 +415,9 @@ namespace Render.Pages.Translator.DraftingPage
                 audio.TemporaryDeleted = false;
                 audio.SetAudio(audioData);
                 audio.SavedDuration = SequencerRecorderViewModel.TotalDuration;
+                audio.PreviewSamples = ViewModelContextProvider
+                    .GetWaveFormService()
+                    .InterpolateBars(record.Samples);
 
                 if (draft.Audio is null)
                 {
@@ -438,7 +453,8 @@ namespace Render.Pages.Translator.DraftingPage
                     path: vm.GetAudioPath(),
                     isTemp: vm.Audio.TemporaryDeleted,
                     canDelete: vm.IsPreviousDraft is false,
-                    flagType: FlagType.Note));
+                    flagType: FlagType.Note,
+                    userId: ViewModelContextProvider.GetLoggedInUser().Id));
 
                 _conversationService.SequencerAudios = new List<Passage>() { _passage }.Select(p => p.CurrentDraftAudio);
                 _conversationService.SequencerRecords = _sequencerRecorderAudioList;
@@ -473,6 +489,7 @@ namespace Render.Pages.Translator.DraftingPage
             {
                 return;
             }
+
             selectedDraft.TriggerUpdate();
             await _temporaryAudioRepository.SaveAsync(selectedDraft.Audio);
         }
@@ -519,6 +536,7 @@ namespace Render.Pages.Translator.DraftingPage
                     SessionStateService.AddDraftAudio(draft.Audio);
                 }
             }
+
             await SessionStateService.RemoveDraftAudios(audioIdsToRemove);
             return await NavigateTo(draftSelectViewModel);
         }
@@ -554,12 +572,12 @@ namespace Render.Pages.Translator.DraftingPage
                 var modalService = ViewModelContextProvider.GetModalService();
                 using var component = new DraftReplacementComponentViewModel(_draftViewModels, ViewModelContextProvider);
                 using var confirmationModal = new ModalViewModel(viewModelContextProvider: ViewModelContextProvider,
-                                                           modalService: modalService,
-                                                           icon: null,
-                                                           title: AppResources.DraftReplacementModalTitle,
-                                                           contentContentViewModel: component,
-                                                           cancelButtonViewModel: new ModalButtonViewModel(AppResources.Cancel),
-                                                           confirmButtonViewModel: new ModalButtonViewModel(AppResources.Replace))
+                    modalService: modalService,
+                    icon: null,
+                    title: AppResources.DraftReplacementModalTitle,
+                    contentContentViewModel: component,
+                    cancelButtonViewModel: new ModalButtonViewModel(AppResources.Cancel),
+                    confirmButtonViewModel: new ModalButtonViewModel(AppResources.Replace))
                 {
                     BeforeConfirmCommand = component.ReplaceAudioCommand
                 };

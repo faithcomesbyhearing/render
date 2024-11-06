@@ -3,6 +3,7 @@ using Render.Components.StageSettings.CommunityTestStageSettings;
 using Render.Models.Sections;
 using Render.Models.Workflow;
 using Render.Models.Workflow.Stage;
+using Render.Resources.Localization;
 using Render.Services.AudioServices;
 
 namespace Render.Utilities
@@ -11,30 +12,12 @@ namespace Render.Utilities
     {
         private const double HourSeconds = 3600;
 
-        public static (DateTimeOffset dateTimeOffset, string name) GetDropDownAttributes(string formattedString)
-        {
-            var name = (formattedString).Split(':').FirstOrDefault();
-            var replaceString = name + ": ";
-            var dateTimeString = formattedString.Replace(replaceString,"");
-                
-            var isValid =  DateTimeOffset.TryParse(dateTimeString, out var dateTime);
-            return isValid ? (dateTime, name) : (default, default);
-        }
-        
-        public static string GetTimeDisplay(double positionSeconds, double durationSeconds, AudioPlayerState? state=null)
+        public static string GetTimeDisplay(double positionSeconds, double durationSeconds, AudioPlayerState? state = null)
         {
             var durationText = GetFormattedTime(durationSeconds);
             var positionText = GetFormattedTime(positionSeconds);
 
             return state != AudioPlayerState.Initial ? $"{positionText} | {durationText}" : $"{durationText}";
-        }
-
-        public static (string PositionText, string DurationText) GetTimerLabelDisplay(double positionSeconds, double durationSeconds, AudioPlayerState? state=null)
-        {
-            var durationText = GetFormattedTime(durationSeconds);
-            var positionText = GetFormattedTime(positionSeconds);
-            return state != AudioPlayerState.Initial ? (positionText, durationText) : (null, durationText);
-            
         }
 
         public static int ToMilliseconds(this double seconds)
@@ -47,7 +30,7 @@ namespace Render.Utilities
             var timeSpan = TimeSpan.FromSeconds(seconds);
             return seconds >= HourSeconds ? $"{timeSpan:hh\\:mm\\:ss}" : $"{timeSpan:mm\\:ss}";
         }
-        
+
         public static List<CultureInfo> GetAvailableCultures()
         {
             var result = new List<CultureInfo>();
@@ -57,104 +40,121 @@ namespace Render.Utilities
             {
                 result.Add(culture);
             }
+
             culture = cultures.FirstOrDefault(x => x.Name.StartsWith("bn"));
             if (culture != null)
             {
                 result.Add(culture);
             }
+
             culture = cultures.FirstOrDefault(x => x.Name.StartsWith("dz"));
             if (culture != null)
             {
                 result.Add(culture);
             }
+
             culture = cultures.FirstOrDefault(x => x.Name.StartsWith("en"));
             if (culture != null)
             {
                 result.Add(culture);
             }
+
             culture = cultures.FirstOrDefault(x => x.Name.StartsWith("es"));
             if (culture != null)
             {
                 result.Add(culture);
             }
+
             culture = cultures.FirstOrDefault(x => x.Name.StartsWith("fr"));
             if (culture != null)
             {
                 result.Add(culture);
             }
+
             culture = cultures.FirstOrDefault(x => x.Name.StartsWith("ha"));
             if (culture != null)
             {
                 result.Add(culture);
             }
+
             culture = cultures.FirstOrDefault(x => x.Name.StartsWith("hi"));
             if (culture != null)
             {
                 result.Add(culture);
             }
+
             culture = cultures.FirstOrDefault(x => x.Name.StartsWith("id"));
             if (culture != null)
             {
                 result.Add(culture);
             }
+
             culture = cultures.FirstOrDefault(x => x.Name.StartsWith("lo"));
             if (culture != null)
             {
                 result.Add(culture);
             }
+
             culture = cultures.FirstOrDefault(x => x.Name.StartsWith("ne"));
             if (culture != null)
             {
                 result.Add(culture);
             }
+
             culture = cultures.FirstOrDefault(x => x.Name.StartsWith("pt"));
             if (culture != null)
             {
                 result.Add(culture);
             }
+
             culture = cultures.FirstOrDefault(x => x.Name.StartsWith("ru"));
             if (culture != null)
             {
                 result.Add(culture);
             }
+
             culture = cultures.FirstOrDefault(x => x.Name.StartsWith("sw"));
             if (culture != null)
             {
                 result.Add(culture);
             }
+
             culture = cultures.FirstOrDefault(x => x.Name.StartsWith("ta"));
             if (culture != null)
             {
                 result.Add(culture);
             }
+
             culture = cultures.FirstOrDefault(x => x.Name.StartsWith("vi"));
             if (culture != null)
             {
                 result.Add(culture);
             }
+
             return result;
         }
-        
+
         public static string GetStageName(Stage stage)
         {
-            return stage.Name == GetDefaultStageName(stage.StageType) ? StageTypes.ToString(stage.StageType) : stage.Name;
+            return stage.Name == GetDefaultStageName(stage.StageType) ? GetStageNameFromResources(stage.StageType) : stage.Name;
         }
 
-        public static string GetDefaultStageName(Models.Workflow.StageTypes stageType)
+        public static string GetStageNameFromResources(StageTypes stageType)
         {
             switch (stageType)
             {
-                case Models.Workflow.StageTypes.Drafting:
-                    return Stage.DraftingDefaultStageName;
-                case Models.Workflow.StageTypes.PeerCheck:
-                    return Stage.PeerCheckDefaultStageName;
-                case Models.Workflow.StageTypes.CommunityTest:
-                    return Stage.CommunityTestDefaultStageName;
-                case Models.Workflow.StageTypes.ConsultantCheck:
-                    return Stage.ConsultantCheckDefaultStageName;
-                case Models.Workflow.StageTypes.ConsultantApproval:
-                    return Stage.ConsultantApprovalDefaultStageName;
-                case Models.Workflow.StageTypes.Generic:
+                case StageTypes.Generic:
+                    return AppResources.Generic;
+                case StageTypes.Drafting:
+                    return AppResources.Draft;
+                case StageTypes.PeerCheck:
+                    return AppResources.PeerCheck;
+                case StageTypes.CommunityTest:
+                    return AppResources.CommunityTest;
+                case StageTypes.ConsultantCheck:
+                    return AppResources.ConsultantCheck;
+                case StageTypes.ConsultantApproval:
+                    return AppResources.ConsultantApproval;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(stageType), stageType, null);
             }
@@ -165,11 +165,9 @@ namespace Render.Utilities
             var doCommunityRetell = step.StepSettings.GetSetting(SettingType.DoCommunityRetell);
             var doCommunityResponse = step.StepSettings.GetSetting(SettingType.DoCommunityResponse);
 
-            return doCommunityRetell && doCommunityResponse ? 
-                RetellQuestionResponseSettings.Both :
-                doCommunityRetell ? 
-                    RetellQuestionResponseSettings.Retell :
-                    RetellQuestionResponseSettings.QuestionAndResponse;
+            return doCommunityRetell && doCommunityResponse ? RetellQuestionResponseSettings.Both :
+                doCommunityRetell ? RetellQuestionResponseSettings.Retell :
+                RetellQuestionResponseSettings.QuestionAndResponse;
         }
 
         /// <summary>
@@ -179,7 +177,7 @@ namespace Render.Utilities
         /// If there are not previously translated segments, just select first untranslated segment.
         /// </summary
         public static int GetSegmentIndexToSelect(
-            IList<SegmentBackTranslation> backTranslations, 
+            IList<SegmentBackTranslation> backTranslations,
             SegmentBackTranslation previousBackTranslation,
             Func<SegmentBackTranslation, bool> nextSegmentCondition)
         {
@@ -195,18 +193,36 @@ namespace Render.Utilities
             }
 
             var previousSelectedTranslationIndex = backTranslations.IndexOf(previousBackTranslation);
-            var itemToSelect = 
-                
+            var itemToSelect =
                 backTranslations
                     .Skip(previousSelectedTranslationIndex + 1)
                     .Take(backTranslations.Count - previousSelectedTranslationIndex + 1)
                     .FirstOrDefault(nextSegmentCondition) ??
-                
                 backTranslations
                     .Take(previousSelectedTranslationIndex)
                     .FirstOrDefault(nextSegmentCondition);
 
             return itemToSelect is null ? -1 : backTranslations.IndexOf(itemToSelect);
+        }
+
+        private static string GetDefaultStageName(StageTypes stageType)
+        {
+            switch (stageType)
+            {
+                case StageTypes.Drafting:
+                    return Stage.DraftingDefaultStageName;
+                case StageTypes.PeerCheck:
+                    return Stage.PeerCheckDefaultStageName;
+                case StageTypes.CommunityTest:
+                    return Stage.CommunityTestDefaultStageName;
+                case StageTypes.ConsultantCheck:
+                    return Stage.ConsultantCheckDefaultStageName;
+                case StageTypes.ConsultantApproval:
+                    return Stage.ConsultantApprovalDefaultStageName;
+                case StageTypes.Generic:
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(stageType), stageType, null);
+            }
         }
     }
 }

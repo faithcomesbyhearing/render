@@ -1,7 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
-using Render.TempFromVessel.Kernel;
+﻿using Render.TempFromVessel.Kernel;
 using System.Net;
-using System.Reflection;
 using Render.Interfaces;
 
 namespace Render.WebAuthentication
@@ -15,7 +13,7 @@ namespace Render.WebAuthentication
         public SyncGatewayApiWrapper(IAppSettings appSettings, HttpClient httpClient, IRenderLogger logger)
         {
             _httpClient = httpClient;
-            _httpClient.Timeout = TimeSpan.FromSeconds(5);
+            _httpClient.Timeout = TimeSpan.FromSeconds(2);
             _requestString = $"https://{appSettings.CouchbaseReplicationUri}:{appSettings.ReplicationPort}/";
             _logger = logger;
         }

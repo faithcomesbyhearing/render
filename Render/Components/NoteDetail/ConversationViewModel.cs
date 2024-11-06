@@ -24,32 +24,13 @@ namespace Render.Components.NoteDetail
         public DomainEntity Item => Conversation;
 
         public ConversationViewModel(Conversation conversation, 
-            FlagState flagState, 
             IViewModelContextProvider viewModelContextProvider,
             bool needToSetRequiredFlagStateInsteadOptional = false)
             : base(ActionState.Optional, "ConversationMarker", viewModelContextProvider)
         {
             Conversation = conversation;
-            FlagState = flagState;
+            FlagState = GetFlagState(needToSetRequiredFlagStateInsteadOptional);
             TimeMarker = conversation.FlagOverride;
-
-            Disposables.Add(this.WhenAnyValue(vm => vm.Conversation.Messages)
-                .ObserveOn(RxApp.MainThreadScheduler)
-                .Subscribe(messages =>
-                {
-                    var isSeen = true;
-                    var loggedInUserId = ViewModelContextProvider.GetLoggedInUser().Id;
-                    foreach (var message in messages)
-                    {
-                        if (message.GetSeenStatus(loggedInUserId) == false && message.UserId != loggedInUserId)
-                        {
-                            isSeen = false;
-                            break;
-                        }
-                    }
-
-                    FlagState = isSeen ? FlagState.Viewed : needToSetRequiredFlagStateInsteadOptional ? FlagState.Required : FlagState.Optional;
-                }));
 
             Disposables.Add(this.WhenAnyValue(vm => vm.FlagState)
                 .ObserveOn(RxApp.MainThreadScheduler)
@@ -57,6 +38,22 @@ namespace Render.Components.NoteDetail
                 {
                     ActionState = FlagState == FlagState.Required ? ActionState.Required : ActionState.Optional;
                 }));
+        }
+
+        private FlagState GetFlagState(bool required)
+        {
+            var isSeen = true;
+            var loggedInUserId = ViewModelContextProvider.GetLoggedInUser().Id;
+            foreach (var message in Conversation.Messages)
+            {
+                if (message.GetSeenStatus(loggedInUserId) == false && message.UserId != loggedInUserId)
+                {
+                    isSeen = false;
+                    break;
+                }
+            }
+
+            return isSeen ? FlagState.Viewed : required ? FlagState.Required : FlagState.Optional;
         }
     }
 }

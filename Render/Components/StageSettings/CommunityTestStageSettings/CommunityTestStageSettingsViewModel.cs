@@ -26,26 +26,26 @@ namespace Render.Components.StageSettings.CommunityTestStageSettings
 
         [Reactive]
         public bool AssignToTranslator { get; set; }
-        
+
         [Reactive]
         public bool RetellRequireSectionListen { get; set; } // Section Listen Guidance
-        
+
         [Reactive]
         public bool RetellRequirePassageListen { get; set; } // Passage Listen Guidance
-        
+
         [Reactive]
         public bool ResponseRequireContextListen { get; set; } // Question Context Listen Guidance
-        
+
         [Reactive]
         public bool ResponseRequireRecordResponse { get; set; } // Include Response Guidance
 
         [Reactive]
         public RetellQuestionResponseSettings SelectedState { get; set; }
-        
-        
+
+
         [Reactive]
         public bool ReviseAllowEditing { get; set; } // Allow Editing
-        
+
         [Reactive]
         public bool ReviseRequireSectionListen { get; set; } // Section Listen Guidance
 
@@ -53,28 +53,41 @@ namespace Render.Components.StageSettings.CommunityTestStageSettings
         public bool ReviseRequireCommunityFeedback { get; set; } // Community Feedback Guidance
 
 
-        public CommunityTestStageSettingsViewModel(RenderWorkflow workflow,
+        public StepNameViewModel ReviseStepName { get; }
+        public StepNameViewModel ReviewStepName { get; }
+        public StepNameViewModel ResponseSetupStepName { get; }
+
+        public CommunityTestStageSettingsViewModel(
+            RenderWorkflow workflow,
             Stage stage,
             IViewModelContextProvider viewModelContextProvider,
-            Action<Stage> updateStageCard) 
-            : base(workflow, stage, viewModelContextProvider, updateStageCard)
+            Action<Stage> updateStageCard)
+            : base(
+                renderWorkflow: workflow,
+                stage: stage,
+                viewModelContextProvider: viewModelContextProvider,
+                updateStageCard: updateStageCard)
         {
             _reviseStep = stage.Steps.First(step => step.RenderStepType == RenderStepTypes.CommunityRevise);
             _reviewStep = stage.Steps.First(step => step.RenderStepType == RenderStepTypes.CommunityTest);
             _responseSetupStep = stage.Steps.First(step => step.RenderStepType == RenderStepTypes.CommunitySetup);
+
+            ReviseStepName = new StepNameViewModel(_reviseStep);
+            ReviewStepName = new StepNameViewModel(_reviewStep);
+            ResponseSetupStepName = new StepNameViewModel(_responseSetupStep);
 
             AssignToTranslator = stage.StageSettings.GetSetting(SettingType.AssignToTranslator);
             _initialAssignToTranslator = AssignToTranslator;
 
             // Review step
             RetellRequireSectionListen = _reviewStep.StepSettings.GetSetting(SettingType.RequireSectionListen);
-            
+
             RetellRequirePassageListen = _reviewStep.StepSettings.GetSetting(SettingType.RequirePassageListen);
             ResponseRequireContextListen = _reviewStep.StepSettings.GetSetting(SettingType.RequireQuestionContextListen);
             ResponseRequireRecordResponse = _reviewStep.StepSettings.GetSetting(SettingType.RequireRecordResponse);
 
             SelectedState = Utilities.Utilities.GetRetellQuestionResponseSettingFrom(_reviewStep);
-            
+
             // Revise step
             ReviseAllowEditing = _reviseStep.StepSettings.GetSetting(SettingType.AllowEditing);
             ReviseRequireSectionListen = _reviseStep.StepSettings.GetSetting(SettingType.RequireSectionListen);
@@ -96,31 +109,34 @@ namespace Render.Components.StageSettings.CommunityTestStageSettings
             Workflow.SetStepSetting(_reviewStep, SettingType.RequireSectionListen, RetellRequireSectionListen);
 
             //Retell settings
+            ReviewStepName.UpdateEntity();
             Workflow.SetStepSetting(
-                step: _reviewStep, settingType: SettingType.DoCommunityRetell, 
+                step: _reviewStep, settingType: SettingType.DoCommunityRetell,
                 value: SelectedState is RetellQuestionResponseSettings.Both || SelectedState is RetellQuestionResponseSettings.Retell);
 
             Workflow.SetStepSetting(_reviewStep, SettingType.RequirePassageListen, RetellRequirePassageListen);
 
             //Response settings
+            ResponseSetupStepName.UpdateEntity();
             Workflow.SetStepSetting(
-                step: _responseSetupStep, settingType: SettingType.IsActive, 
+                step: _responseSetupStep, settingType: SettingType.IsActive,
                 value: SelectedState is RetellQuestionResponseSettings.Both || SelectedState is RetellQuestionResponseSettings.QuestionAndResponse);
 
             Workflow.SetStepSetting(
-                step: _reviewStep, settingType: SettingType.DoCommunityResponse, 
+                step: _reviewStep, settingType: SettingType.DoCommunityResponse,
                 value: SelectedState is RetellQuestionResponseSettings.Both || SelectedState is RetellQuestionResponseSettings.QuestionAndResponse);
 
             Workflow.SetStepSetting(_reviewStep, SettingType.RequireQuestionContextListen, ResponseRequireContextListen);
             Workflow.SetStepSetting(_reviewStep, SettingType.RequireRecordResponse, ResponseRequireRecordResponse);
-            
+
             //Revise settings
+            ReviseStepName.UpdateEntity();
             Workflow.SetStepSetting(
-                step: _reviseStep, settingType: SettingType.DoCommunityRetell, 
+                step: _reviseStep, settingType: SettingType.DoCommunityRetell,
                 value: SelectedState is RetellQuestionResponseSettings.Both || SelectedState is RetellQuestionResponseSettings.Retell);
 
             Workflow.SetStepSetting(
-                step: _reviseStep, settingType: SettingType.DoCommunityResponse, 
+                step: _reviseStep, settingType: SettingType.DoCommunityResponse,
                 value: SelectedState is RetellQuestionResponseSettings.Both || SelectedState is RetellQuestionResponseSettings.QuestionAndResponse);
 
             Workflow.SetStepSetting(_reviseStep, SettingType.AllowEditing, ReviseAllowEditing);
@@ -133,7 +149,7 @@ namespace Render.Components.StageSettings.CommunityTestStageSettings
                 Workflow.SetStepSetting(_reviseStep, SettingType.RequirePassageReview, TranslateRequirePassageReview);
             }
 
-            if  (AssignToTranslator && !_initialAssignToTranslator)
+            if (AssignToTranslator && !_initialAssignToTranslator)
             {
                 // we clean translation assignments for this stage
                 Workflow.AssignCommunityTestTranslationTeam(Stage.Id);

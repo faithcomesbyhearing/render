@@ -1,5 +1,4 @@
 ﻿using System.Reactive;
-using FluentAssertions;
 using Moq;
 using ReactiveUI;
 using Render.Components.BarPlayer;
@@ -13,6 +12,7 @@ using Render.Models.Workflow.Stage;
 using Render.Pages.Consultant.ConsultantCheck;
 using Render.Repositories.SectionRepository;
 using Render.Services.AudioServices;
+using Render.Services.WorkflowService;
 using Render.UnitTests.App.Kernel;
 
 namespace Render.UnitTests.App.Pages.Consultant.ConsultantCheck
@@ -59,8 +59,10 @@ namespace Render.UnitTests.App.Pages.Consultant.ConsultantCheck
 
             var workflow = RenderWorkflow.Create(Guid.Empty);
             workflow.AddStage(ConsultantCheckStage.Create());
-            MockGrandCentralStation.Setup(x => x.ProjectWorkflow).Returns(workflow);
-            MockGrandCentralStation.Setup(x => 
+            var mockWorkflowService = new Mock<IWorkflowService>();
+            mockWorkflowService.Setup(x => x.ProjectWorkflow).Returns(workflow);
+
+            MockStageService.Setup(x => 
                     x.SectionsAtStep(It.IsAny<Guid>())).Returns(new List<Guid> { _section.Id });
         }
         
@@ -90,7 +92,7 @@ namespace Render.UnitTests.App.Pages.Consultant.ConsultantCheck
 
             //Assert
             vm.SectionsToCheck.Items.Should().NotBeEmpty();
-            MockGrandCentralStation.Verify(x => x.SectionsAtStep(It.IsAny<Guid>()), Times.AtLeastOnce);
+            MockStageService.Verify(x => x.SectionsAtStep(It.IsAny<Guid>()), Times.AtLeastOnce);
             MockContextProvider.Verify(x => x.GetGrandCentralStation(), Times.AtLeastOnce);
             MockContextProvider.Verify(x => x.GetGrandCentralStation(), Times.AtLeastOnce);
         }
@@ -105,14 +107,14 @@ namespace Render.UnitTests.App.Pages.Consultant.ConsultantCheck
             _step = new Step(RenderStepTypes.ConsultantRevise, Roles.Drafting);
             _stage.AddRevisePreparationStep(_step);
             var reviseStep = _stage.Steps.FirstOrDefault();
-            MockGrandCentralStation.Setup(x => 
+            MockStageService.Setup(x => 
                 x.GetAllAssignedSectionAtStep(reviseStep.Id, reviseStep.RenderStepType)).Returns(new List<Guid> { _section.Id });
             //Act
             var vm = await ConsultantCheckSectionSelectViewModel.CreateAsync(projectId, contentProvider, _stage, _step);
 
             //Assert
             vm.CheckedSections.Items.Should().NotBeEmpty();
-            MockGrandCentralStation.Verify(x => x.GetAllAssignedSectionAtStep(reviseStep.Id, reviseStep.RenderStepType), Times.AtLeastOnce);
+            MockStageService.Verify(x => x.GetAllAssignedSectionAtStep(reviseStep.Id, reviseStep.RenderStepType), Times.AtLeastOnce);
             MockContextProvider.Verify(x => x.GetGrandCentralStation(), Times.AtLeastOnce);
         }
         
@@ -126,14 +128,14 @@ namespace Render.UnitTests.App.Pages.Consultant.ConsultantCheck
             _step = new Step(RenderStepTypes.ConsultantRevise, Roles.Drafting);
             _stage.AddRevisePreparationStep(_step);
             var reviseStep = _stage.Steps.FirstOrDefault();
-            MockGrandCentralStation.Setup(x => 
+            MockStageService.Setup(x => 
                 x.GetAllAssignedSectionAtStep(reviseStep.Id, reviseStep.RenderStepType)).Returns(new List<Guid>());
             //Act
             var vm = await ConsultantCheckSectionSelectViewModel.CreateAsync(projectId, contentProvider, _stage, _step);
 
             //Assert
             vm.CheckedSections.Items.Should().BeEmpty();
-            MockGrandCentralStation.Verify(x => x.GetAllAssignedSectionAtStep(reviseStep.Id, reviseStep.RenderStepType), Times.AtLeastOnce);
+            MockStageService.Verify(x => x.GetAllAssignedSectionAtStep(reviseStep.Id, reviseStep.RenderStepType), Times.AtLeastOnce);
             MockContextProvider.Verify(x => x.GetGrandCentralStation(), Times.AtLeastOnce);
         }
     }

@@ -1,13 +1,9 @@
-﻿using System.Reactive.Linq;
-using System.Threading.Tasks;
-using ReactiveUI;
+﻿using ReactiveUI;
 using Render.Kernel;
 using Render.Pages.AppStart.Home;
 using Render.Resources;
 using Render.Resources.Localization;
 using Render.Resources.Styles;
-using Render.UIResources;
-using Render.UIResources.Styles;
 
 namespace Render.Components.TitleBar.MenuActions
 {
@@ -26,10 +22,9 @@ namespace Render.Components.TitleBar.MenuActions
         private async Task<IRoutableViewModel> NavigateToAsync()
         {
             CloseMenu();
-
-            var projectId = ViewModelContextProvider.GetGrandCentralStation().CurrentProjectId;
-            var homeViewModel = await Task.Run(async () => await HomeViewModel.CreateAsync(projectId, ViewModelContextProvider));
-            return await HostScreen.Router.NavigateAndReset.Execute(homeViewModel);
+            
+            var homeViewModel = await Task.Run(async () => await HomeViewModel.CreateAsync(GetProjectId(), ViewModelContextProvider));
+            return await NavigateToAndReset(homeViewModel);
         }
     }
 }

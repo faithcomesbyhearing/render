@@ -1,4 +1,5 @@
-﻿using Render.Models.Sections;
+﻿using Render.Models.Extensions;
+using Render.Models.Sections;
 using Render.Models.Snapshot;
 using Render.Repositories.Audio;
 using Render.Repositories.Kernel;
@@ -60,23 +61,40 @@ namespace Render.Repositories.SnapshotRepository
             await _snapshot.BatchDeleteAsync(snapshots.Select(x => x.Id).ToList());
         }
         
-        public async Task BatchSoftDeleteAsync(List<Snapshot> snapshots, Section section)
+        public async Task BatchSetTemporaryAsync(List<Snapshot> snapshots, Section section)
         {
             await DeleteDraftFromSnapshots(snapshots, section);
             foreach (var snapshot in snapshots)
             {
-                snapshot.SetDelete(true);
+                snapshot.SetTemporary(true);
                 await _snapshot.UpsertAsync(snapshot.Id, snapshot);
             }
         }
 
-        private async Task DeleteDraftFromSnapshots(List<Snapshot> snapshots, Section section)
+		public async Task BatchSoftDeleteAsync(List<Snapshot> snapshots, Section section)
+		{
+			await DeleteDraftFromSnapshots(snapshots, section);
+			foreach (var snapshot in snapshots)
+			{
+				snapshot.SetDeleted(true);
+				await _snapshot.UpsertAsync(snapshot.Id, snapshot);
+			}
+		}
+
+		/// <summary>
+		/// Removes draft audio from intermediate snapshot.
+		/// Intermediate snapshot - has no relations to any permanent snapshot.
+		/// </summary>
+		/// <param name="snapshots"></param>
+		/// <param name="section"></param>
+		/// <returns></returns>
+		private async Task DeleteDraftFromSnapshots(List<Snapshot> snapshots, Section section)
         {
             if (snapshots.Count == 0) return;
             // return a list of snapshots for a given section which are not deleted
             var snapshotsInSection = await GetSnapshotsForSectionAsync(section.Id);
-            if (snapshots.Any(snapshot => snapshot.Passages.Any(x => x.CurrentDraftAudioId != default)))
-            {
+			if (snapshots.Any(snapshot => snapshot.Passages.Any(x => x.CurrentDraftAudioId != default)))
+			{
                 await DeleteOldDraftedAudio(snapshots, snapshotsInSection, section);
             }
             else
@@ -88,27 +106,28 @@ namespace Render.Repositories.SnapshotRepository
 
         private async Task DeleteOldDraftedAudio(List<Snapshot> snapshots, List<Snapshot> snapshotsInSection, Section section)
         {
-            var draftIdsInSection = section.Passages.Select(x => x.CurrentDraftAudioId).ToList();
-            var snapshotToDeleteIds = snapshots.Select(x => x.Id);
-            var snapshotToKeep = snapshotsInSection.Where(x => !snapshotToDeleteIds.Contains(x.Id));
-            var draftIdsToKeep = snapshotToKeep.SelectMany(x => x.Passages).Select(y => y.CurrentDraftAudioId).ToList();
-            foreach (var snapshot in snapshots)
+			var draftIdsInSection = section.Passages.Select(x => x.CurrentDraftAudioId).ToList();
+			var snapshotToDeleteIds = snapshots.Select(x => x.Id);
+			var snapshotToKeep = snapshotsInSection.Where(x => !snapshotToDeleteIds.Contains(x.Id));
+			var draftIdsToKeep = snapshotToKeep.SelectMany(x => x.Passages).Select(y => y.CurrentDraftAudioId).ToList();
+
+			foreach (var snapshot in snapshots)
             {
                 foreach (var passage in snapshot.Passages)
                 {
-                    if (!draftIdsToKeep.Contains(passage.CurrentDraftAudioId) && !draftIdsInSection.Contains(passage.CurrentDraftAudioId))
-                    {
-                        // delete unreferenced drafts and associated notes
-                        await _sectionRepository.DeleteDraftAsync(passage.CurrentDraftAudioId);
-                    }
-                }
+					if (!draftIdsToKeep.Contains(passage.CurrentDraftAudioId) && !draftIdsInSection.Contains(passage.CurrentDraftAudioId))
+					{
+						// delete unreferenced drafts and associated notes
+						await _sectionRepository.DeleteDraftAsync(passage.CurrentDraftAudioId);
+					}
+				}
             }
         }
         
         private async Task DeleteNewDraftedAudio(List<Snapshot> snapshots, List<Snapshot> snapshotsInSection, Section section)
         {
-            var draftIdsInSection = section.Passages.Select(x => x.CurrentDraftAudio?.Id ?? Guid.Empty).ToList();
-            var snapshotToDeleteIds = snapshots.Select(x => x.Id);
+			var draftIdsInSection = section.Passages.Select(x => x.CurrentDraftAudio?.Id ?? Guid.Empty).ToList();
+			var snapshotToDeleteIds = snapshots.Select(x => x.Id);
             var snapshotToKeep = snapshotsInSection.Where(x => !snapshotToDeleteIds.Contains(x.Id)).ToList();
             var draftIdsToKeep = snapshotToKeep.SelectMany(x => x.PassageDrafts).Select(y => y.DraftId).ToList();
             foreach (var snapshot in snapshots)
@@ -128,14 +147,14 @@ namespace Render.Repositories.SnapshotRepository
             foreach (var passage in snapshot.Passages)
             {
                 Draft draft;
-                //for backward compatibility support
-                if (passage.CurrentDraftAudioId != Guid.Empty)
-                {
-                    draft = await _draftRepository.GetByIdAsync(passage.CurrentDraftAudioId);
-                }
+				// for backward compatibility support
+				if (passage.CurrentDraftAudioId != Guid.Empty)
+				{
+					draft = await _draftRepository.GetByIdAsync(passage.CurrentDraftAudioId);
+				}
                 else
                 {
-                    //Get a draft for a snapshot using the unique DraftId key
+                    // get a draft for a snapshot using the unique DraftId key
                     var draftId = snapshot.PassageDrafts.Single(passageDraft => passageDraft.PassageId == passage.Id).DraftId;
                     draft = await _draftRepository.GetByIdAsync(draftId);
                 }
@@ -154,22 +173,40 @@ namespace Render.Repositories.SnapshotRepository
             
             return await _sectionRepository.GetPassageDraftsAsync(snapshot, getRetellBackTranslations, getSegmentBackTranslations);
         }
-
-        public async Task Purge(Guid id)
-        {
-            await _snapshot.PurgeAllOfTypeForProjectId(id);
-        }
-
+        
         private async Task<List<Snapshot>> GetSnapshots(Func<Snapshot, bool> predicate, Guid sectionId)
         {
-            var matchingSnapshots = new List<Snapshot>();
             var snapshots = await _snapshot.QueryOnFieldAsync("SectionId", sectionId.ToString(), 0);
-            if (snapshots != null && snapshots.Any())
+            if (snapshots is not null && snapshots.Count > 0)
             {
-                matchingSnapshots = snapshots.Where(predicate).OrderBy(x => x.DateUpdated).ToList();
+                return [.. (await ExcludeDuplicates(snapshots.Where(predicate))).OrderBy(x => x.DateUpdated)];
             }
-            
-            return matchingSnapshots;
+
+            return [];
+        }
+
+        private async Task<List<Snapshot>> ExcludeDuplicates(IEnumerable<Snapshot> snapshots)
+        {
+            var toRemove = new List<Snapshot>();
+            var result = snapshots
+                .GroupBy(snapshot => new { Guid = snapshot.GetAllIncludedIds().Merge(), snapshot.Temporary })
+                .Select(group =>
+                {
+                    var ordered = group.OrderByDescending(x => x.DateUpdated);
+                    if (group.Count() > 1)
+                    {
+                        toRemove.AddRange(ordered.Skip(1).Where(s => s.Deleted is false));
+                    }
+
+                    return ordered.First();
+                }).ToList();
+            foreach (var snapshot in toRemove)
+            {
+                snapshot.SetDeleted(true);
+                await _snapshot.UpsertAsync(snapshot.Id, snapshot);
+            }
+
+            return result;
         }
 
         public void Dispose()

@@ -242,7 +242,7 @@ public class WorkflowAssignmentViewModel : WorkflowPageBaseViewModel
     private async Task SaveWorkflowAsync()
     {
         await _workflowPersistence.SaveWorkflowAsync(Workflow);
-        ViewModelContextProvider.GetGrandCentralStation().UpdateWorkflow(Workflow);
+        ViewModelContextProvider.GetWorkflowService().UpdateWorkflow(Workflow);
     }
 
     private bool CheckIfChangesMade()

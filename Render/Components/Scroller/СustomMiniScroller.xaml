@@ -32,7 +32,7 @@
     <Grid AutomationId="MainScrollerGrid">
         
         <HorizontalStackLayout Grid.Row="0" 
-                               x:Name="Frame"
+                               x:Name="ComponentLayout"
                                HeightRequest="80"/>
 
 

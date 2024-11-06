@@ -246,8 +246,8 @@ public class WorkflowConfigurationViewModel : WorkflowPageBaseViewModel
     private async Task SaveWorkflowAsync()
     {
         await _workflowPersistence.SaveWorkflowAsync(Workflow);
-        var grandCentralStation = ViewModelContextProvider.GetGrandCentralStation();
-        grandCentralStation.UpdateWorkflow(Workflow);
+        var workflowService = ViewModelContextProvider.GetWorkflowService();
+        workflowService.UpdateWorkflow(Workflow);
     }
 
     private async Task<IRoutableViewModel> NavigateHome()

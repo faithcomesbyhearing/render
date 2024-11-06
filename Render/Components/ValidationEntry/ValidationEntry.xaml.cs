@@ -19,6 +19,8 @@ public partial class ValidationEntry
                 nameof(Entry.Completed)));
             d(this.OneWayBind(ViewModel, vm => vm.IsPassword,
                 v => v.ValueEntry.IsPassword));
+            d(this.OneWayBind(ViewModel, vm => vm.MaxLength,
+                v => v.ValueEntry.MaxLength));
             d(this.BindCommand(ViewModel, vm => vm.OnTogglePasswordCommand,
                 v => v.ShowPasswordTap));
             d(this.OneWayBind(ViewModel, vm => vm.ShowTogglePasswordButton,

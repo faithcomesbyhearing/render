@@ -63,15 +63,13 @@ namespace Render.Pages.Transcribe.TranscribeRetellBackTranslate
             base(
                 urlPathSegment: "TabletTranscribeRetellBTPassageTranslate",
                 viewModelContextProvider: viewModelContextProvider,
-                pageName: AppResources.Transcribe,
+                pageName: GetStepName(step),
                 section: section,
                 stage: stage,
                 step: step,
                 passageNumber: passage.PassageNumber,
                 secondPageName: AppResources.DoPassageTranscribe)
         {
-            DisposeOnNavigationCleared = true;
-            TitleBarViewModel.DisposeOnNavigationCleared = true;
             
             RetellBackTranslation = retellBackTranslation;
             TranscribeTextBoxViewModel = transcribeTextBoxViewModel;

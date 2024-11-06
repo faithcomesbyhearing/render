@@ -18,8 +18,8 @@ namespace Render.Components.NoteDetail
                 d(this.OneWayBind(ViewModel, vm => vm.BarPlayerViewModel, v => v.AudioMessage.BindingContext));
                 d(this.OneWayBind(ViewModel, vm => vm.HasInterpretedAudio, v => v.InterpretedAudioMessage.IsVisible));
                 d(this.OneWayBind(ViewModel, vm => vm.InterpretBarPlayerViewModel, v => v.InterpretedAudioMessage.BindingContext));
-                d(this.OneWayBind(ViewModel, vm => vm.AllowDelete, v => v.MessageTrashButton.IsVisible));
                 d(this.BindCommandCustom(MessageTrashButton, v => v.ViewModel.OnDeleteCommand));
+                d(this.BindCommandCustom(MessageUndoTrashButton, v => v.ViewModel.OnUndoDeleteCommand));
 
                 d(this.WhenAnyValue(x => x.ViewModel.IsAuthor)
                     .ObserveOn(RxApp.MainThreadScheduler)
@@ -28,6 +28,10 @@ namespace Render.Components.NoteDetail
                 d(this.WhenAnyValue(x => x.ViewModel.HasAudio)
                     .ObserveOn(RxApp.MainThreadScheduler)
                     .Subscribe(SetMessageType));
+
+                d(this.WhenAnyValue(x => x.ViewModel.AllowDelete, x => x.ViewModel.IsDeleted)
+                    .ObserveOn(RxApp.MainThreadScheduler)
+                    .Subscribe(((bool AllowDelete, bool IsDeleted) options) => SetMessageState(options.AllowDelete, options.IsDeleted)));
             });
         }
 
@@ -68,6 +72,14 @@ namespace Render.Components.NoteDetail
         {
             AudioMessage.IsVisible = hasAudio;
             TextMessage.IsVisible = !hasAudio;
+        }
+
+        private void SetMessageState(bool allowDelete, bool isDeleted)
+        {
+            MessageTrashButton.IsVisible = allowDelete && isDeleted is false;
+            MessageUndoTrashButton.IsVisible = allowDelete && isDeleted;
+
+            DeletedMessageOverlay.IsVisible = isDeleted;
         }
     }
 }

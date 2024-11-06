@@ -10,7 +10,7 @@ namespace Render.Pages.Settings.SectionStatus.Processes
         public SectionCard()
         {
             InitializeComponent();
-            this.WhenActivated(d =>
+            DisposableBindings = this.WhenActivated(d =>
             {
                 d(this.BindCommand(ViewModel, vm => vm.SelectSectionCommand,
                     v => v.TapGestureRecognizer));
@@ -37,6 +37,13 @@ namespace Render.Pages.Settings.SectionStatus.Processes
                         CenterIcon.TextColor = ResourceExtensions.GetColor("Transparent") ?? new ColorReference();
                     }
                 }));
+
+                d(this.OneWayBind(ViewModel, vm => vm.SelectedToExport, v => v.Checkmark.IsVisible));
+                d(this.BindCommand(ViewModel, vm => vm.SelectSectionToExportCommand, v => v.SelectToExport));
+                d(this.WhenAnyValue(x => x.ViewModel.SelectedToExport)
+                    .ObserveOn(RxApp.MainThreadScheduler)
+                    .Subscribe(BackgroundSelector));
+                d(this.OneWayBind(ViewModel, vm => vm.IsEmpty, v => v.CheckmarkFrame.IsVisible, CheckboxSelector));
             });
         }
 
@@ -72,6 +79,23 @@ namespace Render.Pages.Settings.SectionStatus.Processes
                     CenterIcon.TextColor = ViewModel != null && ViewModel.HasConflict ? red : cardTextColor;
                 }
             }
+        }
+
+        private static bool CheckboxSelector(bool arg)
+        {
+            return !arg;
+        }
+
+        private void BackgroundSelector(bool selected)
+        {
+            var backgroundColor = selected
+                ? ResourceExtensions.GetColor("Option")
+                : ResourceExtensions.GetColor("SecondaryText");
+
+            var opacity = selected ? 0.5 : 1;
+
+            CheckmarkFrame.SetValue(BackgroundColorProperty, backgroundColor);
+            SectionInfoGrid.SetValue(OpacityProperty, opacity);
         }
     }
 }

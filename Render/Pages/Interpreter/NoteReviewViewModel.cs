@@ -17,11 +17,11 @@ namespace Render.Pages.Interpreter
         private readonly Dictionary<Draft, List<Message>> _messageDictionary;
         public readonly IBarPlayerViewModel OriginalNotePlayer;
         public readonly IBarPlayerViewModel InterpretedNotePlayer;
-        
+
         private Draft Draft { get; set; }
         private Message Message { get; set; }
-        public ReactiveCommand<Unit,IRoutableViewModel> ReRecordNoteCommand { get; }
-        
+        public ReactiveCommand<Unit, IRoutableViewModel> ReRecordNoteCommand { get; }
+
         public static NoteReviewViewModel Create(
             Step step,
             Section section,
@@ -31,11 +31,6 @@ namespace Render.Pages.Interpreter
             Dictionary<Draft, List<Message>> messageDictionary,
             IViewModelContextProvider viewModelContextProvider)
         {
-            var pageName = AppResources.Note + " ";
-            pageName += step.RenderStepType == RenderStepTypes.InterpretToConsultant
-                ? AppResources.InterpretToConsultant
-                : AppResources.InterpretToTranslator;
-            
             return new NoteReviewViewModel(
                 step,
                 section,
@@ -43,8 +38,7 @@ namespace Render.Pages.Interpreter
                 message,
                 stage,
                 messageDictionary,
-                viewModelContextProvider,
-                pageName);
+                viewModelContextProvider);
         }
 
         private NoteReviewViewModel(
@@ -54,25 +48,28 @@ namespace Render.Pages.Interpreter
             Message message,
             Stage stage,
             Dictionary<Draft, List<Message>> messageDictionary,
-            IViewModelContextProvider viewModelContextProvider,
-            string pageName) : 
-            base("NoteReview", viewModelContextProvider, pageName, section, stage, step,
+            IViewModelContextProvider viewModelContextProvider)
+            : base(
+                urlPathSegment: "NoteReview",
+                viewModelContextProvider: viewModelContextProvider,
+                pageName: GetStepName(step),
+                section: section,
+                stage: stage,
+                step: step,
                 nonDraftTranslationId: message.Id, secondPageName: AppResources.DoNoteReview)
         {
-            DisposeOnNavigationCleared = true;
-            TitleBarViewModel.DisposeOnNavigationCleared = true;
             TitleBarViewModel.PageGlyph = IconExtensions.BuildFontImageSource(Icon.NoteTranslate)?.Glyph;
-            
+
             Draft = draft;
             Message = message;
             _messageDictionary = messageDictionary;
-            
+
             var interpretedNoteAudio = message.InterpretationAudio;
             var requireNoteListen = step.StepSettings.GetSetting(SettingType.RequireNoteReview);
-            
-            OriginalNotePlayer = new BarPlayerViewModel(message.Media, viewModelContextProvider, 
-                    requireNoteListen ? ActionState.Required : ActionState.Optional, AppResources.Note);
-            
+
+            OriginalNotePlayer = new BarPlayerViewModel(message.Media, viewModelContextProvider,
+                requireNoteListen ? ActionState.Required : ActionState.Optional, AppResources.Note);
+
             var btMultiStep = stage.Steps.First(x => x.Order == Step.Ordering.Parallel).GetSubSteps()
                 .First(x => x.Role == Roles.BackTranslate);
             string consultantLanguage;
@@ -82,8 +79,9 @@ namespace Render.Pages.Interpreter
                 var bt1stStep = btMultiStep.GetSubSteps()
                     .First(x => x.RenderStepType == RenderStepTypes.BackTranslate);
                 consultantLanguage = bt1stStep.StepSettings
-                    .GetString(bt1stStep.StepSettings.GetSetting(SettingType.DoSegmentBackTranslate) 
-                        ? SettingType.SegmentConsultantLanguage : SettingType.ConsultantLanguage);
+                    .GetString(bt1stStep.StepSettings.GetSetting(SettingType.DoSegmentBackTranslate)
+                        ? SettingType.SegmentConsultantLanguage
+                        : SettingType.ConsultantLanguage);
             }
             // use second step consultant language for interpretToTConsultant
             else
@@ -92,15 +90,17 @@ namespace Render.Pages.Interpreter
                     .GetSubSteps().First(x => x.GetSubSteps().Count > 0).GetSubSteps()
                     .First(x => x.Role == Roles.BackTranslate2);
                 consultantLanguage = bt2ndbtStep.StepSettings
-                    .GetString(bt2ndbtStep.StepSettings.GetSetting(SettingType.DoSegmentBackTranslate) 
-                        ? SettingType.SegmentConsultant2StepLanguage : SettingType.Consultant2StepLanguage);
+                    .GetString(bt2ndbtStep.StepSettings.GetSetting(SettingType.DoSegmentBackTranslate)
+                        ? SettingType.SegmentConsultant2StepLanguage
+                        : SettingType.Consultant2StepLanguage);
             }
-            
-            InterpretedNotePlayer = viewModelContextProvider.GetBarPlayerViewModel(interpretedNoteAudio, 
-                    requireNoteListen ? ActionState.Required : ActionState.Optional, 
-                    string.IsNullOrEmpty(consultantLanguage) ? AppResources.Translation 
-                        : $"{AppResources.Translation} - {consultantLanguage}", 0);
-            
+
+            InterpretedNotePlayer = viewModelContextProvider.GetBarPlayerViewModel(interpretedNoteAudio,
+                requireNoteListen ? ActionState.Required : ActionState.Optional,
+                string.IsNullOrEmpty(consultantLanguage)
+                    ? AppResources.Translation
+                    : $"{AppResources.Translation} - {consultantLanguage}", 0);
+
             ActionViewModelBaseSourceList.AddRange(new[] { OriginalNotePlayer, InterpretedNotePlayer });
 
             ProceedButtonViewModel.SetCommand(NavigateForwardAsync);
@@ -117,7 +117,7 @@ namespace Render.Pages.Interpreter
                 }));
             SetProceedButtonIcon();
         }
-        
+
         protected sealed override void SetProceedButtonIcon()
         {
             var tuple = NoteInterpretViewModel.FindNextMessageWithoutInterpretation(_messageDictionary);
@@ -134,24 +134,22 @@ namespace Render.Pages.Interpreter
 
             return await NavigateToAndReset(noteInterpretViewModel);
         }
-        
+
         private async Task<IRoutableViewModel> NavigateForwardAsync()
         {
             await SaveDraftAsync(Draft, Message, ViewModelContextProvider);
-            
+
             var tuple = NoteInterpretViewModel.FindNextMessageNeedingInterpretation(_messageDictionary);
             if (tuple != default)
             {
-                var viewModel = await Task.Run(async () =>
-                {
-                    return NoteInterpretViewModel.Create(Step, Section, tuple.draft, tuple.message,
-                        Stage, _messageDictionary, ViewModelContextProvider);
-                });
+                var viewModel = NoteInterpretViewModel.Create(Step, Section, tuple.draft, tuple.message,
+                    Stage, _messageDictionary, ViewModelContextProvider);
                 return await NavigateTo(viewModel);
             }
             await Task.Run(async () =>
             {
-                await ViewModelContextProvider.GetGrandCentralStation().AdvanceSectionAsync(Section, Step);
+                var sectionMovementService = ViewModelContextProvider.GetSectionMovementService();
+                await sectionMovementService.AdvanceSectionAsync(Section, Step, GetProjectId(), GetLoggedInUserId()); 
             });
             return await NavigateToHomeOnMainStackAsync();
         }
@@ -175,7 +173,7 @@ namespace Render.Pages.Interpreter
                 await draftRepository.SaveAsync(draft);
             }
         }
-        
+
         public override void Dispose()
         {
             Draft = null;

@@ -23,7 +23,7 @@ namespace Render.Pages.BackTranslator.RetellBackTranslate
         [Reactive] 
         public ISequencerPlayerViewModel SequencerPlayerViewModel { get; private set; }
 
-        public static async Task<TabletRetellPassageSelectPageViewModel> CreateAsync(
+        public static TabletRetellPassageSelectPageViewModel Create(
             IViewModelContextProvider viewModelContextProvider,
             Step step,
             Section section,
@@ -47,14 +47,12 @@ namespace Render.Pages.BackTranslator.RetellBackTranslate
             Stage stage) :
             base(urlPathSegment: "TabletRetellBTPassageSelect",
                 viewModelContextProvider: viewModelContextProvider,
-                pageName: AppResources.BackTranslate,
+                pageName: GetStepName(step),
                 section: section,
                 stage: stage,
                 step: step,
                 secondPageName: AppResources.PassageSelect)
         {
-            DisposeOnNavigationCleared = true;
-            TitleBarViewModel.DisposeOnNavigationCleared = true;
             
             TitleBarViewModel.PageGlyph =
                 ((FontImageSource)ResourceExtensions.GetResourceValue("RetellBackTranslateWhite"))?.Glyph;
@@ -110,7 +108,7 @@ namespace Render.Pages.BackTranslator.RetellBackTranslate
         {
             SequencerPlayerViewModel.TrySelectAudio(_audioToSelectIndex);
         }
-        
+
         private PlayerAudioModel CreateAudioPlayerModel(Passage passage)
         {
             AudioOption option;
@@ -120,15 +118,42 @@ namespace Render.Pages.BackTranslator.RetellBackTranslate
                 ? passage.CurrentDraftAudio
                 : passage.CurrentDraftAudio.RetellBackTranslationAudio;
 
-            var retellAudio = Step.Role != Roles.BackTranslate2
-                ? passage.CurrentDraftAudio.RetellBackTranslationAudio
-                : passage.CurrentDraftAudio.RetellBackTranslationAudio.RetellBackTranslationAudio;
-            
             var audioPath = ViewModelContextProvider
                 .GetTempAudioService(playerAudio)
                 .SaveTempAudio();
 
-            if (retellAudio != null && retellAudio.HasAudio)
+            bool passagesCheckmark = false;
+            bool segmentsCheckmark = false;
+
+            var pbtSetting = Step.StepSettings?.Settings.FirstOrDefault(ss => ss.SettingType == SettingType.DoRetellBackTranslate);                           
+            var sbtSetting = Step.StepSettings?.Settings.FirstOrDefault(ss => ss.SettingType == SettingType.DoSegmentBackTranslate);
+
+            var pbtRequired = pbtSetting?.Value ?? false;
+            var sbtRequired = sbtSetting?.Value ?? false;
+
+            var passageBackTranslationAudio = Step.Role != Roles.BackTranslate2
+                ? passage.CurrentDraftAudio.RetellBackTranslationAudio
+                : passage.CurrentDraftAudio.RetellBackTranslationAudio.RetellBackTranslationAudio;
+            if (!pbtRequired || passageBackTranslationAudio != null && passageBackTranslationAudio.HasAudio)
+            {
+                passagesCheckmark = true;
+            }
+
+            var allSegmentBackTranslationAudios = passage.CurrentDraftAudio.SegmentBackTranslationAudios.ToList();
+            var areAllSegmentsRecordedForFirstStep =
+                Step.Role != Roles.Transcribe2 &&
+                allSegmentBackTranslationAudios.Count > 0 &&
+                allSegmentBackTranslationAudios.All(x => x.HasAudio);
+            var areAllSegmentsRecordedForSecondStep =
+                Step.Role == Roles.Transcribe2 &&
+                allSegmentBackTranslationAudios.Count > 0 &&
+                allSegmentBackTranslationAudios.All(x => x.HasAudio);
+            if (!sbtRequired || areAllSegmentsRecordedForFirstStep || areAllSegmentsRecordedForSecondStep)
+            {
+                segmentsCheckmark = true;
+            }
+
+            if (passagesCheckmark && segmentsCheckmark)
             {
                 option = AudioOption.Completed;
                 endIcon = Icon.Checkmark.ToString();
@@ -173,7 +198,7 @@ namespace Render.Pages.BackTranslator.RetellBackTranslate
                     passage.CurrentDraftAudio.RetellBackTranslationAudio = newRetellBackTranslation;
                 }
 
-                var viewModel = await TabletRetellPassageTranslatePageViewModel.CreateAsync(ViewModelContextProvider,
+                var viewModel = TabletRetellPassageTranslatePageViewModel.Create(ViewModelContextProvider,
                     Step, Section, passage, passage.CurrentDraftAudio.RetellBackTranslationAudio, Stage);
 
                 return await NavigateTo(viewModel);

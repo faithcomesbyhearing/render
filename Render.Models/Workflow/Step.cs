@@ -6,7 +6,9 @@ namespace Render.Models.Workflow
 {
     public class Step : DomainEntity
     {
-	    /// <summary>
+        private const int Version = 1;
+        
+        /// <summary>
 	    /// The ordering of the steps.
 	    /// </summary>
 	    public enum Ordering
@@ -15,18 +17,35 @@ namespace Render.Models.Workflow
 		    Parallel,
 		    Optional
 	    }
+        
+        [JsonProperty("CustomName")]
+        public string CustomName { get; set; }
 
 	    [JsonConverter(typeof(StringEnumConverter))]
         [JsonProperty("Order")]
-        public Ordering Order { get; }
-        
+        public Ordering Order { get; private set; }
+
         /// <summary>
         /// An enum that differentiates specific steps for the purpose of telling navigation which page to go to
         /// when it's a work step and what icon to display when it's a workflow entry step
         /// </summary>
-        [JsonConverter(typeof(StringEnumConverter))]
         [JsonProperty("RenderStepType")]
-        public RenderStepTypes RenderStepType { get; }
+        private string RenderStepTypeString { get; set; }
+
+        [JsonIgnore]
+        public RenderStepTypes RenderStepType
+        {
+            get => Enum.TryParse(RenderStepTypeString, true, out RenderStepTypes enumValue) && Enum.IsDefined(typeof(RenderStepTypes), enumValue)
+                ? enumValue
+                : RenderStepTypes.Unknown;
+            private set
+            {
+                if (value != RenderStepTypes.Unknown)
+                {
+                    RenderStepTypeString = value.ToString();
+                }
+            }
+        }
 
         /// <summary>
         /// The name of the role that can accomplish this step
@@ -47,19 +66,24 @@ namespace Render.Models.Workflow
         [JsonProperty("StepSettings")]
         public WorkflowSettings StepSettings { get; set; } = new WorkflowSettings(Setting.IsActive);
 
-		public Step(
-            RenderStepTypes renderStepType = RenderStepTypes.NotSpecial, 
-            Roles role = Roles.None, 
-            Ordering order = Ordering.Sequential, 
-            WorkflowSettings settings = null) : base(0)
-	    {
-		    Order = order;
-            RenderStepType = renderStepType;
-            Role = role;
+        [JsonConstructor]
+        private Step(WorkflowSettings settings) : base(Version)
+        {
             if (settings != null)
             {
                 StepSettings = settings;
             }
+        }
+
+        public Step(
+            RenderStepTypes renderStepType = RenderStepTypes.NotSpecial,
+            Roles role = Roles.None,
+            Ordering order = Ordering.Sequential,
+            WorkflowSettings settings = null) : this(settings)
+        {
+            Order = order;
+            RenderStepType = renderStepType;
+            Role = role;
         }
         
         public virtual void AddStep(Step renderStep)
@@ -109,7 +133,9 @@ namespace Render.Models.Workflow
         {
             var steps = new List<Step>();
             if (IsLeaf && (!onlyActive || IsActive())
-                       && RenderStepType != RenderStepTypes.HoldingTank && RenderStepType != RenderStepTypes.NotSpecial) 
+                       && RenderStepType != RenderStepTypes.HoldingTank
+                       && RenderStepType != RenderStepTypes.NotSpecial
+                       && RenderStepType != RenderStepTypes.Unknown)
             {
                 steps.Add(this);
             }

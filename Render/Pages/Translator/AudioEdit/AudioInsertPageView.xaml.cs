@@ -13,7 +13,7 @@ namespace Render.Pages.Translator.AudioEdit
             
             this.WhenActivated(d =>
             {
-                d(this.OneWayBind(ViewModel, vm => vm.FlowDirection, v => v.Layout.FlowDirection));
+                d(this.OneWayBind(ViewModel, vm => vm.FlowDirection, v => v.ComponentLayout.FlowDirection));
                 d(this.OneWayBind(ViewModel, vm => vm.MiniAudioRecorderViewModel, v => v.MiniRecorder.BindingContext));
 
                 d(this.BindCommandCustom(RecordGesture, v => v.ViewModel.MiniAudioRecorderViewModel.StartRecordingCommand));

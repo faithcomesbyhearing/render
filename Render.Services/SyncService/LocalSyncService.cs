@@ -1,213 +1,182 @@
 ﻿using System.Net;
-using System.Net.NetworkInformation;
-using System.Net.Sockets;
-using System.Reflection;
-using System.Text;
-using System.Timers;
-using Microsoft.Extensions.Configuration;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Render.Interfaces;
-using Render.Repositories.Kernel;
-using Render.TempFromVessel.Kernel;
-using Timer = System.Timers.Timer;
 
 namespace Render.Services.SyncService
 {
+    public enum CurrentSynchronizationRole
+    {
+        NotSet,
+        Hub,
+        ActiveReplicator
+    }
+
     public class LocalSyncService : ReactiveObject, ILocalSyncService
     {
-        [Reactive]
-        public CurrentSyncStatus CurrentSyncStatus { get; private set; } = CurrentSyncStatus.NotStarted;
-        public int ConnectionCount { get; private set; }
-        public LocalSyncStatus LocalSyncStatus { get; private set; }
-        public List<Device> ConnectedDevices { get; set; } = new List<Device>();
+        [Reactive] public CurrentSyncStatus CurrentSyncStatus { get; private set; } = CurrentSyncStatus.NotStarted;
 
-        private SemaphoreSlim ReplicationStatusSemaphoreSlim { get; } = new SemaphoreSlim(1);
-        private SemaphoreSlim HandshakeSemaphoreSlim { get; } = new SemaphoreSlim(1);
+        private CurrentSynchronizationRole CurrentSyncRole { get; set; }
 
-        private readonly IRenderLogger _logger;
-        private readonly ILocalReplicator _renderReplicatorWrapper;
-        private readonly ILocalReplicator _renderRenderProjectsReplicatorWrapper;
-        private readonly ILocalReplicator _audioReplicatorWrapper;
-        
-        private UdpClient _discoveryAsActive;
-        private UdpClient _discoveryAsPassive;
-        private readonly Guid _thisAppId = Guid.NewGuid();
-        private const int PortNumber = 15000;
-        private string _username;
-        private Guid _projectId;
-        private IPEndPoint _listenEndPoint;
-        private Timer _broadcastTimer;
-        private Timer _listenTimer;
-        private bool _isInHandshakeProcess;
+        private SemaphoreSlim ReplicationStatusSemaphoreSlim { get; set; } = new(1);
+
+        private readonly IHandshakeService _handshakeService;
+        private readonly ILocalReplicationService _localReplicationService;
+        private readonly IRenderLogger _renderLogger;
+
+        private bool _alreadyCancelled;
 
         public LocalSyncService(
-            IAppSettings appSettings,
-            IRenderLogger logger,
-            ILocalReplicator renderReplicatorWrapper,
-            ILocalReplicator renderProjectsReplicatorWrapper,
-            ILocalReplicator audioReplicatorWrapper)
+            IHandshakeService handshakeService,
+            ILocalReplicationService localReplicationService,
+            IRenderLogger renderLogger)
         {
-            _logger = logger;
-            _renderReplicatorWrapper = renderReplicatorWrapper;
-            _renderRenderProjectsReplicatorWrapper = renderProjectsReplicatorWrapper;
-            _audioReplicatorWrapper = audioReplicatorWrapper;
-            
-            _renderReplicatorWrapper.Configure(
-                Buckets.render.ToString(),
-                appSettings.CouchbaseStartingPort,
-                appSettings.CouchbasePeerUsername,
-                appSettings.CouchbasePeerPassword);
-            _renderRenderProjectsReplicatorWrapper.Configure(
-                Buckets.render.ToString(),
-                appSettings.CouchbaseStartingPort + 1,
-                appSettings.CouchbasePeerUsername,
-                appSettings.CouchbasePeerPassword);
-            _audioReplicatorWrapper.Configure(
-                Buckets.renderaudio.ToString(),
-                appSettings.CouchbaseStartingPort + 3,
-                appSettings.CouchbasePeerUsername,
-                appSettings.CouchbasePeerPassword);
+            _handshakeService = handshakeService;
+            _localReplicationService = localReplicationService;
+            _renderLogger = renderLogger;
 
-            _renderReplicatorWrapper.SyncStatusUpdate += SetCurrentReplicationStatus;
-            _renderRenderProjectsReplicatorWrapper.SyncStatusUpdate += SetCurrentReplicationStatus;
-            _audioReplicatorWrapper.SyncStatusUpdate += SetCurrentReplicationStatus;
-
-            _broadcastTimer = new Timer();
-            _broadcastTimer.Interval = 1000;
-            _broadcastTimer.AutoReset = true;
-            _broadcastTimer.Elapsed += BroadcastHelloAsPassiveServer;
+            _localReplicationService.SubscribeOnSyncUpdateAction(SetCurrentReplicationStatus);
         }
 
-        public bool BeginActiveLocalReplication(Device device, Guid projectId)
+        public async Task StartLocalSync(string username, Guid projectId)
         {
-            try
+            if (_handshakeService.IsInHandshakeProcess())
             {
-                _logger.LogInfo("Local replication started");
+                return; // subsequent threads do nothing because the first set this
+            }
 
-                SetStatus(LocalSyncStatus.Active);
-                if (ConnectedDevices.All(a => !a.Address.Equals(device.Address) && !a.Name.Equals(device.Name)))
+            // prevent multiple replicators from starting eg upon multiple presses of sync button
+            if (CurrentSyncRole != CurrentSynchronizationRole.NotSet) return;
+
+            _renderLogger.LogInfo("Local synchronization has been started");
+
+            CurrentSyncStatus = CurrentSyncStatus.Looking;
+
+            var broadcastMessage = await _handshakeService.TryToFindBroadcastForSync(projectId);
+
+            if (broadcastMessage is not null)
+            {
+                var hubToConnect = await
+                    _handshakeService.StartToConnectToServer(broadcastMessage, ConnectionTask.SyncProject);
+
+                if (hubToConnect is not null)
                 {
-                    ConnectedDevices.Add(device);
+                    BecomeAnActiveLocalReplicator(hubToConnect);
+                    return;
                 }
+            }
 
-                device.IsConnected = true;
-                _renderReplicatorWrapper.AddReplicator(device, projectId, new List<string>{projectId.ToString()});
-                _renderRenderProjectsReplicatorWrapper.AddReplicator(device, projectId, new List<string>{projectId.ToString()});
-                _audioReplicatorWrapper.AddReplicator(device, projectId, new List<string>{projectId.ToString()});
-                return true;
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e);
-                return false;
-            }
+            BecomeAHub(projectId, username);
         }
 
         public void StopLocalSync()
         {
-            if (LocalSyncStatus == LocalSyncStatus.Active)
+            switch (CurrentSyncRole)
             {
-                CancelActiveLocalReplications();
-            }
-            else if (LocalSyncStatus == LocalSyncStatus.Passive)
-            {
-                CancelPassiveConnection();
+                case CurrentSynchronizationRole.ActiveReplicator:
+                    CancelActiveLocalReplication();
+                    break;
+                case CurrentSynchronizationRole.Hub:
+                    CancelHubRole();
+                    break;
+                case CurrentSynchronizationRole.NotSet:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
 
-        private void CancelActiveLocalReplications()
+        private void BecomeAnActiveLocalReplicator(Device hubToConnect)
         {
-            _renderReplicatorWrapper.CancelActiveReplications(ConnectedDevices);
-            _renderRenderProjectsReplicatorWrapper.CancelActiveReplications(ConnectedDevices);
-            _audioReplicatorWrapper.CancelActiveReplications(ConnectedDevices);
-            ConnectedDevices.Clear();
-            SetStatus(LocalSyncStatus.NotSet);
+            _alreadyCancelled = false;
+            
+            _handshakeService.SubscribeOnServerDisconnected(CancelActiveLocalReplication);
+
+            _localReplicationService.BeginActiveLocalReplicators(hubToConnect, hubToConnect.ProjectId);
+
+            SetStatus(CurrentSynchronizationRole.ActiveReplicator);
+
+            _renderLogger.LogInfo("This device has become an active replicator");
         }
 
-        public void BeginPassiveLocalReplication()
+        private void BecomeAHub(Guid projectId, string username)
         {
-            SetStatus(LocalSyncStatus.Passive);
-            _renderReplicatorWrapper.StartPassiveListener();
-            _renderRenderProjectsReplicatorWrapper.StartPassiveListener();
-            _audioReplicatorWrapper.StartPassiveListener();
+            _localReplicationService.BeginPassiveLocalListeners();
+
+            _handshakeService.StartServerAndBroadcast(projectId, username);
+
+            SetStatus(CurrentSynchronizationRole.Hub);
+
+            _renderLogger.LogInfo("This device has become a HUB");
+
+            _ = TryAgainToFindAHubToBecomeAnActiveReplicator(projectId);
         }
 
-        private void CancelPassiveConnection()
+        private void CancelActiveLocalReplication()
         {
-            _renderReplicatorWrapper.CancelPassiveListener();
-            _renderRenderProjectsReplicatorWrapper.CancelPassiveListener();
-            _audioReplicatorWrapper.CancelPassiveListener();
-            ConnectionCount = 0;
-            SetStatus(LocalSyncStatus.NotSet);
-        }
-
-        private void ResetForNewHandshakeProcess()
-        {
-            HandshakeSemaphoreSlim.Wait();
-            try
+            if (_alreadyCancelled)
             {
-                _isInHandshakeProcess = false;
-                _broadcastTimer.Stop();
-                _discoveryAsActive?.Close();
-                _discoveryAsActive?.Dispose();
-                _discoveryAsPassive?.Close();
-                _discoveryAsPassive?.Dispose();
+                return;
             }
-            catch (Exception e)
+
+            _handshakeService.UnsubscribeOnServerDisconnected(CancelActiveLocalReplication);
+            
+            _alreadyCancelled = true;
+
+            _localReplicationService.CancelActiveLocalReplications(_handshakeService.GetConnectedServer());
+
+            _handshakeService.DisconnectFromServer();
+
+            SetStatus(CurrentSynchronizationRole.NotSet);
+
+            _renderLogger.LogInfo("This device stopped active replication");
+        }
+
+        private void CancelHubRole()
+        {
+            _handshakeService.StopServerAndBroadcast();
+
+            _localReplicationService.CancelPassiveLocalListeners();
+
+            SetStatus(CurrentSynchronizationRole.NotSet);
+
+            _renderLogger.LogInfo("This device stopped being a hub");
+        }
+
+        private void SetStatus(CurrentSynchronizationRole currentSynchronizationRole)
+        {
+            CurrentSyncRole = currentSynchronizationRole;
+
+            if (currentSynchronizationRole == CurrentSynchronizationRole.NotSet)
             {
-                _logger.LogError(e);
-            }
-            finally
-            {
-                HandshakeSemaphoreSlim.Release();
+                _handshakeService.ResetHandshakeProcess();
+
+                _localReplicationService.DisposeReplicators();
+
+                ResetStatusState();
             }
         }
 
         private async void SetCurrentReplicationStatus()
         {
             await ReplicationStatusSemaphoreSlim.WaitAsync();
+
             try
             {
-                switch (LocalSyncStatus)
+                switch (CurrentSyncRole)
                 {
-                    case LocalSyncStatus.Passive:
+                    case CurrentSynchronizationRole.Hub:
                     {
-                        var listOfPassiveConnections = new List<int>
-                        {
-                            _renderReplicatorWrapper.PassiveConnections,
-                            _renderRenderProjectsReplicatorWrapper.PassiveConnections,
-                            _audioReplicatorWrapper.PassiveConnections
-                        };
-                        ConnectionCount = listOfPassiveConnections.Min();
-                        if (ConnectionCount == 0)
-                        {
-                            CurrentSyncStatus = CurrentSyncStatus.Looking;
-                            //Set local sync status to NotSet?
-                        }
-                        else
-                        {
-                            CurrentSyncStatus = CurrentSyncStatus.ActiveReplication;
-                        }
+                        CurrentSyncStatus = HasActiveConnections()
+                            ? CurrentSyncStatus.ActiveReplication
+                            : CurrentSyncStatus.Looking;
                         break;
                     }
-                    case LocalSyncStatus.Active:
+                    case CurrentSynchronizationRole.ActiveReplicator:
 
-                        ConnectionCount = ConnectedDevices.Count(x => x.IsConnected);
-                        if (ConnectedDevices.Any(x => !x.IsConnected))
-                        {
-                            CurrentSyncStatus = CurrentSyncStatus.ErrorEncountered;
-                            CancelActiveLocalReplications();
-                        }
-                        else if (ConnectionCount > 0)
-                        {
-                            CurrentSyncStatus = CurrentSyncStatus.ActiveReplication;
-                        }
-
+                        CurrentSyncStatus = GetActiveReplicationStatus();
                         break;
-                    case LocalSyncStatus.NotSet:
-                    default:
-                        ConnectionCount = 0;
+                    case CurrentSynchronizationRole.NotSet:
                         break;
                 }
             }
@@ -217,184 +186,57 @@ namespace Render.Services.SyncService
             }
         }
 
-        private void SetStatus(LocalSyncStatus status)
+        private CurrentSyncStatus GetActiveReplicationStatus()
         {
-            LocalSyncStatus = status;
-            if (status == LocalSyncStatus.NotSet)
+            var currentHub = _handshakeService.GetConnectedServer();
+
+            if (currentHub is { IsConnected: true })
             {
-                ResetForNewHandshakeProcess();
+                return CurrentSyncStatus.ActiveReplication;
             }
+
+            CancelActiveLocalReplication();
+            return CurrentSyncStatus.ErrorEncountered;
         }
 
-        public void StartLocalSync(string username, Guid projectId)
+        private bool HasActiveConnections()
         {
-            _projectId = projectId;
-            // prevent multiple replicators from starting eg upon multiple presses of sync button
-            if (LocalSyncStatus != LocalSyncStatus.NotSet) return;
-            
-            _username = username;
-            CurrentSyncStatus = CurrentSyncStatus.Looking;
-            Task.Run(BeginListeningToBecomeActiveReplicator);
-        }
-        
-        private void BeginListeningToBecomeActiveReplicator()
-        {
-            // prevent multiple concurrent handshakes, eg upon quick presses of sync button
-            HandshakeSemaphoreSlim.Wait();
-            try
-            {
-                if (_isInHandshakeProcess)
-                {
-                    return;     // subsequent threads do nothing because the first set this
-                }
-                else
-                {
-                    _isInHandshakeProcess = true;   // the first thread sets this and proceeds
-                }
-            }
-            finally
-            {
-                HandshakeSemaphoreSlim.Release();
-            }
-            
-            _listenEndPoint = new IPEndPoint(IPAddress.Any, PortNumber);
-            _discoveryAsActive = new UdpClient(PortNumber);
-
-            var timeToWait = TimeSpan.FromSeconds(3);
-            var asyncResult = _discoveryAsActive.BeginReceive(null, _listenEndPoint);
-            asyncResult.AsyncWaitHandle.WaitOne(timeToWait);
-            if (asyncResult.IsCompleted)
-            {
-                ReceiveHiFromPassiveServerToStartActiveReplication(asyncResult);
-            }
-            else
-            {
-                _discoveryAsActive.Close();
-                BecomePassiveServer();
-            }
+            return _localReplicationService.GetCouchbasePassiveConnectionCount() > 0
+                   && _handshakeService.GetConnectedClientsCount() > 0;
         }
 
-        private void ReceiveHiFromPassiveServerToStartActiveReplication(IAsyncResult asyncResult)
+        private async Task TryAgainToFindAHubToBecomeAnActiveReplicator(Guid projectId)
         {
-            try
+            var broadcastMessage = await _handshakeService.TryToFindBroadcastForSync(projectId);
+
+            if (broadcastMessage != null)
             {
-                var data = _discoveryAsActive.EndReceive(asyncResult, ref _listenEndPoint);
-                var msg = Encoding.ASCII.GetString(data);
-                var msgArr = msg.Split(':');
-                var remoteId = Guid.Parse(msgArr[0]);
-                if (remoteId != _thisAppId)
+                var remoteHubIpAddress = IPAddress.Parse(broadcastMessage.IpAddress);
+                var currentDeviceShouldBecomeClient =
+                    _handshakeService.CurrentDeviceShouldBecomeClient(remoteHubIpAddress);
+
+                if (currentDeviceShouldBecomeClient)
                 {
-                    Guid listenerCurrentProjectId = Guid.Empty;
-                    if (msgArr.Length >=4 && Guid.TryParse(msgArr[3], out listenerCurrentProjectId) && listenerCurrentProjectId != _projectId)
+                    _renderLogger.LogInfo(
+                        "This device discovered another hub on the network and is trying to become an active replicator");
+
+                    CancelHubRole();
+                    var hubToConnect = await _handshakeService.StartToConnectToServer(broadcastMessage,
+                        ConnectionTask.SyncProject);
+                    if (hubToConnect is null)
                     {
-                        _isInHandshakeProcess = false;
-                        _discoveryAsActive.Close();
-                        BecomePassiveServer();
                         return;
                     }
-
-                    var remoteIp = IPAddress.Parse(msgArr[1]);
-                    var name = msgArr[2];
-
-                    var device = new Device
-                    {
-                        Address = remoteIp,
-                        Name = name,
-                        ProjectId = listenerCurrentProjectId
-                    };
-
-                    BeginActiveLocalReplication(device, _projectId);
+                    BecomeAnActiveLocalReplicator(hubToConnect);
                 }
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e);
-            }
-            finally
-            {
-                _discoveryAsActive?.Close();
             }
         }
 
-        private void BecomePassiveServer()
+        private void ResetStatusState()
         {
-            BeginPassiveLocalReplication();
-            _broadcastTimer.Start();
-            _discoveryAsPassive = new UdpClient(PortNumber);
-            
-            _listenTimer = new Timer();
-            _listenTimer.Interval = 3000;
-            _listenTimer.AutoReset = false;
-            _listenTimer.Elapsed += PassiveServerListenTimeout;
-            _listenTimer.Start();
-            _discoveryAsPassive.BeginReceive(ReceiveHiFromAnotherPassiveServer, _listenEndPoint);
-        }
-        
-        private void PassiveServerListenTimeout(object sender, ElapsedEventArgs e)
-        {
-            _listenTimer.Stop();
-            _discoveryAsPassive?.Close();
-        }
-
-        private void ReceiveHiFromAnotherPassiveServer(IAsyncResult asyncResult)
-        {
-            try
-            {
-                var data = _discoveryAsPassive.EndReceive(asyncResult, ref _listenEndPoint);
-                var msg = Encoding.ASCII.GetString(data);
-                var msgArr = msg.Split(':');
-                var remoteId = Guid.Parse(msgArr[0]);
-                if (remoteId != _thisAppId)
-                {
-                    CancelPassiveConnection();
-                    BeginListeningToBecomeActiveReplicator();
-                }
-                else
-                {
-                    _discoveryAsPassive.BeginReceive(ReceiveHiFromAnotherPassiveServer, _listenEndPoint);
-                }
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e);
-            }
-        }
-        
-        private void BroadcastHelloAsPassiveServer(object sender, ElapsedEventArgs e)
-        {
-            var endpoint = NetworkInterface.GetAllNetworkInterfaces()
-                .FirstOrDefault(x => x.OperationalStatus == OperationalStatus.Up);
-            var ipProps = endpoint?.GetIPProperties();
-            var ip = ipProps?.UnicastAddresses.FirstOrDefault(x =>
-                x.Address.AddressFamily == AddressFamily.InterNetwork);
-            using (var socket = new Socket(
-                       AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
-            {
-                var group = new IPEndPoint(IPAddress.Broadcast, PortNumber);
-                socket.EnableBroadcast = true;
-                var hi = Encoding.ASCII.GetBytes(
-                    $"{_thisAppId}:{ip?.Address}:{_username}:{_projectId}");
-                try
-                {
-                    socket.SendTo(hi, group);
-                }
-                catch (SocketException ex)
-                {
-                    // on android, the SocketException exception is thrown if "Network is unreachable" (10051)
-                    if (ex.ErrorCode == 10051)
-                    {
-                        _logger.LogInfo("HandshakeService failed. Socket Error 10051: 'Network is unreachable'");
-                    }
-                    else
-                    {
-                        _logger.LogError(ex);
-                    }
-                }
-                finally
-                {
-                    socket.Close();
-                }
-            }
+            _localReplicationService.UnsubscribeOnSyncUpdateAction(SetCurrentReplicationStatus);
+            ReplicationStatusSemaphoreSlim = new SemaphoreSlim(1);
+            _localReplicationService.SubscribeOnSyncUpdateAction(SetCurrentReplicationStatus);
         }
     }
 }

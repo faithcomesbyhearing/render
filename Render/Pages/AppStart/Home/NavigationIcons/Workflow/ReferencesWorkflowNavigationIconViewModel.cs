@@ -19,15 +19,20 @@ public class ReferencesWorkflowNavigationIconViewModel : WorkflowNavigationIconV
         var viewModel = await Task.Run(async () =>
         {
             var workflowRepository = ViewModelContextProvider.GetWorkflowRepository();
-            var workflow = await workflowRepository.GetWorkflowForProjectIdAsync(GrandCentralStation.CurrentProjectId);
-            var sectionsAtStep = GrandCentralStation.SectionsAtStep(Step.Id);
-            var priorSectionId = workflow.AllSectionAssignments
+            var workflow = await workflowRepository.GetWorkflowForProjectIdAsync(GetProjectId());
+            var sectionsAtStep = StageService.SectionsAtStep(Step.Id);
+            var sectionAssignments = workflow.AllSectionAssignments
                 .OrderBy(assignment => assignment.Priority)
-                .Select(assignment => assignment.SectionId)
+                .Select(assignment => assignment.SectionId);
+            var priorSectionId = sectionAssignments
                 .Intersect(sectionsAtStep)
-                .First();
+                .FirstOrDefault();
+            if (priorSectionId == default)
+            {
+                priorSectionId = sectionAssignments.FirstOrDefault();
+            }
 
-            var section = await _sectionRepository.GetSectionWithReferencesAsync(priorSectionId);
+            var section = await SectionRepository.GetSectionWithReferencesAsync(priorSectionId);
 
             if (IsSectionDocumentMissing(priorSectionId, section) || IsAudioMissing(section, Step.RenderStepType))
             {
@@ -39,7 +44,7 @@ public class ReferencesWorkflowNavigationIconViewModel : WorkflowNavigationIconV
 
         if (viewModel != null)
         {
-            return await HostScreen.Router.NavigateAndReset.Execute(viewModel);
+            return await NavigateToAndReset(viewModel);
         }
 
         return null;

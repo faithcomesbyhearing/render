@@ -75,9 +75,12 @@ namespace Render.Models.Users
             return Claims.Where(x => x.Type == claimType && x.Value == claimName).Select(x => x.RoleId).ToList();
         }
         
-        public List<Role> RolesForProject(string claimType, string claimName)
+        public List<RoleName> RolesForProject(string claimType, string claimName)
         {
-            return Claims.Where(x => x.Type == claimType && x.Value == claimName).Select(x => RenderRolesAndClaims.GetRoleById(x.RoleId)).ToList();
+            return Claims
+                .Where(x => x.Type == claimType && x.Value == claimName)
+                .Select(x => RenderRolesAndClaims.GetRoleName(x.RoleId))
+                .ToList();
         }
 
         public void SetUserIcon(byte[] image)

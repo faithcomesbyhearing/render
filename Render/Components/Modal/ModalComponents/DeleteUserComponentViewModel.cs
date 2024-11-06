@@ -29,8 +29,8 @@ public class DeleteUserComponentViewModel : ViewModelBase
     
     private async Task OnViewSectionAssignmentsPressedAsync()
     {
-        var projectId = ViewModelContextProvider.GetGrandCentralStation().CurrentProjectId;
-        var vm = await SectionAssignmentPageViewModel.CreateAsync(ViewModelContextProvider, projectId, false, TeamId);
+        var projectId = GetProjectId();
+        var vm = await SectionAssignmentPageViewModel.CreateAsync(ViewModelContextProvider, projectId, TeamId);
         await NavigateToAndReset(vm);
     } 
 }

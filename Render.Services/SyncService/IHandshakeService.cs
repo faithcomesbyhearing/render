@@ -1,16 +1,30 @@
-﻿namespace Render.Services.SyncService
+using System.Net;
+
+namespace Render.Services.SyncService;
+
+public interface IHandshakeService
 {
-    public interface IHandshakeService
-    {
-        List<Device> AvailableDevices { get; } 
+    Task<BroadcastMessage> TryToFindBroadcastForSync(Guid projectId, bool includeTimeout = false);
+    bool IsInHandshakeProcess();
+    void ResetHandshakeProcess();
 
-        event Action<Device> DeviceAvailable;
+    #region Client
 
-        event Action Timeout;
+    event Action ConnectionTimeOut;
+    public Task<Device> StartToConnectToServer(BroadcastMessage broadcastMessage, ConnectionTask connectionTask);
+    void DisconnectFromServer();
+    void SubscribeOnServerDisconnected(Action onServerDisconnect);
+    void UnsubscribeOnServerDisconnected(Action onServerDisconnect);
+    Device GetConnectedServer();
 
-        void BeginListener(bool includeTimeout = false);
+    #endregion
 
-        void MakeDiscoverable(string username);
-        void CloseUDPListener();
-    }
+    #region Server
+
+    void StartServerAndBroadcast(Guid projectId, string username);
+    void StopServerAndBroadcast();
+    int GetConnectedClientsCount();
+    bool CurrentDeviceShouldBecomeClient(IPAddress remoteHubIpAddress);
+
+    #endregion
 }

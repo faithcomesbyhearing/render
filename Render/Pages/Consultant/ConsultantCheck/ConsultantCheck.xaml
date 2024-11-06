@@ -12,6 +12,7 @@
                        xmlns:sequencer="clr-namespace:Render.Sequencer;assembly=Render.Sequencer"
                        xmlns:consultant="clr-namespace:Render.Components.Consultant"
                        xmlns:barPlayer="clr-namespace:Render.Components.BarPlayer"
+                       xmlns:revisionComponent="clr-namespace:Render.Components.Revision"
                        x:Class="Render.Pages.Consultant.ConsultantCheck.ConsultantCheck"
                        xmlns:localization="clr-namespace:Render.Resources.Localization"
                        NavigationPage.HasNavigationBar="False">
@@ -51,27 +52,8 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <HorizontalStackLayout x:Name="RevisionLayout"
-                                       Spacing="10"
-                                       VerticalOptions="Start">
-                    <Label Text="{x:Static localization:AppResources.Revision}"
-                           FontAttributes="Bold"
-                           VerticalTextAlignment="Center"
-                           HorizontalTextAlignment="Start"
-                           TextColor="{StaticResource MainText}"
-                           FontSize="{StaticResource SmallFont}"
-                           AutomationId="RevisionLabel"/>
-                    <Border Style="{StaticResource DraftPickerBorder}"
-                            AutomationId="RevisionPickerFrame"
-                            VerticalOptions="Center">
-                        <Picker x:Name="RevisionPicker"
-                                Style="{StaticResource DraftPicker}"
-                                SelectedIndex="0"
-                                AutomationId="RevisionPicker"
-                                ItemDisplayBinding="{Binding Value}"/>
-                    </Border>
-                </HorizontalStackLayout>
-                
+                <revisionComponent:MultipleRevision x:Name="RevisionComponent"/>
+
                 <Grid Grid.Column="2"
                       x:Name="ButtonList"
                       ColumnSpacing="10">
@@ -86,8 +68,8 @@
                     </Grid.RowDefinitions>
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
-                            <consultantCheckComponents:MenuButton Grid.Column="{Binding GridColumn}"
-                                                                  Grid.Row="{Binding GridRow}"/>
+                            <consultantCheckComponents:MenuButton x:DataType="consultantCheckComponents:MenuButtonViewModel"
+                                                                  Grid.Column="{Binding GridColumn}" Grid.Row="{Binding GridRow}"/>
                         </DataTemplate>
                     </BindableLayout.ItemTemplate>
                 </Grid>
@@ -101,6 +83,7 @@
                                  x:Name="Sequencer"/>
             
             <!-- References slide-out -->
+            <!--TODO: Remove redundant scroll, replace collectionView with BindableLayout"-->
             <ScrollView Grid.Row="2"
                         Grid.Column="0"
                         BackgroundColor="{StaticResource DraftSelectionBackgroundUnselected}"

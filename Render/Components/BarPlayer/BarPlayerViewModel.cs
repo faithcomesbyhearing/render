@@ -37,7 +37,9 @@ namespace Render.Components.BarPlayer
 
         [Reactive] public Color SecondaryButtonBackgroundColor { get; set; }
 
-        [Reactive] public float[] AudioSamples { get; set; }
+		[Reactive] public Color GlyphColor { get; private set; }
+
+		[Reactive] public float[] AudioSamples { get; set; }
 
         [Reactive] public BarPlayerPassagePainter PassagePainter { get; set; }
 
@@ -260,7 +262,7 @@ namespace Render.Components.BarPlayer
             }
         }
 
-        public void Pause()
+        public virtual void Pause()
         {
             if (AudioPlayerService != null && AudioPlayerService.AudioPlayerState == AudioPlayerState.Playing)
             {
@@ -269,7 +271,7 @@ namespace Render.Components.BarPlayer
             }
         }
 
-        private void AudioPlayerServiceOnOnPlayerEnd()
+        protected virtual void AudioPlayerServiceOnOnPlayerEnd()
         {
             AudioPlayerService.Seek(0);
             SetState(ActionState.Optional);
@@ -295,7 +297,12 @@ namespace Render.Components.BarPlayer
             SecondaryButtonBackgroundColor = color;
         }
 
-        public override void Dispose()
+		public void SetGlyphColor(Color color)
+		{
+			GlyphColor = color;
+		}
+
+		public override void Dispose()
         {
             Pause();
 

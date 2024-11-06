@@ -54,11 +54,14 @@ internal abstract class BaseSequencerViewModel<TWaveFormViewModel, TScrollerView
     [Reactive]
     public SequencerState State { get; private set; }
 
-    public TWaveFormViewModel WaveFormViewModel { get; protected set; }
-    public TScrollerViewModel ScrollerViewModel { get; protected set; }
+    public TWaveFormViewModel? WaveFormViewModel { get; protected set; }
+    public TScrollerViewModel? ScrollerViewModel { get; protected set; }
     public ToolbarViewModel ToolbarViewModel { get; protected set; }
 
-    protected BaseSequencerViewModel(
+    BaseWaveFormViewModel? ISequencerViewModel.WaveFormViewModel => WaveFormViewModel;
+	BaseScrollerViewModel? ISequencerViewModel.ScrollerViewModel => ScrollerViewModel;
+
+	protected BaseSequencerViewModel(
         SequencerMode mode,
         Func<IAudioPlayer> playerFactory,
         Func<IAudioRecorder>? recorderFactory,
@@ -70,7 +73,7 @@ internal abstract class BaseSequencerViewModel<TWaveFormViewModel, TScrollerView
         Sequencer = new InternalSequencer(mode, flagType, playerFactory, recorderFactory, isCombining, isEditor);
         ToolbarViewModel = new ToolbarViewModel(mode, Sequencer);
 
-        StopCommand = ReactiveCommand.CreateFromTask<bool?>(StopAsync);
+		StopCommand = ReactiveCommand.CreateFromTask<bool?>(StopAsync);
 
         SetupListeners();
     }
@@ -126,7 +129,7 @@ internal abstract class BaseSequencerViewModel<TWaveFormViewModel, TScrollerView
 
     public bool TrySelectAudio(int index)
     {
-        return WaveFormViewModel.TrySelectWaveForm(index);
+        return WaveFormViewModel?.TrySelectWaveForm(index) ?? false;
     }
 
     protected virtual void SetupListeners()

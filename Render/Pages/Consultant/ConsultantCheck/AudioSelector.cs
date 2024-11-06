@@ -46,16 +46,18 @@ public class AudioSelector
         return SelectAudios(passages, audioType).Select(a => a.Audio).Where(a => a is not null);
     }
 
-    public PlayerAudioModel[] SelectAudioModels(IEnumerable<Passage> passages, ParentAudioType audioType, Predicate<Conversation> conversationsFilter)
+    public PlayerAudioModel[] SelectAudioModels(IEnumerable<Passage> passages, ParentAudioType audioType, Predicate<Conversation> conversationsFilter, bool requireNoteListen)
     {
         var audios = SelectAudios(passages, audioType);
 
         return audios.Where(a => a.Audio != null)
             .Select(a => a.Audio.CreatePlayerAudioModel(
-                audioType,
-                a.Name,
-                _viewModelContextProvider.GetTempAudioService(a.Audio).SaveTempAudio(),
-                conversationsFilter: conversationsFilter))
+                audioType: audioType,
+                name: a.Name,
+                path: _viewModelContextProvider.GetTempAudioService(a.Audio).SaveTempAudio(),
+                conversationsFilter: conversationsFilter,
+                userId: _viewModelContextProvider.GetLoggedInUser().Id,
+                requireNoteListen: requireNoteListen))
             .ToArray();
     }
 }

@@ -7,9 +7,5 @@ namespace Render.Repositories.LocalDataRepositories
         Task<MachineLoginState> GetMachineLoginState();
 
         Task SaveMachineLoginState(MachineLoginState machineLoginState);
-
-        Task PurgeForProject(Guid projectId);
-
-        Task PurgeAllLoginState(Guid machineLoginStateId);
     }
 }

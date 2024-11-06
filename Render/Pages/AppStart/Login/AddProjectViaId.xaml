@@ -7,10 +7,10 @@
                        xmlns:login="clr-namespace:Render.Pages.AppStart.Login;assembly=Render"
                        xmlns:resources="clr-namespace:Render.Resources.Localization"
                        xmlns:uiResources="clr-namespace:Render.Resources"
-                       xmlns:addViaFolder="using:Render.Components.AddViaFolder"
                        xmlns:versionLabel="using:Render.Components.VersionLabel"
                        xmlns:validationEntry="using:Render.Components.ValidationEntry"
                        xmlns:backButton="clr-namespace:Render.Components.BackButton"
+                       xmlns:addProjectView="using:Render.Components.AddProject"
                        x:TypeArguments="login:AddProjectViaIdViewModel"
                        NavigationPage.HasNavigationBar="False"
                        BackgroundColor="{DynamicResource LoginPageBackground}">
@@ -21,7 +21,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <addViaFolder:AddViaFolderView Grid.Row="0" x:Name="AddViaFolderView" HorizontalOptions="Center" />
+            <addProjectView:AddProjectView Grid.Row="0" x:Name="AddViaFolderView" HorizontalOptions="Center" />
 
             <VerticalStackLayout Grid.Row="0" x:Name="AddProjectWrapper" VerticalOptions="CenterAndExpand">
                 <Image AutomationId="RenderFullLogo"

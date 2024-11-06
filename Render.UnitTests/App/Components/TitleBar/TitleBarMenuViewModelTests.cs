@@ -52,8 +52,6 @@ namespace Render.UnitTests.App.Components.TitleBar
                 vm.ShowActionItems.Should().BeFalse();
                 vm.ShowProjectHome.Should().Be(expected);
                 vm.ShowSectionStatus.Should().Be(expected);
-                vm.ShowAudioExport.Should().Be(expected);
-                vm.AudioExportViewModel.Should().BeNull();
             }
         }
 
@@ -76,15 +74,6 @@ namespace Render.UnitTests.App.Components.TitleBar
                 vm.ShowProjectList.Should().BeTrue();
                 vm.ShowProjectHome.Should().BeFalse();
                 vm.ShowSectionStatus.Should().Be(expected);
-                vm.ShowAudioExport.Should().Be(expected);
-                if (expected)
-                {
-                    vm.AudioExportViewModel.Should().NotBeNull();
-                }
-                else
-                {
-                    vm.AudioExportViewModel.Should().BeNull();
-                }
             }
         }
 
@@ -107,15 +96,6 @@ namespace Render.UnitTests.App.Components.TitleBar
                 vm.ShowProjectList.Should().BeTrue();
                 vm.ShowProjectHome.Should().Be(expected);
                 vm.ShowSectionStatus.Should().BeFalse();
-                vm.ShowAudioExport.Should().Be(expected);
-                if (expected)
-                {
-                    vm.AudioExportViewModel.Should().NotBeNull();
-                }
-                else
-                {
-                    vm.AudioExportViewModel.Should().BeNull();
-                }
             }
         }
 
@@ -138,15 +118,6 @@ namespace Render.UnitTests.App.Components.TitleBar
                 vm.ShowProjectList.Should().BeTrue();
                 vm.ShowProjectHome.Should().Be(expected);
                 vm.ShowSectionStatus.Should().Be(expected);
-                vm.ShowAudioExport.Should().Be(expected);
-                if (expected)
-                {
-                    vm.AudioExportViewModel.Should().NotBeNull();
-                }
-                else
-                {
-                    vm.AudioExportViewModel.Should().BeNull();
-                }
             }
         }
 
@@ -169,7 +140,6 @@ namespace Render.UnitTests.App.Components.TitleBar
                 vm.ShowProjectList.Should().BeTrue();
                 vm.ShowProjectHome.Should().Be(expected);
                 vm.ShowSectionStatus.Should().Be(expected);
-                vm.ShowAudioExport.Should().BeFalse();
             }
         }
 
@@ -198,7 +168,6 @@ namespace Render.UnitTests.App.Components.TitleBar
                 vm.ShowProjectList.Should().BeTrue();
                 vm.ShowProjectHome.Should().Be(expected);
                 vm.ShowSectionStatus.Should().Be(expected);
-                vm.ShowAudioExport.Should().Be(expected);
             }
         }
 
@@ -225,7 +194,6 @@ namespace Render.UnitTests.App.Components.TitleBar
                 vm.ShowProjectList.Should().BeTrue();
                 vm.ShowProjectHome.Should().Be(expected);
                 vm.ShowSectionStatus.Should().Be(expected);
-                vm.ShowAudioExport.Should().Be(expected);
             }
         }
     }

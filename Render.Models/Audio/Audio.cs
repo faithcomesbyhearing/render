@@ -34,6 +34,12 @@ namespace Render.Models.Audio
         [JsonProperty("TemporaryDeleted")]
         public bool TemporaryDeleted { get; set; }
 
+        /// <summary>
+        /// Audio samples to draw wave form. 100 bars are expected.
+        /// </summary>
+        [JsonProperty("PreviewSamples")]
+        public float[] PreviewSamples { get; set; }
+
         private int _headerEndPosition;
 
         [JsonIgnore]
@@ -45,21 +51,26 @@ namespace Render.Models.Audio
         [JsonIgnore]
         public string DeclaredDigest {get; private set;}
         
-        public Audio(Guid scopeId, Guid projectId, Guid parentId, int documentVersion = 4)
+        public Audio(Guid scopeId, Guid projectId, Guid parentId, int documentVersion = 5)
             : base(scopeId, projectId, documentVersion)
         {
             ParentId = parentId;
         }
 
-        public void SetAudio(byte[] audio)
+        public void SetAudio(byte[] audio, bool resetSamples = true)
         {
             Data = audio;
             _headerEndPosition = FindHeaderEndPosition();
+
+            if (resetSamples)
+            {
+                PreviewSamples = null;
+            }
         }
         
         public void SetAudio(byte[] audio, int declaredLength, string declaredDigest)
         {
-            SetAudio(audio);
+            SetAudio(audio, false);
             DeclaredLength = declaredLength;
             DeclaredDigest = declaredDigest;
         }
@@ -88,7 +99,7 @@ namespace Render.Models.Audio
 
                 return pos;
             }
-            catch (Exception e)
+            catch
             {
                 return -1;
             }

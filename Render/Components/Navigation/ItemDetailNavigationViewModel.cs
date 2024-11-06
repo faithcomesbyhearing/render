@@ -54,12 +54,12 @@ public class ItemDetailNavigationViewModel : ViewModelBase
             return;
         }
 
+        var item = GetAnotherItem(CurrentItem, true, false);
+
         if (OnBeforeChangeItemCommand != null)
         {
             await OnBeforeChangeItemCommand.Execute();
         }
-
-        var item = GetAnotherItem(CurrentItem, true, false);
 
         if (OnChangeItemCommand != null)
         {
@@ -76,12 +76,12 @@ public class ItemDetailNavigationViewModel : ViewModelBase
             return;
         }
 
+        var item = GetAnotherItem(CurrentItem, false, false);
+
         if (OnBeforeChangeItemCommand != null)
         {
             await OnBeforeChangeItemCommand.Execute();
         }
-
-        var item = GetAnotherItem(CurrentItem, false, false);
 
         if (OnChangeItemCommand != null)
         {

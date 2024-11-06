@@ -18,14 +18,12 @@ namespace Render.Components.Consultant.ConsultantCheck
         public bool IsActive { get; set; }
         [Reactive]
         public bool IsRequired { get; set; }
-        public bool IsBackTranslate { get; }
-        public bool IsSegmentBackTranslate { get; }
-        public bool IsSecondStepBackTranslate { get; }
 
         public int GridColumn { get; }
         public int GridRow { get; }
 
         public ParentAudioType AudioType { get; }
+        public MenuTabType MenuTabType { get; }
 
         public ReactiveCommand<Unit, bool> BorderTapCommand { get; }
 
@@ -37,22 +35,40 @@ namespace Render.Components.Consultant.ConsultantCheck
         {
             LabelText = labelText;
             AudioType = parameters.AudioType;
+            MenuTabType = parameters.MenuTabType;
             AutomationId = $"{AudioType}";
 
             IsVisible = parameters.IsVisible;
             IsEnabled = parameters.IsEnabled;
 
-            IsBackTranslate = parameters.IsBackTranslate || parameters.IsSegmentBackTranslate ||
-                              parameters.IsSecondStepBackTranslate;
-            IsSegmentBackTranslate = parameters.IsSegmentBackTranslate;
-            IsSecondStepBackTranslate = parameters.IsSecondStepBackTranslate;
-
-            GridColumn = Convert.ToInt32(IsBackTranslate) + Convert.ToInt32(parameters.IsSegmentBackTranslate);
-            GridRow = Convert.ToInt32(parameters.IsSecondStepBackTranslate);
+            GridColumn = GetGridColumnNumber(MenuTabType);
+            GridRow = GetGridRowNumber(MenuTabType);
 
             BorderTapCommand = ReactiveCommand.Create(
                 () => IsActive = true,
                 this.WhenAnyValue(vm => vm.IsEnabled));
+        }
+
+        private int GetGridColumnNumber(MenuTabType menuTabType)
+        {
+            return menuTabType switch
+            {
+                MenuTabType.BackTranslate => 1,
+                MenuTabType.BackTranslate2 => 1,
+                MenuTabType.SegmentBackTranslate => 2,
+                MenuTabType.SegmentBackTranslate2 => 2,
+                _ => 0
+            };
+        }
+
+        private int GetGridRowNumber(MenuTabType menuTabType)
+        {
+            return MenuTabType switch
+            {
+                MenuTabType.BackTranslate2 => 1,
+                MenuTabType.SegmentBackTranslate2 => 1,
+                _ => 0
+            };
         }
     }
 }

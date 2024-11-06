@@ -1,18 +1,13 @@
 ﻿using System.Reactive;
-using System.Reactive.Linq;
 using DynamicData;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using Render.Extensions;
 using Render.Kernel;
-using Render.Models.Sections;
 using Render.Pages.AppStart.Home.NavigationPanels;
 using Render.Pages.AppStart.ProjectSelect;
-using Render.Repositories.LocalDataRepositories;
 using Render.Resources;
 using Render.Resources.Localization;
-using Render.Services;
-using Render.Services.SyncService;
+using Render.Services.EntityChangeListenerServices;
 using Render.TempFromVessel.Project;
 using Render.TempFromVessel.User;
 
@@ -28,14 +23,9 @@ namespace Render.Pages.AppStart.Home
         public readonly ReactiveCommand<Unit, Unit> OnSelectWorkflowViewCommand;
         public readonly ReactiveCommand<Unit, Unit> OnSelectAdminViewCommand;
         public readonly ReactiveCommand<Unit, IRoutableViewModel> NavigateToProjectSelectPageCommand;
-
-        //private fields
-        private bool _isInitialized;
-        private bool _syncCompleted;
+        
         private readonly Guid _projectId;
-        private readonly IGrandCentralStation _grandCentralStation;
-        private readonly IRenderChangeMonitoringService _renderChangeMonitoringService;
-        private readonly ISyncService _syncService;
+        public IEntityChangeListenerService EntityChangeListenerService { get; }
 
         [Reactive]
         public INavigationPane WorkflowNavigationPane { get; set; }
@@ -49,17 +39,21 @@ namespace Render.Pages.AppStart.Home
             var sectionRepository = contextProvider.GetSectionRepository();
             var allSections = await sectionRepository.GetSectionsForProjectAsync(projectId);
             var teams = workflow.GetTeams();
-            var enableSectionAssignment = teams.All(team => team.TranslatorId != Guid.Empty && allSections.Count != 0);
+            var enableSectionAssignment = allSections.Count != 0 && teams.Any(team => team.TranslatorId != Guid.Empty);
 
             var grandCentralStation = contextProvider.GetGrandCentralStation();
             var loggedInUserId = contextProvider.GetLoggedInUser()?.Id ?? Guid.Empty;
+            var projectIdChanged = grandCentralStation.CurrentProjectId != projectId;
             await grandCentralStation.FindWorkForUser(projectId, loggedInUserId);
             
             var projectRepository = contextProvider.GetPersistence<Project>();
             var project = await projectRepository.GetAsync(projectId);
 
+            await AddUserChangeListener(contextProvider, projectIdChanged, project, projectId);
+            
             var viewModel = new HomeViewModel(projectId, contextProvider, enableSectionAssignment,
                 project?.Name ?? "Home");
+            
             await viewModel.LoadSectionStateData();
             await viewModel.SessionStateService
                 .LoadUserProjectSessionAsync(loggedInUserId, projectId);
@@ -70,19 +64,32 @@ namespace Render.Pages.AppStart.Home
             return viewModel;
         }
 
+        private static async Task AddUserChangeListener(IViewModelContextProvider contextProvider, bool projectIdChanged,
+            Project project, Guid projectId)
+        {
+            if (projectIdChanged)
+            {
+                contextProvider.UserChangeListenerService?.Dispose();
+                var users = await contextProvider.GetUserRepository().GetUsersForProjectAsync(project);
+                contextProvider.UserChangeListenerService =
+                    contextProvider.GetUserChangeListenerService(users?.Select(p => p.Id).ToList());
+                var deletedUserCleanService = contextProvider.GetDeletedUserCleanService(projectId);
+                contextProvider.UserChangeListenerService?.InitializeListener(deletedUserCleanService.Clean);
+            }
+        }
+
         private HomeViewModel(Guid projectId, IViewModelContextProvider viewModelContextProvider,
             bool enableSectionAssignment, string pageName) :
             base("Home", viewModelContextProvider, AppResources.ProjectHome, secondPageName: pageName)
         {
-            var pageLoadSync = true;
-            DisposeOnNavigationCleared = true;
-            TitleBarViewModel.DisposeOnNavigationCleared = true;
-            _syncService = ViewModelContextProvider.GetSyncService();
+            EntityChangeListenerService = ViewModelContextProvider.GetDocumentSubscriptionManagerService();
+            EntityChangeListenerService.InitializeListener(ReloadOnWorkflowStatusChange);
+            
             var user = viewModelContextProvider.GetLoggedInUser();
             if (user?.HasClaim(
                     RenderRolesAndClaims.ProjectUserClaimType,
                     projectId.ToString(),
-                    RenderRolesAndClaims.GetRoleByName(RoleName.Configure).Id) is true)
+                    RoleName.Configure.GetRoleId()) is true)
             {
                 IsUserAdmin = true;
             }
@@ -91,18 +98,7 @@ namespace Render.Pages.AppStart.Home
             TitleBarViewModel.PageGlyph =
                 ((FontImageSource)ResourceExtensions.GetResourceValue("HomeIcon") ?? new FontImageSource()).Glyph;
             _projectId = projectId;
-            _grandCentralStation = viewModelContextProvider.GetGrandCentralStation();
-            _renderChangeMonitoringService = viewModelContextProvider.GetRenderChangeMonitoringService();
-
-            if (_grandCentralStation.FullWorkflowStatusList != null)
-            {
-                foreach (var workflowStatus in _grandCentralStation.FullWorkflowStatusList)
-                {
-                    _renderChangeMonitoringService.MonitorDocumentByField<WorkflowStatus>("WorkflowStatusId",
-                        workflowStatus.Id.ToString(), ReloadOnWorkflowStatusChange);
-                }
-            }
-
+            
             NavigateToProjectSelectPageCommand = ReactiveCommand.CreateFromTask(NavigateToProjectSelectPage);
             Disposables.Add(NavigateToProjectSelectPageCommand.IsExecuting
                 .Subscribe(isExecuting => { IsLoading = isExecuting; }));
@@ -115,17 +111,6 @@ namespace Render.Pages.AppStart.Home
             Disposables.Add(TitleBarViewModel.NavigationItems.Observable
                 .MergeMany(item => item.IsExecuting)
                 .Subscribe(isExecuting => IsLoading = isExecuting));
-            Disposables.Add(this.WhenAnyValue(v => v._syncService.CurrentSyncStatus)
-                .ObserveOn(RxApp.MainThreadScheduler)
-                .Subscribe(_ =>
-                {
-                    _syncCompleted = _syncService.CurrentSyncStatus == CurrentSyncStatus.Finished;
-                    if (_syncCompleted && !pageLoadSync)
-                    {
-                        ReloadOnWorkflowStatusChange();
-                    }
-                    pageLoadSync = false;
-                }));
         }
 
         private async Task LoadSectionStateData()
@@ -167,13 +152,6 @@ namespace Render.Pages.AppStart.Home
 
         private async Task ReloadIcons()
         {
-            //Need this to prevent calling LoadSectionStateData() twice when HomeScreen is loaded
-            if (!_isInitialized && !_syncCompleted)
-            {
-                _isInitialized = true;
-                return;
-            }
-
             var loggedInUser = ViewModelContextProvider.GetLoggedInUser();
             if (loggedInUser == null)
             {
@@ -188,17 +166,16 @@ namespace Render.Pages.AppStart.Home
             EnableSectionAssignment = teams.All(team => team.TranslatorId != Guid.Empty && allSections.Count != 0);
 
             //If we are syncing when logging out, once the sync completes
-            //it will hit this code with no user logged in so we cut it short
-            await _grandCentralStation.FindWorkForUser(_projectId, loggedInUser.Id);
+            //it will hit this code with no user logged in, so we cut it short
+            await ViewModelContextProvider.GetGrandCentralStation().FindWorkForUser(_projectId, loggedInUser.Id);
             await LoadSectionStateData();
-            _syncCompleted = false;
         }
 
-        private void ReloadOnWorkflowStatusChange()
+        private async Task ReloadOnWorkflowStatusChange(Guid id)
         {
             try
             {
-                MainThread.InvokeOnMainThreadAsync(async () =>
+                await MainThread.InvokeOnMainThreadAsync(async () =>
                 {
                     await ReloadIcons();
 					var pane = (WorkflowNavigationPaneViewModel)WorkflowNavigationPane;
@@ -211,17 +188,7 @@ namespace Render.Pages.AppStart.Home
                 throw;
             }
         }
-
-        public void ResetDocumentListeners()
-        {            
-            foreach (var workflowStatus in _grandCentralStation.FullWorkflowStatusList)
-            {
-                _renderChangeMonitoringService.StopMonitoringDocumentByField<WorkflowStatus>("WorkflowStatusId", workflowStatus.Id.ToString());
-                _renderChangeMonitoringService.MonitorDocumentByField<WorkflowStatus>("WorkflowStatusId", workflowStatus.Id.ToString(), ReloadOnWorkflowStatusChange);
-            }
-        }
-
-
+        
         private void OnSelectWorkflowView()
         {
             ShowAdminPanel = false;
@@ -245,37 +212,16 @@ namespace Render.Pages.AppStart.Home
                 throw;
             }
         }
-        public void RemoveWorkflowMonitors()
-        {
-            if (_grandCentralStation.FullWorkflowStatusList == null)
-            {
-                return;
-            }
-            
-            foreach (var workflowStatus in _grandCentralStation.FullWorkflowStatusList)
-            {
-                _renderChangeMonitoringService.StopMonitoringDocumentByField<WorkflowStatus>("WorkflowStatusId", workflowStatus.Id.ToString());
-            }
-        }
-
-        public static void ClearNavigationStack()
-        {
-            Application.Current?.MainPage?.Navigation?.NavigationStack?
-                .Where(page => page is IDisposable)
-                .Cast<IDisposable>()
-                .ForEach(disposable => disposable.Dispose());
-        }
 
         public override void Dispose()
         {
-            RemoveWorkflowMonitors();
-            _renderChangeMonitoringService?.Dispose();
             AdministrationNavigationPane?.Dispose();
             OnSelectAdminViewCommand?.Dispose();
             OnSelectWorkflowViewCommand?.Dispose();
             NavigateToProjectSelectPageCommand?.Dispose();
             WorkflowNavigationPane?.Dispose();
-
+            EntityChangeListenerService?.Dispose();
+            
             base.Dispose();
         }
     }

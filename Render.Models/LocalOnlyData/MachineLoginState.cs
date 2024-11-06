@@ -39,9 +39,8 @@ namespace Render.Models.LocalOnlyData
         public void RemoveUser(Guid userId)
         {
             if (TopFourUserIds.Select(x => x.UserId).Contains(userId))
-            {
-                var userLogin = TopFourUserIds.First(x => x.UserId == userId);
-                TopFourUserIds.Remove(userLogin);
+            { 
+                TopFourUserIds.RemoveAll(x => x.UserId == userId);
             }
         }
 

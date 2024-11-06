@@ -3,7 +3,6 @@ using System.Reactive.Linq;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Render.Components.AddProject;
-using Render.Components.AddViaFolder;
 using Render.Components.ValidationEntry;
 using Render.Kernel;
 using Render.Models.LocalOnlyData;
@@ -31,24 +30,11 @@ namespace Render.Pages.AppStart.Login
         [Reactive] public string DownloadErrorText { get; private set; }
         public ReactiveCommand<Unit, Unit> DownloadProjectCommand { get; }
         [Reactive] public bool AllowDownloadProjectCommand { get; private set; }
-
-        public static async Task<AddProjectViaIdViewModel> CreateAsync(IViewModelContextProvider contextProvider)
-        {
-            var addProjectIdViewModel = new AddProjectViaIdViewModel(contextProvider);
-
-            if (!await contextProvider.GetSyncGatewayApiWrapper().IsConnected())
-            {
-                addProjectIdViewModel._addProjectViaIdLocalViewModel.Initialize();
-            }
-
-            return addProjectIdViewModel;
-        }
-
-        private AddProjectViaIdViewModel(IViewModelContextProvider viewModelContextProvider) :
+        
+        
+        public AddProjectViaIdViewModel(IViewModelContextProvider viewModelContextProvider) :
             base("AddProjectId", viewModelContextProvider, "Add Project ID")
         {
-            DisposeOnNavigationCleared = true;
-
             _localProjectsRepository = viewModelContextProvider.GetLocalProjectsRepository();
             _offloadService = viewModelContextProvider.GetOffloadService();
             var audioLossRetryDownloadService = viewModelContextProvider.GetAudioLossRetryDownloadService();
@@ -69,6 +55,7 @@ namespace Render.Pages.AppStart.Login
                 false,
                 AppResources.Enter32digitId)
             {
+                MaxLength = 36,
                 OnEnterCommand = DownloadProjectCommand
             };
 
@@ -120,7 +107,7 @@ namespace Render.Pages.AppStart.Login
             }
             else
             {
-                _addProjectViaIdLocalViewModel.StartProjectDownload(ProjectId);
+                await _addProjectViaIdLocalViewModel.StartProjectDownload(ProjectId);
             }
         }
 

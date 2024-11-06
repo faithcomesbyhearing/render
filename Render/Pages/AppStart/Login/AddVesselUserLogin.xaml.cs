@@ -1,6 +1,6 @@
+using System.Reactive.Linq;
 using ReactiveUI;
 using Render.Kernel.WrappersAndExtensions;
-using Render.Resources;
 
 namespace Render.Pages.AppStart.Login;
 
@@ -19,6 +19,8 @@ public partial class AddVesselUserLogin
                 v => v.Password.BindingContext));
             d(this.OneWayBind(ViewModel, vm => vm.AddFromComputerViewModel,
                 v => v.AddViaFolderView.BindingContext));
+            d(this.OneWayBind(ViewModel, vm => vm.XamarinBackupViewModel,
+                v => v.XamarinBackupView.BindingContext));
             
             d(this.OneWayBind(ViewModel, vm => vm.Loading,
              v => v.LoadingStack.IsVisible));
@@ -34,13 +36,15 @@ public partial class AddVesselUserLogin
             d(this.OneWayBind(ViewModel, vm => vm.ShowBackButton,
                 v => v.LoginBackButton.IsVisible));
             d(this.BindCommandCustom(AddAProjectFromComputerGesture, v => v.ViewModel.AddProjectFromComputerCommand));
+            d(this.BindCommandCustom(XamarinBackupGesture, v => v.ViewModel.XamarinBackupCommand));
             d(this.BindCommandCustom(AddAProjectViaIdGesture, v => v.ViewModel.NavigateToAddProjectId));
             d(this.BindCommandCustom(LoginFrameGesture, v => v.ViewModel.LoginCommand));
             d(this.OneWayBind(ViewModel, vm => vm.Loading,
                 v => v.LoginStack.IsVisible, Selector));
             d(this.WhenAnyValue(x => x.ViewModel.ShowAddNewUserLabel)
                 .Subscribe(LabelSelector));
-            d(this.WhenAnyValue(x => x.ViewModel.AddFromComputerViewModel.ShowAddFromComputer)
+            d(this.WhenAnyValue(x => x.ViewModel.AddFromComputerViewModel.ShowProgressView, x => x.ViewModel.XamarinBackupViewModel.ShowProgressView)
+                .ObserveOn(RxApp.MainThreadScheduler)
                 .Subscribe(ViewSelector));
             d(this.OneWayBind(ViewModel, vm => vm.AllowLoginCommand,
                 v => v.LoginButtonFrame.Opacity, isEnabled => isEnabled ? 1 : 0.3));
@@ -71,7 +75,6 @@ public partial class AddVesselUserLogin
     {
         if (!showAddNewUserLabel)
         {
-            WelcomeLabel.SetValue(IsVisibleProperty, true);
             LoginLabel.SetValue(IsVisibleProperty, true);
         }
         else
@@ -80,17 +83,25 @@ public partial class AddVesselUserLogin
         }
     }
     
-    private void ViewSelector(bool showAddFromComputer)
+    private void ViewSelector((bool addFromComputer, bool xamarinBackup) selectedView)
     {
-        if (!showAddFromComputer)
+        switch (selectedView)
         {
-            MainLoginView.SetValue(IsVisibleProperty, true);
-            AddViaFolderView.SetValue(IsVisibleProperty, false);
-        }
-        else
-        {
-            MainLoginView.SetValue(IsVisibleProperty, false);
-            AddViaFolderView.SetValue(IsVisibleProperty, true);
+            case { addFromComputer: false, xamarinBackup: true }:
+                MainLoginView.SetValue(IsVisibleProperty, false);
+                AddViaFolderView.SetValue(IsVisibleProperty, false);
+                XamarinBackupView.SetValue(IsVisibleProperty, true);
+                break;
+            case { addFromComputer: true, xamarinBackup: false }:
+                MainLoginView.SetValue(IsVisibleProperty, false);
+                AddViaFolderView.SetValue(IsVisibleProperty, true);
+                XamarinBackupView.SetValue(IsVisibleProperty, false);
+                break;
+            default:
+                MainLoginView.SetValue(IsVisibleProperty, true);
+                AddViaFolderView.SetValue(IsVisibleProperty, false);
+                XamarinBackupView.SetValue(IsVisibleProperty, false);
+                break;
         }
     }
 
@@ -98,6 +109,8 @@ public partial class AddVesselUserLogin
     {
         Username?.Dispose();
         Password?.Dispose();
+        AddViaFolderView?.Dispose();
+        XamarinBackupView?.Dispose();
 
         base.Dispose(disposing);
     }

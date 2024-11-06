@@ -26,10 +26,24 @@ namespace Render.Kernel.NavigationFactories
             Step step, 
             Section section)
         {
-            var sessionService = viewModelContextProvider.GetSessionStateService();
-            sessionService.SetCurrentStep(step.Id, section.Id);
+			var sessionService = viewModelContextProvider.GetSessionStateService();
+			sessionService.SetCurrentStepForDraftOrRevise(step.Id, section.Id);
+			var isSectionInWorkForCurrentStageExist = sessionService.ActiveSession.SectionId != default;
+			if (isSectionInWorkForCurrentStageExist)
+			{
+				var workflowRepository = viewModelContextProvider.GetWorkflowRepository();
+				var workflow = await workflowRepository.GetWorkflowForProjectIdAsync(section.ProjectId);
+				var userId = viewModelContextProvider.GetLoggedInUser().Id;
+				var isSectionInWorkForCurrentUser = workflow.GetTeams().Any(x =>
+							   x.SectionAssignments.Any(y => y.SectionId == sessionService.ActiveSession.SectionId && x.TranslatorId == userId));
+				if (isSectionInWorkForCurrentUser)
+				{
+					var sectionInWork = await viewModelContextProvider.GetSectionRepository().GetSectionWithDraftsAsync(sessionService.ActiveSession.SectionId, true, true, false, true);
+					section = sectionInWork is not null ? sectionInWork : section;
+				}
+			}
 
-            var passage = sessionService.ActiveSession?.PassageNumber == null
+			var passage = sessionService.ActiveSession?.PassageNumber == null
                 ? section.Passages.First()
                 : section.Passages.First(x => x.PassageNumber.Equals(sessionService.ActiveSession.PassageNumber));
 
@@ -64,8 +78,8 @@ namespace Render.Kernel.NavigationFactories
             string sessionPage)
         {
             
-            var grandCentral = viewModelContextProvider.GetGrandCentralStation();
-            var stage = grandCentral.ProjectWorkflow.GetStage(step.Id);
+            var workflowService = viewModelContextProvider.GetWorkflowService();
+            var stage = workflowService.ProjectWorkflow.GetStage(step.Id);
             if (sessionPage.Contains("Drafting"))
             {
                 return await DraftingViewModel.CreateAsync(
@@ -78,7 +92,7 @@ namespace Render.Kernel.NavigationFactories
 
             if (sessionPage.Contains("Divide"))
             {
-                return await DividePassageDispatcher.GetDividePassagePageViewModelAsync(
+                return DividePassageDispatcher.GetDividePassagePageViewModel(
                     section,
                     passage.PassageNumber,
                     viewModelContextProvider,

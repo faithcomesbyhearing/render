@@ -225,12 +225,6 @@
   <data name="BackTranslate2" xml:space="preserve">
     <value>ফিরতি অনুবাদ 2</value>
   </data>
-  <data name="BackTranslator" xml:space="preserve">
-    <value>ফিরে যান অনুবাদক</value>
-  </data>
-  <data name="BackTranslator2" xml:space="preserve">
-    <value>ফিরতি অনুবাদক 2</value>
-  </data>
   <data name="Both" xml:space="preserve">
     <value>উভয়</value>
   </data>
@@ -279,12 +273,6 @@
   <data name="CombineSegmentTitle" xml:space="preserve">
     <value>একত্রিত করুন - প্যাসেগেট {0}</value>
   </data>
-  <data name="CommunityCheck" xml:space="preserve">
-    <value>কমিউনিটি চেক</value>
-  </data>
-  <data name="CommunityRetellPassage" xml:space="preserve">
-    <value>প্যাসেজ {0} - রিটেল</value>
-  </data>
   <data name="CommunityRevise" xml:space="preserve">
     <value>কমিউনিটি সংশোধন</value>
   </data>
@@ -293,12 +281,6 @@
   </data>
   <data name="CommunityTest" xml:space="preserve">
     <value>কমিউনিটি টেস্ট</value>
-  </data>
-  <data name="CommunityTestRevise" xml:space="preserve">
-    <value>কমিউনিটি টেস্ট সংশোধন</value>
-  </data>
-  <data name="CommunityTestSetup" xml:space="preserve">
-    <value>কমিউনিটি সেটআপ</value>
   </data>
   <data name="CompleteWork" xml:space="preserve">
     <value>কাজ সম্পূর্ণ করুন</value>
@@ -687,9 +669,6 @@
   <data name="Notes" xml:space="preserve">
     <value>নোট</value>
   </data>
-  <data name="NoteTranslator" xml:space="preserve">
-    <value>নোট অনুবাদক</value>
-  </data>
   <data name="NotInWorkflow" xml:space="preserve">
     <value>আর ওয়ার্কফ্লোয়ের অংশ নয়</value>
   </data>
@@ -749,9 +728,6 @@
   </data>
   <data name="PassageNumber" xml:space="preserve">
     <value>রচনাংশ {0}</value>
-  </data>
-  <data name="PassagePeerReview" xml:space="preserve">
-    <value>প্যাসেজ {0} পিয়ার রিভিউ</value>
   </data>
   <data name="PassageRetell" xml:space="preserve">
     <value>প্যাসেজ রিটেল</value>
@@ -1480,7 +1456,7 @@
     <value>একটি বিভাগ পুনরায় সেট করতে পাসওয়ার্ড প্রয়োজন</value>
   </data>
   <data name="PasswordRequiredToRestore" xml:space="preserve">
-    <value>একটি স্ন্যাপশট পুনরুদ্ধার করতে পাসওয়ার্ড প্রয়োজন৷</value>
+    <value>একটি বিভাগ পুনরুদ্ধার করার জন্য পাসওয়ার্ড প্রয়োজন</value>
   </data>
   <data name="TeamWasChosen" xml:space="preserve">
     <value>দল {0} বেছে নেওয়া হয়েছে৷</value>
@@ -1661,5 +1637,48 @@
   </data>
   <data name="CannotLoadAudio" xml:space="preserve">
     <value>অডিও লোড করা যাবে না</value>
+  </data>
+  <data name="UsbSync" xml:space="preserve">
+    <value>ইউএসবি সিঙ্ক</value>
+  </data>
+  <data name="ExportingProject" xml:space="preserve">
+    <value>রপ্তানি হচ্ছে</value>
+  </data>
+  <data name="StorageAlreadyContains" xml:space="preserve">
+    <value>রপ্তানি সম্পূর্ণ</value>
+  </data>
+  <data name="PleaseSelectAnotherStorage" xml:space="preserve">
+    <value>অনুগ্রহ করে অন্য ফোল্ডার নির্বাচন করুন বা স্টোরেজ থেকে এই প্রকল্পটি মুছুন</value>
+  </data>
+  <data name="SyncPathIsNotAvailable" xml:space="preserve">
+    <value>এই সিঙ্ক্রোনাইজেশন পাথ উপলব্ধ নেই</value>
+  </data>
+  <data name="ChooseAnotherStorage" xml:space="preserve">
+    <value>অন্য স্টোরেজ চয়ন করুন</value>
+  </data>
+  <data name="NoProjectsToImport" xml:space="preserve">
+    <value>আমদানি করার জন্য কোন প্রকল্প নেই</value>
+  </data>
+  <data name="NoDataForSync" xml:space="preserve">
+    <value>সিঙ্ক করার জন্য কোন ডেটা নেই</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>রপ্তানি</value>
+  </data>
+  <data name="Exported" xml:space="preserve">
+    <value>রপ্তানি হয়েছে</value>
+  </data>
+  <data name="SubstageName" xml:space="preserve">
+    <value>উপমঞ্চের নাম</value>
+  </data>
+  <data name="RestoreSectionWarning" xml:space="preserve">
+    <value>পুনরুদ্ধার বিভাগটি নির্বাচিত পর্যায়ে সমস্ত ডেটা মুছে ফেলবে । এই ক্রিয়াটি পূর্বাবস্থায় ফেরানো যাবে না ।</value>
+  </data>
+  <data name="ImportFromRender" xml:space="preserve">
+    <value>
+রেন্ডার 3.7 থেকে আমদানি করুন</value>
+  </data>
+  <data name="NoDataFromRender" xml:space="preserve">
+    <value>রেন্ডার 3.7 থেকে কোন তথ্য নেই</value>
   </data>
 </root>

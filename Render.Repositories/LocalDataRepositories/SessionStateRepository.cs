@@ -26,9 +26,5 @@ namespace Render.Repositories.LocalDataRepositories
             await _userProjectSessionPersistence.UpsertAsync(session.Id, session);
         }
         
-        public async Task Purge(Guid id)
-        { 
-            await _userProjectSessionPersistence.PurgeAllOfTypeForProjectId(id);
-        }
     }
 }

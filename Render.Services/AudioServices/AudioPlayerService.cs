@@ -254,7 +254,6 @@ namespace Render.Services.AudioServices
                 if (SimpleAudioPlayer != null)
                 {
                     SimpleAudioPlayer.PlaybackEnded -= OnPlayerEnded;
-                    SimpleAudioPlayer.Stop();
                     SimpleAudioPlayer.Dispose();
                     SimpleAudioPlayer = null;
                 }

@@ -1,7 +1,6 @@
 ﻿using Render.Kernel;
 using Render.Pages.AppStart.Login;
 using Render.Repositories.LocalDataRepositories;
-using System.Reactive.Threading.Tasks;
 
 namespace Render.Pages.AppStart.SplashScreen
 {
@@ -12,7 +11,6 @@ namespace Render.Pages.AppStart.SplashScreen
         public SplashScreenViewModel(IViewModelContextProvider viewModelContextProvider) :
             base("SplashScreen", viewModelContextProvider, "Splash")
         {
-            DisposeOnNavigationCleared = true;
             _localProjectDataRepository = viewModelContextProvider.GetLocalProjectsRepository();
         }
 
@@ -27,12 +25,12 @@ namespace Render.Pages.AppStart.SplashScreen
                 if (!localData.GetProjectIds().Any())
                 {
                     var vm = new AddVesselUserLoginViewModel(ViewModelContextProvider);
-                    await NavigateToAndReset(vm).ToTask();
+                    await NavigateToAndReset(vm);
                     return;
                 }
 
                 var loginViewModel = await LoginViewModel.CreateAsync(ViewModelContextProvider);
-                await NavigateToAndReset(loginViewModel).ToTask();
+                await NavigateToAndReset(loginViewModel);
             }
             catch (Exception e)
             {

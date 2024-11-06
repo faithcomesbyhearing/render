@@ -66,7 +66,7 @@ namespace Render.Pages.BackTranslator.RetellBackTranslate
             : base(
                 urlPathSegment: "RetellBTPassageReview",
                 viewModelContextProvider: viewModelContextProvider,
-                pageName: AppResources.BackTranslate,
+                pageName: GetStepName(step),
                 section: section,
                 stage: stage,
                 step: step,
@@ -78,9 +78,6 @@ namespace Render.Pages.BackTranslator.RetellBackTranslate
             _projectLanguageName = project.GetLanguageName();
 
             IsTwoStepBackTranslate = step.Role == Roles.BackTranslate2;
-            
-            DisposeOnNavigationCleared = true;
-            TitleBarViewModel.DisposeOnNavigationCleared = true;
             
             TitleBarViewModel.PageGlyph = IconExtensions
                 .BuildFontImageSource(Icon.RetellBackTranslate,
@@ -182,7 +179,8 @@ namespace Render.Pages.BackTranslator.RetellBackTranslate
                 }
                 if (AreStepBackTranslationsRecorded())
                 {
-                    await ViewModelContextProvider.GetGrandCentralStation().AdvanceSectionAsync(Section, Step); 
+                    var sectionMovementService = ViewModelContextProvider.GetSectionMovementService();
+                    await sectionMovementService.AdvanceSectionAsync(Section, Step, GetProjectId(), GetLoggedInUserId()); 
                     
                     return await NavigateToHomeOnMainStackAsync();
                 }

@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<kernel:RenderComponentBase x:Class="Render.Pages.Configurator.SectionAssignment.Tabs.Section.SectionViewTab"
+                            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:kernel="clr-namespace:Render.Kernel;assembly=Render"
+                            xmlns:localization="clr-namespace:Render.Resources.Localization"
+                            xmlns:resources="clr-namespace:Render.Resources;assembly=Render"
+                            xmlns:sectionCards="clr-namespace:Render.Pages.Configurator.SectionAssignment.Cards.Section;assembly=Render"
+                            xmlns:sectionTab="clr-namespace:Render.Pages.Configurator.SectionAssignment.Tabs.Section;assembly=Render"
+                            xmlns:teamCards="clr-namespace:Render.Pages.Configurator.SectionAssignment.Cards.Team;assembly=Render"
+                            x:TypeArguments="sectionTab:SectionViewTabViewModel">
+    <Grid x:Name="MainGrid" BackgroundColor="{StaticResource AlternateBackground}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="LeftSpace" Width="Auto" />
+            <ColumnDefinition x:Name="Sections" Width="*" />
+            <ColumnDefinition x:Name="RightSpace" Width="Auto" />
+            <ColumnDefinition x:Name="Separator" Width="Auto" />
+            <ColumnDefinition x:Name="Teams" Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <VerticalStackLayout x:Name="LeftSpaceLayout"
+                             Grid.Column="0"
+                             WidthRequest="330" />
+
+        <Grid x:Name="SectionsGrid"
+              Grid.Column="1"
+              BackgroundColor="{StaticResource AlternateBackground}">
+
+            <Grid.RowDefinitions>
+                <RowDefinition x:Name="higherPriorityRow" Height="50" />
+                <RowDefinition x:Name="sectionsRow" Height="*" />
+                <RowDefinition x:Name="lowerPriorityRow" Height="50" />
+            </Grid.RowDefinitions>
+
+            <!--  Higher priority  -->
+            <Grid x:Name="HigherPriorityGrid"
+                  Padding="10"
+                  BackgroundColor="{StaticResource SlateLight}">
+                <HorizontalStackLayout HorizontalOptions="Center">
+                    <Label Margin="10,5,15,0"
+                           FontFamily="Icons"
+                           FontSize="20"
+                           Rotation="-90"
+                           Text="{resources:IconExtensions ChevronRight}"
+                           TextColor="{StaticResource SecondaryText}"
+                           TextTransform="Uppercase" />
+                    <Label FontSize="Medium"
+                           Text="{x:Static localization:AppResources.HigherPriority}"
+                           TextColor="{StaticResource SecondaryText}" />
+                </HorizontalStackLayout>
+            </Grid>
+
+            <!--  Sections  -->
+            <CollectionView x:Name="SectionCollection"
+                            Grid.Row="1"
+                            CanReorderItems="True">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <sectionCards:PrioritySectionCard />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!--  Lower priority  -->
+            <Grid x:Name="LowerPriorityStack"
+                  Grid.Row="2"
+                  Padding="10"
+                  BackgroundColor="{StaticResource DarkGrey}">
+                <HorizontalStackLayout HorizontalOptions="Center">
+                    <Label Margin="10,5,15,0"
+                           FontFamily="Icons"
+                           FontSize="20"
+                           Rotation="90"
+                           Text="{resources:IconExtensions ChevronRight}"
+                           TextColor="{StaticResource SecondaryText}"
+                           TextTransform="Uppercase" />
+                    <Label FontSize="Medium"
+                           Text="{x:Static localization:AppResources.LowerPriority}"
+                           TextColor="{StaticResource SecondaryText}" />
+                </HorizontalStackLayout>
+            </Grid>
+        </Grid>
+
+        <VerticalStackLayout x:Name="RightSpaceLayout"
+                             Grid.Column="2"
+                             WidthRequest="60" />
+
+        <!--  Separator  -->
+        <VerticalStackLayout Grid.Column="3"
+                             BackgroundColor="{StaticResource SlateLight}"
+                             WidthRequest="2" />
+
+        <!--  Teams  -->
+        <VerticalStackLayout x:Name="TeamsCollectionLayout"
+                             Grid.Column="4"
+                             Margin="0,20,30,0"
+                             HorizontalOptions="EndAndExpand"
+                             WidthRequest="275">
+
+            <HorizontalStackLayout Margin="15,0,0,0" HorizontalOptions="Start">
+                <Label FontFamily="Icons"
+                       FontSize="{StaticResource LargeFont}"
+                       Text="{resources:IconExtensions TeamsIcon}"
+                       TextColor="{StaticResource Option}"
+                       VerticalOptions="Center" />
+                
+                <Label Margin="10,0,0,0"
+                       FontAttributes="Bold"
+                       FontSize="{StaticResource LargeFont}"
+                       Text="{x:Static localization:AppResources.Teams}"
+                       TextColor="{StaticResource Option}"
+                       VerticalOptions="Center"
+                       VerticalTextAlignment="Center" />
+            </HorizontalStackLayout>
+
+            <CollectionView x:Name="TeamCollection" Margin="0,30">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <teamCards:TeamCard />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <VerticalStackLayout HeightRequest="80" />
+        </VerticalStackLayout>
+    </Grid>
+</kernel:RenderComponentBase>

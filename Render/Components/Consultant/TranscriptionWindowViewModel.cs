@@ -2,6 +2,7 @@
 using System.Text;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using Render.Components.Consultant.ConsultantCheck;
 using Render.Kernel;
 using Render.Kernel.WrappersAndExtensions;
 using Render.Models.Sections;
@@ -58,17 +59,16 @@ namespace Render.Components.Consultant
             CopyToClipBoardCommand = ReactiveCommand.CreateFromTask(CopyToClipBoardAsync);
         }
 
-        public void UpdateTranscriptions(bool isBackTranslate, bool isSegmentBackTranslate,
-            bool isSecondStepBackTranslate)
+        public void UpdateTranscriptions(MenuTabType menuTabType)
         {
             Transcriptions.Clear();
 
-            if (!isBackTranslate)
+            if (menuTabType is MenuTabType.Original)
             {
                 return;
             }
 
-            if (isSegmentBackTranslate)
+            if (menuTabType is MenuTabType.SegmentBackTranslate || menuTabType is MenuTabType.SegmentBackTranslate2)
             {
                 var segmentNumber = 1;
 
@@ -76,7 +76,7 @@ namespace Render.Components.Consultant
                 {
                     foreach (var audio in passage.CurrentDraftAudio.SegmentBackTranslationAudios)
                     {
-                        var transcription = isSecondStepBackTranslate
+                        var transcription = menuTabType is MenuTabType.SegmentBackTranslate2
                             ? audio?.RetellBackTranslationAudio?.Transcription
                             : audio?.Transcription;
 
@@ -98,7 +98,7 @@ namespace Render.Components.Consultant
             {
                 foreach (var passage in Section.Passages)
                 {
-                    var transcription = isSecondStepBackTranslate
+                    var transcription = menuTabType is MenuTabType.BackTranslate2
                         ? passage?.CurrentDraftAudio?.RetellBackTranslationAudio?.RetellBackTranslationAudio
                             ?.Transcription
                         : passage?.CurrentDraftAudio?.RetellBackTranslationAudio?.Transcription;

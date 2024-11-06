@@ -8,9 +8,9 @@ using Render.Services.SessionStateServices;
 using Splat;
 using Render.Resources.Localization;
 using Render.Kernel.WrappersAndExtensions;
-using Render.Pages;
 using Render.Extensions;
 using Render.Interfaces;
+using Render.Models.Workflow.Stage;
 
 namespace Render.Kernel
 {
@@ -31,7 +31,6 @@ namespace Render.Kernel
         public FlowDirection FlowDirection { get; }
         public string UrlPathSegment { get; }
 
-        public bool DisposeOnNavigationCleared { get; set; }
         // need to make ViewModelContextProvider public so we can access it
         // using reflection in RenderPageBase.cs
         public IViewModelContextProvider ViewModelContextProvider { get; }
@@ -53,8 +52,10 @@ namespace Render.Kernel
             NavigateBackCommand = ReactiveCommand.CreateFromTask(NavigateBack);
         }
 
-        public IObservable<IRoutableViewModel> NavigateTo(ViewModelBase vm)
+        public async Task<IRoutableViewModel> NavigateTo(ViewModelBase vm)
         {
+            await OnNavigatingAwayAsync();
+
             LogInfo("Navigation", new Dictionary<string, string>
             {
                 { "From", UrlPathSegment },
@@ -65,11 +66,14 @@ namespace Render.Kernel
                 { "Navigated To", vm.UrlPathSegment },
                 { "Navigated From", UrlPathSegment }
             });
-            return HostScreen.Router.Navigate.Execute(vm);
+
+            return await HostScreen.Router.Navigate.Execute(vm);
         }
 
-        public IObservable<IRoutableViewModel> NavigateToAndReset(ViewModelBase vm)
+        public async Task<IRoutableViewModel> NavigateToAndReset(ViewModelBase vm)
         {
+            await OnNavigatingAwayAsync();
+
             LogInfo("Navigation Reset", new Dictionary<string, string>
             {
                 { "From", UrlPathSegment },
@@ -81,20 +85,15 @@ namespace Render.Kernel
                 { "Navigated From", UrlPathSegment }
             });
 
-            if (DisposeOnNavigationCleared)
-            {
-                Application.Current?.MainPage?.Navigation?.NavigationStack?
-                    .Where(page => page is IDisposable)
-                    .Cast<IDisposable>()
-                    .ForEach(disposable => disposable.Dispose());
-            }
+            DisposeNavigationStack();
 
-            var navigation = HostScreen.Router.NavigateAndReset.Execute(vm);
-            return navigation;
+            return await HostScreen.Router.NavigateAndReset.Execute(vm);
         }
 
         protected async Task<IRoutableViewModel> FinishCurrentStackAndNavigateHome()
         {
+            await OnNavigatingAwayAsync();
+
             LogInfo("Navigated to Main Stack", new Dictionary<string, string>
             {
                 { "From", UrlPathSegment },
@@ -105,13 +104,20 @@ namespace Render.Kernel
                 { "Navigated To", "Home" },
                 { "Navigated From", UrlPathSegment }
             });
-
-            var viewModel = await HomeViewModel.CreateAsync(ViewModelContextProvider.GetGrandCentralStation().CurrentProjectId, ViewModelContextProvider);
+            
+            var viewModel = await HomeViewModel.CreateAsync(
+                GetProjectId(), 
+                ViewModelContextProvider);
+            
+            DisposeNavigationStack();
+            
             return await HostScreen.Router.NavigateAndReset.Execute(viewModel);
         }
 
         protected async Task<IRoutableViewModel> NavigateBack()
         {
+            await OnNavigatingAwayAsync();
+
             IRoutableViewModel vm = null;
             var lastDisposablePage = Application.Current?.MainPage?.Navigation?.NavigationStack?.LastOrDefault() as IDisposable;
 
@@ -140,23 +146,18 @@ namespace Render.Kernel
                     { "Navigated From", UrlPathSegment }
                 });
 
-                if (DisposeOnNavigationCleared)
-                {
-                    lastDisposablePage?.Dispose();
-                }
+                lastDisposablePage?.Dispose();
 
                 navigation = await HostScreen.Router.NavigateBack.Execute();
                 return navigation;
             }
-
-            if (DisposeOnNavigationCleared)
-            {
-                lastDisposablePage?.Dispose();
-            }
-
+            
             //If there's nothing on the stack (other than the page we're on), and we're on the step stack,
             //return to the main stack (should be the home page)
             var viewModel = await HomeViewModel.CreateAsync(ViewModelContextProvider.GetGrandCentralStation().CurrentProjectId, ViewModelContextProvider);
+            
+            lastDisposablePage?.Dispose();
+            
             return await HostScreen.Router.NavigateAndReset.Execute(viewModel);
         }
 
@@ -176,18 +177,11 @@ namespace Render.Kernel
             Disposables?.Clear();
         }
 
-        protected async void SetLoadingScreen(bool isExecuting)
-        {
-            IsLoading = isExecuting;
-        }
-
-        public static string GetStageName(IViewModelContextProvider contextProvider, Models.Workflow.StageTypes stageType, Guid stageId)
-        {
-            var gcs = contextProvider.GetGrandCentralStation();
-            var stage = gcs.ProjectWorkflow.GetAllStages().SingleOrDefault(x => x.Id == stageId);
-            return stage == null ? Utilities.StageTypes.ToString(stageType) : Utilities.Utilities.GetStageName(stage);
-        }
-
+		protected void SetLoadingScreen(bool isExecuting)
+		{
+			IsLoading = isExecuting;
+		}
+        
         public void LogInfo(string name, IDictionary<string, string> properties = null)
         {
             var statsInfoList = properties ?? new Dictionary<string, string>();
@@ -216,48 +210,37 @@ namespace Render.Kernel
         {
             return ViewModelContextProvider.GetGrandCentralStation()?.CurrentProjectId ?? Guid.Empty;
         }
-
-        public static string GetStepName(IViewModelContextProvider contextProvider, RenderStepTypes stepType, Guid stageId)
+        
+        public static string GetStepName(Step step)
         {
-            switch (stepType)
+            return step.GetName();
+        }
+
+        private Task OnNavigatingAwayAsync()
+        {
+            if (HostScreen?.Router?.NavigationStack?.LastOrDefault() is ViewModelBase lastViewModel)
             {
-                case RenderStepTypes.Draft:
-                    return AppResources.Draft;
-                case RenderStepTypes.CommunityTest:
-                    return AppResources.CommunityTest;
-                case RenderStepTypes.CommunityRevise:
-                    return AppResources.CommunityRevise;
-                case RenderStepTypes.CommunitySetup:
-                    return AppResources.CommunitySetup;
-                case RenderStepTypes.ConsultantApproval:
-                    return AppResources.ConsultantApproval;
-                case RenderStepTypes.ConsultantCheck:
-                    return AppResources.ConsultantCheck;
-                case RenderStepTypes.ConsultantRevise:
-                    return AppResources.ConsultantRevise;
-                case RenderStepTypes.HoldingTank:
-                    return "";
-                case RenderStepTypes.PeerCheck:
-                    return AppResources.PeerCheck;
-                case RenderStepTypes.PeerRevise:
-                    return AppResources.PeerRevise;
-                case RenderStepTypes.Transcribe:
-                    return AppResources.Transcribe;
-                case RenderStepTypes.InterpretToConsultant:
-                    return AppResources.NoteInterpretToConsultant;
-                case RenderStepTypes.InterpretToTranslator:
-                    return AppResources.NoteInterpretToTranslator;
-                case RenderStepTypes.BackTranslate:
-                    return AppResources.BackTranslate;
-                case RenderStepTypes.NotSpecial:
-                    return "";
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(RenderStepTypes), stepType, null);
+                return lastViewModel.NavigatingAwayAsync();
             }
+
+            return Task.CompletedTask;
+        }
+
+        protected virtual Task NavigatingAwayAsync()
+        {
+            return Task.CompletedTask;
         }
 
         protected virtual void OnNavigatingBack()
         {
+        }
+
+        private void DisposeNavigationStack()
+        {
+            Application.Current?.MainPage?.Navigation?.NavigationStack?
+                .Where(page => page is IDisposable)
+                .Cast<IDisposable>()
+                .ForEach(disposable => disposable.Dispose());
         }
     }
 }

@@ -10,11 +10,16 @@ public class StageTypeCardViewModel : ViewModelBase
     public string Glyph { get; set; }
     public StageTypes StageType { get; set; }
 
-    public StageTypeCardViewModel(StageTypes stageType, IViewModelContextProvider viewModelContextProvider, Icon icon)
-        : base("StageTypeCard", viewModelContextProvider)
+    public StageTypeCardViewModel(
+        StageTypes stageType,
+        IViewModelContextProvider viewModelContextProvider,
+        Icon icon)
+        : base(
+            urlPathSegment: "StageTypeCard",
+            viewModelContextProvider: viewModelContextProvider)
     {
         StageType = stageType;
-        Name = Utilities.StageTypes.ToString(StageType);
+        Name = Utilities.Utilities.GetStageNameFromResources(stageType);
         Glyph = IconExtensions.BuildFontImageSource(icon).Glyph;
     }
 }

@@ -16,9 +16,9 @@ public class PeerReviseNavigationIconViewModel : WorkflowNavigationIconViewModel
 
     protected override async Task<IRoutableViewModel> NavigateOnClickAsync()
     {
-        foreach (var sectionId in GrandCentralStation.SectionsAtStep(Step.Id))
+        foreach (var sectionId in StageService.SectionsAtStep(Step.Id))
         {
-            var section = await _sectionRepository.GetSectionWithDraftsAsync(sectionId, withReferences: true);
+            var section = await SectionRepository.GetSectionWithDraftsAsync(sectionId, withReferences: true);
 
             if (IsSectionDocumentMissing(sectionId, section))
             {
@@ -32,7 +32,7 @@ public class PeerReviseNavigationIconViewModel : WorkflowNavigationIconViewModel
 
             var vm = await WorkflowPageViewModelFactory
                 .GetViewModelToNavigateTo(ViewModelContextProvider, Step, section);
-            return await HostScreen.Router.NavigateAndReset.Execute(vm);
+            return await NavigateToAndReset(vm);
         }
 
         return null;

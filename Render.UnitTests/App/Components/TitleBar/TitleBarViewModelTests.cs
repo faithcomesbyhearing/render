@@ -1,5 +1,4 @@
-﻿using FluentAssertions;
-using Moq;
+﻿using Moq;
 using Render.Components.TitleBar;
 using Render.Components.TitleBar.MenuActions;
 using Render.Kernel.WrappersAndExtensions;
@@ -15,7 +14,7 @@ using Render.Repositories.LocalDataRepositories;
 using Render.Repositories.SectionRepository;
 using Render.Repositories.UserRepositories;
 using Render.Repositories.WorkflowRepositories;
-using Render.Services;
+using Render.Services.GrandCentralStation;
 using Render.Services.SessionStateServices;
 using Render.Services.SyncService;
 using Render.Services.UserServices;
@@ -162,7 +161,7 @@ namespace Render.UnitTests.App.Components.TitleBar
         {
             var grandCentralStation = new Mock<IGrandCentralStation>();
             grandCentralStation.Setup(x => x.CurrentProjectId).Returns(projectId);
-            grandCentralStation.Setup(x => x.StepsAssignedToUser()).Returns(new List<Guid>());
+            MockStageService.Setup(x => x.StepsAssignedToUser()).Returns(new List<Guid>());
             MockContextProvider.Setup(x => x.GetGrandCentralStation()).Returns(grandCentralStation.Object);
             MockContextProvider.Setup(x => x.GetLoggedInUser()).Returns(new Mock<IUser>().Object);
             var sessionStateService = new Mock<ISessionStateService>();
@@ -170,7 +169,6 @@ namespace Render.UnitTests.App.Components.TitleBar
             MockContextProvider.Setup(x => x.GetSessionStateService()).Returns(sessionStateService.Object);
             MockContextProvider.Setup(x => x.GetModalService()).Returns(new Mock<IModalService>().Object);
             var mockMachineStateRepo = new Mock<IMachineLoginStateRepository>();
-            MockContextProvider.Setup(mock => mock.GetSyncService()).Returns(new Mock<ISyncService>().Object);
             MockContextProvider.Setup(mock => mock.GetMachineLoginStateRepository())
                 .Returns(mockMachineStateRepo.Object);
             mockMachineStateRepo.Setup(mock => mock.GetMachineLoginState())
@@ -180,15 +178,13 @@ namespace Render.UnitTests.App.Components.TitleBar
         private void SetupMocksForProjectSelect()
         {
             var user = new User("Test", "test");
-            var claim = new VesselClaim(RenderRolesAndClaims.ProjectUserClaimType, _project.Id.ToString(),
-                RenderRolesAndClaims.GetRoleByName(RoleName.Configure).Id);
+            var claim = new VesselClaim(RenderRolesAndClaims.ProjectUserClaimType, _project.Id.ToString(), RoleName.Configure.GetRoleId());
             user.Claims.Add(claim);
             var userMembershipService = new Mock<IUserMembershipService>();
             var renderProjectRepository = new Mock<IDataPersistence<RenderProject>>();
             var mockProjectRepository = new Mock<IDataPersistence<Project>>();
             var mockUserMembershipService = new Mock<IUserMembershipService>();
             var mockLocalProjectsRepository = new Mock<ILocalProjectsRepository>();
-            var mockSyncService = new Mock<ISyncService>();
             var mockDownloader = new Mock<IOneShotReplicator>();
             var renderProject = new RenderProject(_projectId);
             renderProject.SetLanguage("english");
@@ -203,8 +199,6 @@ namespace Render.UnitTests.App.Components.TitleBar
                 .ReturnsAsync(_project);
             mockProjectRepository.Setup(x => x.GetAllOfTypeAsync(It.IsAny<int>(), It.IsAny<bool>()))
                 .ReturnsAsync(new List<Project>{_project});
-            mockUserMembershipService.Setup(x => x.HasInheritedPermissionForProject(user, _project))
-                .ReturnsAsync(true);
             mockUserMembershipService.Setup(x =>
                 x.HasExplicitPermissionForProject(It.IsAny<IUser>(), It.IsAny<Guid>())).Returns(true);
 
@@ -218,8 +212,6 @@ namespace Render.UnitTests.App.Components.TitleBar
                 .Returns(renderProjectRepository.Object);
             MockContextProvider.Setup(x => x.GetUserMembershipService())
                 .Returns(mockUserMembershipService.Object);
-            MockContextProvider.Setup(x => x.GetSyncService())
-                .Returns(mockSyncService.Object);
             MockContextProvider.Setup(x => x.GetLoggedInUser())
                 .Returns(user);
             MockContextProvider.Setup(x => x.GetUserMembershipService())

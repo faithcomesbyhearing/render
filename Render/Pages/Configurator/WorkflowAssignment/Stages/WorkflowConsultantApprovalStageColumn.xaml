@@ -16,7 +16,7 @@
         <Grid RowSpacing="0">
             <Grid.RowDefinitions>
                 <RowDefinition x:Name="StgName" Height="Auto" />
-                <RowDefinition x:Name="Content" Height="*" />
+                <RowDefinition x:Name="ContentRow" Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
@@ -51,14 +51,30 @@
                     </StackLayout>
                 </ScrollView>
             </VerticalStackLayout>
-            
+
             <!--  Bottom half  -->
-            <VerticalStackLayout Grid.Row="2" HeightRequest="95">
+            <VerticalStackLayout Grid.Row="2">
                 <BoxView Margin="0,26,0,13"
                          BackgroundColor="{StaticResource DarkGrey}"
                          HeightRequest="2"
                          HorizontalOptions="Fill"
                          VerticalOptions="Start" />
+
+                <!--  Settings Button  -->
+                <Frame x:Name="SettingsButton"
+                       Padding="0"
+                       BackgroundColor="Transparent"
+                       HorizontalOptions="End"
+                       VerticalOptions="End">
+                    <Label FontFamily="Icons"
+                           FontSize="54"
+                           Text="{StaticResource Settings}"
+                           TextColor="{DynamicResource SecondaryText}" />
+
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="SettingsButtonGestureRecognizer" AutomationId="DraftStageSettings" />
+                    </Frame.GestureRecognizers>
+                </Frame>
             </VerticalStackLayout>
         </Grid>
     </Border>

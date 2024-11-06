@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Couchbase.Lite;
+﻿using Couchbase.Lite;
 using Couchbase.Lite.Query;
 using Render.TempFromVessel;
 using Render.TempFromVessel.Document_Extensions;
@@ -40,31 +39,30 @@ namespace Render.Repositories.Kernel
             Database = databaseWrapper;
         }
 
-        /// <summary>
-        /// Called when [database change event].
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="DatabaseChangedEventArgs"/> instance containing the event data.</param>
-        private void OnDatabaseChangeEvent(object sender, DatabaseChangedEventArgs e)
-        {
-            foreach (var documentId in e.DocumentIDs)
-            {
-                var document = Database?.GetDocument(documentId);
-                string message = $"Document (id={documentId}) was ";
+        //// <summary>
+        //// Called when [database change event]. Maybe useful for the debug purposes, so it is left there.
+        //// </summary>
+        //// <param name="sender">The sender.</param>
+        //// <param name="e">The <see cref="DatabaseChangedEventArgs"/> instance containing the event data.</param>
+        //private void OnDatabaseChangeEvent(object sender, DatabaseChangedEventArgs e)
+        //{
+        //    foreach (var documentId in e.DocumentIDs)
+        //    {
+        //        var document = Database?.GetDocument(documentId);
+        //        string message = $"Document (id={documentId}) was ";
 
+        //        if (document == null)
+        //        {
+        //            message += "deleted";
+        //        }
+        //        else
+        //        {
+        //            message += "added/updated";
+        //        }
 
-                if (document == null)
-                {
-                    message += "deleted";
-                }
-                else
-                {
-                    message += "added/updated";
-                }
-
-                Debug.WriteLine(message);
-            }
-        }
+        //        Debug.WriteLine(message);
+        //    }
+        //}
 
         protected string CreateKey(Guid id)
         {
@@ -101,30 +99,26 @@ namespace Render.Repositories.Kernel
         public async Task<List<T>> QueryOnFieldAsync(string searchField, string value, int limit,
             bool caseSensitive = true, bool waitForIndex = false)
         {
-            ILimit query;
-            if (limit == 0)
+            var baseWhere = Expression.Property("Type").EqualTo(Expression.String(typeof(T).Name))
+                .And((caseSensitive
+                        ? Expression.Property(searchField)
+                        : Function.Lower(Expression.Property(searchField)))
+                    .EqualTo(caseSensitive 
+                        ? Expression.String(value) 
+                        : Function.Lower(Expression.String(value))));
+            if (typeof(ISoftDeletable).IsAssignableFrom(typeof(T)))
             {
-                query = (ILimit)QueryBuilder.Select(SelectResult.All()).From(Database.GetDataSource())
-                    .Where(Expression.Property("Type").EqualTo(Expression.String(typeof(T).Name))
-                        .And((caseSensitive
-                                ? Expression.Property(searchField)
-                                : Function.Lower(Expression.Property(searchField)))
-                            .EqualTo(
-                                caseSensitive ? Expression.String(value) : Function.Lower(Expression.String(value)))));
+                baseWhere = baseWhere.And(
+                    Expression.Property("IsDeleted").IsNotValued().Or(
+                        Expression.Property("IsDeleted").EqualTo(Expression.Boolean(false))));
             }
-            else
-            {
-                query = QueryBuilder.Select(SelectResult.All()).From(Database.GetDataSource())
-                    .Where(Expression.Property("Type").EqualTo(Expression.String(typeof(T).Name))
-                        .And((caseSensitive
-                                ? Expression.Property(searchField)
-                                : Function.Lower(Expression.Property(searchField)))
-                            .EqualTo((caseSensitive
-                                ? Expression.String(value)
-                                : Function.Lower(Expression.String(value))))))
-                    .Limit(Expression.Int(limit));
-            }
-
+            
+            var baseQuery = QueryBuilder.Select(SelectResult.All())
+                .From(Database.GetDataSource())
+                .Where(baseWhere);
+            
+            ILimit query = limit != 0 ? baseQuery.Limit(Expression.Int(limit)) : (ILimit)baseQuery;
+            
             var queryResults = await Task.Run(() => query.Execute());
             return SerializeQueryResults(queryResults);
         }
@@ -171,7 +165,19 @@ namespace Render.Repositories.Kernel
         public virtual async Task<T> GetAsync(string key)
         {
             var doc = await GetCouchbaseDocumentAsync(key);
-            return doc?.ToObject<T>();
+            if (doc == null)
+            {
+                return null;
+            }
+
+            var entity = doc.ToObject<T>();
+
+            if (entity is ISoftDeletable { IsDeleted: true })
+            {
+                return null;
+            }
+
+            return entity;
         }
 
 
@@ -423,19 +429,18 @@ namespace Render.Repositories.Kernel
         /// <returns>List of JSON strings</returns>
         public async Task<List<T>> GetAllOfTypeAsync(int limit = 0, bool waitForIndex = false)
         {
-            ILimit query;
-            if (limit != 0)
+            var baseWhere = Expression.Property("Type").EqualTo(Expression.String(typeof(T).Name));
+            
+            if (typeof(ISoftDeletable).IsAssignableFrom(typeof(T)))
             {
-                query = QueryBuilder.Select(SelectResult.All()).From(Database.GetDataSource())
-                    .Where(Expression.Property("Type")
-                        .EqualTo(Expression.String(typeof(T).Name)))
-                    .Limit(Expression.Int(limit));
+                baseWhere = baseWhere.And(
+                    Expression.Property("IsDeleted").IsNotValued().Or(
+                        Expression.Property("IsDeleted").EqualTo(Expression.Boolean(false))));
             }
-            else
-            {
-                query = (ILimit)QueryBuilder.Select(SelectResult.All()).From(Database.GetDataSource())
-                    .Where(Expression.Property("Type").EqualTo(Expression.String(typeof(T).Name)));
-            }
+            var baseQuery = QueryBuilder.Select(SelectResult.All())
+                .From(Database.GetDataSource())
+                .Where(baseWhere);
+            var query = limit != 0 ? baseQuery.Limit(Expression.Int(limit)) : (ILimit)baseQuery;
 
             var queryResults = await Task.Run(() => query.Execute());
             return SerializeQueryResults(queryResults);
@@ -537,17 +542,6 @@ namespace Render.Repositories.Kernel
         {
             var documents = await QueryOnFieldAsync("ProjectId",
                 projectId.ToString(), 0);
-            foreach (var key in documents.Select(document => CreateKey(document.Id)))
-            {
-                var doc = await GetCouchbaseDocumentAsync(key);
-                Database.Purge(doc);
-            }
-        }
-        
-        public async Task PurgeAllOfTypeForId(Guid id)
-        {
-            var documents = await QueryOnFieldAsync("Id",
-                id.ToString(), 0);
             foreach (var key in documents.Select(document => CreateKey(document.Id)))
             {
                 var doc = await GetCouchbaseDocumentAsync(key);

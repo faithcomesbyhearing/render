@@ -17,9 +17,9 @@ namespace Render.Components.StageSettings
     {
         protected readonly Stage Stage;
         protected RenderWorkflow Workflow;
-   
+
         private readonly IWorkflowRepository _workflowPersistence;
-        
+
         public ReactiveCommand<Unit, Unit> ConfirmCommand { get; }
 
         [Reactive] public bool TranslateDoSectionListen { get; set; }
@@ -32,16 +32,21 @@ namespace Render.Components.StageSettings
         [Reactive] public bool TranslateDoPassageReview { get; set; }
         [Reactive] public bool TranslateRequirePassageReview { get; set; }
         [Reactive] public bool TranslateAllowEditing { get; set; }
-        
+
         [Reactive] public string StageName { get; set; }
         private Action<Stage> UpdateStageCard;
-        
+
         public string PlusIcon;
         public string MinusIcon;
 
-        protected StageSettingsViewModelBase(RenderWorkflow renderWorkflow, Stage stage,
-            IViewModelContextProvider viewModelContextProvider, Action<Stage> updateStageCard)
-        :base("StageSettings", viewModelContextProvider)
+        protected StageSettingsViewModelBase(
+            RenderWorkflow renderWorkflow,
+            Stage stage,
+            IViewModelContextProvider viewModelContextProvider,
+            Action<Stage> updateStageCard)
+            : base(
+                  "StageSettings",
+                  viewModelContextProvider)
         {
             var color = (ColorReference)ResourceExtensions.GetResourceValue("TertiaryText") ?? new ColorReference();
             PlusIcon = (IconExtensions.BuildFontImageSource(Icon.Plus, color.Color, 10) ?? new FontImageSource()).Glyph;
@@ -51,7 +56,7 @@ namespace Render.Components.StageSettings
             StageName = Stage.Name;
             _workflowPersistence = viewModelContextProvider.GetWorkflowRepository();
             UpdateStageCard = updateStageCard;
-            
+
             Disposables.Add(this.WhenAnyValue(x => x.TranslateDoSectionListen)
                 .Skip(1)
                 .Subscribe(b => TranslateRequireSectionListen = b));
@@ -64,7 +69,7 @@ namespace Render.Components.StageSettings
             Disposables.Add(this.WhenAnyValue(x => x.TranslateDoSectionReview)
                 .Skip(1)
                 .Subscribe(b => TranslateRequireSectionReview = b));
-            
+
             ConfirmCommand = ReactiveCommand.CreateFromTask(ConfirmAsync);
         }
 
@@ -76,8 +81,8 @@ namespace Render.Components.StageSettings
                 {"ProjectId", Workflow.ProjectId.ToString()}
             });
             await _workflowPersistence.SaveWorkflowAsync(Workflow);
-            var grandCentralStation = ViewModelContextProvider.GetGrandCentralStation();
-            grandCentralStation.UpdateWorkflow(Workflow);
+            var workflowService = ViewModelContextProvider.GetWorkflowService();
+            workflowService.UpdateWorkflow(Workflow);
         }
 
         protected virtual void UpdateWorkflow()
@@ -89,20 +94,23 @@ namespace Render.Components.StageSettings
                 {"ProjectId", Workflow.ProjectId.ToString()}
             });
         }
-        
+
         public async Task ConfirmAsync()
         {
             UpdateWorkflow();
             await SaveWorkflowAsync();
             UpdateStageCard.Invoke(Stage);
         }
-        
+
         public async Task<DialogResult> ConfirmStepDeactivationAsync()
         {
             var modalService = ViewModelContextProvider.GetModalService();
 
-            return await modalService.ConfirmationModal(Icon.PopUpWarning,
-                AppResources.SectionsMovingWarning, AppResources.DeactivateStepWarning, AppResources.Cancel,
+            return await modalService.ConfirmationModal(
+                Icon.PopUpWarning,
+                AppResources.SectionsMovingWarning,
+                AppResources.DeactivateStepWarning,
+                AppResources.Cancel,
                 AppResources.Confirm);
         }
 

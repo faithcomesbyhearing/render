@@ -5,6 +5,7 @@
         Task<T> GetByIdAsync(Guid id);
         
         Task<T> GetByParentIdAsync(Guid parentId);
+        
         Task<List<T>> GetMultipleByProjectIdAsync(Guid projectId);
 
         Task<List<T>> GetMultipleByParentIdAsync(Guid parentId);
@@ -14,9 +15,7 @@
         Task DeleteAudioByParentIdAsync(Guid parentId);
         
         Task DeleteAudioByIdAsync(Guid id);
-
-        Task Purge(Guid id);
-
+        
         Task ResetCreatedFromAudioIds(Guid projectId, List<Guid> deletedStandardQuestions);
     }
 }

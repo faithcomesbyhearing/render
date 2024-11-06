@@ -37,11 +37,6 @@ namespace Render.Repositories.WorkflowRepositories
             return workflows ?? new List<RenderWorkflow>();
         }
         
-        public async Task Purge(Guid id)
-        { 
-            await _workflowPersistence.PurgeAllOfTypeForProjectId(id);
-        }
-
         public void Dispose()
         {
             _workflowPersistence?.Dispose();

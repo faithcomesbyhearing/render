@@ -61,6 +61,7 @@ public class QuestionCardViewModel : ViewModelBase
                 {
                     BarPlayerViewModel.Glyph =
                         ResourceExtensions.GetResourceValue<string>(Icon.StarFilled.ToString());
+                    BarPlayerViewModel.SetGlyphColor(ResourceExtensions.GetColor("SecondaryText"));
                 }
                 else
                 {

@@ -225,12 +225,6 @@
   <data name="BackTranslate2" xml:space="preserve">
     <value>Tradução reversa 2</value>
   </data>
-  <data name="BackTranslator" xml:space="preserve">
-    <value>Tradução reversa</value>
-  </data>
-  <data name="BackTranslator2" xml:space="preserve">
-    <value>Tradução reversa 2</value>
-  </data>
   <data name="Both" xml:space="preserve">
     <value>Ambos</value>
   </data>
@@ -279,12 +273,6 @@
   <data name="CombineSegmentTitle" xml:space="preserve">
     <value>Combinar - Passagem {0}</value>
   </data>
-  <data name="CommunityCheck" xml:space="preserve">
-    <value>Verificação da comunidade</value>
-  </data>
-  <data name="CommunityRetellPassage" xml:space="preserve">
-    <value>Passagem {0} - Relato</value>
-  </data>
   <data name="CommunityRevise" xml:space="preserve">
     <value>Revisão da comunidade</value>
   </data>
@@ -293,12 +281,6 @@
   </data>
   <data name="CommunityTest" xml:space="preserve">
     <value>Teste da comunidade</value>
-  </data>
-  <data name="CommunityTestRevise" xml:space="preserve">
-    <value>Revisão de teste da comunidade</value>
-  </data>
-  <data name="CommunityTestSetup" xml:space="preserve">
-    <value>Configuração da comunidade</value>
   </data>
   <data name="CompleteWork" xml:space="preserve">
     <value>Trabalho concluído</value>
@@ -687,9 +669,6 @@
   <data name="Notes" xml:space="preserve">
     <value>Notas</value>
   </data>
-  <data name="NoteTranslator" xml:space="preserve">
-    <value>Tradutor de nota</value>
-  </data>
   <data name="NotInWorkflow" xml:space="preserve">
     <value>Não faz mais parte do fluxo de trabalho</value>
   </data>
@@ -746,9 +725,6 @@
   </data>
   <data name="PassageNumber" xml:space="preserve">
     <value>Passagem {0}</value>
-  </data>
-  <data name="PassagePeerReview" xml:space="preserve">
-    <value>Avaliação de colegas de passagem {0}</value>
   </data>
   <data name="PassageRetell" xml:space="preserve">
     <value>Relato de passagem</value>
@@ -1475,7 +1451,7 @@
     <value>A senha é necessária para redefinir uma seção</value>
   </data>
   <data name="PasswordRequiredToRestore" xml:space="preserve">
-    <value>A senha é necessária para restaurar um instantâneo</value>
+    <value>A senha é necessária para restaurar uma seção</value>
   </data>
   <data name="TeamWasChosen" xml:space="preserve">
     <value>A equipe {0} foi escolhida</value>
@@ -1659,5 +1635,51 @@
   </data>
   <data name="CannotLoadAudio" xml:space="preserve">
     <value>Não é possível carregar o áudio</value>
+  </data>
+  <data name="UsbSync" xml:space="preserve">
+    <value>Sincronização USB</value>
+  </data>
+  <data name="ExportingProject" xml:space="preserve">
+    <value>Exportador</value>
+  </data>
+  <data name="StorageAlreadyContains" xml:space="preserve">
+    <value>Este armazenamento já contém este projeto</value>
+  </data>
+  <data name="PleaseSelectAnotherStorage" xml:space="preserve">
+    <value>Selecione outra pasta ou exclua este projeto do armazenamento</value>
+  </data>
+  <data name="SyncPathIsNotAvailable" xml:space="preserve">
+    <value>Este caminho de sincronização não está disponível</value>
+  </data>
+  <data name="ChooseAnotherStorage" xml:space="preserve">
+    <value>Escolha outro armazenamento</value>
+  </data>
+  <data name="NoProjectsToImport" xml:space="preserve">
+    <value>
+Nenhum projeto para importar</value>
+  </data>
+  <data name="NoDataForSync" xml:space="preserve">
+    <value>
+Não há dados para sincronizar</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>Exportar</value>
+  </data>
+  <data name="Exported" xml:space="preserve">
+    <value>Exportado</value>
+  </data>
+  <data name="SubstageName" xml:space="preserve">
+    <value>Nome do subestágio</value>
+  </data>
+  <data name="RestoreSectionWarning" xml:space="preserve">
+    <value>A secção de restauração eliminará todos os dados pela fase selecionada. Esta ação não pode ser desfeita.</value>
+  </data>
+  <data name="ImportFromRender" xml:space="preserve">
+    <value>
+Importar do Render 3.7</value>
+  </data>
+  <data name="NoDataFromRender" xml:space="preserve">
+    <value>
+Nenhum dado do Render 3.7</value>
   </data>
 </root>

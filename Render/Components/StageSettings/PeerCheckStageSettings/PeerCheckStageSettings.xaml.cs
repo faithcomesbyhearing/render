@@ -1,9 +1,7 @@
-﻿using System;
-using System.Reactive.Linq;
+﻿using System.Reactive.Linq;
 using ReactiveUI;
 using Render.Components.StageSettings.RadioButtons;
 using Render.Extensions;
-using Render.Resources;
 using Render.Resources.Localization;
 
 namespace Render.Components.StageSettings.PeerCheckStageSettings
@@ -28,9 +26,13 @@ namespace Render.Components.StageSettings.PeerCheckStageSettings
                     v => v.NoSelfCheckToggle.IsToggled));
                 d(this.Bind(ViewModel, vm => vm.StageName,
                     v => v.StageName.Text));
+                d(this.Bind(ViewModel, vm => vm.CheckStepName.StepName,
+                    v => v.CheckStepName.Text));
+                d(this.Bind(ViewModel, vm => vm.ReviseStepName.StepName,
+                    v => v.ReviseStepName.Text));
 
                 d(this.WhenAnyValue(x => x.ViewModel.SelectedState).Subscribe(SetRadioButtonState));
-                
+
                 d(this.Bind(ViewModel, vm => vm.CheckRequirePassageListen,
                     v => v.RequirePassageCheckToggle.IsToggled));
                 d(this.Bind(ViewModel, vm => vm.CheckRequireSectionListen,
@@ -47,19 +49,19 @@ namespace Render.Components.StageSettings.PeerCheckStageSettings
                     v => v.AllowEditingToggle.IsToggled));
 
                 d(this.OneWayBind(ViewModel, vm => vm.SelectedState,
-                    v => v.RequireSectionCheckToggle.IsEnabled, state => 
-                        state == SelectedState.SectionListenOnly || state == SelectedState.Both ));
+                    v => v.RequireSectionCheckToggle.IsEnabled, state =>
+                        state == SelectedState.SectionListenOnly || state == SelectedState.Both));
                 d(this.OneWayBind(ViewModel, vm => vm.SelectedState,
-                    v => v.RequireSectionCheckLabel.IsEnabled, state => 
-                        state == SelectedState.SectionListenOnly || state == SelectedState.Both ));
-                
+                    v => v.RequireSectionCheckLabel.IsEnabled, state =>
+                        state == SelectedState.SectionListenOnly || state == SelectedState.Both));
+
                 d(this.OneWayBind(ViewModel, vm => vm.SelectedState,
-                    v => v.RequirePassageCheckToggle.IsEnabled, state => 
+                    v => v.RequirePassageCheckToggle.IsEnabled, state =>
                         state == SelectedState.PassageListenOnly || state == SelectedState.Both));
                 d(this.OneWayBind(ViewModel, vm => vm.SelectedState,
-                    v => v.RequirePassageCheckLabel.IsEnabled, state => 
+                    v => v.RequirePassageCheckLabel.IsEnabled, state =>
                         state == SelectedState.PassageListenOnly || state == SelectedState.Both));
-                
+
                 d(this.OneWayBind(ViewModel, vm => vm.SelectedState,
                     v => v.SelectedOptionLabel.Text, state =>
                     {
@@ -82,13 +84,13 @@ namespace Render.Components.StageSettings.PeerCheckStageSettings
 
                         return value;
                     }));
-                
+
                 d(this.OneWayBind(ViewModel, vm => vm.TranslateDoPassageReview,
                     v => v.RequirePassageReviewToggle.IsEnabled));
                 d(this.OneWayBind(ViewModel, vm => vm.TranslateDoPassageReview,
                     v => v.RequirePassageReviewLabel.IsEnabled));
-                
-                
+
+
                 d(this.WhenAnyValue(x => x.ViewModel.FlowDirection)
                     .ObserveOn(RxApp.MainThreadScheduler)
                     .Subscribe(flowDirection =>
@@ -172,7 +174,7 @@ namespace Render.Components.StageSettings.PeerCheckStageSettings
             ReviseNoteListenExpandStackIcon.IsVisible = !ReviseNoteListenStack.IsVisible;
             ReviseNoteListenCollapseStackIcon.IsVisible = ReviseNoteListenStack.IsVisible;
         }
-        
+
         private void PeerCheckNoteListenStackTapped(object sender, EventArgs e)
         {
             PeerCheckNoteListenStack.IsVisible = !PeerCheckNoteListenStack.IsVisible;
@@ -184,7 +186,7 @@ namespace Render.Components.StageSettings.PeerCheckStageSettings
         private void RevisePassageReviewStackTapped(object sender, EventArgs e)
         {
             RevisePassageReviewStack.IsVisible = !RevisePassageReviewStack.IsVisible;
-            
+
             RevisePassageReviewExpandStackIcon.IsVisible = !RevisePassageReviewStack.IsVisible;
             RevisePassageReviewCollapseStackIcon.IsVisible = RevisePassageReviewStack.IsVisible;
         }
