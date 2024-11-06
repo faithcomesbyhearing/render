@@ -29,7 +29,7 @@ duplicate a production infrastructure, but it is a significant first step
 toward collaborative open development.  
 
 See [Render documentation](doc/RENDER_DOC.md) to get started, and user
-documentation [here](https://renderpartners.freshdesk.com/support/solutions/22000109062).
+documentation [here](https://renderpartners.freshdesk.com/support/solutions).
 
 For technical details see [Developer documentation.](doc/DEVELOPMENT_DOC.md) 
 
